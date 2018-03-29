@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>Shields.io —— 制作各种状态图标 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>Shields.io —— 制作各种状态图标</h1>
+    <div class="info"><h2>嘛这篇文章其实是凑数的</h2><time>2016-07-27 00:00</time></div>
+    <p>在 github 上看见很多项目都有 <img src="https://img.shields.io/wercker/ci/wercker/docs.svg?maxAge=2592000" alt="IMG" /> 这样的图标对不对？</p>
+<p>嗯，这就是今天我在好不容易重新开始的 github 连击要断了于是急中生智水的这一篇博客中要介绍的东西：</p>
+<p><a href="http://shields.io">http://shields.io</a></p>
+<p>打开页面就能发现，各种例子相当全面，完全不用我介绍</p>
+<p>于是这篇文章就结束了</p>
+<!-- more -->
+<hr />
+<p>当然不会就这么结束！</p>
+<p>虽然页面上各种第三方服务的例子很多，不过页面底部还是有自定义样式的说明的</p>
+<p>比如颜色啦文字啦什么的</p>
+<p>稍微折腾一下，就能弄出这种效果:</p>
+<p><img src="https://img.shields.io/github/followers/iovxw.svg?style=social&amp;label=Follow%20@iovxw&amp;maxAge=2592000&amp;logo=image%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAyklEQVQoz6VSsQ0CMQy8vFiD6itGcIfEFI%2B%2BYBNKBkBigogFqBFUfJMB0EtmAYrfgKNAeRmSSC9xlWXf2fE5gIGIEAUUayJCXk7MEXI1N2WaRdd1DgCqpLDZp%2BTdI8lVpc7ee3jvi5OjkL%2BiXGy5M7MrLel1Pn46r9bQ%2BQ3wQNu2oy%2FRHKrqV1srtKjrGgCcyy6wJbl0cFcCzztwWCQ8N%2BXY8QR%2FuaqqzApLPyfGTdPAuppgGIasOPdsqCpFhKrKEAJDCOz7fsxZ7huXgGnvJ7F1FQAAAABJRU5ErkJggg%3D%3D" alt="IMG" /></p>
+<p>具体是这样写的:</p>
+<p><font color="c62828">https://img.shields.io/github/followers/iovxw.svg</font>?<font color="f57f17">style=social</font>
+&<font color="43A047">label=Follow%20@iovxw</font>&<font color="1E88E5">maxAge=2592000</font>&<font color="4527A0">logo=image%2Fpng%3Bbase64%2...%3D</font></p>
+<ul>
+<li><font color="c62828">显示 iovxw 的 github followers</font></li>
+<li><font color="f57f17">social 样式</font></li>
+<li><font color="43A047">将左侧标签替换为 Follow @iovxw</font></li>
+<li><font color="1E88E5">缓存时间 2592000 秒</font>
+<ul>
+<li>也就是刷新时间</li>
+</ul>
+</li>
+<li><font color="4527A0">base64 编码后的左侧 logo</font>
+<ul>
+<li>找一张高度大于等于 14 像素的图片就行，不过太大的话链接会非常非常长</li>
+<li>编码为 base64 可以用 <a href="https://www.base64-image.de/">这个</a></li>
+<li>然后还不能直接加上，先编码为 URL 才行</li>
+<li>同样可以用 <a href="http://meyerweb.com/eric/tools/dencoder/">在线工具</a> 完成</li>
+<li>头部的 <code>data:</code> 其实可以省略，省 5 个字也是省嘛</li>
+<li>还可以加 <code>link</code> 字段来指定点击左侧和右侧时候的链接，不过嵌入在 HTML 里的时候没用，就不加了</li>
+</ul>
+</li>
+</ul>
+<p>觉得很厉害是不是？（才怪）</p>
+<p>其实 github 早就有 <a href="http://ghbtns.com/">这个</a> 了（哈哈哈）</p>
+<iframe src="https://ghbtns.com/github-btn.html?user=iovxw&type=follow&count=true" style="border:0; background-color:transparent" width="150" height="20"></iframe>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>在 Merlin 上配置 rTorrrent 需要注意的 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>在 Merlin 上配置 rTorrrent 需要注意的</h1>
+    <div class="info"><h2>笔记备用</h2><time>2017-07-09 00:26</time></div>
+    <p><a href="https://iovxw.net/p/ac56u.html">之前买的 RT-AC56U</a> 一直没放什么东西，空转到现在</p>
+<p>今天终于有了需求，拿它来挂 BT</p>
+<p>这篇文章作为笔记，记一下遇到的坑，以后备用</p>
+<!-- more -->
+<hr />
+<h2 id="an-zhuang">安装</h2>
+<p>Merlin 支持 Entware，按照 <a href="https://github.com/RMerl/asuswrt-merlin/wiki/Entware">Wiki</a> 装好</p>
+<p>然后 <code>opkg install rtorrent-easy-install</code> 会自动安装 <code>rtorrent-rpc</code>、<code>rutorrent</code> 以及 <code>lighthttpd</code></p>
+<p>安装过程中会询问几个常用配置</p>
+<p>需要注意的是如果启用了密码登录网页面板，需要手动安装 <code>lighttpd-mod-authn_file</code>，不然 <code>lighthttpd</code> 起不来会提示缺少模块</p>
+<p>还要手动修改 <em>/opt/etc/lighttpd/conf.d/99-rtorrent-fastcgi-scgi-auth.conf</em>，把里面重复加载的模块注释掉，或者把重复模块的 <code>.conf</code> 删掉也行</p>
+<hr />
+<h2 id="pei-zhi">配置</h2>
+<p>我的 Entware 是装在 U盘 里的，下载文件夹设置在了移动硬盘，为了 U盘 寿命考虑，需要编辑 <em>/opt/etc/rtorrent/rtorrent.conf</em> 将 session 和 watchdir 文件夹也改在移动硬盘，这两个在安装时修改下载文件夹是不会一块跟着变的</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1aa;">session = /mnt/sdb5/download/session
+</span><span style="background-color:#282828;color:#fdf4c1aa;">schedule = watch_directory,5,5,load_start=/mnt/sdb5/download/watchdir/*.torrent
+</span></pre>
+<p>session 文件夹是用来放各种临时信息，比如 DHT 的节点之类</p>
+<p>watchdir 里的 torrent 文件会自动添加到新任务，当然本质是一个定时器定时检测指定路径而已</p>
+<p>修改之前记得先 <code>/opt/etc/init.d/S85rtorrent stop</code></p>
+<h3 id="duan-kou">端口</h3>
+<p>在安装完成的时候会提示开启端口，虽然不开也能运行，但是将很难找到 peer</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1aa;">iptables -I INPUT -p tcp --destination-port 51411 -j ACCEPT
+</span><span style="background-color:#282828;color:#fdf4c1aa;">iptables -I INPUT -p udp --destination-port 51412 -j ACCEPT
+</span></pre>
+<p>51411 是 <em>port_range</em> 的默认值，这是一个端口范围，全闭区间，用于与其他 peer 的连接</p>
+<p>51412 是 <em>dht_port</em> 的默认值，字面意思</p>
+<p>为了下次启动不需要手动再开端口，在 <em>/jffs/scripts/firewall-start</em> 里加入上面两条</p>
+<p>如果不存在就手动创建，记得 <code>chmod +x</code> 和加 shebang <code>#!/bin/sh</code></p>
+<p>（啊当然别忘了在设置里启用自定义 jffs 脚本）</p>
+<h3 id="dht">DHT</h3>
+<p>默认 <code>dht = auto</code>，是指只有当种子的 tracker 里有设置 dht 的时候才会启用</p>
+<p>不过众所周知的原因在国内 tracker 服务器并不是那么好访问，这里直接设置为 <code>on</code> 强制启用就行</p>
+<p>DHT 在启动的时候需要先连接几个 bootstrap 节点才能初始化，配置里加入如下几行</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1aa;">schedule2 = dht_node0,30,0,dht.add_node=dht.transmissionbt.com
+</span><span style="background-color:#282828;color:#fdf4c1aa;">schedule2 = dht_node1,30,0,dht.add_node=router.bittorrent.com
+</span><span style="background-color:#282828;color:#fdf4c1aa;">schedule2 = dht_node2,30,0,dht.add_node=router.utorrent.com
+</span></pre>
+<p>用 schedule 是因为需要延时一下，等待 DHT 启动完成，详见 <a href="https://github.com/rakshasa/rtorrent/issues/383">rtorrent#383</a></p>
+<h3 id="kai-ji-qi-dong">开机启动</h3>
+<p>启动的时候第一次肯定会失败，因为分区还没挂载</p>
+<p>在 <em>/jffs/scripts/post-mount</em> 里加入</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fabd2f;">[ </span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">1</span><span style="background-color:#282828;color:#b8bb26;">&quot; </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&quot;/tmp/mnt/sdb5&quot; </span><span style="background-color:#282828;color:#fabd2f;">] </span><span style="background-color:#282828;color:#fe8019;">; </span><span style="background-color:#282828;color:#fa5c4b;">then
+</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1;">/opt/etc/init.d/S85rtorrent start
+</span><span style="background-color:#282828;color:#fa5c4b;">fi
+</span></pre>
+<p><em>/tmp/mnt/sdb5</em> 替换为你的下载文件夹的挂载点</p>
+<p>就能在分区挂载后再次尝试启动了</p>
+<hr />
+<h2 id="keng">坑</h2>
+<p>下载完成校验 hash 时，提示 <strong>Hash check on download completion found bad chunks, consider using &quot;safe_sync&quot;</strong></p>
+<p>不过就算开了 <em>safe_sync</em> 也是没用的，因为这玩意是 <strong>降低 USB 3.0 干扰</strong> 这功能导致的<a href="https://github.com/Entware-ng/Entware-ng/issues/121#issuecomment-177321301">玄学问题</a></p>
+<p>解决方案当然就是进 <strong>高级设置</strong> -&gt; <strong>无线网络</strong> -&gt; <strong>专业设置</strong> -&gt; <strong>2.4 Ghz</strong> 里把它关掉</p>
+<p>虽然说是会干扰到 2.4 Ghz 的 wifi，不过实际体验好像没差，真要在意的话可以给数据线和设备包点锡箔纸</p>
+<hr />
+<h2 id="wen-du">温度</h2>
+<p>之前就说过，这个路由器的温度一直在 70 度左右，还是 0 负载</p>
+<p>但这次 100% 的 CPU 使用率，仍然是 70 度左右……嗯……</p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

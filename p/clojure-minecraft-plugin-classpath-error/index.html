@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>使用 Clojure 为 Minecraft 编写 Bukkit 插件时出现 Could not locate clojure&#x2F;core__init.class or clojure&#x2F;core.clj on classpath 的解决方法 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>使用 Clojure 为 Minecraft 编写 Bukkit 插件时出现 Could not locate clojure&#x2F;core__init.class or clojure&#x2F;core.clj on classpath 的解决方法</h1>
+    <div class="info"><h2>标题太长短不了</h2><time>2016-03-11 00:00</time></div>
+    <pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1aa;">09</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">10</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">17</span><span style="background-color:#282828;color:#fdf4c1aa;"> [</span><span style="background-color:#282828;color:#fdf4c1;">SEVERE</span><span style="background-color:#282828;color:#fdf4c1aa;">] </span><span style="background-color:#282828;color:#8ec07c;">Could</span><span style="background-color:#282828;color:#fdf4c1aa;"> not load </span><span style="background-color:#282828;color:#b8bb26;">&#39;plugins/watershipdown-0.1.jar&#39;</span><span style="background-color:#282828;color:#fdf4c1aa;"> in folder </span><span style="background-color:#282828;color:#b8bb26;">&#39;plugins&#39;</span><span style="background-color:#282828;color:#fe8019;">: 
+</span><span style="background-color:#282828;color:#fabd2f;">java</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">lang</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">ExceptionInInitializerError
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">clojure</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">lang</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">Namespace</span><span style="background-color:#282828;color:#fdf4c1aa;">.&lt;init&gt;(</span><span style="background-color:#282828;color:#8ec07c;">Namespace</span><span style="background-color:#282828;color:#fdf4c1aa;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">34</span><span style="background-color:#282828;color:#fdf4c1aa;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">clojure</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">lang</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">Namespace</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">findOrCreate(</span><span style="background-color:#282828;color:#8ec07c;">Namespace</span><span style="background-color:#282828;color:#fdf4c1;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">176</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">clojure</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">lang</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">Var</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">internPrivate(</span><span style="background-color:#282828;color:#8ec07c;">Var</span><span style="background-color:#282828;color:#fdf4c1;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">149</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">net</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">jonnay</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">watershipdown</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">WatershipDown</span><span style="background-color:#282828;color:#fdf4c1aa;">.&lt;clinit&gt;(</span><span style="background-color:#282828;color:#8ec07c;">Unknown Source</span><span style="background-color:#282828;color:#fdf4c1aa;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">java</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">lang</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">Class</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">forName0(</span><span style="background-color:#282828;color:#8ec07c;">Native Method</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">java</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">lang</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">Class</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">forName(</span><span style="background-color:#282828;color:#8ec07c;">Class</span><span style="background-color:#282828;color:#fdf4c1;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">247</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">org</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">bukkit</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">plugin</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">java</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">JavaPluginLoader</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">loadPlugin(</span><span style="background-color:#282828;color:#8ec07c;">JavaPluginLoader</span><span style="background-color:#282828;color:#fdf4c1;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">131</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">org</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">bukkit</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">plugin</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">SimplePluginManager</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">loadPlugin(</span><span style="background-color:#282828;color:#8ec07c;">SimplePluginManager</span><span style="background-color:#282828;color:#fdf4c1;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">285</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">org</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">bukkit</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">plugin</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">SimplePluginManager</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">loadPlugins(</span><span style="background-color:#282828;color:#8ec07c;">SimplePluginManager</span><span style="background-color:#282828;color:#fdf4c1;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">200</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">org</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">bukkit</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">craftbukkit</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">CraftServer</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">loadPlugins(</span><span style="background-color:#282828;color:#8ec07c;">CraftServer</span><span style="background-color:#282828;color:#fdf4c1;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">156</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">org</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">bukkit</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">craftbukkit</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">CraftServer</span><span style="background-color:#282828;color:#fdf4c1aa;">.&lt;init&gt;(</span><span style="background-color:#282828;color:#8ec07c;">CraftServer</span><span style="background-color:#282828;color:#fdf4c1aa;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">132</span><span style="background-color:#282828;color:#fdf4c1aa;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">net</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">minecraft</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">server</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">ServerConfigurationManager</span><span style="background-color:#282828;color:#fdf4c1aa;">.&lt;init&gt;(</span><span style="background-color:#282828;color:#8ec07c;">ServerConfigurationManager</span><span style="background-color:#282828;color:#fdf4c1aa;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">52</span><span style="background-color:#282828;color:#fdf4c1aa;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">net</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">minecraft</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">server</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">MinecraftServer</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">init(</span><span style="background-color:#282828;color:#8ec07c;">MinecraftServer</span><span style="background-color:#282828;color:#fdf4c1;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">148</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">net</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">minecraft</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">server</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">MinecraftServer</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">run(</span><span style="background-color:#282828;color:#8ec07c;">MinecraftServer</span><span style="background-color:#282828;color:#fdf4c1;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">407</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">net</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">minecraft</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">server</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">ThreadServerApplication</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">run(</span><span style="background-color:#282828;color:#8ec07c;">SourceFile</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">465</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#8ec07c;">Caused</span><span style="background-color:#282828;color:#fdf4c1aa;"> by</span><span style="background-color:#282828;color:#fe8019;">: </span><span style="background-color:#282828;color:#fabd2f;">java</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">lang</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">RuntimeException</span><span style="background-color:#282828;color:#fe8019;">: </span><span style="background-color:#282828;color:#fabd2f;">java</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">io</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">FileNotFoundException</span><span style="background-color:#282828;color:#fe8019;">: </span><span style="background-color:#282828;color:#8ec07c;">Could</span><span style="background-color:#282828;color:#fdf4c1aa;"> not locate clojure</span><span style="background-color:#282828;color:#fe8019;">/</span><span style="background-color:#282828;color:#fdf4c1aa;">core__init.</span><span style="background-color:#282828;color:#fdf4c1;">class</span><span style="background-color:#282828;color:#fdf4c1aa;"> or clojure</span><span style="background-color:#282828;color:#fe8019;">/</span><span style="background-color:#282828;color:#fdf4c1aa;">core.clj on classpath</span><span style="background-color:#282828;color:#fe8019;">: 
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">clojure</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">lang</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">Util</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">runtimeException(</span><span style="background-color:#282828;color:#8ec07c;">Util</span><span style="background-color:#282828;color:#fdf4c1;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">165</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">clojure</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">lang</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">RT</span><span style="background-color:#282828;color:#fdf4c1aa;">.&lt;clinit&gt;(</span><span style="background-color:#282828;color:#fdf4c1;">RT</span><span style="background-color:#282828;color:#fdf4c1aa;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">319</span><span style="background-color:#282828;color:#fdf4c1aa;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">... </span><span style="background-color:#282828;color:#d3869b;">15</span><span style="background-color:#282828;color:#fdf4c1aa;"> more
+</span><span style="background-color:#282828;color:#8ec07c;">Caused</span><span style="background-color:#282828;color:#fdf4c1aa;"> by</span><span style="background-color:#282828;color:#fe8019;">: </span><span style="background-color:#282828;color:#fabd2f;">java</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">io</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">FileNotFoundException</span><span style="background-color:#282828;color:#fe8019;">: </span><span style="background-color:#282828;color:#8ec07c;">Could</span><span style="background-color:#282828;color:#fdf4c1aa;"> not locate clojure</span><span style="background-color:#282828;color:#fe8019;">/</span><span style="background-color:#282828;color:#fdf4c1aa;">core__init.</span><span style="background-color:#282828;color:#fdf4c1;">class</span><span style="background-color:#282828;color:#fdf4c1aa;"> or clojure</span><span style="background-color:#282828;color:#fe8019;">/</span><span style="background-color:#282828;color:#fdf4c1aa;">core.clj on classpath</span><span style="background-color:#282828;color:#fe8019;">: 
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">clojure</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">lang</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">RT</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">load(RT.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">430</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">clojure</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">lang</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">RT</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">load(RT.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">398</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">clojure</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">lang</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">RT</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">doInit(RT.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">434</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">at </span><span style="background-color:#282828;color:#fabd2f;">clojure</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">lang</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">RT</span><span style="background-color:#282828;color:#fdf4c1aa;">.&lt;clinit&gt;(</span><span style="background-color:#282828;color:#fdf4c1;">RT</span><span style="background-color:#282828;color:#fdf4c1aa;">.java</span><span style="background-color:#282828;color:#fe8019;">:</span><span style="background-color:#282828;color:#d3869b;">316</span><span style="background-color:#282828;color:#fdf4c1aa;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">... </span><span style="background-color:#282828;color:#d3869b;">15</span><span style="background-color:#282828;color:#fdf4c1aa;"> more
+</span></pre><!-- more -->
+比如上面这样的报错，是因为 Clojure 默认使用当前线程 *context* 的 Classloader 来加载 class 的
+<p>如果 <em>context</em> 没有设置，Clojure 就挂了</p>
+<p>所以加载 Clojure 之前设置一下就好了</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#8ec07c;">Thread</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">currentThread()</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">setContextClassLoader(this.getClass().getClassLoader())</span><span style="background-color:#282828;color:#fdf4c1aa;">;
+</span></pre>
+<hr />
+<p>为了以后方便，魔改了一个前置插件:</p>
+<p><a href="https://github.com/iovxw/cljminecraft">https://github.com/iovxw/cljminecraft</a></p>
+<p>加了这个插件以后，改一下所写插件的 <code>plugin.yml</code>，
+加入 <code>depend: [cljminecraft]</code>，让服务端先加载这个前置插件</p>
+<p>（记得编译的之前把 <code>project.clj</code> 里的 Bukkit API 改成需要的版本）</p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

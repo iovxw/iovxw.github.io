@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>文章存档 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>文章存档</h1>
+    <div class="info"></div>
+    <ul class="archive">
+        
+            <li>
+            <time>2018-03-28 23:30</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ugly-rust&#x2F;">Rust 100 黑</a>
+            </li>
+        
+            <li>
+            <time>2018-03-23 17:53</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coerce-unsized&#x2F;">Rust 隐式转换之 CoerceUnsized</a>
+            </li>
+        
+            <li>
+            <time>2018-03-14 00:17</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;phantomdata-magic&#x2F;">PhantomData 黑魔法</a>
+            </li>
+        
+            <li>
+            <time>2018-02-08 12:03</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;the-new-tokio&#x2F;">新 tokio 中的变动</a>
+            </li>
+        
+            <li>
+            <time>2017-11-13 20:58</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;curve-interpolation&#x2F;">统计图的曲线插值</a>
+            </li>
+        
+            <li>
+            <time>2017-09-21 20:31</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;kailh-box&#x2F;">凯华 Box 轴拆解</a>
+            </li>
+        
+            <li>
+            <time>2017-09-13 22:29</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-higher-rank-lifetime-bounds&#x2F;">Rust 中的高阶生命期约束</a>
+            </li>
+        
+            <li>
+            <time>2017-08-29 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coroutine&#x2F;">Rust 的 async&#x2F;await</a>
+            </li>
+        
+            <li>
+            <time>2017-07-09 00:26</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rtorrent-on-merin&#x2F;">在 Merlin 上配置 rTorrrent 需要注意的</a>
+            </li>
+        
+            <li>
+            <time>2017-06-29 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;soul-knight&#x2F;">Soul Knight Android 免 root 存档修改</a>
+            </li>
+        
+            <li>
+            <time>2017-04-20 22:15</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;cobalt&#x2F;">博客静态生成器切换到 Cobalt</a>
+            </li>
+        
+            <li>
+            <time>2017-04-17 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ac56u&#x2F;">RT-AC56U</a>
+            </li>
+        
+            <li>
+            <time>2017-02-15 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-sanitizers&#x2F;">Rust 使用 Sanitizers 进行运行时安全检查</a>
+            </li>
+        
+            <li>
+            <time>2017-02-12 08:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;waaaave&#x2F;">多种方式实现波浪动画</a>
+            </li>
+        
+            <li>
+            <time>2017-01-03 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;srp&#x2F;">别在服务端储存用户密码了，来用 SRP 吧</a>
+            </li>
+        
+            <li>
+            <time>2016-10-15 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust&#x2F;">学完了 Rust</a>
+            </li>
+        
+            <li>
+            <time>2016-10-07 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;bismuth&#x2F;">bismuth —— 几何壁纸生成器</a>
+            </li>
+        
+            <li>
+            <time>2016-08-24 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;swetter-brainfuck&#x2F;">含糖型 Brainfuck 解释器</a>
+            </li>
+        
+            <li>
+            <time>2016-08-01 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;linux-fix-cursor-theme&#x2F;">修复 Linux GNOME 环境下非 GTK 窗口鼠标指针主题不统一问题</a>
+            </li>
+        
+            <li>
+            <time>2016-07-30 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;git-commit-date&#x2F;">自定义 Git commit 时间</a>
+            </li>
+        
+            <li>
+            <time>2016-07-27 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;shields-io&#x2F;">Shields.io —— 制作各种状态图标</a>
+            </li>
+        
+            <li>
+            <time>2016-07-12 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;minecraft-ingameinfo&#x2F;">一份 Minecraft InGameInfo Mod 配置文件</a>
+            </li>
+        
+            <li>
+            <time>2016-06-14 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ark-lang&#x2F;">Ark —— Go 和 Rust 的结合体</a>
+            </li>
+        
+            <li>
+            <time>2016-05-13 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;chez-scheme-machine-type&#x2F;">Chez Scheme 中的 machine-type</a>
+            </li>
+        
+            <li>
+            <time>2016-05-03 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;chez-scheme-benchmark&#x2F;">Chez Scheme 性能测试</a>
+            </li>
+        
+            <li>
+            <time>2016-05-01 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;release-chez-scheme&#x2F;">打包发布 Chez Scheme 程序</a>
+            </li>
+        
+            <li>
+            <time>2016-04-30 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;chez-scheme-stand-alone&#x2F;">将 Chez Scheme 程序编译为单文件</a>
+            </li>
+        
+            <li>
+            <time>2016-04-29 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;chez-scheme-users-guide&#x2F;">Chez Scheme Version 9 User’s Guide</a>
+            </li>
+        
+            <li>
+            <time>2016-04-21 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;clojure-thread-sleep&#x2F;">Clojure Thread&#x2F;sleep 在 core.async 里的坑</a>
+            </li>
+        
+            <li>
+            <time>2016-04-15 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;chez-scheme&#x2F;">「速报」世界上最好的 Scheme 编译器开源了</a>
+            </li>
+        
+            <li>
+            <time>2016-04-10 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;web-appcache&#x2F;">HTML5 离线缓存两个需要注意的地方</a>
+            </li>
+        
+            <li>
+            <time>2016-03-31 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;the-war&#x2F;">不要去评价一门你没真正用过的编程语言</a>
+            </li>
+        
+            <li>
+            <time>2016-03-29 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;about-lisp&#x2F;">关于 Lisp</a>
+            </li>
+        
+            <li>
+            <time>2016-03-18 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;update-again&#x2F;">再次更新模板</a>
+            </li>
+        
+            <li>
+            <time>2016-03-11 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;clojure-minecraft-plugin-classpath-error&#x2F;">使用 Clojure 为 Minecraft 编写 Bukkit 插件时出现 Could not locate clojure&#x2F;core__init.class or clojure&#x2F;core.clj on classpath 的解决方法</a>
+            </li>
+        
+            <li>
+            <time>2016-01-26 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;make-a-jar-file-linux-executable&#x2F;">Linux 下将 .jar 制作为可直接执行文件</a>
+            </li>
+        
+            <li>
+            <time>2015-12-29 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;acme&#x2F;">Let&#x27;s Encrypt 证书申请&#x2F;签发流程</a>
+            </li>
+        
+            <li>
+            <time>2015-12-24 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;new-year&#x2F;">博客更新完成</a>
+            </li>
+        
+            <li>
+            <time>2015-11-14 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;theme-color-in-chrome&#x2F;">给 Chrome for Android 设置顶栏颜色以及图标</a>
+            </li>
+        
+            <li>
+            <time>2015-11-14 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;functional-programming-for-the-jvm&#x2F;">Clojure - Functional Programming for the JVM 中文版</a>
+            </li>
+        
+            <li>
+            <time>2015-10-22 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;docker-anyconnect-dtls-handshake-failed&#x2F;">使用 Docker 运行 AnyConnect 时出现 DTLS handshake failed 的解决方法</a>
+            </li>
+        
+            <li>
+            <time>2015-10-19 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;lets-encrypt-is-trusted&#x2F;">Let&#x27;s Encrypt is Trusted</a>
+            </li>
+        
+            <li>
+            <time>2015-10-11 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;git-update-index&#x2F;">Git 取消跟踪文件和重新跟踪文件</a>
+            </li>
+        
+            <li>
+            <time>2015-10-09 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;programing-elixir-zh&#x2F;">Elixir 入门指南中文版</a>
+            </li>
+        
+            <li>
+            <time>2015-09-25 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ctr&#x2F;">块密码的 CTR 计数器模式</a>
+            </li>
+        
+            <li>
+            <time>2015-09-21 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;new-highlight-style&#x2F;">换了个代码高亮主题</a>
+            </li>
+        
+            <li>
+            <time>2015-09-20 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;20150920&#x2F;">被百度取消收录了？</a>
+            </li>
+        
+            <li>
+            <time>2015-06-18 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;crystal-json&#x2F;">Crystal 中自定义数据结构的 json 编解码</a>
+            </li>
+        
+            <li>
+            <time>2015-06-16 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;play-space-engineers-on-linux&#x2F;">在 Linux 上玩 Space Engineers（太空工程师）</a>
+            </li>
+        
+            <li>
+            <time>2015-06-09 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;crystal&#x2F;">在 ubuntu 上编译安装 Crystal</a>
+            </li>
+        
+            <li>
+            <time>2015-05-30 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;golang-func-multi-return-value-to-slice&#x2F;">Go语言函数多返回值转换为切片</a>
+            </li>
+        
+            <li>
+            <time>2015-05-27 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;state-fo-go-may&#x2F;">The State of Go</a>
+            </li>
+        
+            <li>
+            <time>2015-05-15 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-1-0&#x2F;">Rust 1.0 发布</a>
+            </li>
+        
+            <li>
+            <time>2015-04-28 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;wacom-speed&#x2F;">Linux下Wacom数位板相对定位画笔移动速度的设置</a>
+            </li>
+        
+            <li>
+            <time>2015-03-05 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;nim&#x2F;">Nim语言尝试</a>
+            </li>
+        
+            <li>
+            <time>2015-02-05 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;2015-2-5&#x2F;">坑开的有点多了</a>
+            </li>
+        
+            <li>
+            <time>2014-12-27 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;bye-2014&#x2F;">2014浏览器A-Z</a>
+            </li>
+        
+            <li>
+            <time>2014-11-21 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;golang-type-switch&#x2F;">Golang类型switch</a>
+            </li>
+        
+            <li>
+            <time>2014-11-07 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;new-template&#x2F;">更新了下模板</a>
+            </li>
+        
+            <li>
+            <time>2014-10-31 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;leveldb&#x2F;">LevelDB储存过程解析</a>
+            </li>
+        
+            <li>
+            <time>2014-10-27 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;gohtml&#x2F;">Golang 模板工具</a>
+            </li>
+        
+            <li>
+            <time>2014-10-02 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;kengdie&#x2F;">在写一个新的静态博客生成工具</a>
+            </li>
+        
+            <li>
+            <time>2014-09-03 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;new-highlight&#x2F;">换了一个高亮插件</a>
+            </li>
+        
+            <li>
+            <time>2014-09-01 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;google-code-prettify&#x2F;">给博客添加了代码高亮</a>
+            </li>
+        
+            <li>
+            <time>2014-08-31 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;coding-moon-cake&#x2F;">Coding活动送的月饼收到</a>
+            </li>
+        
+            <li>
+            <time>2014-08-26 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;hello-twister&#x2F;">Twister 去中心化的 Twitter</a>
+            </li>
+        
+            <li>
+            <time>2014-08-21 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;chedan&#x2F;">近期的计划</a>
+            </li>
+        
+            <li>
+            <time>2014-07-31 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;arch-start&#x2F;">[备用]Arch安装后的配置</a>
+            </li>
+        
+            <li>
+            <time>2014-07-30 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;use-arch&#x2F;">装上了Arch</a>
+            </li>
+        
+            <li>
+            <time>2014-07-26 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;stepladder&#x2F;">用Golang写了一个梯子</a>
+            </li>
+        
+            <li>
+            <time>2014-07-14 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;golang-neovim&#x2F;">Neovim的Golang开发环境配置</a>
+            </li>
+        
+            <li>
+            <time>2014-07-12 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;neovim&#x2F;">ubuntu编译安装Neovim</a>
+            </li>
+        
+            <li>
+            <time>2014-07-10 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;gnome&#x2F;">再次换回GNOME</a>
+            </li>
+        
+            <li>
+            <time>2014-07-09 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ubuntu-install-budgie-desktop&#x2F;">Ubuntu 安装 Budgie Desktop</a>
+            </li>
+        
+            <li>
+            <time>2014-06-26 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;golang-in-atom&#x2F;">Atom配置Golang开发环境</a>
+            </li>
+        
+            <li>
+            <time>2014-06-20 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;add-search&#x2F;">好久没更新了啊</a>
+            </li>
+        
+            <li>
+            <time>2014-06-06 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;go-intellij-idea&#x2F;">Golang IntelliJ IDEA</a>
+            </li>
+        
+            <li>
+            <time>2014-06-05 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;go-opengl&#x2F;">开始折腾OpenGL</a>
+            </li>
+        
+            <li>
+            <time>2014-06-02 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;fuck-you-gwf&#x2F;">博客优化完成</a>
+            </li>
+        
+            <li>
+            <time>2014-05-30 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;go-get-glfw3&#x2F;">Go语言GLFW3库的安装</a>
+            </li>
+        
+            <li>
+            <time>2014-05-27 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;modify-xp-registry&#x2F;">让XP继续接受更新</a>
+            </li>
+        
+            <li>
+            <time>2014-05-26 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;github-page-404&#x2F;">Github Page自定义404页面</a>
+            </li>
+        
+            <li>
+            <time>2014-05-25 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;mobile-version&#x2F;">手机版搞定！</a>
+            </li>
+        
+            <li>
+            <time>2014-05-25 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;test&#x2F;">测试TEST</a>
+            </li>
+        
+            <li>
+            <time>2014-04-08 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;hello-world&#x2F;">Hello World!</a>
+            </li>
+        
+    </ul>
+</article>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

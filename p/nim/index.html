@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>Nim语言尝试 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>Nim语言尝试</h1>
+    <div class="info"><h2>几乎没人用</h2><time>2015-03-05 00:00</time></div>
+    <p>从solidot看到，稍微尝试了一下</p>
+<p>打开<a href="http://nim-lang.org">官网</a>后，第一感想是：</p>
+<blockquote>
+<p>诶这个代码高亮的配色不错</p>
+</blockquote>
+<p>然后看了语法什么的，觉得还算顺眼，就把首页的所有链接全部点开了</p>
+<p>第一个版本发布的日期是<code>2008-08-22</code>，比go还早一点，但是没什么人用。（果然还是得拼爹啊）</p>
+<p>教程方面，只有Tutorials栏里的两个是最新版本的，其他都是旧版</p>
+<p>语法层面还没深入研究，就不说了</p>
+<p>不过有两个比较有意思的特性，大体介绍一下</p>
+<p>首先是各种命名方法可以互相兼容</p>
+<p>就是说不管你是喜欢帕斯卡命名法还是驼峰命名法，都一样用</p>
+<p>比如标准库里的<code>system.hostOS</code>，你在使用的时候可以写成<code>system.host_os</code>或者<code>system.host_OS</code>再或者<code>system.h_Os_tOS</code>都是可以的。除了首字母以外其他地方都不区分大小写，而下划线只要不是首尾字母，其他地方也是可以随便插入的</p>
+<p>然后是foo(bar)可以写成bar.foo() (这个我还没用到，但是好像会很有用？)</p>
+<p>至于编辑器支持方面，不要去看官网FAQ里的，那里面也是好久没更新了</p>
+<p>可以直接看github上的wiki <a href="https://github.com/Araq/Nim/wiki/Editor-Support">https://github.com/Araq/Nim/wiki/Editor-Support</a></p>
+<p>最新更新的就是emacs的插件和官方的IDE <a href="https://github.com/nim-lang/Aporia">Aporia</a></p>
+<p>emacs的插件我怎么弄自动补全也没搞定，虽然有提供一个<code>ac-nim.el</code></p>
+<p>Aporia的master分支里的完全不能用！有很多严重问题。比如<a href="https://github.com/nim-lang/Aporia/issues/71">这个</a>，还有自动补全和定义转跳完全不起作用（以及里面的nimrod还没有更名为nim，虽然官方开了一个分支修改名字吧）。不知道是我配置问题还是怎么着（也根据提示设置nim路径了），开发者有一个答复是nim的idetools本身挂掉了，看了下Aporia的源码照着打了几句<code>nim idetools</code>命令也没什么输出</p>
+<p>去翻更新记录找到了<a href="https://github.com/nim-lang/nimsuggest">https://github.com/nim-lang/nimsuggest</a>这个东西，好像是0.10.3以后会用它代替idetools。于是开始折腾</p>
+<p>先是升级nim和Aporia到0.10.3开发版，然后用<code>nimble install nimsuggest</code>来安装nimsuggest。但是出现错误提示<code>~/.nimble/pkgs/compiler-0.10.3/compiler/nimfix/prettybase.nim(10, 7) Error: cannot open 'ast'</code></p>
+<p>重试几遍无果，手动编译了一下compiler，发现没问题啊</p>
+<p>浪费掉十几分钟后发现是编译器没有读取cfg？直接把源码扔到compiler文件夹里编译，成功。</p>
+<p>我激动的打开Aporia开始尝试语义转跳，刚按下快捷键</p>
+<p>……</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1aa;">Error: unhandled exception: 拒绝连接 [OSError]
+</span></pre>
+<p>窗口吡的一下就关掉了！</p>
+<p>关！掉！了！</p>
+<p>我还没有放弃，手动开启nimsuggest服务</p>
+<p>再试</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1aa;">Traceback (most recent call last)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(197)      nimsuggest
+</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(187)      handleCmdLine
+</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(149)      mainCommand
+</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(132)      serve
+</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(106)      action
+</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(203)         compileProject
+</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(151)         compileModule
+</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(197)          processModule
+</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(137)          processTopLevelStmt
+</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(450)             myProcess
+</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(419)             semStmtAndGenerateGenerics
+</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1340)       semStmt
+</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(893)        semExprNoType
+</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(2196)       semExpr
+</span><span style="background-color:#282828;color:#fdf4c1aa;">importer.nim(171)        evalImport
+</span><span style="background-color:#282828;color:#fdf4c1aa;">importer.nim(161)        myImportModule
+</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(164)         importModule
+</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(151)         compileModule
+</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(197)          processModule
+</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(137)          processTopLevelStmt
+</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(450)             myProcess
+</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(419)             semStmtAndGenerateGenerics
+</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1340)       semStmt
+</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(893)        semExprNoType
+</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(2196)       semExpr
+</span><span style="background-color:#282828;color:#fdf4c1aa;">importer.nim(171)        evalImport
+</span><span style="background-color:#282828;color:#fdf4c1aa;">importer.nim(161)        myImportModule
+</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(164)         importModule
+</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(151)         compileModule
+</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(197)          processModule
+</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(137)          processTopLevelStmt
+</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(450)             myProcess
+</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(419)             semStmtAndGenerateGenerics
+</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1340)       semStmt
+</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(893)        semExprNoType
+</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(2189)       semExpr
+</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1134)       semProc
+</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1074)       semProcAux
+</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(788)          transformBody
+</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(773)          processTransf
+</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(761)          transform
+</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(104)          transformSons
+</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(706)          transform
+</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(472)          transformFor
+</span><span style="background-color:#282828;color:#fdf4c1aa;">lambdalifting.nim(1022)  liftForLoop
+</span><span style="background-color:#282828;color:#fdf4c1aa;">ast.nim(941)             []
+</span><span style="background-color:#282828;color:#fdf4c1aa;">SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+</span></pre><pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1aa;">*** Error in `aporia&#39;: free(): invalid pointer: 0x00007f1f16667700 ***
+</span><span style="background-color:#282828;color:#fdf4c1aa;">SIGABRT: Abnormal termination.
+</span></pre>
+<p>我仿佛已经知道十万只草泥马在心中奔腾而过的感觉了</p>
+<p><em>可能永远也不会续的未完待续</em></p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

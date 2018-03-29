@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>统计图的曲线插值 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>统计图的曲线插值</h1>
+    <div class="info"><h2>不会数学还想写图形界面?</h2><time>2017-11-13 20:58</time></div>
+    <p>很多程序, 比如各种监视器, 需要实时绘制统计图来将数据直观的展示给用户</p>
+<p>而这个实时, 却又不是那么的 &quot;实时&quot;, 一般表示一秒左右</p>
+<p>不然一个监视器吃的资源比被监视程序还多, 就十分微妙了</p>
+<p>通常为了偷懒, 直接画几条线把型值点连起来, 做成折线图, 然后一秒一秒的刷新就可以</p>
+<p>但人是要有追求的! 我们要平滑! 要曲线!</p>
+<p>所以便有了本文, 记录追求上帝所有物的流水帐</p>
+<!-- more -->
+<hr />
+<p>对于两个型值点, 要画条线把它们连起来, 就需要求出中间未知的数据</p>
+<p>而求出这些数据的过程, 叫做插值 (或者内插, 反正知道有这么个词就行了)</p>
+<p>然后如果你知道拟合, 那要明确一下, 插值不是拟合, 与拟合相比插值必须经过所有型值点</p>
+<hr />
+<h2 id="xian-xing-cha-zhi">线性插值</h2>
+<p>最简单的插值, 效果就是折线图:</p>
+<p><img src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='150' width='600'%3E%3Cg transform='translate(2,2)'%3E%3Cpath d='M50,100L150,60L250,120L350,20L450,140L550,110' stroke='rgb(31,119,180)' stroke-width='2'%3E%3C/path%3E%3C/g%3E%3Cg transform='translate(2,2)'%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='50' cy='100' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='150' cy='60' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='250' cy='120' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='350' cy='20' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='450' cy='140' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='550' cy='110' r='3'%3E%3C/circle%3E%3C/g%3E%3C/svg%3E"></p>
+<p>实现也很简单 <code>line to</code> 一下就行</p>
+<h2 id="duo-xiang-shi-cha-zhi">多项式插值</h2>
+<p>是一个类型的统称, 算法有很多, 但因为复杂度还有<a href="https://zh.wikipedia.org/wiki/%E9%BE%99%E6%A0%BC%E7%8E%B0%E8%B1%A1">龙格现象</a>导致的等距点插值时的过大误差, 这里肯定是不能用的了, 所以就此略过</p>
+<h2 id="yang-tiao-cha-zhi">样条插值</h2>
+<p>要避免龙格现象, 最通用的方法是使用样条插值, 同样也有很多算法 (还有专门为字体适配的, 各种杂七杂八的算法, 不过这里就画个统计图也用不到)</p>
+<p>样条插值的特点是根据分段计算, 计算时只关注相邻的几个型值点, 不需要整条曲线, 自然也就不会因为阶数太高受到龙格现象影响</p>
+<p>这里选用 Cardinal Splines, tension 为 0.7:</p>
+<p><img src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='150' width='600'%3E%3Cg transform='translate(2,2)'%3E%3Cpath d='M50,100Q116.66666666666666,56.666666666666664,150,60C200,65,200,130,250,120S300,15,350,20S400,117.5,450,140Q483.3333333333333,155,550,110' stroke='rgb(31,119,180)' stroke-width='2'%3E%3C/path%3E%3C/g%3E%3Cg transform='translate(2,2)'%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='50' cy='100' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='150' cy='60' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='250' cy='120' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='350' cy='20' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='450' cy='140' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='550' cy='110' r='3'%3E%3C/circle%3E%3C/g%3E%3C/svg%3E"></p>
+<p>关于 Cardinal Splines 的实现可以看: <a href="http://www.mvps.org/directx/articles/catmull">http://www.mvps.org/directx/articles/catmull</a> (这里讲的是 Catmull-Rom, 而 Catmull-Rom 就是 Cardinal 的 tension = 1 或者 Cardinal 去掉 tension)</p>
+<p>可以看见上图的效果还是非常棒的, 然而有个问题:</p>
+<p>统计图是要实时更新的</p>
+<p>也就是说最后一个型值点会随时被添加, 而样条插值所绘制的曲线受相邻点影响</p>
+<p><img src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='150' width='700'%3E%3Cg transform='translate(2,2)'%3E%3Cpath d='M50,100Q116.66666666666666,56.666666666666664,150,60C200,65,200,130,250,120S300,15,350,20S400,117.5,450,140Q483.3333333333333,155,550,110' stroke='rgb(31,119,180)' stroke-width='2'%3E%3C/path%3E%3Cpath d='M450,140C500,162.5,500,120,550,110' stroke='rgb(44,160,44)' stroke-width='2'%3E%3C/path%3E%3Cpath d='M550,110Q583.3333333333334,103.33333333333333,650,100' stroke='rgb(44,160,44)' stroke-width='2'%3E%3C/path%3E%3C/g%3E%3Cg transform='translate(2,2)'%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='50' cy='100' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='150' cy='60' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='250' cy='120' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='350' cy='20' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='450' cy='140' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='550' cy='110' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='650' cy='100' r='3'%3E%3C/circle%3E%3C/g%3E%3C/svg%3E"></p>
+<p>变动的地方用绿色表示, 嗯……要是实时的话, 用户会看见最后一部分曲线不停抽搐……</p>
+<p>怎么办呢?</p>
+<p>除非能精准的预测下一个值否则无法消除这个抖动, 而这个预测肯定做不到</p>
+<p>(陷入沉思)</p>
+<p>看看其他程序怎么做的吧, 比如 GNOME 的系统监视器:</p>
+<p><img src="x.png" alt="gnome-system-monitor" /></p>
+<p>等等, 这僵硬的曲线有点眼熟?</p>
+<p>来加几个控制点:</p>
+<p><img src="y.png" alt="gnome-system-monitor" /></p>
+<p>就是二次贝塞尔曲线啊!</p>
+<p>这段<a href="https://github.com/GNOME/gnome-system-monitor/blob/e828468ac0c02ae1a33e4a65f169a6927c98e156/src/load-graph.cpp#L267-L273">源码</a>也证实了这一点, 简单暴力, 还不用处理边界问题 (</p>
+<p>心情复杂</p>
+<p>看来写界面是真的不用数学的, 只需要你知道世界上有一条万能的贝塞尔曲线 (</p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

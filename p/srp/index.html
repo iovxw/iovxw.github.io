@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>别在服务端储存用户密码了，来用 SRP 吧 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>别在服务端储存用户密码了，来用 SRP 吧</h1>
+    <div class="info"><h2>只是介绍</h2><time>2017-01-03 00:00</time></div>
+    <p>新年第一篇文章就是从去年的草稿箱里发出来的，感觉真不怎么新……</p>
+<p>当然这个协议也不新了，是 2000 年出的 RFC</p>
+<p>不过现在都 2017 年了，还是有一大堆网站在用什么 md5 加盐（不，就算你用 SHA2XX 也不行），甚至连 bcrypt 和 Argon2 是啥都不知道，感觉真是悲伤（</p>
+<p>所以，来看看 SRP 是个啥（如果你真的不知道 Argon2，还是先去看它吧）：</p>
+<!-- more -->
+<blockquote>
+<p>The <a href="https://www.ietf.org/rfc/rfc2945.txt">Secure Remote Password (SRP) protocol</a> is <strong>widely-tested</strong> and <strong>widely-deployed</strong> password-authenticated key agreement (PAKE) protocol which mutually authenticates both the user and server while <strong>never sending any password-equivalent data over the network</strong>. Authentication attempts cannot be replayed, and the protocol remains secure even in the presence of active tampering by a third party.</p>
+</blockquote>
+<p>以上摘自<a href="https://protonmail.com/blog/encrypted_email_authentication/">《ProtonMail Authentication Technical Implementation》</a>中对 SRP 的介绍（ProtonMail 就是那个斯诺登事件后创建的以安全著称的邮件服务，而 SRP 就是人家用的方案）</p>
+<p>看见重点了吗？</p>
+<p><strong>never sending any password-equivalent data over the network</strong></p>
+<p>是的，哪怕你用的是 Argon2，也得想办法先把密码发到服务器上，而 SRP</p>
+<p><strong>NEVER SENDING ANY PASSWORD-EQUIVALENT DATA OVER THE NETWORK!!</strong></p>
+<p>咳，激动了，总之就是这么一个神奇的东西</p>
+<hr />
+<p>SRP 的安全性基于离散对数问题，就和 DH 还有 ECC 一样（当然问题是量子计算机出来就完蛋了，不过现在不用关心这个）</p>
+<p>具体的原理不用管，相信看这篇文章的都不懂密码学（我也不懂，真的），要是真想研究的话请看 <a href="http://www.ietf.org/rfc/rfc2945.txt">RFC</a></p>
+<p>一般程序员只需要了解协议过程就行了，而<a href="https://en.wikipedia.org/wiki/Secure_Remote_Password_protocol#Implementation_example_in_Python">维基百科上的 Python 例子</a>就讲的很明白。这里就直接复制过来：</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;font-style:italic;color:#928374;"># An example SRP authentication
+</span><span style="background-color:#282828;font-style:italic;color:#928374;"># WARNING: Do not use for real cryptographic purposes beyond testing.
+</span><span style="background-color:#282828;font-style:italic;color:#928374;"># based on http://srp.stanford.edu/design.html
+</span><span style="background-color:#282828;color:#fa5c4b;">import </span><span style="background-color:#282828;color:#fdf4c1aa;">hashlib
+</span><span style="background-color:#282828;color:#fa5c4b;">import </span><span style="background-color:#282828;color:#fdf4c1aa;">random
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fa5c4b;">def </span><span style="background-color:#282828;color:#8ec07c;">global_print</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fe8019;">*</span><span style="background-color:#282828;color:#fdf4c1;">names</span><span style="background-color:#282828;color:#fdf4c1aa;">):
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">x </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fa5c4b;">lambda </span><span style="background-color:#282828;color:#fdf4c1;">s</span><span style="background-color:#282828;color:#fdf4c1aa;">: [</span><span style="background-color:#282828;color:#b8bb26;">&quot;{}&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;0x{</span><span style="background-color:#282828;color:#fdf4c1;">:x</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">] [</span><span style="background-color:#282828;color:#fabd2f;">hasattr</span><span style="background-color:#282828;color:#fdf4c1;">(s, </span><span style="background-color:#282828;color:#b8bb26;">&#39;real&#39;</span><span style="background-color:#282828;color:#fdf4c1;">)</span><span style="background-color:#282828;color:#fdf4c1aa;">]</span><span style="background-color:#282828;color:#fdf4c1;">.format(s)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.join(</span><span style="background-color:#282828;color:#b8bb26;">&quot;{} = {}\n&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(name, x(</span><span style="background-color:#282828;color:#fabd2f;">globals</span><span style="background-color:#282828;color:#fdf4c1;">()[name])) </span><span style="background-color:#282828;color:#fa5c4b;">for </span><span style="background-color:#282828;color:#fdf4c1;">name </span><span style="background-color:#282828;color:#fa5c4b;">in </span><span style="background-color:#282828;color:#fdf4c1;">names))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;font-style:italic;color:#928374;"># note: str converts as is, str( [1,2,3,4] ) will convert to &quot;[1,2,3,4]&quot;
+</span><span style="background-color:#282828;color:#fa5c4b;">def </span><span style="background-color:#282828;color:#8ec07c;">H</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fe8019;">*</span><span style="background-color:#282828;color:#fdf4c1;">args</span><span style="background-color:#282828;color:#fdf4c1aa;">):  </span><span style="background-color:#282828;font-style:italic;color:#928374;"># a one-way hash function
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">a </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&#39;:&#39;</span><span style="background-color:#282828;color:#fdf4c1;">.join(</span><span style="background-color:#282828;color:#fabd2f;">str</span><span style="background-color:#282828;color:#fdf4c1;">(a) </span><span style="background-color:#282828;color:#fa5c4b;">for </span><span style="background-color:#282828;color:#fdf4c1;">a </span><span style="background-color:#282828;color:#fa5c4b;">in </span><span style="background-color:#282828;color:#fdf4c1;">args)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">return </span><span style="background-color:#282828;color:#fabd2f;">int</span><span style="background-color:#282828;color:#fdf4c1;">(hashlib.sha256(a.encode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf-8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">)).hexdigest(), </span><span style="background-color:#282828;color:#d3869b;">16</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fa5c4b;">def </span><span style="background-color:#282828;color:#8ec07c;">cryptrand</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">n</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#d3869b;">1024</span><span style="background-color:#282828;color:#fdf4c1aa;">):
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">return </span><span style="background-color:#282828;color:#fdf4c1;">random.SystemRandom().getrandbits(n) </span><span style="background-color:#282828;color:#fe8019;">% </span><span style="background-color:#282828;color:#fdf4c1aa;">N
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;font-style:italic;color:#928374;"># A large safe prime (N = 2q+1, where q is prime)
+</span><span style="background-color:#282828;font-style:italic;color:#928374;"># All arithmetic is done modulo N
+</span><span style="background-color:#282828;font-style:italic;color:#928374;"># (generated using &quot;openssl dhparam -text 1024&quot;)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">N </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&#39;&#39;&#39;00:c0:37:c3:75:88:b4:32:98:87:e6:1c:2d:a3:32:
+</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">4b:1b:a4:b8:1a:63:f9:74:8f:ed:2d:8a:41:0c:2f:
+</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">c2:1b:12:32:f0:d3:bf:a0:24:27:6c:fd:88:44:81:
+</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">97:aa:e4:86:a6:3b:fc:a7:b8:bf:77:54:df:b3:27:
+</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">c7:20:1f:6f:d1:7f:d7:fd:74:15:8b:d3:1c:e7:72:
+</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">c9:f5:f8:ab:58:45:48:a9:9a:75:9b:5a:2c:05:32:
+</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">16:2b:7b:62:18:e8:f1:42:bc:e2:c3:0d:77:84:68:
+</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">9a:48:3e:09:5e:70:16:18:43:79:13:a8:c3:9c:3d:
+</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">d0:d4:ca:3c:50:0b:88:5f:e3&#39;&#39;&#39;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">N </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">int</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&#39;&#39;</span><span style="background-color:#282828;color:#fdf4c1;">.join(N.split()).replace(</span><span style="background-color:#282828;color:#b8bb26;">&#39;:&#39;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&#39;&#39;</span><span style="background-color:#282828;color:#fdf4c1;">), </span><span style="background-color:#282828;color:#d3869b;">16</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">g </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#d3869b;">2        </span><span style="background-color:#282828;font-style:italic;color:#928374;"># A generator modulo N
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">k </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(N, g)  </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Multiplier parameter (k=3 in legacy SRP-6)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;#. H, N, g, and k are known beforehand to both client and server:&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;H&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;N&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;g&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;k&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;0. server stores (I, s, v) in its password database&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;font-style:italic;color:#928374;"># the server must first generate the password verifier
+</span><span style="background-color:#282828;color:#fdf4c1aa;">I </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&quot;person&quot;         </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Username
+</span><span style="background-color:#282828;color:#fdf4c1aa;">p </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&quot;password1234&quot;   </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Password
+</span><span style="background-color:#282828;color:#fdf4c1aa;">s </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">cryptrand(</span><span style="background-color:#282828;color:#d3869b;">64</span><span style="background-color:#282828;color:#fdf4c1;">)    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Salt for the user
+</span><span style="background-color:#282828;color:#fdf4c1aa;">x </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(s, I, p)       </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Private key
+</span><span style="background-color:#282828;color:#fdf4c1aa;">v </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">pow</span><span style="background-color:#282828;color:#fdf4c1;">(g, x, N)     </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Password verifier
+</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;I&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;p&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;s&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;x&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;v&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;1. client sends username I and public ephemeral value A to the server&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">a </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">cryptrand()
+</span><span style="background-color:#282828;color:#fdf4c1aa;">A </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">pow</span><span style="background-color:#282828;color:#fdf4c1;">(g, a, N)
+</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;I&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;A&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)  </span><span style="background-color:#282828;font-style:italic;color:#928374;"># client-&gt;server (I, A)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;2. server sends user&#39;s salt s and public ephemeral value B to client&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">b </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">cryptrand()
+</span><span style="background-color:#282828;color:#fdf4c1aa;">B </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1aa;">(k </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fdf4c1aa;">v </span><span style="background-color:#282828;color:#fe8019;">+ </span><span style="background-color:#282828;color:#fabd2f;">pow</span><span style="background-color:#282828;color:#fdf4c1;">(g, b, N)</span><span style="background-color:#282828;color:#fdf4c1aa;">) </span><span style="background-color:#282828;color:#fe8019;">% </span><span style="background-color:#282828;color:#fdf4c1aa;">N
+</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;s&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;B&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)  </span><span style="background-color:#282828;font-style:italic;color:#928374;"># server-&gt;client (s, B)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;3. client and server calculate the random scrambling parameter&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">u </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(A, B)  </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Random scrambling parameter
+</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;u&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;4. client computes session key&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">x </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(s, I, p)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">S_c </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">pow</span><span style="background-color:#282828;color:#fdf4c1;">(B </span><span style="background-color:#282828;color:#fe8019;">- </span><span style="background-color:#282828;color:#fdf4c1;">k </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fabd2f;">pow</span><span style="background-color:#282828;color:#fdf4c1;">(g, x, N), a </span><span style="background-color:#282828;color:#fe8019;">+ </span><span style="background-color:#282828;color:#fdf4c1;">u </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fdf4c1;">x, N)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">K_c </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(S_c)
+</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;S_c&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;K_c&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;5. server computes session key&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">S_s </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">pow</span><span style="background-color:#282828;color:#fdf4c1;">(A </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fabd2f;">pow</span><span style="background-color:#282828;color:#fdf4c1;">(v, u, N), b, N)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">K_s </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(S_s)
+</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;S_s&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;K_s&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;6. client sends proof of session key to server&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">M_c </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(H(N) </span><span style="background-color:#282828;color:#fe8019;">^ </span><span style="background-color:#282828;color:#fdf4c1;">H(g), H(I), s, A, B, K_c)
+</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;M_c&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;font-style:italic;color:#928374;"># client-&gt;server (M_c) ; server verifies M_c
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;7. server sends proof of session key to client&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">M_s </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(A, M_c, K_s)
+</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;M_s&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;font-style:italic;color:#928374;"># server-&gt;client (M_s) ;  client verifies M_s
+</span></pre>
+<p>然后 SRP 的各种实现可以看这里： http://srp.stanford.edu/links.html</p>
+<p>或者可以去相应语言的包管理系统还有 Github 搜搜看，当然不要自己实现，除非你真的懂密码学 :-)</p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

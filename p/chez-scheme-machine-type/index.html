@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>Chez Scheme 中的 machine-type - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>Chez Scheme 中的 machine-type</h1>
+    <div class="info"><h2>魔法的缩写</h2><time>2016-05-13 00:00</time></div>
+    <p>在 <em>Chez Scheme</em> 中可以用 <code>(machine-type)</code> 获取当前的运行环境</p>
+<p>比如 64 位 Linux 获取到的是 <strong>a6le</strong>, 而如果启用了线程则是 <strong>ta6le</strong></p>
+<p>第一次看完全是一头雾水, 这到底是什么玩意?</p>
+<p>其实只要注意看一下 <strong><em>Makefile</em></strong>, 就能明白了</p>
+<!-- more -->
+<hr />
+<p>格式如下：</p>
+<p>是否启用线程 + CPU + 操作系统</p>
+<hr />
+<p>如果启用了线程就在前面加上 &quot;t&quot;</p>
+<p><code>i3</code> <code>a6</code> 分别是 i386 和 amd64 的缩写, 其他同</p>
+<p><code>le</code> 是 Linux; <code>nt</code> 是 Windows; <code>fb</code> 是 FreeBSD; <code>nb</code> 是 NetBSD……</p>
+<hr />
+<p>做了个表格, 可以点击标题排序</p>
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+<style>
+table {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.1);
+}
+th, td {
+  padding: 1px 3px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+#t {
+  overflow-x: auto;
+  max-width: 100%;
+}
+</style>
+<div id="t">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>machine-type</th>
+      <th>是否启用线程</th>
+      <th>架构</th>
+      <th>位元</th>
+      <th>操作系统</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>a6fb</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>64</td>
+      <td>FreeBSD</td>
+    </tr>
+    <tr>
+      <td>a6le</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>64</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>a6ob</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>64</td>
+      <td>OpenBSD</td>
+    </tr>
+    <tr>
+      <td>a6osx</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>64</td>
+      <td>Darwin</td>
+    </tr>
+    <tr>
+      <td>a6nb</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>64</td>
+      <td>NetBSD</td>
+    </tr>
+    <tr>
+      <td>a6nt</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>64</td>
+      <td>Windows</td>
+    </tr>
+    <tr>
+      <td>a6s2</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>64</td>
+      <td>SunOS</td>
+    </tr>
+    <tr>
+      <td>arm32le</td>
+      <td>否</td>
+      <td>ARM</td>
+      <td>32</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>ppc32le</td>
+      <td>否</td>
+      <td>PowerPC</td>
+      <td>32</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>i3qnx</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>QNX</td>
+    </tr>
+    <tr>
+      <td>i3fb</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>FreeBSD</td>
+    </tr>
+    <tr>
+      <td>i3le</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>i3ob</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>OpenBSD</td>
+    </tr>
+    <tr>
+      <td>i3osx</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>Darwin</td>
+    </tr>
+    <tr>
+      <td>i3nb</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>NetBSD</td>
+    </tr>
+    <tr>
+      <td>i3nt</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>Windows</td>
+    </tr>
+    <tr>
+      <td>i3s2</td>
+      <td>否</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>SunOS</td>
+    </tr>
+    <tr>
+      <td>ta6fb</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>64</td>
+      <td>FreeBSD</td>
+    </tr>
+    <tr>
+      <td>ta6le</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>64</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>ta6ob</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>64</td>
+      <td>OpenBSD</td>
+    </tr>
+    <tr>
+      <td>ta6osx</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>64</td>
+      <td>Darwin</td>
+    </tr>
+    <tr>
+      <td>ta6nb</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>64</td>
+      <td>NetBSD</td>
+    </tr>
+    <tr>
+      <td>ta6nt</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>64</td>
+      <td>Windows</td>
+    </tr>
+    <tr>
+      <td>ta6s2</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>64</td>
+      <td>SunOS</td>
+    </tr>
+    <tr>
+      <td>tarm32le</td>
+      <td>是</td>
+      <td>ARM</td>
+      <td>32</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>tppc32le</td>
+      <td>是</td>
+      <td>PowerPC</td>
+      <td>32</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>ti3qnx</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>QNX</td>
+    </tr>
+    <tr>
+      <td>ti3fb</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>FreeBSD</td>
+    </tr>
+    <tr>
+      <td>ti3le</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>ti3ob</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>OpenBSD</td>
+    </tr>
+    <tr>
+      <td>ti3osx</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>Darwin</td>
+    </tr>
+    <tr>
+      <td>ti3nb</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>NetBSD</td>
+    </tr>
+    <tr>
+      <td>ti3nt</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>Windows</td>
+    </tr>
+    <tr>
+      <td>ti3s2</td>
+      <td>是</td>
+      <td>x86</td>
+      <td>32</td>
+      <td>SunOS</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

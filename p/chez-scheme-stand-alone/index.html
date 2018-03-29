@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>将 Chez Scheme 程序编译为单文件 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>将 Chez Scheme 程序编译为单文件</h1>
+    <div class="info"><h2>但是仍然依赖解释器</h2><time>2016-04-30 00:00</time></div>
+    <p>通过使用 <code>make-boot-file</code> 可以将 Chez Scheme 程序编译为单文件</p>
+<p>文档如下：</p>
+<style>
+    .doc {
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 5px;
+        background: rgba(255,255,255,.05);
+    }
+</style>
+<div class="doc">
+<span><b>procedure</b>: <tt>(make-boot-file&nbsp;<i>output-filename</i>&nbsp;<i>base-boot-list</i>&nbsp;<i>input-filename</i>&nbsp;...)</tt></span>
+<br>
+<b>returns: </b>unspecified
+<br>
+<b>libraries: </b><tt>(chezscheme)</tt>
+<p><tt><i>output-filename</i></tt>, <tt><i>input-filename</i></tt>, and the elements of
+<tt><i>base-boot-list</i></tt> must be strings.
+</p>
+<p>
+<tt>make-boot-file</tt> writes a boot header to the file named by
+<tt><i>output-filename</i></tt>, followed by the object code for each
+<tt><i>input-filename</i></tt> in turn.
+If an input file is not already compiled, <tt>make-boot-file</tt> compiles
+the file as it proceeds.
+</p>
+<p>
+The boot header identifies the elements of <tt><i>base-boot-list</i></tt> as
+alternative boot files upon which the new boot file depends.
+If the list of strings naming base boot files is empty, the first named
+input file should be a base boot file, i.e., petite.boot or some boot file
+derived from petite.boot.
+</p>
+<p>
+Boot files are loaded explicitly via the <tt>--boot</tt> or <tt>-b</tt>
+command-line options or implicitly based on the name of the executable
+(Section&nbsp;<a href="https://iovxw.net/csug9/use.html#g14">2.9</a>).
+</p>
+<p>
+See Section&nbsp;<a href="https://iovxw.net/csug9/use.html#g13">2.8</a> for more information on boot files
+and the use of <tt>make-boot-file</tt>.
+</p>
+</div>
+<!-- more -->
+<hr />
+<p>例子：</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1aa;">;; lib/b.ss
+</span><span style="background-color:#282828;color:#fdf4c1aa;">(library (lib b)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(export y)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(import (rnrs))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(define y &quot;Hello!\n&quot;))
+</span></pre><pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1aa;">;; lib/a.ss
+</span><span style="background-color:#282828;color:#fdf4c1aa;">(library (lib a)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(export x)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(import (rnrs)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">          </span><span style="background-color:#282828;color:#fdf4c1aa;">(lib b))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(define x y))
+</span></pre><pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1aa;">;; main.ss
+</span><span style="background-color:#282828;color:#fdf4c1aa;">(import (rnrs)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">(lib a))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">(display x)
+</span></pre>
+<p>编译：</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fabd2f;">echo </span><span style="background-color:#282828;color:#b8bb26;">$&#39;(make-boot-file &quot;main.boot&quot; \&#39;(&quot;scheme&quot; &quot;petite&quot;) &quot;lib/b.ss&quot; &quot;lib/a.ss&quot; &quot;main.ss&quot;)&#39; </span><span style="background-color:#282828;color:#fe8019;">| </span><span style="background-color:#282828;color:#fdf4c1;">scheme -q
+</span></pre>
+<p>需要注意的是，<strong>input-filename</strong> 的顺序要和 <code>import</code> 的顺序一样，不然会无法找到</p>
+<p>然后是关于 <strong>base-boot-list</strong>：</p>
+<blockquote>
+<p>In most cases, you can construct your application so it does not depend upon features of <em>Chez Scheme</em> (specifically, the compiler) by specifying only <em>&quot;petite&quot;</em> in the call to <code>make-boot-file</code>. If your application calls <code>eval</code>, however, and you wish to allow users to be able to take advantage of the faster execution speed of compiled code, then specifying both <em>&quot;scheme&quot;</em> and <em>&quot;petite&quot;</em> is appropriate.</p>
+</blockquote>
+<p>运行：</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1;">$ scheme --program main.boot
+</span><span style="background-color:#282828;color:#fdf4c1;">Hello!
+</span></pre>
+<hr />
+<p>但是这样编译以后仍然依赖 <em>Chez Scheme</em>, 或者是 <em>Petite Chez Scheme</em></p>
+<p>具体依赖要看你 <strong>base-boot-list</strong> 是怎么写的了</p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

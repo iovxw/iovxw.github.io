@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>学完了 Rust - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>学完了 Rust</h1>
+    <div class="info"><h2>算入门</h2><time>2016-10-15 00:00</time></div>
+    <p>实在受够了 <em>Clojure</em> 的内存占用, <em>Go</em> 又太丑, 决定该再找个语言用了</p>
+<p>在用了一圈小众语言之后, 又被残酷的现实打击了, 没社区就得什么都自己来</p>
+<p>自己造语言这个想法也很快放弃了, 至少现在还不行</p>
+<p>而折中方案, 就是 <em>Rust</em></p>
+<!-- more -->
+<hr />
+<p>先逐个吐槽一下中间接触的语言吧</p>
+<p>首先是 <em>Racket</em>:</p>
+<p>噢, 有着足够大的 (非工程向) 社区和足够优雅的设计 (毕竟 Scheme), 而且 IDE 还挺好玩的</p>
+<p>嗯等等……这内存占用好像和 <em>Clojure</em> 没什么区别?</p>
+<p>再见</p>
+<hr />
+<p>再是 <em>Chez Scheme</em>:</p>
+<p>名气相当大, 有各种传说加成</p>
+<p>然后刚好赶上这货开源, 就顺便啃完了文档</p>
+<p>虽然是 R6RS, 不过自带的 <code>chezscheme</code> 库把该加的都加上了</p>
+<p>然而问题来了, 到底要不要在文件头加上 <code>#!chezscheme</code> 呢?</p>
+<p>在移植了一个 <em>json</em> 库和写了不知道多少 FFI 后</p>
+<p>我已经不想说什么了, 造轮子好累</p>
+<hr />
+<p><em>Carp</em>:</p>
+<p>静态类型? 无 GC?</p>
+<p>听起来相当不错, 不过到最后我就根本没用它</p>
+<p>为什么呢? <a href="https://github.com/carp-lang/Carp/blob/master/README.md">README</a> 里已经写的很清楚了</p>
+<p>一大堆东西都没完成, 而且自从我开始关注就没什么更新, 到目前为止已经两个月没动弹了</p>
+<p>希望终有一日能达到可用状态吧</p>
+<hr />
+<p>之后又回头瞅了瞅 <em>Nim</em>, 说好的 1.0 始终没有来</p>
+<p><em>Crystal</em>, 没什么吸引力</p>
+<p><em>Elixir</em>, 噢噢终于有 <code>try</code> <code>catch</code> 啦? 不过我想写客户端啊</p>
+<p><em>Dart</em>, 这货竟然还活着? 之前好像还<a href="http://home.solidot.org/story?sid=49401">回光返照</a>了?</p>
+<p>总之目光就回到了 <em>Rust</em> 上 (咦我为什么要说 &quot;回&quot;?)</p>
+<hr />
+<p>先花了三天啃完了 <a href="https://doc.rust-lang.org/book/">Rust Book</a>, 单纯看书真是相当无聊, 不过至少得过一遍才靠谱</p>
+<p>中间还发现自己竟然是 <a href="https://github.com/KaiserY/rust-book-chinese">中文版</a> 的贡献者? 而且还是 #2?</p>
+<p>啊不过好像就改了个错别字的样子……</p>
+<p>然后就是写项目练手了, 我个人喜欢先造个轮子或者其他什么简单的东西 (Hello World 可不算)</p>
+<p>毕竟对于自己熟悉的东西换个语言换个思维来写还是相当有意思的, 踩到的坑也不会是项目本身的问题</p>
+<p>不过需要注意的就是不要按照以前语言的思维来写, 完整看一遍教程也是为了这个, 把一种语言当作另一种语言来写这事有多糗也不用我说了(某人, 说的就是你)……</p>
+<p>而这次的项目, 是 <a href="https://github.com/iovxw/jandan_pic_bot">这个</a>, 一个煎蛋首页无聊图的爬虫</p>
+<p>功能就是抓取首页推荐的无聊图和其热门评论, 并推送到 <em>Telegram</em> 频道中</p>
+<p>有 <em>Telegram</em> 的话可以直接加入 <a href="https://telegram.me/jandan_pic">@jandan_pic</a> 频道查看</p>
+<p>写的时候也没遇到什么大问题, 就是第一天被 <em>Rust</em> 的编译器折腾的半死半活的</p>
+<p>生命期这个真是麻烦, 不过第二天熟悉了就没问题了, 希望以后的项目不要遇到什么坑吧……</p>
+<hr />
+<p>吐槽时间:</p>
+<p>首先是用的那个 <code>telegram-bot</code> 库, 真的是玩具级别, 要啥啥没有, 最后为了支持频道字符串 ID 还曲线救国了一下</p>
+<p>要不是对 <em>Rust</em> 不熟, 就像 <em>Clojure</em> 一样自己造一个了 <del>(已加入 To-Do List)</del></p>
+<p>然后这次项目里没有用上 <code>mioco</code>, 比较可惜, 因为的确没什么必要用, 不然还是挺想试试的</p>
+<p>再是 <em>Rust</em> 的错误处理, 啊这个真的挺合胃口, 除了传递下层错误时封装麻烦了点, 在我用过的值传递错误的语言里是相当舒服的</p>
+<p>还有编译, 真的太慢了, 不知何时会有优化</p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

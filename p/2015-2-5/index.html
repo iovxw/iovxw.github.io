@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>坑开的有点多了 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>坑开的有点多了</h1>
+    <div class="info"><h2>吐槽</h2><time>2015-02-05 00:00</time></div>
+    <p>又过了很长时间没写博客了</p>
+<p>这次真不是因为懒</p>
+<p>各种忙</p>
+<p>然后还不小心开了几个大坑</p>
+<hr />
+<p>近期做过的事：</p>
+<p>先是帮<a href="https://github.com/Go-zh/go">go-zh</a>翻译了一个package（只有几行的翻译量，结果还各种不准确，几乎都是minux纠正过来的）</p>
+<p>又写了个<a href="https://github.com/Bluek404/downloader">各种意义上都弃坑了的golang下载package</a></p>
+<p>一旦下载超大文件就会直接挂掉，是因为线程分配的问题（直接平均分配给每个线程，所以缓冲区会爆掉），但是也懒得改了。要是有人发现了，发个issue可能会给我点动力</p>
+<p>然后又为了给coding.net的PaaS弄个<a href="https://github.com/Bluek404/coding-buildpack-dart">Dart的Buildpack</a></p>
+<p>用着电信的渣出口从google code拖了1.7G的源码，编译了最新的Dart SDK</p>
+<p>又因为各种原因以及buildpack原作者的脚本有些许问题，弄了2天才下载好了完整的源码</p>
+<p>简直生不如死</p>
+<p>关键是，最后部署的时候，才想起来dart的包管理网站 被！墙！了！</p>
+<p>于是所有的package都要预先下载好再改包管理路径然后全部提交到git</p>
+<p>又涉及到了协议什么的一大堆东西，果断还是弃坑不维护了</p>
+<p>在用go写一些小程序的时候需要用到图形界面。而go的ui库我基本都用遍了</p>
+<p>缺点大致如下（部分问题可能有解决方法，如果知道还请留言告诉我哈）：</p>
+<ul>
+<li>绘制界面时太啰嗦(go-qt5啦什么的，要一个一个创建控件，再一个一个弄框框套进去)</li>
+<li>不够灵活(<a href="https://github.com/andlabs/ui">ui</a>在绘制表格的时候是用反射获取的struct里变量的命名来做标题的，中文直接跪)</li>
+<li>还是不够灵活(go-qml的依赖对我来说太复杂，又懒得弄安装包)</li>
+<li>自定义控件麻烦(qml的话要么放在路径下，要么扔到默认文件夹里，关键是每个控件都要一个文件)</li>
+</ul>
+<p>于是！</p>
+<p>就开始写一个用<a href="https://github.com/go-nwui/nwui">node-webkit做框架的ui库</a>了</p>
+<p>用html+js做控件，然后可以自定义css，前后端通信用websocket</p>
+<p>依赖只有一个nwjs，基本什么平台都可以用</p>
+<p>然后支持很方便的自定义控件（只要实现一个方法即可，会自动用反射来调用），以及写一个自定义控件的教程（计划中）</p>
+<p>来一段例子：</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">var w *Window
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">w = &amp;Window{
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">Title:  &quot;window&quot;,
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">Width:  800,
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">Height: 600,
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">Controls: []interface{}{
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">&amp;Button{
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">ID:   &quot;btn0&quot;,
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">Text: &quot;button&quot;,
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">OnClick: func() {
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                    </span><span style="background-color:#282828;color:#fdf4c1aa;">println(GetConByID(&quot;btn0&quot;).(*Button).Text)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">},
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">},
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">&amp;Button{
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">ID:   &quot;btn1&quot;,
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">Text: &quot;button&quot;,
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">},
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">},
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">w.Show()
+</span></pre>
+<p>当然这个库还只是写了个框架（就是说上面说的大部分功能都还没实现(别激动别激动)）</p>
+<p>控件什么的也只写了一个按钮和一个自定义窗口边框来做演示</p>
+<p>上张图（实际运行截图）：</p>
+<p><img src="https://raw.githubusercontent.com/go-nwui/nwui/master/screenshot.png" alt="img" /></p>
+<p>然后就在这货刚写完框架之后</p>
+<p>我又开了个坑（因为<a href="https://github.com/Bluek404/Stepladder">Stepladder</a>在长链接下会有几率始终占满一个CPU线程的使用率（具体触发原因不明），然后因为是tcp所以延迟什么的还比较大）</p>
+<p>于是准备重写个基于udp的</p>
+<p>在github上翻了一遍发现这货<a href="https://github.com/skywind3000/kcp">https://github.com/skywind3000/kcp</a></p>
+<p>以浪费10%流量为代价换取更低的延迟？</p>
+<p>貌似不错</p>
+<p>还有人弄了个go版本的<a href="https://github.com/vzex/dog-tunnel">https://github.com/vzex/dog-tunnel</a></p>
+<p>就是里面的ikcp，貌似是直接用的c2go转换的，所以编码风格还是有点奇怪</p>
+<p>c版本的源码协议是GPL，但是这个是转换的所以貌似可以不用？</p>
+<p>总之拖了一份到本地，然后修改了一下编码风格</p>
+<p>这货就诞生了<a href="https://github.com/go-ukcp/ukcp">https://github.com/go-ukcp/ukcp</a>（里面的ikcp文件夹）</p>
+<p>只是把编码风格转换了一下，然后ukcp本来是想封装一下的</p>
+<p>但是因为发送端的判断什么的（还要传给kcp所以识别很麻烦），就又弃坑了……</p>
+<p>（不过里面的ikcp还是可以单独拿出来用用的）</p>
+<p>当然还不能放弃，开始自己封装一个udp<a href="https://github.com/Bluek404/rudp">https://github.com/Bluek404/rudp</a></p>
+<p>然后嘛……现在为止还没写完</p>
+<hr />
+<p>就这么多了，坑还是慢慢填吧</p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

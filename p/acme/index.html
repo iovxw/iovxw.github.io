@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>Let&#x27;s Encrypt 证书申请&#x2F;签发流程 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>Let&#x27;s Encrypt 证书申请&#x2F;签发流程</h1>
+    <div class="info"><h2>HTTP</h2><time>2015-12-29 00:00</time></div>
+    <p>Let's Encrypt 的自动工具很方便，但也让人搞不清过程。其实就是一个 ACME (Automatic Certificate Management Environment，自动证书管理环境) 的客户端实现，相关规范可以<a href="https://github.com/ietf-wg-acme/acme">看这里</a></p>
+<p>这篇博文相当于是个笔记，只讲最简单(暴力)的验证方式，就是靠 HTTP 验证。其他还有用 DNS 和 TLS SNI 等进行验证的。</p>
+<!-- more -->
+<hr />
+<p>为了便于理解，没有使用官方客户端，而是一个第三方精简版本 <a href="https://github.com/diafygi/acme-tiny">https://github.com/diafygi/acme-tiny</a></p>
+<p>使用的源码版本:</p>
+<p><a href="https://github.com/diafygi/acme-tiny/tree/32376d02f45843545f38810f1c18478cdc6cb8a0">https://github.com/diafygi/acme-tiny/tree/32376d02f45843545f38810f1c18478cdc6cb8a0</a></p>
+<p>推荐看下面的之前先读完这个项目的 <a href="https://github.com/diafygi/acme-tiny/blob/32376d02f45843545f38810f1c18478cdc6cb8a0/README.md">README</a>，了解一下大致过程</p>
+<hr />
+<p>最后一个问题就是……我并不会 Python（别打我），不过看懂还是没问题的</p>
+<p>当然也免不了出错，到时还请指出</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;font-style:italic;color:#928374;">#!/usr/bin/env python
+</span><span style="background-color:#282828;color:#fa5c4b;">import </span><span style="background-color:#282828;color:#fdf4c1aa;">argparse, subprocess, json, os, sys, base64, binascii, time, hashlib, re, copy, textwrap, logging
+</span><span style="background-color:#282828;color:#fa5c4b;">try</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">from </span><span style="background-color:#282828;color:#fdf4c1aa;">urllib.request </span><span style="background-color:#282828;color:#fa5c4b;">import </span><span style="background-color:#282828;color:#fdf4c1aa;">urlopen </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Python 3
+</span><span style="background-color:#282828;color:#fa5c4b;">except </span><span style="background-color:#282828;color:#fabd2f;">ImportError</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">from </span><span style="background-color:#282828;color:#fdf4c1aa;">urllib2 </span><span style="background-color:#282828;color:#fa5c4b;">import </span><span style="background-color:#282828;color:#fdf4c1aa;">urlopen </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Python 2
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;font-style:italic;color:#928374;"># 签发机构的 ACME API 地址，如果没修改的话，接下来的请求都发往这里
+</span><span style="background-color:#282828;font-style:italic;color:#928374;">#DEFAULT_CA = &quot;https://acme-staging.api.letsencrypt.org&quot;
+</span><span style="background-color:#282828;color:#fdf4c1;">DEFAULT_CA </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&quot;https://acme-v01.api.letsencrypt.org&quot;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1;">LOGGER </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">logging.getLogger(</span><span style="background-color:#282828;color:#fabd2f;">__name__</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1;">LOGGER.addHandler(logging.StreamHandler())
+</span><span style="background-color:#282828;color:#fdf4c1;">LOGGER.setLevel(logging.INFO)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fa5c4b;">def </span><span style="background-color:#282828;color:#8ec07c;">get_crt</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">account_key</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">csr</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">acme_dir</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">log</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">LOGGER</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">CA</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">DEFAULT_CA</span><span style="background-color:#282828;color:#fdf4c1aa;">):
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># helper function base64 encode for jose spec
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">def </span><span style="background-color:#282828;color:#8ec07c;">_b64</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">b</span><span style="background-color:#282828;color:#fdf4c1aa;">):
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">return </span><span style="background-color:#282828;color:#fdf4c1;">base64.urlsafe_b64encode(b).decode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">).replace(</span><span style="background-color:#282828;color:#b8bb26;">&quot;=&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 如下面所讲，通过传入的账户私钥获取公钥用于身份验证
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># parse account key to get public key
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">log.info(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Parsing account key...&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 直接调用 openssl 生成公钥
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">proc </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">subprocess.Popen([</span><span style="background-color:#282828;color:#b8bb26;">&quot;openssl&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;rsa&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;-in&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, account_key, </span><span style="background-color:#282828;color:#b8bb26;">&quot;-noout&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;-text&quot;</span><span style="background-color:#282828;color:#fdf4c1;">],
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#fdf4c1;">stdin</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">subprocess.PIPE, stdout</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">subprocess.PIPE, stderr</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">subprocess.PIPE)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">out, err </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">proc.communicate()
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fdf4c1aa;">proc.returncode </span><span style="background-color:#282828;color:#fe8019;">!= </span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">raise </span><span style="background-color:#282828;color:#fabd2f;">IOError</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;OpenSSL Error: {</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(err))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">pub_hex, pub_exp </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">re.search(
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#fa5c4b;">r</span><span style="background-color:#282828;color:#b8bb26;">&quot;modulus:\n</span><span style="background-color:#282828;color:#d3869b;">\s</span><span style="background-color:#282828;color:#fe8019;">+</span><span style="background-color:#282828;color:#b8bb26;">00:([</span><span style="background-color:#282828;color:#fdf4c1;">a-f0-9</span><span style="background-color:#282828;color:#b8bb26;">\:</span><span style="background-color:#282828;color:#d3869b;">\s</span><span style="background-color:#282828;color:#b8bb26;">]</span><span style="background-color:#282828;color:#fe8019;">+?</span><span style="background-color:#282828;color:#b8bb26;">)\npublicExponent: ([</span><span style="background-color:#282828;color:#fdf4c1;">0-9</span><span style="background-color:#282828;color:#b8bb26;">]</span><span style="background-color:#282828;color:#fe8019;">+</span><span style="background-color:#282828;color:#b8bb26;">)&quot;</span><span style="background-color:#282828;color:#fdf4c1;">,
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#fdf4c1;">out.decode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">), re.MULTILINE</span><span style="background-color:#282828;color:#fe8019;">|</span><span style="background-color:#282828;color:#fdf4c1;">re.DOTALL).groups()
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">pub_exp </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&quot;{</span><span style="background-color:#282828;color:#fdf4c1;">0:x</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(</span><span style="background-color:#282828;color:#fabd2f;">int</span><span style="background-color:#282828;color:#fdf4c1;">(pub_exp))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">pub_exp </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&quot;0{</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(pub_exp) </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fabd2f;">len</span><span style="background-color:#282828;color:#fdf4c1;">(pub_exp) </span><span style="background-color:#282828;color:#fe8019;">% </span><span style="background-color:#282828;color:#d3869b;">2 </span><span style="background-color:#282828;color:#fa5c4b;">else </span><span style="background-color:#282828;color:#fdf4c1aa;">pub_exp
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 用于给每个请求签名
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># https://tools.ietf.org/html/rfc7515
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 签名步骤请看下面的 _send_signed_request
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">header </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1aa;">{
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#b8bb26;">&quot;alg&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">: </span><span style="background-color:#282828;color:#b8bb26;">&quot;RS256&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">,
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#b8bb26;">&quot;jwk&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">: {
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#b8bb26;">&quot;e&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">: </span><span style="background-color:#282828;color:#fdf4c1;">_b64(binascii.unhexlify(pub_exp.encode(</span><span style="background-color:#282828;color:#b8bb26;">&quot;utf-8&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)))</span><span style="background-color:#282828;color:#fdf4c1aa;">,
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#b8bb26;">&quot;kty&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">: </span><span style="background-color:#282828;color:#b8bb26;">&quot;RSA&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">,
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#b8bb26;">&quot;n&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">: </span><span style="background-color:#282828;color:#fdf4c1;">_b64(binascii.unhexlify(re.sub(</span><span style="background-color:#282828;color:#fa5c4b;">r</span><span style="background-color:#282828;color:#b8bb26;">&quot;(</span><span style="background-color:#282828;color:#d3869b;">\s</span><span style="background-color:#282828;color:#fe8019;">|</span><span style="background-color:#282828;color:#b8bb26;">:)&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, pub_hex).encode(</span><span style="background-color:#282828;color:#b8bb26;">&quot;utf-8&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)))</span><span style="background-color:#282828;color:#fdf4c1aa;">,
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">},
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">accountkey_json </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">json.dumps(header[</span><span style="background-color:#282828;color:#b8bb26;">&#39;jwk&#39;</span><span style="background-color:#282828;color:#fdf4c1;">], sort_keys</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#d3869b;">True</span><span style="background-color:#282828;color:#fdf4c1;">, separators</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&#39;,&#39;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&#39;:&#39;</span><span style="background-color:#282828;color:#fdf4c1;">))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 生成用户指纹
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">thumbprint </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">_b64(hashlib.sha256(accountkey_json.encode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">)).digest())
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 将请求签名后发送，请参考：
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># https://github.com/ietf-wg-acme/acme/blob/master/draft-ietf-acme-acme.md#proof-of-possession-of-a-prior-key
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># helper function make signed requests
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">def </span><span style="background-color:#282828;color:#8ec07c;">_send_signed_request</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">url</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">payload</span><span style="background-color:#282828;color:#fdf4c1aa;">):
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">payload64 </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">_b64(json.dumps(payload).encode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">protected </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">copy.deepcopy(header)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">protected[</span><span style="background-color:#282828;color:#b8bb26;">&quot;nonce&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">] </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">urlopen(CA </span><span style="background-color:#282828;color:#fe8019;">+ </span><span style="background-color:#282828;color:#b8bb26;">&quot;/directory&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)</span><span style="background-color:#282828;color:#fdf4c1aa;">.headers[</span><span style="background-color:#282828;color:#b8bb26;">&#39;Replay-Nonce&#39;</span><span style="background-color:#282828;color:#fdf4c1aa;">]
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">protected64 </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">_b64(json.dumps(protected).encode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">proc </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">subprocess.Popen([</span><span style="background-color:#282828;color:#b8bb26;">&quot;openssl&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;dgst&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;-sha256&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;-sign&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, account_key],
+</span><span style="background-color:#282828;color:#fdf4c1;">            </span><span style="background-color:#282828;color:#fdf4c1;">stdin</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">subprocess.PIPE, stdout</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">subprocess.PIPE, stderr</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">subprocess.PIPE)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">out, err </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">proc.communicate(</span><span style="background-color:#282828;color:#b8bb26;">&quot;{</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">}.{</span><span style="background-color:#282828;color:#fdf4c1;">1</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(protected64, payload64).encode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fdf4c1aa;">proc.returncode </span><span style="background-color:#282828;color:#fe8019;">!= </span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">raise </span><span style="background-color:#282828;color:#fabd2f;">IOError</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;OpenSSL Error: {</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(err))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">data </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">json.dumps({
+</span><span style="background-color:#282828;color:#fdf4c1;">            </span><span style="background-color:#282828;color:#b8bb26;">&quot;header&quot;</span><span style="background-color:#282828;color:#fdf4c1;">: header, </span><span style="background-color:#282828;color:#b8bb26;">&quot;protected&quot;</span><span style="background-color:#282828;color:#fdf4c1;">: protected64,
+</span><span style="background-color:#282828;color:#fdf4c1;">            </span><span style="background-color:#282828;color:#b8bb26;">&quot;payload&quot;</span><span style="background-color:#282828;color:#fdf4c1;">: payload64, </span><span style="background-color:#282828;color:#b8bb26;">&quot;signature&quot;</span><span style="background-color:#282828;color:#fdf4c1;">: _b64(out),
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#fdf4c1;">})
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">try</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">resp </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">urlopen(url, data.encode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">return </span><span style="background-color:#282828;color:#fdf4c1;">resp.getcode()</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">resp.read()
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">except </span><span style="background-color:#282828;color:#fabd2f;">IOError </span><span style="background-color:#282828;color:#fa5c4b;">as </span><span style="background-color:#282828;color:#fdf4c1aa;">e:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">return </span><span style="background-color:#282828;color:#fabd2f;">getattr</span><span style="background-color:#282828;color:#fdf4c1;">(e, </span><span style="background-color:#282828;color:#b8bb26;">&quot;code&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#d3869b;">None</span><span style="background-color:#282828;color:#fdf4c1;">)</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fabd2f;">getattr</span><span style="background-color:#282828;color:#fdf4c1;">(e, </span><span style="background-color:#282828;color:#b8bb26;">&quot;read&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, e.reason.</span><span style="background-color:#282828;color:#fabd2f;">__str__</span><span style="background-color:#282828;color:#fdf4c1;">)()
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 用 openssl 处理 CSR，读取要签名的域名
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># find domains
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">log.info(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Parsing CSR...&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">proc </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">subprocess.Popen([</span><span style="background-color:#282828;color:#b8bb26;">&quot;openssl&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;req&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;-in&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, csr, </span><span style="background-color:#282828;color:#b8bb26;">&quot;-noout&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;-text&quot;</span><span style="background-color:#282828;color:#fdf4c1;">],
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#fdf4c1;">stdout</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">subprocess.PIPE, stderr</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">subprocess.PIPE)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">out, err </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">proc.communicate()
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fdf4c1aa;">proc.returncode </span><span style="background-color:#282828;color:#fe8019;">!= </span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">raise </span><span style="background-color:#282828;color:#fabd2f;">IOError</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Error loading {</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">}: {</span><span style="background-color:#282828;color:#fdf4c1;">1</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(csr, err))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">domains </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">set</span><span style="background-color:#282828;color:#fdf4c1;">([])
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">common_name </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">re.search(</span><span style="background-color:#282828;color:#fa5c4b;">r</span><span style="background-color:#282828;color:#b8bb26;">&quot;Subject:</span><span style="background-color:#282828;color:#d3869b;">.</span><span style="background-color:#282828;color:#fe8019;">*?</span><span style="background-color:#282828;color:#b8bb26;"> CN=([</span><span style="background-color:#282828;color:#fe8019;">^</span><span style="background-color:#282828;color:#d3869b;">\s</span><span style="background-color:#282828;color:#fdf4c1;">,;/</span><span style="background-color:#282828;color:#b8bb26;">]</span><span style="background-color:#282828;color:#fe8019;">+</span><span style="background-color:#282828;color:#b8bb26;">)&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, out.decode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fdf4c1aa;">common_name </span><span style="background-color:#282828;color:#fe8019;">is not </span><span style="background-color:#282828;color:#d3869b;">None</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1;">domains.add(common_name.group(</span><span style="background-color:#282828;color:#d3869b;">1</span><span style="background-color:#282828;color:#fdf4c1;">))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">subject_alt_names </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">re.search(</span><span style="background-color:#282828;color:#fa5c4b;">r</span><span style="background-color:#282828;color:#b8bb26;">&quot;X509v3 Subject Alternative Name: \n </span><span style="background-color:#282828;color:#fe8019;">+</span><span style="background-color:#282828;color:#b8bb26;">([</span><span style="background-color:#282828;color:#fe8019;">^</span><span style="background-color:#282828;color:#b8bb26;">\n]</span><span style="background-color:#282828;color:#fe8019;">+</span><span style="background-color:#282828;color:#b8bb26;">)\n&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, out.decode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">), re.MULTILINE</span><span style="background-color:#282828;color:#fe8019;">|</span><span style="background-color:#282828;color:#fdf4c1;">re.DOTALL)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fdf4c1aa;">subject_alt_names </span><span style="background-color:#282828;color:#fe8019;">is not </span><span style="background-color:#282828;color:#d3869b;">None</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">for </span><span style="background-color:#282828;color:#fdf4c1aa;">san </span><span style="background-color:#282828;color:#fa5c4b;">in </span><span style="background-color:#282828;color:#fdf4c1;">subject_alt_names.group(</span><span style="background-color:#282828;color:#d3869b;">1</span><span style="background-color:#282828;color:#fdf4c1;">).split(</span><span style="background-color:#282828;color:#b8bb26;">&quot;, &quot;</span><span style="background-color:#282828;color:#fdf4c1;">)</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fdf4c1;">san.startswith(</span><span style="background-color:#282828;color:#b8bb26;">&quot;DNS:&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1;">domains.add(san[</span><span style="background-color:#282828;color:#d3869b;">4</span><span style="background-color:#282828;color:#fdf4c1;">:])
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 注册账户，还可以附加邮件地址和其他联系方式。参见：
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># https://github.com/ietf-wg-acme/acme/blob/master/draft-ietf-acme-acme.md#registration
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># get the certificate domains and expiration
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">log.info(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Registering account...&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">code, result </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">_send_signed_request(CA </span><span style="background-color:#282828;color:#fe8019;">+ </span><span style="background-color:#282828;color:#b8bb26;">&quot;/acme/new-reg&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, {
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#b8bb26;">&quot;resource&quot;</span><span style="background-color:#282828;color:#fdf4c1;">: </span><span style="background-color:#282828;color:#b8bb26;">&quot;new-reg&quot;</span><span style="background-color:#282828;color:#fdf4c1;">,
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#b8bb26;">&quot;agreement&quot;</span><span style="background-color:#282828;color:#fdf4c1;">: </span><span style="background-color:#282828;color:#b8bb26;">&quot;https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf&quot;</span><span style="background-color:#282828;color:#fdf4c1;">,
+</span><span style="background-color:#282828;color:#fdf4c1;">    </span><span style="background-color:#282828;color:#fdf4c1;">})
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fdf4c1aa;">code </span><span style="background-color:#282828;color:#fe8019;">== </span><span style="background-color:#282828;color:#d3869b;">201</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1;">log.info(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Registered!&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">elif </span><span style="background-color:#282828;color:#fdf4c1aa;">code </span><span style="background-color:#282828;color:#fe8019;">== </span><span style="background-color:#282828;color:#d3869b;">409</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1;">log.info(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Already registered!&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">else</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">raise </span><span style="background-color:#282828;color:#fabd2f;">ValueError</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Error registering: {</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">} {</span><span style="background-color:#282828;color:#fdf4c1;">1</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(code, result))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 如下面所说，给每个域名发送验证请求
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># https://github.com/ietf-wg-acme/acme/blob/master/draft-ietf-acme-acme.md#identifier-authorization
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># verify each domain
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">for </span><span style="background-color:#282828;color:#fdf4c1aa;">domain </span><span style="background-color:#282828;color:#fa5c4b;">in </span><span style="background-color:#282828;color:#fdf4c1aa;">domains:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1;">log.info(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Verifying {</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">}...&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(domain))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;"># get new challenge
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">code, result </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">_send_signed_request(CA </span><span style="background-color:#282828;color:#fe8019;">+ </span><span style="background-color:#282828;color:#b8bb26;">&quot;/acme/new-authz&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, {
+</span><span style="background-color:#282828;color:#fdf4c1;">            </span><span style="background-color:#282828;color:#b8bb26;">&quot;resource&quot;</span><span style="background-color:#282828;color:#fdf4c1;">: </span><span style="background-color:#282828;color:#b8bb26;">&quot;new-authz&quot;</span><span style="background-color:#282828;color:#fdf4c1;">,
+</span><span style="background-color:#282828;color:#fdf4c1;">            </span><span style="background-color:#282828;color:#b8bb26;">&quot;identifier&quot;</span><span style="background-color:#282828;color:#fdf4c1;">: {</span><span style="background-color:#282828;color:#b8bb26;">&quot;type&quot;</span><span style="background-color:#282828;color:#fdf4c1;">: </span><span style="background-color:#282828;color:#b8bb26;">&quot;dns&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;value&quot;</span><span style="background-color:#282828;color:#fdf4c1;">: domain},
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#fdf4c1;">})
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fdf4c1aa;">code </span><span style="background-color:#282828;color:#fe8019;">!= </span><span style="background-color:#282828;color:#d3869b;">201</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">raise </span><span style="background-color:#282828;color:#fabd2f;">ValueError</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Error requesting challenges: {</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">} {</span><span style="background-color:#282828;color:#fdf4c1;">1</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(code, result))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 响应消息中包含多种验证方式，这里选择使用 HTTP 验证
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;"># https://github.com/ietf-wg-acme/acme/blob/master/draft-ietf-acme-acme.md#http
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;"># make the challenge file
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">challenge </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1aa;">[c </span><span style="background-color:#282828;color:#fa5c4b;">for </span><span style="background-color:#282828;color:#fdf4c1aa;">c </span><span style="background-color:#282828;color:#fa5c4b;">in </span><span style="background-color:#282828;color:#fdf4c1;">json.loads(result.decode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">))</span><span style="background-color:#282828;color:#fdf4c1aa;">[</span><span style="background-color:#282828;color:#b8bb26;">&#39;challenges&#39;</span><span style="background-color:#282828;color:#fdf4c1aa;">] </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fdf4c1aa;">c[</span><span style="background-color:#282828;color:#b8bb26;">&#39;type&#39;</span><span style="background-color:#282828;color:#fdf4c1aa;">] </span><span style="background-color:#282828;color:#fe8019;">== </span><span style="background-color:#282828;color:#b8bb26;">&quot;http-01&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">][</span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">]
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">token </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">re.sub(</span><span style="background-color:#282828;color:#fa5c4b;">r</span><span style="background-color:#282828;color:#b8bb26;">&quot;[</span><span style="background-color:#282828;color:#fe8019;">^</span><span style="background-color:#282828;color:#fdf4c1;">A-Za-z0-9_</span><span style="background-color:#282828;color:#b8bb26;">\-]&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;_&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, challenge[</span><span style="background-color:#282828;color:#b8bb26;">&#39;token&#39;</span><span style="background-color:#282828;color:#fdf4c1;">])
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">keyauthorization </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&quot;{</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">}.{</span><span style="background-color:#282828;color:#fdf4c1;">1</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(token, thumbprint)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">wellknown_path </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">os.path.join(acme_dir, token)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">with </span><span style="background-color:#282828;color:#fabd2f;">open</span><span style="background-color:#282828;color:#fdf4c1;">(wellknown_path, </span><span style="background-color:#282828;color:#b8bb26;">&quot;w&quot;</span><span style="background-color:#282828;color:#fdf4c1;">) </span><span style="background-color:#282828;color:#fa5c4b;">as </span><span style="background-color:#282828;color:#fdf4c1aa;">wellknown_file:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1;">wellknown_file.write(keyauthorization)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 本地测试一下验证文件是否能正确获取
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;"># check that the file is in place
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">wellknown_url </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&quot;http://{</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">}/.well-known/acme-challenge/{</span><span style="background-color:#282828;color:#fdf4c1;">1</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(domain, token)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">try</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">resp </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">urlopen(wellknown_url)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">resp_data </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">resp.read().decode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">).strip()
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">assert </span><span style="background-color:#282828;color:#fdf4c1aa;">resp_data </span><span style="background-color:#282828;color:#fe8019;">== </span><span style="background-color:#282828;color:#fdf4c1aa;">keyauthorization
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">except</span><span style="background-color:#282828;color:#fdf4c1aa;"> (</span><span style="background-color:#282828;color:#fabd2f;">IOError</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fabd2f;">AssertionError</span><span style="background-color:#282828;color:#fdf4c1aa;">):
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1;">os.remove(wellknown_path)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">raise </span><span style="background-color:#282828;color:#fabd2f;">ValueError</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Wrote file to {</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">}, but couldn&#39;t download {</span><span style="background-color:#282828;color:#fdf4c1;">1</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(
+</span><span style="background-color:#282828;color:#fdf4c1;">                </span><span style="background-color:#282828;color:#fdf4c1;">wellknown_path, wellknown_url))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 通知验证服务器开始 HTTP 验证
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;"># （诶这里不应该加个 &quot;type&quot;: &quot;http-01&quot; 么）
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;"># notify challenge are met
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">code, result </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">_send_signed_request(challenge[</span><span style="background-color:#282828;color:#b8bb26;">&#39;uri&#39;</span><span style="background-color:#282828;color:#fdf4c1;">], {
+</span><span style="background-color:#282828;color:#fdf4c1;">            </span><span style="background-color:#282828;color:#b8bb26;">&quot;resource&quot;</span><span style="background-color:#282828;color:#fdf4c1;">: </span><span style="background-color:#282828;color:#b8bb26;">&quot;challenge&quot;</span><span style="background-color:#282828;color:#fdf4c1;">,
+</span><span style="background-color:#282828;color:#fdf4c1;">            </span><span style="background-color:#282828;color:#b8bb26;">&quot;keyAuthorization&quot;</span><span style="background-color:#282828;color:#fdf4c1;">: keyauthorization,
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#fdf4c1;">})
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fdf4c1aa;">code </span><span style="background-color:#282828;color:#fe8019;">!= </span><span style="background-color:#282828;color:#d3869b;">202</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">raise </span><span style="background-color:#282828;color:#fabd2f;">ValueError</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Error triggering challenge: {</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">} {</span><span style="background-color:#282828;color:#fdf4c1;">1</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(code, result))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 如下所说
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;"># wait for challenge to be verified
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">while </span><span style="background-color:#282828;color:#d3869b;">True</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">try</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">resp </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">urlopen(challenge[</span><span style="background-color:#282828;color:#b8bb26;">&#39;uri&#39;</span><span style="background-color:#282828;color:#fdf4c1;">])
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">challenge_status </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">json.loads(resp.read().decode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">except </span><span style="background-color:#282828;color:#fabd2f;">IOError </span><span style="background-color:#282828;color:#fa5c4b;">as </span><span style="background-color:#282828;color:#fdf4c1aa;">e:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fa5c4b;">raise </span><span style="background-color:#282828;color:#fabd2f;">ValueError</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Error checking challenge: {</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">} {</span><span style="background-color:#282828;color:#fdf4c1;">1</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(
+</span><span style="background-color:#282828;color:#fdf4c1;">                    </span><span style="background-color:#282828;color:#fdf4c1;">e.code, json.loads(e.read().decode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">))))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fdf4c1aa;">challenge_status[</span><span style="background-color:#282828;color:#b8bb26;">&#39;status&#39;</span><span style="background-color:#282828;color:#fdf4c1aa;">] </span><span style="background-color:#282828;color:#fe8019;">== </span><span style="background-color:#282828;color:#b8bb26;">&quot;pending&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1;">time.sleep(</span><span style="background-color:#282828;color:#d3869b;">2</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">elif </span><span style="background-color:#282828;color:#fdf4c1aa;">challenge_status[</span><span style="background-color:#282828;color:#b8bb26;">&#39;status&#39;</span><span style="background-color:#282828;color:#fdf4c1aa;">] </span><span style="background-color:#282828;color:#fe8019;">== </span><span style="background-color:#282828;color:#b8bb26;">&quot;valid&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1;">log.info(</span><span style="background-color:#282828;color:#b8bb26;">&quot;{</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">} verified!&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(domain))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1;">os.remove(wellknown_path)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fa5c4b;">break
+</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">else</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fa5c4b;">raise </span><span style="background-color:#282828;color:#fabd2f;">ValueError</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;{</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">} challenge did not pass: {</span><span style="background-color:#282828;color:#fdf4c1;">1</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(
+</span><span style="background-color:#282828;color:#fdf4c1;">                    </span><span style="background-color:#282828;color:#fdf4c1;">domain, challenge_status))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 签证书，同样先用 openssl 处理 CSR
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># get the new certificate
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">log.info(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Signing certificate...&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">proc </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">subprocess.Popen([</span><span style="background-color:#282828;color:#b8bb26;">&quot;openssl&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;req&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;-in&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, csr, </span><span style="background-color:#282828;color:#b8bb26;">&quot;-outform&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;DER&quot;</span><span style="background-color:#282828;color:#fdf4c1;">],
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#fdf4c1;">stdout</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">subprocess.PIPE, stderr</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">subprocess.PIPE)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">csr_der, err </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">proc.communicate()
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 把 CSR 发给服务器签发证书
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># https://github.com/ietf-wg-acme/acme/blob/master/draft-ietf-acme-acme.md#certificate-issuance
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">code, result </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">_send_signed_request(CA </span><span style="background-color:#282828;color:#fe8019;">+ </span><span style="background-color:#282828;color:#b8bb26;">&quot;/acme/new-cert&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, {
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#b8bb26;">&quot;resource&quot;</span><span style="background-color:#282828;color:#fdf4c1;">: </span><span style="background-color:#282828;color:#b8bb26;">&quot;new-cert&quot;</span><span style="background-color:#282828;color:#fdf4c1;">,
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#b8bb26;">&quot;csr&quot;</span><span style="background-color:#282828;color:#fdf4c1;">: _b64(csr_der),
+</span><span style="background-color:#282828;color:#fdf4c1;">    </span><span style="background-color:#282828;color:#fdf4c1;">})
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fdf4c1aa;">code </span><span style="background-color:#282828;color:#fe8019;">!= </span><span style="background-color:#282828;color:#d3869b;">201</span><span style="background-color:#282828;color:#fdf4c1aa;">:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">raise </span><span style="background-color:#282828;color:#fabd2f;">ValueError</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Error signing certificate: {</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">} {</span><span style="background-color:#282828;color:#fdf4c1;">1</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(code, result))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># return signed certificate!
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">log.info(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Certificate signed!&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 签发成功，编码一下
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">return </span><span style="background-color:#282828;color:#b8bb26;">&quot;&quot;&quot;-----BEGIN CERTIFICATE-----\n{</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">}\n-----END CERTIFICATE-----\n&quot;&quot;&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#b8bb26;">&quot;\n&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.join(textwrap.wrap(base64.b64encode(result).decode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">), </span><span style="background-color:#282828;color:#d3869b;">64</span><span style="background-color:#282828;color:#fdf4c1;">)))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fa5c4b;">def </span><span style="background-color:#282828;color:#8ec07c;">main</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">argv</span><span style="background-color:#282828;color:#fdf4c1aa;">):
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">parser </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">argparse.ArgumentParser(
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#fdf4c1;">formatter_class</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">argparse.RawDescriptionHelpFormatter,
+</span><span style="background-color:#282828;color:#fdf4c1;">        </span><span style="background-color:#282828;color:#fdf4c1;">description</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">textwrap.dedent(</span><span style="background-color:#282828;color:#b8bb26;">&quot;&quot;&quot;\
+</span><span style="background-color:#282828;color:#b8bb26;">            </span><span style="background-color:#282828;color:#b8bb26;">This script automates the process of getting a signed TLS certificate from
+</span><span style="background-color:#282828;color:#b8bb26;">            </span><span style="background-color:#282828;color:#b8bb26;">Let&#39;s Encrypt using the ACME protocol. It will need to be run on your server
+</span><span style="background-color:#282828;color:#b8bb26;">            </span><span style="background-color:#282828;color:#b8bb26;">and have access to your private account key, so PLEASE READ THROUGH IT! It&#39;s
+</span><span style="background-color:#282828;color:#b8bb26;">            </span><span style="background-color:#282828;color:#b8bb26;">only ~200 lines, so it won&#39;t take long.
+</span><span style="background-color:#282828;color:#b8bb26;">
+</span><span style="background-color:#282828;color:#b8bb26;">            </span><span style="background-color:#282828;color:#b8bb26;">===Example Usage===
+</span><span style="background-color:#282828;color:#b8bb26;">            </span><span style="background-color:#282828;color:#b8bb26;">python acme_tiny.py --account-key ./account.key --csr ./domain.csr --acme-dir /usr/share/nginx/html/.well-known/acme-challenge/ &gt; signed.crt
+</span><span style="background-color:#282828;color:#b8bb26;">            </span><span style="background-color:#282828;color:#b8bb26;">===================
+</span><span style="background-color:#282828;color:#b8bb26;">
+</span><span style="background-color:#282828;color:#b8bb26;">            </span><span style="background-color:#282828;color:#b8bb26;">===Example Crontab Renewal (once per month)===
+</span><span style="background-color:#282828;color:#b8bb26;">            </span><span style="background-color:#282828;color:#b8bb26;">0 0 1 * * python /path/to/acme_tiny.py --account-key /path/to/account.key --csr /path/to/domain.csr --acme-dir /usr/share/nginx/html/.well-known/acme-challenge/ &gt; /path/to/signed.crt 2&gt;&gt; /var/log/acme_tiny.log
+</span><span style="background-color:#282828;color:#b8bb26;">            </span><span style="background-color:#282828;color:#b8bb26;">==============================================
+</span><span style="background-color:#282828;color:#b8bb26;">            </span><span style="background-color:#282828;color:#b8bb26;">&quot;&quot;&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1;">    </span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">parser.add_argument(</span><span style="background-color:#282828;color:#b8bb26;">&quot;--account-key&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, required</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#d3869b;">True</span><span style="background-color:#282828;color:#fdf4c1;">, help</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#b8bb26;">&quot;path to your Let&#39;s Encrypt account private key&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">parser.add_argument(</span><span style="background-color:#282828;color:#b8bb26;">&quot;--csr&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, required</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#d3869b;">True</span><span style="background-color:#282828;color:#fdf4c1;">, help</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#b8bb26;">&quot;path to your certificate signing request&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">parser.add_argument(</span><span style="background-color:#282828;color:#b8bb26;">&quot;--acme-dir&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, required</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#d3869b;">True</span><span style="background-color:#282828;color:#fdf4c1;">, help</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#b8bb26;">&quot;path to the .well-known/acme-challenge/ directory&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">parser.add_argument(</span><span style="background-color:#282828;color:#b8bb26;">&quot;--quiet&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, action</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#b8bb26;">&quot;store_const&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, const</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">logging.ERROR, help</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#b8bb26;">&quot;suppress output except for errors&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">parser.add_argument(</span><span style="background-color:#282828;color:#b8bb26;">&quot;--ca&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, default</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">DEFAULT_CA, help</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#b8bb26;">&quot;certificate authority, default is Let&#39;s Encrypt&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">args </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">parser.parse_args(argv)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">LOGGER.setLevel(args.quiet </span><span style="background-color:#282828;color:#fe8019;">or </span><span style="background-color:#282828;color:#fdf4c1;">LOGGER.level)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">signed_crt </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">get_crt(args.account_key, args.csr, args.acme_dir, log</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">LOGGER, CA</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">args.ca)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">sys.stdout.write(signed_crt)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fabd2f;">__name__ </span><span style="background-color:#282828;color:#fe8019;">== </span><span style="background-color:#282828;color:#b8bb26;">&quot;__main__&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">: </span><span style="background-color:#282828;font-style:italic;color:#928374;"># pragma: no cover
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">main(sys.argv[</span><span style="background-color:#282828;color:#d3869b;">1</span><span style="background-color:#282828;color:#fdf4c1;">:])
+</span></pre>
+<p>源码本身写的很清楚，配合文档基本不用加注释。不过还是大致复述一下吧</p>
+<p>首先使用账户私钥生成公钥向服务器注册一下，以后就用来给所有请求签名了（参见 <a href="https://tools.ietf.org/html/rfc7515">rfc7515</a>）</p>
+<p>然后发送一个域名验证请求，服务器返回可选验证方式，这里选择了 HTTP</p>
+<p>根据服务器所给的验证信息生成一个文件，放在本地服务器 <code>/.well-known/acme-challenge/</code> 目录</p>
+<p>再告诉服务器所选择的验证方式，服务器会开始验证</p>
+<p>因为选的是 HTTP，服务器会尝试读取 <code>http://{domain}/.well-known/acme-challenge/{token}</code>，如果读取成功并且验证信息匹配，验证就成功了</p>
+<p>客户端可以 <code>HTTP GET</code> 服务器返回可选验证方式那一步里返回的 <em>uri</em> 来验证域名是否已经验证成功</p>
+<p>等确认所有域名验证成功了就直接把 CSR 发给服务器获取证书就好了</p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

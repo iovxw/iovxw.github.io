@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>Golang 模板工具 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>Golang 模板工具</h1>
+    <div class="info"><h2>生成器</h2><time>2014-10-27 00:00</time></div>
+    <p>就是上一篇文章里说的那个，写完之后发现挺奇葩的</p>
+<p>项目地址：<a href="https://github.com/Bluek404/GoHTML">https://github.com/Bluek404/GoHTML</a></p>
+<p>介绍什么的直接扔README了：</p>
+<hr />
+<h1 id="gohtml">GoHTML</h1>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1aa;"> </span><span style="background-color:#282828;color:#fdf4c1aa;">██████╗         ██╗  ██╗████████╗███╗   ███╗██╗
+</span><span style="background-color:#282828;color:#fdf4c1aa;">██╔════╝  █████╗ ██║  ██║╚══██╔══╝████╗ ████║██║
+</span><span style="background-color:#282828;color:#fdf4c1aa;">██║  ███╗██╔══██╗███████║   ██║   ██╔████╔██║██║
+</span><span style="background-color:#282828;color:#fdf4c1aa;">██║   ██║██║  ██║██╔══██║   ██║   ██║╚██╔╝██║██║
+</span><span style="background-color:#282828;color:#fdf4c1aa;">╚██████╔╝╚█████╔╝██║  ██║   ██║   ██║ ╚═╝ ██║███████╗
+</span><span style="background-color:#282828;color:#fdf4c1aa;"> </span><span style="background-color:#282828;color:#fdf4c1aa;">╚═════╝  ╚════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝╚══════╝
+</span></pre>
+<p>Golang HTML模板，非正式项目</p>
+<p>基本就是写着玩的</p>
+<p>可以将Golang和HTML写在一起，然后用本工具转换成Golang文件</p>
+<p>基本功能就是将<code>&lt;a&gt;</code>转换成<code>buffer.WriteString(&quot;&lt;a&gt;&quot;)</code></p>
+<h2 id="li-zi">例子</h2>
+<p><strong>转换前：</strong></p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1aa;">package tpl
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">import (
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;fmt&quot;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;bytes&quot;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">func Index() string {
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">_buffer := new(bytes.Buffer)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;a&gt;Text&lt;/a&gt;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">for i:=0; i&lt;10; i++ {
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;a&gt;{​{string(i)}}&lt;/a&gt;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">var t string = &quot;2&quot;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">fmt.Println(t)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">print:=func() {
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;a&gt;text&lt;/a&gt;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">print()
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">test1(_buffer)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">test2(_buffer, t)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">return _buffer.String()
+</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">func test1(_buffer *bytes.Buffer) {
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;a&gt;test1&lt;/a&gt;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">func test2(_buffer *bytes.Buffer, t string) {
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;a&gt;test{​{t}}&lt;/a&gt;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span></pre>
+<p><strong>转换后：</strong></p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fa5c4b;">package</span><span style="background-color:#282828;color:#fdf4c1aa;"> tpl
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fa5c4b;">import </span><span style="background-color:#282828;color:#fdf4c1aa;">(
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#b8bb26;">&quot;fmt&quot;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#b8bb26;">&quot;bytes&quot;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fa5c4b;">func </span><span style="background-color:#282828;color:#8ec07c;">Index</span><span style="background-color:#282828;color:#fdf4c1aa;">() </span><span style="background-color:#282828;color:#fa5c4b;">string </span><span style="background-color:#282828;color:#fdf4c1aa;">{
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">_buffer </span><span style="background-color:#282828;color:#fe8019;">:= </span><span style="background-color:#282828;color:#fabd2f;">new</span><span style="background-color:#282828;color:#fdf4c1;">(bytes.Buffer)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">_buffer</span><span style="background-color:#282828;color:#fdf4c1;">.WriteString(</span><span style="background-color:#282828;color:#b8bb26;">&quot;&lt;a&gt;Text&lt;/a&gt;&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">for </span><span style="background-color:#282828;color:#fdf4c1;">i</span><span style="background-color:#282828;color:#fe8019;">:=</span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">; i</span><span style="background-color:#282828;color:#fe8019;">&lt;</span><span style="background-color:#282828;color:#d3869b;">10</span><span style="background-color:#282828;color:#fdf4c1aa;">; i</span><span style="background-color:#282828;color:#fe8019;">++ </span><span style="background-color:#282828;color:#fdf4c1aa;">{
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">_buffer</span><span style="background-color:#282828;color:#fdf4c1;">.WriteString(</span><span style="background-color:#282828;color:#b8bb26;">&quot;&lt;a&gt;&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">_buffer</span><span style="background-color:#282828;color:#fdf4c1;">.WriteString(</span><span style="background-color:#282828;color:#fa5c4b;">string</span><span style="background-color:#282828;color:#fdf4c1;">(i))
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">_buffer</span><span style="background-color:#282828;color:#fdf4c1;">.WriteString(</span><span style="background-color:#282828;color:#b8bb26;">&quot;&lt;/a&gt;&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">var </span><span style="background-color:#282828;color:#fdf4c1;">t </span><span style="background-color:#282828;color:#fa5c4b;">string </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&quot;2&quot;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">fmt</span><span style="background-color:#282828;color:#fdf4c1;">.Println(t)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">print</span><span style="background-color:#282828;color:#fe8019;">:=</span><span style="background-color:#282828;color:#fa5c4b;">func</span><span style="background-color:#282828;color:#fdf4c1aa;">() {
+</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">_buffer</span><span style="background-color:#282828;color:#fdf4c1;">.WriteString(</span><span style="background-color:#282828;color:#b8bb26;">&quot;&lt;a&gt;text&lt;/a&gt;&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">()
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">test1(_buffer)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">test2(_buffer,t)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">return</span><span style="background-color:#282828;color:#fdf4c1aa;"> _buffer</span><span style="background-color:#282828;color:#fdf4c1;">.String()
+</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fa5c4b;">func </span><span style="background-color:#282828;color:#8ec07c;">test1</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">_buffer </span><span style="background-color:#282828;color:#fe8019;">*</span><span style="background-color:#282828;color:#fdf4c1aa;">bytes.Buffer) {
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">_buffer</span><span style="background-color:#282828;color:#fdf4c1;">.WriteString(</span><span style="background-color:#282828;color:#b8bb26;">&quot;&lt;a&gt;test1&lt;/a&gt;&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fa5c4b;">func </span><span style="background-color:#282828;color:#8ec07c;">test2</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">_buffer </span><span style="background-color:#282828;color:#fe8019;">*</span><span style="background-color:#282828;color:#fdf4c1aa;">bytes.Buffer, </span><span style="background-color:#282828;color:#fdf4c1;">t </span><span style="background-color:#282828;color:#fa5c4b;">string</span><span style="background-color:#282828;color:#fdf4c1aa;">) {
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">_buffer</span><span style="background-color:#282828;color:#fdf4c1;">.WriteString(</span><span style="background-color:#282828;color:#b8bb26;">&quot;&lt;a&gt;test&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">_buffer</span><span style="background-color:#282828;color:#fdf4c1;">.WriteString(t)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">_buffer</span><span style="background-color:#282828;color:#fdf4c1;">.WriteString(</span><span style="background-color:#282828;color:#b8bb26;">&quot;&lt;/a&gt;&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span></pre>
+<p>然后就可以直接调用里面的函数作为<code>http.HandleFunc</code></p>
+<h2 id="shi-yong-bang-zhu">使用帮助</h2>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fdf4c1aa;">$ go run GoHTML.go
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;"> </span><span style="background-color:#282828;color:#fdf4c1aa;">██████╗         ██╗  ██╗████████╗███╗   ███╗██╗
+</span><span style="background-color:#282828;color:#fdf4c1aa;">██╔════╝  █████╗ ██║  ██║╚══██╔══╝████╗ ████║██║
+</span><span style="background-color:#282828;color:#fdf4c1aa;">██║  ███╗██╔══██╗███████║   ██║   ██╔████╔██║██║
+</span><span style="background-color:#282828;color:#fdf4c1aa;">██║   ██║██║  ██║██╔══██║   ██║   ██║╚██╔╝██║██║
+</span><span style="background-color:#282828;color:#fdf4c1aa;">╚██████╔╝╚█████╔╝██║  ██║   ██║   ██║ ╚═╝ ██║███████╗
+</span><span style="background-color:#282828;color:#fdf4c1aa;"> </span><span style="background-color:#282828;color:#fdf4c1aa;">╚═════╝  ╚════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝╚══════╝
+</span><span style="background-color:#282828;color:#fdf4c1aa;">=====================================================
+</span><span style="background-color:#282828;color:#fdf4c1aa;">GoHTML使用帮助:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">===============
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">命令结构:
+</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">命令 [参数] &lt;模板文件夹路径&gt;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">参数：
+</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">-dl &lt;字符串&gt;     | 默认：{{      | 左分隔符样式
+</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">-dr &lt;字符串&gt;     | 默认：}}      | 右分隔符样式
+</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">-suffix &lt;字符串&gt; | 默认：gohtml  | GoHTML模板文件后缀
+</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">-buffer &lt;字符串&gt; | 默认：_buffer | 缓冲器变量名称
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">举例：
+</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">$ gohtml -dl &lt;{ -dr }&gt; -suffix temp -buffer buf /home/bluek404/gocode/web/view
+</span><span style="background-color:#282828;color:#fdf4c1aa;">   </span><span style="background-color:#282828;color:#fdf4c1aa;">| 则会将
+</span><span style="background-color:#282828;color:#fdf4c1aa;">   </span><span style="background-color:#282828;color:#fdf4c1aa;">| /home/bluek404/gocode/web/view
+</span><span style="background-color:#282828;color:#fdf4c1aa;">   </span><span style="background-color:#282828;color:#fdf4c1aa;">| 里面所有temp为后缀的文件转换为go文件后放到同一文件夹内
+</span><span style="background-color:#282828;color:#fdf4c1aa;">   </span><span style="background-color:#282828;color:#fdf4c1aa;">| 将缓冲器变量名称设为“buf”
+</span><span style="background-color:#282828;color:#fdf4c1aa;">   </span><span style="background-color:#282828;color:#fdf4c1aa;">| 并设置左分隔符为“&lt;{” ，右分割符为“}&gt;”
+</span><span style="background-color:#282828;color:#fdf4c1aa;">
+</span><span style="background-color:#282828;color:#fdf4c1aa;">备注：
+</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">方括号[]为选填项目，尖括号&lt;&gt;为必填项目
+</span></pre><h2 id="yuan-ma-gui-fan">源码规范</h2>
+<p>作为<code>http.HandleFunc</code>的函数，必须返回值只有一个<code>string</code>（因为多了就不符合<code>http.HandleFunc</code>的要求了）</p>
+<p>然后里面必须创建一个类型为<code>*bytes.Buffer</code>的变量，变量名称需要和设置的一样（默认是<code>_buffer</code>）。这个缓冲器是用于存放要输出的HTML代码的</p>
+<p>然后作为<code>http.HandleFunc</code>的函数的返回值需要是<code>_buffer.String()</code>，如果你自定义了缓冲器变量名称，需要相应的改变</p>
+<p>负责处理部分html的函数，推荐写成上面例子里的样式（接收一个缓冲器变量），就像：</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fa5c4b;">func </span><span style="background-color:#282828;color:#8ec07c;">test1</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">_buffer </span><span style="background-color:#282828;color:#fe8019;">*</span><span style="background-color:#282828;color:#fdf4c1aa;">bytes.Buffer) {
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fe8019;">&lt;</span><span style="background-color:#282828;color:#fdf4c1aa;">a</span><span style="background-color:#282828;color:#fe8019;">&gt;</span><span style="background-color:#282828;color:#fdf4c1aa;">test1</span><span style="background-color:#282828;color:#fe8019;">&lt;/</span><span style="background-color:#282828;color:#fdf4c1aa;">a</span><span style="background-color:#282828;color:#fe8019;">&gt;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span></pre>
+<p>因为会转换成：</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fa5c4b;">func </span><span style="background-color:#282828;color:#8ec07c;">test1</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">_buffer </span><span style="background-color:#282828;color:#fe8019;">*</span><span style="background-color:#282828;color:#fdf4c1aa;">bytes.Buffer) {
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">_buffer</span><span style="background-color:#282828;color:#fdf4c1;">.WriteString(</span><span style="background-color:#282828;color:#b8bb26;">&quot;&lt;a&gt;test1&lt;/a&gt;&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
+</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span></pre>
+<p>这个样子</p>
+<p>当然你要是写成函数里新建一个缓冲器变量然后再<code>return</code>也是没问题的</p>
+<p>不过那样就需要在使用函数的地方再加一个输出了（相当麻烦）</p>
+<p>所以就乖乖按照标准写吧</p>
+<p>然后还有一点要注意</p>
+<p>就是分隔符输出变量那里，比如<code>{​{t}}</code></p>
+<p>这里的分隔符只有在HTML中才会被转换，就像<code>&lt;a&gt;{​{t}}&lt;/a&gt;</code></p>
+<p>写在别的地方是不会转换的，比如：</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fe8019;">&lt;</span><span style="background-color:#282828;color:#fdf4c1aa;">a</span><span style="background-color:#282828;color:#fe8019;">&gt;
+</span><span style="background-color:#282828;color:#fa5c4b;">if</span><span style="background-color:#282828;color:#fdf4c1aa;"> i</span><span style="background-color:#282828;color:#fe8019;">==</span><span style="background-color:#282828;color:#d3869b;">0 </span><span style="background-color:#282828;color:#fdf4c1aa;">{
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">{​{t1}}
+</span><span style="background-color:#282828;color:#fdf4c1aa;">}</span><span style="background-color:#282828;color:#fa5c4b;">else</span><span style="background-color:#282828;color:#fdf4c1aa;">{
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">{​{t2}}
+</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span><span style="background-color:#282828;color:#fe8019;">&lt;/</span><span style="background-color:#282828;color:#fdf4c1aa;">a</span><span style="background-color:#282828;color:#fe8019;">&gt;
+</span></pre>
+<p>必须写成</p>
+<pre style="background-color:#282828">
+<span style="background-color:#282828;color:#fa5c4b;">if</span><span style="background-color:#282828;color:#fdf4c1aa;"> i</span><span style="background-color:#282828;color:#fe8019;">==</span><span style="background-color:#282828;color:#d3869b;">0 </span><span style="background-color:#282828;color:#fdf4c1aa;">{
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fe8019;">&lt;</span><span style="background-color:#282828;color:#fdf4c1aa;">a</span><span style="background-color:#282828;color:#fe8019;">&gt;</span><span style="background-color:#282828;color:#fdf4c1aa;">{​{t1}}</span><span style="background-color:#282828;color:#fe8019;">&lt;/</span><span style="background-color:#282828;color:#fdf4c1aa;">a</span><span style="background-color:#282828;color:#fe8019;">&gt;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">}</span><span style="background-color:#282828;color:#fa5c4b;">else</span><span style="background-color:#282828;color:#fdf4c1aa;">{
+</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fe8019;">&lt;</span><span style="background-color:#282828;color:#fdf4c1aa;">a</span><span style="background-color:#282828;color:#fe8019;">&gt;</span><span style="background-color:#282828;color:#fdf4c1aa;">{​{t2}}</span><span style="background-color:#282828;color:#fe8019;">&lt;/</span><span style="background-color:#282828;color:#fdf4c1aa;">a</span><span style="background-color:#282828;color:#fe8019;">&gt;
+</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+</span></pre>
+<p>这样才可以</p>
+<h2 id="zi-dong-zhuan-huan">自动转换</h2>
+<p>每次更新完模板后都要手动执行一次转换工具一定是超麻烦的</p>
+<p>所以需要自动的工具</p>
+<p>这里推荐<a href="https://github.com/Unknwon">Unknwon</a>的<a href="https://github.com/Unknwon/bra/">BRA</a>（名字好像有点奇怪？），当然其他相似功能的工具也是可以的（如果有更好的还拜托推荐一下）</p>
+<p>具体使用方法这里就不说了，自己去看吧</p>
+<h2 id="xia-zai">下载</h2>
+<p><a href="http://gobuild.io/github.com/Bluek404/GoHTML"><img src="http://gobuild.io/badge/github.com/Bluek404/GoHTML/downloads.svg" alt="Gobuild Download" /></a></p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

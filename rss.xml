@@ -1,0 +1,310 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>iovxw</title>
+        <link>https:&#x2F;&#x2F;iovxw.net</link>
+        <description>iovxw&#x27;s blog</description>
+        <generator>Gutenberg</generator>
+        <language>en</language>
+        <atom:link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Wed, 28 Mar 2018 23:30:57 +0800</lastBuildDate>
+        
+            <item>
+                <title>Rust 100 黑</title>
+                <pubDate>Wed, 28 Mar 2018 23:30:57 +0800</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ugly-rust&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ugly-rust&#x2F;</guid>
+                <description>&lt;p&gt;所谓爱到深处自然黑, 本文将会收集 Rust 的黑点, 并附上简单的解释和状态跟踪&lt;&#x2F;p&gt;
+&lt;p&gt;至于能不能真的收集到 100 个, 希望不能吧&lt;&#x2F;p&gt;
+&lt;p&gt;友情链接: &lt;a href=&quot;https:&#x2F;&#x2F;3442853561.gitbooks.io&#x2F;wtfrust&#x2F;content&#x2F;&quot;&gt;https:&#x2F;&#x2F;3442853561.gitbooks.io&#x2F;wtfrust&#x2F;content&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;enum&lt;&#x2F;code&gt; 的内存占用&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;尽管某些特殊类型会优化, 但大部分需要额外保存 tag, 而这个 tag 是 1byte, 极端情况下是个灾难&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;尾递归优化并不总是生效&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;当进行尾递归调用的作用域内有 &lt;code&gt;Drop&lt;&#x2F;code&gt; 变量存在时&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#282828&quot;&gt;
+&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#8ec07c;&quot;&gt;recur&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;() {
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt; x &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fabd2f;&quot;&gt;vec!&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#d3869b;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;];
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fabd2f;&quot;&gt;recur&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;()
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>Rust 隐式转换之 CoerceUnsized</title>
+                <pubDate>Fri, 23 Mar 2018 17:53:27 +0800</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coerce-unsized&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coerce-unsized&#x2F;</guid>
+                <description>&lt;p&gt;Rust 中有四种隐式类型转换 (别和我提回字怎么写), 其中三种都是为了简化代码, 就算没有隐式, 也可以显式地用其他方法写出来&lt;&#x2F;p&gt;
+&lt;p&gt;唯有 &lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;core&#x2F;ops&#x2F;trait.CoerceUnsized.html&quot;&gt;&lt;code&gt;CoerceUnsized&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; 比较特殊, 提供了一种抽象, 没有它就无法写出包含 DST(Dynamically-sized Type) 的智能指针&lt;&#x2F;p&gt;
+&lt;p&gt;像这样:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#282828&quot;&gt;
+&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt; x: [&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;u8&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#d3869b;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#d3869b;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#d3869b;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#d3869b;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;];
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt; y: Box&amp;lt;[&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;u8&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;]&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fabd2f;&quot;&gt;Box&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;::new(x);
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;</description>
+            </item>
+        
+            <item>
+                <title>PhantomData 黑魔法</title>
+                <pubDate>Wed, 14 Mar 2018 00:17:21 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;phantomdata-magic&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;phantomdata-magic&#x2F;</guid>
+                <description>&lt;pre style=&quot;background-color:#282828&quot;&gt;
+&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;std::marker::PhantomData;
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;pub struct &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#8ec07c;&quot;&gt;Magic&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;&amp;#39;a&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;&amp;gt;(PhantomData&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fe8019;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;&amp;#39;a mut &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fe8019;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;&amp;#39;a &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fe8019;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;impl&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;&amp;#39;a&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#8ec07c;&quot;&gt;Magic&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;&amp;#39;a&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;pub fn &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#8ec07c;&quot;&gt;as_ref&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fe8019;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;&amp;#39;a &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fe8019;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;&amp;#39;a Self &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fe8019;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1;&quot;&gt;self
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#8ec07c;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;() {
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt; pin &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fe8019;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt; Magic(PhantomData);
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;pin.&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fabd2f;&quot;&gt;as_ref&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;pin;
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;</description>
+            </item>
+        
+            <item>
+                <title>新 tokio 中的变动</title>
+                <pubDate>Thu, 08 Feb 2018 12:03:15 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;the-new-tokio&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;the-new-tokio&#x2F;</guid>
+                <description>&lt;p&gt;几个小时前, &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;tokio&#x2F;0.1.0&quot;&gt;&lt;em&gt;tokio&lt;&#x2F;em&gt; 0.1.0&lt;&#x2F;a&gt; 正式发布了&lt;&#x2F;p&gt;
+&lt;p&gt;如果没有一直关注, 肯定是一脸茫然
+&lt;img width=&quot;64em&quot; src=&quot;data:image&#x2F;svg+xml;charset=utf8,%3Csvg xmlns=&#x27;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&#x27; width=&#x27;400&#x27; height=&#x27;384&#x27; fill=&#x27;white&#x27; display=&#x27;block&#x27;%3E%3Cpath d=&#x27;M219.7 12.7c-8.2 5.2-9.4 28-2 38.2 1 1 2.5 4 3.3 6 .8 2 2.7 5 4 7 1.6 2 3.2 5 3.5 7 .4 1 1 2 1.5 2 .7 0 4 5 8.6 13 .7 1 2.6 3 4.3 5 2 2 4 6 2 6l-25-4c-3-2-40-2-45 0l-11 2c-3 0-6 1-7 2s-3 2-6 2-7 2-10 3c-6 3-9 2-9-2l-2-4c-4-9-6-13-7-14-3-4-4-5-5-7s-4-6-7-10-5.8-7-5.8-8-1-2-2-3-2-2-2-3-.3-1.6-1-1.6-4-2.6-8-6c-9.4-8.7-14-12-17-13-1-.6-3-1.6-4-2.4-4.6-4-16-2-21 4-5.5 7-1 31 8.6 47 2.3 4 5 9 6 10.5.4 2 2 4 3.3 5 3 2 11 10 11 12 0 1 2 4 4.3 6 3 3 5 5 5 6l6 5.6c8 6.5 8 6-2 17-5 5-10 11-12 14-1 3-4 6-5 7-3 2.8-9 14-10 18.8 0 2.3-1 5-2 6s-1 4-2 7c0 3-1 7.5-2 9.4-1 2-1 5.6-1 7.5 0 2-.7 5-1 6.4-2 4-3 28.8-2 38.4 3 17.5 4 27 6 33.4 3.7 9.4 9 21.3 11 22 1 .3 1.7 1 1.7 1.7 0 1 1.6 3 3 5l8.5 10c3 3.6 7 7.2 10 9 3.5 1.5 5 3 5 4.4 0 3 1.3 4 5 5 1.3 1 4.2 2 6.4 4s5.5 4 7 5c3 2 3 4.5 2 12.6l-1.7 10-1 5.7h5c5.7 0 5 1 7-15.5 1.4-14.3-.4-18.5-10-24-8.6-4.5-37-32.4-37-36 0-1-.5-2-1-3-1 0-7-13-7-14s-1-3-2-5-2-6-2-8c0-2.7-1-8.6-2-13.6-3-13.3-2.7-29.2 1.3-52 2.8-15.6 7-28 9-28 .6 0 .8-1 0-2.6-1-3.5 5.7-13.7 13.8-22.4l5-7c1.8-2.3 6-7 9-10 10-8.6 9.8-9.4-6-22.3-2.3-2.5-5-5-5.5-6s-4-5-7.5-9c-3.4-4-7-8.5-8-10-.6-1.5-2.3-4-4-6-5.3-7-14-22.7-14-26 0-1-.4-4-1-6-4-10.7 1-22 7-17 .5.2 1.4.4 2 0 1-1 8 3 12 7 12 12.5 24.6 26 25.6 30 0 1 1 2 2 3s1.5 2 1.5 2.5.3 1 1.3 2 2 3 3 4l3 5c1 2 2 4 2 6s2 5 3 7 3 5 3 6c2 7.5 8 11 12 6 1-1.4 3-3 5-3.4 2 0 4-1 6-2 1-1 4-2 7-2.3 2 0 7-1 9-2 10-3 38-4 54-2 11.5 1 26 4.2 29 6 2 1 4 2 5 2s3 1 5 2c5 3 7.2-3.8 3-9l-3-4c0-1-1.4-2-3-3l-4.5-5-6-9-6-9-4-5c-1.4-1-2.6-3.4-2.6-5 0-1-1-3.4-1.7-5-11-19-15-35-10-41 2.6-3 13 5 17 12.7 1 1 3 5 5 7.3l5 7 4 6.7c1.3 2 3.3 5 4.3 6 2 2.5 13 22 19 33 2.6 5 7 17 10.5 28 1 3 8 13 9 13l5 3.5s5 3.4 5.7 3.4c1.5 0 17.6 16 17.6 17 0 2 3 7.6 4 7.6 3.8 0 15 23 19.8 38 3.6 12 5 40 2 47l-2 8.3c-1 6.6-8.2 25.6-10.5 27-.5.7-1.7 3-3 5.6s-2.4 5-3 5c-.5 0-2.4 2.2-4.3 5-4 6-18.3 20-22.5 22l-3.6 2c-1 2-9 7-24 14-4 2-9 3.5-16 4.2-10 1-10.6 2-12 30v11h11l1-12.3c2-20 1-18 5-18 5-.6 11-2 13-4 1-1 3-2 5-2s5-1 6-2c2-1.5 8-5 13-8 5.6-3.5 13-9 18-14 5-4.7 9-8 9-8 .7 0 1-1 1-2 1-1 2-2.6 4-3.7 1.7-1 4-4 5-6.2s3-5.2 4-6c2-1.6 5-8 9-17 1-1.7 2-6 3-9.6 4-17 5-19.8 6-21 2.5-5 .2-37-3-44.7l-2.5-8c-3-11-5.7-17.6-10.7-25-3-4.5-5-8.4-5-9 0-1.4-15.5-19-21-23.4l-9-8c-2-2-4.7-3.4-6-3.4-5.8 0-9-6-14.4-27.3-.7-2-2-6-3-8-8.6-16-12-23-13-24.2-1-.8-2-2.6-2.8-4-2-3.8-3.7-6.6-5-8.5-1.7-2-3-5-5-9-2-3-7.7-12-9.5-14-.4-1-3-4-5-7-10-12-21-17.6-28.2-13m85 174c-2.6 3-2.6 4-.3 6 3.6 3 6 1.5 6-4 0-4-3-5-6-2m-149 3c-3.4 1.6.6 9 4.5 8 3-.3 5-5 4-7 0-2-5-2.5-8-1m74 36c-21.2 1-24 1-24 3.5 0 4 4.4 5 18.4 3.8 7-.7 17-1 21.2-1 9 0 12-1.8 10-5-1-2-1.6-2-25-1&#x27; fill-rule=&#x27;evenodd&#x27;&#x2F;%3E%3C&#x2F;svg%3E&quot;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;em&gt;tokio-core&lt;&#x2F;em&gt; 呢? &lt;code&gt;reactor::Core&lt;&#x2F;code&gt; 又跑哪去了??&lt;&#x2F;p&gt;
+&lt;p&gt;其实这是计划了差不多半年的一个变动&lt;&#x2F;p&gt;
+&lt;p&gt;因为之前的 &lt;em&gt;futures&lt;&#x2F;em&gt; 和 &lt;em&gt;tokio&lt;&#x2F;em&gt; 都只是 &amp;quot;能用&amp;quot; 的程度, 在被大量使用后暴露出了很多设计上的问题, 并且还有不少要放弃向后兼容才能修复&lt;&#x2F;p&gt;
+&lt;p&gt;所以这次就攒到一起重新设计顺便分了个新的 crate&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>统计图的曲线插值</title>
+                <pubDate>Mon, 13 Nov 2017 20:58:39 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;curve-interpolation&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;curve-interpolation&#x2F;</guid>
+                <description>&lt;p&gt;很多程序, 比如各种监视器, 需要实时绘制统计图来将数据直观的展示给用户&lt;&#x2F;p&gt;
+&lt;p&gt;而这个实时, 却又不是那么的 &amp;quot;实时&amp;quot;, 一般表示一秒左右&lt;&#x2F;p&gt;
+&lt;p&gt;不然一个监视器吃的资源比被监视程序还多, 就十分微妙了&lt;&#x2F;p&gt;
+&lt;p&gt;通常为了偷懒, 直接画几条线把型值点连起来, 做成折线图, 然后一秒一秒的刷新就可以&lt;&#x2F;p&gt;
+&lt;p&gt;但人是要有追求的! 我们要平滑! 要曲线!&lt;&#x2F;p&gt;
+&lt;p&gt;所以便有了本文, 记录追求上帝所有物的流水帐&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>凯华 Box 轴拆解</title>
+                <pubDate>Thu, 21 Sep 2017 20:31:04 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;kailh-box&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;kailh-box&#x2F;</guid>
+                <description>&lt;p&gt;键盘的 &lt;code&gt;A&lt;&#x2F;code&gt; 键坏了, 可能是我在 Spacemacs 里后插入用的太多的原因, 总之决定自己换轴&lt;&#x2F;p&gt;
+&lt;p&gt;挑轴的时候发现卖家还卖一种叫 Box 轴的轴体, 是凯华今年一月发布, 自主研发, 主打寿命长和防水性的新系列 (这介绍真长&lt;&#x2F;p&gt;
+&lt;p&gt;官网上他们自己说的是挺好&lt;&#x2F;p&gt;
+&lt;p&gt;可是只有白(qīng)轴的图解, 其他轴则是一笔带过&lt;&#x2F;p&gt;
+&lt;p&gt;想着反正不包邮, 不如顺便多买点, 就在买替换用轴的同时各买了一种 Box 轴&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>Rust 中的高阶生命期约束</title>
+                <pubDate>Wed, 13 Sep 2017 22:29:59 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-higher-rank-lifetime-bounds&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-higher-rank-lifetime-bounds&#x2F;</guid>
+                <description>&lt;p&gt;这篇文章并不在讲什么是生命期, 请先确保有正确的生命期概念&lt;&#x2F;p&gt;
+&lt;p&gt;虽然标题是说高阶生命期约束, 不过 RFC 本身是叫高阶 Trait 约束 (Higher Ranked Trait Bounds), 但由于他们目前只实现了生命期的部分, 所以……&lt;&#x2F;p&gt;
+&lt;p&gt;言归正传, 在 &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;serde&quot;&gt;&lt;em&gt;serde&lt;&#x2F;em&gt;&lt;&#x2F;a&gt; 里, 会发现 &lt;a href=&quot;https:&#x2F;&#x2F;docs.serde.rs&#x2F;serde&#x2F;de&#x2F;trait.DeserializeOwned.html&quot;&gt;&lt;code&gt;DeserializeOwned&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; 的定义是这样的&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#282828&quot;&gt;
+&lt;span style=&quot;background-color:#282828;color:#fa5c4b;&quot;&gt;pub trait &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#8ec07c;&quot;&gt;DeserializeOwned&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;: for&amp;lt;&amp;#39;de&amp;gt; Deserialize&amp;lt;&amp;#39;de&amp;gt; { }
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;</description>
+            </item>
+        
+            <item>
+                <title>Rust 的 async&#x2F;await</title>
+                <pubDate>Tue, 29 Aug 2017 00:00:00 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coroutine&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coroutine&#x2F;</guid>
+                <description>&lt;p&gt;今天, Rust 的 Generator 支持&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;rust-lang&#x2F;rust&#x2F;pull&#x2F;43076#issuecomment-325453224&quot;&gt;终于被合并了&lt;&#x2F;a&gt;!&lt;&#x2F;p&gt;
+&lt;p&gt;这代表那拖了很久又很久的 Coroutine 也终于可以在 Nightly(2017-08-29) 里使用了&lt;&#x2F;p&gt;
+&lt;p&gt;可喜可贺, 可喜可贺&lt;&#x2F;p&gt;
+&lt;p&gt;那以后就可以愉快的在 Rust 里写异步代码啦?&lt;&#x2F;p&gt;
+&lt;p&gt;想得美&lt;&#x2F;p&gt;
+&lt;p&gt;坑在哪里我下面慢慢说&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>在 Merlin 上配置 rTorrrent 需要注意的</title>
+                <pubDate>Sun, 09 Jul 2017 00:26:00 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rtorrent-on-merin&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rtorrent-on-merin&#x2F;</guid>
+                <description>&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ac56u.html&quot;&gt;之前买的 RT-AC56U&lt;&#x2F;a&gt; 一直没放什么东西，空转到现在&lt;&#x2F;p&gt;
+&lt;p&gt;今天终于有了需求，拿它来挂 BT&lt;&#x2F;p&gt;
+&lt;p&gt;这篇文章作为笔记，记一下遇到的坑，以后备用&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>Soul Knight Android 免 root 存档修改</title>
+                <pubDate>Thu, 29 Jun 2017 00:00:00 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;soul-knight&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;soul-knight&#x2F;</guid>
+                <description>&lt;p&gt;挺好玩的 Roguelike 游戏（最近还加了联机模式，然而联机起来各种崩，戒指怕是有生之年了）&lt;&#x2F;p&gt;
+&lt;p&gt;可惜没有云存档，在经历了某次事件后，我的存档和我说了再见&lt;&#x2F;p&gt;
+&lt;p&gt;重新打？我没那毅力。不过既然是本地的，改起来也容易&lt;&#x2F;p&gt;
+&lt;p&gt;流程如下：&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>博客静态生成器切换到 Cobalt</title>
+                <pubDate>Thu, 20 Apr 2017 22:15:00 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;cobalt&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;cobalt&#x2F;</guid>
+                <description>&lt;p&gt;抽空把博客生成器换到了 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;cobalt-org&#x2F;cobalt.rs&quot;&gt;Cobalt&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;纯 Rust 编写，还支持用 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;trishume&#x2F;syntect&#x2F;&quot;&gt;syntect&lt;&#x2F;a&gt; 对代码块高亮（虽然仅限 Linux 平台）&lt;&#x2F;p&gt;
+&lt;p&gt;之前用 &lt;a href=&quot;https:&#x2F;&#x2F;gohugo.io&#x2F;&quot;&gt;hugo&lt;&#x2F;a&gt; 的时候说要修改啊贡献啊什么的结果也没做&lt;&#x2F;p&gt;
+&lt;p&gt;这次一上来就发了个 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;cobalt-org&#x2F;cobalt.rs&#x2F;pull&#x2F;212&quot;&gt;PR&lt;&#x2F;a&gt; 把 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;google&#x2F;pulldown-cmark&quot;&gt;pulldown&lt;&#x2F;a&gt; 升级了还修了下 test&lt;&#x2F;p&gt;
+&lt;p&gt;旧的 pulldown 各种毛病，&lt;code&gt;&amp;lt;script&amp;gt;&lt;&#x2F;code&gt; 标签之内都不能有空行，否则就解析成 Markdown&lt;&#x2F;p&gt;
+&lt;p&gt;维护者曾经&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;cobalt-org&#x2F;cobalt.rs&#x2F;pull&#x2F;204&quot;&gt;尝试升级&lt;&#x2F;a&gt;不过高亮测试失败了，而他用 Windows 无法测试高亮，就卡在旧版本了&lt;&#x2F;p&gt;
+&lt;p&gt;然后因为我在用 Linux ，顺便跑了一遍 test&lt;&#x2F;p&gt;
+&lt;p&gt;结果发现原来的 test 本身就是错的，所以直接把正确结果拿出来覆盖上去 pass 了&lt;&#x2F;p&gt;
+&lt;p&gt;嗯……有些时候问题真是简单呢&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>RT-AC56U</title>
+                <pubDate>Mon, 17 Apr 2017 00:00:00 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ac56u&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ac56u&#x2F;</guid>
+                <description>&lt;p&gt;&lt;img id=&quot;demo&quot; src=&quot;https:&#x2F;&#x2F;www.asus.com&#x2F;websites&#x2F;global&#x2F;products&#x2F;ejvcVtFQNPxjVH5w&#x2F;3D&#x2F;0_32_2.jpg&quot;&gt;
+&lt;input id=&quot;slide&quot; type=&quot;range&quot; min=&quot;16&quot; max=&quot;64&quot; value=&quot;32&quot;&gt;&lt;&#x2F;input&gt;&lt;&#x2F;p&gt;
+&lt;script&gt;
+    let demo = document.querySelector(&quot;#demo&quot;);
+    let slide = document.querySelector(&quot;#slide&quot;);
+    slide.oninput = ()=&gt; {
+        demo.src = &quot;https:&#x2F;&#x2F;www.asus.com&#x2F;websites&#x2F;global&#x2F;products&#x2F;ejvcVtFQNPxjVH5w&#x2F;3D&#x2F;0_&quot; + slide.value + &quot;.jpg&quot;
+    };
+&lt;&#x2F;script&gt;
+&lt;p&gt;上边这是华硕官网的介绍图，本以为他们还搞了个 3D 什么的，结果就是一堆图拼起来的，所以这里干脆用滑块代替了&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>Rust 使用 Sanitizers 进行运行时安全检查</title>
+                <pubDate>Wed, 15 Feb 2017 00:00:00 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-sanitizers&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-sanitizers&#x2F;</guid>
+                <description>&lt;p&gt;6 天前, Rust 引入了由 LLVM 提供的实验性的 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;rust-lang&#x2F;rust&#x2F;pull&#x2F;38699&quot;&gt;Sanitizer 支持&lt;&#x2F;a&gt; (仅限 &lt;code&gt;x86_64-unknown-linux-gnu&lt;&#x2F;code&gt; 平台)&lt;&#x2F;p&gt;
+&lt;p&gt;而今天 Rust Nightly 默认启用了 Sanitizer, 就是说所有用 Nightly 的小伙伴都可以直接更新体验 Sanitizer 啦 (废话&lt;&#x2F;p&gt;
+&lt;p&gt;目前有如下几个 Sanitizer：&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;LeakSanitizer&lt;&#x2F;em&gt; 内存泄漏检查 (例如 &lt;code&gt;Rc&lt;&#x2F;code&gt; 环和 &lt;code&gt;std::mem::forget&lt;&#x2F;code&gt;)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;em&gt;ThreadSanitizer&lt;&#x2F;em&gt; 数据竟态检查 (就是 go 的那个 &lt;code&gt;-race&lt;&#x2F;code&gt; 命令)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;em&gt;AddressSanitizer&lt;&#x2F;em&gt; 内存寻址检查 (比如数组访问越界)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;em&gt;MemorySanitizer&lt;&#x2F;em&gt; 未初始化内存的使用检查&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;当然这主要还是为 &lt;code&gt;unsafe&lt;&#x2F;code&gt; 准备的，毕竟其他大部分情况都能在编译时检测出来&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>多种方式实现波浪动画</title>
+                <pubDate>Sun, 12 Feb 2017 08:00:00 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;waaaave&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;waaaave&#x2F;</guid>
+                <description>&lt;p&gt;当我知道有些动画效果是纯靠图片拼起来的时候我是绝望的，虽然的确很省计算资源，但是你们让高分屏往哪哭？&lt;&#x2F;p&gt;
+&lt;p&gt;大部分动画效果，直接用相应图形库自带的函数就能解决&lt;&#x2F;p&gt;
+&lt;p&gt;有些稍微麻烦一点的，就得手写了（当然还是不推荐，毕竟人家的函数一般都带各种加速）&lt;&#x2F;p&gt;
+&lt;p&gt;这时候就体现出了一个 客户端&#x2F;网页端 的前端稍微懂点数学是多么的重要&lt;&#x2F;p&gt;
+&lt;p&gt;不过太高级的数学我也不会，只能讲点简单的，就是实现一个波浪动画&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>别在服务端储存用户密码了，来用 SRP 吧</title>
+                <pubDate>Tue, 03 Jan 2017 00:00:00 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;srp&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;srp&#x2F;</guid>
+                <description>&lt;p&gt;新年第一篇文章就是从去年的草稿箱里发出来的，感觉真不怎么新……&lt;&#x2F;p&gt;
+&lt;p&gt;当然这个协议也不新了，是 2000 年出的 RFC&lt;&#x2F;p&gt;
+&lt;p&gt;不过现在都 2017 年了，还是有一大堆网站在用什么 md5 加盐（不，就算你用 SHA2XX 也不行），甚至连 bcrypt 和 Argon2 是啥都不知道，感觉真是悲伤（&lt;&#x2F;p&gt;
+&lt;p&gt;所以，来看看 SRP 是个啥（如果你真的不知道 Argon2，还是先去看它吧）：&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>学完了 Rust</title>
+                <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust&#x2F;</guid>
+                <description>&lt;p&gt;实在受够了 &lt;em&gt;Clojure&lt;&#x2F;em&gt; 的内存占用, &lt;em&gt;Go&lt;&#x2F;em&gt; 又太丑, 决定该再找个语言用了&lt;&#x2F;p&gt;
+&lt;p&gt;在用了一圈小众语言之后, 又被残酷的现实打击了, 没社区就得什么都自己来&lt;&#x2F;p&gt;
+&lt;p&gt;自己造语言这个想法也很快放弃了, 至少现在还不行&lt;&#x2F;p&gt;
+&lt;p&gt;而折中方案, 就是 &lt;em&gt;Rust&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>bismuth —— 几何壁纸生成器</title>
+                <pubDate>Fri, 07 Oct 2016 00:00:00 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;bismuth&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;bismuth&#x2F;</guid>
+                <description>&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;iovxw&#x2F;bismuth&#x2F;1a7b7e4587b549ee489168bb3c264faabfb89499&#x2F;screenshot0.png&quot; alt=&quot;screenshot&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>含糖型 Brainfuck 解释器</title>
+                <pubDate>Wed, 24 Aug 2016 00:00:00 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;swetter-brainfuck&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;swetter-brainfuck&#x2F;</guid>
+                <description>&lt;p&gt;其实标题应该是 《含糖型 Brainfuck | 的解释器》&lt;&#x2F;p&gt;
+&lt;p&gt;不过因为不单单是个解释器还是个可视化和单步执行工具以及一个语法糖的实现&lt;&#x2F;p&gt;
+&lt;p&gt;所以，嗯……标题就这样吧&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>修复 Linux GNOME 环境下非 GTK 窗口鼠标指针主题不统一问题</title>
+                <pubDate>Mon, 01 Aug 2016 00:00:00 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;linux-fix-cursor-theme&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;linux-fix-cursor-theme&#x2F;</guid>
+                <description>&lt;p&gt;把 &lt;code&gt;~&#x2F;.icons&#x2F;default&#x2F;index.theme&lt;&#x2F;code&gt; 中的 &lt;em&gt;Inherits&lt;&#x2F;em&gt; 改过来就行了&lt;&#x2F;p&gt;
+&lt;p&gt;如果没有就改 &lt;code&gt;&#x2F;usr&#x2F;share&#x2F;icons&#x2F;default&#x2F;index.theme&lt;&#x2F;code&gt;，不过就是全局的了&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;本文完&lt;&#x2F;em&gt;&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;原因估计是 GNOME 自带的鼠标主题设置没改这个文件，而非 GTK 程序都是靠这个读取鼠标主题的&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>自定义 Git commit 时间</title>
+                <pubDate>Sat, 30 Jul 2016 00:00:00 +0000</pubDate>
+                <link>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;git-commit-date&#x2F;</link>
+                <guid>https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;git-commit-date&#x2F;</guid>
+                <description>&lt;p&gt;在需要给 &lt;em&gt;commit&lt;&#x2F;em&gt; 指定时间的时候，可以用 &lt;code&gt;--date&lt;&#x2F;code&gt; 参数&lt;&#x2F;p&gt;
+&lt;p&gt;支持的日期格式可以看：&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;19742345&#x2F;what-is-the-format-for-date-parameter-of-git-commit&quot;&gt;http:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;19742345&#x2F;what-is-the-format-for-date-parameter-of-git-commit&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;使用 &lt;code&gt;&#x27;x days ago&#x27;&lt;&#x2F;code&gt; 可以很方便的补上之前的小绿点（🙈这功能其实就是拿来干这种事的）&lt;&#x2F;p&gt;
+&lt;script&gt;
+if (window.location.pathname == &quot;&#x2F;&quot;) {
+    document.write(&quot;&lt;p&gt;然后这篇文章到这就结束了，剩下是给连今天是几号都懒得看的人的&lt;&#x2F;p&gt;&quot;)
+}
+&lt;&#x2F;script&gt;
+</description>
+            </item>
+        
+    </channel>
+</rss>
