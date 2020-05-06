@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;go-opengl&#x2F;">开始折腾OpenGL</a></h1>
+              <div class="info">
+                <h2>生命在于折腾啊。生命不息，折腾不止。</h2>
+                <time>2014-06-05 00:00</time>
+              </div>
+              
+                <p>嗯，准备写一个类似Mineccraft的游戏</p>
+<p>基本设定已经弄好了</p>
+<p>不过目测是个大坑</p>
+<p>希望到时候别弃坑吧</p>
+<p>求有经验的人帮忙啊……</p>
+<p>下面是<code>go-gl</code>的example源码</p>
+<p>顺便测试一下代码高亮</p>
+<link id="prettify-style" href="https://www.zybuluo.com/static/editor/libs/google-code-prettify/prettify-cmd.css" type="text/css" rel="stylesheet">
+<pre style="" class="prettyprint linenums prettyprinted"><ol class="linenums"><li class="L0"><code><span class="kwd">package</span><span class="pln"> main</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="kwd">import</span><span class="pln"> </span><span class="pun">(</span></code></li><li class="L3"><code><span class="pln">    </span><span class="str">"errors"</span></code></li><li class="L4"><code><span class="pln">    </span><span class="str">"fmt"</span></code></li><li class="L5"><code><span class="pln">    </span><span class="str">"github.com/go-gl/gl"</span></code></li><li class="L6"><code><span class="pln">    glfw </span><span class="str">"github.com/go-gl/glfw3"</span></code></li><li class="L7"><code><span class="pln">    </span><span class="str">"image"</span></code></li><li class="L8"><code><span class="pln">    </span><span class="str">"image/png"</span></code></li><li class="L9"><code><span class="pln">    </span><span class="str">"io"</span></code></li><li class="L0"><code><span class="pln">    </span><span class="str">"os"</span></code></li><li class="L1"><code><span class="pun">)</span></code></li><li class="L2"><code></code></li><li class="L3"><code><span class="kwd">const</span><span class="pln"> </span><span class="pun">(</span></code></li><li class="L4"><code><span class="pln">    </span><span class="typ">Title</span><span class="pln">  </span><span class="pun">=</span><span class="pln"> </span><span class="str">"Spinning Gopher"</span></code></li><li class="L5"><code><span class="pln">    </span><span class="typ">Width</span><span class="pln">  </span><span class="pun">=</span><span class="pln"> </span><span class="lit">640</span></code></li><li class="L6"><code><span class="pln">    </span><span class="typ">Height</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">480</span></code></li><li class="L7"><code><span class="pun">)</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="kwd">var</span><span class="pln"> </span><span class="pun">(</span></code></li><li class="L0"><code><span class="pln">    texture    gl</span><span class="pun">.</span><span class="typ">Texture</span></code></li><li class="L1"><code><span class="pln">    rotx</span><span class="pun">,</span><span class="pln"> roty float32</span></code></li><li class="L2"><code><span class="pln">    ambient    </span><span class="pun">[]</span><span class="pln">float32 </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[]</span><span class="pln">float32</span><span class="pun">{</span><span class="lit">0.5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0.5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0.5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">}</span></code></li><li class="L3"><code><span class="pln">    diffuse    </span><span class="pun">[]</span><span class="pln">float32 </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[]</span><span class="pln">float32</span><span class="pun">{</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">}</span></code></li><li class="L4"><code><span class="pln">    lightpos   </span><span class="pun">[]</span><span class="pln">float32 </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[]</span><span class="pln">float32</span><span class="pun">{-</span><span class="lit">5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">10</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">}</span></code></li><li class="L5"><code><span class="pun">)</span></code></li><li class="L6"><code></code></li><li class="L7"><code><span class="pln">func errorCallback</span><span class="pun">(</span><span class="pln">err glfw</span><span class="pun">.</span><span class="typ">ErrorCode</span><span class="pun">,</span><span class="pln"> desc </span><span class="kwd">string</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L8"><code><span class="pln">    fmt</span><span class="pun">.</span><span class="typ">Printf</span><span class="pun">(</span><span class="str">"%v: %v\n"</span><span class="pun">,</span><span class="pln"> err</span><span class="pun">,</span><span class="pln"> desc</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pun">}</span></code></li><li class="L0"><code></code></li><li class="L1"><code><span class="pln">func main</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L2"><code><span class="pln">    glfw</span><span class="pun">.</span><span class="typ">SetErrorCallback</span><span class="pun">(</span><span class="pln">errorCallback</span><span class="pun">)</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">!</span><span class="pln">glfw</span><span class="pun">.</span><span class="typ">Init</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L5"><code><span class="pln">        panic</span><span class="pun">(</span><span class="str">"Can't init glfw!"</span><span class="pun">)</span></code></li><li class="L6"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L7"><code><span class="pln">    defer glfw</span><span class="pun">.</span><span class="typ">Terminate</span><span class="pun">()</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="pln">    window</span><span class="pun">,</span><span class="pln"> err </span><span class="pun">:=</span><span class="pln"> glfw</span><span class="pun">.</span><span class="typ">CreateWindow</span><span class="pun">(</span><span class="typ">Width</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Height</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Title</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">nil</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">nil</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    </span><span class="kwd">if</span><span class="pln"> err </span><span class="pun">!=</span><span class="pln"> </span><span class="kwd">nil</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L1"><code><span class="pln">        panic</span><span class="pun">(</span><span class="pln">err</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">    window</span><span class="pun">.</span><span class="typ">MakeContextCurrent</span><span class="pun">()</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    glfw</span><span class="pun">.</span><span class="typ">SwapInterval</span><span class="pun">(</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L7"><code></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Init</span><span class="pun">()</span></code></li><li class="L9"><code></code></li><li class="L0"><code><span class="pln">    </span><span class="kwd">if</span><span class="pln"> err </span><span class="pun">:=</span><span class="pln"> initScene</span><span class="pun">();</span><span class="pln"> err </span><span class="pun">!=</span><span class="pln"> </span><span class="kwd">nil</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L1"><code><span class="pln">        fmt</span><span class="pun">.</span><span class="typ">Fprintf</span><span class="pun">(</span><span class="pln">os</span><span class="pun">.</span><span class="typ">Stderr</span><span class="pun">,</span><span class="pln"> </span><span class="str">"init: %s\n"</span><span class="pun">,</span><span class="pln"> err</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">        </span><span class="kwd">return</span></code></li><li class="L3"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L4"><code><span class="pln">    defer destroyScene</span><span class="pun">()</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">!</span><span class="pln">window</span><span class="pun">.</span><span class="typ">ShouldClose</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L7"><code><span class="pln">        drawScene</span><span class="pun">()</span></code></li><li class="L8"><code><span class="pln">        window</span><span class="pun">.</span><span class="typ">SwapBuffers</span><span class="pun">()</span></code></li><li class="L9"><code><span class="pln">        glfw</span><span class="pun">.</span><span class="typ">PollEvents</span><span class="pun">()</span></code></li><li class="L0"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L1"><code><span class="pun">}</span></code></li><li class="L2"><code></code></li><li class="L3"><code><span class="pln">func createTexture</span><span class="pun">(</span><span class="pln">r io</span><span class="pun">.</span><span class="typ">Reader</span><span class="pun">)</span><span class="pln"> </span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="typ">Texture</span><span class="pun">,</span><span class="pln"> error</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    img</span><span class="pun">,</span><span class="pln"> err </span><span class="pun">:=</span><span class="pln"> png</span><span class="pun">.</span><span class="typ">Decode</span><span class="pun">(</span><span class="pln">r</span><span class="pun">)</span></code></li><li class="L5"><code><span class="pln">    </span><span class="kwd">if</span><span class="pln"> err </span><span class="pun">!=</span><span class="pln"> </span><span class="kwd">nil</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L6"><code><span class="pln">        </span><span class="kwd">return</span><span class="pln"> gl</span><span class="pun">.</span><span class="typ">Texture</span><span class="pun">(</span><span class="lit">0</span><span class="pun">),</span><span class="pln"> err</span></code></li><li class="L7"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="pln">    rgbaImg</span><span class="pun">,</span><span class="pln"> ok </span><span class="pun">:=</span><span class="pln"> img</span><span class="pun">.(*</span><span class="pln">image</span><span class="pun">.</span><span class="pln">NRGBA</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">!</span><span class="pln">ok </span><span class="pun">{</span></code></li><li class="L1"><code><span class="pln">        </span><span class="kwd">return</span><span class="pln"> gl</span><span class="pun">.</span><span class="typ">Texture</span><span class="pun">(</span><span class="lit">0</span><span class="pun">),</span><span class="pln"> errors</span><span class="pun">.</span><span class="typ">New</span><span class="pun">(</span><span class="str">"texture must be an NRGBA image"</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">    textureId </span><span class="pun">:=</span><span class="pln"> gl</span><span class="pun">.</span><span class="typ">GenTexture</span><span class="pun">()</span></code></li><li class="L5"><code><span class="pln">    textureId</span><span class="pun">.</span><span class="typ">Bind</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">TEXTURE_2D</span><span class="pun">)</span></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexParameterf</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">TEXTURE_2D</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">TEXTURE_MAG_FILTER</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">LINEAR</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexParameterf</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">TEXTURE_2D</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">TEXTURE_MIN_FILTER</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">LINEAR</span><span class="pun">)</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="pln">    </span><span class="com">// flip image: first pixel is lower left corner</span></code></li><li class="L0"><code><span class="pln">    imgWidth</span><span class="pun">,</span><span class="pln"> imgHeight </span><span class="pun">:=</span><span class="pln"> img</span><span class="pun">.</span><span class="typ">Bounds</span><span class="pun">().</span><span class="typ">Dx</span><span class="pun">(),</span><span class="pln"> img</span><span class="pun">.</span><span class="typ">Bounds</span><span class="pun">().</span><span class="typ">Dy</span><span class="pun">()</span></code></li><li class="L1"><code><span class="pln">    data </span><span class="pun">:=</span><span class="pln"> make</span><span class="pun">([]</span><span class="kwd">byte</span><span class="pun">,</span><span class="pln"> imgWidth</span><span class="pun">*</span><span class="pln">imgHeight</span><span class="pun">*</span><span class="lit">4</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    lineLen </span><span class="pun">:=</span><span class="pln"> imgWidth </span><span class="pun">*</span><span class="pln"> </span><span class="lit">4</span></code></li><li class="L3"><code><span class="pln">    dest </span><span class="pun">:=</span><span class="pln"> len</span><span class="pun">(</span><span class="pln">data</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> lineLen</span></code></li><li class="L4"><code><span class="pln">    </span><span class="kwd">for</span><span class="pln"> src </span><span class="pun">:=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> src </span><span class="pun">&lt;</span><span class="pln"> len</span><span class="pun">(</span><span class="pln">rgbaImg</span><span class="pun">.</span><span class="typ">Pix</span><span class="pun">);</span><span class="pln"> src </span><span class="pun">+=</span><span class="pln"> rgbaImg</span><span class="pun">.</span><span class="typ">Stride</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L5"><code><span class="pln">        copy</span><span class="pun">(</span><span class="pln">data</span><span class="pun">[</span><span class="pln">dest</span><span class="pun">:</span><span class="pln">dest</span><span class="pun">+</span><span class="pln">lineLen</span><span class="pun">],</span><span class="pln"> rgbaImg</span><span class="pun">.</span><span class="typ">Pix</span><span class="pun">[</span><span class="pln">src</span><span class="pun">:</span><span class="pln">src</span><span class="pun">+</span><span class="pln">rgbaImg</span><span class="pun">.</span><span class="typ">Stride</span><span class="pun">])</span></code></li><li class="L6"><code><span class="pln">        dest </span><span class="pun">-=</span><span class="pln"> lineLen</span></code></li><li class="L7"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexImage2D</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">TEXTURE_2D</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> imgWidth</span><span class="pun">,</span><span class="pln"> imgHeight</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">RGBA</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">UNSIGNED_BYTE</span><span class="pun">,</span><span class="pln"> data</span><span class="pun">)</span></code></li><li class="L9"><code></code></li><li class="L0"><code><span class="pln">    </span><span class="kwd">return</span><span class="pln"> textureId</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">nil</span></code></li><li class="L1"><code><span class="pun">}</span></code></li><li class="L2"><code></code></li><li class="L3"><code><span class="pln">func initScene</span><span class="pun">()</span><span class="pln"> </span><span class="pun">(</span><span class="pln">err error</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Enable</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">TEXTURE_2D</span><span class="pun">)</span></code></li><li class="L5"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Enable</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">DEPTH_TEST</span><span class="pun">)</span></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Enable</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">LIGHTING</span><span class="pun">)</span></code></li><li class="L7"><code></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">ClearColor</span><span class="pun">(</span><span class="lit">0.5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0.5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0.5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0.0</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">ClearDepth</span><span class="pun">(</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">DepthFunc</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">LEQUAL</span><span class="pun">)</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Lightfv</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">LIGHT0</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">AMBIENT</span><span class="pun">,</span><span class="pln"> ambient</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Lightfv</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">LIGHT0</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">DIFFUSE</span><span class="pun">,</span><span class="pln"> diffuse</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Lightfv</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">LIGHT0</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">POSITION</span><span class="pun">,</span><span class="pln"> lightpos</span><span class="pun">)</span></code></li><li class="L5"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Enable</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">LIGHT0</span><span class="pun">)</span></code></li><li class="L6"><code></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Viewport</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Width</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Height</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">MatrixMode</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">PROJECTION</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">LoadIdentity</span><span class="pun">()</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Frustum</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1.0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">10.0</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">MatrixMode</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">MODELVIEW</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">LoadIdentity</span><span class="pun">()</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">    goph</span><span class="pun">,</span><span class="pln"> err </span><span class="pun">:=</span><span class="pln"> os</span><span class="pun">.</span><span class="typ">Open</span><span class="pun">(</span><span class="str">"gopher.png"</span><span class="pun">)</span></code></li><li class="L5"><code><span class="pln">    </span><span class="kwd">if</span><span class="pln"> err </span><span class="pun">!=</span><span class="pln"> </span><span class="kwd">nil</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L6"><code><span class="pln">        panic</span><span class="pun">(</span><span class="pln">err</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L8"><code><span class="pln">    defer goph</span><span class="pun">.</span><span class="typ">Close</span><span class="pun">()</span></code></li><li class="L9"><code></code></li><li class="L0"><code><span class="pln">    texture</span><span class="pun">,</span><span class="pln"> err </span><span class="pun">=</span><span class="pln"> createTexture</span><span class="pun">(</span><span class="pln">goph</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    </span><span class="kwd">return</span></code></li><li class="L2"><code><span class="pun">}</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">func destroyScene</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L5"><code><span class="pln">    texture</span><span class="pun">.</span><span class="typ">Delete</span><span class="pun">()</span></code></li><li class="L6"><code><span class="pun">}</span></code></li><li class="L7"><code></code></li><li class="L8"><code><span class="pln">func drawScene</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Clear</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">COLOR_BUFFER_BIT </span><span class="pun">|</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">DEPTH_BUFFER_BIT</span><span class="pun">)</span></code></li><li class="L0"><code></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">MatrixMode</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">MODELVIEW</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">LoadIdentity</span><span class="pun">()</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Translatef</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">3.0</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Rotatef</span><span class="pun">(</span><span class="pln">rotx</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L5"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Rotatef</span><span class="pun">(</span><span class="pln">roty</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L6"><code></code></li><li class="L7"><code><span class="pln">    rotx </span><span class="pun">+=</span><span class="pln"> </span><span class="lit">0.5</span></code></li><li class="L8"><code><span class="pln">    roty </span><span class="pun">+=</span><span class="pln"> </span><span class="lit">0.1</span></code></li><li class="L9"><code></code></li><li class="L0"><code><span class="pln">    texture</span><span class="pun">.</span><span class="typ">Bind</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">TEXTURE_2D</span><span class="pun">)</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Color4f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Begin</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">QUADS</span><span class="pun">)</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Normal3f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Normal3f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Normal3f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Normal3f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Normal3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Normal3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">End</span><span class="pun">()</span></code></li><li class="L7"><code><span class="pun">}</span></code></li></ol></pre>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;fuck-you-gwf&#x2F;">博客优化完成</a></h1>
+              <div class="info">
+                <h2>因为某些原因，优化博客访问速度</h2>
+                <time>2014-06-02 00:00</time>
+              </div>
+              
+                <p>因为某些众所周知的原因，谷歌访问不稳定，而这个博客本身的字体是用的谷歌的API，所以打开死慢= =</p>
+<p>于是刚刚把整个css和字体都下载到了本地，访问速度应该会提升</p>
+<p>希望Github别不稳定啊……不然就真挂了</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;go-get-glfw3&#x2F;">Go语言GLFW3库的安装</a></h1>
+              <div class="info">
+                <h2>编译&amp;&amp;安装GLFW3</h2>
+                <time>2014-05-30 00:00</time>
+              </div>
+              
+                <p>因为想要写一个小游戏玩玩，然后需要安装GLFW3</p>
+<p>于是写了这么一个教程备用</p>
+<p>首先，安装需要的lib库</p>
+<p><code>sudo apt-get install libxrandr-dev libxi-dev</code></p>
+<p>当然已经安装过的就不用了，不过反正也不会重复安装，忘记的话就运行一遍试试吧</p>
+<p>下载GLFW源码</p>
+<p><a href="http://www.glfw.org">http://www.glfw.org</a></p>
+<p>编译</p>
+<p><code>cmake -DBUILD_SHARED_LIBS=ON</code></p>
+<p><img src="http://s29.postimg.org/4w8ttvzt1/Deepin_Screenshot20140601153904.png" alt="cmake_install.cmake" /></p>
+<p>打开<code>cmake_install.cmake</code>，修改<code>SET(CMAKE_INSTALL_PREFIX &quot;/usr/local&quot;)</code>为<code>SET(CMAKE_INSTALL_PREFIX &quot;/usr&quot;)</code></p>
+<p>然后<code>make</code>+<code>sudo make install</code></p>
+<p><code>go get -u github.com/go-gl/glfw3</code></p>
+<p>======END======</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;modify-xp-registry&#x2F;">让XP继续接受更新</a></h1>
+              <div class="info">
+                <h2>通过修改注册表来让XP继续接受更新</h2>
+                <time>2014-05-27 00:00</time>
+              </div>
+              
+                <p>在<a href="http://www.zdnet.com/registry-hack-enables-continued-updates-for-windows-xp-7000029851/">Betanews</a>看到了让XP继续更新的方法</p>
+<p>大体过程如下：</p>
+<p>1.新建一个文件扩展名为<code>.reg</code>的文件（例如<code>updates.reg</code>）</p>
+<p>2.用文本编辑器打开</p>
+<p>3.修改内容为</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">Windows Registry Editor Version 5.00
+[HKEY_LOCAL_MACHINE\SYSTEM\WPA\PosReady]
+&quot;Installed&quot;=dword:00000001
+</span></pre>
+<p>4.保存，然后双击它</p>
+<p>现在打开更新管理器就会发现有新的更新可用了</p>
+<p>这个的原理是欺骗Windows Update，让它把你的电脑识别为<a href="http://Windows%20Embedded%20POSReady%202009">Windows Embedded POSReady 2009</a></p>
+<p>而Windows Embedded POSReady 2009的支持日期一直到2019年4月9日</p>
+<p>当然这不是最好的解决办法，要想一直有免费升级的话，还是去用Linux吧</p>
+<p>最起码你不用再担心系统是不是安全了</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;github-page-404&#x2F;">Github Page自定义404页面</a></h1>
+              <div class="info">
+                <h2>404呦</h2>
+                <time>2014-05-26 00:00</time>
+              </div>
+              
+                <p>想给博客自定义一个404页面，毕竟老用Github默认的也不太好</p>
+<p>于是乎上网翻了一下，发现貌似没中文介绍</p>
+<p>然后在Github Page官方帮助找到了</p>
+<p>很简单</p>
+<p>只需要在根目录新建一个<code>404.html</code>即可</p>
+<p>当然有个前提，就是你必须要先绑定独立域名，不然会出错的</p>
+<p>至于怎么绑定……还是百度吧，也很简单……</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;mobile-version&#x2F;">手机版搞定！</a></h1>
+              <div class="info">
+                <h2>弄好了博客的手机版</h2>
+                <time>2014-05-25 00:00</time>
+              </div>
+              
+                <p><img src="http://s30.postimg.org/p6hzxfzpr/Deepin_Screenshot20140526142158.png" alt="我是图" /></p>
+<p>如图，把浏览器缩放到手机大小就可以预览了</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;test&#x2F;">测试TEST</a></h1>
+              <div class="info">
+                <h2>用来测试主题控件</h2>
+                <time>2014-05-25 00:00</time>
+              </div>
+              
+                <pre style="background-color:#282828;">
+  &lt;div class=&quot;page-header&quot; id=&quot;banner&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-6&quot;&gt;
+        &lt;h1&gt;Yeti&lt;/h1&gt;
+        &lt;p class=&quot;lead&quot;&gt;A friendly foundation&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-6&quot; style=&quot;padding: 15px 15px 0 15px;&quot;&gt;
+        &lt;div class=&quot;well sponsor&quot;&gt;
+          &lt;a href=&quot;http://srv.buysellads.com/direct/click/track/yes/x/G6NDC27ICWAI627UCWALYK7UCKBILKJMCT7I5&quot; onclick=&quot;_gaq.push(['_trackEvent', 'banner', 'click', 'treehouse']);&quot; rel=&quot;nofollow&quot; target=&quot;_blank&quot;&gt;
+            &lt;span style=&quot;float: left; margin-right: 15px;&quot;&gt;
+              &lt;img src=&quot;http://srv.buysellads.com/direct/image/track/yes/x/G6NDC27ICWAI627UCWALYK7UCKBILKJMCT7I5&quot; onload=&quot;_gaq.push(['_trackEvent', 'banner', 'impression', 'treehouse']);&quot; height=&quot;135&quot; width=&quot;175&quot;&gt;
+            &lt;/span&gt;
+          &lt;/a&gt;
+          &lt;a href=&quot;http://srv.buysellads.com/direct/click/track/yes/x/G6NDC27ICWAI627UCWALYK7UCKBILKJMCT7I5&quot; onclick=&quot;_gaq.push(['_trackEvent', 'banner', 'click', 'treehouse']);&quot; rel=&quot;nofollow&quot; target=&quot;_blank&quot;&gt;
+            &lt;h4 style=&quot;margin-bottom: 0.4em;&quot;&gt;Treehouse&lt;/h4&gt;
+            &lt;div class=&quot;clearfix&quot;&gt;
+              &lt;p&gt;Learn Web Design, Coding, Mobile App Development &amp;amp; More.&lt;/p&gt;
+              &lt;p&gt;Start Learning for Free!&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- Navbar
+  ================================================== --&gt;
+  &lt;div class=&quot;bs-docs-section clearfix&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-12&quot;&gt;
+        &lt;div class=&quot;page-header&quot;&gt;
+          &lt;h1 id=&quot;navbar&quot;&gt;Navbar&lt;/h1&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;navbar navbar-default&quot;&gt;
+            &lt;div class=&quot;navbar-header&quot;&gt;
+              &lt;button type=&quot;button&quot; class=&quot;navbar-toggle&quot; data-toggle=&quot;collapse&quot; data-target=&quot;.navbar-responsive-collapse&quot;&gt;
+                &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+              &lt;/button&gt;
+              &lt;a class=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;Brand&lt;/a&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;navbar-collapse collapse navbar-responsive-collapse&quot;&gt;
+              &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+                &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;Active&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+                &lt;li class=&quot;dropdown&quot;&gt;
+                  &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;Dropdown &lt;b class=&quot;caret&quot;&gt;&lt;/b&gt;&lt;/a&gt;
+                  &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Action&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Another action&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                    &lt;li class=&quot;dropdown-header&quot;&gt;Dropdown header&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;One more separated link&lt;/a&gt;&lt;/li&gt;
+                  &lt;/ul&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+              &lt;form class=&quot;navbar-form navbar-left&quot;&gt;
+                &lt;input class=&quot;form-control col-lg-8&quot; placeholder=&quot;Search&quot; type=&quot;text&quot;&gt;
+              &lt;/form&gt;
+              &lt;ul class=&quot;nav navbar-nav navbar-right&quot;&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+                &lt;li class=&quot;dropdown&quot;&gt;
+                  &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;Dropdown &lt;b class=&quot;caret&quot;&gt;&lt;/b&gt;&lt;/a&gt;
+                  &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Action&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Another action&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+                  &lt;/ul&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;navbar navbar-inverse&quot;&gt;
+            &lt;div class=&quot;navbar-header&quot;&gt;
+              &lt;button type=&quot;button&quot; class=&quot;navbar-toggle&quot; data-toggle=&quot;collapse&quot; data-target=&quot;.navbar-inverse-collapse&quot;&gt;
+                &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+              &lt;/button&gt;
+              &lt;a class=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;Brand&lt;/a&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;navbar-collapse collapse navbar-inverse-collapse&quot;&gt;
+              &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+                &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;Active&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+                &lt;li class=&quot;dropdown&quot;&gt;
+                  &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;Dropdown &lt;b class=&quot;caret&quot;&gt;&lt;/b&gt;&lt;/a&gt;
+                  &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Action&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Another action&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                    &lt;li class=&quot;dropdown-header&quot;&gt;Dropdown header&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;One more separated link&lt;/a&gt;&lt;/li&gt;
+                  &lt;/ul&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+              &lt;form class=&quot;navbar-form navbar-left&quot;&gt;
+                &lt;input class=&quot;form-control col-lg-8&quot; placeholder=&quot;Search&quot; type=&quot;text&quot;&gt;
+              &lt;/form&gt;
+              &lt;ul class=&quot;nav navbar-nav navbar-right&quot;&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+                &lt;li class=&quot;dropdown&quot;&gt;
+                  &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;Dropdown &lt;b class=&quot;caret&quot;&gt;&lt;/b&gt;&lt;/a&gt;
+                  &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Action&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Another action&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+                  &lt;/ul&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;&lt;!-- /example --&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- Buttons
+  ================================================== --&gt;
+  &lt;div class=&quot;bs-docs-section&quot;&gt;
+    &lt;div class=&quot;page-header&quot;&gt;
+      &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;col-lg-12&quot;&gt;
+          &lt;h1 id=&quot;buttons&quot;&gt;Buttons&lt;/h1&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-6&quot;&gt;
+        &lt;p class=&quot;bs-component&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;Default&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot;&gt;Primary&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-success&quot;&gt;Success&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-info&quot;&gt;Info&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-warning&quot;&gt;Warning&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-danger&quot;&gt;Danger&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-link&quot;&gt;Link&lt;/button&gt;
+        &lt;/p&gt;
+        &lt;p class=&quot;bs-component&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-default disabled&quot;&gt;Default&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-primary disabled&quot;&gt;Primary&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-success disabled&quot;&gt;Success&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-info disabled&quot;&gt;Info&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-warning disabled&quot;&gt;Warning&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-danger disabled&quot;&gt;Danger&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-link disabled&quot;&gt;Link&lt;/button&gt;
+        &lt;/p&gt;
+        &lt;div style=&quot;margin-bottom: 15px;&quot;&gt;
+          &lt;div class=&quot;btn-toolbar bs-component&quot; style=&quot;margin: 0;&quot;&gt;
+            &lt;div class=&quot;btn-group&quot;&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;Default&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-default dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+              &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Another action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+                &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;btn-group&quot;&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot;&gt;Primary&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-primary dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+              &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Another action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+                &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;btn-group&quot;&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-success&quot;&gt;Success&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-success dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+              &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Another action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+                &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;btn-group&quot;&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-info&quot;&gt;Info&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-info dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+              &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Another action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+                &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;btn-group&quot;&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-warning&quot;&gt;Warning&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-warning dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+              &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Another action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+                &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p class=&quot;bs-component&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-primary btn-lg&quot;&gt;Large button&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot;&gt;Default button&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-primary btn-sm&quot;&gt;Small button&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-primary btn-xs&quot;&gt;Mini button&lt;/button&gt;
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-6&quot;&gt;
+        &lt;p class=&quot;bs-component&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-default btn-lg btn-block&quot;&gt;Block level button&lt;/button&gt;
+        &lt;/p&gt;
+        &lt;div class=&quot;bs-component&quot; style=&quot;margin-bottom: 15px;&quot;&gt;
+          &lt;div class=&quot;btn-group btn-group-justified&quot;&gt;
+            &lt;a href=&quot;#&quot; class=&quot;btn btn-default&quot;&gt;Left&lt;/a&gt;
+            &lt;a href=&quot;#&quot; class=&quot;btn btn-default&quot;&gt;Middle&lt;/a&gt;
+            &lt;a href=&quot;#&quot; class=&quot;btn btn-default&quot;&gt;Right&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;bs-component&quot; style=&quot;margin-bottom: 15px;&quot;&gt;
+          &lt;div class=&quot;btn-toolbar&quot;&gt;
+            &lt;div class=&quot;btn-group&quot;&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;1&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;2&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;3&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;4&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;btn-group&quot;&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;5&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;6&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;7&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;btn-group&quot;&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;8&lt;/button&gt;
+              &lt;div class=&quot;btn-group&quot;&gt;
+                &lt;button type=&quot;button&quot; class=&quot;btn btn-default dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;
+                  Dropdown
+                  &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;
+                &lt;/button&gt;
+                &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Dropdown link&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Dropdown link&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Dropdown link&lt;/a&gt;&lt;/li&gt;
+                 &lt;/ul&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;btn-group-vertical&quot;&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;Button&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;Button&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;Button&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;Button&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- Typography
+  ================================================== --&gt;
+  &lt;div class=&quot;bs-docs-section&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-12&quot;&gt;
+        &lt;div class=&quot;page-header&quot;&gt;
+          &lt;h1 id=&quot;type&quot;&gt;Typography&lt;/h1&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- Headings --&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;h1&gt;Heading 1&lt;/h1&gt;
+          &lt;h2&gt;Heading 2&lt;/h2&gt;
+          &lt;h3&gt;Heading 3&lt;/h3&gt;
+          &lt;h4&gt;Heading 4&lt;/h4&gt;
+          &lt;h5&gt;Heading 5&lt;/h5&gt;
+          &lt;h6&gt;Heading 6&lt;/h6&gt;
+          &lt;p class=&quot;lead&quot;&gt;Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;h2&gt;Example body text&lt;/h2&gt;
+          &lt;p&gt;Nullam quis risus eget &lt;a href=&quot;#&quot;&gt;urna mollis ornare&lt;/a&gt; vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.&lt;/p&gt;
+          &lt;p&gt;&lt;small&gt;This line of text is meant to be treated as fine print.&lt;/small&gt;&lt;/p&gt;
+          &lt;p&gt;The following snippet of text is &lt;strong&gt;rendered as bold text&lt;/strong&gt;.&lt;/p&gt;
+          &lt;p&gt;The following snippet of text is &lt;em&gt;rendered as italicized text&lt;/em&gt;.&lt;/p&gt;
+          &lt;p&gt;An abbreviation of the word attribute is &lt;abbr title=&quot;attribute&quot;&gt;attr&lt;/abbr&gt;.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;h2&gt;Emphasis classes&lt;/h2&gt;
+          &lt;p class=&quot;text-muted&quot;&gt;Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.&lt;/p&gt;
+          &lt;p class=&quot;text-primary&quot;&gt;Nullam id dolor id nibh ultricies vehicula ut id elit.&lt;/p&gt;
+          &lt;p class=&quot;text-warning&quot;&gt;Etiam porta sem malesuada magna mollis euismod.&lt;/p&gt;
+          &lt;p class=&quot;text-danger&quot;&gt;Donec ullamcorper nulla non metus auctor fringilla.&lt;/p&gt;
+          &lt;p class=&quot;text-success&quot;&gt;Duis mollis, est non commodo luctus, nisi erat porttitor ligula.&lt;/p&gt;
+          &lt;p class=&quot;text-info&quot;&gt;Maecenas sed diam eget risus varius blandit sit amet non magna.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- Blockquotes --&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-12&quot;&gt;
+        &lt;h2 id=&quot;type-blockquotes&quot;&gt;Blockquotes&lt;/h2&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-6&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;blockquote&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.&lt;/p&gt;
+            &lt;small&gt;Someone famous in &lt;cite title=&quot;Source Title&quot;&gt;Source Title&lt;/cite&gt;&lt;/small&gt;
+          &lt;/blockquote&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-6&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;blockquote class=&quot;pull-right&quot;&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.&lt;/p&gt;
+            &lt;small&gt;Someone famous in &lt;cite title=&quot;Source Title&quot;&gt;Source Title&lt;/cite&gt;&lt;/small&gt;
+          &lt;/blockquote&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- Tables
+  ================================================== --&gt;
+  &lt;div class=&quot;bs-docs-section&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-12&quot;&gt;
+        &lt;div class=&quot;page-header&quot;&gt;
+          &lt;h1 id=&quot;tables&quot;&gt;Tables&lt;/h1&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;table class=&quot;table table-striped table-hover &quot;&gt;
+            &lt;thead&gt;
+              &lt;tr&gt;
+                &lt;th&gt;#&lt;/th&gt;
+                &lt;th&gt;Column heading&lt;/th&gt;
+                &lt;th&gt;Column heading&lt;/th&gt;
+                &lt;th&gt;Column heading&lt;/th&gt;
+              &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+              &lt;tr&gt;
+                &lt;td&gt;1&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;2&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr class=&quot;info&quot;&gt;
+                &lt;td&gt;3&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr class=&quot;success&quot;&gt;
+                &lt;td&gt;4&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr class=&quot;danger&quot;&gt;
+                &lt;td&gt;5&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr class=&quot;warning&quot;&gt;
+                &lt;td&gt;6&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr class=&quot;active&quot;&gt;
+                &lt;td&gt;7&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+                &lt;td&gt;Column content&lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/tbody&gt;
+          &lt;/table&gt;
+        &lt;/div&gt;&lt;!-- /example --&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- Forms
+  ================================================== --&gt;
+  &lt;div class=&quot;bs-docs-section&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-12&quot;&gt;
+        &lt;div class=&quot;page-header&quot;&gt;
+          &lt;h1 id=&quot;forms&quot;&gt;Forms&lt;/h1&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-6&quot;&gt;
+        &lt;div class=&quot;well bs-component&quot;&gt;
+          &lt;form class=&quot;form-horizontal&quot;&gt;
+            &lt;fieldset&gt;
+              &lt;legend&gt;Legend&lt;/legend&gt;
+              &lt;div class=&quot;form-group&quot;&gt;
+                &lt;label for=&quot;inputEmail&quot; class=&quot;col-lg-2 control-label&quot;&gt;Email&lt;/label&gt;
+                &lt;div class=&quot;col-lg-10&quot;&gt;
+                  &lt;input class=&quot;form-control&quot; id=&quot;inputEmail&quot; placeholder=&quot;Email&quot; type=&quot;text&quot;&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;form-group&quot;&gt;
+                &lt;label for=&quot;inputPassword&quot; class=&quot;col-lg-2 control-label&quot;&gt;Password&lt;/label&gt;
+                &lt;div class=&quot;col-lg-10&quot;&gt;
+                  &lt;input class=&quot;form-control&quot; id=&quot;inputPassword&quot; placeholder=&quot;Password&quot; type=&quot;password&quot;&gt;
+                  &lt;div class=&quot;checkbox&quot;&gt;
+                    &lt;label&gt;
+                      &lt;input type=&quot;checkbox&quot;&gt; Checkbox
+                    &lt;/label&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;form-group&quot;&gt;
+                &lt;label for=&quot;textArea&quot; class=&quot;col-lg-2 control-label&quot;&gt;Textarea&lt;/label&gt;
+                &lt;div class=&quot;col-lg-10&quot;&gt;
+                  &lt;textarea class=&quot;form-control&quot; rows=&quot;3&quot; id=&quot;textArea&quot;&gt;&lt;/textarea&gt;
+                  &lt;span class=&quot;help-block&quot;&gt;A longer block of help text that breaks onto a new line and may extend beyond one line.&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;form-group&quot;&gt;
+                &lt;label class=&quot;col-lg-2 control-label&quot;&gt;Radios&lt;/label&gt;
+                &lt;div class=&quot;col-lg-10&quot;&gt;
+                  &lt;div class=&quot;radio&quot;&gt;
+                    &lt;label&gt;
+                      &lt;input name=&quot;optionsRadios&quot; id=&quot;optionsRadios1&quot; value=&quot;option1&quot; checked=&quot;&quot; type=&quot;radio&quot;&gt;
+                      Option one is this
+                    &lt;/label&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&quot;radio&quot;&gt;
+                    &lt;label&gt;
+                      &lt;input name=&quot;optionsRadios&quot; id=&quot;optionsRadios2&quot; value=&quot;option2&quot; type=&quot;radio&quot;&gt;
+                      Option two can be something else
+                    &lt;/label&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;form-group&quot;&gt;
+                &lt;label for=&quot;select&quot; class=&quot;col-lg-2 control-label&quot;&gt;Selects&lt;/label&gt;
+                &lt;div class=&quot;col-lg-10&quot;&gt;
+                  &lt;select class=&quot;form-control&quot; id=&quot;select&quot;&gt;
+                    &lt;option&gt;1&lt;/option&gt;
+                    &lt;option&gt;2&lt;/option&gt;
+                    &lt;option&gt;3&lt;/option&gt;
+                    &lt;option&gt;4&lt;/option&gt;
+                    &lt;option&gt;5&lt;/option&gt;
+                  &lt;/select&gt;
+                  &lt;br&gt;
+                  &lt;select multiple=&quot;&quot; class=&quot;form-control&quot;&gt;
+                    &lt;option&gt;1&lt;/option&gt;
+                    &lt;option&gt;2&lt;/option&gt;
+                    &lt;option&gt;3&lt;/option&gt;
+                    &lt;option&gt;4&lt;/option&gt;
+                    &lt;option&gt;5&lt;/option&gt;
+                  &lt;/select&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;form-group&quot;&gt;
+                &lt;div class=&quot;col-lg-10 col-lg-offset-2&quot;&gt;
+                  &lt;button class=&quot;btn btn-default&quot;&gt;Cancel&lt;/button&gt;
+                  &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/fieldset&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4 col-lg-offset-1&quot;&gt;
+          &lt;form class=&quot;bs-component&quot;&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+              &lt;label class=&quot;control-label&quot; for=&quot;focusedInput&quot;&gt;Focused input&lt;/label&gt;
+              &lt;input class=&quot;form-control&quot; id=&quot;focusedInput&quot; value=&quot;This is focused...&quot; type=&quot;text&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+              &lt;label class=&quot;control-label&quot; for=&quot;disabledInput&quot;&gt;Disabled input&lt;/label&gt;
+              &lt;input class=&quot;form-control&quot; id=&quot;disabledInput&quot; placeholder=&quot;Disabled input here...&quot; disabled=&quot;&quot; type=&quot;text&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group has-warning&quot;&gt;
+              &lt;label class=&quot;control-label&quot; for=&quot;inputWarning&quot;&gt;Input warning&lt;/label&gt;
+              &lt;input class=&quot;form-control&quot; id=&quot;inputWarning&quot; type=&quot;text&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group has-error&quot;&gt;
+              &lt;label class=&quot;control-label&quot; for=&quot;inputError&quot;&gt;Input error&lt;/label&gt;
+              &lt;input class=&quot;form-control&quot; id=&quot;inputError&quot; type=&quot;text&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group has-success&quot;&gt;
+              &lt;label class=&quot;control-label&quot; for=&quot;inputSuccess&quot;&gt;Input success&lt;/label&gt;
+              &lt;input class=&quot;form-control&quot; id=&quot;inputSuccess&quot; type=&quot;text&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+              &lt;label class=&quot;control-label&quot; for=&quot;inputLarge&quot;&gt;Large input&lt;/label&gt;
+              &lt;input class=&quot;form-control input-lg&quot; id=&quot;inputLarge&quot; type=&quot;text&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+              &lt;label class=&quot;control-label&quot; for=&quot;inputDefault&quot;&gt;Default input&lt;/label&gt;
+              &lt;input class=&quot;form-control&quot; id=&quot;inputDefault&quot; type=&quot;text&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+              &lt;label class=&quot;control-label&quot; for=&quot;inputSmall&quot;&gt;Small input&lt;/label&gt;
+              &lt;input class=&quot;form-control input-sm&quot; id=&quot;inputSmall&quot; type=&quot;text&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+              &lt;label class=&quot;control-label&quot;&gt;Input addons&lt;/label&gt;
+              &lt;div class=&quot;input-group&quot;&gt;
+                &lt;span class=&quot;input-group-addon&quot;&gt;$&lt;/span&gt;
+                &lt;input class=&quot;form-control&quot; type=&quot;text&quot;&gt;
+                &lt;span class=&quot;input-group-btn&quot;&gt;
+                  &lt;button class=&quot;btn btn-default&quot; type=&quot;button&quot;&gt;Button&lt;/button&gt;
+                &lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- Navs
+  ================================================== --&gt;
+  &lt;div class=&quot;bs-docs-section&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-12&quot;&gt;
+        &lt;div class=&quot;page-header&quot;&gt;
+          &lt;h1 id=&quot;nav&quot;&gt;Navs&lt;/h1&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;h2 id=&quot;nav-tabs&quot;&gt;Tabs&lt;/h2&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;ul class=&quot;nav nav-tabs&quot; style=&quot;margin-bottom: 15px;&quot;&gt;
+            &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#home&quot; data-toggle=&quot;tab&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#profile&quot; data-toggle=&quot;tab&quot;&gt;Profile&lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&quot;disabled&quot;&gt;&lt;a&gt;Disabled&lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&quot;dropdown&quot;&gt;
+              &lt;a class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot; href=&quot;#&quot;&gt;
+                Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;
+              &lt;/a&gt;
+              &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                &lt;li&gt;&lt;a href=&quot;#dropdown1&quot; data-toggle=&quot;tab&quot;&gt;Action&lt;/a&gt;&lt;/li&gt;
+                &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#dropdown2&quot; data-toggle=&quot;tab&quot;&gt;Another action&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+          &lt;div id=&quot;myTabContent&quot; class=&quot;tab-content&quot;&gt;
+            &lt;div class=&quot;tab-pane fade active in&quot; id=&quot;home&quot;&gt;
+              &lt;p&gt;Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;tab-pane fade&quot; id=&quot;profile&quot;&gt;
+              &lt;p&gt;Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;tab-pane fade&quot; id=&quot;dropdown1&quot;&gt;
+              &lt;p&gt;Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;tab-pane fade&quot; id=&quot;dropdown2&quot;&gt;
+              &lt;p&gt;Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;h2 id=&quot;nav-pills&quot;&gt;Pills&lt;/h2&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;ul class=&quot;nav nav-pills&quot;&gt;
+            &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Profile&lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&quot;disabled&quot;&gt;&lt;a href=&quot;#&quot;&gt;Disabled&lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&quot;dropdown&quot;&gt;
+              &lt;a class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot; href=&quot;#&quot;&gt;
+                Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;
+              &lt;/a&gt;
+              &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Another action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+                &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;br&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;ul class=&quot;nav nav-pills nav-stacked&quot; style=&quot;max-width: 300px;&quot;&gt;
+            &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Profile&lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&quot;disabled&quot;&gt;&lt;a href=&quot;#&quot;&gt;Disabled&lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&quot;dropdown&quot;&gt;
+              &lt;a class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot; href=&quot;#&quot;&gt;
+                Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;
+              &lt;/a&gt;
+              &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Another action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+                &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;h2 id=&quot;nav-breadcrumbs&quot;&gt;Breadcrumbs&lt;/h2&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;ul class=&quot;breadcrumb&quot;&gt;
+            &lt;li class=&quot;active&quot;&gt;Home&lt;/li&gt;
+          &lt;/ul&gt;
+          &lt;ul class=&quot;breadcrumb&quot;&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&quot;active&quot;&gt;Library&lt;/li&gt;
+          &lt;/ul&gt;
+          &lt;ul class=&quot;breadcrumb&quot; style=&quot;margin-bottom: 5px;&quot;&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Library&lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&quot;active&quot;&gt;Data&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;h2 id=&quot;pagination&quot;&gt;Pagination&lt;/h2&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;ul class=&quot;pagination&quot;&gt;
+            &lt;li class=&quot;disabled&quot;&gt;&lt;a href=&quot;#&quot;&gt;«&lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;2&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;3&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;4&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;5&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;»&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+          &lt;ul class=&quot;pagination pagination-lg&quot;&gt;
+            &lt;li class=&quot;disabled&quot;&gt;&lt;a href=&quot;#&quot;&gt;«&lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;2&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;3&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;»&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+          &lt;ul class=&quot;pagination pagination-sm&quot;&gt;
+            &lt;li class=&quot;disabled&quot;&gt;&lt;a href=&quot;#&quot;&gt;«&lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;2&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;3&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;4&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;5&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;»&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;h2 id=&quot;pager&quot;&gt;Pager&lt;/h2&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;ul class=&quot;pager&quot;&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Previous&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Next&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+          &lt;ul class=&quot;pager&quot;&gt;
+            &lt;li class=&quot;previous disabled&quot;&gt;&lt;a href=&quot;#&quot;&gt;← Older&lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&quot;next&quot;&gt;&lt;a href=&quot;#&quot;&gt;Newer →&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- Indicators
+  ================================================== --&gt;
+  &lt;div class=&quot;bs-docs-section&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-12&quot;&gt;
+        &lt;div class=&quot;page-header&quot;&gt;
+          &lt;h1 id=&quot;indicators&quot;&gt;Indicators&lt;/h1&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-12&quot;&gt;
+        &lt;h2&gt;Alerts&lt;/h2&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;alert alert-dismissable alert-warning&quot;&gt;
+            &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;×&lt;/button&gt;
+            &lt;h4&gt;Warning!&lt;/h4&gt;
+            &lt;p&gt;Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, &lt;a href=&quot;#&quot; class=&quot;alert-link&quot;&gt;vel scelerisque nisl consectetur et&lt;/a&gt;.&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;alert alert-dismissable alert-danger&quot;&gt;
+            &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;×&lt;/button&gt;
+            &lt;strong&gt;Oh snap!&lt;/strong&gt; &lt;a href=&quot;#&quot; class=&quot;alert-link&quot;&gt;Change a few things up&lt;/a&gt; and try submitting again.
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;alert alert-dismissable alert-success&quot;&gt;
+            &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;×&lt;/button&gt;
+            &lt;strong&gt;Well done!&lt;/strong&gt; You successfully read &lt;a href=&quot;#&quot; class=&quot;alert-link&quot;&gt;this important alert message&lt;/a&gt;.
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;alert alert-dismissable alert-info&quot;&gt;
+            &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;×&lt;/button&gt;
+            &lt;strong&gt;Heads up!&lt;/strong&gt; This &lt;a href=&quot;#&quot; class=&quot;alert-link&quot;&gt;alert needs your attention&lt;/a&gt;, but it's not super important.
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;h2&gt;Labels&lt;/h2&gt;
+        &lt;div class=&quot;bs-component&quot; style=&quot;margin-bottom: 40px;&quot;&gt;
+          &lt;span class=&quot;label label-default&quot;&gt;Default&lt;/span&gt;
+          &lt;span class=&quot;label label-primary&quot;&gt;Primary&lt;/span&gt;
+          &lt;span class=&quot;label label-success&quot;&gt;Success&lt;/span&gt;
+          &lt;span class=&quot;label label-warning&quot;&gt;Warning&lt;/span&gt;
+          &lt;span class=&quot;label label-danger&quot;&gt;Danger&lt;/span&gt;
+          &lt;span class=&quot;label label-info&quot;&gt;Info&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;h2&gt;Badges&lt;/h2&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;ul class=&quot;nav nav-pills&quot;&gt;
+            &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;Home &lt;span class=&quot;badge&quot;&gt;42&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Profile &lt;span class=&quot;badge&quot;&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Messages &lt;span class=&quot;badge&quot;&gt;3&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- Progress bars
+  ================================================== --&gt;
+  &lt;div class=&quot;bs-docs-section&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-12&quot;&gt;
+        &lt;div class=&quot;page-header&quot;&gt;
+          &lt;h1 id=&quot;progress&quot;&gt;Progress bars&lt;/h1&gt;
+        &lt;/div&gt;
+        &lt;h3 id=&quot;progress-basic&quot;&gt;Basic&lt;/h3&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;progress&quot;&gt;
+            &lt;div class=&quot;progress-bar&quot; style=&quot;width: 60%;&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;h3 id=&quot;progress-alternatives&quot;&gt;Contextual alternatives&lt;/h3&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;progress&quot;&gt;
+            &lt;div class=&quot;progress-bar progress-bar-info&quot; style=&quot;width: 20%&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;progress&quot;&gt;
+            &lt;div class=&quot;progress-bar progress-bar-success&quot; style=&quot;width: 40%&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;progress&quot;&gt;
+            &lt;div class=&quot;progress-bar progress-bar-warning&quot; style=&quot;width: 60%&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;progress&quot;&gt;
+            &lt;div class=&quot;progress-bar progress-bar-danger&quot; style=&quot;width: 80%&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;h3 id=&quot;progress-striped&quot;&gt;Striped&lt;/h3&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;progress progress-striped&quot;&gt;
+            &lt;div class=&quot;progress-bar progress-bar-info&quot; style=&quot;width: 20%&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;progress progress-striped&quot;&gt;
+            &lt;div class=&quot;progress-bar progress-bar-success&quot; style=&quot;width: 40%&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;progress progress-striped&quot;&gt;
+            &lt;div class=&quot;progress-bar progress-bar-warning&quot; style=&quot;width: 60%&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;progress progress-striped&quot;&gt;
+            &lt;div class=&quot;progress-bar progress-bar-danger&quot; style=&quot;width: 80%&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;h3 id=&quot;progress-animated&quot;&gt;Animated&lt;/h3&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;progress progress-striped active&quot;&gt;
+            &lt;div class=&quot;progress-bar&quot; style=&quot;width: 45%&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;h3 id=&quot;progress-stacked&quot;&gt;Stacked&lt;/h3&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;progress&quot;&gt;
+            &lt;div class=&quot;progress-bar progress-bar-success&quot; style=&quot;width: 35%&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;progress-bar progress-bar-warning&quot; style=&quot;width: 20%&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;progress-bar progress-bar-danger&quot; style=&quot;width: 10%&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- Containers
+  ================================================== --&gt;
+  &lt;div class=&quot;bs-docs-section&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-12&quot;&gt;
+        &lt;div class=&quot;page-header&quot;&gt;
+          &lt;h1 id=&quot;container&quot;&gt;Containers&lt;/h1&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;jumbotron&quot;&gt;
+            &lt;h1&gt;Jumbotron&lt;/h1&gt;
+            &lt;p&gt;This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.&lt;/p&gt;
+            &lt;p&gt;&lt;a class=&quot;btn btn-primary btn-lg&quot;&gt;Learn more&lt;/a&gt;&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-12&quot;&gt;
+        &lt;h2&gt;List groups&lt;/h2&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;ul class=&quot;list-group&quot;&gt;
+            &lt;li class=&quot;list-group-item&quot;&gt;
+              &lt;span class=&quot;badge&quot;&gt;14&lt;/span&gt;
+              Cras justo odio
+            &lt;/li&gt;
+            &lt;li class=&quot;list-group-item&quot;&gt;
+              &lt;span class=&quot;badge&quot;&gt;2&lt;/span&gt;
+              Dapibus ac facilisis in
+            &lt;/li&gt;
+            &lt;li class=&quot;list-group-item&quot;&gt;
+              &lt;span class=&quot;badge&quot;&gt;1&lt;/span&gt;
+              Morbi leo risus
+            &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;list-group&quot;&gt;
+            &lt;a href=&quot;#&quot; class=&quot;list-group-item active&quot;&gt;
+              Cras justo odio
+            &lt;/a&gt;
+            &lt;a href=&quot;#&quot; class=&quot;list-group-item&quot;&gt;Dapibus ac facilisis in
+            &lt;/a&gt;
+            &lt;a href=&quot;#&quot; class=&quot;list-group-item&quot;&gt;Morbi leo risus
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;list-group&quot;&gt;
+            &lt;a href=&quot;#&quot; class=&quot;list-group-item&quot;&gt;
+              &lt;h4 class=&quot;list-group-item-heading&quot;&gt;List group item heading&lt;/h4&gt;
+              &lt;p class=&quot;list-group-item-text&quot;&gt;Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.&lt;/p&gt;
+            &lt;/a&gt;
+            &lt;a href=&quot;#&quot; class=&quot;list-group-item&quot;&gt;
+              &lt;h4 class=&quot;list-group-item-heading&quot;&gt;List group item heading&lt;/h4&gt;
+              &lt;p class=&quot;list-group-item-text&quot;&gt;Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.&lt;/p&gt;
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-12&quot;&gt;
+        &lt;h2&gt;Panels&lt;/h2&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;panel panel-default&quot;&gt;
+            &lt;div class=&quot;panel-body&quot;&gt;
+              Basic panel
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;panel panel-default&quot;&gt;
+            &lt;div class=&quot;panel-heading&quot;&gt;Panel heading&lt;/div&gt;
+            &lt;div class=&quot;panel-body&quot;&gt;
+              Panel content
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;panel panel-default&quot;&gt;
+            &lt;div class=&quot;panel-body&quot;&gt;
+              Panel content
+            &lt;/div&gt;
+            &lt;div class=&quot;panel-footer&quot;&gt;Panel footer&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;panel panel-primary&quot;&gt;
+            &lt;div class=&quot;panel-heading&quot;&gt;
+              &lt;h3 class=&quot;panel-title&quot;&gt;Panel primary&lt;/h3&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;panel-body&quot;&gt;
+              Panel content
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;panel panel-success&quot;&gt;
+            &lt;div class=&quot;panel-heading&quot;&gt;
+              &lt;h3 class=&quot;panel-title&quot;&gt;Panel success&lt;/h3&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;panel-body&quot;&gt;
+              Panel content
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;panel panel-warning&quot;&gt;
+            &lt;div class=&quot;panel-heading&quot;&gt;
+              &lt;h3 class=&quot;panel-title&quot;&gt;Panel warning&lt;/h3&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;panel-body&quot;&gt;
+              Panel content
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;panel panel-danger&quot;&gt;
+            &lt;div class=&quot;panel-heading&quot;&gt;
+              &lt;h3 class=&quot;panel-title&quot;&gt;Panel danger&lt;/h3&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;panel-body&quot;&gt;
+              Panel content
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;panel panel-info&quot;&gt;
+            &lt;div class=&quot;panel-heading&quot;&gt;
+              &lt;h3 class=&quot;panel-title&quot;&gt;Panel info&lt;/h3&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;panel-body&quot;&gt;
+              Panel content
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-12&quot;&gt;
+        &lt;h2&gt;Wells&lt;/h2&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;well&quot;&gt;
+            Look, I'm in a well!
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;well well-sm&quot;&gt;
+            Look, I'm in a small well!
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-4&quot;&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;well well-lg&quot;&gt;
+            Look, I'm in a large well!
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- Dialogs
+  ================================================== --&gt;
+  &lt;div class=&quot;bs-docs-section&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-12&quot;&gt;
+        &lt;div class=&quot;page-header&quot;&gt;
+          &lt;h1 id=&quot;tables&quot;&gt;Dialogs&lt;/h1&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-lg-6&quot;&gt;
+        &lt;h2&gt;Modals&lt;/h2&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;div class=&quot;modal&quot;&gt;
+            &lt;div class=&quot;modal-dialog&quot;&gt;
+              &lt;div class=&quot;modal-content&quot;&gt;
+                &lt;div class=&quot;modal-header&quot;&gt;
+                  &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;×&lt;/button&gt;
+                  &lt;h4 class=&quot;modal-title&quot;&gt;Modal title&lt;/h4&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;modal-body&quot;&gt;
+                  &lt;p&gt;One fine body…&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;modal-footer&quot;&gt;
+                  &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-dismiss=&quot;modal&quot;&gt;Close&lt;/button&gt;
+                  &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot;&gt;Save changes&lt;/button&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-lg-6&quot;&gt;
+        &lt;h2&gt;Popovers&lt;/h2&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;button title=&quot;&quot; data-original-title=&quot;&quot; type=&quot;button&quot; class=&quot;btn btn-default&quot; data-container=&quot;body&quot; data-toggle=&quot;popover&quot; data-placement=&quot;left&quot; data-content=&quot;Vivamus sagittis lacus vel augue laoreet rutrum faucibus.&quot;&gt;Left&lt;/button&gt;
+          &lt;button title=&quot;&quot; data-original-title=&quot;&quot; type=&quot;button&quot; class=&quot;btn btn-default&quot; data-container=&quot;body&quot; data-toggle=&quot;popover&quot; data-placement=&quot;top&quot; data-content=&quot;Vivamus sagittis lacus vel augue laoreet rutrum faucibus.&quot;&gt;Top&lt;/button&gt;
+          &lt;button title=&quot;&quot; data-original-title=&quot;&quot; type=&quot;button&quot; class=&quot;btn btn-default&quot; data-container=&quot;body&quot; data-toggle=&quot;popover&quot; data-placement=&quot;bottom&quot; data-content=&quot;Vivamus
+          sagittis lacus vel augue laoreet rutrum faucibus.&quot;&gt;Bottom&lt;/button&gt;
+          &lt;button title=&quot;&quot; data-original-title=&quot;&quot; type=&quot;button&quot; class=&quot;btn btn-default&quot; data-container=&quot;body&quot; data-toggle=&quot;popover&quot; data-placement=&quot;right&quot; data-content=&quot;Vivamus sagittis lacus vel augue laoreet rutrum faucibus.&quot;&gt;Right&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;h2&gt;Tooltips&lt;/h2&gt;
+        &lt;div class=&quot;bs-component&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-toggle=&quot;tooltip&quot; data-placement=&quot;left&quot; title=&quot;&quot; data-original-title=&quot;Tooltip on left&quot;&gt;Left&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-toggle=&quot;tooltip&quot; data-placement=&quot;top&quot; title=&quot;&quot; data-original-title=&quot;Tooltip on top&quot;&gt;Top&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-toggle=&quot;tooltip&quot; data-placement=&quot;bottom&quot; title=&quot;&quot; data-original-title=&quot;Tooltip on bottom&quot;&gt;Bottom&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-toggle=&quot;tooltip&quot; data-placement=&quot;right&quot; title=&quot;&quot; data-original-title=&quot;Tooltip on right&quot;&gt;Right&lt;/button&gt;
+        &lt;div style=&quot;display: none;&quot; id=&quot;source-button&quot; class=&quot;btn btn-primary btn-xs&quot;&gt;&amp;lt; &amp;gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;source-modal&quot; class=&quot;modal fade&quot;&gt;
+    &lt;div class=&quot;modal-dialog modal-lg&quot;&gt;
+      &lt;div class=&quot;modal-content&quot;&gt;
+        &lt;div class=&quot;modal-header&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;×&lt;/button&gt;
+          &lt;h4 class=&quot;modal-title&quot;&gt;Source Code&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;modal-body&quot;&gt;
+          &lt;pre&gt;&lt;/pre&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+</pre>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;hello-world&#x2F;">Hello World!</a></h1>
+              <div class="info">
+                <h2>嗯，国际惯例。</h2>
+                <time>2014-04-08 00:00</time>
+              </div>
+              
+                <p>第一篇帖子，庆祝在Github Page上搭建成功！使用了Go语言写的<code>Hugo</code>作为静态页面生成工具。有时间写个前端什么的，不然直接写MarkDown太痛苦了</p>
+<p>下面是Hugo自带的文章示例</p>
+<h2 id="a-section">A Section</h2>
+<p>Here's a simple titled section where you can place whatever information you want.</p>
+<p>You can use inline HTML if you want, but really there's not much that markdown can't do.</p>
+<h2 id="showing-off-with-markdown">Showing Off With Markdown</h2>
+<p>A full cheat sheet can be found <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">here</a>
+or through <a href="https://google.com/">google</a>.</p>
+<p>There are some <em>easy</em> examples for styling, though. I can't <strong>emphasize</strong> that enough.
+Creating <a href="https://google.com/">links</a> or <code>inline code</code> blocks are very straightforward.</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">There are some *easy* examples for styling, though. I can&#39;t **emphasize** that enough.
+Creating [links](https://google.com/) or `inline code` blocks are very straightforward.
+</span></pre><h2 id="front-matter-for-fun">Front Matter For Fun</h2>
+<p>This is the meta data for this post. It is located at the top of the <code>content/post/hello-hugo.md</code> markdown file.</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">---
+title: &quot;Hello Hugo!&quot;
+description: &quot;Saying &#39;Hello&#39; from Hugo&quot;
+date: &quot;2014-04-09&quot;
+categories:
+  - &quot;example&quot;
+  - &quot;hello&quot;
+tags:
+  - &quot;example&quot;
+  - &quot;hugo&quot;
+  - &quot;blog&quot;
+---
+</span></pre>
+<p>This section, called 'Front Matter', is what tells Hugo about the content in this file. The title of the item,the
+description, the date it was posted. In our example we're adding two custom bits of data, too. The <code>categories</code> and
+<code>tags</code> sections are used in this example for indexing/grouping content. You will learn more about what that means by
+examining the code in this example and through reading the Hugo <a href="http://hugo.spf13.com/overview/introduction">documentation</a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">关于</a></h1>
+              <div class="info">
+                <h2>关于我</h2>
+                <time>1999-01-26 00:00</time>
+              </div>
+              
+              <p>这是一个憋了很久还是没有写完的页面, 于是阅读以下内容可能会感受到</p>
+<ul>
+<li>文风多变</li>
+<li>上下文混乱</li>
+<li>时间线错乱</li>
+<li><del>多重人格</del></li>
+<li><del>乱码</del></li>
+<li>以及超多的删除线</li>
+</ul>
+<p><del>如有任何不适还请装作没事</del></p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">友情链接</a></h1>
+              <div class="info">
+                <h2>排序是随机的</h2>
+                <time>0000-01-01 00:05</time>
+              </div>
+              
+                <ul id="links"></ul>
+<script>
+    let links = [
+        ["szszss' blog", "http://www.hakugyokurou.net/wordpress"],
+        ["某只熊猫的博客", "http://qaq.gd"],
+        ["bangbang93.blog()", "http://blog.bangbang93.com"],
+        ["Kuludu的博客", "http://kuludu.net"],
+        ["Reflect Sky", "http://www.reflectsky.com"],
+        ["ChinaMoe's Blog", "http://tap-io.com"],
+        ["Fz<del>(大金牛)</del>'s blog", "http://www.zhuhening.cn"],
+        ["小竹's blog", "https://blog.justforlxz.com"],
+        ["Farseerfc的小窩", "https://farseerfc.me"],
+        ["新一", "https://a-wing.top"],
+    ];
+    let linksElem = document.getElementById("links");
+    function secureRandom() {
+        var buf = new Uint8Array(1);
+        window.crypto.getRandomValues(buf);
+        return buf[0];
+    }
+    function main() {
+        let linksR = links.sort(function(_, _) {
+            return (secureRandom() >= 128) ? -1 : 1;
+        });
+        var html = "";
+        linksR.forEach(function(e) {
+            html += "<li><a href=\"" + e[1] + "\">" + e[0] + "</a></li>";
+        });
+        linksElem.innerHTML = html;
+    }
+    main();
+</script>
+
+              
+            </article>
+          
+        
+        
+        <nav>
+          
+          <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;n&#x2F;8&#x2F;">PREV</a>
+          
+          
+        </nav>
+        
+      
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

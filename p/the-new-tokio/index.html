@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -328,7 +345,7 @@
 <p>其实这是计划了差不多半年的一个变动</p>
 <p>因为之前的 <em>futures</em> 和 <em>tokio</em> 都只是 &quot;能用&quot; 的程度, 在被大量使用后暴露出了很多设计上的问题, 并且还有不少要放弃向后兼容才能修复</p>
 <p>所以这次就攒到一起重新设计顺便分了个新的 crate</p>
-<!-- more -->
+<span id="continue-reading"></span>
 <p>而旧的 <em>tokio-core</em> 会被保留做兼容, 新项目应该全部使用 <em>tokio</em></p>
 <hr />
 <p>除了包名变更, 值得注意的还有以下几点:</p>
@@ -341,52 +358,52 @@
 <li>提供一个 <strong>default</strong> global event loop. 最有意思的来了, 结合上一条 executor 的抽象, <em>tokio</em> 的 <code>Reactor</code> 可以只管 IO 并 notify 其他 <code>Task</code> 就行</li>
 </ul>
 <p>关于 <strong>default</strong> global event loop, 下面细说一下</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">extern crate</span><span style="background-color:#282828;color:#fdf4c1aa;"> futures;
-</span><span style="background-color:#282828;color:#fa5c4b;">extern crate</span><span style="background-color:#282828;color:#fdf4c1aa;"> futures_cpupool;
-</span><span style="background-color:#282828;color:#fa5c4b;">extern crate</span><span style="background-color:#282828;color:#fdf4c1aa;"> tokio;
-</span><span style="background-color:#282828;color:#fa5c4b;">extern crate</span><span style="background-color:#282828;color:#fdf4c1aa;"> tokio_io;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">use </span><span style="background-color:#282828;color:#fdf4c1aa;">std::env;
-</span><span style="background-color:#282828;color:#fa5c4b;">use </span><span style="background-color:#282828;color:#fdf4c1aa;">std::net::SocketAddr;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">use </span><span style="background-color:#282828;color:#fdf4c1aa;">futures::Future;
-</span><span style="background-color:#282828;color:#fa5c4b;">use </span><span style="background-color:#282828;color:#fdf4c1aa;">futures::future::Executor;
-</span><span style="background-color:#282828;color:#fa5c4b;">use </span><span style="background-color:#282828;color:#fdf4c1aa;">futures::stream::Stream;
-</span><span style="background-color:#282828;color:#fa5c4b;">use </span><span style="background-color:#282828;color:#fdf4c1aa;">futures_cpupool::CpuPool;
-</span><span style="background-color:#282828;color:#fa5c4b;">use </span><span style="background-color:#282828;color:#fdf4c1aa;">tokio_io::AsyncRead;
-</span><span style="background-color:#282828;color:#fa5c4b;">use </span><span style="background-color:#282828;color:#fdf4c1aa;">tokio_io::io::copy;
-</span><span style="background-color:#282828;color:#fa5c4b;">use </span><span style="background-color:#282828;color:#fdf4c1aa;">tokio::net::TcpListener;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">main</span><span style="background-color:#282828;color:#fdf4c1aa;">() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> addr </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1aa;">env::args().</span><span style="background-color:#282828;color:#fabd2f;">nth</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#d3869b;">1</span><span style="background-color:#282828;color:#fdf4c1aa;">).</span><span style="background-color:#282828;color:#fabd2f;">unwrap_or</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;127.0.0.1:8080&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">to_string</span><span style="background-color:#282828;color:#fdf4c1aa;">());
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> addr </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> addr.parse::&lt;SocketAddr&gt;().</span><span style="background-color:#282828;color:#fabd2f;">unwrap</span><span style="background-color:#282828;color:#fdf4c1aa;">();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> socket </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1aa;">TcpListener::bind(</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fdf4c1aa;">addr).</span><span style="background-color:#282828;color:#fabd2f;">unwrap</span><span style="background-color:#282828;color:#fdf4c1aa;">();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fabd2f;">println!</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Listening on: </span><span style="background-color:#282828;color:#fdf4c1;">{}</span><span style="background-color:#282828;color:#b8bb26;">&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">, addr);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> pool </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1aa;">CpuPool::new(</span><span style="background-color:#282828;color:#d3869b;">1</span><span style="background-color:#282828;color:#fdf4c1aa;">);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> done </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> socket.</span><span style="background-color:#282828;color:#fabd2f;">incoming</span><span style="background-color:#282828;color:#fdf4c1aa;">().</span><span style="background-color:#282828;color:#fabd2f;">for_each</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fa5c4b;">move </span><span style="background-color:#282828;color:#fe8019;">|</span><span style="background-color:#282828;color:#fdf4c1aa;">socket</span><span style="background-color:#282828;color:#fe8019;">| </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">let </span><span style="background-color:#282828;color:#fdf4c1aa;">(reader, writer) </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> socket.</span><span style="background-color:#282828;color:#fabd2f;">split</span><span style="background-color:#282828;color:#fdf4c1aa;">();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> amt </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">copy</span><span style="background-color:#282828;color:#fdf4c1aa;">(reader, writer);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> msg </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> amt.</span><span style="background-color:#282828;color:#fabd2f;">then</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fa5c4b;">move </span><span style="background-color:#282828;color:#fe8019;">|</span><span style="background-color:#282828;color:#fdf4c1aa;">result</span><span style="background-color:#282828;color:#fe8019;">| </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">match</span><span style="background-color:#282828;color:#fdf4c1aa;"> result {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fabd2f;">Ok</span><span style="background-color:#282828;color:#fdf4c1aa;">((amt, </span><span style="background-color:#282828;color:#fe8019;">_</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fe8019;">_</span><span style="background-color:#282828;color:#fdf4c1aa;">)) </span><span style="background-color:#282828;color:#fe8019;">=&gt; </span><span style="background-color:#282828;color:#fabd2f;">println!</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;wrote </span><span style="background-color:#282828;color:#fdf4c1;">{}</span><span style="background-color:#282828;color:#b8bb26;"> bytes&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">, amt),
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fabd2f;">Err</span><span style="background-color:#282828;color:#fdf4c1aa;">(e) </span><span style="background-color:#282828;color:#fe8019;">=&gt; </span><span style="background-color:#282828;color:#fabd2f;">println!</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;error: </span><span style="background-color:#282828;color:#fdf4c1;">{}</span><span style="background-color:#282828;color:#b8bb26;">&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">, e),
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fabd2f;">Ok</span><span style="background-color:#282828;color:#fdf4c1aa;">(())
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">});
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">pool.</span><span style="background-color:#282828;color:#fabd2f;">execute</span><span style="background-color:#282828;color:#fdf4c1aa;">(msg).</span><span style="background-color:#282828;color:#fabd2f;">unwrap</span><span style="background-color:#282828;color:#fdf4c1aa;">();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fabd2f;">Ok</span><span style="background-color:#282828;color:#fdf4c1aa;">(())
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">});
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">done.</span><span style="background-color:#282828;color:#fabd2f;">wait</span><span style="background-color:#282828;color:#fdf4c1aa;">().</span><span style="background-color:#282828;color:#fabd2f;">unwrap</span><span style="background-color:#282828;color:#fdf4c1aa;">();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">extern crate</span><span style="color:#fdf4c1aa;"> futures;
+</span><span style="color:#fa5c4b;">extern crate</span><span style="color:#fdf4c1aa;"> futures_cpupool;
+</span><span style="color:#fa5c4b;">extern crate</span><span style="color:#fdf4c1aa;"> tokio;
+</span><span style="color:#fa5c4b;">extern crate</span><span style="color:#fdf4c1aa;"> tokio_io;
+
+</span><span style="color:#fa5c4b;">use </span><span style="color:#fdf4c1aa;">std::env;
+</span><span style="color:#fa5c4b;">use </span><span style="color:#fdf4c1aa;">std::net::SocketAddr;
+
+</span><span style="color:#fa5c4b;">use </span><span style="color:#fdf4c1aa;">futures::Future;
+</span><span style="color:#fa5c4b;">use </span><span style="color:#fdf4c1aa;">futures::future::Executor;
+</span><span style="color:#fa5c4b;">use </span><span style="color:#fdf4c1aa;">futures::stream::Stream;
+</span><span style="color:#fa5c4b;">use </span><span style="color:#fdf4c1aa;">futures_cpupool::CpuPool;
+</span><span style="color:#fa5c4b;">use </span><span style="color:#fdf4c1aa;">tokio_io::AsyncRead;
+</span><span style="color:#fa5c4b;">use </span><span style="color:#fdf4c1aa;">tokio_io::io::copy;
+</span><span style="color:#fa5c4b;">use </span><span style="color:#fdf4c1aa;">tokio::net::TcpListener;
+
+</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">main</span><span style="color:#fdf4c1aa;">() {
+    </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> addr </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">env::args().</span><span style="color:#fabd2f;">nth</span><span style="color:#fdf4c1aa;">(</span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1aa;">).</span><span style="color:#fabd2f;">unwrap_or</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;127.0.0.1:8080&quot;</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">to_string</span><span style="color:#fdf4c1aa;">());
+    </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> addr </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> addr.parse::&lt;SocketAddr&gt;().</span><span style="color:#fabd2f;">unwrap</span><span style="color:#fdf4c1aa;">();
+
+    </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> socket </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">TcpListener::bind(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1aa;">addr).</span><span style="color:#fabd2f;">unwrap</span><span style="color:#fdf4c1aa;">();
+    </span><span style="color:#fabd2f;">println!</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;Listening on: </span><span style="color:#fdf4c1;">{}</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fdf4c1aa;">, addr);
+
+    </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> pool </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">CpuPool::new(</span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1aa;">);
+
+    </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> done </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> socket.</span><span style="color:#fabd2f;">incoming</span><span style="color:#fdf4c1aa;">().</span><span style="color:#fabd2f;">for_each</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">move </span><span style="color:#fe8019;">|</span><span style="color:#fdf4c1aa;">socket</span><span style="color:#fe8019;">| </span><span style="color:#fdf4c1aa;">{
+        </span><span style="color:#fa5c4b;">let </span><span style="color:#fdf4c1aa;">(reader, writer) </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> socket.</span><span style="color:#fabd2f;">split</span><span style="color:#fdf4c1aa;">();
+        </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> amt </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">copy</span><span style="color:#fdf4c1aa;">(reader, writer);
+
+        </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> msg </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> amt.</span><span style="color:#fabd2f;">then</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">move </span><span style="color:#fe8019;">|</span><span style="color:#fdf4c1aa;">result</span><span style="color:#fe8019;">| </span><span style="color:#fdf4c1aa;">{
+            </span><span style="color:#fa5c4b;">match</span><span style="color:#fdf4c1aa;"> result {
+                </span><span style="color:#fabd2f;">Ok</span><span style="color:#fdf4c1aa;">((amt, </span><span style="color:#fe8019;">_</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fe8019;">_</span><span style="color:#fdf4c1aa;">)) </span><span style="color:#fe8019;">=&gt; </span><span style="color:#fabd2f;">println!</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;wrote </span><span style="color:#fdf4c1;">{}</span><span style="color:#b8bb26;"> bytes&quot;</span><span style="color:#fdf4c1aa;">, amt),
+                </span><span style="color:#fabd2f;">Err</span><span style="color:#fdf4c1aa;">(e) </span><span style="color:#fe8019;">=&gt; </span><span style="color:#fabd2f;">println!</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;error: </span><span style="color:#fdf4c1;">{}</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fdf4c1aa;">, e),
+            }
+
+            </span><span style="color:#fabd2f;">Ok</span><span style="color:#fdf4c1aa;">(())
+        });
+
+        pool.</span><span style="color:#fabd2f;">execute</span><span style="color:#fdf4c1aa;">(msg).</span><span style="color:#fabd2f;">unwrap</span><span style="color:#fdf4c1aa;">();
+
+        </span><span style="color:#fabd2f;">Ok</span><span style="color:#fdf4c1aa;">(())
+    });
+
+    done.</span><span style="color:#fabd2f;">wait</span><span style="color:#fdf4c1aa;">().</span><span style="color:#fabd2f;">unwrap</span><span style="color:#fdf4c1aa;">();
+}
 </span></pre>
 <p>这是官方的 echo server example</p>
 <p>值得注意的是 <code>Reactor</code> 不见了, <code>done</code> 这个 Future 直接调用了 <code>.wait()</code></p>
@@ -396,77 +413,77 @@
 <p>而所有 IO 相关的, 在 tokio 里是运行一个 <code>Reactor</code> (比如 Linux 里是 epoll), 由这个 <code>Reactor</code> 来调用 <code>.notify()</code></p>
 <p>那 <code>Reactor</code> 跑哪去了? <code>TcpListener::bind</code> 原本所需要的 <code>Handle</code> 参数又跑哪去了?</p>
 <p>跟着源码来</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">impl </span><span style="background-color:#282828;color:#8ec07c;">TcpListener </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;">/// Create a new TCP listener associated with this event loop.
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;">///
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;">/// The TCP listener will bind to the provided `addr` address, if available.
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;">/// If the result is `Ok`, the socket has successfully bound.
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">pub fn </span><span style="background-color:#282828;color:#8ec07c;">bind</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">addr</span><span style="background-color:#282828;color:#fdf4c1aa;">: </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fdf4c1aa;">SocketAddr) -&gt; io::Result&lt;TcpListener&gt; {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> l </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">try!</span><span style="background-color:#282828;color:#fdf4c1aa;">(mio::net::TcpListener::bind(addr));
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">TcpListener::new(l, </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fdf4c1aa;">Handle::default())
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">impl </span><span style="color:#8ec07c;">TcpListener </span><span style="color:#fdf4c1aa;">{
+    </span><span style="font-style:italic;color:#928374;">/// Create a new TCP listener associated with this event loop.
+    ///
+    /// The TCP listener will bind to the provided `addr` address, if available.
+    /// If the result is `Ok`, the socket has successfully bound.
+    </span><span style="color:#fa5c4b;">pub fn </span><span style="color:#8ec07c;">bind</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">addr</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1aa;">SocketAddr) -&gt; io::Result&lt;TcpListener&gt; {
+        </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> l </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">try!</span><span style="color:#fdf4c1aa;">(mio::net::TcpListener::bind(addr));
+        TcpListener::new(l, </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1aa;">Handle::default())
+    }
 </span></pre>
 <p>哈! <code>Handle</code> 实现了 <code>Default</code>! 看 <code>Default</code> 的实现又会发现它用了一个全局变量存了一个 <code>Handle</code> 的指针</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">impl </span><span style="background-color:#282828;color:#fdf4c1aa;">Default </span><span style="background-color:#282828;color:#fa5c4b;">for </span><span style="background-color:#282828;color:#8ec07c;">Handle </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">default</span><span style="background-color:#282828;color:#fdf4c1aa;">() -&gt; Handle {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">let mut</span><span style="background-color:#282828;color:#fdf4c1aa;"> fallback </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">HANDLE_FALLBACK</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">load</span><span style="background-color:#282828;color:#fdf4c1aa;">(SeqCst);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;">// If the fallback hasn&#39;t been previously initialized then let&#39;s spin
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;">// up a helper thread and try to initialize with that. If we can&#39;t
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;">// actually create a helper thread then we&#39;ll just return a &quot;defunkt&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;">// handle which will return errors when I/O objects are attempted to be
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;">// associated.
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">if</span><span style="background-color:#282828;color:#fdf4c1aa;"> fallback </span><span style="background-color:#282828;color:#fe8019;">== </span><span style="background-color:#282828;color:#d3869b;">0 </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> helper </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fa5c4b;">match </span><span style="background-color:#282828;color:#fdf4c1aa;">global::HelperThread::new() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fabd2f;">Ok</span><span style="background-color:#282828;color:#fdf4c1aa;">(helper) </span><span style="background-color:#282828;color:#fe8019;">=&gt;</span><span style="background-color:#282828;color:#fdf4c1aa;"> helper,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fabd2f;">Err</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fe8019;">_</span><span style="background-color:#282828;color:#fdf4c1aa;">) </span><span style="background-color:#282828;color:#fe8019;">=&gt; </span><span style="background-color:#282828;color:#fa5c4b;">return</span><span style="background-color:#282828;color:#fdf4c1aa;"> Handle { inner: Weak::new() },
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">};
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;font-style:italic;color:#928374;">// If we successfully set ourselves as the actual fallback then we
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;font-style:italic;color:#928374;">// want to `forget` the helper thread to ensure that it persists
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;font-style:italic;color:#928374;">// globally. If we fail to set ourselves as the fallback that means
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;font-style:italic;color:#928374;">// that someone was racing with this call to `Handle::default`.
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;font-style:italic;color:#928374;">// They ended up winning so we&#39;ll destroy our helper thread (which
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;font-style:italic;color:#928374;">// shuts down the thread) and reload the fallback.
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fabd2f;">set_fallback</span><span style="background-color:#282828;color:#fdf4c1aa;">(helper.</span><span style="background-color:#282828;color:#fabd2f;">handle</span><span style="background-color:#282828;color:#fdf4c1aa;">().</span><span style="background-color:#282828;color:#fabd2f;">clone</span><span style="background-color:#282828;color:#fdf4c1aa;">()).</span><span style="background-color:#282828;color:#fabd2f;">is_ok</span><span style="background-color:#282828;color:#fdf4c1aa;">() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> ret </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> helper.</span><span style="background-color:#282828;color:#fabd2f;">handle</span><span style="background-color:#282828;color:#fdf4c1aa;">().</span><span style="background-color:#282828;color:#fabd2f;">clone</span><span style="background-color:#282828;color:#fdf4c1aa;">();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">helper.</span><span style="background-color:#282828;color:#fabd2f;">forget</span><span style="background-color:#282828;color:#fdf4c1aa;">();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fa5c4b;">return</span><span style="background-color:#282828;color:#fdf4c1aa;"> ret
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">fallback </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">HANDLE_FALLBACK</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fabd2f;">load</span><span style="background-color:#282828;color:#fdf4c1aa;">(SeqCst);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;">// At this point our fallback handle global was configured so we use
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;">// its value to reify a handle, clone it, and then forget our reified
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;">// handle as we don&#39;t actually have an owning reference to it.
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fabd2f;">assert!</span><span style="background-color:#282828;color:#fdf4c1aa;">(fallback </span><span style="background-color:#282828;color:#fe8019;">!= </span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">unsafe </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> handle </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1aa;">Handle::from_usize(fallback);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> ret </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> handle.</span><span style="background-color:#282828;color:#fabd2f;">clone</span><span style="background-color:#282828;color:#fdf4c1aa;">();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fabd2f;">drop</span><span style="background-color:#282828;color:#fdf4c1aa;">(handle.</span><span style="background-color:#282828;color:#fabd2f;">into_usize</span><span style="background-color:#282828;color:#fdf4c1aa;">());
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">return</span><span style="background-color:#282828;color:#fdf4c1aa;"> ret
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">impl </span><span style="color:#fdf4c1aa;">Default </span><span style="color:#fa5c4b;">for </span><span style="color:#8ec07c;">Handle </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">default</span><span style="color:#fdf4c1aa;">() -&gt; Handle {
+        </span><span style="color:#fa5c4b;">let mut</span><span style="color:#fdf4c1aa;"> fallback </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">HANDLE_FALLBACK</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">load</span><span style="color:#fdf4c1aa;">(SeqCst);
+
+        </span><span style="font-style:italic;color:#928374;">// If the fallback hasn&#39;t been previously initialized then let&#39;s spin
+        // up a helper thread and try to initialize with that. If we can&#39;t
+        // actually create a helper thread then we&#39;ll just return a &quot;defunkt&quot;
+        // handle which will return errors when I/O objects are attempted to be
+        // associated.
+        </span><span style="color:#fa5c4b;">if</span><span style="color:#fdf4c1aa;"> fallback </span><span style="color:#fe8019;">== </span><span style="color:#d3869b;">0 </span><span style="color:#fdf4c1aa;">{
+            </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> helper </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">match </span><span style="color:#fdf4c1aa;">global::HelperThread::new() {
+                </span><span style="color:#fabd2f;">Ok</span><span style="color:#fdf4c1aa;">(helper) </span><span style="color:#fe8019;">=&gt;</span><span style="color:#fdf4c1aa;"> helper,
+                </span><span style="color:#fabd2f;">Err</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">_</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fe8019;">=&gt; </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> Handle { inner: Weak::new() },
+            };
+
+            </span><span style="font-style:italic;color:#928374;">// If we successfully set ourselves as the actual fallback then we
+            // want to `forget` the helper thread to ensure that it persists
+            // globally. If we fail to set ourselves as the fallback that means
+            // that someone was racing with this call to `Handle::default`.
+            // They ended up winning so we&#39;ll destroy our helper thread (which
+            // shuts down the thread) and reload the fallback.
+            </span><span style="color:#fa5c4b;">if </span><span style="color:#fabd2f;">set_fallback</span><span style="color:#fdf4c1aa;">(helper.</span><span style="color:#fabd2f;">handle</span><span style="color:#fdf4c1aa;">().</span><span style="color:#fabd2f;">clone</span><span style="color:#fdf4c1aa;">()).</span><span style="color:#fabd2f;">is_ok</span><span style="color:#fdf4c1aa;">() {
+                </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> ret </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> helper.</span><span style="color:#fabd2f;">handle</span><span style="color:#fdf4c1aa;">().</span><span style="color:#fabd2f;">clone</span><span style="color:#fdf4c1aa;">();
+                helper.</span><span style="color:#fabd2f;">forget</span><span style="color:#fdf4c1aa;">();
+                </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> ret
+            }
+            fallback </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">HANDLE_FALLBACK</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">load</span><span style="color:#fdf4c1aa;">(SeqCst);
+        }
+
+        </span><span style="font-style:italic;color:#928374;">// At this point our fallback handle global was configured so we use
+        // its value to reify a handle, clone it, and then forget our reified
+        // handle as we don&#39;t actually have an owning reference to it.
+        </span><span style="color:#fabd2f;">assert!</span><span style="color:#fdf4c1aa;">(fallback </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">);
+        </span><span style="color:#fa5c4b;">unsafe </span><span style="color:#fdf4c1aa;">{
+            </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> handle </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">Handle::from_usize(fallback);
+            </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> ret </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> handle.</span><span style="color:#fabd2f;">clone</span><span style="color:#fdf4c1aa;">();
+            </span><span style="color:#fabd2f;">drop</span><span style="color:#fdf4c1aa;">(handle.</span><span style="color:#fabd2f;">into_usize</span><span style="color:#fdf4c1aa;">());
+            </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> ret
+        }
+    }
+}
 </span></pre>
 <p><code>global::HelperThread::new</code> 更简单, 直接开了一个线程跑 <code>Reactor</code></p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">impl </span><span style="background-color:#282828;color:#8ec07c;">HelperThread </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">pub fn </span><span style="background-color:#282828;color:#8ec07c;">new</span><span style="background-color:#282828;color:#fdf4c1aa;">() -&gt; io::Result&lt;HelperThread&gt; {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> reactor </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1aa;">Reactor::new()</span><span style="background-color:#282828;color:#fe8019;">?</span><span style="background-color:#282828;color:#fdf4c1aa;">;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> reactor_handle </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> reactor.</span><span style="background-color:#282828;color:#fabd2f;">handle</span><span style="background-color:#282828;color:#fdf4c1aa;">().</span><span style="background-color:#282828;color:#fabd2f;">clone</span><span style="background-color:#282828;color:#fdf4c1aa;">();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> done </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1aa;">Arc::new(AtomicBool::new(</span><span style="background-color:#282828;color:#d3869b;">false</span><span style="background-color:#282828;color:#fdf4c1aa;">));
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> done2 </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> done.</span><span style="background-color:#282828;color:#fabd2f;">clone</span><span style="background-color:#282828;color:#fdf4c1aa;">();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> thread </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1aa;">thread::Builder::new().</span><span style="background-color:#282828;color:#fabd2f;">spawn</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fa5c4b;">move </span><span style="background-color:#282828;color:#fe8019;">|| </span><span style="background-color:#282828;color:#fabd2f;">run</span><span style="background-color:#282828;color:#fdf4c1aa;">(reactor, done))</span><span style="background-color:#282828;color:#fe8019;">?</span><span style="background-color:#282828;color:#fdf4c1aa;">;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fabd2f;">Ok</span><span style="background-color:#282828;color:#fdf4c1aa;">(HelperThread {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">thread: </span><span style="background-color:#282828;color:#fabd2f;">Some</span><span style="background-color:#282828;color:#fdf4c1aa;">(thread),
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">reactor: reactor_handle,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">done: done2,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">})
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">impl </span><span style="color:#8ec07c;">HelperThread </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#fa5c4b;">pub fn </span><span style="color:#8ec07c;">new</span><span style="color:#fdf4c1aa;">() -&gt; io::Result&lt;HelperThread&gt; {
+        </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> reactor </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">Reactor::new()</span><span style="color:#fe8019;">?</span><span style="color:#fdf4c1aa;">;
+        </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> reactor_handle </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> reactor.</span><span style="color:#fabd2f;">handle</span><span style="color:#fdf4c1aa;">().</span><span style="color:#fabd2f;">clone</span><span style="color:#fdf4c1aa;">();
+        </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> done </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">Arc::new(AtomicBool::new(</span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1aa;">));
+        </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> done2 </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> done.</span><span style="color:#fabd2f;">clone</span><span style="color:#fdf4c1aa;">();
+        </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> thread </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">thread::Builder::new().</span><span style="color:#fabd2f;">spawn</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">move </span><span style="color:#fe8019;">|| </span><span style="color:#fabd2f;">run</span><span style="color:#fdf4c1aa;">(reactor, done))</span><span style="color:#fe8019;">?</span><span style="color:#fdf4c1aa;">;
+
+        </span><span style="color:#fabd2f;">Ok</span><span style="color:#fdf4c1aa;">(HelperThread {
+            thread: </span><span style="color:#fabd2f;">Some</span><span style="color:#fdf4c1aa;">(thread),
+            reactor: reactor_handle,
+            done: done2,
+        })
+    }
 </span></pre>
 <p>问题解决, tokio 用了简单暴力的方法——多开一个线程</p>
 <p>不过由于是隐式的, 某些特定环境中可能会被坑</p>

@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -324,7 +341,7 @@
     <p><a href="https://iovxw.net/p/ac56u.html">之前买的 RT-AC56U</a> 一直没放什么东西，空转到现在</p>
 <p>今天终于有了需求，拿它来挂 BT</p>
 <p>这篇文章作为笔记，记一下遇到的坑，以后备用</p>
-<!-- more -->
+<span id="continue-reading"></span>
 <hr />
 <h2 id="an-zhuang">安装</h2>
 <p>Merlin 支持 Entware，按照 <a href="https://github.com/RMerl/asuswrt-merlin/wiki/Entware">Wiki</a> 装好</p>
@@ -335,18 +352,18 @@
 <hr />
 <h2 id="pei-zhi">配置</h2>
 <p>我的 Entware 是装在 U盘 里的，下载文件夹设置在了移动硬盘，为了 U盘 寿命考虑，需要编辑 <em>/opt/etc/rtorrent/rtorrent.conf</em> 将 session 和 watchdir 文件夹也改在移动硬盘，这两个在安装时修改下载文件夹是不会一块跟着变的</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">session = /mnt/sdb5/download/session
-</span><span style="background-color:#282828;color:#fdf4c1aa;">schedule = watch_directory,5,5,load_start=/mnt/sdb5/download/watchdir/*.torrent
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">session = /mnt/sdb5/download/session
+schedule = watch_directory,5,5,load_start=/mnt/sdb5/download/watchdir/*.torrent
 </span></pre>
 <p>session 文件夹是用来放各种临时信息，比如 DHT 的节点之类</p>
 <p>watchdir 里的 torrent 文件会自动添加到新任务，当然本质是一个定时器定时检测指定路径而已</p>
 <p>修改之前记得先 <code>/opt/etc/init.d/S85rtorrent stop</code></p>
 <h3 id="duan-kou">端口</h3>
 <p>在安装完成的时候会提示开启端口，虽然不开也能运行，但是将很难找到 peer</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">iptables -I INPUT -p tcp --destination-port 51411 -j ACCEPT
-</span><span style="background-color:#282828;color:#fdf4c1aa;">iptables -I INPUT -p udp --destination-port 51412 -j ACCEPT
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">iptables -I INPUT -p tcp --destination-port 51411 -j ACCEPT
+iptables -I INPUT -p udp --destination-port 51412 -j ACCEPT
 </span></pre>
 <p>51411 是 <em>port_range</em> 的默认值，这是一个端口范围，全闭区间，用于与其他 peer 的连接</p>
 <p>51412 是 <em>dht_port</em> 的默认值，字面意思</p>
@@ -357,19 +374,19 @@
 <p>默认 <code>dht = auto</code>，是指只有当种子的 tracker 里有设置 dht 的时候才会启用</p>
 <p>不过众所周知的原因在国内 tracker 服务器并不是那么好访问，这里直接设置为 <code>on</code> 强制启用就行</p>
 <p>DHT 在启动的时候需要先连接几个 bootstrap 节点才能初始化，配置里加入如下几行</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">schedule2 = dht_node0,30,0,dht.add_node=dht.transmissionbt.com
-</span><span style="background-color:#282828;color:#fdf4c1aa;">schedule2 = dht_node1,30,0,dht.add_node=router.bittorrent.com
-</span><span style="background-color:#282828;color:#fdf4c1aa;">schedule2 = dht_node2,30,0,dht.add_node=router.utorrent.com
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">schedule2 = dht_node0,30,0,dht.add_node=dht.transmissionbt.com
+schedule2 = dht_node1,30,0,dht.add_node=router.bittorrent.com
+schedule2 = dht_node2,30,0,dht.add_node=router.utorrent.com
 </span></pre>
 <p>用 schedule 是因为需要延时一下，等待 DHT 启动完成，详见 <a href="https://github.com/rakshasa/rtorrent/issues/383">rtorrent#383</a></p>
 <h3 id="kai-ji-qi-dong">开机启动</h3>
 <p>启动的时候第一次肯定会失败，因为分区还没挂载</p>
 <p>在 <em>/jffs/scripts/post-mount</em> 里加入</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fabd2f;">[ </span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">1</span><span style="background-color:#282828;color:#b8bb26;">&quot; </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&quot;/tmp/mnt/sdb5&quot; </span><span style="background-color:#282828;color:#fabd2f;">] </span><span style="background-color:#282828;color:#fe8019;">; </span><span style="background-color:#282828;color:#fa5c4b;">then
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1;">/opt/etc/init.d/S85rtorrent start
-</span><span style="background-color:#282828;color:#fa5c4b;">fi
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">if </span><span style="color:#fabd2f;">[ </span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">1</span><span style="color:#b8bb26;">&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;/tmp/mnt/sdb5&quot; </span><span style="color:#fabd2f;">] </span><span style="color:#fe8019;">; </span><span style="color:#fa5c4b;">then
+  </span><span style="color:#fdf4c1;">/opt/etc/init.d/S85rtorrent start
+</span><span style="color:#fa5c4b;">fi
 </span></pre>
 <p><em>/tmp/mnt/sdb5</em> 替换为你的下载文件夹的挂载点</p>
 <p>就能在分区挂载后再次尝试启动了</p>

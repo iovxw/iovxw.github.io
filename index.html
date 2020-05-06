@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,19 +323,107 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
 
       
         
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;kensington-orbit-trackball&#x2F;">Kensington Orbit 轨迹球</a></h1>
+              <div class="info">
+                <h2>一整年没更新了，写点什么吧</h2>
+                <time>2020-04-12 17:13</time>
+              </div>
+              
+              <p><img src="https://iovxw.net/p/kensington-orbit-trackball/kensington_orbit_and_cat_feet.jpg" alt="" /></p>
+<p>最近右手手腕痛得要死</p>
+<p>因为鼠标</p>
+<p>想着不能再拖了，必须得换个输入方式</p>
+<p>就挑了一堆骨头后，入手了 Kensington Orbit with Scroll Ring</p>
+<p>这里写篇文章记录下，选择的过程，以及应该避开的坑</p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;kensington-orbit-trackball&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-closure-and-copy&#x2F;">Rust 闭包环境捕获行为与 Copy trait</a></h1>
+              <div class="info">
+                <h2>历史遗留问题</h2>
+                <time>2019-04-28 23:01</time>
+              </div>
+              
+              <p>今天 Rust 群里有人遇到了反直觉的关于闭包的引用错误, 在群友合力排除各种干扰找到原因之后</p>
+<p>我们就又有了一个可以塞到 <a href="https://iovxw.net/p/ugly-rust/">100 黑</a> 里的坑 (悲)</p>
+<p>不过因为篇幅太长 (太罗嗦), 这里独立拆分出一篇文章讲解</p>
+<hr />
+<p>闭包在捕获环境时, 如不显式添加 <code>move</code> 关键字, 捕获的方法是由编译器推导的</p>
+<p>规则为: 如果捕获的变量在闭包内被引用, 或者可变引用, 那么就捕获到引用或可变引用</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span style="color:#fdf4c1aa;">::new();
+</span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">|| v.</span><span style="color:#fabd2f;">len</span><span style="color:#fdf4c1aa;">(); </span><span style="font-style:italic;color:#928374;">// v: &amp;String
+</span></pre>
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-closure-and-copy&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;intel-5ghz-ap&#x2F;">Linux 下 Intel® 网卡开启 5Ghz AP</a></h1>
+              <div class="info">
+                <h2>最好还是换网卡</h2>
+                <time>2019-01-05 21:20</time>
+              </div>
+              
+              <p>Intel 家的网卡都禁止使用 5Ghz 开 AP, 只能开 2.4 的</p>
+<p>比如我的 9560, 可以说是旗舰网卡, 能跑 1.7Gbps, 强得一匹</p>
+<p>但却连个 5Ghz AP 都开不了</p>
+<p>周边 2.4Ghz 信道都满了，要它何用啊</p>
+<p>幸</p>
+<p>今日得一魔法, 可破此局</p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;intel-5ghz-ap&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;fcitx5&#x2F;">我也! 用上 fcitx5 了</a></h1>
+              <div class="info">
+                <h2>已然开发两年半了</h2>
+                <time>2018-05-13 15:39</time>
+              </div>
+              
+              <p>新 fcitx 很棒, 棒到甚至可以干掉 ibus 的服务然后直接使用 ibus 的 im module</p>
+<p>虽然目前没有配置界面也没有文档, 不过我们不需要!</p>
+<p>来上个图:</p>
+<p><img src="/p/fcitx5/0.png" alt="screenshot" /></p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;fcitx5&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
         
           
             <article>
@@ -340,16 +445,14 @@
 <li>
 <p><strong>尾递归优化并不总是生效</strong></p>
 <p>当进行尾递归调用的作用域内有 <code>Drop</code> 变量存在时</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">recur</span><span style="background-color:#282828;color:#fdf4c1aa;">() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> x </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">vec!</span><span style="background-color:#282828;color:#fdf4c1aa;">[</span><span style="background-color:#282828;color:#d3869b;">false</span><span style="background-color:#282828;color:#fdf4c1aa;">];
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fabd2f;">recur</span><span style="background-color:#282828;color:#fdf4c1aa;">()
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span></pre></li>
-</ol>
-
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">recur</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> x </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">vec!</span><span style="color:#fdf4c1aa;">[</span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1aa;">];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fabd2f;">recur</span><span style="color:#fdf4c1aa;">()
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
               <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ugly-rust&#x2F;">Read More…</a>
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ugly-rust&#x2F;#continue-reading">Read More…</a>
               </div>
               
             </article>
@@ -366,12 +469,12 @@
               <p>Rust 中有四种隐式类型转换 (别和我提回字怎么写), 其中三种都是为了简化代码, 就算没有隐式, 也可以显式地用其他方法写出来</p>
 <p>唯有 <a href="https://doc.rust-lang.org/core/ops/trait.CoerceUnsized.html"><code>CoerceUnsized</code></a> 比较特殊, 提供了一种抽象, 没有它就无法写出包含 DST(Dynamically-sized Type) 的智能指针</p>
 <p>像这样:</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> x: [</span><span style="background-color:#282828;color:#fa5c4b;">u8</span><span style="background-color:#282828;color:#fdf4c1aa;">; </span><span style="background-color:#282828;color:#d3869b;">3</span><span style="background-color:#282828;color:#fdf4c1aa;">] </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1aa;">[</span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">];
-</span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> y: Box&lt;[</span><span style="background-color:#282828;color:#fa5c4b;">u8</span><span style="background-color:#282828;color:#fdf4c1aa;">]&gt; </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">Box</span><span style="background-color:#282828;color:#fdf4c1aa;">::new(x);
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> x: [</span><span style="color:#fa5c4b;">u8</span><span style="color:#fdf4c1aa;">; </span><span style="color:#d3869b;">3</span><span style="color:#fdf4c1aa;">] </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">[</span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">, </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">, </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">];
+</span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> y: Box&lt;[</span><span style="color:#fa5c4b;">u8</span><span style="color:#fdf4c1aa;">]&gt; </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">Box</span><span style="color:#fdf4c1aa;">::new(x);
 </span></pre>
               <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coerce-unsized&#x2F;">Read More…</a>
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coerce-unsized&#x2F;#continue-reading">Read More…</a>
               </div>
               
             </article>
@@ -385,27 +488,27 @@
                 <time>2018-03-14 00:17</time>
               </div>
               
-              <pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">use </span><span style="background-color:#282828;color:#fdf4c1aa;">std::marker::PhantomData;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">pub struct </span><span style="background-color:#282828;color:#8ec07c;">Magic</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a</span><span style="background-color:#282828;color:#fdf4c1aa;">&gt;(PhantomData&lt;</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a mut </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a </span><span style="background-color:#282828;color:#fdf4c1aa;">()</span><span style="background-color:#282828;color:#fe8019;">&gt;</span><span style="background-color:#282828;color:#fdf4c1aa;">);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">impl</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a</span><span style="background-color:#282828;color:#fdf4c1aa;">&gt; </span><span style="background-color:#282828;color:#8ec07c;">Magic</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a</span><span style="background-color:#282828;color:#fdf4c1aa;">&gt; {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">pub fn </span><span style="background-color:#282828;color:#8ec07c;">as_ref</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a </span><span style="background-color:#282828;color:#fdf4c1;">self</span><span style="background-color:#282828;color:#fdf4c1aa;">) -&gt; </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a Self </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fdf4c1;">self
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">main</span><span style="background-color:#282828;color:#fdf4c1aa;">() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> pin </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> Magic(PhantomData);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">pin.</span><span style="background-color:#282828;color:#fabd2f;">as_ref</span><span style="background-color:#282828;color:#fdf4c1aa;">();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">pin;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+              <pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">use </span><span style="color:#fdf4c1aa;">std::marker::PhantomData;
+
+</span><span style="color:#fa5c4b;">pub struct </span><span style="color:#8ec07c;">Magic</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fa5c4b;">&#39;a</span><span style="color:#fdf4c1aa;">&gt;(PhantomData&lt;</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a mut </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a </span><span style="color:#fdf4c1aa;">()</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1aa;">);
+
+</span><span style="color:#fa5c4b;">impl</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fa5c4b;">&#39;a</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">Magic</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fa5c4b;">&#39;a</span><span style="color:#fdf4c1aa;">&gt; {
+    </span><span style="color:#fa5c4b;">pub fn </span><span style="color:#8ec07c;">as_ref</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a </span><span style="color:#fdf4c1;">self</span><span style="color:#fdf4c1aa;">) -&gt; </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a Self </span><span style="color:#fdf4c1aa;">{
+        </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">self
+    </span><span style="color:#fdf4c1aa;">}
+}
+
+</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">main</span><span style="color:#fdf4c1aa;">() {
+    </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> pin </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> Magic(PhantomData);
+    {
+        pin.</span><span style="color:#fabd2f;">as_ref</span><span style="color:#fdf4c1aa;">();
+    }
+    pin;
+}
 </span></pre>
               <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;phantomdata-magic&#x2F;">Read More…</a>
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;phantomdata-magic&#x2F;#continue-reading">Read More…</a>
               </div>
               
             </article>
@@ -428,7 +531,7 @@
 <p>所以这次就攒到一起重新设计顺便分了个新的 crate</p>
 
               <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;the-new-tokio&#x2F;">Read More…</a>
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;the-new-tokio&#x2F;#continue-reading">Read More…</a>
               </div>
               
             </article>
@@ -450,28 +553,7 @@
 <p>所以便有了本文, 记录追求上帝所有物的流水帐</p>
 
               <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;curve-interpolation&#x2F;">Read More…</a>
-              </div>
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;kailh-box&#x2F;">凯华 Box 轴拆解</a></h1>
-              <div class="info">
-                <h2>还可以</h2>
-                <time>2017-09-21 20:31</time>
-              </div>
-              
-              <p>键盘的 <code>A</code> 键坏了, 可能是我在 Spacemacs 里后插入用的太多的原因, 总之决定自己换轴</p>
-<p>挑轴的时候发现卖家还卖一种叫 Box 轴的轴体, 是凯华今年一月发布, 自主研发, 主打寿命长和防水性的新系列 (这介绍真长</p>
-<p>官网上他们自己说的是挺好</p>
-<p>可是只有白(qīng)轴的图解, 其他轴则是一笔带过</p>
-<p>想着反正不包邮, 不如顺便多买点, 就在买替换用轴的同时各买了一种 Box 轴</p>
-
-              <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;kailh-box&#x2F;">Read More…</a>
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;curve-interpolation&#x2F;#continue-reading">Read More…</a>
               </div>
               
             </article>
@@ -488,226 +570,23 @@
               <p>这篇文章并不在讲什么是生命期, 请先确保有正确的生命期概念</p>
 <p>虽然标题是说高阶生命期约束, 不过 RFC 本身是叫高阶 Trait 约束 (Higher Ranked Trait Bounds), 但由于他们目前只实现了生命期的部分, 所以……</p>
 <p>言归正传, 在 <a href="https://crates.io/crates/serde"><em>serde</em></a> 里, 会发现 <a href="https://docs.serde.rs/serde/de/trait.DeserializeOwned.html"><code>DeserializeOwned</code></a> 的定义是这样的</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">pub trait </span><span style="background-color:#282828;color:#8ec07c;">DeserializeOwned</span><span style="background-color:#282828;color:#fdf4c1aa;">: for&lt;&#39;de&gt; Deserialize&lt;&#39;de&gt; { }
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">pub trait </span><span style="color:#8ec07c;">DeserializeOwned</span><span style="color:#fdf4c1aa;">: for&lt;&#39;de&gt; Deserialize&lt;&#39;de&gt; { }
 </span></pre>
               <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-higher-rank-lifetime-bounds&#x2F;">Read More…</a>
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-higher-rank-lifetime-bounds&#x2F;#continue-reading">Read More…</a>
               </div>
               
             </article>
           
         
-          
-            <article>
-              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coroutine&#x2F;">Rust 的 async&#x2F;await</a></h1>
-              <div class="info">
-                <h2>仍需努力</h2>
-                <time>2017-08-29 00:00</time>
-              </div>
-              
-              <p>今天, Rust 的 Generator 支持<a href="https://github.com/rust-lang/rust/pull/43076#issuecomment-325453224">终于被合并了</a>!</p>
-<p>这代表那拖了很久又很久的 Coroutine 也终于可以在 Nightly(2017-08-29) 里使用了</p>
-<p>可喜可贺, 可喜可贺</p>
-<p>那以后就可以愉快的在 Rust 里写异步代码啦?</p>
-<p>想得美</p>
-<p>坑在哪里我下面慢慢说</p>
-
-              <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coroutine&#x2F;">Read More…</a>
-              </div>
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rtorrent-on-merin&#x2F;">在 Merlin 上配置 rTorrrent 需要注意的</a></h1>
-              <div class="info">
-                <h2>笔记备用</h2>
-                <time>2017-07-09 00:26</time>
-              </div>
-              
-              <p><a href="https://iovxw.net/p/ac56u.html">之前买的 RT-AC56U</a> 一直没放什么东西，空转到现在</p>
-<p>今天终于有了需求，拿它来挂 BT</p>
-<p>这篇文章作为笔记，记一下遇到的坑，以后备用</p>
-
-              <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rtorrent-on-merin&#x2F;">Read More…</a>
-              </div>
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;soul-knight&#x2F;">Soul Knight Android 免 root 存档修改</a></h1>
-              <div class="info">
-                <h2>勿滥用</h2>
-                <time>2017-06-29 00:00</time>
-              </div>
-              
-              <p>挺好玩的 Roguelike 游戏（最近还加了联机模式，然而联机起来各种崩，戒指怕是有生之年了）</p>
-<p>可惜没有云存档，在经历了某次事件后，我的存档和我说了再见</p>
-<p>重新打？我没那毅力。不过既然是本地的，改起来也容易</p>
-<p>流程如下：</p>
-
-              <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;soul-knight&#x2F;">Read More…</a>
-              </div>
-              
-            </article>
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
         
+        <nav>
           
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
           
-        
-          
-        
-          
-        
+          <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;n&#x2F;2&#x2F;">NEXT</a>
           
+        </nav>
         
       
 

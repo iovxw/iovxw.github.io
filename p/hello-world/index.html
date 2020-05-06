@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -331,24 +348,24 @@
 or through <a href="https://google.com/">google</a>.</p>
 <p>There are some <em>easy</em> examples for styling, though. I can't <strong>emphasize</strong> that enough.
 Creating <a href="https://google.com/">links</a> or <code>inline code</code> blocks are very straightforward.</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">There are some *easy* examples for styling, though. I can&#39;t **emphasize** that enough.
-</span><span style="background-color:#282828;color:#fdf4c1aa;">Creating [links](https://google.com/) or `inline code` blocks are very straightforward.
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">There are some *easy* examples for styling, though. I can&#39;t **emphasize** that enough.
+Creating [links](https://google.com/) or `inline code` blocks are very straightforward.
 </span></pre><h2 id="front-matter-for-fun">Front Matter For Fun</h2>
 <p>This is the meta data for this post. It is located at the top of the <code>content/post/hello-hugo.md</code> markdown file.</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">---
-</span><span style="background-color:#282828;color:#fdf4c1aa;">title: &quot;Hello Hugo!&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">description: &quot;Saying &#39;Hello&#39; from Hugo&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">date: &quot;2014-04-09&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">categories:
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">- &quot;example&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">- &quot;hello&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">tags:
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">- &quot;example&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">- &quot;hugo&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">- &quot;blog&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">---
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">---
+title: &quot;Hello Hugo!&quot;
+description: &quot;Saying &#39;Hello&#39; from Hugo&quot;
+date: &quot;2014-04-09&quot;
+categories:
+  - &quot;example&quot;
+  - &quot;hello&quot;
+tags:
+  - &quot;example&quot;
+  - &quot;hugo&quot;
+  - &quot;blog&quot;
+---
 </span></pre>
 <p>This section, called 'Front Matter', is what tells Hugo about the content in this file. The title of the item,the
 description, the date it was posted. In our example we're adding two custom bits of data, too. The <code>categories</code> and

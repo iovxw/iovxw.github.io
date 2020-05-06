@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -323,21 +340,21 @@
     <div class="info"><h2>语法强迫症</h2><time>2014-11-21 00:00</time></div>
     <p>在群里讨论到了这个问题</p>
 <p>然后下面这是官方给出的例子</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">var t interface{}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">t = functionOfSomeType()
-</span><span style="background-color:#282828;color:#fdf4c1aa;">switch t := t.(type) {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">default:
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">fmt.Printf(&quot;unexpected type %T&quot;, t)       // %T prints whatever type t has
-</span><span style="background-color:#282828;color:#fdf4c1aa;">case bool:
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">fmt.Printf(&quot;boolean %t\n&quot;, t)             // t has type bool
-</span><span style="background-color:#282828;color:#fdf4c1aa;">case int:
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">fmt.Printf(&quot;integer %d\n&quot;, t)             // t has type int
-</span><span style="background-color:#282828;color:#fdf4c1aa;">case *bool:
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">fmt.Printf(&quot;pointer to boolean %t\n&quot;, *t) // t has type *bool
-</span><span style="background-color:#282828;color:#fdf4c1aa;">case *int:
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">fmt.Printf(&quot;pointer to integer %d\n&quot;, *t) // t has type *int
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">var t interface{}
+t = functionOfSomeType()
+switch t := t.(type) {
+default:
+    fmt.Printf(&quot;unexpected type %T&quot;, t)       // %T prints whatever type t has
+case bool:
+    fmt.Printf(&quot;boolean %t\n&quot;, t)             // t has type bool
+case int:
+    fmt.Printf(&quot;integer %d\n&quot;, t)             // t has type int
+case *bool:
+    fmt.Printf(&quot;pointer to boolean %t\n&quot;, *t) // t has type *bool
+case *int:
+    fmt.Printf(&quot;pointer to integer %d\n&quot;, *t) // t has type *int
+}
 </span></pre>
 <p>里面有几点要注意一下</p>
 <p>在<code>switch t := t.(type)</code>时</p>
@@ -346,25 +363,25 @@
 <p>里面所使用的<code>t</code>都是<code>switch</code>里新建的那个<code>t</code></p>
 <hr />
 <p>等于下面这个例子</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">var t interface{}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">t = functionOfSomeType()
-</span><span style="background-color:#282828;color:#fdf4c1aa;">switch t.(type) {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">default:
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">fmt.Printf(&quot;unexpected type %T&quot;, t)       // %T prints whatever type t has
-</span><span style="background-color:#282828;color:#fdf4c1aa;">case bool:
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">t := t.(bool)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">fmt.Printf(&quot;boolean %t\n&quot;, t)             // t has type bool
-</span><span style="background-color:#282828;color:#fdf4c1aa;">case int:
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">t := t.(int)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">fmt.Printf(&quot;integer %d\n&quot;, t)             // t has type int
-</span><span style="background-color:#282828;color:#fdf4c1aa;">case *bool:
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">t := t.(*bool)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">fmt.Printf(&quot;pointer to boolean %t\n&quot;, *t) // t has type *bool
-</span><span style="background-color:#282828;color:#fdf4c1aa;">case *int:
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">t := t.(*int)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">fmt.Printf(&quot;pointer to integer %d\n&quot;, *t) // t has type *int
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">var t interface{}
+t = functionOfSomeType()
+switch t.(type) {
+default:
+    fmt.Printf(&quot;unexpected type %T&quot;, t)       // %T prints whatever type t has
+case bool:
+    t := t.(bool)
+    fmt.Printf(&quot;boolean %t\n&quot;, t)             // t has type bool
+case int:
+    t := t.(int)
+    fmt.Printf(&quot;integer %d\n&quot;, t)             // t has type int
+case *bool:
+    t := t.(*bool)
+    fmt.Printf(&quot;pointer to boolean %t\n&quot;, *t) // t has type *bool
+case *int:
+    t := t.(*int)
+    fmt.Printf(&quot;pointer to integer %d\n&quot;, *t) // t has type *int
+}
 </span></pre>
 </article>
 <div id="disqus_thread"></div>

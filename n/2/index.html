@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coroutine&#x2F;">Rust 的 async&#x2F;await</a></h1>
+              <div class="info">
+                <h2>仍需努力</h2>
+                <time>2017-08-29 00:00</time>
+              </div>
+              
+              <p>今天, Rust 的 Generator 支持<a href="https://github.com/rust-lang/rust/pull/43076#issuecomment-325453224">终于被合并了</a>!</p>
+<p>这代表那拖了很久又很久的 Coroutine 也终于可以在 Nightly(2017-08-29) 里使用了</p>
+<p>可喜可贺, 可喜可贺</p>
+<p>那以后就可以愉快的在 Rust 里写异步代码啦?</p>
+<p>想得美</p>
+<p>坑在哪里我下面慢慢说</p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coroutine&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rtorrent-on-merin&#x2F;">在 Merlin 上配置 rTorrrent 需要注意的</a></h1>
+              <div class="info">
+                <h2>笔记备用</h2>
+                <time>2017-07-09 00:26</time>
+              </div>
+              
+              <p><a href="https://iovxw.net/p/ac56u.html">之前买的 RT-AC56U</a> 一直没放什么东西，空转到现在</p>
+<p>今天终于有了需求，拿它来挂 BT</p>
+<p>这篇文章作为笔记，记一下遇到的坑，以后备用</p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rtorrent-on-merin&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;soul-knight&#x2F;">Soul Knight Android 免 root 存档修改</a></h1>
+              <div class="info">
+                <h2>勿滥用</h2>
+                <time>2017-06-29 00:00</time>
+              </div>
+              
+              <p>挺好玩的 Roguelike 游戏（最近还加了联机模式，然而联机起来各种崩，戒指怕是有生之年了）</p>
+<p>可惜没有云存档，在经历了某次事件后，我的存档和我说了再见</p>
+<p>重新打？我没那毅力。不过既然是本地的，改起来也容易</p>
+<p>流程如下：</p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;soul-knight&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;cobalt&#x2F;">博客静态生成器切换到 Cobalt</a></h1>
+              <div class="info">
+                <h2>外观没变</h2>
+                <time>2017-04-20 22:15</time>
+              </div>
+              
+              <p>抽空把博客生成器换到了 <a href="https://github.com/cobalt-org/cobalt.rs">Cobalt</a></p>
+<p>纯 Rust 编写，还支持用 <a href="https://github.com/trishume/syntect/">syntect</a> 对代码块高亮（虽然仅限 Linux 平台）</p>
+<p>之前用 <a href="https://gohugo.io/">hugo</a> 的时候说要修改啊贡献啊什么的结果也没做</p>
+<p>这次一上来就发了个 <a href="https://github.com/cobalt-org/cobalt.rs/pull/212">PR</a> 把 <a href="https://github.com/google/pulldown-cmark">pulldown</a> 升级了还修了下 test</p>
+<p>旧的 pulldown 各种毛病，<code>&lt;script&gt;</code> 标签之内都不能有空行，否则就解析成 Markdown</p>
+<p>维护者曾经<a href="https://github.com/cobalt-org/cobalt.rs/pull/204">尝试升级</a>不过高亮测试失败了，而他用 Windows 无法测试高亮，就卡在旧版本了</p>
+<p>然后因为我在用 Linux ，顺便跑了一遍 test</p>
+<p>结果发现原来的 test 本身就是错的，所以直接把正确结果拿出来覆盖上去 pass 了</p>
+<p>嗯……有些时候问题真是简单呢</p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;cobalt&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ac56u&#x2F;">RT-AC56U</a></h1>
+              <div class="info">
+                <h2>流水帐</h2>
+                <time>2017-04-17 00:00</time>
+              </div>
+              
+              <img id="demo" src="https://www.asus.com/websites/global/products/ejvcVtFQNPxjVH5w/3D/0_32_2.jpg">
+<input id="slide" type="range" min="16" max="64" value="32"></input>
+<script>
+    let demo = document.querySelector("#demo");
+    let slide = document.querySelector("#slide");
+    slide.oninput = ()=> {
+        demo.src = "https://www.asus.com/websites/global/products/ejvcVtFQNPxjVH5w/3D/0_" + slide.value + ".jpg"
+    };
+</script>
+<p>上边这是华硕官网的介绍图，本以为他们还搞了个 3D 什么的，结果就是一堆图拼起来的，所以这里干脆用滑块代替了</p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ac56u&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-sanitizers&#x2F;">Rust 使用 Sanitizers 进行运行时安全检查</a></h1>
+              <div class="info">
+                <h2>还是实验性功能</h2>
+                <time>2017-02-15 00:00</time>
+              </div>
+              
+              <p>6 天前, Rust 引入了由 LLVM 提供的实验性的 <a href="https://github.com/rust-lang/rust/pull/38699">Sanitizer 支持</a> (仅限 <code>x86_64-unknown-linux-gnu</code> 平台)</p>
+<p>而今天 Rust Nightly 默认启用了 Sanitizer, 就是说所有用 Nightly 的小伙伴都可以直接更新体验 Sanitizer 啦 (废话</p>
+<p>目前有如下几个 Sanitizer：</p>
+<ul>
+<li><em>LeakSanitizer</em> 内存泄漏检查 (例如 <code>Rc</code> 环和 <code>std::mem::forget</code>)</li>
+<li><em>ThreadSanitizer</em> 数据竟态检查 (就是 go 的那个 <code>-race</code> 命令)</li>
+<li><em>AddressSanitizer</em> 内存寻址检查 (比如数组访问越界)</li>
+<li><em>MemorySanitizer</em> 未初始化内存的使用检查</li>
+</ul>
+<p>当然这主要还是为 <code>unsafe</code> 准备的，毕竟其他大部分情况都能在编译时检测出来</p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-sanitizers&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;waaaave&#x2F;">多种方式实现波浪动画</a></h1>
+              <div class="info">
+                <h2>基础动画实现</h2>
+                <time>2017-02-12 08:00</time>
+              </div>
+              
+              <p>当我知道有些动画效果是纯靠图片拼起来的时候我是绝望的，虽然的确很省计算资源，但是你们让高分屏往哪哭？</p>
+<p>大部分动画效果，直接用相应图形库自带的函数就能解决</p>
+<p>有些稍微麻烦一点的，就得手写了（当然还是不推荐，毕竟人家的函数一般都带各种加速）</p>
+<p>这时候就体现出了一个 客户端/网页端 的前端稍微懂点数学是多么的重要</p>
+<p>不过太高级的数学我也不会，只能讲点简单的，就是实现一个波浪动画</p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;waaaave&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;srp&#x2F;">别在服务端储存用户密码了，来用 SRP 吧</a></h1>
+              <div class="info">
+                <h2>只是介绍</h2>
+                <time>2017-01-03 00:00</time>
+              </div>
+              
+              <p>新年第一篇文章就是从去年的草稿箱里发出来的，感觉真不怎么新……</p>
+<p>当然这个协议也不新了，是 2000 年出的 RFC</p>
+<p>不过现在都 2017 年了，还是有一大堆网站在用什么 md5 加盐（不，就算你用 SHA2XX 也不行），甚至连 bcrypt 和 Argon2 是啥都不知道，感觉真是悲伤（</p>
+<p>所以，来看看 SRP 是个啥（如果你真的不知道 Argon2，还是先去看它吧）：</p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;srp&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust&#x2F;">学完了 Rust</a></h1>
+              <div class="info">
+                <h2>算入门</h2>
+                <time>2016-10-15 00:00</time>
+              </div>
+              
+              <p>实在受够了 <em>Clojure</em> 的内存占用, <em>Go</em> 又太丑, 决定该再找个语言用了</p>
+<p>在用了一圈小众语言之后, 又被残酷的现实打击了, 没社区就得什么都自己来</p>
+<p>自己造语言这个想法也很快放弃了, 至少现在还不行</p>
+<p>而折中方案, 就是 <em>Rust</em></p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;bismuth&#x2F;">bismuth —— 几何壁纸生成器</a></h1>
+              <div class="info">
+                <h2>填坑好累</h2>
+                <time>2016-10-07 00:00</time>
+              </div>
+              
+              <p><img src="https://raw.githubusercontent.com/iovxw/bismuth/1a7b7e4587b549ee489168bb3c264faabfb89499/screenshot0.png" alt="screenshot" /></p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;bismuth&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+        
+        <nav>
+          
+          <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;">PREV</a>
+          
+          
+          <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;n&#x2F;3&#x2F;">NEXT</a>
+          
+        </nav>
+        
+      
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

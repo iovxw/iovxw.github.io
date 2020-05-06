@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -321,82 +338,82 @@
 <article>
     <h1>Neovim的Golang开发环境配置</h1>
     <div class="info"><h2>强迫症强迫症强迫症强迫……</h2><time>2014-07-14 00:00</time></div>
-    <pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">&quot;No warp───┐
-</span><span style="background-color:#282828;color:#fdf4c1aa;">set nowrap&quot;│
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;──────────┘
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;Line number─┐
-</span><span style="background-color:#282828;color:#fdf4c1aa;">set number  &quot;│
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;────────────┘
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;Plugin Manager────────────────────┐
-</span><span style="background-color:#282828;color:#fdf4c1aa;">set rtp+=~/.nvim/bundle/Vundle.vim&quot;│
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;──────────────────────────────────┘
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;Plugin load begin───────────────────┐
-</span><span style="background-color:#282828;color:#fdf4c1aa;">set nocompatible                    &quot;│
-</span><span style="background-color:#282828;color:#fdf4c1aa;">filetype off                        &quot;│
-</span><span style="background-color:#282828;color:#fdf4c1aa;">call vundle#begin()                 &quot;│
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                                    </span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;│
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;Airline───────────────────┐         │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">Plugin &#39;bling/vim-airline&#39;&quot;│         │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">set laststatus=2          &quot;│         │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;──────────────────────────┘         │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;TagBar─────────────────────────────┐│
-</span><span style="background-color:#282828;color:#fdf4c1aa;">Plugin &#39;majutsushi/tagbar&#39;         &quot;││
-</span><span style="background-color:#282828;color:#fdf4c1aa;">nmap &lt;F8&gt; :TagbarToggle&lt;CR&gt;        &quot;││
-</span><span style="background-color:#282828;color:#fdf4c1aa;">let g:tagbar_type_go = {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;ctagstype&#39; : &#39;go&#39;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;kinds&#39;     : [
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;p:package&#39;,             
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;i:imports:1&#39;,           
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;c:constants&#39;,           
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;v:variables&#39;,           
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;t:types&#39;,               
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;n:interfaces&#39;,         
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;w:fields&#39;,             
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;e:embedded&#39;,           
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;m:methods&#39;,             
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;r:constructor&#39;,         
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;f:functions&#39;           
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">\ ],
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;sro&#39; : &#39;.&#39;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;kind2scope&#39; : {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;t&#39; : &#39;ctype&#39;,           
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;n&#39; : &#39;ntype&#39;           
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">\ },
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;scope2kind&#39; : {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;ctype&#39; : &#39;t&#39;,           
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;ntype&#39; : &#39;n&#39;           
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">\ },
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;ctagsbin&#39;  : &#39;gotags&#39;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">\ &#39;ctagsargs&#39; : &#39;-sort -silent&#39;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">\ }                                &quot;││
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;───────────────────────────────────┘│
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;NerdTree────────────────────┐       │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">Plugin &#39;scrooloose/nerdtree&#39;&quot;│       │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">map &lt;C-n&gt; :NERDTree&lt;CR&gt;     &quot;│       │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;────────────────────────────┘       │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;Golang Plugin────────────────┐      │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">Plugin &#39;dgryski/vim-godef&#39;   &quot;│      │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">Plugin &#39;cespare/vim-golang&#39;  &quot;│      │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">Plugin &#39;Blackrush/vim-gocode&#39;&quot;│      │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;─────────────────────────────┘      │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;Autocompletion─────────────────┐    │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">Plugin &#39;Valloric/YouCompleteMe&#39;&quot;│    │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;───────────────────────────────┘    │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;Plugin load end──────────┐          │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">call vundle#end()        &quot;│          │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">filetype plugin indent on&quot;│          │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;─────────────────────────┘          │
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;────────────────────────────────────┘
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;Highlight─┐
-</span><span style="background-color:#282828;color:#fdf4c1aa;">syntax on &quot;│
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;──────────┘
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;Golang compiler plugin─────────┐
-</span><span style="background-color:#282828;color:#fdf4c1aa;">autocmd FileType go compiler go&quot;│
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;───────────────────────────────┘
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;Automatic format────────────────────────────────────┐
-</span><span style="background-color:#282828;color:#fdf4c1aa;">autocmd FileType go autocmd BufWritePre &lt;buffer&gt; Fmt&quot;│
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;────────────────────────────────────────────────────┘
+    <pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&quot;No warp───┐
+set nowrap&quot;│
+&quot;──────────┘
+&quot;Line number─┐
+set number  &quot;│
+&quot;────────────┘
+&quot;Plugin Manager────────────────────┐
+set rtp+=~/.nvim/bundle/Vundle.vim&quot;│
+&quot;──────────────────────────────────┘
+&quot;Plugin load begin───────────────────┐
+set nocompatible                    &quot;│
+filetype off                        &quot;│
+call vundle#begin()                 &quot;│
+                                    &quot;│
+&quot;Airline───────────────────┐         │
+Plugin &#39;bling/vim-airline&#39;&quot;│         │
+set laststatus=2          &quot;│         │
+&quot;──────────────────────────┘         │
+&quot;TagBar─────────────────────────────┐│
+Plugin &#39;majutsushi/tagbar&#39;         &quot;││
+nmap &lt;F8&gt; :TagbarToggle&lt;CR&gt;        &quot;││
+let g:tagbar_type_go = {
+    \ &#39;ctagstype&#39; : &#39;go&#39;,
+    \ &#39;kinds&#39;     : [
+        \ &#39;p:package&#39;,             
+        \ &#39;i:imports:1&#39;,           
+        \ &#39;c:constants&#39;,           
+        \ &#39;v:variables&#39;,           
+        \ &#39;t:types&#39;,               
+        \ &#39;n:interfaces&#39;,         
+        \ &#39;w:fields&#39;,             
+        \ &#39;e:embedded&#39;,           
+        \ &#39;m:methods&#39;,             
+        \ &#39;r:constructor&#39;,         
+        \ &#39;f:functions&#39;           
+    \ ],
+    \ &#39;sro&#39; : &#39;.&#39;,
+    \ &#39;kind2scope&#39; : {
+        \ &#39;t&#39; : &#39;ctype&#39;,           
+        \ &#39;n&#39; : &#39;ntype&#39;           
+    \ },
+    \ &#39;scope2kind&#39; : {
+        \ &#39;ctype&#39; : &#39;t&#39;,           
+        \ &#39;ntype&#39; : &#39;n&#39;           
+    \ },
+    \ &#39;ctagsbin&#39;  : &#39;gotags&#39;,
+    \ &#39;ctagsargs&#39; : &#39;-sort -silent&#39;
+\ }                                &quot;││
+&quot;───────────────────────────────────┘│
+&quot;NerdTree────────────────────┐       │
+Plugin &#39;scrooloose/nerdtree&#39;&quot;│       │
+map &lt;C-n&gt; :NERDTree&lt;CR&gt;     &quot;│       │
+&quot;────────────────────────────┘       │
+&quot;Golang Plugin────────────────┐      │
+Plugin &#39;dgryski/vim-godef&#39;   &quot;│      │
+Plugin &#39;cespare/vim-golang&#39;  &quot;│      │
+Plugin &#39;Blackrush/vim-gocode&#39;&quot;│      │
+&quot;─────────────────────────────┘      │
+&quot;Autocompletion─────────────────┐    │
+Plugin &#39;Valloric/YouCompleteMe&#39;&quot;│    │
+&quot;───────────────────────────────┘    │
+&quot;Plugin load end──────────┐          │
+call vundle#end()        &quot;│          │
+filetype plugin indent on&quot;│          │
+&quot;─────────────────────────┘          │
+&quot;────────────────────────────────────┘
+&quot;Highlight─┐
+syntax on &quot;│
+&quot;──────────┘
+&quot;Golang compiler plugin─────────┐
+autocmd FileType go compiler go&quot;│
+&quot;───────────────────────────────┘
+&quot;Automatic format────────────────────────────────────┐
+autocmd FileType go autocmd BufWritePre &lt;buffer&gt; Fmt&quot;│
+&quot;────────────────────────────────────────────────────┘
 </span></pre>
 <p>好吧其实原版VIM也通用</p>
 <p>只是需要把上面的<code>.nvim</code>文件夹改成<code>.vim</code>就行</p>
@@ -404,7 +421,7 @@
 <p>别问我为什么写成这样……我有强迫症</p>
 <p>不过因为<code>\</code>接上一行的问题，所以有些地方没法注释（逼死强迫症啊）</p>
 <p>然后这个是适用于初学者的，因为我才开始用vim不到一周。有什么问题欢迎指出哈</p>
-<p><img src="0.png" alt="" /></p>
+<p><img src="https://iovxw.net/p/golang-neovim/0.png" alt="" /></p>
 <p>使用方法：</p>
 <ol>
 <li>

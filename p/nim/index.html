@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -346,65 +363,65 @@
 <p>浪费掉十几分钟后发现是编译器没有读取cfg？直接把源码扔到compiler文件夹里编译，成功。</p>
 <p>我激动的打开Aporia开始尝试语义转跳，刚按下快捷键</p>
 <p>……</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">Error: unhandled exception: 拒绝连接 [OSError]
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">Error: unhandled exception: 拒绝连接 [OSError]
 </span></pre>
 <p>窗口吡的一下就关掉了！</p>
 <p>关！掉！了！</p>
 <p>我还没有放弃，手动开启nimsuggest服务</p>
 <p>再试</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">Traceback (most recent call last)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(197)      nimsuggest
-</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(187)      handleCmdLine
-</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(149)      mainCommand
-</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(132)      serve
-</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(106)      action
-</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(203)         compileProject
-</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(151)         compileModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(197)          processModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(137)          processTopLevelStmt
-</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(450)             myProcess
-</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(419)             semStmtAndGenerateGenerics
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1340)       semStmt
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(893)        semExprNoType
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(2196)       semExpr
-</span><span style="background-color:#282828;color:#fdf4c1aa;">importer.nim(171)        evalImport
-</span><span style="background-color:#282828;color:#fdf4c1aa;">importer.nim(161)        myImportModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(164)         importModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(151)         compileModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(197)          processModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(137)          processTopLevelStmt
-</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(450)             myProcess
-</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(419)             semStmtAndGenerateGenerics
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1340)       semStmt
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(893)        semExprNoType
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(2196)       semExpr
-</span><span style="background-color:#282828;color:#fdf4c1aa;">importer.nim(171)        evalImport
-</span><span style="background-color:#282828;color:#fdf4c1aa;">importer.nim(161)        myImportModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(164)         importModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(151)         compileModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(197)          processModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(137)          processTopLevelStmt
-</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(450)             myProcess
-</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(419)             semStmtAndGenerateGenerics
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1340)       semStmt
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(893)        semExprNoType
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(2189)       semExpr
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1134)       semProc
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1074)       semProcAux
-</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(788)          transformBody
-</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(773)          processTransf
-</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(761)          transform
-</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(104)          transformSons
-</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(706)          transform
-</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(472)          transformFor
-</span><span style="background-color:#282828;color:#fdf4c1aa;">lambdalifting.nim(1022)  liftForLoop
-</span><span style="background-color:#282828;color:#fdf4c1aa;">ast.nim(941)             []
-</span><span style="background-color:#282828;color:#fdf4c1aa;">SIGSEGV: Illegal storage access. (Attempt to read from nil?)
-</span></pre><pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">*** Error in `aporia&#39;: free(): invalid pointer: 0x00007f1f16667700 ***
-</span><span style="background-color:#282828;color:#fdf4c1aa;">SIGABRT: Abnormal termination.
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">Traceback (most recent call last)
+nimsuggest.nim(197)      nimsuggest
+nimsuggest.nim(187)      handleCmdLine
+nimsuggest.nim(149)      mainCommand
+nimsuggest.nim(132)      serve
+nimsuggest.nim(106)      action
+modules.nim(203)         compileProject
+modules.nim(151)         compileModule
+passes.nim(197)          processModule
+passes.nim(137)          processTopLevelStmt
+sem.nim(450)             myProcess
+sem.nim(419)             semStmtAndGenerateGenerics
+semstmts.nim(1340)       semStmt
+semexprs.nim(893)        semExprNoType
+semexprs.nim(2196)       semExpr
+importer.nim(171)        evalImport
+importer.nim(161)        myImportModule
+modules.nim(164)         importModule
+modules.nim(151)         compileModule
+passes.nim(197)          processModule
+passes.nim(137)          processTopLevelStmt
+sem.nim(450)             myProcess
+sem.nim(419)             semStmtAndGenerateGenerics
+semstmts.nim(1340)       semStmt
+semexprs.nim(893)        semExprNoType
+semexprs.nim(2196)       semExpr
+importer.nim(171)        evalImport
+importer.nim(161)        myImportModule
+modules.nim(164)         importModule
+modules.nim(151)         compileModule
+passes.nim(197)          processModule
+passes.nim(137)          processTopLevelStmt
+sem.nim(450)             myProcess
+sem.nim(419)             semStmtAndGenerateGenerics
+semstmts.nim(1340)       semStmt
+semexprs.nim(893)        semExprNoType
+semexprs.nim(2189)       semExpr
+semstmts.nim(1134)       semProc
+semstmts.nim(1074)       semProcAux
+transf.nim(788)          transformBody
+transf.nim(773)          processTransf
+transf.nim(761)          transform
+transf.nim(104)          transformSons
+transf.nim(706)          transform
+transf.nim(472)          transformFor
+lambdalifting.nim(1022)  liftForLoop
+ast.nim(941)             []
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+</span></pre><pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">*** Error in `aporia&#39;: free(): invalid pointer: 0x00007f1f16667700 ***
+SIGABRT: Abnormal termination.
 </span></pre>
 <p>我仿佛已经知道十万只草泥马在心中奔腾而过的感觉了</p>
 <p><em>可能永远也不会续的未完待续</em></p>

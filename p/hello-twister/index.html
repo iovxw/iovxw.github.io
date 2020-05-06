@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -329,10 +346,10 @@
 <p>然后配置一下</p>
 <p><code>~/.twister/twister.conf</code></p>
 <p>里面填入</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">rpcuser=user
-</span><span style="background-color:#282828;color:#fdf4c1aa;">rpcpassword=pwd
-</span><span style="background-color:#282828;color:#fdf4c1aa;">rpcallowip=127.0.0.1
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">rpcuser=user
+rpcpassword=pwd
+rpcallowip=127.0.0.1
 </span></pre>
 <p>上面的用户名和密码改成你自定义的就行了</p>
 <p>这个用户名和密码只不过是用来识别本地管理员身份的，不是twister帐号</p>

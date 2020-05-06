@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -321,7 +338,8 @@
 <article>
     <h1>测试TEST</h1>
     <div class="info"><h2>用来测试主题控件</h2><time>2014-05-25 00:00</time></div>
-    <pre><code>  &lt;div class=&quot;page-header&quot; id=&quot;banner&quot;&gt;
+    <pre style="background-color:#282828;">
+  &lt;div class=&quot;page-header&quot; id=&quot;banner&quot;&gt;
     &lt;div class=&quot;row&quot;&gt;
       &lt;div class=&quot;col-lg-6&quot;&gt;
         &lt;h1&gt;Yeti&lt;/h1&gt;
@@ -1392,8 +1410,7 @@
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-</code></pre>
-
+</pre>
 </article>
 <div id="disqus_thread"></div>
 <script>

@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;arch-start&#x2F;">[备用]Arch安装后的配置</a></h1>
+              <div class="info">
+                <h2>个人备用笔记</h2>
+                <time>2014-07-31 00:00</time>
+              </div>
+              
+                <p>个人备用笔记，以防下次玩脱了结果忘了怎么配置</p>
+<p>当然要先安装图形界面了，这里我使用的是KDE</p>
+<p><code>pacman -S xorg kde</code></p>
+<p>设置KDM自动启动</p>
+<p><code>systemctl enable kdm</code></p>
+<p>开启KDM</p>
+<p><code>systemctl start kdm</code></p>
+<p>安装KDE中文语言包</p>
+<p><code>pacman -S kde-l10n-zh_cn</code></p>
+<p>安装<strong>文泉驿微米黑</strong>中文字体</p>
+<p><code>pacman -S wqy-microhei wqy-microhei-lite</code></p>
+<p>安装Yaourt</p>
+<p>在<code>/etc/pacman.conf</code>里添加</p>
+<blockquote>
+<p>[archlinuxcn]<br />
+#The Chinese Arch Linux communities packages.<br />
+SigLevel = Optional TrustAll<br />
+Server   = http://repo.archlinuxcn.org/$arch</p>
+</blockquote>
+<p>然后<code>pacman -Syu yaourt</code></p>
+<p>安装字体渲染工具</p>
+<p><code>yaourt -S freetype2-infinality lib32-freetype2-infinality fontconfig-infinality</code></p>
+<p>设置字体渲染</p>
+<p><code>infctl setstyle</code>选择linux</p>
+<p>安装网络管理器</p>
+<p><code>yaourt -S networkmanager kdeplasma-applets-networkmanagement</code></p>
+<p>安装KDE的GTK主题管理工具</p>
+<p><code>yaourt -S kde-gtk-config</code></p>
+<p>安装fcitx和中州韵输入法</p>
+<p><code>yaourt -S fcitx fcitx-qt4 fcitx-rime</code></p>
+<p>使fcitx成为默认输入法</p>
+<p><code>nano ~/.xprofile</code></p>
+<p>添加</p>
+<blockquote>
+<p>export LANG=zh_CN.UTF8<br />
+export XMODIFIERS=@im=fcitx<br />
+export GTK_IM_MODULE=fcitx<br />
+export QT_IM_MODULE=fcitx</p>
+</blockquote>
+<p>安装Java JDK</p>
+<p><code>yaourt -S jdk</code></p>
+<p>安装WineQQ</p>
+<p><code>yaourt -S wineqq</code></p>
+<p>还有一大堆解码器和压缩格式支持就懒得写了</p>
+<p>去翻Arch Wiki把</p>
+<p>扔一张配置好的图，左边那个时钟的栏是可以自动隐藏的面板</p>
+<p><img src="https://iovxw.net/p/arch-start/0.png" alt="图片" /></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;use-arch&#x2F;">装上了Arch</a></h1>
+              <div class="info">
+                <h2>生命不息，折腾不止</h2>
+                <time>2014-07-30 00:00</time>
+              </div>
+              
+                <p>安装的原因是前几天捣鼓KDE5，虽然安装成功了</p>
+<p>结果系统却是32位的，强迫症各种伤不起</p>
+<p>于是乎还是果断重装了</p>
+<p>ubuntu每日构建版下载2遍MD5依旧不正确，发现是迅雷离线下载的问题</p>
+<p>于是用百度离线重下了</p>
+<p>U盘刻录成功</p>
+<p>结果安装程序缺失部件</p>
+<p>验证了好几遍然后确定是ISO本身问题</p>
+<p>然后已经到了夜里2点</p>
+<p>遂不折腾了</p>
+<p>早上起床想到可以试一下Arch，于是下载刻盘安装</p>
+<p>安装基本顺利</p>
+<p>除了刚开始忘了分EFI分区导致只能用BIOS启动</p>
+<p>还有手滑习惯性的把<code>/dev/sdb1</code>输入成了<code>/dev/sda1</code>导致1T的数据盘被格以外</p>
+<p>其他基本没啥问题（感谢我那良好的备份习惯啊……）</p>
+<p>还有发现<em>中州韵输入法</em>和<em>Smartgithg</em>挺不错的</p>
+<p><a href="http://img1.tuchuang.org/uploads/2014/07/download_id_8308_mode_view.png"><img src="http://img1.tuchuang.org/thumbs/2014/07/download_id_8308_mode_view.png" alt="图片" /></a>
+<a href="http://img5.tuchuang.org/uploads/2014/07/download_id_8309_mode_view.png"><img src="http://img5.tuchuang.org/thumbs/2014/07/download_id_8309_mode_view.png" alt="图片" /></a>
+<a href="http://img3.tuchuang.org/uploads/2014/07/download_id_8310_mode_view.png"><img src="http://img3.tuchuang.org/thumbs/2014/07/download_id_8310_mode_view.png" alt="图片" /></a>
+<a href="http://img2.picbed.org/uploads/2014/07/download_id_8311_mode_view.png"><img src="http://img2.picbed.org/thumbs/2014/07/download_id_8311_mode_view.png" alt="图片" /></a>
+<a href="http://img2.picbed.org/uploads/2014/07/download_id_8312_mode_view.png"><img src="http://img2.picbed.org/thumbs/2014/07/download_id_8312_mode_view.png" alt="图片" /></a>
+<a href="http://img1.picbed.org/uploads/2014/07/awdssrr34ssd.png"><img src="http://img1.picbed.org/thumbs/2014/07/awdssrr34ssd.png" alt="图片" /></a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;stepladder&#x2F;">用Golang写了一个梯子</a></h1>
+              <div class="info">
+                <h2>梯子，当然是用来翻墙的</h2>
+                <time>2014-07-26 00:00</time>
+              </div>
+              
+                <p>无聊的作品</p>
+<p>其实就是一个通过tls的socks5代理</p>
+<p>然后中间传输用了点Golang的gob而已</p>
+<p>没啥好介绍的</p>
+<p>直接扔github地址：<a href="https://github.com/Bluek404/Stepladder">https://github.com/Bluek404/Stepladder</a></p>
+<p>在README里有详细使用教程</p>
+<p>话说发现一个新东西：<a href="https://coding.net">Coding</a></p>
+<p>看起来不错</p>
+<p>于是也上传了一份</p>
+<p><a href="https://coding.net/u/Bluek404/p/Stepladder/git">https://coding.net/u/Bluek404/p/Stepladder/git</a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;golang-neovim&#x2F;">Neovim的Golang开发环境配置</a></h1>
+              <div class="info">
+                <h2>强迫症强迫症强迫症强迫……</h2>
+                <time>2014-07-14 00:00</time>
+              </div>
+              
+                <pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&quot;No warp───┐
+set nowrap&quot;│
+&quot;──────────┘
+&quot;Line number─┐
+set number  &quot;│
+&quot;────────────┘
+&quot;Plugin Manager────────────────────┐
+set rtp+=~/.nvim/bundle/Vundle.vim&quot;│
+&quot;──────────────────────────────────┘
+&quot;Plugin load begin───────────────────┐
+set nocompatible                    &quot;│
+filetype off                        &quot;│
+call vundle#begin()                 &quot;│
+                                    &quot;│
+&quot;Airline───────────────────┐         │
+Plugin &#39;bling/vim-airline&#39;&quot;│         │
+set laststatus=2          &quot;│         │
+&quot;──────────────────────────┘         │
+&quot;TagBar─────────────────────────────┐│
+Plugin &#39;majutsushi/tagbar&#39;         &quot;││
+nmap &lt;F8&gt; :TagbarToggle&lt;CR&gt;        &quot;││
+let g:tagbar_type_go = {
+    \ &#39;ctagstype&#39; : &#39;go&#39;,
+    \ &#39;kinds&#39;     : [
+        \ &#39;p:package&#39;,             
+        \ &#39;i:imports:1&#39;,           
+        \ &#39;c:constants&#39;,           
+        \ &#39;v:variables&#39;,           
+        \ &#39;t:types&#39;,               
+        \ &#39;n:interfaces&#39;,         
+        \ &#39;w:fields&#39;,             
+        \ &#39;e:embedded&#39;,           
+        \ &#39;m:methods&#39;,             
+        \ &#39;r:constructor&#39;,         
+        \ &#39;f:functions&#39;           
+    \ ],
+    \ &#39;sro&#39; : &#39;.&#39;,
+    \ &#39;kind2scope&#39; : {
+        \ &#39;t&#39; : &#39;ctype&#39;,           
+        \ &#39;n&#39; : &#39;ntype&#39;           
+    \ },
+    \ &#39;scope2kind&#39; : {
+        \ &#39;ctype&#39; : &#39;t&#39;,           
+        \ &#39;ntype&#39; : &#39;n&#39;           
+    \ },
+    \ &#39;ctagsbin&#39;  : &#39;gotags&#39;,
+    \ &#39;ctagsargs&#39; : &#39;-sort -silent&#39;
+\ }                                &quot;││
+&quot;───────────────────────────────────┘│
+&quot;NerdTree────────────────────┐       │
+Plugin &#39;scrooloose/nerdtree&#39;&quot;│       │
+map &lt;C-n&gt; :NERDTree&lt;CR&gt;     &quot;│       │
+&quot;────────────────────────────┘       │
+&quot;Golang Plugin────────────────┐      │
+Plugin &#39;dgryski/vim-godef&#39;   &quot;│      │
+Plugin &#39;cespare/vim-golang&#39;  &quot;│      │
+Plugin &#39;Blackrush/vim-gocode&#39;&quot;│      │
+&quot;─────────────────────────────┘      │
+&quot;Autocompletion─────────────────┐    │
+Plugin &#39;Valloric/YouCompleteMe&#39;&quot;│    │
+&quot;───────────────────────────────┘    │
+&quot;Plugin load end──────────┐          │
+call vundle#end()        &quot;│          │
+filetype plugin indent on&quot;│          │
+&quot;─────────────────────────┘          │
+&quot;────────────────────────────────────┘
+&quot;Highlight─┐
+syntax on &quot;│
+&quot;──────────┘
+&quot;Golang compiler plugin─────────┐
+autocmd FileType go compiler go&quot;│
+&quot;───────────────────────────────┘
+&quot;Automatic format────────────────────────────────────┐
+autocmd FileType go autocmd BufWritePre &lt;buffer&gt; Fmt&quot;│
+&quot;────────────────────────────────────────────────────┘
+</span></pre>
+<p>好吧其实原版VIM也通用</p>
+<p>只是需要把上面的<code>.nvim</code>文件夹改成<code>.vim</code>就行</p>
+<p>这里面需要用到Golang的官方插件，把go源码里的<code>misc/vim</code>全部扔到相应的文件夹即可（或者做个链接）</p>
+<p>别问我为什么写成这样……我有强迫症</p>
+<p>不过因为<code>\</code>接上一行的问题，所以有些地方没法注释（逼死强迫症啊）</p>
+<p>然后这个是适用于初学者的，因为我才开始用vim不到一周。有什么问题欢迎指出哈</p>
+<p><img src="https://iovxw.net/p/golang-neovim/0.png" alt="" /></p>
+<p>使用方法：</p>
+<ol>
+<li>
+<p>有一个Neovim（原版vim请自行把<code>.nvim</code>脑补成<code>.vim</code>，Neovim编译安装可以看<a href="http://bluek404.net/post/neovim">http://bluek404.net/post/neovim</a>）</p>
+</li>
+<li>
+<p>安装Vundle插件管理器
+<code>git clone https://github.com/gmarik/Vundle.vim.git ~/.nvim/bundle/Vundle.vim</code>
+然后打开<code>~/.nvim/bundle/Vundle.vim/autoload/vundle.vim</code>，把里面的文件夹路径.vim替换成.nvim（原版vim无需此步骤，这是让插件管理器安装插件到Neovim的文件夹）</p>
+</li>
+<li>
+<p>把上面的配置文件保存到用户目录的<code>.nvimrc</code>文件</p>
+</li>
+<li>
+<p>终端输入<code>nvim</code>然后输入<code>:BundleInstall</code>安装插件</p>
+</li>
+<li>
+<p>完成～</p>
+</li>
+</ol>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;neovim&#x2F;">ubuntu编译安装Neovim</a></h1>
+              <div class="info">
+                <h2>21世纪的VIM？</h2>
+                <time>2014-07-12 00:00</time>
+              </div>
+              
+                <p>介绍：</p>
+<blockquote>
+<p><img src="http://neovim.org/images/logo@2x.png" alt="" /></p>
+</blockquote>
+<blockquote>
+<p>巴西程序员Thiago de Arruda Padilha（aka tarruda）向Vim开源编辑器项目递交了两大补丁，对Vim的架构进行了大幅调整，结果遭到了Vim作者Bram Moolenaar的拒绝，因为对于Vim这样一个成熟的项目进行如此大的改变风险太高。于是tarruda发起了Vim fork项目Neovim，集资1万美元打造出21世纪的编辑器，提供更好的脚本、插件支持，整合现代的图形界面。</p>
+</blockquote>
+<blockquote>
+<p>该项目超额完成集资，已筹集到3.25万美元。Moolenaar本人对该项目持有异议，认为需要大量工作，会引入新的bug，而终端用户获益不多。</p>
+</blockquote>
+<p>主页：<a href="http://neovim.org">http://neovim.org</a></p>
+<p>官方wiki里的安装方法：<a href="https://github.com/neovim/neovim/wiki/Installing">https://github.com/neovim/neovim/wiki/Installing</a></p>
+<p>我用brew安装竟然提示需要pkgutil，我用的是ubuntu哪来的pkgutil？</p>
+<p>于是乎还是果断手动编译安装了</p>
+<p>先安装所需要的工具：<code>sudo apt-get install libtool autoconf automake cmake libncurses5-dev g++ pkg-config</code></p>
+<p>clone到本地<code>git clone https://github.com/neovim/neovim.git</code>然后<code>cd neovim</code>+<code>make</code>就编译完成了</p>
+<p>这里主要是说一下编译过程中出现的error解决方法</p>
+<p><code>libtoolize: not found</code>：<code>sudo apt-get install libtool</code></p>
+<p><code>aclocal: not found</code>：<code>sudo apt-get install autoconf</code></p>
+<p>安装过程中会下载几个包，网站都是国外的，所以比较慢，而且没有进度显示。耐心等待就行（如果相关网站被墙请手动设置代理）</p>
+<p>安装：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/
+make install
+</span></pre>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;gnome&#x2F;">再次换回GNOME</a></h1>
+              <div class="info">
+                <h2>换啊换，换啊换</h2>
+                <time>2014-07-10 00:00</time>
+              </div>
+              
+                <p>桌面环境又换到了GNOME</p>
+<p>发行版也顺便换了好几遍</p>
+<p>当然最后的结果还是GNOME+Deepin</p>
+<p>中间还顺便尝试了仿Chrome OS的<code>Budgie Desktop</code>和仿Windows的<code>Zorn OS</code></p>
+<p>发现貌似没什么特点</p>
+<p>这次的GNOME的配置是：</p>
+<p>GTK主题：<code>Zukitwo Dark Shell</code><br />
+shell主题：<code>Moskva</code><br />
+开启的扩展：<br />
+<code>Alternatetab</code><br />
+<code>Applications menu</code><br />
+<code>User themes</code><br />
+使用：<code>GNOME Next PPA</code></p>
+<p>扔图：</p>
+<p><img src="https://iovxw.net/p/gnome/0.png" alt="" />
+<img src="https://iovxw.net/p/gnome/1.png" alt="" />
+<img src="https://iovxw.net/p/gnome/2.png" alt="" />
+<img src="https://iovxw.net/p/gnome/3.png" alt="" />
+<img src="https://iovxw.net/p/gnome/4.png" alt="" />
+<img src="https://iovxw.net/p/gnome/5.png" alt="" />
+<img src="https://iovxw.net/p/gnome/6.png" alt="" />
+<img src="https://iovxw.net/p/gnome/7.png" alt="" /></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ubuntu-install-budgie-desktop&#x2F;">Ubuntu 安装 Budgie Desktop</a></h1>
+              <div class="info">
+                <h2>类似ChromeOS的桌面环境</h2>
+                <time>2014-07-09 00:00</time>
+              </div>
+              
+                <p>介绍什么的就懒得重复了</p>
+<p>自己百度吧</p>
+<p>直接扔命令</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">        sudo add-apt-repository ppa:sukso96100/budgie-desktop
+        sudo apt-get update
+        sudo apt-get install budgie-desktop
+</span></pre>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;golang-in-atom&#x2F;">Atom配置Golang开发环境</a></h1>
+              <div class="info">
+                <h2>没有自动补全硬伤</h2>
+                <time>2014-06-26 00:00</time>
+              </div>
+              
+                <p><img src="http://img3.picbed.org/uploads/2014/06/DeepinScreenshot20140626190918.png" alt="" /></p>
+<p>先扔一个效果图</p>
+<p>Atom我就不介绍了，自己去看WIKI吧</p>
+<p>ubuntu快速安装：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">sudo add-apt-repository ppa:webupd8team/atom
+sudo apt-get update &amp;&amp; sudo apt-get install atom
+</span></pre>
+<p>MAC可以直接从<a href="https://atom.io">官网</a>下载</p>
+<p>其他系统就自己编译吧</p>
+<p>因为和Github结合的很好，然后速度较快，比较适合项目的小修改&amp;提交，和不喜欢大型IDE的人</p>
+<p>未配置的界面很像<code>Sublime Text</code>，上图是我修改主题和配色后的</p>
+<p>言归正传。Atom自带Golang插件，但是调试和格式化没有（自动补全就别想了）</p>
+<p>然后我在官方Packages里找到了Go的插件，叫做<code>Go Plus</code></p>
+<p>Github地址：<a href="https://github.com/joefitzgerald/go-plus">https://github.com/joefitzgerald/go-plus</a></p>
+<p>作者的演示：</p>
+<p><img src="https://camo.githubusercontent.com/dfd447388f9d6506dcdd19e6c5c431bf4211e673/687474703a2f2f636c2e6c792f696d6167652f3339327a324c3066304534312f676f2d706c75732d6578616d706c652e676966" alt="https://camo.githubusercontent.com/dfd447388f9d6506dcdd19e6c5c431bf4211e673/687474703a2f2f636c2e6c792f696d6167652f3339327a324c3066304534312f676f2d706c75732d6578616d706c652e676966" /></p>
+<p>安装的方法也很简单，<code>File -&gt; Preferences... -&gt; Packages</code></p>
+<p>然后在搜索框内输入<code>go plus</code>回车等一会就会出现了</p>
+<p>点击<code>Install</code>安装</p>
+<p>有可能会出错，重试一遍就行了</p>
+<p><img src="http://img4.picbed.org/uploads/2014/06/DeepinScreenshot20140626192051.png" alt="" /></p>
+<p>然后点击<code>Settings</code>进行设置</p>
+<p><img src="http://img4.tuchuang.org/uploads/2014/06/DeepinScreenshot20140626192214.png" alt="" /></p>
+<p>勾选自己需要的功能</p>
+<p>然后填入Go的安装目录和工作目录就行了</p>
+<p>如果要使用<code>Lint</code>和<code>Vet</code>的话</p>
+<p>还需要</p>
+<p><code>go get github.com/golang/lint/golint</code></p>
+<p><code>go get code.google.com/p/go.tools/cmd/vet</code></p>
+<p>主题和配色也都可以在<code>Preferences</code>里更换&amp;下载</p>
+<p>开始玩吧！</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;add-search&#x2F;">好久没更新了啊</a></h1>
+              <div class="info">
+                <h2>顺便给博客添加搜索功能</h2>
+                <time>2014-06-20 00:00</time>
+              </div>
+              
+                <p>谁说静态博客就不能用搜索的？</p>
+<p>好吧其实就是用了下搜索引擎的site搜索功能</p>
+<p>可以看见右边测栏里已经多出来了一个搜索框</p>
+<p>不过貌似百度没有收录这个博客= =</p>
+<p>所以没法用什么的很正常</p>
+<p>在页面内添加</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;form id=&quot;search&quot; class=&quot;search&quot; role=&quot;search&quot;&gt;
+        &lt;input class=&quot;form-control&quot; placeholder=&quot;搜索&quot; name=&quot;q&quot; type=&quot;text&quot;&gt;
+&lt;/form&gt;
+</span></pre>
+<p>然后在js里添加</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">(function(){
+	$(document).on(&#39;submit&#39;, &#39;#search.search&#39;, function(){
+		var q = $(this).find(&#39;[name=q]&#39;).val();
+		if($.trim(q) !== &#39;&#39;){
+			var host = window.location.hostname;
+			var url = &#39;http://www.baidu.com/s?wd=&#39; + &#39;site:&#39; + host + &quot; &quot; + $.trim(q);
+			window.open(url, &quot;_blank&quot;);
+		}
+		return false;
+	});
+})();
+</span></pre>
+<p><code>http://www.baidu.com/s?wd=</code>可以替换成任意支持site搜索的搜索引擎地址</p>
+<hr />
+<p>PS: 这是 jQuery 版本，写成原生的也不难这里就不废话了</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;go-intellij-idea&#x2F;">Golang IntelliJ IDEA</a></h1>
+              <div class="info">
+                <h2>换了个IDE玩</h2>
+                <time>2014-06-06 00:00</time>
+              </div>
+              
+                <p>LiteIDE用了好久，觉得有些地方不是很符合要求</p>
+<p>于是又去试了几个Golang的编辑器</p>
+<p>发现<code>IntelliJ IDEA</code>还挺顺手的</p>
+<p>各种IDE该有的功能都有了（这不废话么）</p>
+<p>配合Golang的插件我认为应该是最好用的Go IDE了</p>
+<p>当然缺点就是CPU占用略高</p>
+<p>1.1Ghz的渣本有点发热</p>
+<p><img src="http://s30.postimg.org/5ugx7gjen/Deepin_Screenshot20140606142553.png" alt="" /></p>
+<p><img src="http://s30.postimg.org/4e5epbghr/Deepin_Screenshot20140606143239.png" alt="" /><br />
+CPU已经撑不住了</p>
+<p><img src="http://s30.postimg.org/s3uue0ev3/Deepin_Screenshot20140606143544.png" alt="" /><br />
+鼠标放到右侧滚轮条可以预览相应的代码</p>
+<p><img src="http://s30.postimg.org/b220bwzzz/Deepin_Screenshot20140606143612.png" alt="" /><br />
+提示功能</p>
+<p><img src="http://s30.postimg.org/m0d9u3olb/Deepin_Screenshot20140606143636.png" alt="" /><br />
+自动补全</p>
+<p>不知道什么时候能有个中文语言包呢</p>
+
+              
+            </article>
+          
+        
+        
+        <nav>
+          
+          <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;n&#x2F;7&#x2F;">PREV</a>
+          
+          
+          <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;n&#x2F;9&#x2F;">NEXT</a>
+          
+        </nav>
+        
+      
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

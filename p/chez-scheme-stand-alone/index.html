@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -363,32 +380,32 @@ See Section&nbsp;<a href="https://iovxw.net/csug9/use.html#g13">2.8</a> for more
 and the use of <tt>make-boot-file</tt>.
 </p>
 </div>
-<!-- more -->
+<span id="continue-reading"></span>
 <hr />
 <p>例子：</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">;; lib/b.ss
-</span><span style="background-color:#282828;color:#fdf4c1aa;">(library (lib b)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(export y)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(import (rnrs))
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(define y &quot;Hello!\n&quot;))
-</span></pre><pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">;; lib/a.ss
-</span><span style="background-color:#282828;color:#fdf4c1aa;">(library (lib a)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(export x)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(import (rnrs)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">          </span><span style="background-color:#282828;color:#fdf4c1aa;">(lib b))
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(define x y))
-</span></pre><pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">;; main.ss
-</span><span style="background-color:#282828;color:#fdf4c1aa;">(import (rnrs)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">(lib a))
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">(display x)
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">;; lib/b.ss
+(library (lib b)
+  (export y)
+  (import (rnrs))
+  (define y &quot;Hello!\n&quot;))
+</span></pre><pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">;; lib/a.ss
+(library (lib a)
+  (export x)
+  (import (rnrs)
+          (lib b))
+  (define x y))
+</span></pre><pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">;; main.ss
+(import (rnrs)
+        (lib a))
+
+(display x)
 </span></pre>
 <p>编译：</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fabd2f;">echo </span><span style="background-color:#282828;color:#b8bb26;">$&#39;(make-boot-file &quot;main.boot&quot; \&#39;(&quot;scheme&quot; &quot;petite&quot;) &quot;lib/b.ss&quot; &quot;lib/a.ss&quot; &quot;main.ss&quot;)&#39; </span><span style="background-color:#282828;color:#fe8019;">| </span><span style="background-color:#282828;color:#fdf4c1;">scheme -q
+<pre style="background-color:#282828;">
+<span style="color:#fabd2f;">echo </span><span style="color:#b8bb26;">$&#39;(make-boot-file &quot;main.boot&quot; \&#39;(&quot;scheme&quot; &quot;petite&quot;) &quot;lib/b.ss&quot; &quot;lib/a.ss&quot; &quot;main.ss&quot;)&#39; </span><span style="color:#fe8019;">| </span><span style="color:#fdf4c1;">scheme -q
 </span></pre>
 <p>需要注意的是，<strong>input-filename</strong> 的顺序要和 <code>import</code> 的顺序一样，不然会无法找到</p>
 <p>然后是关于 <strong>base-boot-list</strong>：</p>
@@ -396,9 +413,9 @@ and the use of <tt>make-boot-file</tt>.
 <p>In most cases, you can construct your application so it does not depend upon features of <em>Chez Scheme</em> (specifically, the compiler) by specifying only <em>&quot;petite&quot;</em> in the call to <code>make-boot-file</code>. If your application calls <code>eval</code>, however, and you wish to allow users to be able to take advantage of the faster execution speed of compiled code, then specifying both <em>&quot;scheme&quot;</em> and <em>&quot;petite&quot;</em> is appropriate.</p>
 </blockquote>
 <p>运行：</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1;">$ scheme --program main.boot
-</span><span style="background-color:#282828;color:#fdf4c1;">Hello!
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1;">$ scheme --program main.boot
+Hello!
 </span></pre>
 <hr />
 <p>但是这样编译以后仍然依赖 <em>Chez Scheme</em>, 或者是 <em>Petite Chez Scheme</em></p>

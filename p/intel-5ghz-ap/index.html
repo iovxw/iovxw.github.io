@@ -13,7 +13,7 @@
       <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
       <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
-    <title>凯华 Box 轴拆解 - iovxw</title>
+    <title>Linux 下 Intel® 网卡开启 5Ghz AP - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,61 +323,129 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
 
       
 <article>
-    <h1>凯华 Box 轴拆解</h1>
-    <div class="info"><h2>还可以</h2><time>2017-09-21 20:31</time></div>
-    <p>键盘的 <code>A</code> 键坏了, 可能是我在 Spacemacs 里后插入用的太多的原因, 总之决定自己换轴</p>
-<p>挑轴的时候发现卖家还卖一种叫 Box 轴的轴体, 是凯华今年一月发布, 自主研发, 主打寿命长和防水性的新系列 (这介绍真长</p>
-<p>官网上他们自己说的是挺好</p>
-<p>可是只有白(qīng)轴的图解, 其他轴则是一笔带过</p>
-<p>想着反正不包邮, 不如顺便多买点, 就在买替换用轴的同时各买了一种 Box 轴</p>
-<!-- more -->
+    <h1>Linux 下 Intel® 网卡开启 5Ghz AP</h1>
+    <div class="info"><h2>最好还是换网卡</h2><time>2019-01-05 21:20</time></div>
+    <p>Intel 家的网卡都禁止使用 5Ghz 开 AP, 只能开 2.4 的</p>
+<p>比如我的 9560, 可以说是旗舰网卡, 能跑 1.7Gbps, 强得一匹</p>
+<p>但却连个 5Ghz AP 都开不了</p>
+<p>周边 2.4Ghz 信道都满了，要它何用啊</p>
+<p>幸</p>
+<p>今日得一魔法, 可破此局</p>
+<span id="continue-reading"></span>
 <hr />
-<p><img src="0.jpg" alt="0.jpg" /></p>
-<p>拍照水平就不要吐槽了, 下面四个是准备拿来给键盘换的 Cherry 青轴</p>
-<p>拍的时候还忘了关闪光灯, 后面的影子是猫, 在我拍完后一爪子拍走了所有 Box 轴</p>
-<hr />
-<p><img src="1.jpg" alt="1.jpg" /></p>
-<p>白轴(他们非要说这是青轴, 只是白色的而已……), 和官网上给出的结构一样 (废话</p>
-<p>是靠那根横着的弹簧, 他们叫扭簧, 来发声的(我特意侧着拍了轴芯, 可以看见后面有用于拨动扭簧的突起)</p>
-<p>不过我试了试, 这根弹簧并不只管发声, 实际上大部分段落感都来源于它, 如果把它拆掉, 或者挑开, 就基本感觉不到段落感的存在</p>
-<p>而这一部分是暴露在 &quot;Box&quot; 之外, 不知道经历了水和尘之后还能不能保持手感</p>
-<p>声音的话, 是超级大, 从感觉上来讲至少比 Cherry 青轴吵个两三倍, 而且一般的青轴, 是按下去响一声, 抬起来时声音基本没有, 这个白(qīng)轴, 抬起来和按下去的声音一样大, 按一次键能明显的听出响了两声, 要是在人多的地方用怕是会被打死</p>
-<hr />
-<p><img src="2.jpg" alt="2.jpg" /></p>
-<p>茶轴, 这个轴比较特殊</p>
-<p>和其他三个轴比, 只有它的 &quot;小绿点&quot; 不是绿的</p>
-<p>原因, 据我猜测是因为它的段落感实现不是靠和白轴一样的扭簧, 是普通的在轴芯接触部分增加突起实现的(如上图)</p>
-<p>而这个突起可能会导致轴芯或 &quot;小绿点&quot; 磨损的更快, 就换成了和轴芯一样的材质</p>
-<p>但就算这样估计茶轴也是这些轴里手感损失最快的</p>
-<p>这张照片里我把 &quot;Box&quot; 的盖掀开了</p>
-<p>能看见 &quot;小绿点&quot; 旁边有一圈凹槽, 里面填有润滑油, 大概是用于防止水进入 &quot;Box&quot; 中</p>
-<p>动片与 MX 轴不同, 变为横着的, 弯折处与触点间距离变长, 每次按键可以更小幅度的弯折动片, 增加寿命</p>
-<p>他们官网的动画展示了触发方式:</p>
-<video controls="controls" poster="http://www.kailh.com/img/video1.jpg" src="http://www.kailh.com/video/kaihua.mp4" width="100%">Your browser does not support the video tag</video>
-<hr />
-<p>说到防水, Box 轴的轴芯十字部分都被围了一圈, 这一圈是为了当按键按下时也不会有大量的水进入轴体:</p>
-<p><img src="3.jpg" alt="3.jpg" /></p>
-<p>在底部的轴柱中间有一个洞让水排出去:</p>
-<p><img src="4.jpg" alt="4.jpg" /></p>
-<p>然后黑轴和红轴都很普通, 轴芯都一样, 没啥好讲的就不单独拍了</p>
-<p>最后来个合影, 可以看出每个轴芯的差别:</p>
-<p><img src="5.jpg" alt="5.jpg" /></p>
-<hr />
-<h2 id="hou-ji">后记</h2>
-<p>就在我准备把键盘拆开换轴的时候, <code>A</code> 键又好使了……嗯……</p>
+<p>默认情况下, <code>iw list</code> 输出 5Ghz 可用频段如下:</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">Frequencies:
+        * 5180 MHz [36] (22.0 dBm) (no IR)
+        * 5200 MHz [40] (22.0 dBm) (no IR)
+        * 5220 MHz [44] (22.0 dBm) (no IR)
+        * 5240 MHz [48] (22.0 dBm) (no IR)
+        * 5260 MHz [52] (22.0 dBm) (no IR, radar detection)
+        * 5280 MHz [56] (22.0 dBm) (no IR, radar detection)
+        * 5300 MHz [60] (22.0 dBm) (no IR, radar detection)
+        * 5320 MHz [64] (22.0 dBm) (no IR, radar detection)
+        * 5340 MHz [68] (disabled)
+        * 5360 MHz [72] (disabled)
+        * 5380 MHz [76] (disabled)
+        * 5400 MHz [80] (disabled)
+        * 5420 MHz [84] (disabled)
+        * 5440 MHz [88] (disabled)
+        * 5460 MHz [92] (disabled)
+        * 5480 MHz [96] (disabled)
+        * 5500 MHz [100] (22.0 dBm) (no IR, radar detection)
+        * 5520 MHz [104] (22.0 dBm) (no IR, radar detection)
+        * 5540 MHz [108] (22.0 dBm) (no IR, radar detection)
+        * 5560 MHz [112] (22.0 dBm) (no IR, radar detection)
+        * 5580 MHz [116] (22.0 dBm) (no IR, radar detection)
+        * 5600 MHz [120] (22.0 dBm) (no IR, radar detection)
+        * 5620 MHz [124] (22.0 dBm) (no IR, radar detection)
+        * 5640 MHz [128] (22.0 dBm) (no IR, radar detection)
+        * 5660 MHz [132] (22.0 dBm) (no IR, radar detection)
+        * 5680 MHz [136] (22.0 dBm) (no IR, radar detection)
+        * 5700 MHz [140] (22.0 dBm) (no IR, radar detection)
+        * 5720 MHz [144] (22.0 dBm) (no IR, radar detection)
+        * 5745 MHz [149] (22.0 dBm) (no IR)
+        * 5765 MHz [153] (22.0 dBm) (no IR)
+        * 5785 MHz [157] (22.0 dBm) (no IR)
+        * 5805 MHz [161] (22.0 dBm) (no IR)
+        * 5825 MHz [165] (22.0 dBm) (no IR)
+        * 5845 MHz [169] (disabled)
+        * 5865 MHz [173] (disabled)
+        * 5885 MHz [177] (disabled)
+        * 5905 MHz [181] (disabled)
+</span></pre>
+<p>除了 <code>disabled</code> 就是 <code>no-IR</code>, 意思就是没戏</p>
+<p>解决方法是关掉 Intel 的 Location Aware Regulatory, 这玩意禁止你使用非法信道（别家网卡都没有，你咋管这么多）</p>
+<pre style="background-color:#282828;">
+<span style="color:#fabd2f;">echo</span><span style="color:#fdf4c1;"> options iwlwifi lar_disable=1 </span><span style="color:#fe8019;">&gt;&gt;</span><span style="color:#fdf4c1;"> /etc/modprobe.d/iwlwifi.conf
+</span></pre>
+<p>重启</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">Frequencies:
+        * 5180 MHz [36] (22.0 dBm) (no IR)
+        * 5200 MHz [40] (22.0 dBm) (no IR)
+        * 5220 MHz [44] (22.0 dBm) (no IR)
+        * 5240 MHz [48] (22.0 dBm) (no IR)
+        * 5260 MHz [52] (22.0 dBm) (no IR, radar detection)
+        * 5280 MHz [56] (22.0 dBm) (no IR, radar detection)
+        * 5300 MHz [60] (22.0 dBm) (no IR, radar detection)
+        * 5320 MHz [64] (22.0 dBm) (no IR, radar detection)
+        * 5500 MHz [100] (disabled)
+        * 5520 MHz [104] (disabled)
+        * 5540 MHz [108] (disabled)
+        * 5560 MHz [112] (disabled)
+        * 5580 MHz [116] (disabled)
+        * 5600 MHz [120] (disabled)
+        * 5620 MHz [124] (disabled)
+        * 5640 MHz [128] (disabled)
+        * 5660 MHz [132] (disabled)
+        * 5680 MHz [136] (disabled)
+        * 5700 MHz [140] (disabled)
+        * 5720 MHz [144] (disabled)
+        * 5745 MHz [149] (22.0 dBm)
+        * 5765 MHz [153] (22.0 dBm)
+        * 5785 MHz [157] (22.0 dBm)
+        * 5805 MHz [161] (22.0 dBm)
+        * 5825 MHz [165] (22.0 dBm)
+</span></pre>
+<p>虽然好像少了几个, 不过至少有看起来能用的信道了</p>
+<p>为什么是看起来呢, 因为还是不能用, 网卡不给你开</p>
+<p>咋办呢</p>
+<p>该使用魔法了:</p>
+<p>打开你的 WiFi, 找到个 5Ghz 的, 连上去</p>
+<p>你要用的信道就开启了</p>
+<p>当然要确认那个 WiFi 是在上述可使用频段中的</p>
+<p>再正常创建 AP 就行了</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">create_ap --ieee80211ac --freq-band 5 wlo1 eno1 AP PASSWORD
+</span></pre><pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">Config dir: /tmp/create_ap.wlo1.conf.ZWqfelAf
+PID: 3478
+Network Manager found, set ap0 as unmanaged device... DONE
+wlo1 is already associated with channel 149 (5745 MHz), fallback to channel 149
+Creating a virtual WiFi interface... ap0 created.
+Sharing Internet using method: nat
+hostapd command-line interface: hostapd_cli -p /tmp/create_ap.wlo1.conf.ZWqfelAf/hostapd_ctrl
+Configuration file: /tmp/create_ap.wlo1.conf.ZWqfelAf/hostapd.conf
+Using interface ap0 with hwaddr xx:xx:xx:xx:xx:xx and ssid &quot;AP&quot;
+ap0: interface state UNINITIALIZED-&gt;ENABLED
+ap0: AP-ENABLED
+</span></pre>
+<p>注意 <code>already associated with channel 149 (5745 MHz)</code> 这里, 说明在用已连接的信道</p>
+<p>如果提示 <code>rfkill: WLAN soft blocked</code>, 运行 <code>rfkill unblock all</code> 解锁即可</p>
 
 </article>
 <div id="disqus_thread"></div>

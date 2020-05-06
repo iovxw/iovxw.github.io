@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -324,7 +341,7 @@
     <p>给 Telegram 写的一个 RSS Bot 总是随机出现大量重复推送更新的 BUG，还以为是数据库或者 RSS 对比的问题，然而逻辑上根本没问题</p>
 <p>百思不得其解</p>
 <p>直到发现了自己在 loop 用的是 <code>Thread/sleep</code> 来进行定时的，它是 <code>Thread</code> 啊！</p>
-<!-- more -->
+<span id="continue-reading"></span>
 <hr />
 <p>这个是真被坑到了，有不少 <code>core.async</code> 的例子里都是直接用的 <code>Thread/sleep</code></p>
 <p>比如这个：<a href="https://gist.github.com/danneu/5941767">https://gist.github.com/danneu/5941767</a></p>

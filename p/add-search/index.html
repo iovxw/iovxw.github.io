@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -327,24 +344,24 @@
 <p>不过貌似百度没有收录这个博客= =</p>
 <p>所以没法用什么的很正常</p>
 <p>在页面内添加</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">&lt;form id=&quot;search&quot; class=&quot;search&quot; role=&quot;search&quot;&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;input class=&quot;form-control&quot; placeholder=&quot;搜索&quot; name=&quot;q&quot; type=&quot;text&quot;&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;/form&gt;
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">&lt;form id=&quot;search&quot; class=&quot;search&quot; role=&quot;search&quot;&gt;
+        &lt;input class=&quot;form-control&quot; placeholder=&quot;搜索&quot; name=&quot;q&quot; type=&quot;text&quot;&gt;
+&lt;/form&gt;
 </span></pre>
 <p>然后在js里添加</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">(function(){
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">$(document).on(&#39;submit&#39;, &#39;#search.search&#39;, function(){
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">var q = $(this).find(&#39;[name=q]&#39;).val();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">if($.trim(q) !== &#39;&#39;){
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">var host = window.location.hostname;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">var url = &#39;http://www.baidu.com/s?wd=&#39; + &#39;site:&#39; + host + &quot; &quot; + $.trim(q);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">window.open(url, &quot;_blank&quot;);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">return false;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">});
-</span><span style="background-color:#282828;color:#fdf4c1aa;">})();
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">(function(){
+	$(document).on(&#39;submit&#39;, &#39;#search.search&#39;, function(){
+		var q = $(this).find(&#39;[name=q]&#39;).val();
+		if($.trim(q) !== &#39;&#39;){
+			var host = window.location.hostname;
+			var url = &#39;http://www.baidu.com/s?wd=&#39; + &#39;site:&#39; + host + &quot; &quot; + $.trim(q);
+			window.open(url, &quot;_blank&quot;);
+		}
+		return false;
+	});
+})();
 </span></pre>
 <p><code>http://www.baidu.com/s?wd=</code>可以替换成任意支持site搜索的搜索引擎地址</p>
 <hr />

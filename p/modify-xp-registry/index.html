@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -326,10 +343,10 @@
 <p>1.新建一个文件扩展名为<code>.reg</code>的文件（例如<code>updates.reg</code>）</p>
 <p>2.用文本编辑器打开</p>
 <p>3.修改内容为</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">Windows Registry Editor Version 5.00
-</span><span style="background-color:#282828;color:#fdf4c1aa;">[HKEY_LOCAL_MACHINE\SYSTEM\WPA\PosReady]
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&quot;Installed&quot;=dword:00000001
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">Windows Registry Editor Version 5.00
+[HKEY_LOCAL_MACHINE\SYSTEM\WPA\PosReady]
+&quot;Installed&quot;=dword:00000001
 </span></pre>
 <p>4.保存，然后双击它</p>
 <p>现在打开更新管理器就会发现有新的更新可用了</p>

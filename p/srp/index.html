@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -325,7 +342,7 @@
 <p>当然这个协议也不新了，是 2000 年出的 RFC</p>
 <p>不过现在都 2017 年了，还是有一大堆网站在用什么 md5 加盐（不，就算你用 SHA2XX 也不行），甚至连 bcrypt 和 Argon2 是啥都不知道，感觉真是悲伤（</p>
 <p>所以，来看看 SRP 是个啥（如果你真的不知道 Argon2，还是先去看它吧）：</p>
-<!-- more -->
+<span id="continue-reading"></span>
 <blockquote>
 <p>The <a href="https://www.ietf.org/rfc/rfc2945.txt">Secure Remote Password (SRP) protocol</a> is <strong>widely-tested</strong> and <strong>widely-deployed</strong> password-authenticated key agreement (PAKE) protocol which mutually authenticates both the user and server while <strong>never sending any password-equivalent data over the network</strong>. Authentication attempts cannot be replayed, and the protocol remains secure even in the presence of active tampering by a third party.</p>
 </blockquote>
@@ -339,89 +356,89 @@
 <p>SRP 的安全性基于离散对数问题，就和 DH 还有 ECC 一样（当然问题是量子计算机出来就完蛋了，不过现在不用关心这个）</p>
 <p>具体的原理不用管，相信看这篇文章的都不懂密码学（我也不懂，真的），要是真想研究的话请看 <a href="http://www.ietf.org/rfc/rfc2945.txt">RFC</a></p>
 <p>一般程序员只需要了解协议过程就行了，而<a href="https://en.wikipedia.org/wiki/Secure_Remote_Password_protocol#Implementation_example_in_Python">维基百科上的 Python 例子</a>就讲的很明白。这里就直接复制过来：</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;font-style:italic;color:#928374;"># An example SRP authentication
-</span><span style="background-color:#282828;font-style:italic;color:#928374;"># WARNING: Do not use for real cryptographic purposes beyond testing.
-</span><span style="background-color:#282828;font-style:italic;color:#928374;"># based on http://srp.stanford.edu/design.html
-</span><span style="background-color:#282828;color:#fa5c4b;">import </span><span style="background-color:#282828;color:#fdf4c1aa;">hashlib
-</span><span style="background-color:#282828;color:#fa5c4b;">import </span><span style="background-color:#282828;color:#fdf4c1aa;">random
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">def </span><span style="background-color:#282828;color:#8ec07c;">global_print</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fe8019;">*</span><span style="background-color:#282828;color:#fdf4c1;">names</span><span style="background-color:#282828;color:#fdf4c1aa;">):
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">x </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fa5c4b;">lambda </span><span style="background-color:#282828;color:#fdf4c1;">s</span><span style="background-color:#282828;color:#fdf4c1aa;">: [</span><span style="background-color:#282828;color:#b8bb26;">&quot;{}&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;0x{</span><span style="background-color:#282828;color:#fdf4c1;">:x</span><span style="background-color:#282828;color:#b8bb26;">}&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">] [</span><span style="background-color:#282828;color:#fabd2f;">hasattr</span><span style="background-color:#282828;color:#fdf4c1;">(s, </span><span style="background-color:#282828;color:#b8bb26;">&#39;real&#39;</span><span style="background-color:#282828;color:#fdf4c1;">)</span><span style="background-color:#282828;color:#fdf4c1aa;">]</span><span style="background-color:#282828;color:#fdf4c1;">.format(s)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.join(</span><span style="background-color:#282828;color:#b8bb26;">&quot;{} = {}\n&quot;</span><span style="background-color:#282828;color:#fdf4c1;">.format(name, x(</span><span style="background-color:#282828;color:#fabd2f;">globals</span><span style="background-color:#282828;color:#fdf4c1;">()[name])) </span><span style="background-color:#282828;color:#fa5c4b;">for </span><span style="background-color:#282828;color:#fdf4c1;">name </span><span style="background-color:#282828;color:#fa5c4b;">in </span><span style="background-color:#282828;color:#fdf4c1;">names))
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;font-style:italic;color:#928374;"># note: str converts as is, str( [1,2,3,4] ) will convert to &quot;[1,2,3,4]&quot;
-</span><span style="background-color:#282828;color:#fa5c4b;">def </span><span style="background-color:#282828;color:#8ec07c;">H</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fe8019;">*</span><span style="background-color:#282828;color:#fdf4c1;">args</span><span style="background-color:#282828;color:#fdf4c1aa;">):  </span><span style="background-color:#282828;font-style:italic;color:#928374;"># a one-way hash function
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">a </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&#39;:&#39;</span><span style="background-color:#282828;color:#fdf4c1;">.join(</span><span style="background-color:#282828;color:#fabd2f;">str</span><span style="background-color:#282828;color:#fdf4c1;">(a) </span><span style="background-color:#282828;color:#fa5c4b;">for </span><span style="background-color:#282828;color:#fdf4c1;">a </span><span style="background-color:#282828;color:#fa5c4b;">in </span><span style="background-color:#282828;color:#fdf4c1;">args)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">return </span><span style="background-color:#282828;color:#fabd2f;">int</span><span style="background-color:#282828;color:#fdf4c1;">(hashlib.sha256(a.encode(</span><span style="background-color:#282828;color:#b8bb26;">&#39;utf-8&#39;</span><span style="background-color:#282828;color:#fdf4c1;">)).hexdigest(), </span><span style="background-color:#282828;color:#d3869b;">16</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">def </span><span style="background-color:#282828;color:#8ec07c;">cryptrand</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">n</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#d3869b;">1024</span><span style="background-color:#282828;color:#fdf4c1aa;">):
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">return </span><span style="background-color:#282828;color:#fdf4c1;">random.SystemRandom().getrandbits(n) </span><span style="background-color:#282828;color:#fe8019;">% </span><span style="background-color:#282828;color:#fdf4c1aa;">N
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;font-style:italic;color:#928374;"># A large safe prime (N = 2q+1, where q is prime)
-</span><span style="background-color:#282828;font-style:italic;color:#928374;"># All arithmetic is done modulo N
-</span><span style="background-color:#282828;font-style:italic;color:#928374;"># (generated using &quot;openssl dhparam -text 1024&quot;)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">N </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&#39;&#39;&#39;00:c0:37:c3:75:88:b4:32:98:87:e6:1c:2d:a3:32:
-</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">4b:1b:a4:b8:1a:63:f9:74:8f:ed:2d:8a:41:0c:2f:
-</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">c2:1b:12:32:f0:d3:bf:a0:24:27:6c:fd:88:44:81:
-</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">97:aa:e4:86:a6:3b:fc:a7:b8:bf:77:54:df:b3:27:
-</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">c7:20:1f:6f:d1:7f:d7:fd:74:15:8b:d3:1c:e7:72:
-</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">c9:f5:f8:ab:58:45:48:a9:9a:75:9b:5a:2c:05:32:
-</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">16:2b:7b:62:18:e8:f1:42:bc:e2:c3:0d:77:84:68:
-</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">9a:48:3e:09:5e:70:16:18:43:79:13:a8:c3:9c:3d:
-</span><span style="background-color:#282828;color:#b8bb26;">       </span><span style="background-color:#282828;color:#b8bb26;">d0:d4:ca:3c:50:0b:88:5f:e3&#39;&#39;&#39;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">N </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">int</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&#39;&#39;</span><span style="background-color:#282828;color:#fdf4c1;">.join(N.split()).replace(</span><span style="background-color:#282828;color:#b8bb26;">&#39;:&#39;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&#39;&#39;</span><span style="background-color:#282828;color:#fdf4c1;">), </span><span style="background-color:#282828;color:#d3869b;">16</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">g </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#d3869b;">2        </span><span style="background-color:#282828;font-style:italic;color:#928374;"># A generator modulo N
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">k </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(N, g)  </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Multiplier parameter (k=3 in legacy SRP-6)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;#. H, N, g, and k are known beforehand to both client and server:&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;H&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;N&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;g&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;k&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;0. server stores (I, s, v) in its password database&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;font-style:italic;color:#928374;"># the server must first generate the password verifier
-</span><span style="background-color:#282828;color:#fdf4c1aa;">I </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&quot;person&quot;         </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Username
-</span><span style="background-color:#282828;color:#fdf4c1aa;">p </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&quot;password1234&quot;   </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Password
-</span><span style="background-color:#282828;color:#fdf4c1aa;">s </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">cryptrand(</span><span style="background-color:#282828;color:#d3869b;">64</span><span style="background-color:#282828;color:#fdf4c1;">)    </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Salt for the user
-</span><span style="background-color:#282828;color:#fdf4c1aa;">x </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(s, I, p)       </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Private key
-</span><span style="background-color:#282828;color:#fdf4c1aa;">v </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">pow</span><span style="background-color:#282828;color:#fdf4c1;">(g, x, N)     </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Password verifier
-</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;I&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;p&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;s&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;x&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;v&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;1. client sends username I and public ephemeral value A to the server&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">a </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">cryptrand()
-</span><span style="background-color:#282828;color:#fdf4c1aa;">A </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">pow</span><span style="background-color:#282828;color:#fdf4c1;">(g, a, N)
-</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;I&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;A&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)  </span><span style="background-color:#282828;font-style:italic;color:#928374;"># client-&gt;server (I, A)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;2. server sends user&#39;s salt s and public ephemeral value B to client&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">b </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">cryptrand()
-</span><span style="background-color:#282828;color:#fdf4c1aa;">B </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1aa;">(k </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fdf4c1aa;">v </span><span style="background-color:#282828;color:#fe8019;">+ </span><span style="background-color:#282828;color:#fabd2f;">pow</span><span style="background-color:#282828;color:#fdf4c1;">(g, b, N)</span><span style="background-color:#282828;color:#fdf4c1aa;">) </span><span style="background-color:#282828;color:#fe8019;">% </span><span style="background-color:#282828;color:#fdf4c1aa;">N
-</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;s&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;B&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)  </span><span style="background-color:#282828;font-style:italic;color:#928374;"># server-&gt;client (s, B)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;3. client and server calculate the random scrambling parameter&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">u </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(A, B)  </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Random scrambling parameter
-</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;u&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;4. client computes session key&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">x </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(s, I, p)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">S_c </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">pow</span><span style="background-color:#282828;color:#fdf4c1;">(B </span><span style="background-color:#282828;color:#fe8019;">- </span><span style="background-color:#282828;color:#fdf4c1;">k </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fabd2f;">pow</span><span style="background-color:#282828;color:#fdf4c1;">(g, x, N), a </span><span style="background-color:#282828;color:#fe8019;">+ </span><span style="background-color:#282828;color:#fdf4c1;">u </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fdf4c1;">x, N)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">K_c </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(S_c)
-</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;S_c&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;K_c&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;5. server computes session key&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">S_s </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">pow</span><span style="background-color:#282828;color:#fdf4c1;">(A </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fabd2f;">pow</span><span style="background-color:#282828;color:#fdf4c1;">(v, u, N), b, N)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">K_s </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(S_s)
-</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;S_s&quot;</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;K_s&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;6. client sends proof of session key to server&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">M_c </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(H(N) </span><span style="background-color:#282828;color:#fe8019;">^ </span><span style="background-color:#282828;color:#fdf4c1;">H(g), H(I), s, A, B, K_c)
-</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;M_c&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;font-style:italic;color:#928374;"># client-&gt;server (M_c) ; server verifies M_c
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fabd2f;">print</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;7. server sends proof of session key to client&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">M_s </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">H(A, M_c, K_s)
-</span><span style="background-color:#282828;color:#fdf4c1;">global_print(</span><span style="background-color:#282828;color:#b8bb26;">&quot;M_s&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;font-style:italic;color:#928374;"># server-&gt;client (M_s) ;  client verifies M_s
+<pre style="background-color:#282828;">
+<span style="font-style:italic;color:#928374;"># An example SRP authentication
+# WARNING: Do not use for real cryptographic purposes beyond testing.
+# based on http://srp.stanford.edu/design.html
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fdf4c1aa;">hashlib
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fdf4c1aa;">random
+
+</span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">global_print</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">names</span><span style="color:#fdf4c1aa;">):
+    x </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">lambda </span><span style="color:#fdf4c1;">s</span><span style="color:#fdf4c1aa;">: [</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fdf4c1;">{}</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fdf4c1aa;">, </span><span style="color:#b8bb26;">&quot;0x</span><span style="color:#fdf4c1;">{:x}</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fdf4c1aa;">] [</span><span style="color:#fabd2f;">hasattr</span><span style="color:#fdf4c1;">(s, </span><span style="color:#b8bb26;">&#39;real&#39;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">]</span><span style="color:#fdf4c1;">.format(s)
+    </span><span style="color:#fabd2f;">print</span><span style="color:#fdf4c1;">(</span><span style="color:#b8bb26;">&quot;&quot;</span><span style="color:#fdf4c1;">.join(</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fdf4c1;">{}</span><span style="color:#b8bb26;"> = </span><span style="color:#fdf4c1;">{}</span><span style="color:#b8bb26;">\n&quot;</span><span style="color:#fdf4c1;">.format(name, x(</span><span style="color:#fabd2f;">globals</span><span style="color:#fdf4c1;">()[name])) </span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">name </span><span style="color:#fa5c4b;">in </span><span style="color:#fdf4c1;">names))
+
+</span><span style="font-style:italic;color:#928374;"># note: str converts as is, str( [1,2,3,4] ) will convert to &quot;[1,2,3,4]&quot;
+</span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">H</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">args</span><span style="color:#fdf4c1aa;">):  </span><span style="font-style:italic;color:#928374;"># a one-way hash function
+    </span><span style="color:#fdf4c1aa;">a </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;:&#39;</span><span style="color:#fdf4c1;">.join(</span><span style="color:#fabd2f;">str</span><span style="color:#fdf4c1;">(a) </span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">a </span><span style="color:#fa5c4b;">in </span><span style="color:#fdf4c1;">args)
+    </span><span style="color:#fa5c4b;">return </span><span style="color:#fabd2f;">int</span><span style="color:#fdf4c1;">(hashlib.sha256(a.encode(</span><span style="color:#b8bb26;">&#39;utf-8&#39;</span><span style="color:#fdf4c1;">)).hexdigest(), </span><span style="color:#d3869b;">16</span><span style="color:#fdf4c1;">)
+
+</span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">cryptrand</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">n</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">1024</span><span style="color:#fdf4c1aa;">):
+    </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">random.SystemRandom().getrandbits(n) </span><span style="color:#fe8019;">% </span><span style="color:#fdf4c1aa;">N
+
+</span><span style="font-style:italic;color:#928374;"># A large safe prime (N = 2q+1, where q is prime)
+# All arithmetic is done modulo N
+# (generated using &quot;openssl dhparam -text 1024&quot;)
+</span><span style="color:#fdf4c1aa;">N </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;&#39;&#39;00:c0:37:c3:75:88:b4:32:98:87:e6:1c:2d:a3:32:
+       4b:1b:a4:b8:1a:63:f9:74:8f:ed:2d:8a:41:0c:2f:
+       c2:1b:12:32:f0:d3:bf:a0:24:27:6c:fd:88:44:81:
+       97:aa:e4:86:a6:3b:fc:a7:b8:bf:77:54:df:b3:27:
+       c7:20:1f:6f:d1:7f:d7:fd:74:15:8b:d3:1c:e7:72:
+       c9:f5:f8:ab:58:45:48:a9:9a:75:9b:5a:2c:05:32:
+       16:2b:7b:62:18:e8:f1:42:bc:e2:c3:0d:77:84:68:
+       9a:48:3e:09:5e:70:16:18:43:79:13:a8:c3:9c:3d:
+       d0:d4:ca:3c:50:0b:88:5f:e3&#39;&#39;&#39;
+</span><span style="color:#fdf4c1aa;">N </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">int</span><span style="color:#fdf4c1;">(</span><span style="color:#b8bb26;">&#39;&#39;</span><span style="color:#fdf4c1;">.join(N.split()).replace(</span><span style="color:#b8bb26;">&#39;:&#39;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&#39;&#39;</span><span style="color:#fdf4c1;">), </span><span style="color:#d3869b;">16</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">g </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">2        </span><span style="font-style:italic;color:#928374;"># A generator modulo N
+
+</span><span style="color:#fdf4c1aa;">k </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">H(N, g)  </span><span style="font-style:italic;color:#928374;"># Multiplier parameter (k=3 in legacy SRP-6)
+
+</span><span style="color:#fabd2f;">print</span><span style="color:#fdf4c1;">(</span><span style="color:#b8bb26;">&quot;#. H, N, g, and k are known beforehand to both client and server:&quot;</span><span style="color:#fdf4c1;">)
+global_print(</span><span style="color:#b8bb26;">&quot;H&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;N&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;g&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;k&quot;</span><span style="color:#fdf4c1;">)
+
+</span><span style="color:#fabd2f;">print</span><span style="color:#fdf4c1;">(</span><span style="color:#b8bb26;">&quot;0. server stores (I, s, v) in its password database&quot;</span><span style="color:#fdf4c1;">)
+
+</span><span style="font-style:italic;color:#928374;"># the server must first generate the password verifier
+</span><span style="color:#fdf4c1aa;">I </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;person&quot;         </span><span style="font-style:italic;color:#928374;"># Username
+</span><span style="color:#fdf4c1aa;">p </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;password1234&quot;   </span><span style="font-style:italic;color:#928374;"># Password
+</span><span style="color:#fdf4c1aa;">s </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">cryptrand(</span><span style="color:#d3869b;">64</span><span style="color:#fdf4c1;">)    </span><span style="font-style:italic;color:#928374;"># Salt for the user
+</span><span style="color:#fdf4c1aa;">x </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">H(s, I, p)       </span><span style="font-style:italic;color:#928374;"># Private key
+</span><span style="color:#fdf4c1aa;">v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">pow</span><span style="color:#fdf4c1;">(g, x, N)     </span><span style="font-style:italic;color:#928374;"># Password verifier
+</span><span style="color:#fdf4c1;">global_print(</span><span style="color:#b8bb26;">&quot;I&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;p&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;s&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;x&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;v&quot;</span><span style="color:#fdf4c1;">)
+
+</span><span style="color:#fabd2f;">print</span><span style="color:#fdf4c1;">(</span><span style="color:#b8bb26;">&quot;1. client sends username I and public ephemeral value A to the server&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">a </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">cryptrand()
+</span><span style="color:#fdf4c1aa;">A </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">pow</span><span style="color:#fdf4c1;">(g, a, N)
+global_print(</span><span style="color:#b8bb26;">&quot;I&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;A&quot;</span><span style="color:#fdf4c1;">)  </span><span style="font-style:italic;color:#928374;"># client-&gt;server (I, A)
+
+</span><span style="color:#fabd2f;">print</span><span style="color:#fdf4c1;">(</span><span style="color:#b8bb26;">&quot;2. server sends user&#39;s salt s and public ephemeral value B to client&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">b </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">cryptrand()
+</span><span style="color:#fdf4c1aa;">B </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">(k </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1aa;">v </span><span style="color:#fe8019;">+ </span><span style="color:#fabd2f;">pow</span><span style="color:#fdf4c1;">(g, b, N)</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fe8019;">% </span><span style="color:#fdf4c1aa;">N
+</span><span style="color:#fdf4c1;">global_print(</span><span style="color:#b8bb26;">&quot;s&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;B&quot;</span><span style="color:#fdf4c1;">)  </span><span style="font-style:italic;color:#928374;"># server-&gt;client (s, B)
+
+</span><span style="color:#fabd2f;">print</span><span style="color:#fdf4c1;">(</span><span style="color:#b8bb26;">&quot;3. client and server calculate the random scrambling parameter&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">u </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">H(A, B)  </span><span style="font-style:italic;color:#928374;"># Random scrambling parameter
+</span><span style="color:#fdf4c1;">global_print(</span><span style="color:#b8bb26;">&quot;u&quot;</span><span style="color:#fdf4c1;">)
+
+</span><span style="color:#fabd2f;">print</span><span style="color:#fdf4c1;">(</span><span style="color:#b8bb26;">&quot;4. client computes session key&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">x </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">H(s, I, p)
+</span><span style="color:#fdf4c1aa;">S_c </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">pow</span><span style="color:#fdf4c1;">(B </span><span style="color:#fe8019;">- </span><span style="color:#fdf4c1;">k </span><span style="color:#fe8019;">* </span><span style="color:#fabd2f;">pow</span><span style="color:#fdf4c1;">(g, x, N), a </span><span style="color:#fe8019;">+ </span><span style="color:#fdf4c1;">u </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">x, N)
+</span><span style="color:#fdf4c1aa;">K_c </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">H(S_c)
+global_print(</span><span style="color:#b8bb26;">&quot;S_c&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;K_c&quot;</span><span style="color:#fdf4c1;">)
+
+</span><span style="color:#fabd2f;">print</span><span style="color:#fdf4c1;">(</span><span style="color:#b8bb26;">&quot;5. server computes session key&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">S_s </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">pow</span><span style="color:#fdf4c1;">(A </span><span style="color:#fe8019;">* </span><span style="color:#fabd2f;">pow</span><span style="color:#fdf4c1;">(v, u, N), b, N)
+</span><span style="color:#fdf4c1aa;">K_s </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">H(S_s)
+global_print(</span><span style="color:#b8bb26;">&quot;S_s&quot;</span><span style="color:#fdf4c1;">, </span><span style="color:#b8bb26;">&quot;K_s&quot;</span><span style="color:#fdf4c1;">)
+
+</span><span style="color:#fabd2f;">print</span><span style="color:#fdf4c1;">(</span><span style="color:#b8bb26;">&quot;6. client sends proof of session key to server&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">M_c </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">H(H(N) </span><span style="color:#fe8019;">^ </span><span style="color:#fdf4c1;">H(g), H(I), s, A, B, K_c)
+global_print(</span><span style="color:#b8bb26;">&quot;M_c&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="font-style:italic;color:#928374;"># client-&gt;server (M_c) ; server verifies M_c
+
+</span><span style="color:#fabd2f;">print</span><span style="color:#fdf4c1;">(</span><span style="color:#b8bb26;">&quot;7. server sends proof of session key to client&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">M_s </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">H(A, M_c, K_s)
+global_print(</span><span style="color:#b8bb26;">&quot;M_s&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="font-style:italic;color:#928374;"># server-&gt;client (M_s) ;  client verifies M_s
 </span></pre>
 <p>然后 SRP 的各种实现可以看这里： http://srp.stanford.edu/links.html</p>
 <p>或者可以去相应语言的包管理系统还有 Github 搜搜看，当然不要自己实现，除非你真的懂密码学 :-)</p>

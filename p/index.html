@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -322,6 +339,22 @@
     <h1>文章存档</h1>
     <div class="info"></div>
     <ul class="archive">
+        
+            <li>
+            <time>2020-04-12 17:13</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;kensington-orbit-trackball&#x2F;">Kensington Orbit 轨迹球</a>
+            </li>
+        
+            <li>
+            <time>2019-04-28 23:01</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-closure-and-copy&#x2F;">Rust 闭包环境捕获行为与 Copy trait</a>
+            </li>
+        
+            <li>
+            <time>2019-01-05 21:20</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;intel-5ghz-ap&#x2F;">Linux 下 Intel® 网卡开启 5Ghz AP</a>
+            </li>
+        
+            <li>
+            <time>2018-05-13 15:39</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;fcitx5&#x2F;">我也! 用上 fcitx5 了</a>
+            </li>
         
             <li>
             <time>2018-03-28 23:30</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ugly-rust&#x2F;">Rust 100 黑</a>
@@ -341,10 +374,6 @@
         
             <li>
             <time>2017-11-13 20:58</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;curve-interpolation&#x2F;">统计图的曲线插值</a>
-            </li>
-        
-            <li>
-            <time>2017-09-21 20:31</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;kailh-box&#x2F;">凯华 Box 轴拆解</a>
             </li>
         
             <li>
@@ -476,11 +505,11 @@
             </li>
         
             <li>
-            <time>2015-11-14 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;theme-color-in-chrome&#x2F;">给 Chrome for Android 设置顶栏颜色以及图标</a>
+            <time>2015-11-14 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;functional-programming-for-the-jvm&#x2F;">Clojure - Functional Programming for the JVM 中文版</a>
             </li>
         
             <li>
-            <time>2015-11-14 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;functional-programming-for-the-jvm&#x2F;">Clojure - Functional Programming for the JVM 中文版</a>
+            <time>2015-11-14 00:00</time><a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;theme-color-in-chrome&#x2F;">给 Chrome for Android 设置顶栏颜色以及图标</a>
             </li>
         
             <li>

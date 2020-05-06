@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -323,7 +340,7 @@
     <div class="info"><h2>没文档</h2><time>2015-06-18 00:00</time></div>
     <p><img src="https://t.williamgates.net/image-C4ED_55826551.jpg" alt="图" /></p>
 <p>上图为煎蛋无聊图爬虫里的comment储存结构体，在编码为json时发现需要定义几个东西，如下：</p>
-<!-- more -->
+<span id="continue-reading"></span>
 <p>对于想要编码成json的数据结构，都需要定义一个<code>to_json(io)</code></p>
 <p>然后返回编码后的String，这个方法在嵌套数据结构的时候会被自动调用</p>
 <p>需要注意的是，String必须转码，不然生成的json一团糟。用<code>to_json</code>方法就行（需要先<code>require &quot;json&quot;</code>）</p>
@@ -336,18 +353,18 @@
 <hr />
 <p>如果是简单的json结构，可以直接用<code>JSON.parse</code>解码</p>
 <p>但是里面的嵌套结构的类型还需要转换</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">require &quot;json&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">json = JSON.parse &quot;{\&quot;name1\&quot;:\&quot;value1\&quot;, \&quot;name2\&quot;:\&quot;value2\&quot;}&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">exit unless json.is_a?(Hash(String, JSON::Type)) # 类型断言
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">pp json.is_a?(Hash(String, JSON::Type))
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">pp json.is_a?(Hash(String, String))
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">pp json[&quot;name1&quot;].is_a?(String)
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">require &quot;json&quot;
+
+json = JSON.parse &quot;{\&quot;name1\&quot;:\&quot;value1\&quot;, \&quot;name2\&quot;:\&quot;value2\&quot;}&quot;
+
+exit unless json.is_a?(Hash(String, JSON::Type)) # 类型断言
+
+pp json.is_a?(Hash(String, JSON::Type))
+
+pp json.is_a?(Hash(String, String))
+
+pp json[&quot;name1&quot;].is_a?(String)
 </span></pre>
 <blockquote>
 <p>json.is_a?(Hash(String, JSON::Type)) = true</p>

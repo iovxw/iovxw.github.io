@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -326,59 +343,59 @@
 <p>说是系统级编程语言，可以和C无缝交互</p>
 <p>至于为什么说是go和rust的结合体</p>
 <p>看下面的例子就知道了（<a href="https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md">https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md</a>）</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">struct Bar {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">name: str;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">struct Baz {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">name: str;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">trait Foo {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">func fooBar();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">impl Foo for Bar {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">func fooBar() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">println(&quot;foobar method in foo for bar %s!&quot;, name);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">impl Foo for Baz {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">func fooBar() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">println(&quot;foobar method in foo for baz %s!&quot;, name);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">// attributes look cool
-</span><span style="background-color:#282828;color:#fdf4c1aa;">// basically generics, we need to use
-</span><span style="background-color:#282828;color:#fdf4c1aa;">// them in this case instead of saying `value: Foo` as
-</span><span style="background-color:#282828;color:#fdf4c1aa;">// a param, because a trait does not have a constant
-</span><span style="background-color:#282828;color:#fdf4c1aa;">// size that is known at compile time, so the generic
-</span><span style="background-color:#282828;color:#fdf4c1aa;">// will basically compile down to [in this case] two
-</span><span style="background-color:#282828;color:#fdf4c1aa;">// functions one for Bar, and one for Baz, then it
-</span><span style="background-color:#282828;color:#fdf4c1aa;">// will know the size of the given value.
-</span><span style="background-color:#282828;color:#fdf4c1aa;">// this might be weird to understand but its 1am and im
-</span><span style="background-color:#282828;color:#fdf4c1aa;">// ill and tired. jah bless xx
-</span><span style="background-color:#282828;color:#fdf4c1aa;">func [T: Foo] callFooBar(value: T) {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">func main() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">// monomorphisation????
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">baz: Baz = {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">name: &quot;baz&quot;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">};
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">bar: Bar = {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">name: &quot;bar&quot;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">callFooBar(baz);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">callFooBar(bar);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">struct Bar {
+    name: str;
+}
+
+struct Baz {
+    name: str;
+}
+
+trait Foo {
+    func fooBar();
+}
+
+impl Foo for Bar {
+    func fooBar() {
+        println(&quot;foobar method in foo for bar %s!&quot;, name);
+    }
+}
+
+impl Foo for Baz {
+    func fooBar() {
+        println(&quot;foobar method in foo for baz %s!&quot;, name);
+    }
+}
+
+
+// attributes look cool
+// basically generics, we need to use
+// them in this case instead of saying `value: Foo` as
+// a param, because a trait does not have a constant
+// size that is known at compile time, so the generic
+// will basically compile down to [in this case] two
+// functions one for Bar, and one for Baz, then it
+// will know the size of the given value.
+// this might be weird to understand but its 1am and im
+// ill and tired. jah bless xx
+func [T: Foo] callFooBar(value: T) {
+
+}
+
+func main() {
+    // monomorphisation????
+    baz: Baz = {
+        name: &quot;baz&quot;,
+    };
+
+    bar: Bar = {
+        name: &quot;bar&quot;,
+    }
+
+    callFooBar(baz);
+    callFooBar(bar);
+}
 </span></pre>
 </article>
 <div id="disqus_thread"></div>

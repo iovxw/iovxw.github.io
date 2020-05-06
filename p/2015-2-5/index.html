@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -351,27 +368,27 @@
 <p>依赖只有一个nwjs，基本什么平台都可以用</p>
 <p>然后支持很方便的自定义控件（只要实现一个方法即可，会自动用反射来调用），以及写一个自定义控件的教程（计划中）</p>
 <p>来一段例子：</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">var w *Window
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">w = &amp;Window{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">Title:  &quot;window&quot;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">Width:  800,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">Height: 600,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">Controls: []interface{}{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">&amp;Button{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">ID:   &quot;btn0&quot;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">Text: &quot;button&quot;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">OnClick: func() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                    </span><span style="background-color:#282828;color:#fdf4c1aa;">println(GetConByID(&quot;btn0&quot;).(*Button).Text)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">},
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">},
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">&amp;Button{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">ID:   &quot;btn1&quot;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">Text: &quot;button&quot;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">},
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">},
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">w.Show()
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">	var w *Window
+	w = &amp;Window{
+		Title:  &quot;window&quot;,
+		Width:  800,
+		Height: 600,
+		Controls: []interface{}{
+			&amp;Button{
+				ID:   &quot;btn0&quot;,
+				Text: &quot;button&quot;,
+				OnClick: func() {
+					println(GetConByID(&quot;btn0&quot;).(*Button).Text)
+				},
+			},
+			&amp;Button{
+				ID:   &quot;btn1&quot;,
+				Text: &quot;button&quot;,
+			},
+		},
+	}
+	w.Show()
 </span></pre>
 <p>当然这个库还只是写了个框架（就是说上面说的大部分功能都还没实现(别激动别激动)）</p>
 <p>控件什么的也只写了一个按钮和一个自定义窗口边框来做演示</p>

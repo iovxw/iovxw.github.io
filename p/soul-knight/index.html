@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -325,14 +342,14 @@
 <p>可惜没有云存档，在经历了某次事件后，我的存档和我说了再见</p>
 <p>重新打？我没那毅力。不过既然是本地的，改起来也容易</p>
 <p>流程如下：</p>
-<!-- more -->
+<span id="continue-reading"></span>
 <hr />
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">adb backup -shared com.ChillyRoom.DungeonShooter
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">adb backup -shared com.ChillyRoom.DungeonShooter
 </span></pre>
 <p><a href="https://github.com/nelenkov/android-backup-extractor">https://github.com/nelenkov/android-backup-extractor</a></p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">abe unpack backup.ab backup.tar
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">abe unpack backup.ab backup.tar
 </span></pre>
 <p>/apps/com.ChillyRoom.DungeonShooter/sp/com.ChillyRoom.DungeonShooter.v2.playerprefs.xml</p>
 <p>改就行了，宝石数量有三个值都要改，其他悠着来，改大了玩起来就没意思了</p>

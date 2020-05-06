@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -325,9 +342,9 @@
 <p>先扔一个效果图</p>
 <p>Atom我就不介绍了，自己去看WIKI吧</p>
 <p>ubuntu快速安装：</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">sudo add-apt-repository ppa:webupd8team/atom
-</span><span style="background-color:#282828;color:#fdf4c1aa;">sudo apt-get update &amp;&amp; sudo apt-get install atom
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">sudo add-apt-repository ppa:webupd8team/atom
+sudo apt-get update &amp;&amp; sudo apt-get install atom
 </span></pre>
 <p>MAC可以直接从<a href="https://atom.io">官网</a>下载</p>
 <p>其他系统就自己编译吧</p>

@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;golang-type-switch&#x2F;">Golang类型switch</a></h1>
+              <div class="info">
+                <h2>语法强迫症</h2>
+                <time>2014-11-21 00:00</time>
+              </div>
+              
+                <p>在群里讨论到了这个问题</p>
+<p>然后下面这是官方给出的例子</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">var t interface{}
+t = functionOfSomeType()
+switch t := t.(type) {
+default:
+    fmt.Printf(&quot;unexpected type %T&quot;, t)       // %T prints whatever type t has
+case bool:
+    fmt.Printf(&quot;boolean %t\n&quot;, t)             // t has type bool
+case int:
+    fmt.Printf(&quot;integer %d\n&quot;, t)             // t has type int
+case *bool:
+    fmt.Printf(&quot;pointer to boolean %t\n&quot;, *t) // t has type *bool
+case *int:
+    fmt.Printf(&quot;pointer to integer %d\n&quot;, *t) // t has type *int
+}
+</span></pre>
+<p>里面有几点要注意一下</p>
+<p>在<code>switch t := t.(type)</code>时</p>
+<p><code>switch</code>的其实是<code>t.(type)</code>而不是被创建的<code>t</code></p>
+<p>然后<code>t := t.(type)</code>创建的是类型为<code>t.(type)</code>，值为<code>t</code>的值的一个变量</p>
+<p>里面所使用的<code>t</code>都是<code>switch</code>里新建的那个<code>t</code></p>
+<hr />
+<p>等于下面这个例子</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">var t interface{}
+t = functionOfSomeType()
+switch t.(type) {
+default:
+    fmt.Printf(&quot;unexpected type %T&quot;, t)       // %T prints whatever type t has
+case bool:
+    t := t.(bool)
+    fmt.Printf(&quot;boolean %t\n&quot;, t)             // t has type bool
+case int:
+    t := t.(int)
+    fmt.Printf(&quot;integer %d\n&quot;, t)             // t has type int
+case *bool:
+    t := t.(*bool)
+    fmt.Printf(&quot;pointer to boolean %t\n&quot;, *t) // t has type *bool
+case *int:
+    t := t.(*int)
+    fmt.Printf(&quot;pointer to integer %d\n&quot;, *t) // t has type *int
+}
+</span></pre>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;new-template&#x2F;">更新了下模板</a></h1>
+              <div class="info">
+                <h2>瞬间高大上</h2>
+                <time>2014-11-07 00:00</time>
+              </div>
+              
+                <p>除了50行的custom.css和几行html修改之外全部都是直接找的模板哇咔咔</p>
+<p>虽然上上上次说要重新写一个静态博客生成工具，而且Golang的模板工具和页面模板已经写完了。但是最近又开了个坑所以就……</p>
+<p>无限延期吧……</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;leveldb&#x2F;">LevelDB储存过程解析</a></h1>
+              <div class="info">
+                <h2>写的乱糟糟的</h2>
+                <time>2014-10-31 00:00</time>
+              </div>
+              
+                <p>本文是研究LevelDB结构之后为了加深印象写的，然后主要是写存储过程的细节（其实本来像画个gif来实现的，但是太麻烦了……）。细节部分都是靠各种资料总结的，然后推荐先看一下文章底部的资料，因为有些重复部分没写</p>
+<p>如有理解错误，还请指出</p>
+<hr />
+<p>首先收到一个添加key的请求，先直接写入log文件（追加写入）</p>
+<p>然后插入到内存的储存区（内存储存区内按照key的顺序排列），等到内存储存的数据达到一定大小后（1M），将内存内的数据写入level为0的sst文件内，然后删除log（这里说一下需要注意的是level0内的数据都是直接从内存写入的，所以不同sst文件的key可能会有重复，和其他level不同，其他level在合并的时候都会去掉重复key，不过level0不经过合并这个步骤（当然要是每次从内存写入的时候都更新一下也行，但是io消耗太大，不如在合并到level1的时候进行操作）。所以说level0和其他level相比，更像一个缓存数据用的）</p>
+<p>等到level0级别的sst文件达到一定数量后，挑选其中一个sst文件合并到level1（如果没有level1那么就生成level1，其他level也是这么来的。然后因为level0会有重复key（上面也说过原因），所以合并到level1的时候会先去掉和被选中的sst文件内重复的key再合并（所以可能会涉及到level0级别的多个sst文件更新））</p>
+<p>合并的时候会检查level0中的key是否和level1中的key有重合，如果有重合那就读取重合的文件和level0中被挑选的sst文件进行更新key，然后排序key之后再按照2M一个sst文件写入level1（这里就可以看出key按照顺序排列的好处了，因为挨着的key基本都在一个文件里，从level0里选择sst文件的key是挨着的，level1的也是，更新的话只需要更新1~2个文件，能减少需要读取的sst文件个数。比如level0抽取的sst文件key是<code>A1~C3</code>的，和level1里面<code>A1~C5</code>的sst刚好能重合，就只需要读取一个文件进行合并了。如果是按照插入顺序之类的乱序，可能会从N个文件里找到重复的key，合并需要读取的文件也就会更多了）</p>
+<p>等到level1的文件数据达到10M时（每个级别最大数据量为<code>10^level</code>，level1为10M，level2就是100M），就选择其中一个sst文件合并到leve2。合并方法也是找到重复的key更新，排序，然后生成sst。不过这一层的sst单个文件不再是2M，而是更大一些，每增加一层sst文件最大限制都会扩大。这样设计是为了一层满了之后不至于逐层更新。</p>
+<p>剩下的level层也是像上面那样进行更新，所以level最大的一层，数据也是最旧的</p>
+<p>删除操作和更新操作基本也都是直接插入数据，只不过删除操作插入的是删除标记，更新操作是直接重新插入一遍数据（在level合并的时候会进行处理更新）</p>
+<p>在进行读取key的时候，会先从内存查找是否有这个key，然后再到level0查找，如果还是没有就会到更高层level挨个查找，因为越高层数据越旧，没有被更新到的可能也就越大（比如一个储存在level3的key被在level2标记了删除，但是还没更新到。那么当查找这个key的时候就会优先找到在level2的删除标记（当然level3的key也会在多次合并操作之后被删除掉））</p>
+<p>本文章配合以下资料阅读更佳：</p>
+<p><a href="http://blog.nosqlfan.com/html/2882.html">http://blog.nosqlfan.com/html/2882.html</a></p>
+<p><a href="http://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html">http://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html</a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;gohtml&#x2F;">Golang 模板工具</a></h1>
+              <div class="info">
+                <h2>生成器</h2>
+                <time>2014-10-27 00:00</time>
+              </div>
+              
+                <p>就是上一篇文章里说的那个，写完之后发现挺奇葩的</p>
+<p>项目地址：<a href="https://github.com/Bluek404/GoHTML">https://github.com/Bluek404/GoHTML</a></p>
+<p>介绍什么的直接扔README了：</p>
+<hr />
+<h1 id="gohtml">GoHTML</h1>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;"> ██████╗         ██╗  ██╗████████╗███╗   ███╗██╗
+██╔════╝  █████╗ ██║  ██║╚══██╔══╝████╗ ████║██║
+██║  ███╗██╔══██╗███████║   ██║   ██╔████╔██║██║
+██║   ██║██║  ██║██╔══██║   ██║   ██║╚██╔╝██║██║
+╚██████╔╝╚█████╔╝██║  ██║   ██║   ██║ ╚═╝ ██║███████╗
+ ╚═════╝  ╚════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝╚══════╝
+</span></pre>
+<p>Golang HTML模板，非正式项目</p>
+<p>基本就是写着玩的</p>
+<p>可以将Golang和HTML写在一起，然后用本工具转换成Golang文件</p>
+<p>基本功能就是将<code>&lt;a&gt;</code>转换成<code>buffer.WriteString(&quot;&lt;a&gt;&quot;)</code></p>
+<h2 id="li-zi">例子</h2>
+<p><strong>转换前：</strong></p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">package tpl
+
+import (
+	&quot;fmt&quot;
+	&quot;bytes&quot;
+)
+
+func Index() string {
+	_buffer := new(bytes.Buffer)
+
+	&lt;a&gt;Text&lt;/a&gt;
+
+	for i:=0; i&lt;10; i++ {
+		&lt;a&gt;{​{string(i)}}&lt;/a&gt;
+	}
+
+	var t string = &quot;2&quot;
+	fmt.Println(t)
+
+	print:=func() {
+		&lt;a&gt;text&lt;/a&gt;
+	}
+	print()
+
+	test1(_buffer)
+	test2(_buffer, t)
+
+	return _buffer.String()
+}
+
+func test1(_buffer *bytes.Buffer) {
+	&lt;a&gt;test1&lt;/a&gt;
+}
+
+func test2(_buffer *bytes.Buffer, t string) {
+	&lt;a&gt;test{​{t}}&lt;/a&gt;
+}
+</span></pre>
+<p><strong>转换后：</strong></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">package</span><span style="color:#fdf4c1aa;"> tpl
+
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fdf4c1aa;">(
+	</span><span style="color:#b8bb26;">&quot;fmt&quot;
+	&quot;bytes&quot;
+</span><span style="color:#fdf4c1aa;">)
+
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">Index</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">string </span><span style="color:#fdf4c1aa;">{
+	</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">:= </span><span style="color:#fabd2f;">new</span><span style="color:#fdf4c1;">(bytes.Buffer)</span><span style="color:#fdf4c1aa;">
+
+	_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;Text&lt;/a&gt;&quot;</span><span style="color:#fdf4c1;">)
+
+	</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">i</span><span style="color:#fe8019;">:=</span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">; i</span><span style="color:#fe8019;">&lt;</span><span style="color:#d3869b;">10</span><span style="color:#fdf4c1aa;">; i</span><span style="color:#fe8019;">++ </span><span style="color:#fdf4c1aa;">{
+		_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">
+		_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#fa5c4b;">string</span><span style="color:#fdf4c1;">(i))</span><span style="color:#fdf4c1aa;">
+		_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;/a&gt;&quot;</span><span style="color:#fdf4c1;">)
+	</span><span style="color:#fdf4c1aa;">}
+
+	</span><span style="color:#fa5c4b;">var </span><span style="color:#fdf4c1;">t </span><span style="color:#fa5c4b;">string </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;2&quot;</span><span style="color:#fdf4c1aa;">
+	fmt</span><span style="color:#fdf4c1;">.Println(t)
+
+	print</span><span style="color:#fe8019;">:=</span><span style="color:#fa5c4b;">func</span><span style="color:#fdf4c1aa;">() {
+		_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;text&lt;/a&gt;&quot;</span><span style="color:#fdf4c1;">)
+	</span><span style="color:#fdf4c1aa;">}
+	</span><span style="color:#fabd2f;">print</span><span style="color:#fdf4c1;">()
+
+	test1(_buffer)
+	test2(_buffer,t)
+
+	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> _buffer</span><span style="color:#fdf4c1;">.String()
+</span><span style="color:#fdf4c1aa;">}
+
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test1</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">bytes.Buffer) {
+	_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;test1&lt;/a&gt;&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">}
+
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test2</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">bytes.Buffer, </span><span style="color:#fdf4c1;">t </span><span style="color:#fa5c4b;">string</span><span style="color:#fdf4c1aa;">) {
+	_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;test&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">
+	_buffer</span><span style="color:#fdf4c1;">.WriteString(t)</span><span style="color:#fdf4c1aa;">
+	_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;/a&gt;&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>然后就可以直接调用里面的函数作为<code>http.HandleFunc</code></p>
+<h2 id="shi-yong-bang-zhu">使用帮助</h2>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">$ go run GoHTML.go
+
+ ██████╗         ██╗  ██╗████████╗███╗   ███╗██╗
+██╔════╝  █████╗ ██║  ██║╚══██╔══╝████╗ ████║██║
+██║  ███╗██╔══██╗███████║   ██║   ██╔████╔██║██║
+██║   ██║██║  ██║██╔══██║   ██║   ██║╚██╔╝██║██║
+╚██████╔╝╚█████╔╝██║  ██║   ██║   ██║ ╚═╝ ██║███████╗
+ ╚═════╝  ╚════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝╚══════╝
+=====================================================
+GoHTML使用帮助:
+===============
+
+命令结构:
+  命令 [参数] &lt;模板文件夹路径&gt;
+
+参数：
+  -dl &lt;字符串&gt;     | 默认：{{      | 左分隔符样式
+  -dr &lt;字符串&gt;     | 默认：}}      | 右分隔符样式
+  -suffix &lt;字符串&gt; | 默认：gohtml  | GoHTML模板文件后缀
+  -buffer &lt;字符串&gt; | 默认：_buffer | 缓冲器变量名称
+
+举例：
+  $ gohtml -dl &lt;{ -dr }&gt; -suffix temp -buffer buf /home/bluek404/gocode/web/view
+   | 则会将
+   | /home/bluek404/gocode/web/view
+   | 里面所有temp为后缀的文件转换为go文件后放到同一文件夹内
+   | 将缓冲器变量名称设为“buf”
+   | 并设置左分隔符为“&lt;{” ，右分割符为“}&gt;”
+
+备注：
+  方括号[]为选填项目，尖括号&lt;&gt;为必填项目
+</span></pre><h2 id="yuan-ma-gui-fan">源码规范</h2>
+<p>作为<code>http.HandleFunc</code>的函数，必须返回值只有一个<code>string</code>（因为多了就不符合<code>http.HandleFunc</code>的要求了）</p>
+<p>然后里面必须创建一个类型为<code>*bytes.Buffer</code>的变量，变量名称需要和设置的一样（默认是<code>_buffer</code>）。这个缓冲器是用于存放要输出的HTML代码的</p>
+<p>然后作为<code>http.HandleFunc</code>的函数的返回值需要是<code>_buffer.String()</code>，如果你自定义了缓冲器变量名称，需要相应的改变</p>
+<p>负责处理部分html的函数，推荐写成上面例子里的样式（接收一个缓冲器变量），就像：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test1</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">bytes.Buffer) {
+    </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1aa;">test1</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>因为会转换成：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test1</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">bytes.Buffer) {
+    _buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;test1&lt;/a&gt;&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>这个样子</p>
+<p>当然你要是写成函数里新建一个缓冲器变量然后再<code>return</code>也是没问题的</p>
+<p>不过那样就需要在使用函数的地方再加一个输出了（相当麻烦）</p>
+<p>所以就乖乖按照标准写吧</p>
+<p>然后还有一点要注意</p>
+<p>就是分隔符输出变量那里，比如<code>{​{t}}</code></p>
+<p>这里的分隔符只有在HTML中才会被转换，就像<code>&lt;a&gt;{​{t}}&lt;/a&gt;</code></p>
+<p>写在别的地方是不会转换的，比如：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;
+</span><span style="color:#fa5c4b;">if</span><span style="color:#fdf4c1aa;"> i</span><span style="color:#fe8019;">==</span><span style="color:#d3869b;">0 </span><span style="color:#fdf4c1aa;">{
+    {​{t1}}
+}</span><span style="color:#fa5c4b;">else</span><span style="color:#fdf4c1aa;">{
+    {​{t2}}
+}
+</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;
+</span></pre>
+<p>必须写成</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">if</span><span style="color:#fdf4c1aa;"> i</span><span style="color:#fe8019;">==</span><span style="color:#d3869b;">0 </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1aa;">{​{t1}}</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;
+</span><span style="color:#fdf4c1aa;">}</span><span style="color:#fa5c4b;">else</span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1aa;">{​{t2}}</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>这样才可以</p>
+<h2 id="zi-dong-zhuan-huan">自动转换</h2>
+<p>每次更新完模板后都要手动执行一次转换工具一定是超麻烦的</p>
+<p>所以需要自动的工具</p>
+<p>这里推荐<a href="https://github.com/Unknwon">Unknwon</a>的<a href="https://github.com/Unknwon/bra/">BRA</a>（名字好像有点奇怪？），当然其他相似功能的工具也是可以的（如果有更好的还拜托推荐一下）</p>
+<p>具体使用方法这里就不说了，自己去看吧</p>
+<h2 id="xia-zai">下载</h2>
+<p><a href="http://gobuild.io/github.com/Bluek404/GoHTML"><img src="http://gobuild.io/badge/github.com/Bluek404/GoHTML/downloads.svg" alt="Gobuild Download" /></a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;kengdie&#x2F;">在写一个新的静态博客生成工具</a></h1>
+              <div class="info">
+                <h2>轮子、轮子、轮</h2>
+                <time>2014-10-02 00:00</time>
+              </div>
+              
+                <p>目标是“完全没有可定制性”</p>
+<p>模板已经写好了</p>
+<p>但是后端基本没写</p>
+<p>而且因为Golang本身的template包实在不好用</p>
+<p>于是准备重写一个（又是大坑）</p>
+<p>然后……</p>
+<p>估计就没有然后了……</p>
+<p><img src="https://iovxw.net/p/kengdie/0.png" alt="" /></p>
+<p><img src="https://iovxw.net/p/kengdie/1.png" alt="" /></p>
+<p><img src="https://iovxw.net/p/kengdie/2.png" alt="" /></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;new-highlight&#x2F;">换了一个高亮插件</a></h1>
+              <div class="info">
+                <h2>还是因为懒……</h2>
+                <time>2014-09-03 00:00</time>
+              </div>
+              
+                <p>这个高亮脚本就叫做highlightjs</p>
+<p>因为主题比较多</p>
+<p>所以就直接换成这个了</p>
+<p>支持92种语言和49种高亮主题</p>
+<p>官网：<br />
+https://highlightjs.org</p>
+<p>主题列表&amp;预览：
+https://highlightjs.org/static/test.html</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">package</span><span style="color:#fdf4c1aa;"> main
+
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fdf4c1aa;">(
+	</span><span style="color:#b8bb26;">&quot;fmt&quot;
+	&quot;math/rand&quot;
+	&quot;sync/atomic&quot;
+	&quot;time&quot;
+</span><span style="color:#fdf4c1aa;">)
+
+</span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">readOp </span><span style="color:#fa5c4b;">struct </span><span style="color:#fdf4c1aa;">{
+	</span><span style="color:#fdf4c1;">key  </span><span style="color:#fa5c4b;">int
+	</span><span style="color:#fdf4c1;">resp </span><span style="color:#fa5c4b;">chan int
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">writeOp </span><span style="color:#fa5c4b;">struct </span><span style="color:#fdf4c1aa;">{
+	</span><span style="color:#fdf4c1;">key  </span><span style="color:#fa5c4b;">int
+	</span><span style="color:#fdf4c1;">val  </span><span style="color:#fa5c4b;">int
+	</span><span style="color:#fdf4c1;">resp </span><span style="color:#fa5c4b;">chan bool
+</span><span style="color:#fdf4c1aa;">}
+
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">main</span><span style="color:#fdf4c1aa;">() {
+
+	</span><span style="color:#fa5c4b;">var </span><span style="color:#fdf4c1;">ops </span><span style="color:#fa5c4b;">int64
+
+	</span><span style="color:#fdf4c1;">reads </span><span style="color:#fe8019;">:= </span><span style="color:#fabd2f;">make</span><span style="color:#fdf4c1;">(</span><span style="color:#fa5c4b;">chan </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">readOp)
+	writes </span><span style="color:#fe8019;">:= </span><span style="color:#fabd2f;">make</span><span style="color:#fdf4c1;">(</span><span style="color:#fa5c4b;">chan </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">writeOp)
+
+	</span><span style="color:#fa5c4b;">go func</span><span style="color:#fdf4c1aa;">() {
+		</span><span style="color:#fa5c4b;">var </span><span style="color:#fdf4c1;">state </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">make</span><span style="color:#fdf4c1;">(</span><span style="color:#fa5c4b;">map</span><span style="color:#fdf4c1;">[</span><span style="color:#fa5c4b;">int</span><span style="color:#fdf4c1;">]</span><span style="color:#fa5c4b;">int</span><span style="color:#fdf4c1;">)
+		</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">{
+			</span><span style="color:#fa5c4b;">select </span><span style="color:#fdf4c1aa;">{
+			</span><span style="color:#fa5c4b;">case </span><span style="color:#fdf4c1;">read </span><span style="color:#fe8019;">:= &lt;-</span><span style="color:#fdf4c1aa;">reads:
+				read.</span><span style="color:#fdf4c1;">resp </span><span style="color:#fe8019;">&lt;-</span><span style="color:#fdf4c1aa;"> state[read.</span><span style="color:#fdf4c1;">key</span><span style="color:#fdf4c1aa;">]
+			</span><span style="color:#fa5c4b;">case </span><span style="color:#fdf4c1;">write </span><span style="color:#fe8019;">:= &lt;-</span><span style="color:#fdf4c1aa;">writes:
+				state[write.</span><span style="color:#fdf4c1;">key</span><span style="color:#fdf4c1aa;">] </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> write.</span><span style="color:#fdf4c1;">val</span><span style="color:#fdf4c1aa;">
+				write.</span><span style="color:#fdf4c1;">resp </span><span style="color:#fe8019;">&lt;- </span><span style="color:#d3869b;">true
+			</span><span style="color:#fdf4c1aa;">}
+		}
+	}()
+
+	</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">r </span><span style="color:#fe8019;">:= </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">; r </span><span style="color:#fe8019;">&lt; </span><span style="color:#d3869b;">100</span><span style="color:#fdf4c1aa;">; r</span><span style="color:#fe8019;">++ </span><span style="color:#fdf4c1aa;">{
+		</span><span style="color:#fa5c4b;">go func</span><span style="color:#fdf4c1aa;">() {
+			</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">{
+				</span><span style="color:#fdf4c1;">read </span><span style="color:#fe8019;">:= &amp;</span><span style="color:#fdf4c1aa;">readOp{
+					</span><span style="color:#8ec07c;">key</span><span style="color:#fdf4c1aa;">:  rand</span><span style="color:#fdf4c1;">.Intn(</span><span style="color:#d3869b;">5</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">,
+					</span><span style="color:#8ec07c;">resp</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fabd2f;">make</span><span style="color:#fdf4c1;">(</span><span style="color:#fa5c4b;">chan int</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">}
+				reads </span><span style="color:#fe8019;">&lt;-</span><span style="color:#fdf4c1aa;"> read
+				</span><span style="color:#fe8019;">&lt;-</span><span style="color:#fdf4c1aa;">read.</span><span style="color:#fdf4c1;">resp</span><span style="color:#fdf4c1aa;">
+				atomic</span><span style="color:#fdf4c1;">.AddInt64(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">ops, </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">)
+			</span><span style="color:#fdf4c1aa;">}
+		}()
+	}
+
+	</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">w </span><span style="color:#fe8019;">:= </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">; w </span><span style="color:#fe8019;">&lt; </span><span style="color:#d3869b;">10</span><span style="color:#fdf4c1aa;">; w</span><span style="color:#fe8019;">++ </span><span style="color:#fdf4c1aa;">{
+		</span><span style="color:#fa5c4b;">go func</span><span style="color:#fdf4c1aa;">() {
+			</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">{
+				</span><span style="color:#fdf4c1;">write </span><span style="color:#fe8019;">:= &amp;</span><span style="color:#fdf4c1aa;">writeOp{
+					</span><span style="color:#8ec07c;">key</span><span style="color:#fdf4c1aa;">:  rand</span><span style="color:#fdf4c1;">.Intn(</span><span style="color:#d3869b;">5</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">,
+					</span><span style="color:#8ec07c;">val</span><span style="color:#fdf4c1aa;">:  rand</span><span style="color:#fdf4c1;">.Intn(</span><span style="color:#d3869b;">100</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">,
+					</span><span style="color:#8ec07c;">resp</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fabd2f;">make</span><span style="color:#fdf4c1;">(</span><span style="color:#fa5c4b;">chan bool</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">}
+				writes </span><span style="color:#fe8019;">&lt;-</span><span style="color:#fdf4c1aa;"> write
+				</span><span style="color:#fe8019;">&lt;-</span><span style="color:#fdf4c1aa;">write.</span><span style="color:#fdf4c1;">resp</span><span style="color:#fdf4c1aa;">
+				atomic</span><span style="color:#fdf4c1;">.AddInt64(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">ops, </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">)
+			</span><span style="color:#fdf4c1aa;">}
+		}()
+	}
+
+	time</span><span style="color:#fdf4c1;">.Sleep(time.Second)
+
+	opsFinal </span><span style="color:#fe8019;">:=</span><span style="color:#fdf4c1aa;"> atomic</span><span style="color:#fdf4c1;">.LoadInt64(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">ops)</span><span style="color:#fdf4c1aa;">
+	fmt</span><span style="color:#fdf4c1;">.Println(</span><span style="color:#b8bb26;">&quot;ops:&quot;</span><span style="color:#fdf4c1;">, opsFinal)
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;google-code-prettify&#x2F;">给博客添加了代码高亮</a></h1>
+              <div class="info">
+                <h2>Google Code Prettify</h2>
+                <time>2014-09-01 00:00</time>
+              </div>
+              
+                <p>使用的是Google Code Prettify</p>
+<p>因为这个js是google code用的，所以各种语言支持比较全面（当然主要是因为Golang才用的）</p>
+<p>直接用的默认css</p>
+<p>所以和博客主题不是很搭</p>
+<p>准备有时间自己修改一下（目测这几个月内是不行了）</p>
+<p>来一段测试一下：</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">package</span><span style="color:#fdf4c1aa;"> main
+
+</span><span style="color:#fa5c4b;">import </span><span style="color:#fdf4c1aa;">(
+	</span><span style="color:#b8bb26;">&quot;fmt&quot;
+	&quot;math/rand&quot;
+	&quot;sync/atomic&quot;
+	&quot;time&quot;
+</span><span style="color:#fdf4c1aa;">)
+
+</span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">readOp </span><span style="color:#fa5c4b;">struct </span><span style="color:#fdf4c1aa;">{
+	</span><span style="color:#fdf4c1;">key  </span><span style="color:#fa5c4b;">int
+	</span><span style="color:#fdf4c1;">resp </span><span style="color:#fa5c4b;">chan int
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">writeOp </span><span style="color:#fa5c4b;">struct </span><span style="color:#fdf4c1aa;">{
+	</span><span style="color:#fdf4c1;">key  </span><span style="color:#fa5c4b;">int
+	</span><span style="color:#fdf4c1;">val  </span><span style="color:#fa5c4b;">int
+	</span><span style="color:#fdf4c1;">resp </span><span style="color:#fa5c4b;">chan bool
+</span><span style="color:#fdf4c1aa;">}
+
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">main</span><span style="color:#fdf4c1aa;">() {
+
+	</span><span style="color:#fa5c4b;">var </span><span style="color:#fdf4c1;">ops </span><span style="color:#fa5c4b;">int64
+
+	</span><span style="color:#fdf4c1;">reads </span><span style="color:#fe8019;">:= </span><span style="color:#fabd2f;">make</span><span style="color:#fdf4c1;">(</span><span style="color:#fa5c4b;">chan </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">readOp)
+	writes </span><span style="color:#fe8019;">:= </span><span style="color:#fabd2f;">make</span><span style="color:#fdf4c1;">(</span><span style="color:#fa5c4b;">chan </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">writeOp)
+
+	</span><span style="color:#fa5c4b;">go func</span><span style="color:#fdf4c1aa;">() {
+		</span><span style="color:#fa5c4b;">var </span><span style="color:#fdf4c1;">state </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">make</span><span style="color:#fdf4c1;">(</span><span style="color:#fa5c4b;">map</span><span style="color:#fdf4c1;">[</span><span style="color:#fa5c4b;">int</span><span style="color:#fdf4c1;">]</span><span style="color:#fa5c4b;">int</span><span style="color:#fdf4c1;">)
+		</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">{
+			</span><span style="color:#fa5c4b;">select </span><span style="color:#fdf4c1aa;">{
+			</span><span style="color:#fa5c4b;">case </span><span style="color:#fdf4c1;">read </span><span style="color:#fe8019;">:= &lt;-</span><span style="color:#fdf4c1aa;">reads:
+				read.</span><span style="color:#fdf4c1;">resp </span><span style="color:#fe8019;">&lt;-</span><span style="color:#fdf4c1aa;"> state[read.</span><span style="color:#fdf4c1;">key</span><span style="color:#fdf4c1aa;">]
+			</span><span style="color:#fa5c4b;">case </span><span style="color:#fdf4c1;">write </span><span style="color:#fe8019;">:= &lt;-</span><span style="color:#fdf4c1aa;">writes:
+				state[write.</span><span style="color:#fdf4c1;">key</span><span style="color:#fdf4c1aa;">] </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> write.</span><span style="color:#fdf4c1;">val</span><span style="color:#fdf4c1aa;">
+				write.</span><span style="color:#fdf4c1;">resp </span><span style="color:#fe8019;">&lt;- </span><span style="color:#d3869b;">true
+			</span><span style="color:#fdf4c1aa;">}
+		}
+	}()
+
+	</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">r </span><span style="color:#fe8019;">:= </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">; r </span><span style="color:#fe8019;">&lt; </span><span style="color:#d3869b;">100</span><span style="color:#fdf4c1aa;">; r</span><span style="color:#fe8019;">++ </span><span style="color:#fdf4c1aa;">{
+		</span><span style="color:#fa5c4b;">go func</span><span style="color:#fdf4c1aa;">() {
+			</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">{
+				</span><span style="color:#fdf4c1;">read </span><span style="color:#fe8019;">:= &amp;</span><span style="color:#fdf4c1aa;">readOp{
+					</span><span style="color:#8ec07c;">key</span><span style="color:#fdf4c1aa;">:  rand</span><span style="color:#fdf4c1;">.Intn(</span><span style="color:#d3869b;">5</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">,
+					</span><span style="color:#8ec07c;">resp</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fabd2f;">make</span><span style="color:#fdf4c1;">(</span><span style="color:#fa5c4b;">chan int</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">}
+				reads </span><span style="color:#fe8019;">&lt;-</span><span style="color:#fdf4c1aa;"> read
+				</span><span style="color:#fe8019;">&lt;-</span><span style="color:#fdf4c1aa;">read.</span><span style="color:#fdf4c1;">resp</span><span style="color:#fdf4c1aa;">
+				atomic</span><span style="color:#fdf4c1;">.AddInt64(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">ops, </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">)
+			</span><span style="color:#fdf4c1aa;">}
+		}()
+	}
+
+	</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">w </span><span style="color:#fe8019;">:= </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">; w </span><span style="color:#fe8019;">&lt; </span><span style="color:#d3869b;">10</span><span style="color:#fdf4c1aa;">; w</span><span style="color:#fe8019;">++ </span><span style="color:#fdf4c1aa;">{
+		</span><span style="color:#fa5c4b;">go func</span><span style="color:#fdf4c1aa;">() {
+			</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">{
+				</span><span style="color:#fdf4c1;">write </span><span style="color:#fe8019;">:= &amp;</span><span style="color:#fdf4c1aa;">writeOp{
+					</span><span style="color:#8ec07c;">key</span><span style="color:#fdf4c1aa;">:  rand</span><span style="color:#fdf4c1;">.Intn(</span><span style="color:#d3869b;">5</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">,
+					</span><span style="color:#8ec07c;">val</span><span style="color:#fdf4c1aa;">:  rand</span><span style="color:#fdf4c1;">.Intn(</span><span style="color:#d3869b;">100</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">,
+					</span><span style="color:#8ec07c;">resp</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fabd2f;">make</span><span style="color:#fdf4c1;">(</span><span style="color:#fa5c4b;">chan bool</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">}
+				writes </span><span style="color:#fe8019;">&lt;-</span><span style="color:#fdf4c1aa;"> write
+				</span><span style="color:#fe8019;">&lt;-</span><span style="color:#fdf4c1aa;">write.</span><span style="color:#fdf4c1;">resp</span><span style="color:#fdf4c1aa;">
+				atomic</span><span style="color:#fdf4c1;">.AddInt64(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">ops, </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1;">)
+			</span><span style="color:#fdf4c1aa;">}
+		}()
+	}
+
+	time</span><span style="color:#fdf4c1;">.Sleep(time.Second)
+
+	opsFinal </span><span style="color:#fe8019;">:=</span><span style="color:#fdf4c1aa;"> atomic</span><span style="color:#fdf4c1;">.LoadInt64(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">ops)</span><span style="color:#fdf4c1aa;">
+	fmt</span><span style="color:#fdf4c1;">.Println(</span><span style="color:#b8bb26;">&quot;ops:&quot;</span><span style="color:#fdf4c1;">, opsFinal)
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>上面这段源码来自于：</p>
+<p><a href="http://everyx.github.io/gobyexample/stateful-goroutines/">Go by Example 中文：Go 状态协程</a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;coding-moon-cake&#x2F;">Coding活动送的月饼收到</a></h1>
+              <div class="info">
+                <h2>下午茶的东西全了</h2>
+                <time>2014-08-31 00:00</time>
+              </div>
+              
+                <p>上面还附带一个开箱工具</p>
+<p>外加一包铁观音</p>
+<p><img src="https://iovxw.net/p/coding-moon-cake/0.jpg" alt="" /></p>
+<p><img src="https://iovxw.net/p/coding-moon-cake/1.jpg" alt="" /></p>
+<p><img src="https://iovxw.net/p/coding-moon-cake/2.jpg" alt="" /></p>
+<p><img src="https://iovxw.net/p/coding-moon-cake/3.jpg" alt="" /></p>
+<p><img src="https://iovxw.net/p/coding-moon-cake/4.jpg" alt="" /></p>
+<p>顺便在博客css里面加上了一段</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">.container img {
+	max-width: 100%;
+}
+</span></pre>
+<p>这样图片就自动缩放了</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;hello-twister&#x2F;">Twister 去中心化的 Twitter</a></h1>
+              <div class="info">
+                <h2>FREEDOM！！</h2>
+                <time>2014-08-26 00:00</time>
+              </div>
+              
+                <p>在36氪看见的文章</p>
+<p><a href="http://www.36kr.com/p/214845.html">http://www.36kr.com/p/214845.html</a></p>
+<p>于是就下载使用了一下</p>
+<p>发现Arch的aur源里已经可以安装了</p>
+<p><code>yaourt -S twister-core-git twister-html-git</code></p>
+<p>然后配置一下</p>
+<p><code>~/.twister/twister.conf</code></p>
+<p>里面填入</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">rpcuser=user
+rpcpassword=pwd
+rpcallowip=127.0.0.1
+</span></pre>
+<p>上面的用户名和密码改成你自定义的就行了</p>
+<p>这个用户名和密码只不过是用来识别本地管理员身份的，不是twister帐号</p>
+<p>然后移动twister-html到~/.twister/html（twister-html的位置我忘了，搜索下吧）</p>
+<p>su切换到root运行<code>systemctl start twister</code>开启服务</p>
+<p>切换到普通用户运行<code>twisterd</code>开启主程序</p>
+<p>打开网页<a href="http://127.0.0.1:28332/index.html">http://127.0.0.1:28332/index.html</a>输入你上面的用户名密码然后等待区块同步完成修改个人信息即可</p>
+<p>官网：<a href="http://twister.net.co">http://twister.net.co</a></p>
+<p>参考信息：<a href="http://wiki.twister.net.co/w/using:howto:compiling_twister_on_ubuntu_12.04">http://wiki.twister.net.co/w/using:howto:compiling_twister_on_ubuntu_12.04</a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;chedan&#x2F;">近期的计划</a></h1>
+              <div class="info">
+                <h2>懒啊………</h2>
+                <time>2014-08-21 00:00</time>
+              </div>
+              
+                <p>又好久没写博客了</p>
+<p>这次不是因为太忙</p>
+<p>纯粹是懒</p>
+<p>果然天一热就什么也不想干啊……</p>
+<p>因为懒，所以也就有了一大堆代办事项</p>
+<p>现在列出来备忘一下</p>
+<ol>
+<li>学好js和css，然后修改一下博客的图片显示缩放等等</li>
+<li>把上次写的那个梯子的坑填完，做一个网页管理系统和代理服务器群组的自动配置</li>
+<li>填好2个Minecraft服务器的坑</li>
+<li>攒钱租服务器</li>
+<li>修改一下这个博客的生成器<code>hugo</code>，加强一下markdown解析什么的</li>
+<li>攒钱给域名续费&amp;&amp;攒钱买游戏</li>
+</ol>
+<p>一直想wine星际2，结果就是不成功，一直卡在检查更新中</p>
+<p>看了一下应该是wine网络问题，如果始终不行的话还是去Steam买《Planetary Annihilation》吧，不过49刀太贵了（不知有没有土豪愿意送我 :D）</p>
+<p>估计得慢慢等打折，上次打折后仅需5刀结果错过了，悲伤啊悲伤</p>
+<p>感觉好懒……</p>
+
+              
+            </article>
+          
+        
+        
+        <nav>
+          
+          <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;n&#x2F;6&#x2F;">PREV</a>
+          
+          
+          <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;n&#x2F;8&#x2F;">NEXT</a>
+          
+        </nav>
+        
+      
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

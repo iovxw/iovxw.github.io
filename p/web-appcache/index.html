@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -325,17 +342,17 @@
 <p>在线版本: <a href="https://iovxw.net/text-todo-list/">https://iovxw.net/text-todo-list/</a></p>
 <p>为了能离线使用, 试着用了下 HTML5 加的 Application Cache, 效果当然是不错的</p>
 <p>不过中间看文档不仔细导致白折腾了半天</p>
-<!-- more -->
------------------------------
+<span id="continue-reading"></span>
+<hr />
 <p>第一个问题:</p>
 <p>缓存只有在浏览器检测到所设置的 <code>manifest</code> 更新后才会更新</p>
 <p>如果 <code>manifest</code> 文件没更新, 手动调用 <code>window.applicationCache.update()</code> 也是没用的</p>
 <p>简单暴力的方法是在文件里用注释标记一个版本号或者时间之类的</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">CACHE MANIFEST
-</span><span style="background-color:#282828;color:#fdf4c1aa;"># Version: 1.0.1
-</span><span style="background-color:#282828;color:#fdf4c1aa;">script.js
-</span><span style="background-color:#282828;color:#fdf4c1aa;">style.css
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">CACHE MANIFEST
+# Version: 1.0.1
+script.js
+style.css
 </span></pre>
 <p>第二个问题:</p>
 <p>坑爹的 CDN 优化</p>

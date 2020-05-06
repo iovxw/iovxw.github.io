@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -330,7 +347,10 @@
         ["Kuludu的博客", "http://kuludu.net"],
         ["Reflect Sky", "http://www.reflectsky.com"],
         ["ChinaMoe's Blog", "http://tap-io.com"],
-        ["Fz<del>(大金牛)</del>'s blog", "http://www.zhuhening.cn"]
+        ["Fz<del>(大金牛)</del>'s blog", "http://www.zhuhening.cn"],
+        ["小竹's blog", "https://blog.justforlxz.com"],
+        ["Farseerfc的小窩", "https://farseerfc.me"],
+        ["新一", "https://a-wing.top"],
     ];
     let linksElem = document.getElementById("links");
     function secureRandom() {
@@ -350,9 +370,6 @@
     }
     main();
 </script>
-<hr />
-<p>想添加的话跟我说一声就行，不要求回加</p>
-<p>不过至少我得认识你</p>
 
 </article>
 <div id="disqus_thread"></div>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+
+    
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    p, li {
+        line-height: 1.5em;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px dashed white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px dashed #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 1em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
+            
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
+            
+          </div>
+      </header>
+
+      
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;swetter-brainfuck&#x2F;">含糖型 Brainfuck 解释器</a></h1>
+              <div class="info">
+                <h2>断句有问题</h2>
+                <time>2016-08-24 00:00</time>
+              </div>
+              
+              <p>其实标题应该是 《含糖型 Brainfuck | 的解释器》</p>
+<p>不过因为不单单是个解释器还是个可视化和单步执行工具以及一个语法糖的实现</p>
+<p>所以，嗯……标题就这样吧</p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;swetter-brainfuck&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;linux-fix-cursor-theme&#x2F;">修复 Linux GNOME 环境下非 GTK 窗口鼠标指针主题不统一问题</a></h1>
+              <div class="info">
+                <h2>以后重装系统得清配置文件</h2>
+                <time>2016-08-01 00:00</time>
+              </div>
+              
+                <p>把 <code>~/.icons/default/index.theme</code> 中的 <em>Inherits</em> 改过来就行了</p>
+<p>如果没有就改 <code>/usr/share/icons/default/index.theme</code>，不过就是全局的了</p>
+<p><em><strong>本文完</strong></em></p>
+<p>原因估计是 GNOME 自带的鼠标主题设置没改这个文件，而非 GTK 程序都是靠这个读取鼠标主题的</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;git-commit-date&#x2F;">自定义 Git commit 时间</a></h1>
+              <div class="info">
+                <h2>拿来刷小绿点</h2>
+                <time>2016-07-30 00:00</time>
+              </div>
+              
+              <p>在需要给 <em>commit</em> 指定时间的时候，可以用 <code>--date</code> 参数</p>
+<p>支持的日期格式可以看：</p>
+<p><a href="http://stackoverflow.com/questions/19742345/what-is-the-format-for-date-parameter-of-git-commit">http://stackoverflow.com/questions/19742345/what-is-the-format-for-date-parameter-of-git-commit</a></p>
+<p>使用 <code>'x days ago'</code> 可以很方便的补上之前的小绿点（🙈这功能其实就是拿来干这种事的）</p>
+<script>
+if (window.location.pathname == "/") {
+    document.write("<p>然后这篇文章到这就结束了，剩下是给连今天是几号都懒得看的人的</p>")
+}
+</script>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;git-commit-date&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;shields-io&#x2F;">Shields.io —— 制作各种状态图标</a></h1>
+              <div class="info">
+                <h2>嘛这篇文章其实是凑数的</h2>
+                <time>2016-07-27 00:00</time>
+              </div>
+              
+              <p>在 github 上看见很多项目都有 <img src="https://img.shields.io/wercker/ci/wercker/docs.svg?maxAge=2592000" alt="IMG" /> 这样的图标对不对？</p>
+<p>嗯，这就是今天我在好不容易重新开始的 github 连击要断了于是急中生智水的这一篇博客中要介绍的东西：</p>
+<p><a href="http://shields.io">http://shields.io</a></p>
+<p>打开页面就能发现，各种例子相当全面，完全不用我介绍</p>
+<p>于是这篇文章就结束了</p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;shields-io&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;minecraft-ingameinfo&#x2F;">一份 Minecraft InGameInfo Mod 配置文件</a></h1>
+              <div class="info">
+                <h2>没错，这段时间我都在玩游戏</h2>
+                <time>2016-07-12 00:00</time>
+              </div>
+              
+              <p>效果图:</p>
+<p><img src="https://img.vim-cn.com/f6/80f3ababde436eacbeaf0616cb42dc34f5fc2a.png" alt="https://img.vim-cn.com/f6/80f3ababde436eacbeaf0616cb42dc34f5fc2a.png" /></p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;minecraft-ingameinfo&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ark-lang&#x2F;">Ark —— Go 和 Rust 的结合体</a></h1>
+              <div class="info">
+                <h2>只是没人用</h2>
+                <time>2016-06-14 00:00</time>
+              </div>
+              
+                <p>编译器是用go和Rust写的，github在这里：<a href="https://github.com/ark-lang/ark">https://github.com/ark-lang/ark</a></p>
+<p>官网：<a href="http://ark-lang.org/">http://ark-lang.org/</a></p>
+<p>说是系统级编程语言，可以和C无缝交互</p>
+<p>至于为什么说是go和rust的结合体</p>
+<p>看下面的例子就知道了（<a href="https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md">https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md</a>）</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">struct Bar {
+    name: str;
+}
+
+struct Baz {
+    name: str;
+}
+
+trait Foo {
+    func fooBar();
+}
+
+impl Foo for Bar {
+    func fooBar() {
+        println(&quot;foobar method in foo for bar %s!&quot;, name);
+    }
+}
+
+impl Foo for Baz {
+    func fooBar() {
+        println(&quot;foobar method in foo for baz %s!&quot;, name);
+    }
+}
+
+
+// attributes look cool
+// basically generics, we need to use
+// them in this case instead of saying `value: Foo` as
+// a param, because a trait does not have a constant
+// size that is known at compile time, so the generic
+// will basically compile down to [in this case] two
+// functions one for Bar, and one for Baz, then it
+// will know the size of the given value.
+// this might be weird to understand but its 1am and im
+// ill and tired. jah bless xx
+func [T: Foo] callFooBar(value: T) {
+
+}
+
+func main() {
+    // monomorphisation????
+    baz: Baz = {
+        name: &quot;baz&quot;,
+    };
+
+    bar: Bar = {
+        name: &quot;bar&quot;,
+    }
+
+    callFooBar(baz);
+    callFooBar(bar);
+}
+</span></pre>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;chez-scheme-machine-type&#x2F;">Chez Scheme 中的 machine-type</a></h1>
+              <div class="info">
+                <h2>魔法的缩写</h2>
+                <time>2016-05-13 00:00</time>
+              </div>
+              
+              <p>在 <em>Chez Scheme</em> 中可以用 <code>(machine-type)</code> 获取当前的运行环境</p>
+<p>比如 64 位 Linux 获取到的是 <strong>a6le</strong>, 而如果启用了线程则是 <strong>ta6le</strong></p>
+<p>第一次看完全是一头雾水, 这到底是什么玩意?</p>
+<p>其实只要注意看一下 <em><strong>Makefile</strong></em>, 就能明白了</p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;chez-scheme-machine-type&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;chez-scheme-benchmark&#x2F;">Chez Scheme 性能测试</a></h1>
+              <div class="info">
+                <h2>不用自己跑，省了很多事</h2>
+                <time>2016-05-03 00:00</time>
+              </div>
+              
+              <p>在 <a href="http://webchat.freenode.net?channels=%23chez">#chez</a> 频道里, <strong>@ecraven</strong> 使用 <em>Chez Scheme</em> 跑了下
+<a href="http://www.larcenists.org/benchmarksGenuineR6Linux.html">Larceny 项目的 R6RS Scheme 基准测试</a> (感谢 ecraven)</p>
+<p>测试环境是 <code>Intel i7-4770 @ 3.4GHz</code>, 结果如下:</p>
+<p><a href="http://www.nexoid.at/tmp/scheme-benchmark.html">http://www.nexoid.at/tmp/scheme-benchmark.html</a></p>
+<p>为了省事在这里也放一份, 不过不保证更新, 最新结果请去上面的链接查看</p>
+<style>
+.result {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.result div {
+  float: left;
+}
+
+.chart text {
+  fill: white;
+  font-size: 10px;
+}
+</style>
+<div class="result">
+<div><h4>total-accumulated-runtime</h4><svg class="chart" width="420" height="160"><g transform="translate(0,0)"><rect width="18.347430058555627" height="19" style="fill:#00a0dc"/><text x="23.347430058555627" y="9.5" dy=".35em">chez-9.4 (94.)</text></g><g transform="translate(0,20)"><rect width="45.86857514638907" height="19" style="fill:#8d6cab"/><text x="50.86857514638907" y="9.5" dy=".35em">larceny (235.)</text></g><g transform="translate(0,40)"><rect width="146.19388418998048" height="19" style="fill:#e68523"/><text x="151.19388418998048" y="9.5" dy=".35em">petite-9.4 (749.)</text></g><g transform="translate(0,60)"><rect width="146.38906961613534" height="19" style="fill:#00aeb3"/><text x="151.38906961613534" y="9.5" dy=".35em">racket (750.)</text></g><g transform="translate(0,80)"><rect width="173.5198438516591" height="19" style="fill:#dd5143"/><text x="178.5198438516591" y="9.5" dy=".35em">petite-8.4 (889.)</text></g><g transform="translate(0,100)"><rect width="174.30058555627846" height="19" style="fill:#edb220"/><text x="179.30058555627846" y="9.5" dy=".35em">vicare (893.)</text></g><g transform="translate(0,120)"><rect width="300.0" height="19" style="fill:#dc4b89"/><text x="305.0" y="9.5" dy=".35em">ypsilon (1537.)</text></g></svg></div>
+<div><h4>times-faster-than-any-other</h4><svg class="chart" width="420" height="160"><g transform="translate(0,0)"><rect width="14.285714285714286" height="19" style="fill:#dd5143"/><text x="19.285714285714285" y="9.5" dy=".35em">petite-8.4 (2)</text></g><g transform="translate(0,20)"><rect width="21.428571428571427" height="19" style="fill:#8d6cab"/><text x="26.428571428571427" y="9.5" dy=".35em">larceny (3)</text></g><g transform="translate(0,40)"><rect width="21.428571428571427" height="19" style="fill:#00aeb3"/><text x="26.428571428571427" y="9.5" dy=".35em">racket (3)</text></g><g transform="translate(0,60)"><rect width="21.428571428571427" height="19" style="fill:#edb220"/><text x="26.428571428571427" y="9.5" dy=".35em">vicare (3)</text></g><g transform="translate(0,80)"><rect width="28.571428571428573" height="19" style="fill:#e68523"/><text x="33.57142857142857" y="9.5" dy=".35em">petite-9.4 (4)</text></g><g transform="translate(0,100)"><rect width="78.57142857142857" height="19" style="fill:#dc4b89"/><text x="83.57142857142857" y="9.5" dy=".35em">ypsilon (11)</text></g><g transform="translate(0,120)"><rect width="300.0" height="19" style="fill:#00a0dc"/><text x="305.0" y="9.5" dy=".35em">chez-9.4 (42)</text></g></svg></div>
+</div>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;chez-scheme-benchmark&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;release-chez-scheme&#x2F;">打包发布 Chez Scheme 程序</a></h1>
+              <div class="info">
+                <h2>简单暴力</h2>
+                <time>2016-05-01 00:00</time>
+              </div>
+              
+              <p>在 <a href="/p/chez-scheme-stand-alone.html">上一篇文章</a> 里说过如何将 <em>Chez Scheme</em> 程序编译为单文件,
+不过仍然需要 <em>Chez Scheme</em> 或者是 <em>Petite Chez Scheme</em> 才能运行</p>
+<p>但是总不能要求用户都安装 <em>Chez Scheme</em>, 因为这货在各大发行版官方仓库里都没有 (AUR 不是官方仓库), 只能自己编译, 更别说 Windows 了
+(好好好, 我知道 Windows 10 发布了一个很重要的特性, 但那现在还是预览版)</p>
+<p>解决方法很简单也很暴力, 发布的时候把 <em>Chez Scheme</em> 打包进去</p>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;release-chez-scheme&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;chez-scheme-stand-alone&#x2F;">将 Chez Scheme 程序编译为单文件</a></h1>
+              <div class="info">
+                <h2>但是仍然依赖解释器</h2>
+                <time>2016-04-30 00:00</time>
+              </div>
+              
+              <p>通过使用 <code>make-boot-file</code> 可以将 Chez Scheme 程序编译为单文件</p>
+<p>文档如下：</p>
+<style>
+    .doc {
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 5px;
+        background: rgba(255,255,255,.05);
+    }
+</style>
+<div class="doc">
+<span><b>procedure</b>: <tt>(make-boot-file&nbsp;<i>output-filename</i>&nbsp;<i>base-boot-list</i>&nbsp;<i>input-filename</i>&nbsp;...)</tt></span>
+<br>
+<b>returns: </b>unspecified
+<br>
+<b>libraries: </b><tt>(chezscheme)</tt>
+<p><tt><i>output-filename</i></tt>, <tt><i>input-filename</i></tt>, and the elements of
+<tt><i>base-boot-list</i></tt> must be strings.
+</p>
+<p>
+<tt>make-boot-file</tt> writes a boot header to the file named by
+<tt><i>output-filename</i></tt>, followed by the object code for each
+<tt><i>input-filename</i></tt> in turn.
+If an input file is not already compiled, <tt>make-boot-file</tt> compiles
+the file as it proceeds.
+</p>
+<p>
+The boot header identifies the elements of <tt><i>base-boot-list</i></tt> as
+alternative boot files upon which the new boot file depends.
+If the list of strings naming base boot files is empty, the first named
+input file should be a base boot file, i.e., petite.boot or some boot file
+derived from petite.boot.
+</p>
+<p>
+Boot files are loaded explicitly via the <tt>--boot</tt> or <tt>-b</tt>
+command-line options or implicitly based on the name of the executable
+(Section&nbsp;<a href="https://iovxw.net/csug9/use.html#g14">2.9</a>).
+</p>
+<p>
+See Section&nbsp;<a href="https://iovxw.net/csug9/use.html#g13">2.8</a> for more information on boot files
+and the use of <tt>make-boot-file</tt>.
+</p>
+</div>
+
+              <div class="read-more">
+                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;chez-scheme-stand-alone&#x2F;#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+        
+        <nav>
+          
+          <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;n&#x2F;2&#x2F;">PREV</a>
+          
+          
+          <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;n&#x2F;4&#x2F;">NEXT</a>
+          
+        </nav>
+        
+      
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

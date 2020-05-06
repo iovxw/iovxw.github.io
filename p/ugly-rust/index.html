@@ -114,12 +114,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+	display: flex;
+    }
+
+    nav a + a {
+	border-left: 5px solid white;
+    }
+
+    nav a {
+	flex: 1 1 0;
+	margin: -10px 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	color: white;
     }
 
     section {
@@ -306,13 +323,13 @@
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;links&#x2F;">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;about&#x2F;">About</a>
             
           </div>
       </header>
@@ -333,27 +350,27 @@
 <li>
 <p><strong>尾递归优化并不总是生效</strong></p>
 <p>当进行尾递归调用的作用域内有 <code>Drop</code> 变量存在时</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">recur</span><span style="background-color:#282828;color:#fdf4c1aa;">() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> x </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">vec!</span><span style="background-color:#282828;color:#fdf4c1aa;">[</span><span style="background-color:#282828;color:#d3869b;">false</span><span style="background-color:#282828;color:#fdf4c1aa;">];
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fabd2f;">recur</span><span style="background-color:#282828;color:#fdf4c1aa;">()
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span></pre><!-- more -->
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">recur</span><span style="color:#fdf4c1aa;">() {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> x </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">vec!</span><span style="color:#fdf4c1aa;">[</span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1aa;">];
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fabd2f;">recur</span><span style="color:#fdf4c1aa;">()
+</span><span style="color:#fdf4c1aa;">}
+</span></pre><span id="continue-reading"></span>
 <p><a href="https://play.rust-lang.org/?gist=7593b6cec2caac2efdecf17f2b01dab7&amp;version=stable">Playground</a></p>
 </li>
 <li>
 <p><strong><code>&amp;mut</code> 不是 <code>Copy</code> 的，但却会被特殊处理</strong></p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">drop_ref</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;T&gt;(</span><span style="background-color:#282828;color:#fe8019;">_</span><span style="background-color:#282828;color:#fdf4c1aa;">: </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">mut</span><span style="background-color:#282828;color:#fdf4c1aa;"> T) {}
-</span><span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">drop</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;T&gt;(</span><span style="background-color:#282828;color:#fe8019;">_</span><span style="background-color:#282828;color:#fdf4c1aa;">: T) {}
-</span><span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">assert_copy</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;T: Copy&gt;(</span><span style="background-color:#282828;color:#fe8019;">_</span><span style="background-color:#282828;color:#fdf4c1aa;">: T) {}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> x </span><span style="background-color:#282828;color:#fe8019;">= &amp;</span><span style="background-color:#282828;color:#fa5c4b;">mut </span><span style="background-color:#282828;color:#d3869b;">1</span><span style="background-color:#282828;color:#fdf4c1aa;">;
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">// assert_copy(x);
-</span><span style="background-color:#282828;color:#fabd2f;">drop_ref</span><span style="background-color:#282828;color:#fdf4c1aa;">(x);
-</span><span style="background-color:#282828;color:#fabd2f;">println!</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;</span><span style="background-color:#282828;color:#fdf4c1;">{}</span><span style="background-color:#282828;color:#b8bb26;">&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">, x);
-</span><span style="background-color:#282828;color:#fabd2f;">drop</span><span style="background-color:#282828;color:#fdf4c1aa;">(x);
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">// println!(&quot;{}&quot;, x);
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">drop_ref</span><span style="color:#fdf4c1aa;">&lt;T&gt;(</span><span style="color:#fe8019;">_</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut</span><span style="color:#fdf4c1aa;"> T) {}
+</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">drop</span><span style="color:#fdf4c1aa;">&lt;T&gt;(</span><span style="color:#fe8019;">_</span><span style="color:#fdf4c1aa;">: T) {}
+</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">assert_copy</span><span style="color:#fdf4c1aa;">&lt;T: Copy&gt;(</span><span style="color:#fe8019;">_</span><span style="color:#fdf4c1aa;">: T) {}
+
+</span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> x </span><span style="color:#fe8019;">= &amp;</span><span style="color:#fa5c4b;">mut </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1aa;">;
+</span><span style="font-style:italic;color:#928374;">// assert_copy(x);
+</span><span style="color:#fabd2f;">drop_ref</span><span style="color:#fdf4c1aa;">(x);
+</span><span style="color:#fabd2f;">println!</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fdf4c1;">{}</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fdf4c1aa;">, x);
+</span><span style="color:#fabd2f;">drop</span><span style="color:#fdf4c1aa;">(x);
+</span><span style="font-style:italic;color:#928374;">// println!(&quot;{}&quot;, x);
 </span></pre>
 <p>试着去掉注释, <a href="https://play.rust-lang.org/?gist=c3a06ad91c15721bdd3032707d39256a&amp;version=stable">Playground</a></p>
 </li>
@@ -361,9 +378,9 @@
 <p><strong><code>'static</code> 并不是 <code>static</code></strong></p>
 <p><code>'static</code> 甚至不是一个生命期参数，只是表示变量不受某个生命期约束<br />
 很多人认为所有 <code>'static</code> 的变量会永远留在内存中，这是不正确的，一个 owned 类型也是 <code>'static</code> 的</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">assert_static</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;T: </span><span style="background-color:#282828;color:#fa5c4b;">&#39;static</span><span style="background-color:#282828;color:#fdf4c1aa;">&gt;(</span><span style="background-color:#282828;color:#fe8019;">_</span><span style="background-color:#282828;color:#fdf4c1aa;">: T) {}
-</span><span style="background-color:#282828;color:#fabd2f;">assert_static</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fabd2f;">String</span><span style="background-color:#282828;color:#fdf4c1aa;">::new());
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">assert_static</span><span style="color:#fdf4c1aa;">&lt;T: </span><span style="color:#fa5c4b;">&#39;static</span><span style="color:#fdf4c1aa;">&gt;(</span><span style="color:#fe8019;">_</span><span style="color:#fdf4c1aa;">: T) {}
+</span><span style="color:#fabd2f;">assert_static</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fabd2f;">String</span><span style="color:#fdf4c1aa;">::new());
 </span></pre>
 <p><a href="https://play.rust-lang.org/?gist=6b9741f92f3a0616b772f768c18c72a1&amp;version=stable">Playground</a></p>
 </li>
@@ -373,13 +390,147 @@
 </li>
 <li>
 <p><strong>Range overflow</strong></p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">for </span><span style="background-color:#282828;color:#fe8019;">_ in </span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fe8019;">..</span><span style="background-color:#282828;color:#d3869b;">256_</span><span style="background-color:#282828;color:#fa5c4b;">u8 </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fabd2f;">unreachable!</span><span style="background-color:#282828;color:#fdf4c1aa;">();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">for </span><span style="color:#fe8019;">_ in </span><span style="color:#d3869b;">0</span><span style="color:#fe8019;">..</span><span style="color:#d3869b;">256_</span><span style="color:#fa5c4b;">u8 </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fabd2f;">unreachable!</span><span style="color:#fdf4c1aa;">();
+</span><span style="color:#fdf4c1aa;">}
 </span></pre>
 <p><a href="https://play.rust-lang.org/?gist=04878872b877ac4603b4f1d304be2efc">Playground</a>,
 当然这有个警告, 以及还有 <a href="https://github.com/rust-lang/rust/issues/28237">#28237</a></p>
+</li>
+<li>
+<p><strong>易混淆的花括号</strong></p>
+<pre style="background-color:#282828;">
+<span style="color:#d3869b;">false </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fdf4c1aa;">{ </span><span style="color:#d3869b;">true </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#d3869b;">false
+</span></pre>
+<p>会被解释成</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">(</span><span style="color:#d3869b;">false </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fdf4c1aa;">{ </span><span style="color:#d3869b;">true </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1aa;">)
+</span></pre>
+<p>而</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">{ </span><span style="color:#d3869b;">true </span><span style="color:#fdf4c1aa;">} </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#d3869b;">false
+</span></pre>
+<p>会被解释成</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">{ </span><span style="color:#d3869b;">true </span><span style="color:#fdf4c1aa;">}; </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#d3869b;">false
+</span></pre>
+<p><a href="https://play.rust-lang.org/?gist=540bfcc12dee19c864169164849f0297">Playground</a></p>
+</li>
+<li>
+<p><strong>Shadow 常量时, 糟糕的错误信息</strong></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">const</span><span style="color:#fdf4c1aa;"> x: </span><span style="color:#fa5c4b;">bool </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> x </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1aa;">;
+</span></pre><pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">error[</span><span style="color:#fdf4c1;">E0308</span><span style="color:#fdf4c1aa;">]: mismatched types
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fe8019;">-</span><span style="color:#fdf4c1aa;">-&gt; src</span><span style="color:#fe8019;">/</span><span style="color:#fdf4c1aa;">main.rs:</span><span style="color:#d3869b;">3</span><span style="color:#fdf4c1aa;">:</span><span style="color:#d3869b;">9
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fe8019;">|
+</span><span style="color:#d3869b;">3 </span><span style="color:#fe8019;">|     </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> x </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">  |         ^ expected integral </span><span style="color:#fdf4c1;">variable</span><span style="color:#fdf4c1aa;">, found bool
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fe8019;">|
+</span><span style="color:#fdf4c1aa;">  </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> note: expected </span><span style="color:#fa5c4b;">type</span><span style="color:#fdf4c1aa;"> `{integer}`
+</span><span style="color:#fdf4c1aa;">             found </span><span style="color:#fa5c4b;">type</span><span style="color:#fdf4c1aa;"> `</span><span style="color:#fa5c4b;">bool</span><span style="color:#fdf4c1aa;">`
+</span></pre>
+<p>类似的还有 Unit Struct</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">struct </span><span style="color:#8ec07c;">x</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> x </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1aa;">;
+</span></pre>
+<p><a href="https://play.rust-lang.org/?gist=2a135089fa4aee6df8379e4f4c7c56fc">Playground</a>,
+当然只要遵守命名规范, 就不会遇到这种问题 (然而一个例子是 <a href="https://web.archive.org/web/20180406185305/http://diesel.rs/guides/schema-in-depth/">Diesel</a>)</p>
+</li>
+<li>
+<p><strong>特殊情况下数字类型的类型推导</strong></p>
+<p>Rust 编译器对数字运算的类型推导有特殊处理, 以方便确定具体的长度和有无符号</p>
+<p>然而这些规则只针对特定运算符, 并且各个运算符的规则都不同, 在不了解的情况下会导致混乱, 比如下面这行代码可以编译</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">(</span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">u32 </span><span style="color:#fe8019;">&gt;&gt; </span><span style="color:#d3869b;">2</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fe8019;">| </span><span style="color:#d3869b;">3</span><span style="color:#fdf4c1aa;">;
+</span></pre>
+<p>而这个理应等价的不能:</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">std::ops::Shr::shr(</span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">u32</span><span style="color:#fdf4c1aa;">, </span><span style="color:#d3869b;">2</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fe8019;">| </span><span style="color:#d3869b;">3</span><span style="color:#fdf4c1aa;">;
+</span></pre><pre style="background-color:#282828;">
+<span style="color:#d3869b;">2 </span><span style="color:#fe8019;">|     </span><span style="color:#fdf4c1aa;">std::ops::Shr::shr(</span><span style="color:#d3869b;">1</span><span style="color:#fa5c4b;">u32</span><span style="color:#fdf4c1aa;">, </span><span style="color:#d3869b;">2</span><span style="color:#fdf4c1aa;">) </span><span style="color:#fe8019;">| </span><span style="color:#d3869b;">3</span><span style="color:#fdf4c1aa;">;
+</span><span style="color:#fdf4c1aa;">  |                                 ^ no implementation for `</span><span style="color:#fdf4c1;">u32 </span><span style="color:#fdf4c1aa;">| </span><span style="color:#fa5c4b;">i32</span><span style="color:#fdf4c1aa;">`
+</span></pre>
+<p>原因是编译器会默认 <code>&gt;&gt;</code> 的返回值和左手边的类型一样, 推导返回值类型时不需要依赖 <code>2</code> 的类型</p>
+<p>而 <code>shr</code> 这个函数的返回值类型依赖参数的类型, 只能在 <code>2</code> 推导完成后再推导, 这导致在同一个步骤中进行推导的 <code>3</code> 无法确定类型, 就成为默认的 <code>i32</code></p>
+<p>给 <code>2</code> 加上类型标注 (<code>2u32</code>) 使返回值类型提前推导出来可以解决问题 <a href="https://play.rust-lang.org/?gist=529986617123fd2da38dbb618ae7bc47">Playground</a></p>
+</li>
+<li>
+<p><strong>Float 的转换</strong></p>
+<p>目前, float 对目标类型不能表示的值的转换是未定义行为</p>
+<p>比如 <code>NaN</code> 和 <code>Inf</code> 转换为 integer, 以及大于或小于 <code>f32</code> 所能表示值的 <code>f64</code> 转换为 <code>f32</code></p>
+<p><a href="https://github.com/rust-lang/rust/issues/10184">Issue#10184</a></p>
+</li>
+<li>
+<p><strong>闭包的捕获粒度</strong></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">struct </span><span style="color:#8ec07c;">Config </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">value</span><span style="color:#fdf4c1aa;">: Option&lt;String&gt;,
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fdf4c1;">fallback</span><span style="color:#fdf4c1aa;">: String,
+</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fa5c4b;">impl </span><span style="color:#8ec07c;">Config </span><span style="color:#fdf4c1aa;">{
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// 获取 value 的值, 如果 value 为 None, 自动将 value 的值设为 fallback
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// 不要吐槽为啥不直接返回 fallback, 这只是个例子
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">get_value1</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut </span><span style="color:#fdf4c1;">self</span><span style="color:#fdf4c1aa;">) -&gt; </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut</span><span style="color:#fdf4c1aa;"> String {
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// 这样可以工作, 但是如果 value 不为 None, 会做一次无意义的 Clone
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">self</span><span style="color:#fdf4c1aa;">.value.</span><span style="color:#fabd2f;">get_or_insert</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">self</span><span style="color:#fdf4c1aa;">.fallback.</span><span style="color:#fabd2f;">clone</span><span style="color:#fdf4c1aa;">())
+</span><span style="color:#fdf4c1aa;">    }
+</span><span style="color:#fdf4c1aa;">    </span><span style="font-style:italic;color:#928374;">// 换一种实现方法
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">get_value2</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut </span><span style="color:#fdf4c1;">self</span><span style="color:#fdf4c1aa;">) -&gt; </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut</span><span style="color:#fdf4c1aa;"> String {
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// 所以我们写成这样, 然而问题来了, 会提示不能再次借用 self 因为已经借用了 self.value
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// self.value.get_or_insert_with(|| self.fallback.clone())
+
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// 解决方法是不要让闭包捕获到整个 self
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> fallback </span><span style="color:#fe8019;">= &amp;</span><span style="color:#fdf4c1;">self</span><span style="color:#fdf4c1aa;">.fallback;
+</span><span style="color:#fdf4c1aa;">        </span><span style="color:#fdf4c1;">self</span><span style="color:#fdf4c1aa;">.value.</span><span style="color:#fabd2f;">get_or_insert_with</span><span style="color:#fdf4c1aa;">(|| fallback.</span><span style="color:#fabd2f;">clone</span><span style="color:#fdf4c1aa;">())
+</span><span style="color:#fdf4c1aa;">    }
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p><a href="https://play.rust-lang.org/?gist=c810cf40856886c7ba2d0579e0b63091">Playground</a>
+和 <a href="http://smallcultfollowing.com/babysteps/blog/2018/04/24/rust-pattern-precise-closure-capture-clauses/">相关文章</a>
+以及 <a href="https://github.com/rust-lang/rfcs/pull/2229">RFC#2229</a></p>
+</li>
+<li>
+<p><strong>智能指针的 <code>DerefMove</code></strong></p>
+<p>Box 实现了 <code>Deref</code></p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">impl</span><span style="color:#fdf4c1aa;">&lt;T: </span><span style="background-color:#932b1e;color:#fdf4c1;">?</span><span style="color:#8ec07c;">Sized</span><span style="color:#fdf4c1aa;">&gt; </span><span style="color:#8ec07c;">Deref for Box</span><span style="color:#fdf4c1aa;">&lt;T&gt; {
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">Target </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> T;
+</span><span style="color:#fdf4c1aa;"> 
+</span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">deref</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">self</span><span style="color:#fdf4c1aa;">) -&gt; </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1aa;">T {
+</span><span style="color:#fdf4c1aa;">        </span><span style="font-style:italic;color:#928374;">// ...
+</span><span style="color:#fdf4c1aa;">    }
+</span><span style="color:#fdf4c1aa;">}
+</span></pre>
+<p>所以 <code>let x: bool = *Box::new(false);</code> 成立, 并被翻译为 <code>let x: bool = *Deref::deref(&amp;Box::new(false));</code></p>
+<p>当 <code>T</code> 为 <code>Copy</code> 时这一点问题都没有, 但假如不是呢? <code>deref</code> 接受的是 <code>&amp;self</code>, 按理说无法将 <code>T</code> move 出去</p>
+<p>但下面代码是可以运行的</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> x: </span><span style="color:#fabd2f;">String </span><span style="color:#fe8019;">= *</span><span style="color:#fabd2f;">Box</span><span style="color:#fdf4c1aa;">::new(</span><span style="color:#fabd2f;">String</span><span style="color:#fdf4c1aa;">::new());
+</span></pre>
+<p>原因当然是编译器对 <code>Box</code> 做了特殊处理</p>
+<p>而为了让其他智能指针也能做到, 有人提出了 <code>DerefMut</code>, 但这是 Rust 1.0 发布之前的事, 拖到现在还没解决(或者说都没这需求)</p>
+<p>最近又有人提出了新的 <a href="https://github.com/rust-lang/rfcs/pull/2439">RFC#2439</a>, 拭目以待吧</p>
+</li>
+<li>
+<p><strong>智能指针的模式匹配</strong></p>
+<p>感觉这个就不用讲了, 都知道</p>
+</li>
+<li>
+<p><strong>函数参数解构的语义</strong></p>
+<p>Rust 的函数参数支持解构, 但不算在函数签名里, 就导致了和其他解构行为不一样</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">foo</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">ref </span><span style="color:#fdf4c1;">bar</span><span style="color:#fdf4c1aa;">: String) {}
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> x </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span style="color:#fdf4c1aa;">::new();
+</span><span style="color:#fabd2f;">foo</span><span style="color:#fdf4c1aa;">(x); </span><span style="font-style:italic;color:#928374;">// x moved here
+</span></pre></li>
+<li>
+<p><strong>闭包捕获环境的行为依赖 <code>Copy</code> trait</strong></p>
+<p>因为太长, 拆到<a href="https://iovxw.net/p/rust-closure-and-copy/">这篇独立文章里</a></p>
 </li>
 </ol>
 
