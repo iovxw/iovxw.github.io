@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -341,23 +338,23 @@
     <p>golang里面函数的多返回值就相当于一个展开过的切片</p>
 <p>像这个样子：</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">[]</span><span style="color:#fa5c4b;">interface</span><span style="color:#fdf4c1aa;">{}{返回值1, 返回值2}...
-</span></pre>
+<code><span style="color:#fdf4c1aa;">[]</span><span style="color:#fa5c4b;">interface</span><span style="color:#fdf4c1aa;">{}{</span><span style="color:#fdf4c1;">返回值1</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fdf4c1;">返回值2</span><span style="color:#fdf4c1aa;">}</span><span style="color:#fe8019;">...
+</span></code></pre>
 <p>于是我们把它反过来就行了</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">package</span><span style="color:#fdf4c1aa;"> main
+<code><span style="color:#fa5c4b;">package </span><span style="color:#fdf4c1;">main
 
 </span><span style="color:#fa5c4b;">import </span><span style="color:#fdf4c1aa;">(
 	</span><span style="color:#b8bb26;">&quot;fmt&quot;
 	&quot;strconv&quot;
 </span><span style="color:#fdf4c1aa;">)
 
-</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">toSlice</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">v</span><span style="color:#fdf4c1aa;"> ...</span><span style="color:#fa5c4b;">interface</span><span style="color:#fdf4c1aa;">{}) []</span><span style="color:#fa5c4b;">interface</span><span style="color:#fdf4c1aa;">{} { </span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> v }
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">toSlice</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">v </span><span style="color:#fe8019;">...</span><span style="color:#fa5c4b;">interface</span><span style="color:#fdf4c1aa;">{}) []</span><span style="color:#fa5c4b;">interface</span><span style="color:#fdf4c1aa;">{} { </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">v </span><span style="color:#fdf4c1aa;">}
 
 </span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">main</span><span style="color:#fdf4c1aa;">() {
-	fmt</span><span style="color:#fdf4c1;">.Println(toSlice(strconv.Atoi(</span><span style="color:#b8bb26;">&quot;1&quot;</span><span style="color:#fdf4c1;">)))
-</span><span style="color:#fdf4c1aa;">}
-</span></pre>
+	</span><span style="color:#fdf4c1;">fmt</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">Println</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">toSlice</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">strconv</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">Atoi</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;1&quot;</span><span style="color:#fdf4c1aa;">)))
+}
+</span></code></pre>
 </article>
 <div id="disqus_thread"></div>
 <script>

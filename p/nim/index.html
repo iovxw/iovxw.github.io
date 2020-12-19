@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -364,14 +361,14 @@
 <p>我激动的打开Aporia开始尝试语义转跳，刚按下快捷键</p>
 <p>……</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">Error: unhandled exception: 拒绝连接 [OSError]
-</span></pre>
+<code><span style="color:#fdf4c1aa;">Error: unhandled exception: 拒绝连接 [OSError]
+</span></code></pre>
 <p>窗口吡的一下就关掉了！</p>
 <p>关！掉！了！</p>
 <p>我还没有放弃，手动开启nimsuggest服务</p>
 <p>再试</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">Traceback (most recent call last)
+<code><span style="color:#fdf4c1aa;">Traceback (most recent call last)
 nimsuggest.nim(197)      nimsuggest
 nimsuggest.nim(187)      handleCmdLine
 nimsuggest.nim(149)      mainCommand
@@ -419,10 +416,10 @@ transf.nim(472)          transformFor
 lambdalifting.nim(1022)  liftForLoop
 ast.nim(941)             []
 SIGSEGV: Illegal storage access. (Attempt to read from nil?)
-</span></pre><pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">*** Error in `aporia&#39;: free(): invalid pointer: 0x00007f1f16667700 ***
+</span></code></pre><pre style="background-color:#282828;">
+<code><span style="color:#fdf4c1aa;">*** Error in `aporia&#39;: free(): invalid pointer: 0x00007f1f16667700 ***
 SIGABRT: Abnormal termination.
-</span></pre>
+</span></code></pre>
 <p>我仿佛已经知道十万只草泥马在心中奔腾而过的感觉了</p>
 <p><em>可能永远也不会续的未完待续</em></p>
 

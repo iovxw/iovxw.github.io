@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -339,7 +336,7 @@
     <h1>PhantomData 黑魔法</h1>
     <div class="info"><h2>&amp;&#x27;a mut &amp;&#x27;a ()</h2><time>2018-03-14 00:17</time></div>
     <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">use </span><span style="color:#fdf4c1aa;">std::marker::PhantomData;
+<code><span style="color:#fa5c4b;">use </span><span style="color:#fdf4c1aa;">std::marker::PhantomData;
 
 </span><span style="color:#fa5c4b;">pub struct </span><span style="color:#8ec07c;">Magic</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fa5c4b;">&#39;a</span><span style="color:#fdf4c1aa;">&gt;(PhantomData&lt;</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a mut </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a </span><span style="color:#fdf4c1aa;">()</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1aa;">);
 
@@ -356,10 +353,10 @@
     }
     pin;
 }
-</span></pre><span id="continue-reading"></span>
+</span></code></pre><span id="continue-reading"></span>
 <hr />
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">error[E0505]: cannot move out of `pin` because it is borrowed
+<code><span style="color:#fdf4c1aa;">error[E0505]: cannot move out of `pin` because it is borrowed
   --&gt; src/main.rs:16:5
    |
 14 |         pin.as_ref();
@@ -373,7 +370,7 @@ error: aborting due to previous error
 error: Could not compile `playground`.
 
 To learn more, run the command again with --verbose.
-</span></pre>
+</span></code></pre>
 <p><a href="https://play.rust-lang.org/?gist=e16426ed7dc4dbfc0665bdb39b2876fe">https://play.rust-lang.org/?gist=e16426ed7dc4dbfc0665bdb39b2876fe</a></p>
 <hr />
 <p>此处 <code>as_ref()</code> 之后, 就算出了作用域, 引用也没被释放, 原因就是 <code>'a</code> 被强行绑定为与 pin 的生命期一样了</p>
@@ -381,7 +378,7 @@ To learn more, run the command again with --verbose.
 <p>但是引入可变性的一些情况下例外, <code>&amp;mut T</code> 的 <code>T</code> 就是一个</p>
 <p>看下面的例子</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">overwrite</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fa5c4b;">&#39;a</span><span style="color:#fdf4c1aa;">&gt;(</span><span style="color:#fdf4c1;">input</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a str</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fdf4c1;">new</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a str</span><span style="color:#fdf4c1aa;">) {
+<code><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">overwrite</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fa5c4b;">&#39;a</span><span style="color:#fdf4c1aa;">&gt;(</span><span style="color:#fdf4c1;">input</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a str</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fdf4c1;">new</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a str</span><span style="color:#fdf4c1aa;">) {
     </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">input </span><span style="color:#fe8019;">= *</span><span style="color:#fdf4c1aa;">new;
 }
 
@@ -394,7 +391,7 @@ To learn more, run the command again with --verbose.
     </span><span style="font-style:italic;color:#928374;">// Oops, printing free&#39;d memory
     </span><span style="color:#fabd2f;">println!</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fdf4c1;">{}</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fdf4c1aa;">, forever_str);
 }
-</span></pre>
+</span></code></pre>
 <p><a href="https://play.rust-lang.org/?gist=49c82fc84a3091cb1853462b221239f7">https://play.rust-lang.org/?gist=49c82fc84a3091cb1853462b221239f7</a></p>
 <p>如果允许 <code>&amp;mut</code> 后的类型 variant, 上面的 <code>'static</code> 会被降为 <code>'a</code>, 就 use after free 了</p>
 <p>所以所有提供可变性的, 比如 <code>&amp;mut T</code>, <code>Cell&lt;T&gt;</code>, <code>RefCell&lt;T&gt;</code> 的 <code>T</code> 的生命期都是 invariant 的</p>

@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -359,7 +356,7 @@
 </ul>
 <p>关于 <strong>default</strong> global event loop, 下面细说一下</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">extern crate</span><span style="color:#fdf4c1aa;"> futures;
+<code><span style="color:#fa5c4b;">extern crate</span><span style="color:#fdf4c1aa;"> futures;
 </span><span style="color:#fa5c4b;">extern crate</span><span style="color:#fdf4c1aa;"> futures_cpupool;
 </span><span style="color:#fa5c4b;">extern crate</span><span style="color:#fdf4c1aa;"> tokio;
 </span><span style="color:#fa5c4b;">extern crate</span><span style="color:#fdf4c1aa;"> tokio_io;
@@ -404,7 +401,7 @@
 
     done.</span><span style="color:#fabd2f;">wait</span><span style="color:#fdf4c1aa;">().</span><span style="color:#fabd2f;">unwrap</span><span style="color:#fdf4c1aa;">();
 }
-</span></pre>
+</span></code></pre>
 <p>这是官方的 echo server example</p>
 <p>值得注意的是 <code>Reactor</code> 不见了, <code>done</code> 这个 Future 直接调用了 <code>.wait()</code></p>
 <p>按旧的 <code>tokio-core</code> 的思维, 上面这个代码因为没有运行 <code>Reactor</code>, 所有 IO 相关的 <code>Task</code> 都会被 block 住, 永远不会被 poll</p>
@@ -414,19 +411,19 @@
 <p>那 <code>Reactor</code> 跑哪去了? <code>TcpListener::bind</code> 原本所需要的 <code>Handle</code> 参数又跑哪去了?</p>
 <p>跟着源码来</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">impl </span><span style="color:#8ec07c;">TcpListener </span><span style="color:#fdf4c1aa;">{
+<code><span style="color:#fa5c4b;">impl </span><span style="color:#8ec07c;">TcpListener </span><span style="color:#fdf4c1aa;">{
     </span><span style="font-style:italic;color:#928374;">/// Create a new TCP listener associated with this event loop.
     ///
     /// The TCP listener will bind to the provided `addr` address, if available.
     /// If the result is `Ok`, the socket has successfully bound.
-    </span><span style="color:#fa5c4b;">pub fn </span><span style="color:#8ec07c;">bind</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">addr</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1aa;">SocketAddr) -&gt; io::Result&lt;TcpListener&gt; {
+    </span><span style="color:#fa5c4b;">pub fn </span><span style="color:#8ec07c;">bind</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">addr</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1aa;">SocketAddr) -&gt; io::</span><span style="color:#fabd2f;">Result</span><span style="color:#fdf4c1aa;">&lt;TcpListener&gt; {
         </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> l </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">try!</span><span style="color:#fdf4c1aa;">(mio::net::TcpListener::bind(addr));
         TcpListener::new(l, </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1aa;">Handle::default())
     }
-</span></pre>
+</span></code></pre>
 <p>哈! <code>Handle</code> 实现了 <code>Default</code>! 看 <code>Default</code> 的实现又会发现它用了一个全局变量存了一个 <code>Handle</code> 的指针</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">impl </span><span style="color:#fdf4c1aa;">Default </span><span style="color:#fa5c4b;">for </span><span style="color:#8ec07c;">Handle </span><span style="color:#fdf4c1aa;">{
+<code><span style="color:#fa5c4b;">impl </span><span style="color:#fdf4c1aa;">Default </span><span style="color:#fa5c4b;">for </span><span style="color:#8ec07c;">Handle </span><span style="color:#fdf4c1aa;">{
     </span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">default</span><span style="color:#fdf4c1aa;">() -&gt; Handle {
         </span><span style="color:#fa5c4b;">let mut</span><span style="color:#fdf4c1aa;"> fallback </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">HANDLE_FALLBACK</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fabd2f;">load</span><span style="color:#fdf4c1aa;">(SeqCst);
 
@@ -467,11 +464,11 @@
         }
     }
 }
-</span></pre>
+</span></code></pre>
 <p><code>global::HelperThread::new</code> 更简单, 直接开了一个线程跑 <code>Reactor</code></p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">impl </span><span style="color:#8ec07c;">HelperThread </span><span style="color:#fdf4c1aa;">{
-    </span><span style="color:#fa5c4b;">pub fn </span><span style="color:#8ec07c;">new</span><span style="color:#fdf4c1aa;">() -&gt; io::Result&lt;HelperThread&gt; {
+<code><span style="color:#fa5c4b;">impl </span><span style="color:#8ec07c;">HelperThread </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#fa5c4b;">pub fn </span><span style="color:#8ec07c;">new</span><span style="color:#fdf4c1aa;">() -&gt; io::</span><span style="color:#fabd2f;">Result</span><span style="color:#fdf4c1aa;">&lt;HelperThread&gt; {
         </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> reactor </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">Reactor::new()</span><span style="color:#fe8019;">?</span><span style="color:#fdf4c1aa;">;
         </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> reactor_handle </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> reactor.</span><span style="color:#fabd2f;">handle</span><span style="color:#fdf4c1aa;">().</span><span style="color:#fabd2f;">clone</span><span style="color:#fdf4c1aa;">();
         </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> done </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">Arc::new(AtomicBool::new(</span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1aa;">));
@@ -484,7 +481,7 @@
             done: done2,
         })
     }
-</span></pre>
+</span></code></pre>
 <p>问题解决, tokio 用了简单暴力的方法——多开一个线程</p>
 <p>不过由于是隐式的, 某些特定环境中可能会被坑</p>
 <p>然后由于只有一个 event loop, 极端情况下还可能会成为瓶颈</p>

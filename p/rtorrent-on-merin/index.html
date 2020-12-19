@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -353,18 +350,18 @@
 <h2 id="pei-zhi">配置</h2>
 <p>我的 Entware 是装在 U盘 里的，下载文件夹设置在了移动硬盘，为了 U盘 寿命考虑，需要编辑 <em>/opt/etc/rtorrent/rtorrent.conf</em> 将 session 和 watchdir 文件夹也改在移动硬盘，这两个在安装时修改下载文件夹是不会一块跟着变的</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">session = /mnt/sdb5/download/session
+<code><span style="color:#fdf4c1aa;">session = /mnt/sdb5/download/session
 schedule = watch_directory,5,5,load_start=/mnt/sdb5/download/watchdir/*.torrent
-</span></pre>
+</span></code></pre>
 <p>session 文件夹是用来放各种临时信息，比如 DHT 的节点之类</p>
 <p>watchdir 里的 torrent 文件会自动添加到新任务，当然本质是一个定时器定时检测指定路径而已</p>
 <p>修改之前记得先 <code>/opt/etc/init.d/S85rtorrent stop</code></p>
 <h3 id="duan-kou">端口</h3>
 <p>在安装完成的时候会提示开启端口，虽然不开也能运行，但是将很难找到 peer</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">iptables -I INPUT -p tcp --destination-port 51411 -j ACCEPT
+<code><span style="color:#fdf4c1aa;">iptables -I INPUT -p tcp --destination-port 51411 -j ACCEPT
 iptables -I INPUT -p udp --destination-port 51412 -j ACCEPT
-</span></pre>
+</span></code></pre>
 <p>51411 是 <em>port_range</em> 的默认值，这是一个端口范围，全闭区间，用于与其他 peer 的连接</p>
 <p>51412 是 <em>dht_port</em> 的默认值，字面意思</p>
 <p>为了下次启动不需要手动再开端口，在 <em>/jffs/scripts/firewall-start</em> 里加入上面两条</p>
@@ -375,19 +372,19 @@ iptables -I INPUT -p udp --destination-port 51412 -j ACCEPT
 <p>不过众所周知的原因在国内 tracker 服务器并不是那么好访问，这里直接设置为 <code>on</code> 强制启用就行</p>
 <p>DHT 在启动的时候需要先连接几个 bootstrap 节点才能初始化，配置里加入如下几行</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">schedule2 = dht_node0,30,0,dht.add_node=dht.transmissionbt.com
+<code><span style="color:#fdf4c1aa;">schedule2 = dht_node0,30,0,dht.add_node=dht.transmissionbt.com
 schedule2 = dht_node1,30,0,dht.add_node=router.bittorrent.com
 schedule2 = dht_node2,30,0,dht.add_node=router.utorrent.com
-</span></pre>
+</span></code></pre>
 <p>用 schedule 是因为需要延时一下，等待 DHT 启动完成，详见 <a href="https://github.com/rakshasa/rtorrent/issues/383">rtorrent#383</a></p>
 <h3 id="kai-ji-qi-dong">开机启动</h3>
 <p>启动的时候第一次肯定会失败，因为分区还没挂载</p>
 <p>在 <em>/jffs/scripts/post-mount</em> 里加入</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">if </span><span style="color:#fabd2f;">[ </span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">1</span><span style="color:#b8bb26;">&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;/tmp/mnt/sdb5&quot; </span><span style="color:#fabd2f;">] </span><span style="color:#fe8019;">; </span><span style="color:#fa5c4b;">then
+<code><span style="color:#fa5c4b;">if </span><span style="color:#fabd2f;">[ </span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">1</span><span style="color:#b8bb26;">&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;/tmp/mnt/sdb5&quot; </span><span style="color:#fabd2f;">] </span><span style="color:#fe8019;">; </span><span style="color:#fa5c4b;">then
   </span><span style="color:#fdf4c1;">/opt/etc/init.d/S85rtorrent start
 </span><span style="color:#fa5c4b;">fi
-</span></pre>
+</span></code></pre>
 <p><em>/tmp/mnt/sdb5</em> 替换为你的下载文件夹的挂载点</p>
 <p>就能在分区挂载后再次尝试启动了</p>
 <hr />

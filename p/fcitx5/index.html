@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -361,22 +358,22 @@
 <h2 id="yi-lai">依赖</h2>
 <p>按照 <code>CMakeLists.txt</code> 缺哪个装哪个, 下面是大概的列表, 不保证全, 其他 debian 系应该也没差</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">build-essential cmake extra-cmake-modules libxcb1-dev libxcb-keysyms1-dev libxcb-util0-dev libdbus-1-dev libevent-dev uuid-dev gettext libsystemd-dev libxkbfile-dev libxkbcommon-x11-dev libxcb-xkb-dev libxcb1-dev libpango1.0-dev libpangocairo-1.0-0 libenchant-dev libxcb-ewmh-dev libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-ewmh-dev wayland-protocols libboost-dev libcurl4-gnutls-dev libopencc-dev libqt5webengine5-dev libqt5webchannel5-dev qt4-qmake libqt4-dev qtbase5-dev libboost-iostreams-dev gobject-introspection libgirepository1.0-dev libgtk2.0-dev libgtk-3-dev
-</span></pre>
+<code><span style="color:#fdf4c1aa;">build-essential cmake extra-cmake-modules libxcb1-dev libxcb-keysyms1-dev libxcb-util0-dev libdbus-1-dev libevent-dev uuid-dev gettext libsystemd-dev libxkbfile-dev libxkbcommon-x11-dev libxcb-xkb-dev libxcb1-dev libpango1.0-dev libpangocairo-1.0-0 libenchant-dev libxcb-ewmh-dev libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-ewmh-dev wayland-protocols libboost-dev libcurl4-gnutls-dev libopencc-dev libqt5webengine5-dev libqt5webchannel5-dev qt4-qmake libqt4-dev qtbase5-dev libboost-iostreams-dev gobject-introspection libgirepository1.0-dev libgtk2.0-dev libgtk-3-dev
+</span></code></pre>
 <p>源里的 <code>libfmt3-dev</code> 不带 cmake 文件, cmake 找不到, <a href="https://github.com/fmtlib/fmt">得自己编译安装</a></p>
 <h2 id="bian-yi">编译</h2>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">mkdir build </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fabd2f;">cd </span><span style="color:#fdf4c1;">$_ </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fdf4c1;">cmake .. </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fdf4c1;">make -j`nproc` </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fdf4c1;">sudo make install
-</span></pre>
+<code><span style="color:#fdf4c1;">mkdir build </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fabd2f;">cd </span><span style="color:#fdf4c1;">$_ </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fdf4c1;">cmake .. </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fdf4c1;">make -j`nproc` </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fdf4c1;">sudo make install
+</span></code></pre>
 <p>编译那几个依赖 Qt5 的项目的时候可能会报错, 因为最低 Qt 版本要求是 5.7, Deepin 的是 5.6</p>
 <p>比如找不到合适的 <code>QAction</code> 构造器, 是因为 5.7 新加了默认值, 手动把默认值填上就行了</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">diff --git a/qt5/widgetsaddons/fcitxqtkeysequencewidget.cpp b/qt5/widgetsaddons/fcitxqtkeysequencewidget.cpp
+<code><span style="color:#fdf4c1aa;">diff --git a/qt5/widgetsaddons/fcitxqtkeysequencewidget.cpp b/qt5/widgetsaddons/fcitxqtkeysequencewidget.cpp
 index a774282..a6d8b78 100644
 </span><span style="color:#83a598;">--- a/qt5/widgetsaddons/fcitxqtkeysequencewidget.cpp
 +++ b/qt5/widgetsaddons/fcitxqtkeysequencewidget.cpp
-@@ -143,7 +143,7 @@</span><span style="color:#fdf4c1aa;"> void FcitxQtKeySequenceWidgetPrivate::init() {
-     clearButton_ = new QToolButton(q);
+@@ -143,7 +143,7 @@ </span><span style="color:#8ec07c;">void FcitxQtKeySequenceWidgetPrivate::init() {
+</span><span style="color:#fdf4c1aa;">     clearButton_ = new QToolButton(q);
      layout_-&gt;addWidget(clearButton_);
  
 </span><span style="color:#fa5c4b;">-    keyCodeModeAction_ = new QAction(_(&quot;Key code mode&quot;));
@@ -384,48 +381,48 @@ index a774282..a6d8b78 100644
 </span><span style="color:#fdf4c1aa;">     keyCodeModeAction_-&gt;setCheckable(true);
      keyCodeModeAction_-&gt;setEnabled(isX11LikePlatform());
      q-&gt;setContextMenuPolicy(Qt::ActionsContextMenu);
-</span></pre>
+</span></code></pre>
 <p>还有找不到 <code>qOverload</code>, 也是自己声明个就行, 实现在:</p>
 <p><a href="https://github.com/qt/qtbase/blob/5.7/src/corelib/global/qglobal.h#L1041-L1086">https://github.com/qt/qtbase/blob/5.7/src/corelib/global/qglobal.h#L1041-L1086</a></p>
 <h2 id="pei-zhi">配置</h2>
 <p>在 <code>~/.config/fcitx5/profile</code> 写上以下内容, 如果不写靠默认配置是不会有拼音输入法可以用的</p>
 <p>配置格式在未来版本可能会变, 自己照着改改吧</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">[Groups/0]
-</span><span style="font-style:italic;color:#928374;"># Group Name
+<code><span style="color:#fa5c4b;">[Groups/0]
+</span><span style="color:#fdf4c1aa;"># Group Name
 </span><span style="color:#fdf4c1;">Name</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;">默认
-</span><span style="font-style:italic;color:#928374;"># Layout
+# Layout
 </span><span style="color:#fdf4c1;">Default </span><span style="color:#fdf4c1aa;">Layout</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;">us
-</span><span style="font-style:italic;color:#928374;"># Default Input Method
+# Default Input Method
 </span><span style="color:#fdf4c1;">DefaultIM</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;">pinyin
-</span><span style="color:#fa5c4b;">
-[Groups/0/Items/0]
-</span><span style="font-style:italic;color:#928374;"># Name
+
+</span><span style="color:#fa5c4b;">[Groups/0/Items/0]
+</span><span style="color:#fdf4c1aa;"># Name
 </span><span style="color:#fdf4c1;">Name</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;">keyboard</span><span style="color:#fe8019;">-</span><span style="color:#fdf4c1aa;">us
-</span><span style="font-style:italic;color:#928374;"># Layout
+# Layout
 </span><span style="color:#fdf4c1;">Layout</span><span style="color:#fe8019;">=
-</span><span style="color:#fa5c4b;">
-[Groups/0/Items/1]
-</span><span style="font-style:italic;color:#928374;"># Name
+
+</span><span style="color:#fa5c4b;">[Groups/0/Items/1]
+</span><span style="color:#fdf4c1aa;"># Name
 </span><span style="color:#fdf4c1;">Name</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;">pinyin
-</span><span style="font-style:italic;color:#928374;"># Layout
+# Layout
 </span><span style="color:#fdf4c1;">Layout</span><span style="color:#fe8019;">=
-</span><span style="color:#fa5c4b;">
-[GroupOrder]
+
+</span><span style="color:#fa5c4b;">[GroupOrder]
 </span><span style="color:#d3869b;">0</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;">默认
-</span></pre>
+</span></code></pre>
 <p>不要在 fcitx 运行时修改, 因为进程退出后会覆写所有配置文件</p>
 <h2 id="huan-jing-bian-liang">环境变量</h2>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">GTK_IM_MODULE</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">fcitx5
+<code><span style="color:#fdf4c1;">GTK_IM_MODULE</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">fcitx5
 </span><span style="color:#fdf4c1;">XMODIFIERS</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">@im=fcitx
 </span><span style="color:#fdf4c1;">QT_IM_MODULE</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">fcitx5
-</span></pre><h2 id="qi-dong">启动</h2>
+</span></code></pre><h2 id="qi-dong">启动</h2>
 <p>终端运行 <code>fcitx5</code>, 看看有没有错误</p>
 <h2 id="zi-dong-yun-xing">自动运行</h2>
 <p>在 <code>~/.config/autostart/</code> 建个 <code>fcitx5.desktop</code>, 填上</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">[Desktop Entry]
+<code><span style="color:#fa5c4b;">[Desktop Entry]
 </span><span style="color:#fdf4c1;">Name</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;">Fcitx5
 </span><span style="color:#fdf4c1;">GenericName</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;">Fcitx5 Input Method
 </span><span style="color:#fdf4c1;">Comment</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;">Start Fcitx5
@@ -441,19 +438,19 @@ index a774282..a6d8b78 100644
 </span><span style="color:#fabd2f;">X</span><span style="color:#fe8019;">-</span><span style="color:#fabd2f;">KDE</span><span style="color:#fe8019;">-</span><span style="color:#fdf4c1aa;">autostart</span><span style="color:#fe8019;">-</span><span style="color:#fdf4c1aa;">after</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;">panel
 </span><span style="color:#fabd2f;">X</span><span style="color:#fe8019;">-</span><span style="color:#fabd2f;">KDE</span><span style="color:#fe8019;">-</span><span style="color:#fdf4c1aa;">StartupNotify</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">false
 </span><span style="color:#fabd2f;">X</span><span style="color:#fe8019;">-</span><span style="color:#fabd2f;">GNOME</span><span style="color:#fe8019;">-</span><span style="color:#fdf4c1aa;">Autostart</span><span style="color:#fe8019;">-</span><span style="color:#fdf4c1aa;">enabled</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">true
-</span></pre><h2 id="guan-bi-yun-pin-yin">关闭云拼音</h2>
+</span></code></pre><h2 id="guan-bi-yun-pin-yin">关闭云拼音</h2>
 <p>默认用的是 Google 的云拼音, 也可以切换到 Baidu 的, 但我不用</p>
 <p>关闭的快捷键是 <code>Control+Alt+Shift+C</code>, 参见 <a href="https://github.com/fcitx/fcitx5-chinese-addons/blob/b5da671c29050/modules/cloudpinyin/cloudpinyin.h#L37">这里</a></p>
 <p>也可以修改 <code>~/.config/fcitx5/conf/pinyin.conf</code></p>
 <pre style="background-color:#282828;">
-<span style="font-style:italic;color:#928374;"># Enable Cloud Pinyin
+<code><span style="color:#fdf4c1aa;"># Enable Cloud Pinyin
 </span><span style="color:#fdf4c1;">CloudPinyinEnabled</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">False
-</span></pre><h2 id="qi-ta">其他</h2>
+</span></code></pre><h2 id="qi-ta">其他</h2>
 <p>默认界面的配置文件在 <code>~/.config/fcitx5/conf/classicui.conf</code></p>
 <p>如果遇到多屏幕字体大小不一致的情况, 设置</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">PerScreenDPI</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">False
-</span></pre>
+<code><span style="color:#fdf4c1;">PerScreenDPI</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">False
+</span></code></pre>
 <p>因为 fcitx5 会自动计算每个屏幕的物理 DPI 大小然后进行缩放</p>
 <hr />
 <p>最后我移植了个主题, 有兴趣的话可以试试:</p>

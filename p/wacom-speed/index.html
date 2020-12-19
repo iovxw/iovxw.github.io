@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -348,15 +345,15 @@
 <p>首先找到画笔的ID</p>
 <p><code>xsetwacom --list</code></p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">Wacom Intuos P M Pen stylus             id: 17        type: STYLUS    
+<code><span style="color:#fdf4c1aa;">Wacom Intuos P M Pen stylus             id: 17        type: STYLUS    
 Wacom Intuos P M Pen eraser             id: 18        type: ERASER    
 Wacom Intuos P M Pad pad                id: 19        type: PAD  
-</span></pre>
+</span></code></pre>
 <p>我这里的ID是17</p>
 <p>然后<code>xinput watch-props 17</code></p>
 <p>输出：</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">Device &#39;Wacom Intuos P M Pen stylus&#39;:
+<code><span style="color:#fdf4c1aa;">Device &#39;Wacom Intuos P M Pen stylus&#39;:
         Device Enabled (137):        1
         Coordinate Transformation Matrix (139):        1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
         Device Accel Profile (261):        0
@@ -383,7 +380,7 @@ Wacom Intuos P M Pad pad                id: 19        type: PAD
         Device Product ID (256):        1386, 803
         Wacom Debug Levels (636):        0, 0
 
-</span></pre>
+</span></code></pre>
 <p>找到我们要设置的<em>Device Accel Constant Deceleration</em>后面括号里的数字</p>
 <p><code>xinput set-prop 17 262 2.5</code></p>
 <p>就搞定啦</p>

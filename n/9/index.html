@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -415,10 +412,10 @@
 <p>2.用文本编辑器打开</p>
 <p>3.修改内容为</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">Windows Registry Editor Version 5.00
+<code><span style="color:#fdf4c1aa;">Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\WPA\PosReady]
 &quot;Installed&quot;=dword:00000001
-</span></pre>
+</span></code></pre>
 <p>4.保存，然后双击它</p>
 <p>现在打开更新管理器就会发现有新的更新可用了</p>
 <p>这个的原理是欺骗Windows Update，让它把你的电脑识别为<a href="http://Windows%20Embedded%20POSReady%202009">Windows Embedded POSReady 2009</a></p>
@@ -474,7 +471,7 @@
               </div>
               
                 <pre style="background-color:#282828;">
-  &lt;div class=&quot;page-header&quot; id=&quot;banner&quot;&gt;
+<code>  &lt;div class=&quot;page-header&quot; id=&quot;banner&quot;&gt;
     &lt;div class=&quot;row&quot;&gt;
       &lt;div class=&quot;col-lg-6&quot;&gt;
         &lt;h1&gt;Yeti&lt;/h1&gt;
@@ -1545,7 +1542,7 @@
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-</pre>
+</code></pre>
               
             </article>
           
@@ -1569,12 +1566,12 @@ or through <a href="https://google.com/">google</a>.</p>
 <p>There are some <em>easy</em> examples for styling, though. I can't <strong>emphasize</strong> that enough.
 Creating <a href="https://google.com/">links</a> or <code>inline code</code> blocks are very straightforward.</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">There are some *easy* examples for styling, though. I can&#39;t **emphasize** that enough.
+<code><span style="color:#fdf4c1aa;">There are some *easy* examples for styling, though. I can&#39;t **emphasize** that enough.
 Creating [links](https://google.com/) or `inline code` blocks are very straightforward.
-</span></pre><h2 id="front-matter-for-fun">Front Matter For Fun</h2>
+</span></code></pre><h2 id="front-matter-for-fun">Front Matter For Fun</h2>
 <p>This is the meta data for this post. It is located at the top of the <code>content/post/hello-hugo.md</code> markdown file.</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">---
+<code><span style="color:#fdf4c1aa;">---
 title: &quot;Hello Hugo!&quot;
 description: &quot;Saying &#39;Hello&#39; from Hugo&quot;
 date: &quot;2014-04-09&quot;
@@ -1586,7 +1583,7 @@ tags:
   - &quot;hugo&quot;
   - &quot;blog&quot;
 ---
-</span></pre>
+</span></code></pre>
 <p>This section, called 'Front Matter', is what tells Hugo about the content in this file. The title of the item,the
 description, the date it was posted. In our example we're adding two custom bits of data, too. The <code>categories</code> and
 <code>tags</code> sections are used in this example for indexing/grouping content. You will learn more about what that means by
@@ -1637,30 +1634,23 @@ examining the code in this example and through reading the Hugo <a href="http://
         ["某只熊猫的博客", "http://qaq.gd"],
         ["bangbang93.blog()", "http://blog.bangbang93.com"],
         ["Kuludu的博客", "http://kuludu.net"],
-        ["Reflect Sky", "http://www.reflectsky.com"],
-        ["ChinaMoe's Blog", "http://tap-io.com"],
-        ["Fz<del>(大金牛)</del>'s blog", "http://www.zhuhening.cn"],
+        ["Fz<del>(大金牛)</del>'s blog", "https://blog.zhuhening.cn"],
         ["小竹's blog", "https://blog.justforlxz.com"],
         ["Farseerfc的小窩", "https://farseerfc.me"],
         ["新一", "https://a-wing.top"],
+        ["辣辣辣辣辣酱", "https://silverrainz.me"],
     ];
     let linksElem = document.getElementById("links");
-    function secureRandom() {
-        var buf = new Uint8Array(1);
-        window.crypto.getRandomValues(buf);
-        return buf[0];
-    }
-    function main() {
-        let linksR = links.sort(function(_, _) {
-            return (secureRandom() >= 128) ? -1 : 1;
-        });
-        var html = "";
-        linksR.forEach(function(e) {
-            html += "<li><a href=\"" + e[1] + "\">" + e[0] + "</a></li>";
-        });
-        linksElem.innerHTML = html;
-    }
-    main();
+
+    links.sort(() => (
+        window.crypto.getRandomValues(new Int8Array(1))[0]
+    ));
+
+    let html = links.reduce((html, link) => (
+        html + "<li><a href=\"" + link[1] + "\">" + link[0] + "</a></li>"
+    ), "");
+
+    linksElem.innerHTML = html;
 </script>
 
               

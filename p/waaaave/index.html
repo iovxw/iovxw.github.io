@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -450,7 +447,7 @@
 <p>而要画一条横着的直线，只需要知道三个值，<code>x1</code> <code>x2</code> 和 <code>y</code>，因为两个点 <code>y</code> 是一样的</p>
 <p>画起来是这样的（伪代码）：</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">x1 </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">0
+<code><span style="color:#fdf4c1;">x1 </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">0
 </span><span style="color:#fdf4c1;">x2 </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">10
 </span><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">0
 </span><span style="color:#fdf4c1;">ctx </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">canvas.get_context() </span><span style="font-style:italic;color:#928374;">// 基本各种绘图库都有这个方法，获取一个 &quot;画笔&quot;
@@ -463,38 +460,38 @@
 </span><span style="color:#fdf4c1aa;">}
 
 </span><span style="color:#fdf4c1;">ctx.stroke() </span><span style="font-style:italic;color:#928374;">// 将路径画出来
-</span></pre>
+</span></code></pre>
 <p>当然可以直接一个 <code>line_to</code> 到 <code>x2</code>，不过这里是为了演示逐点画线</p>
 <p>至于曲线，聪明的你肯定知道了，画点的过程中想个办法让 <code>y</code> 根据 <code>x</code> 上下跑就可以了</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">x</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1;">x1</span><span style="color:#fe8019;">+</span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1aa;">; </span><span style="color:#fdf4c1;">x</span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1;">x2</span><span style="color:#fe8019;">+</span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1aa;">; </span><span style="color:#fdf4c1;">x</span><span style="color:#fe8019;">++</span><span style="color:#fdf4c1aa;">) {
+<code><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">x</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1;">x1</span><span style="color:#fe8019;">+</span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1aa;">; </span><span style="color:#fdf4c1;">x</span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1;">x2</span><span style="color:#fe8019;">+</span><span style="color:#d3869b;">1</span><span style="color:#fdf4c1aa;">; </span><span style="color:#fdf4c1;">x</span><span style="color:#fe8019;">++</span><span style="color:#fdf4c1aa;">) {
     </span><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">magic(x)
     ctx.line_to(x, y)
 </span><span style="color:#fdf4c1aa;">}
-</span></pre>
+</span></code></pre>
 <p>把里面的 magic 换成三角函数，比如正弦函数（sin），你就可以画出来这样的曲线：</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Sin.svg/800px-Sin.svg.png" alt="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Sin.svg/800px-Sin.svg.png" /></p>
 <p>（图片来自维基百科，公有领域）</p>
 <p>但这还不够，我们需要让这条曲线看起来更 &quot;柔和&quot; 一些，所以让我们把 <code>x</code> 变小一点，比如：</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">sin(</span><span style="color:#d3869b;">0.3 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">x)
-</span></pre>
+<code><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">sin(</span><span style="color:#d3869b;">0.3 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">x)
+</span></code></pre>
 <p><img src="https://img.vim-cn.com/f6/8fa1280ff1f6eac4e46afacb57945f4c8afb02.svg" alt="https://img.vim-cn.com/f6/8fa1280ff1f6eac4e46afacb57945f4c8afb02.svg" /></p>
 <p>红线是 <code>* 0.3</code> 的结果，看起来好多了</p>
 <p>目前为止浪高都是一样的，需要让他再大一些，修改一下 <code>y</code> 的波动幅度，比如两倍（黄线）</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">2 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">sin(</span><span style="color:#d3869b;">0.3 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">x)
-</span></pre>
+<code><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">2 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">sin(</span><span style="color:#d3869b;">0.3 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">x)
+</span></code></pre>
 <p><img src="https://img.vim-cn.com/86/8a94484098b7831f7e1615d2435de82457a0f9.svg" alt="https://img.vim-cn.com/86/8a94484098b7831f7e1615d2435de82457a0f9.svg" /></p>
 <p>同时需要让曲线能上下移动（控制水量），直接改变 <code>y</code> 的高度，比如向上 1 点（绿线）</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">2 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">sin(</span><span style="color:#d3869b;">0.3 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">x) </span><span style="color:#fe8019;">+ </span><span style="color:#d3869b;">1
-</span></pre>
+<code><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">2 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">sin(</span><span style="color:#d3869b;">0.3 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">x) </span><span style="color:#fe8019;">+ </span><span style="color:#d3869b;">1
+</span></code></pre>
 <p><img src="https://img.vim-cn.com/6c/a819fd1685d8241cb9dd49d59052acad5397ca.svg" alt="https://img.vim-cn.com/6c/a819fd1685d8241cb9dd49d59052acad5397ca.svg" /></p>
 <p>最后让波浪向左平移，动起来（offset 在每次动画循环中自增）</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">2 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">sin(</span><span style="color:#d3869b;">0.3 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">x </span><span style="color:#fe8019;">+ </span><span style="color:#fdf4c1;">offset) </span><span style="color:#fe8019;">+ </span><span style="color:#d3869b;">1
-</span></pre>
+<code><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">2 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">sin(</span><span style="color:#d3869b;">0.3 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">x </span><span style="color:#fe8019;">+ </span><span style="color:#fdf4c1;">offset) </span><span style="color:#fe8019;">+ </span><span style="color:#d3869b;">1
+</span></code></pre>
 <p>演示就不做了，好麻烦</p>
 <p>总之现在就有了一个波浪动画，改变波浪形状只需要把上面挨个介绍过的量修改就行</p>
 <p>上面的双波浪是分别用的正弦和余弦函数做成的，也可以直接给 offset 加个差值</p>
@@ -533,7 +530,7 @@
 </svg></p>
 <p>这次直接讲源码</p>
 <pre style="background-color:#282828;">
-<span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">svg </span><span style="color:#8ec07c;">width=</span><span style="color:#b8bb26;">&quot;100&quot; </span><span style="color:#8ec07c;">height=</span><span style="color:#b8bb26;">&quot;100&quot; </span><span style="color:#8ec07c;">xmlns=</span><span style="color:#b8bb26;">&quot;http://www.w3.org/2000/svg&quot;
+<code><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">svg </span><span style="color:#8ec07c;">width=</span><span style="color:#b8bb26;">&quot;100&quot; </span><span style="color:#8ec07c;">height=</span><span style="color:#b8bb26;">&quot;100&quot; </span><span style="color:#8ec07c;">xmlns=</span><span style="color:#b8bb26;">&quot;http://www.w3.org/2000/svg&quot;
     </span><span style="color:#8ec07c;">xmlns:xlink=</span><span style="color:#b8bb26;">&quot;http://www.w3.org/1999/xlink&quot;</span><span style="color:#83a598;">&gt;
   &lt;</span><span style="font-weight:bold;color:#8ec07c;">defs</span><span style="color:#83a598;">&gt;
     &lt;</span><span style="font-weight:bold;color:#8ec07c;">g </span><span style="color:#8ec07c;">id=</span><span style="color:#b8bb26;">&quot;wave&quot;</span><span style="color:#83a598;">&gt; </span><span style="font-style:italic;color:#928374;">&lt;!--单条波浪，具体怎么画的请看之前的介绍贴--&gt;
@@ -571,7 +568,7 @@
     &lt;/</span><span style="font-weight:bold;color:#8ec07c;">g</span><span style="color:#83a598;">&gt;
   &lt;/</span><span style="font-weight:bold;color:#8ec07c;">g</span><span style="color:#83a598;">&gt;
 &lt;/</span><span style="font-weight:bold;color:#8ec07c;">svg</span><span style="color:#83a598;">&gt;
-</span></pre>
+</span></code></pre>
 <p>拼接波浪的数量也不用真的去算，看见缺了的话再加一条就行了</p>
 <p>把动画放慢再展开的效果（蓝色是第一条波浪，红色第二条，可以看见波浪的拼接线）：</p>
 <p><svg width="500" height="100" xmlns="http://www.w3.org/2000/svg"

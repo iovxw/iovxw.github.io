@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -463,7 +460,7 @@ export QT_IM_MODULE=fcitx</p>
               </div>
               
                 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">&quot;No warp───┐
+<code><span style="color:#fdf4c1aa;">&quot;No warp───┐
 set nowrap&quot;│
 &quot;──────────┘
 &quot;Line number─┐
@@ -538,7 +535,7 @@ autocmd FileType go compiler go&quot;│
 &quot;Automatic format────────────────────────────────────┐
 autocmd FileType go autocmd BufWritePre &lt;buffer&gt; Fmt&quot;│
 &quot;────────────────────────────────────────────────────┘
-</span></pre>
+</span></code></pre>
 <p>好吧其实原版VIM也通用</p>
 <p>只是需要把上面的<code>.nvim</code>文件夹改成<code>.vim</code>就行</p>
 <p>这里面需要用到Golang的官方插件，把go源码里的<code>misc/vim</code>全部扔到相应的文件夹即可（或者做个链接）</p>
@@ -601,9 +598,9 @@ autocmd FileType go autocmd BufWritePre &lt;buffer&gt; Fmt&quot;│
 <p>安装过程中会下载几个包，网站都是国外的，所以比较慢，而且没有进度显示。耐心等待就行（如果相关网站被墙请手动设置代理）</p>
 <p>安装：</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/
+<code><span style="color:#fdf4c1aa;">cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/
 make install
-</span></pre>
+</span></code></pre>
               
             </article>
           
@@ -655,10 +652,10 @@ shell主题：<code>Moskva</code><br />
 <p>自己百度吧</p>
 <p>直接扔命令</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">        sudo add-apt-repository ppa:sukso96100/budgie-desktop
+<code><span style="color:#fdf4c1aa;">        sudo add-apt-repository ppa:sukso96100/budgie-desktop
         sudo apt-get update
         sudo apt-get install budgie-desktop
-</span></pre>
+</span></code></pre>
               
             </article>
           
@@ -676,9 +673,9 @@ shell主题：<code>Moskva</code><br />
 <p>Atom我就不介绍了，自己去看WIKI吧</p>
 <p>ubuntu快速安装：</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">sudo add-apt-repository ppa:webupd8team/atom
+<code><span style="color:#fdf4c1aa;">sudo add-apt-repository ppa:webupd8team/atom
 sudo apt-get update &amp;&amp; sudo apt-get install atom
-</span></pre>
+</span></code></pre>
 <p>MAC可以直接从<a href="https://atom.io">官网</a>下载</p>
 <p>其他系统就自己编译吧</p>
 <p>因为和Github结合的很好，然后速度较快，比较适合项目的小修改&amp;提交，和不喜欢大型IDE的人</p>
@@ -723,13 +720,13 @@ sudo apt-get update &amp;&amp; sudo apt-get install atom
 <p>所以没法用什么的很正常</p>
 <p>在页面内添加</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">&lt;form id=&quot;search&quot; class=&quot;search&quot; role=&quot;search&quot;&gt;
+<code><span style="color:#fdf4c1aa;">&lt;form id=&quot;search&quot; class=&quot;search&quot; role=&quot;search&quot;&gt;
         &lt;input class=&quot;form-control&quot; placeholder=&quot;搜索&quot; name=&quot;q&quot; type=&quot;text&quot;&gt;
 &lt;/form&gt;
-</span></pre>
+</span></code></pre>
 <p>然后在js里添加</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">(function(){
+<code><span style="color:#fdf4c1aa;">(function(){
 	$(document).on(&#39;submit&#39;, &#39;#search.search&#39;, function(){
 		var q = $(this).find(&#39;[name=q]&#39;).val();
 		if($.trim(q) !== &#39;&#39;){
@@ -740,7 +737,7 @@ sudo apt-get update &amp;&amp; sudo apt-get install atom
 		return false;
 	});
 })();
-</span></pre>
+</span></code></pre>
 <p><code>http://www.baidu.com/s?wd=</code>可以替换成任意支持site搜索的搜索引擎地址</p>
 <hr />
 <p>PS: 这是 jQuery 版本，写成原生的也不难这里就不废话了</p>

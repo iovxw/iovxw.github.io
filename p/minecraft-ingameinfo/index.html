@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -350,7 +347,7 @@
 <p>肯定是先安装 InGameInfo 这个 Mod</p>
 <p>然后直接将以下内容存到 <code>.minecraft/config/InGameInfo.xml</code></p>
 <pre style="background-color:#282828;">
-<span style="color:#83a598;">&lt;?</span><span style="font-weight:bold;color:#8ec07c;">xml </span><span style="color:#8ec07c;">version=</span><span style="color:#b8bb26;">&quot;1.0&quot; </span><span style="color:#8ec07c;">encoding=</span><span style="color:#b8bb26;">&quot;UTF-8&quot; </span><span style="color:#8ec07c;">standalone=</span><span style="color:#b8bb26;">&quot;no&quot;</span><span style="color:#83a598;">?&gt;
+<code><span style="color:#83a598;">&lt;?</span><span style="font-weight:bold;color:#8ec07c;">xml </span><span style="color:#8ec07c;">version=</span><span style="color:#b8bb26;">&quot;1.0&quot; </span><span style="color:#8ec07c;">encoding=</span><span style="color:#b8bb26;">&quot;UTF-8&quot; </span><span style="color:#8ec07c;">standalone=</span><span style="color:#b8bb26;">&quot;no&quot;</span><span style="color:#83a598;">?&gt;
 &lt;</span><span style="font-weight:bold;color:#8ec07c;">config</span><span style="color:#83a598;">&gt;
     &lt;</span><span style="font-weight:bold;color:#8ec07c;">lines </span><span style="color:#8ec07c;">at=</span><span style="color:#b8bb26;">&quot;topleft&quot;</span><span style="color:#83a598;">&gt;
         &lt;</span><span style="font-weight:bold;color:#8ec07c;">line</span><span style="color:#83a598;">&gt;
@@ -669,7 +666,7 @@
         &lt;/</span><span style="font-weight:bold;color:#8ec07c;">line</span><span style="color:#83a598;">&gt;
     &lt;/</span><span style="font-weight:bold;color:#8ec07c;">lines</span><span style="color:#83a598;">&gt;
 &lt;/</span><span style="font-weight:bold;color:#8ec07c;">config</span><span style="color:#83a598;">&gt;
-</span></pre>
+</span></code></pre>
 </article>
 <div id="disqus_thread"></div>
 <script>

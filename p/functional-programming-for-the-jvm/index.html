@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -462,11 +459,11 @@
 <p>左括号被移到了最前面；逗号和分号不需要了. 我们称这种语法叫： "form". 这种风格是简单而又美丽：Lisp里面所有东西都是这种风格的.要注意的是clojure里面的命名规范是小写单词，如果是多个单词，那么通过中横线连接。</p>
 <p>定义函数也比java里面简洁。Clojure里面的<code>println</code> 会在它的每个参数之间加一个空格。如果这个不是你想要的，那么你可以把参数传给<code>str</code>，然后再传给<code>println</code> .</p>
 <pre style="background-color:#282828;">
-<span style="font-style:italic;color:#928374;">// Java
+<code><span style="font-style:italic;color:#928374;">// Java
 </span><span style="color:#fa5c4b;">public</span><span style="color:#fdf4c1aa;"> void </span><span style="color:#fdf4c1;">hello(</span><span style="color:#8ec07c;">String</span><span style="color:#fdf4c1;"> name) </span><span style="color:#fdf4c1aa;">{
 	</span><span style="color:#8ec07c;">System</span><span style="color:#fdf4c1aa;">.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#b8bb26;">&quot;Hello, &quot; </span><span style="color:#fe8019;">+</span><span style="color:#fdf4c1;"> name)</span><span style="color:#fdf4c1aa;">;
 }
-</span></pre><pre><code class="clojure hljs">; Clojure
+</span></code></pre><pre><code class="clojure hljs">; Clojure
 (defn hello [name]
   (println "Hello," name))
 </pre></code>
@@ -667,7 +664,7 @@ lein repl # starts up the interactive REPL
 // This is Java code.
 public class PigLatin {
 <pre style="background-color:#282828;">
-public static String pigLatin(String word) {
+<code>public static String pigLatin(String word) {
 	char firstLetter = word.charAt(0);
 	if (&quot;aeiou&quot;.indexOf(firstLetter) != -1) return word + &quot;ay&quot;;
 	return word.substring(1) + firstLetter + &quot;ay&quot;;
@@ -677,10 +674,10 @@ public static void main(String args[]) {
 	System.out.println(pigLatin(&quot;red&quot;));
 	System.out.println(pigLatin(&quot;orange&quot;));
 }
-</pre>
+</code></pre>
 <p>}</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">
+<code><span style="color:#fdf4c1aa;">
 &lt;pre&gt;&lt;code class=&quot;clojure hljs&quot;&gt;; This is Clojure code.
 ; When a set is used as a function, it returns the argument if it is
 ; in the set and nil otherwise.  When used in a boolean context,
@@ -2814,7 +2811,7 @@ public class Main {
 	System.out.println(message);
 	}
 }
-</span></pre><p>下面是编译并且运行它的步骤：</p>
+</span></code></pre><p>下面是编译并且运行它的步骤：</p>
 <ol>
   <li>cd到包含<code>src</code> 和<code>classes</code> 的目录。</li>
   <li>通过 "<code>clj</code>"命令来打开一个REPL。</li>

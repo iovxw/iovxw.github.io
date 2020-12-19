@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -365,15 +362,15 @@
 <p>有好几个带图形界面的项目，但都不太能用，唯一稳定的是 <a href="https://xboxdrv.gitlab.io">xboxdrv</a></p>
 <p>下面是我的配置文件：</p>
 <pre style="background-color:#282828;">
-<span style="font-style:italic;color:#928374;"># Mouse Emulation
-# ===============
-#
-# This configuration file emulates a mouse.
-</span><span style="color:#fa5c4b;">
-[xboxdrv]
+<code><span style="color:#fdf4c1aa;"># Mouse Emulation
+# </span><span style="color:#fe8019;">===============
+</span><span style="color:#fdf4c1aa;">#
+</span><span style="font-style:italic;color:#928374;"># This configuration file emulates a mouse.
+
+</span><span style="color:#fa5c4b;">[xboxdrv]
 </span><span style="color:#fdf4c1;">ui-clear</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">true
-</span><span style="color:#fa5c4b;">
-[ui-axismap]
+
+</span><span style="color:#fa5c4b;">[ui-axismap]
 </span><span style="color:#fdf4c1;">x1 </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> rel</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_X</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1000</span><span style="color:#fe8019;">:-</span><span style="color:#d3869b;">1
 </span><span style="color:#fdf4c1;">y1 </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> rel</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_Y</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1000</span><span style="color:#fe8019;">:-</span><span style="color:#d3869b;">1
 
@@ -382,8 +379,8 @@
 
 </span><span style="color:#fdf4c1;">lt </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> rel</span><span style="color:#fe8019;">-</span><span style="color:#fdf4c1aa;">repeat</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_WHEEL</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">20
 </span><span style="color:#fdf4c1;">rt </span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1aa;"> rel</span><span style="color:#fe8019;">-</span><span style="color:#fdf4c1aa;">repeat</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_WHEEL</span><span style="color:#fe8019;">:-</span><span style="color:#d3869b;">1</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">20
-</span><span style="color:#fa5c4b;">
-[ui-buttonmap]
+
+</span><span style="color:#fa5c4b;">[ui-buttonmap]
 </span><span style="color:#fdf4c1;">a </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">BTN_LEFT
 </span><span style="color:#fdf4c1;">b </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">BTN_RIGHT
 </span><span style="color:#fdf4c1;">x </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">BTN_MIDDLE
@@ -394,20 +391,20 @@
 
 </span><span style="color:#fdf4c1;">tl </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_BACKSPACE
 </span><span style="color:#fdf4c1;">tr </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_SPACE
-</span><span style="color:#fa5c4b;">
-[ui-buttonmap]
+
+</span><span style="color:#fa5c4b;">[ui-buttonmap]
 </span><span style="color:#fdf4c1;">dl </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_LEFT
 </span><span style="color:#fdf4c1;">dr </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_RIGHT
 </span><span style="color:#fdf4c1;">du </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_UP
 </span><span style="color:#fdf4c1;">dd </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_DOWN
-</span><span style="color:#fa5c4b;">
-[ui-buttonmap]
+
+</span><span style="color:#fa5c4b;">[ui-buttonmap]
 start </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_FORWARD
 </span><span style="color:#fdf4c1;">back  </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_BACK
 </span><span style="color:#fdf4c1;">guide </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_ESC
 
 </span><span style="font-style:italic;color:#928374;"># EOF #
-</span></pre>
+</span></code></pre>
 <p>使用感想：</p>
 <p>精度不行，得非常有耐心才用得来，下一个吧</p>
 <hr />
@@ -475,13 +472,13 @@ start </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">
 <p>发行版 Arch，桌面环境 Gnome 3.36.1 on Wayland</p>
 <p>因为只有两个键，设置一下同时按住两键模拟中键：</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">gsettings set org.gnome.desktop.peripherals.mouse middle-click-emulation true
-</span></pre>
+<code><span style="color:#fdf4c1;">gsettings set org.gnome.desktop.peripherals.mouse middle-click-emulation true
+</span></code></pre>
 <p>还有一个 <code>org.gnome.desktop.peripherals.trackball</code>，但看起来暂时没用</p>
 <p>启用鼠标加速度：</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">gsettings set org.gnome.desktop.peripherals.mouse accel-profile adaptive
-</span></pre>
+<code><span style="color:#fdf4c1;">gsettings set org.gnome.desktop.peripherals.mouse accel-profile adaptive
+</span></code></pre>
 <p>鼠标速度的话有图形界面设置，进控制中心直接拖到底：</p>
 <p><img src="https://iovxw.net/p/kensington-orbit-trackball/mouse-speed.png" alt="" /></p>
 <hr />

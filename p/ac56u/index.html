@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -363,19 +360,19 @@
 <p>在 Tools 面板里可以看见当前 NVRAM 使用量，总共 64K 确实挺可怜的</p>
 <p>如果真的很满的话可以用下面的命令删除空值来减少 NVRAM 占用</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">nvram show </span><span style="color:#fe8019;">| </span><span style="color:#fdf4c1;">awk -F</span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;{ if ($1!=&quot;wl_wpa_psk&quot; &amp;&amp; $2==&quot;&quot;) { cmd=&quot;nvram unset &quot;; system(cmd $1) } }&#39;
-</span></pre>
+<code><span style="color:#fdf4c1;">nvram show </span><span style="color:#fe8019;">| </span><span style="color:#fdf4c1;">awk -F</span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&#39;{ if ($1!=&quot;wl_wpa_psk&quot; &amp;&amp; $2==&quot;&quot;) { cmd=&quot;nvram unset &quot;; system(cmd $1) } }&#39;
+</span></code></pre>
 <p>再把常用的各种东西配置一下就可以用了</p>
 <hr />
 <p>想用 Rust 写点东西放上去，毕竟启动后还剩近 200M 的内存，空着太浪费</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">rustup target install arm-unknown-linux-musleabi
-</span></pre>
+<code><span style="color:#fdf4c1;">rustup target install arm-unknown-linux-musleabi
+</span></code></pre>
 <p>编辑 <code>~/.cargo/config</code>，添加</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">[</span><span style="color:#8ec07c;">target.arm-unknown-linux-musleabi</span><span style="color:#fdf4c1aa;">]
+<code><span style="color:#fdf4c1aa;">[</span><span style="color:#8ec07c;">target.arm-unknown-linux-musleabi</span><span style="color:#fdf4c1aa;">]
 </span><span style="font-weight:bold;color:#8ec07c;">linker </span><span style="color:#fdf4c1aa;">= </span><span style="color:#b8bb26;">&quot;arm-brcm-linux-uclibcgnueabi-gcc&quot;
-</span></pre>
+</span></code></pre>
 <p>记得先把 <a href="https://github.com/RMerl/asuswrt-merlin/tree/593e1e1ab7a0db72ee9e1641390bf23e518cc868/release/src-rt-6.x.4708/toolchains/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin">Merlin 的 toolchain</a> 加入 <code>$PATH</code>，或者 linker 直接写绝对路径</p>
 <p>然后 <code>cargo build</code> 的时候 <code>--target=arm-unknown-linux-musleabi</code> 就行</p>
 <hr />

@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -349,12 +346,12 @@ or through <a href="https://google.com/">google</a>.</p>
 <p>There are some <em>easy</em> examples for styling, though. I can't <strong>emphasize</strong> that enough.
 Creating <a href="https://google.com/">links</a> or <code>inline code</code> blocks are very straightforward.</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">There are some *easy* examples for styling, though. I can&#39;t **emphasize** that enough.
+<code><span style="color:#fdf4c1aa;">There are some *easy* examples for styling, though. I can&#39;t **emphasize** that enough.
 Creating [links](https://google.com/) or `inline code` blocks are very straightforward.
-</span></pre><h2 id="front-matter-for-fun">Front Matter For Fun</h2>
+</span></code></pre><h2 id="front-matter-for-fun">Front Matter For Fun</h2>
 <p>This is the meta data for this post. It is located at the top of the <code>content/post/hello-hugo.md</code> markdown file.</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">---
+<code><span style="color:#fdf4c1aa;">---
 title: &quot;Hello Hugo!&quot;
 description: &quot;Saying &#39;Hello&#39; from Hugo&quot;
 date: &quot;2014-04-09&quot;
@@ -366,7 +363,7 @@ tags:
   - &quot;hugo&quot;
   - &quot;blog&quot;
 ---
-</span></pre>
+</span></code></pre>
 <p>This section, called 'Front Matter', is what tells Hugo about the content in this file. The title of the item,the
 description, the date it was posted. In our example we're adding two custom bits of data, too. The <code>categories</code> and
 <code>tags</code> sections are used in this example for indexing/grouping content. You will learn more about what that means by

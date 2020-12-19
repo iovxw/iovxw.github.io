@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -352,8 +349,8 @@ if (window.location.pathname == "/") {
 <p>不过这种相对时间格式并不支持未来时间，除非你愿意看看今天是几号（我就是这么懒）</p>
 <p>解决方式就是，用 <code>date</code> 命令：</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">git commit --date</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">&quot;`</span><span style="color:#fdf4c1;">LANG</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">C </span><span style="color:#fdf4c1;">date --d</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">&#39;next day&#39;`&quot;
-</span></pre>
+<code><span style="color:#fdf4c1;">git commit --date</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">&quot;`</span><span style="color:#fdf4c1;">LANG</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">C </span><span style="color:#fdf4c1;">date --d</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">&#39;next day&#39;`&quot;
+</span></code></pre>
 <p><code>LANG=C</code> 是为了输出英文日期格式。让 <em>git</em> 直接识别本地时间格式的方法也有，但是这个最简单暴力</p>
 <p><code>--d='next day'</code> 就是字面意思，也可以用 <code>--d='-1 days ago'</code> 之类的</p>
 <p>嗯……不过好像更长了……</p>
@@ -363,8 +360,8 @@ if (window.location.pathname == "/") {
 <p>一个简单暴力的方法就是用 <a href="https://github.com/wolfcw/libfaketime">libfaketime</a></p>
 <p>但是注意不要直接用 ubuntu 源里的 <code>faketime</code> 运行 git，会 <strong>Segmentation fault</strong> 的</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">LD_PRELOAD</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">/usr/local/lib/faketime/libfaketime.so.1 </span><span style="color:#fdf4c1;">FAKETIME</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">&quot;+1d&quot; </span><span style="color:#fdf4c1;">git ...
-</span></pre>
+<code><span style="color:#fdf4c1;">LD_PRELOAD</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">/usr/local/lib/faketime/libfaketime.so.1 </span><span style="color:#fdf4c1;">FAKETIME</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">&quot;+1d&quot; </span><span style="color:#fdf4c1;">git ...
+</span></code></pre>
 </article>
 <div id="disqus_thread"></div>
 <script>

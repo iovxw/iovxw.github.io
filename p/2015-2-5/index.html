@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -369,7 +366,7 @@
 <p>然后支持很方便的自定义控件（只要实现一个方法即可，会自动用反射来调用），以及写一个自定义控件的教程（计划中）</p>
 <p>来一段例子：</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">	var w *Window
+<code><span style="color:#fdf4c1aa;">	var w *Window
 	w = &amp;Window{
 		Title:  &quot;window&quot;,
 		Width:  800,
@@ -389,7 +386,7 @@
 		},
 	}
 	w.Show()
-</span></pre>
+</span></code></pre>
 <p>当然这个库还只是写了个框架（就是说上面说的大部分功能都还没实现(别激动别激动)）</p>
 <p>控件什么的也只写了一个按钮和一个自定义窗口边框来做演示</p>
 <p>上张图（实际运行截图）：</p>

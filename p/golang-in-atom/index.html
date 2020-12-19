@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -343,9 +340,9 @@
 <p>Atom我就不介绍了，自己去看WIKI吧</p>
 <p>ubuntu快速安装：</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">sudo add-apt-repository ppa:webupd8team/atom
+<code><span style="color:#fdf4c1aa;">sudo add-apt-repository ppa:webupd8team/atom
 sudo apt-get update &amp;&amp; sudo apt-get install atom
-</span></pre>
+</span></code></pre>
 <p>MAC可以直接从<a href="https://atom.io">官网</a>下载</p>
 <p>其他系统就自己编译吧</p>
 <p>因为和Github结合的很好，然后速度较快，比较适合项目的小修改&amp;提交，和不喜欢大型IDE的人</p>

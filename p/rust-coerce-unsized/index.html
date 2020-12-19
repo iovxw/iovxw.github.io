@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -342,9 +339,9 @@
 <p>唯有 <a href="https://doc.rust-lang.org/core/ops/trait.CoerceUnsized.html"><code>CoerceUnsized</code></a> 比较特殊, 提供了一种抽象, 没有它就无法写出包含 DST(Dynamically-sized Type) 的智能指针</p>
 <p>像这样:</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> x: [</span><span style="color:#fa5c4b;">u8</span><span style="color:#fdf4c1aa;">; </span><span style="color:#d3869b;">3</span><span style="color:#fdf4c1aa;">] </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">[</span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">, </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">, </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">];
-</span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> y: Box&lt;[</span><span style="color:#fa5c4b;">u8</span><span style="color:#fdf4c1aa;">]&gt; </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">Box</span><span style="color:#fdf4c1aa;">::new(x);
-</span></pre><span id="continue-reading"></span>
+<code><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> x: [</span><span style="color:#fa5c4b;">u8</span><span style="color:#fdf4c1aa;">; </span><span style="color:#d3869b;">3</span><span style="color:#fdf4c1aa;">] </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">[</span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">, </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">, </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">];
+</span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> y: </span><span style="color:#fabd2f;">Box</span><span style="color:#fdf4c1aa;">&lt;[</span><span style="color:#fa5c4b;">u8</span><span style="color:#fdf4c1aa;">]&gt; </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">Box</span><span style="color:#fdf4c1aa;">::new(x);
+</span></code></pre><span id="continue-reading"></span>
 <hr />
 <p>在讲 <a href="https://doc.rust-lang.org/core/ops/trait.CoerceUnsized.html"><code>CoerceUnsized</code></a> 之前, 必须要说 <a href="https://doc.rust-lang.org/core/marker/trait.Unsize.html"><code>Unsize</code></a></p>
 <p><code>Unsize</code> 是一个标记 trait, 表示一个类型可以被 &quot;unsized&quot; 到一个 DST, 像 <code>[u8; 3]</code> 可以 &quot;unsized&quot; 为 <code>[u8]</code> (<code>[u8; 3]</code> 实现了 <code>Unsize&lt;[u8]&gt;</code>), 以及 <code>T: Trait</code> 的 <code>T</code> 可以作为 <code>dyn Trait</code> (<code>T: Trait</code> 实现了 <code>Unsize&lt;dyn Trait&gt;</code>)</p>

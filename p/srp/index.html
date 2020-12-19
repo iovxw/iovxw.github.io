@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -357,7 +354,7 @@
 <p>具体的原理不用管，相信看这篇文章的都不懂密码学（我也不懂，真的），要是真想研究的话请看 <a href="http://www.ietf.org/rfc/rfc2945.txt">RFC</a></p>
 <p>一般程序员只需要了解协议过程就行了，而<a href="https://en.wikipedia.org/wiki/Secure_Remote_Password_protocol#Implementation_example_in_Python">维基百科上的 Python 例子</a>就讲的很明白。这里就直接复制过来：</p>
 <pre style="background-color:#282828;">
-<span style="font-style:italic;color:#928374;"># An example SRP authentication
+<code><span style="font-style:italic;color:#928374;"># An example SRP authentication
 # WARNING: Do not use for real cryptographic purposes beyond testing.
 # based on http://srp.stanford.edu/design.html
 </span><span style="color:#fa5c4b;">import </span><span style="color:#fdf4c1aa;">hashlib
@@ -439,7 +436,7 @@ global_print(</span><span style="color:#b8bb26;">&quot;M_c&quot;</span><span sty
 </span><span style="color:#fdf4c1aa;">M_s </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">H(A, M_c, K_s)
 global_print(</span><span style="color:#b8bb26;">&quot;M_s&quot;</span><span style="color:#fdf4c1;">)
 </span><span style="font-style:italic;color:#928374;"># server-&gt;client (M_s) ;  client verifies M_s
-</span></pre>
+</span></code></pre>
 <p>然后 SRP 的各种实现可以看这里： http://srp.stanford.edu/links.html</p>
 <p>或者可以去相应语言的包管理系统还有 Github 搜搜看，当然不要自己实现，除非你真的懂密码学 :-)</p>
 

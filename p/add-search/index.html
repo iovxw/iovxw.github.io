@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -345,13 +342,13 @@
 <p>所以没法用什么的很正常</p>
 <p>在页面内添加</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">&lt;form id=&quot;search&quot; class=&quot;search&quot; role=&quot;search&quot;&gt;
+<code><span style="color:#fdf4c1aa;">&lt;form id=&quot;search&quot; class=&quot;search&quot; role=&quot;search&quot;&gt;
         &lt;input class=&quot;form-control&quot; placeholder=&quot;搜索&quot; name=&quot;q&quot; type=&quot;text&quot;&gt;
 &lt;/form&gt;
-</span></pre>
+</span></code></pre>
 <p>然后在js里添加</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">(function(){
+<code><span style="color:#fdf4c1aa;">(function(){
 	$(document).on(&#39;submit&#39;, &#39;#search.search&#39;, function(){
 		var q = $(this).find(&#39;[name=q]&#39;).val();
 		if($.trim(q) !== &#39;&#39;){
@@ -362,7 +359,7 @@
 		return false;
 	});
 })();
-</span></pre>
+</span></code></pre>
 <p><code>http://www.baidu.com/s?wd=</code>可以替换成任意支持site搜索的搜索引擎地址</p>
 <hr />
 <p>PS: 这是 jQuery 版本，写成原生的也不难这里就不废话了</p>

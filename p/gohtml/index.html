@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -344,13 +341,13 @@
 <hr />
 <h1 id="gohtml">GoHTML</h1>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;"> ██████╗         ██╗  ██╗████████╗███╗   ███╗██╗
+<code><span style="color:#fdf4c1aa;"> ██████╗         ██╗  ██╗████████╗███╗   ███╗██╗
 ██╔════╝  █████╗ ██║  ██║╚══██╔══╝████╗ ████║██║
 ██║  ███╗██╔══██╗███████║   ██║   ██╔████╔██║██║
 ██║   ██║██║  ██║██╔══██║   ██║   ██║╚██╔╝██║██║
 ╚██████╔╝╚█████╔╝██║  ██║   ██║   ██║ ╚═╝ ██║███████╗
  ╚═════╝  ╚════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝╚══════╝
-</span></pre>
+</span></code></pre>
 <p>Golang HTML模板，非正式项目</p>
 <p>基本就是写着玩的</p>
 <p>可以将Golang和HTML写在一起，然后用本工具转换成Golang文件</p>
@@ -358,7 +355,7 @@
 <h2 id="li-zi">例子</h2>
 <p><strong>转换前：</strong></p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">package tpl
+<code><span style="color:#fdf4c1aa;">package tpl
 
 import (
 	&quot;fmt&quot;
@@ -395,55 +392,55 @@ func test1(_buffer *bytes.Buffer) {
 func test2(_buffer *bytes.Buffer, t string) {
 	&lt;a&gt;test{​{t}}&lt;/a&gt;
 }
-</span></pre>
+</span></code></pre>
 <p><strong>转换后：</strong></p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">package</span><span style="color:#fdf4c1aa;"> tpl
+<code><span style="color:#fa5c4b;">package </span><span style="color:#fdf4c1;">tpl
 
 </span><span style="color:#fa5c4b;">import </span><span style="color:#fdf4c1aa;">(
 	</span><span style="color:#b8bb26;">&quot;fmt&quot;
 	&quot;bytes&quot;
 </span><span style="color:#fdf4c1aa;">)
 
-</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">Index</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fa5c4b;">string </span><span style="color:#fdf4c1aa;">{
-	</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">:= </span><span style="color:#fabd2f;">new</span><span style="color:#fdf4c1;">(bytes.Buffer)</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">Index</span><span style="color:#fdf4c1aa;">() </span><span style="color:#fabd2f;">string </span><span style="color:#fdf4c1aa;">{
+	</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">:= </span><span style="color:#fabd2f;">new</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">bytes</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fa5c4b;">Buffer</span><span style="color:#fdf4c1aa;">)
 
-	_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;Text&lt;/a&gt;&quot;</span><span style="color:#fdf4c1;">)
+	</span><span style="color:#fdf4c1;">_buffer</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">WriteString</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;Text&lt;/a&gt;&quot;</span><span style="color:#fdf4c1aa;">)
 
-	</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">i</span><span style="color:#fe8019;">:=</span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">; i</span><span style="color:#fe8019;">&lt;</span><span style="color:#d3869b;">10</span><span style="color:#fdf4c1aa;">; i</span><span style="color:#fe8019;">++ </span><span style="color:#fdf4c1aa;">{
-		_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">
-		_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#fa5c4b;">string</span><span style="color:#fdf4c1;">(i))</span><span style="color:#fdf4c1aa;">
-		_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;/a&gt;&quot;</span><span style="color:#fdf4c1;">)
-	</span><span style="color:#fdf4c1aa;">}
+	</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">i</span><span style="color:#fe8019;">:=</span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">; </span><span style="color:#fdf4c1;">i</span><span style="color:#fe8019;">&lt;</span><span style="color:#d3869b;">10</span><span style="color:#fdf4c1aa;">; </span><span style="color:#fdf4c1;">i</span><span style="color:#fe8019;">++ </span><span style="color:#fdf4c1aa;">{
+		</span><span style="color:#fdf4c1;">_buffer</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">WriteString</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;&quot;</span><span style="color:#fdf4c1aa;">)
+		</span><span style="color:#fdf4c1;">_buffer</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">WriteString</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fabd2f;">string</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">i</span><span style="color:#fdf4c1aa;">))
+		</span><span style="color:#fdf4c1;">_buffer</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">WriteString</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;&lt;/a&gt;&quot;</span><span style="color:#fdf4c1aa;">)
+	}
 
-	</span><span style="color:#fa5c4b;">var </span><span style="color:#fdf4c1;">t </span><span style="color:#fa5c4b;">string </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;2&quot;</span><span style="color:#fdf4c1aa;">
-	fmt</span><span style="color:#fdf4c1;">.Println(t)
+	</span><span style="color:#fa5c4b;">var </span><span style="color:#fdf4c1;">t </span><span style="color:#fabd2f;">string </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;2&quot;
+	</span><span style="color:#fdf4c1;">fmt</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">Println</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">t</span><span style="color:#fdf4c1aa;">)
 
-	print</span><span style="color:#fe8019;">:=</span><span style="color:#fa5c4b;">func</span><span style="color:#fdf4c1aa;">() {
-		_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;text&lt;/a&gt;&quot;</span><span style="color:#fdf4c1;">)
-	</span><span style="color:#fdf4c1aa;">}
-	</span><span style="color:#fabd2f;">print</span><span style="color:#fdf4c1;">()
+	</span><span style="color:#fdf4c1;">print</span><span style="color:#fe8019;">:=</span><span style="color:#fa5c4b;">func</span><span style="color:#fdf4c1aa;">() {
+		</span><span style="color:#fdf4c1;">_buffer</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">WriteString</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;text&lt;/a&gt;&quot;</span><span style="color:#fdf4c1aa;">)
+	}
+	</span><span style="color:#fabd2f;">print</span><span style="color:#fdf4c1aa;">()
 
-	test1(_buffer)
-	test2(_buffer,t)
+	</span><span style="color:#fdf4c1;">test1</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">_buffer</span><span style="color:#fdf4c1aa;">)
+	</span><span style="color:#fdf4c1;">test2</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">_buffer</span><span style="color:#fdf4c1aa;">,</span><span style="color:#fdf4c1;">t</span><span style="color:#fdf4c1aa;">)
 
-	</span><span style="color:#fa5c4b;">return</span><span style="color:#fdf4c1aa;"> _buffer</span><span style="color:#fdf4c1;">.String()
-</span><span style="color:#fdf4c1aa;">}
+	</span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">_buffer</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">String</span><span style="color:#fdf4c1aa;">()
+}
 
-</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test1</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">bytes.Buffer) {
-	_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;test1&lt;/a&gt;&quot;</span><span style="color:#fdf4c1;">)
-</span><span style="color:#fdf4c1aa;">}
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test1</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">bytes</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fa5c4b;">Buffer</span><span style="color:#fdf4c1aa;">) {
+	</span><span style="color:#fdf4c1;">_buffer</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">WriteString</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;test1&lt;/a&gt;&quot;</span><span style="color:#fdf4c1aa;">)
+}
 
-</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test2</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">bytes.Buffer, </span><span style="color:#fdf4c1;">t </span><span style="color:#fa5c4b;">string</span><span style="color:#fdf4c1aa;">) {
-	_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;test&quot;</span><span style="color:#fdf4c1;">)</span><span style="color:#fdf4c1aa;">
-	_buffer</span><span style="color:#fdf4c1;">.WriteString(t)</span><span style="color:#fdf4c1aa;">
-	_buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;/a&gt;&quot;</span><span style="color:#fdf4c1;">)
-</span><span style="color:#fdf4c1aa;">}
-</span></pre>
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test2</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">bytes</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fa5c4b;">Buffer</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fdf4c1;">t </span><span style="color:#fabd2f;">string</span><span style="color:#fdf4c1aa;">) {
+	</span><span style="color:#fdf4c1;">_buffer</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">WriteString</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;test&quot;</span><span style="color:#fdf4c1aa;">)
+	</span><span style="color:#fdf4c1;">_buffer</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">WriteString</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">t</span><span style="color:#fdf4c1aa;">)
+	</span><span style="color:#fdf4c1;">_buffer</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">WriteString</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;&lt;/a&gt;&quot;</span><span style="color:#fdf4c1aa;">)
+}
+</span></code></pre>
 <p>然后就可以直接调用里面的函数作为<code>http.HandleFunc</code></p>
 <h2 id="shi-yong-bang-zhu">使用帮助</h2>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1aa;">$ go run GoHTML.go
+<code><span style="color:#fdf4c1aa;">$ go run GoHTML.go
 
  ██████╗         ██╗  ██╗████████╗███╗   ███╗██╗
 ██╔════╝  █████╗ ██║  ██║╚══██╔══╝████╗ ████║██║
@@ -474,22 +471,22 @@ GoHTML使用帮助:
 
 备注：
   方括号[]为选填项目，尖括号&lt;&gt;为必填项目
-</span></pre><h2 id="yuan-ma-gui-fan">源码规范</h2>
+</span></code></pre><h2 id="yuan-ma-gui-fan">源码规范</h2>
 <p>作为<code>http.HandleFunc</code>的函数，必须返回值只有一个<code>string</code>（因为多了就不符合<code>http.HandleFunc</code>的要求了）</p>
 <p>然后里面必须创建一个类型为<code>*bytes.Buffer</code>的变量，变量名称需要和设置的一样（默认是<code>_buffer</code>）。这个缓冲器是用于存放要输出的HTML代码的</p>
 <p>然后作为<code>http.HandleFunc</code>的函数的返回值需要是<code>_buffer.String()</code>，如果你自定义了缓冲器变量名称，需要相应的改变</p>
 <p>负责处理部分html的函数，推荐写成上面例子里的样式（接收一个缓冲器变量），就像：</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test1</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">bytes.Buffer) {
-    </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1aa;">test1</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;
+<code><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test1</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">bytes</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fa5c4b;">Buffer</span><span style="color:#fdf4c1aa;">) {
+    </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1;">test1</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;
 </span><span style="color:#fdf4c1aa;">}
-</span></pre>
+</span></code></pre>
 <p>因为会转换成：</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test1</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">bytes.Buffer) {
-    _buffer</span><span style="color:#fdf4c1;">.WriteString(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;test1&lt;/a&gt;&quot;</span><span style="color:#fdf4c1;">)
-</span><span style="color:#fdf4c1aa;">}
-</span></pre>
+<code><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test1</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">bytes</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fa5c4b;">Buffer</span><span style="color:#fdf4c1aa;">) {
+    </span><span style="color:#fdf4c1;">_buffer</span><span style="color:#fdf4c1aa;">.</span><span style="color:#fdf4c1;">WriteString</span><span style="color:#fdf4c1aa;">(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;test1&lt;/a&gt;&quot;</span><span style="color:#fdf4c1aa;">)
+}
+</span></code></pre>
 <p>这个样子</p>
 <p>当然你要是写成函数里新建一个缓冲器变量然后再<code>return</code>也是没问题的</p>
 <p>不过那样就需要在使用函数的地方再加一个输出了（相当麻烦）</p>
@@ -499,22 +496,22 @@ GoHTML使用帮助:
 <p>这里的分隔符只有在HTML中才会被转换，就像<code>&lt;a&gt;{​{t}}&lt;/a&gt;</code></p>
 <p>写在别的地方是不会转换的，比如：</p>
 <pre style="background-color:#282828;">
-<span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;
-</span><span style="color:#fa5c4b;">if</span><span style="color:#fdf4c1aa;"> i</span><span style="color:#fe8019;">==</span><span style="color:#d3869b;">0 </span><span style="color:#fdf4c1aa;">{
-    {​{t1}}
+<code><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;
+</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1;">i</span><span style="color:#fe8019;">==</span><span style="color:#d3869b;">0 </span><span style="color:#fdf4c1aa;">{
+    {​{</span><span style="color:#fdf4c1;">t1</span><span style="color:#fdf4c1aa;">}}
 }</span><span style="color:#fa5c4b;">else</span><span style="color:#fdf4c1aa;">{
-    {​{t2}}
+    {​{</span><span style="color:#fdf4c1;">t2</span><span style="color:#fdf4c1aa;">}}
 }
-</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;
-</span></pre>
+</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;
+</span></code></pre>
 <p>必须写成</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">if</span><span style="color:#fdf4c1aa;"> i</span><span style="color:#fe8019;">==</span><span style="color:#d3869b;">0 </span><span style="color:#fdf4c1aa;">{
-    </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1aa;">{​{t1}}</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;
+<code><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1;">i</span><span style="color:#fe8019;">==</span><span style="color:#d3869b;">0 </span><span style="color:#fdf4c1aa;">{
+    </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1aa;">{​{</span><span style="color:#fdf4c1;">t1</span><span style="color:#fdf4c1aa;">}}</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;
 </span><span style="color:#fdf4c1aa;">}</span><span style="color:#fa5c4b;">else</span><span style="color:#fdf4c1aa;">{
-    </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1aa;">{​{t2}}</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1aa;">a</span><span style="color:#fe8019;">&gt;
+    </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1aa;">{​{</span><span style="color:#fdf4c1;">t2</span><span style="color:#fdf4c1aa;">}}</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;
 </span><span style="color:#fdf4c1aa;">}
-</span></pre>
+</span></code></pre>
 <p>这样才可以</p>
 <h2 id="zi-dong-zhuan-huan">自动转换</h2>
 <p>每次更新完模板后都要手动执行一次转换工具一定是超麻烦的</p>

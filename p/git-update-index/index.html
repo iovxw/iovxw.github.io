@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -341,12 +338,12 @@
     <p>有时候需要让 git 忽略某个文件的更新，比如<em>配置文件</em>。配置文件里经常有各种涉及隐私的东西，一般只提交一个模板上去，如果把自己的配置提交上去了……被盗用的例子也不少了（比如<a href="http://www.devfactor.net/2014/12/30/2375-amazon-mistake/">这个</a>、<a href="http://wptavern.com/ryan-hellyers-aws-nightmare-leaked-access-keys-result-in-a-6000-bill-overnight">这个</a>和<a href="http://www.wooyun.org/bugs/wooyun-2010-061718">这个</a>）</p>
 <p>解决方法也很简单，让 git 忽略这个文件的变更就行了</p>
 <span id="continue-reading"></span><pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">git update-index --assume-unchanged your_file_path
-</span></pre>
+<code><span style="color:#fdf4c1;">git update-index --assume-unchanged your_file_path
+</span></code></pre>
 <p>重新跟踪:</p>
 <pre style="background-color:#282828;">
-<span style="color:#fdf4c1;">git update-index --no-assume-unchanged your_file_path
-</span></pre>
+<code><span style="color:#fdf4c1;">git update-index --no-assume-unchanged your_file_path
+</span></code></pre>
 <blockquote>
 <p><strong>--[no-]assume-unchanged</strong>
 When this flag is specified, the object names recorded for the paths are not updated. Instead, this option sets/unsets the &quot;assume unchanged&quot; bit for the paths. When the &quot;assume unchanged&quot; bit is on, the user promises not to change the file and allows Git to assume that the working tree file matches what is recorded in the index. If you want to change the working tree file, you need to unset the bit to tell Git. This is sometimes helpful when working with a big project on a filesystem that has very slow lstat(2) system call (e.g. cifs).</p>

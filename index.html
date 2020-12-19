@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -373,9 +370,9 @@
 <p>闭包在捕获环境时, 如不显式添加 <code>move</code> 关键字, 捕获的方法是由编译器推导的</p>
 <p>规则为: 如果捕获的变量在闭包内被引用, 或者可变引用, 那么就捕获到引用或可变引用</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span style="color:#fdf4c1aa;">::new();
+<code><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span style="color:#fdf4c1aa;">::new();
 </span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">|| v.</span><span style="color:#fabd2f;">len</span><span style="color:#fdf4c1aa;">(); </span><span style="font-style:italic;color:#928374;">// v: &amp;String
-</span></pre>
+</span></code></pre>
               <div class="read-more">
                 <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-closure-and-copy&#x2F;#continue-reading">Read More…</a>
               </div>
@@ -446,11 +443,11 @@
 <p><strong>尾递归优化并不总是生效</strong></p>
 <p>当进行尾递归调用的作用域内有 <code>Drop</code> 变量存在时</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">recur</span><span style="color:#fdf4c1aa;">() {
+<code><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">recur</span><span style="color:#fdf4c1aa;">() {
 </span><span style="color:#fdf4c1aa;">    </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> x </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">vec!</span><span style="color:#fdf4c1aa;">[</span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1aa;">];
 </span><span style="color:#fdf4c1aa;">    </span><span style="color:#fabd2f;">recur</span><span style="color:#fdf4c1aa;">()
 </span><span style="color:#fdf4c1aa;">}
-</span></pre>
+</span></code></pre>
               <div class="read-more">
                 <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ugly-rust&#x2F;#continue-reading">Read More…</a>
               </div>
@@ -470,9 +467,9 @@
 <p>唯有 <a href="https://doc.rust-lang.org/core/ops/trait.CoerceUnsized.html"><code>CoerceUnsized</code></a> 比较特殊, 提供了一种抽象, 没有它就无法写出包含 DST(Dynamically-sized Type) 的智能指针</p>
 <p>像这样:</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> x: [</span><span style="color:#fa5c4b;">u8</span><span style="color:#fdf4c1aa;">; </span><span style="color:#d3869b;">3</span><span style="color:#fdf4c1aa;">] </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">[</span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">, </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">, </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">];
-</span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> y: Box&lt;[</span><span style="color:#fa5c4b;">u8</span><span style="color:#fdf4c1aa;">]&gt; </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">Box</span><span style="color:#fdf4c1aa;">::new(x);
-</span></pre>
+<code><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> x: [</span><span style="color:#fa5c4b;">u8</span><span style="color:#fdf4c1aa;">; </span><span style="color:#d3869b;">3</span><span style="color:#fdf4c1aa;">] </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">[</span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">, </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">, </span><span style="color:#d3869b;">0</span><span style="color:#fdf4c1aa;">];
+</span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> y: </span><span style="color:#fabd2f;">Box</span><span style="color:#fdf4c1aa;">&lt;[</span><span style="color:#fa5c4b;">u8</span><span style="color:#fdf4c1aa;">]&gt; </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">Box</span><span style="color:#fdf4c1aa;">::new(x);
+</span></code></pre>
               <div class="read-more">
                 <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coerce-unsized&#x2F;#continue-reading">Read More…</a>
               </div>
@@ -489,7 +486,7 @@
               </div>
               
               <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">use </span><span style="color:#fdf4c1aa;">std::marker::PhantomData;
+<code><span style="color:#fa5c4b;">use </span><span style="color:#fdf4c1aa;">std::marker::PhantomData;
 
 </span><span style="color:#fa5c4b;">pub struct </span><span style="color:#8ec07c;">Magic</span><span style="color:#fdf4c1aa;">&lt;</span><span style="color:#fa5c4b;">&#39;a</span><span style="color:#fdf4c1aa;">&gt;(PhantomData&lt;</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a mut </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a </span><span style="color:#fdf4c1aa;">()</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1aa;">);
 
@@ -506,7 +503,7 @@
     }
     pin;
 }
-</span></pre>
+</span></code></pre>
               <div class="read-more">
                 <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;phantomdata-magic&#x2F;#continue-reading">Read More…</a>
               </div>
@@ -568,11 +565,11 @@
               </div>
               
               <p>这篇文章并不在讲什么是生命期, 请先确保有正确的生命期概念</p>
-<p>虽然标题是说高阶生命期约束, 不过 RFC 本身是叫高阶 Trait 约束 (Higher Ranked Trait Bounds), 但由于他们目前只实现了生命期的部分, 所以……</p>
+<p>虽然标题是说高阶生命期约束, 不过 RFC 本身是叫高阶 Trait 约束 (Higher Ranked Trait Bounds), 但由于目前只实现了生命期的部分, 所以……</p>
 <p>言归正传, 在 <a href="https://crates.io/crates/serde"><em>serde</em></a> 里, 会发现 <a href="https://docs.serde.rs/serde/de/trait.DeserializeOwned.html"><code>DeserializeOwned</code></a> 的定义是这样的</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">pub trait </span><span style="color:#8ec07c;">DeserializeOwned</span><span style="color:#fdf4c1aa;">: for&lt;&#39;de&gt; Deserialize&lt;&#39;de&gt; { }
-</span></pre>
+<code><span style="color:#fa5c4b;">pub trait </span><span style="color:#8ec07c;">DeserializeOwned</span><span style="color:#fdf4c1aa;">: for&lt;&#39;de&gt; Deserialize&lt;&#39;de&gt; { }
+</span></code></pre>
               <div class="read-more">
                 <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-higher-rank-lifetime-bounds&#x2F;#continue-reading">Read More…</a>
               </div>

@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -123,20 +124,20 @@
     }
 
     nav {
-	display: flex;
+        display: flex;
     }
 
     nav a + a {
-	border-left: 5px solid white;
+        border-left: 5px solid white;
     }
 
     nav a {
-	flex: 1 1 0;
-	margin: -10px 0;
-	padding: 10px 0;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -186,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -229,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -345,32 +342,32 @@
 <p>闭包在捕获环境时, 如不显式添加 <code>move</code> 关键字, 捕获的方法是由编译器推导的</p>
 <p>规则为: 如果捕获的变量在闭包内被引用, 或者可变引用, 那么就捕获到引用或可变引用</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span style="color:#fdf4c1aa;">::new();
+<code><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span style="color:#fdf4c1aa;">::new();
 </span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">|| v.</span><span style="color:#fabd2f;">len</span><span style="color:#fdf4c1aa;">(); </span><span style="font-style:italic;color:#928374;">// v: &amp;String
-</span></pre><span id="continue-reading"></span><pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span style="color:#fdf4c1aa;">::new();
+</span></code></pre><span id="continue-reading"></span><pre style="background-color:#282828;">
+<code><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span style="color:#fdf4c1aa;">::new();
 </span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">|| v.</span><span style="color:#fabd2f;">clear</span><span style="color:#fdf4c1aa;">(); </span><span style="font-style:italic;color:#928374;">// v: &amp;mut String
-</span></pre>
+</span></code></pre>
 <p>可以在 MIR 里查看闭包捕获的类型, 这里我就直接在注释里写出来了</p>
 <p>然后如果捕获的变量在闭包内被消耗, move 走的话, 就捕获所有权</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span style="color:#fdf4c1aa;">::new();
+<code><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span style="color:#fdf4c1aa;">::new();
 </span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">|| std::mem::drop(v); </span><span style="font-style:italic;color:#928374;">// v: String
-</span></pre>
+</span></code></pre>
 <p>到这还是非常符合直觉的 —— 除非你捕获的变量实现了 <code>Copy</code></p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> v </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1aa;">;
+<code><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> v </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1aa;">;
 </span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">|| std::mem::drop(v); </span><span style="font-style:italic;color:#928374;">// v: &amp;bool
-</span></pre>
+</span></code></pre>
 <p>按理来说, 上面这个闭包的行为应该和给闭包加 <code>move</code> 一样, 因为我们把 <code>v</code> 消耗掉了</p>
 <p>然而并不, <code>c</code> 捕获到的 <code>v</code> 的类型是 <code>&amp;bool</code>, 是个引用</p>
 <p>那 <code>std::mem::drop</code> 接受的参数也是 <code>&amp;bool</code> 吗?</p>
 <p>也不是, 仍然是 <code>bool</code>, 因为编译器把上面的例子展开后差不多是这样的</p>
 <pre style="background-color:#282828;">
-<span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> v </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1aa;">;
+<code><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> v </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">false</span><span style="color:#fdf4c1aa;">;
 </span><span style="color:#fa5c4b;">let</span><span style="color:#fdf4c1aa;"> ref_v </span><span style="color:#fe8019;">= &amp;</span><span style="color:#fdf4c1aa;">v;
 </span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1aa;">|| std::mem::drop(</span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1aa;">ref_v);
-</span></pre>
+</span></code></pre>
 <p>闭包只捕获了 <code>v</code> 的引用, 然后在使用时 <code>*</code> 解引用, 又因为 <code>v</code> 是 <code>Copy</code>, 相当于无事发生</p>
 <p>换句话说如果 Rust 的闭包在捕获环境时没有手动指定 <code>move</code>, 那么编译器会尝试惰性的 <code>Copy</code></p>
 <p>如果不了解这个行为, 会让你撞上奇怪的 &quot;短命&quot; 还有引用问题, 并且编译器不会提示加 <code>move</code> 续命, 比如 <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=a4cebe3ca7669755d34de340f14305fc">这样</a>
