@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="Ruskell">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>Rust 中的高阶生命期约束 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,17 +316,17 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
@@ -322,83 +336,82 @@
     <h1>Rust 中的高阶生命期约束</h1>
     <div class="info"><h2>Ruskell</h2><time>2017-09-13 22:29</time></div>
     <p>这篇文章并不在讲什么是生命期, 请先确保有正确的生命期概念</p>
-<p>虽然标题是说高阶生命期约束, 不过 RFC 本身是叫高阶 Trait 约束 (Higher Ranked Trait Bounds), 但由于他们目前只实现了生命期的部分, 所以……</p>
+<p>虽然标题是说高阶生命期约束, 不过 RFC 本身是叫高阶 Trait 约束 (Higher Ranked Trait Bounds), 但由于目前只实现了生命期的部分, 所以……</p>
 <p>言归正传, 在 <a href="https://crates.io/crates/serde"><em>serde</em></a> 里, 会发现 <a href="https://docs.serde.rs/serde/de/trait.DeserializeOwned.html"><code>DeserializeOwned</code></a> 的定义是这样的</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">pub trait </span><span style="background-color:#282828;color:#8ec07c;">DeserializeOwned</span><span style="background-color:#282828;color:#fdf4c1aa;">: for&lt;&#39;de&gt; Deserialize&lt;&#39;de&gt; { }
-</span></pre><!-- more -->
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">pub trait </span><span style="color:#8ec07c;">DeserializeOwned</span><span>: for&lt;&#39;de&gt; Deserialize&lt;&#39;de&gt; { }
+</span></code></pre>
+<span id="continue-reading"></span>
 <p>这算什么语法? 教程里没写啊!</p>
 <p>其实这是一个在闭包里经常被用到的特性, 只是不需要显式去写</p>
 <p>为了说明, 首先让我们实现一个闭包:</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">struct </span><span style="background-color:#282828;color:#8ec07c;">Closure</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;F&gt; {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">data</span><span style="background-color:#282828;color:#fdf4c1aa;">: (</span><span style="background-color:#282828;color:#fa5c4b;">u8</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fa5c4b;">u16</span><span style="background-color:#282828;color:#fdf4c1aa;">),
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">func</span><span style="background-color:#282828;color:#fdf4c1aa;">: F,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">impl</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;F&gt; </span><span style="background-color:#282828;color:#8ec07c;">Closure</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;F&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">where</span><span style="background-color:#282828;color:#fdf4c1aa;"> F: Fn(</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fa5c4b;">u8</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fa5c4b;">u16</span><span style="background-color:#282828;color:#fdf4c1aa;">)) -&gt; </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">u8</span><span style="background-color:#282828;color:#fdf4c1aa;">,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">call</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fdf4c1;">self</span><span style="background-color:#282828;color:#fdf4c1aa;">) -&gt; </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">u8 </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">self</span><span style="background-color:#282828;color:#fdf4c1aa;">.func)(</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fdf4c1;">self</span><span style="background-color:#282828;color:#fdf4c1aa;">.data)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">do_it</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">data</span><span style="background-color:#282828;color:#fdf4c1aa;">: </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">u8</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">u16</span><span style="background-color:#282828;color:#fdf4c1aa;">)) -&gt; </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">u8 </span><span style="background-color:#282828;color:#fdf4c1aa;">{ </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fdf4c1aa;">data.</span><span style="background-color:#282828;color:#d3869b;">0 </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">main</span><span style="background-color:#282828;color:#fdf4c1aa;">() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> clo </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> Closure { data: (</span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#d3869b;">1</span><span style="background-color:#282828;color:#fdf4c1aa;">), func: do_it };
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fabd2f;">println!</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;</span><span style="background-color:#282828;color:#fdf4c1;">{}</span><span style="background-color:#282828;color:#b8bb26;">&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">, clo.</span><span style="background-color:#282828;color:#fabd2f;">call</span><span style="background-color:#282828;color:#fdf4c1aa;">());
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span></pre>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">struct </span><span style="color:#8ec07c;">Closure</span><span>&lt;F&gt; {
+</span><span>    </span><span style="color:#fdf4c1;">data</span><span>: (</span><span style="color:#fa5c4b;">u8</span><span>, </span><span style="color:#fa5c4b;">u16</span><span>),
+</span><span>    </span><span style="color:#fdf4c1;">func</span><span>: F,
+</span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">impl</span><span>&lt;F&gt; </span><span style="color:#8ec07c;">Closure</span><span>&lt;F&gt;
+</span><span>    </span><span style="color:#fa5c4b;">where</span><span> F: Fn(</span><span style="color:#fe8019;">&amp;</span><span>(</span><span style="color:#fa5c4b;">u8</span><span>, </span><span style="color:#fa5c4b;">u16</span><span>)) -&gt; </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">u8</span><span>,
+</span><span>{
+</span><span>    </span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">call</span><span>(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">self</span><span>) -&gt; </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">u8 </span><span>{
+</span><span>        (</span><span style="color:#fdf4c1;">self</span><span>.func)(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">self</span><span>.data)
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">do_it</span><span>(</span><span style="color:#fdf4c1;">data</span><span>: </span><span style="color:#fe8019;">&amp;</span><span>(</span><span style="color:#fdf4c1;">u8</span><span>, </span><span style="color:#fdf4c1;">u16</span><span>)) -&gt; </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">u8 </span><span>{ </span><span style="color:#fe8019;">&amp;</span><span>data.</span><span style="color:#d3869b;">0 </span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">main</span><span>() {
+</span><span>    </span><span style="color:#fa5c4b;">let</span><span> clo </span><span style="color:#fe8019;">=</span><span> Closure { data: (</span><span style="color:#d3869b;">0</span><span>, </span><span style="color:#d3869b;">1</span><span>), func: do_it };
+</span><span>    </span><span style="color:#fabd2f;">println!</span><span>(</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fdf4c1;">{}</span><span style="color:#b8bb26;">&quot;</span><span>, clo.</span><span style="color:#fabd2f;">call</span><span>());
+</span><span>}
+</span></code></pre>
 <p>乍一看什么毛病也没有, 很符合逻辑, 外部环境被包装到 <code>data</code> 里传递到函数形成闭包</p>
 <p>但这上面引用类型生命期都是隐式的, 我们都知道 Rust 会在编译时给它去糖展开再编译, 像这样:</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">struct </span><span style="background-color:#282828;color:#8ec07c;">Closure</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;F&gt; {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">data</span><span style="background-color:#282828;color:#fdf4c1aa;">: (</span><span style="background-color:#282828;color:#fa5c4b;">u8</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fa5c4b;">u16</span><span style="background-color:#282828;color:#fdf4c1aa;">),
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">func</span><span style="background-color:#282828;color:#fdf4c1aa;">: F,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">impl</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;F&gt; </span><span style="background-color:#282828;color:#8ec07c;">Closure</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;F&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;">// where F: Fn(&amp;&#39;??? (u8, u16)) -&gt; &amp;&#39;??? u8,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">call</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a</span><span style="background-color:#282828;color:#fdf4c1aa;">&gt;(</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a </span><span style="background-color:#282828;color:#fdf4c1;">self</span><span style="background-color:#282828;color:#fdf4c1aa;">) -&gt; </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a u8 </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">self</span><span style="background-color:#282828;color:#fdf4c1aa;">.func)(</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fdf4c1;">self</span><span style="background-color:#282828;color:#fdf4c1aa;">.data)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">do_it</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;b</span><span style="background-color:#282828;color:#fdf4c1aa;">&gt;(</span><span style="background-color:#282828;color:#fdf4c1;">data</span><span style="background-color:#282828;color:#fdf4c1aa;">: </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;b </span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">u8</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">u16</span><span style="background-color:#282828;color:#fdf4c1aa;">)) -&gt; </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;b u8 </span><span style="background-color:#282828;color:#fdf4c1aa;">{ </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;b</span><span style="background-color:#282828;color:#fdf4c1aa;"> data.</span><span style="background-color:#282828;color:#d3869b;">0 </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">main</span><span style="background-color:#282828;color:#fdf4c1aa;">() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#8ec07c;">&#39;x</span><span style="background-color:#282828;color:#fdf4c1aa;">: {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> clo </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> Closure { data: (</span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#d3869b;">1</span><span style="background-color:#282828;color:#fdf4c1aa;">), func: do_it };
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fabd2f;">println!</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;</span><span style="background-color:#282828;color:#fdf4c1;">{}</span><span style="background-color:#282828;color:#b8bb26;">&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">, clo.</span><span style="background-color:#282828;color:#fabd2f;">call</span><span style="background-color:#282828;color:#fdf4c1aa;">());
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span></pre>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">struct </span><span style="color:#8ec07c;">Closure</span><span>&lt;F&gt; {
+</span><span>    </span><span style="color:#fdf4c1;">data</span><span>: (</span><span style="color:#fa5c4b;">u8</span><span>, </span><span style="color:#fa5c4b;">u16</span><span>),
+</span><span>    </span><span style="color:#fdf4c1;">func</span><span>: F,
+</span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">impl</span><span>&lt;F&gt; </span><span style="color:#8ec07c;">Closure</span><span>&lt;F&gt;
+</span><span>    </span><span style="font-style:italic;color:#928374;">// where F: Fn(&amp;&#39;??? (u8, u16)) -&gt; &amp;&#39;??? u8,
+</span><span>{
+</span><span>    </span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">call</span><span>&lt;</span><span style="color:#fa5c4b;">&#39;a</span><span>&gt;(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a </span><span style="color:#fdf4c1;">self</span><span>) -&gt; </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a u8 </span><span>{
+</span><span>        (</span><span style="color:#fdf4c1;">self</span><span>.func)(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">self</span><span>.data)
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">do_it</span><span>&lt;</span><span style="color:#fa5c4b;">&#39;b</span><span>&gt;(</span><span style="color:#fdf4c1;">data</span><span>: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;b </span><span>(</span><span style="color:#fdf4c1;">u8</span><span>, </span><span style="color:#fdf4c1;">u16</span><span>)) -&gt; </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;b u8 </span><span>{ </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;b</span><span> data.</span><span style="color:#d3869b;">0 </span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">main</span><span>() {
+</span><span>    </span><span style="color:#8ec07c;">&#39;x</span><span>: {
+</span><span>        </span><span style="color:#fa5c4b;">let</span><span> clo </span><span style="color:#fe8019;">=</span><span> Closure { data: (</span><span style="color:#d3869b;">0</span><span>, </span><span style="color:#d3869b;">1</span><span>), func: do_it };
+</span><span>        </span><span style="color:#fabd2f;">println!</span><span>(</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fdf4c1;">{}</span><span style="color:#b8bb26;">&quot;</span><span>, clo.</span><span style="color:#fabd2f;">call</span><span>());
+</span><span>    }
+</span><span>}
+</span></code></pre>
 <p>问题来了, 由于 <code>'a</code> 是在 <code>call</code> 时才定义的, 我们无法写出 <code>F</code> 的约束</p>
 <p>要是懂 Haskell 的, 肯定说有个东西叫 <em>Rank N Type</em> 可以解决这个问题, 而 Rust 实现了它的一部分, 只针对生命期</p>
 <p>语法为 <code>for&lt;'a&gt; Foo&lt;'a&gt;</code></p>
 <p>代表 <code>'a</code> 的所有可能</p>
-<p>通俗点来说就是你把这个泛型放到哪, 他就会满足哪里的约束, 一个例子可以很好的解释:</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">foo</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fa5c4b;">&#39;b</span><span style="background-color:#282828;color:#fdf4c1aa;">, F&gt;(</span><span style="background-color:#282828;color:#fdf4c1;">a</span><span style="background-color:#282828;color:#fdf4c1aa;">: </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a i32</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">b</span><span style="background-color:#282828;color:#fdf4c1aa;">: </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;b i32</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">f</span><span style="background-color:#282828;color:#fdf4c1aa;">: F) -&gt; (</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a i32</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;b i32</span><span style="background-color:#282828;color:#fdf4c1aa;">)
-</span><span style="background-color:#282828;color:#fa5c4b;">where
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">F: </span><span style="background-color:#282828;color:#fa5c4b;">for</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;x</span><span style="background-color:#282828;color:#fdf4c1aa;">&gt; Fn(</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;x i32</span><span style="background-color:#282828;color:#fdf4c1aa;">) -&gt; </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;x i32</span><span style="background-color:#282828;color:#fdf4c1aa;">,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fabd2f;">f</span><span style="background-color:#282828;color:#fdf4c1aa;">(a), </span><span style="background-color:#282828;color:#fabd2f;">f</span><span style="background-color:#282828;color:#fdf4c1aa;">(b))
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span></pre>
+<p>通俗点来说就是把这个泛型放到哪, 他就会满足哪里的约束, 一个例子可以很好的解释:</p>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">foo</span><span>&lt;</span><span style="color:#fa5c4b;">&#39;a</span><span>, </span><span style="color:#fa5c4b;">&#39;b</span><span>, F&gt;(</span><span style="color:#fdf4c1;">a</span><span>: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a i32</span><span>, </span><span style="color:#fdf4c1;">b</span><span>: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;b i32</span><span>, </span><span style="color:#fdf4c1;">f</span><span>: F) -&gt; (</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a i32</span><span>, </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;b i32</span><span>)
+</span><span style="color:#fa5c4b;">where
+</span><span>    F: </span><span style="color:#fa5c4b;">for</span><span>&lt;</span><span style="color:#fa5c4b;">&#39;x</span><span>&gt; Fn(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;x i32</span><span>) -&gt; </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;x i32</span><span>,
+</span><span>{
+</span><span>    (</span><span style="color:#fabd2f;">f</span><span>(a), </span><span style="color:#fabd2f;">f</span><span>(b))
+</span><span>}
+</span></code></pre>
 <p><code>'x</code> 在作用到第一个元素时推导为 <code>'a</code>, 后为 <code>'b</code></p>
 <p>所以上面 Closure 例子里 <code>F</code> 的约束应该这么写:</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">where for</span><span style="background-color:#282828;color:#fe8019;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a</span><span style="background-color:#282828;color:#fe8019;">&gt;</span><span style="background-color:#282828;color:#fdf4c1aa;"> F: </span><span style="background-color:#282828;color:#fabd2f;">Fn</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a </span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fa5c4b;">u8</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fa5c4b;">u16</span><span style="background-color:#282828;color:#fdf4c1aa;">)) -&gt; </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a u8</span><span style="background-color:#282828;color:#fdf4c1aa;">,
-</span></pre>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">where for</span><span style="color:#fe8019;">&lt;</span><span style="color:#fa5c4b;">&#39;a</span><span style="color:#fe8019;">&gt;</span><span> F: </span><span style="color:#fabd2f;">Fn</span><span>(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a </span><span>(</span><span style="color:#fa5c4b;">u8</span><span>, </span><span style="color:#fa5c4b;">u16</span><span>)) -&gt; </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a u8</span><span>,
+</span></code></pre>
 <p>而 <code>DeserializeOwned</code> 之所以能表示 Owned 的数据的原因也就显而易见了</p>
 
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/rust-higher-rank-lifetime-bounds/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';

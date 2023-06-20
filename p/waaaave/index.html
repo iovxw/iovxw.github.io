@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="基础动画实现">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>多种方式实现波浪动画 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,17 +316,17 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
@@ -326,11 +340,11 @@
 <p>有些稍微麻烦一点的，就得手写了（当然还是不推荐，毕竟人家的函数一般都带各种加速）</p>
 <p>这时候就体现出了一个 客户端/网页端 的前端稍微懂点数学是多么的重要</p>
 <p>不过太高级的数学我也不会，只能讲点简单的，就是实现一个波浪动画</p>
-<!-- more -->
+<span id="continue-reading"></span>
 <hr />
 <p>首先想到的，是用各种绘图库都有提供的贝塞尔曲线直接画（关于贝塞尔曲线的介绍 <a href="http://www.zhangxinxu.com/wordpress/2014/06/deep-understand-svg-path-bezier-curves-command/">可以看这个</a>，讲的很清晰）</p>
 <p>下面这个就是用一条三次贝塞尔曲线画出来的（源码请直接查看网页源码）</p>
-<canvas id="canvas0" width="100" height="100" style="background:white;border-radius:100px"></canvas>
+<p><canvas id="canvas0" width="100" height="100" style="background:white;border-radius:100px"></canvas></p>
 <script>
 (function(){
     var width = 100;
@@ -383,7 +397,7 @@
 <p>不过控制算法写的不好，导致看起来并不是很舒服，也不想继续优化了，所以这个版本弃坑</p>
 <hr />
 <p>第二个版本，直接用三角函数画，简单暴力</p>
-<canvas id="canvas1" width="100" height="100" style="background:white;border-radius:100px"></canvas>
+<p><canvas id="canvas1" width="100" height="100" style="background:white;border-radius:100px"></canvas></p>
 <script>
 (function(){
     var canvas = document.getElementById("canvas1");
@@ -432,59 +446,53 @@
 <p>我们都知道，在二维坐标系里，有 <code>x</code> <code>y</code> 就有了一个点，俩点连起来就有了一条线</p>
 <p>而要画一条横着的直线，只需要知道三个值，<code>x1</code> <code>x2</code> 和 <code>y</code>，因为两个点 <code>y</code> 是一样的</p>
 <p>画起来是这样的（伪代码）：</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1;">x1 </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#d3869b;">0
-</span><span style="background-color:#282828;color:#fdf4c1;">x2 </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#d3869b;">10
-</span><span style="background-color:#282828;color:#fdf4c1;">y </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#d3869b;">0
-</span><span style="background-color:#282828;color:#fdf4c1;">ctx </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">canvas</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">get_context() </span><span style="background-color:#282828;font-style:italic;color:#928374;">// 基本各种绘图库都有这个方法，获取一个 &quot;画笔&quot;
-</span><span style="background-color:#282828;color:#fdf4c1;">ctx</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">begin_path() </span><span style="background-color:#282828;font-style:italic;color:#928374;">// 开始标记一个路径
-</span><span style="background-color:#282828;color:#fdf4c1;">
-</span><span style="background-color:#282828;color:#fdf4c1;">ctx</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">move_to(x0, y) </span><span style="background-color:#282828;font-style:italic;color:#928374;">// 将画笔移到起点
-</span><span style="background-color:#282828;color:#fdf4c1;">
-</span><span style="background-color:#282828;color:#fa5c4b;">for </span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">x</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">x1</span><span style="background-color:#282828;color:#fe8019;">+</span><span style="background-color:#282828;color:#d3869b;">1</span><span style="background-color:#282828;color:#fdf4c1aa;">; </span><span style="background-color:#282828;color:#fdf4c1;">x</span><span style="background-color:#282828;color:#fe8019;">&lt;</span><span style="background-color:#282828;color:#fdf4c1;">x2</span><span style="background-color:#282828;color:#fe8019;">+</span><span style="background-color:#282828;color:#d3869b;">1</span><span style="background-color:#282828;color:#fdf4c1aa;">; </span><span style="background-color:#282828;color:#fdf4c1;">x</span><span style="background-color:#282828;color:#fe8019;">++</span><span style="background-color:#282828;color:#fdf4c1aa;">) {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">ctx</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">line_to(x, y) </span><span style="background-color:#282828;font-style:italic;color:#928374;">// 将前后两点连起来
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1;">ctx</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">stroke() </span><span style="background-color:#282828;font-style:italic;color:#928374;">// 将路径画出来
-</span></pre>
+<pre data-lang="js" style="background-color:#282828;color:#fdf4c1aa;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#fdf4c1;">x1 </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">0
+</span><span style="color:#fdf4c1;">x2 </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">10
+</span><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">0
+</span><span style="color:#fdf4c1;">ctx </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">canvas.</span><span style="color:#8ec07c;">get_context</span><span>() </span><span style="font-style:italic;color:#928374;">// 基本各种绘图库都有这个方法，获取一个 &quot;画笔&quot;
+</span><span style="color:#fdf4c1;">ctx.</span><span style="color:#8ec07c;">begin_path</span><span>() </span><span style="font-style:italic;color:#928374;">// 开始标记一个路径
+</span><span>
+</span><span style="color:#fdf4c1;">ctx.</span><span style="color:#8ec07c;">move_to</span><span>(</span><span style="color:#fdf4c1;">x0</span><span>, </span><span style="color:#fdf4c1;">y</span><span>) </span><span style="font-style:italic;color:#928374;">// 将画笔移到起点
+</span><span>
+</span><span style="color:#fa5c4b;">for </span><span>(</span><span style="color:#fdf4c1;">x</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1;">x1</span><span style="color:#fe8019;">+</span><span style="color:#d3869b;">1</span><span>; </span><span style="color:#fdf4c1;">x</span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1;">x2</span><span style="color:#fe8019;">+</span><span style="color:#d3869b;">1</span><span>; </span><span style="color:#fdf4c1;">x</span><span style="color:#fe8019;">++</span><span>) {
+</span><span>    </span><span style="color:#fdf4c1;">ctx.</span><span style="color:#8ec07c;">line_to</span><span>(</span><span style="color:#fdf4c1;">x</span><span>, </span><span style="color:#fdf4c1;">y</span><span>) </span><span style="font-style:italic;color:#928374;">// 将前后两点连起来
+</span><span>}
+</span><span>
+</span><span style="color:#fdf4c1;">ctx.</span><span style="color:#8ec07c;">stroke</span><span>() </span><span style="font-style:italic;color:#928374;">// 将路径画出来
+</span></code></pre>
 <p>当然可以直接一个 <code>line_to</code> 到 <code>x2</code>，不过这里是为了演示逐点画线</p>
 <p>至于曲线，聪明的你肯定知道了，画点的过程中想个办法让 <code>y</code> 根据 <code>x</code> 上下跑就可以了</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">for </span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">x</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1;">x1</span><span style="background-color:#282828;color:#fe8019;">+</span><span style="background-color:#282828;color:#d3869b;">1</span><span style="background-color:#282828;color:#fdf4c1aa;">; </span><span style="background-color:#282828;color:#fdf4c1;">x</span><span style="background-color:#282828;color:#fe8019;">&lt;</span><span style="background-color:#282828;color:#fdf4c1;">x2</span><span style="background-color:#282828;color:#fe8019;">+</span><span style="background-color:#282828;color:#d3869b;">1</span><span style="background-color:#282828;color:#fdf4c1aa;">; </span><span style="background-color:#282828;color:#fdf4c1;">x</span><span style="background-color:#282828;color:#fe8019;">++</span><span style="background-color:#282828;color:#fdf4c1aa;">) {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">y </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">magic(x)
-</span><span style="background-color:#282828;color:#fdf4c1;">    </span><span style="background-color:#282828;color:#fdf4c1;">ctx</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#fdf4c1;">line_to(x, y)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span></pre>
+<pre data-lang="js" style="background-color:#282828;color:#fdf4c1aa;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#fa5c4b;">for </span><span>(</span><span style="color:#fdf4c1;">x</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1;">x1</span><span style="color:#fe8019;">+</span><span style="color:#d3869b;">1</span><span>; </span><span style="color:#fdf4c1;">x</span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1;">x2</span><span style="color:#fe8019;">+</span><span style="color:#d3869b;">1</span><span>; </span><span style="color:#fdf4c1;">x</span><span style="color:#fe8019;">++</span><span>) {
+</span><span>    </span><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">magic</span><span>(</span><span style="color:#fdf4c1;">x</span><span>)
+</span><span>    </span><span style="color:#fdf4c1;">ctx.</span><span style="color:#8ec07c;">line_to</span><span>(</span><span style="color:#fdf4c1;">x</span><span>, </span><span style="color:#fdf4c1;">y</span><span>)
+</span><span>}
+</span></code></pre>
 <p>把里面的 magic 换成三角函数，比如正弦函数（sin），你就可以画出来这样的曲线：</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Sin.svg/800px-Sin.svg.png" alt="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Sin.svg/800px-Sin.svg.png" /></p>
 <p>（图片来自维基百科，公有领域）</p>
 <p>但这还不够，我们需要让这条曲线看起来更 &quot;柔和&quot; 一些，所以让我们把 <code>x</code> 变小一点，比如：</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1;">y </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1;">sin(</span><span style="background-color:#282828;color:#d3869b;">0.3 </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fdf4c1;">x)
-</span></pre>
+<pre data-lang="js" style="background-color:#282828;color:#fdf4c1aa;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">sin</span><span>(</span><span style="color:#d3869b;">0.3 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">x</span><span>)
+</span></code></pre>
 <p><img src="https://img.vim-cn.com/f6/8fa1280ff1f6eac4e46afacb57945f4c8afb02.svg" alt="https://img.vim-cn.com/f6/8fa1280ff1f6eac4e46afacb57945f4c8afb02.svg" /></p>
 <p>红线是 <code>* 0.3</code> 的结果，看起来好多了</p>
 <p>目前为止浪高都是一样的，需要让他再大一些，修改一下 <code>y</code> 的波动幅度，比如两倍（黄线）</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1;">y </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#d3869b;">2 </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fdf4c1;">sin(</span><span style="background-color:#282828;color:#d3869b;">0.3 </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fdf4c1;">x)
-</span></pre>
+<pre data-lang="js" style="background-color:#282828;color:#fdf4c1aa;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">2 </span><span style="color:#fe8019;">* </span><span style="color:#8ec07c;">sin</span><span>(</span><span style="color:#d3869b;">0.3 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">x</span><span>)
+</span></code></pre>
 <p><img src="https://img.vim-cn.com/86/8a94484098b7831f7e1615d2435de82457a0f9.svg" alt="https://img.vim-cn.com/86/8a94484098b7831f7e1615d2435de82457a0f9.svg" /></p>
 <p>同时需要让曲线能上下移动（控制水量），直接改变 <code>y</code> 的高度，比如向上 1 点（绿线）</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1;">y </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#d3869b;">2 </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fdf4c1;">sin(</span><span style="background-color:#282828;color:#d3869b;">0.3 </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fdf4c1;">x) </span><span style="background-color:#282828;color:#fe8019;">+ </span><span style="background-color:#282828;color:#d3869b;">1
-</span></pre>
+<pre data-lang="js" style="background-color:#282828;color:#fdf4c1aa;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">2 </span><span style="color:#fe8019;">* </span><span style="color:#8ec07c;">sin</span><span>(</span><span style="color:#d3869b;">0.3 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">x</span><span>) </span><span style="color:#fe8019;">+ </span><span style="color:#d3869b;">1
+</span></code></pre>
 <p><img src="https://img.vim-cn.com/6c/a819fd1685d8241cb9dd49d59052acad5397ca.svg" alt="https://img.vim-cn.com/6c/a819fd1685d8241cb9dd49d59052acad5397ca.svg" /></p>
 <p>最后让波浪向左平移，动起来（offset 在每次动画循环中自增）</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1;">y </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#d3869b;">2 </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fdf4c1;">sin(</span><span style="background-color:#282828;color:#d3869b;">0.3 </span><span style="background-color:#282828;color:#fe8019;">* </span><span style="background-color:#282828;color:#fdf4c1;">x </span><span style="background-color:#282828;color:#fe8019;">+ </span><span style="background-color:#282828;color:#fdf4c1;">offset) </span><span style="background-color:#282828;color:#fe8019;">+ </span><span style="background-color:#282828;color:#d3869b;">1
-</span></pre>
+<pre data-lang="js" style="background-color:#282828;color:#fdf4c1aa;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">2 </span><span style="color:#fe8019;">* </span><span style="color:#8ec07c;">sin</span><span>(</span><span style="color:#d3869b;">0.3 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">x </span><span style="color:#fe8019;">+ </span><span style="color:#fdf4c1;">offset</span><span>) </span><span style="color:#fe8019;">+ </span><span style="color:#d3869b;">1
+</span></code></pre>
 <p>演示就不做了，好麻烦</p>
 <p>总之现在就有了一个波浪动画，改变波浪形状只需要把上面挨个介绍过的量修改就行</p>
 <p>上面的双波浪是分别用的正弦和余弦函数做成的，也可以直接给 offset 加个差值</p>
 <hr />
 <p>第三个版本，因为在 svg 中靠预先绘制点连线做曲线是相当丑陋的，根本经不起放大，所以这个版本用二次贝塞尔曲线绘制</p>
 <p><svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"
-xmlns:xlink="http://www.w3.org/1999/xlink">
+    xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <g id="wave">
 <path d="M0 0 Q 50 10, 100 0 T 200 0 V 50 H 0 V 0" />
@@ -505,60 +513,59 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
 <use x="200" y="50" xlink:href="#wave" />
 </g>
 <animateTransform attributeName="transform"
-attributeType="XML"
-type="translate"
-from="0"
-to="-200"
-dur="1s"
-repeatCount="indefinite"/>
+                        attributeType="XML"
+                        type="translate"
+                        from="0"
+                        to="-200"
+                        dur="1s"
+                        repeatCount="indefinite"/>
 </g>
 </g>
 </svg></p>
 <p>这次直接讲源码</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">svg </span><span style="background-color:#282828;color:#8ec07c;">width=</span><span style="background-color:#282828;color:#b8bb26;">&quot;100&quot; </span><span style="background-color:#282828;color:#8ec07c;">height=</span><span style="background-color:#282828;color:#b8bb26;">&quot;100&quot; </span><span style="background-color:#282828;color:#8ec07c;">xmlns=</span><span style="background-color:#282828;color:#b8bb26;">&quot;http://www.w3.org/2000/svg&quot;
-</span><span style="background-color:#282828;color:#8ec07c;">    </span><span style="background-color:#282828;color:#8ec07c;">xmlns:xlink=</span><span style="background-color:#282828;color:#b8bb26;">&quot;http://www.w3.org/1999/xlink&quot;</span><span style="background-color:#282828;color:#83a598;">&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">defs</span><span style="background-color:#282828;color:#83a598;">&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">g </span><span style="background-color:#282828;color:#8ec07c;">id=</span><span style="background-color:#282828;color:#b8bb26;">&quot;wave&quot;</span><span style="background-color:#282828;color:#83a598;">&gt; </span><span style="background-color:#282828;font-style:italic;color:#928374;">&lt;!--单条波浪，具体怎么画的请看之前的介绍贴--&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">      </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">path </span><span style="background-color:#282828;color:#8ec07c;">d=</span><span style="background-color:#282828;color:#b8bb26;">&quot;M0 0 Q 50 10, 100 0 T 200 0 V 50 H 0 V 0&quot; </span><span style="background-color:#282828;color:#83a598;">/&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#83a598;">&lt;/</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">g</span><span style="background-color:#282828;color:#83a598;">&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">clipPath </span><span style="background-color:#282828;color:#8ec07c;">id=</span><span style="background-color:#282828;color:#b8bb26;">&quot;boder&quot;</span><span style="background-color:#282828;color:#83a598;">&gt; </span><span style="background-color:#282828;font-style:italic;color:#928374;">&lt;!--圆形遮罩，用来做边框--&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">      </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">circle </span><span style="background-color:#282828;color:#8ec07c;">cx=</span><span style="background-color:#282828;color:#b8bb26;">&quot;50&quot; </span><span style="background-color:#282828;color:#8ec07c;">cy=</span><span style="background-color:#282828;color:#b8bb26;">&quot;50&quot; </span><span style="background-color:#282828;color:#8ec07c;">r=</span><span style="background-color:#282828;color:#b8bb26;">&quot;50&quot; </span><span style="background-color:#282828;color:#83a598;">/&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#83a598;">&lt;/</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">clipPath</span><span style="background-color:#282828;color:#83a598;">&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#83a598;">&lt;/</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">defs</span><span style="background-color:#282828;color:#83a598;">&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">g </span><span style="background-color:#282828;color:#8ec07c;">clip-path=</span><span style="background-color:#282828;color:#b8bb26;">&quot;url(#boder)&quot;</span><span style="background-color:#282828;color:#83a598;">&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">rect </span><span style="background-color:#282828;color:#8ec07c;">x=</span><span style="background-color:#282828;color:#b8bb26;">&quot;0&quot; </span><span style="background-color:#282828;color:#8ec07c;">y=</span><span style="background-color:#282828;color:#b8bb26;">&quot;0&quot; </span><span style="background-color:#282828;color:#8ec07c;">width=</span><span style="background-color:#282828;color:#b8bb26;">&quot;100&quot; </span><span style="background-color:#282828;color:#8ec07c;">height=</span><span style="background-color:#282828;color:#b8bb26;">&quot;100&quot; </span><span style="background-color:#282828;color:#8ec07c;">fill=</span><span style="background-color:#282828;color:#b8bb26;">&quot;white&quot; </span><span style="background-color:#282828;color:#83a598;">/&gt; </span><span style="background-color:#282828;font-style:italic;color:#928374;">&lt;!--白色背景--&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">g</span><span style="background-color:#282828;color:#83a598;">&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">      </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">g </span><span style="background-color:#282828;color:#8ec07c;">fill=</span><span style="background-color:#282828;color:#b8bb26;">&quot;rgba(10, 132, 255, 0.7)&quot;</span><span style="background-color:#282828;color:#83a598;">&gt; </span><span style="background-color:#282828;font-style:italic;color:#928374;">&lt;!--多条波浪拼成一条完整波浪--&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;">&lt;!--需要的最少波浪数量为：
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">            </span><span style="background-color:#282828;font-style:italic;color:#928374;">向上取整(图宽/波浪长度)+1--&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">use </span><span style="background-color:#282828;color:#8ec07c;">x=</span><span style="background-color:#282828;color:#b8bb26;">&quot;0&quot; </span><span style="background-color:#282828;color:#8ec07c;">y=</span><span style="background-color:#282828;color:#b8bb26;">&quot;50&quot; </span><span style="background-color:#282828;color:#8ec07c;">xlink:href=</span><span style="background-color:#282828;color:#b8bb26;">&quot;#wave&quot; </span><span style="background-color:#282828;color:#83a598;">/&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">use </span><span style="background-color:#282828;color:#8ec07c;">x=</span><span style="background-color:#282828;color:#b8bb26;">&quot;200&quot; </span><span style="background-color:#282828;color:#8ec07c;">y=</span><span style="background-color:#282828;color:#b8bb26;">&quot;50&quot; </span><span style="background-color:#282828;color:#8ec07c;">xlink:href=</span><span style="background-color:#282828;color:#b8bb26;">&quot;#wave&quot; </span><span style="background-color:#282828;color:#83a598;">/&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">      </span><span style="background-color:#282828;color:#83a598;">&lt;/</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">g</span><span style="background-color:#282828;color:#83a598;">&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">      </span><span style="background-color:#282828;font-style:italic;color:#928374;">&lt;!--第二条波浪，用 translate 加偏移，推荐偏移波浪长的 1/4--&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">      </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">g </span><span style="background-color:#282828;color:#8ec07c;">transform=</span><span style="background-color:#282828;color:#b8bb26;">&quot;translate(-50)&quot; </span><span style="background-color:#282828;color:#8ec07c;">fill=</span><span style="background-color:#282828;color:#b8bb26;">&quot;rgba(1, 112, 223, 0.7)&quot;</span><span style="background-color:#282828;color:#83a598;">&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;">&lt;!--因为加了偏移，所以还要判断
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">            </span><span style="background-color:#282828;font-style:italic;color:#928374;">向上取整(图宽/波浪长度)*波浪长度-偏移&gt;=图宽
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">            </span><span style="background-color:#282828;font-style:italic;color:#928374;">否则再+1--&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">use </span><span style="background-color:#282828;color:#8ec07c;">x=</span><span style="background-color:#282828;color:#b8bb26;">&quot;0&quot; </span><span style="background-color:#282828;color:#8ec07c;">y=</span><span style="background-color:#282828;color:#b8bb26;">&quot;50&quot; </span><span style="background-color:#282828;color:#8ec07c;">xlink:href=</span><span style="background-color:#282828;color:#b8bb26;">&quot;#wave&quot; </span><span style="background-color:#282828;color:#83a598;">/&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">use </span><span style="background-color:#282828;color:#8ec07c;">x=</span><span style="background-color:#282828;color:#b8bb26;">&quot;200&quot; </span><span style="background-color:#282828;color:#8ec07c;">y=</span><span style="background-color:#282828;color:#b8bb26;">&quot;50&quot; </span><span style="background-color:#282828;color:#8ec07c;">xlink:href=</span><span style="background-color:#282828;color:#b8bb26;">&quot;#wave&quot; </span><span style="background-color:#282828;color:#83a598;">/&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">      </span><span style="background-color:#282828;color:#83a598;">&lt;/</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">g</span><span style="background-color:#282828;color:#83a598;">&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">      </span><span style="background-color:#282828;font-style:italic;color:#928374;">&lt;!--动画效果，to 等于单条波浪长度，dur 为波浪移动速度--&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">      </span><span style="background-color:#282828;color:#83a598;">&lt;</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">animateTransform </span><span style="background-color:#282828;color:#8ec07c;">attributeName=</span><span style="background-color:#282828;color:#b8bb26;">&quot;transform&quot;
-</span><span style="background-color:#282828;color:#8ec07c;">                        </span><span style="background-color:#282828;color:#8ec07c;">attributeType=</span><span style="background-color:#282828;color:#b8bb26;">&quot;XML&quot;
-</span><span style="background-color:#282828;color:#8ec07c;">                        </span><span style="background-color:#282828;color:#8ec07c;">type=</span><span style="background-color:#282828;color:#b8bb26;">&quot;translate&quot;
-</span><span style="background-color:#282828;color:#8ec07c;">                        </span><span style="background-color:#282828;color:#8ec07c;">from=</span><span style="background-color:#282828;color:#b8bb26;">&quot;0&quot;
-</span><span style="background-color:#282828;color:#8ec07c;">                        </span><span style="background-color:#282828;color:#8ec07c;">to=</span><span style="background-color:#282828;color:#b8bb26;">&quot;-200&quot;
-</span><span style="background-color:#282828;color:#8ec07c;">                        </span><span style="background-color:#282828;color:#8ec07c;">dur=</span><span style="background-color:#282828;color:#b8bb26;">&quot;1s&quot;
-</span><span style="background-color:#282828;color:#8ec07c;">                        </span><span style="background-color:#282828;color:#8ec07c;">repeatCount=</span><span style="background-color:#282828;color:#b8bb26;">&quot;indefinite&quot;</span><span style="background-color:#282828;color:#83a598;">/&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#83a598;">&lt;/</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">g</span><span style="background-color:#282828;color:#83a598;">&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#83a598;">&lt;/</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">g</span><span style="background-color:#282828;color:#83a598;">&gt;
-</span><span style="background-color:#282828;color:#83a598;">&lt;/</span><span style="background-color:#282828;font-weight:bold;color:#8ec07c;">svg</span><span style="background-color:#282828;color:#83a598;">&gt;
-</span></pre>
+<pre data-lang="xml" style="background-color:#282828;color:#fdf4c1aa;" class="language-xml "><code class="language-xml" data-lang="xml"><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">svg </span><span style="color:#8ec07c;">width=</span><span style="color:#b8bb26;">&quot;100&quot; </span><span style="color:#8ec07c;">height=</span><span style="color:#b8bb26;">&quot;100&quot; </span><span style="color:#8ec07c;">xmlns=</span><span style="color:#b8bb26;">&quot;http://www.w3.org/2000/svg&quot;
+</span><span style="color:#8ec07c;">    xmlns:xlink=</span><span style="color:#b8bb26;">&quot;http://www.w3.org/1999/xlink&quot;</span><span style="color:#83a598;">&gt;
+</span><span>  </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">defs</span><span style="color:#83a598;">&gt;
+</span><span>    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">g </span><span style="color:#8ec07c;">id=</span><span style="color:#b8bb26;">&quot;wave&quot;</span><span style="color:#83a598;">&gt; </span><span style="font-style:italic;color:#928374;">&lt;!--单条波浪，具体怎么画的请看之前的介绍贴--&gt;
+</span><span>      </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">path </span><span style="color:#8ec07c;">d=</span><span style="color:#b8bb26;">&quot;M0 0 Q 50 10, 100 0 T 200 0 V 50 H 0 V 0&quot; </span><span style="color:#83a598;">/&gt;
+</span><span>    </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">g</span><span style="color:#83a598;">&gt;
+</span><span>    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">clipPath </span><span style="color:#8ec07c;">id=</span><span style="color:#b8bb26;">&quot;boder&quot;</span><span style="color:#83a598;">&gt; </span><span style="font-style:italic;color:#928374;">&lt;!--圆形遮罩，用来做边框--&gt;
+</span><span>      </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">circle </span><span style="color:#8ec07c;">cx=</span><span style="color:#b8bb26;">&quot;50&quot; </span><span style="color:#8ec07c;">cy=</span><span style="color:#b8bb26;">&quot;50&quot; </span><span style="color:#8ec07c;">r=</span><span style="color:#b8bb26;">&quot;50&quot; </span><span style="color:#83a598;">/&gt;
+</span><span>    </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">clipPath</span><span style="color:#83a598;">&gt;
+</span><span>  </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">defs</span><span style="color:#83a598;">&gt;
+</span><span>  </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">g </span><span style="color:#8ec07c;">clip-path=</span><span style="color:#b8bb26;">&quot;url(#boder)&quot;</span><span style="color:#83a598;">&gt;
+</span><span>    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">rect </span><span style="color:#8ec07c;">x=</span><span style="color:#b8bb26;">&quot;0&quot; </span><span style="color:#8ec07c;">y=</span><span style="color:#b8bb26;">&quot;0&quot; </span><span style="color:#8ec07c;">width=</span><span style="color:#b8bb26;">&quot;100&quot; </span><span style="color:#8ec07c;">height=</span><span style="color:#b8bb26;">&quot;100&quot; </span><span style="color:#8ec07c;">fill=</span><span style="color:#b8bb26;">&quot;white&quot; </span><span style="color:#83a598;">/&gt; </span><span style="font-style:italic;color:#928374;">&lt;!--白色背景--&gt;
+</span><span>    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">g</span><span style="color:#83a598;">&gt;
+</span><span>      </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">g </span><span style="color:#8ec07c;">fill=</span><span style="color:#b8bb26;">&quot;rgba(10, 132, 255, 0.7)&quot;</span><span style="color:#83a598;">&gt; </span><span style="font-style:italic;color:#928374;">&lt;!--多条波浪拼成一条完整波浪--&gt;
+</span><span>        </span><span style="font-style:italic;color:#928374;">&lt;!--需要的最少波浪数量为：
+</span><span style="font-style:italic;color:#928374;">            向上取整(图宽/波浪长度)+1--&gt;
+</span><span>        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">use </span><span style="color:#8ec07c;">x=</span><span style="color:#b8bb26;">&quot;0&quot; </span><span style="color:#8ec07c;">y=</span><span style="color:#b8bb26;">&quot;50&quot; </span><span style="color:#8ec07c;">xlink:href=</span><span style="color:#b8bb26;">&quot;#wave&quot; </span><span style="color:#83a598;">/&gt;
+</span><span>        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">use </span><span style="color:#8ec07c;">x=</span><span style="color:#b8bb26;">&quot;200&quot; </span><span style="color:#8ec07c;">y=</span><span style="color:#b8bb26;">&quot;50&quot; </span><span style="color:#8ec07c;">xlink:href=</span><span style="color:#b8bb26;">&quot;#wave&quot; </span><span style="color:#83a598;">/&gt;
+</span><span>      </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">g</span><span style="color:#83a598;">&gt;
+</span><span>      </span><span style="font-style:italic;color:#928374;">&lt;!--第二条波浪，用 translate 加偏移，推荐偏移波浪长的 1/4--&gt;
+</span><span>      </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">g </span><span style="color:#8ec07c;">transform=</span><span style="color:#b8bb26;">&quot;translate(-50)&quot; </span><span style="color:#8ec07c;">fill=</span><span style="color:#b8bb26;">&quot;rgba(1, 112, 223, 0.7)&quot;</span><span style="color:#83a598;">&gt;
+</span><span>        </span><span style="font-style:italic;color:#928374;">&lt;!--因为加了偏移，所以还要判断
+</span><span style="font-style:italic;color:#928374;">            向上取整(图宽/波浪长度)*波浪长度-偏移&gt;=图宽
+</span><span style="font-style:italic;color:#928374;">            否则再+1--&gt;
+</span><span>        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">use </span><span style="color:#8ec07c;">x=</span><span style="color:#b8bb26;">&quot;0&quot; </span><span style="color:#8ec07c;">y=</span><span style="color:#b8bb26;">&quot;50&quot; </span><span style="color:#8ec07c;">xlink:href=</span><span style="color:#b8bb26;">&quot;#wave&quot; </span><span style="color:#83a598;">/&gt;
+</span><span>        </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">use </span><span style="color:#8ec07c;">x=</span><span style="color:#b8bb26;">&quot;200&quot; </span><span style="color:#8ec07c;">y=</span><span style="color:#b8bb26;">&quot;50&quot; </span><span style="color:#8ec07c;">xlink:href=</span><span style="color:#b8bb26;">&quot;#wave&quot; </span><span style="color:#83a598;">/&gt;
+</span><span>      </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">g</span><span style="color:#83a598;">&gt;
+</span><span>      </span><span style="font-style:italic;color:#928374;">&lt;!--动画效果，to 等于单条波浪长度，dur 为波浪移动速度--&gt;
+</span><span>      </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">animateTransform </span><span style="color:#8ec07c;">attributeName=</span><span style="color:#b8bb26;">&quot;transform&quot;
+</span><span style="color:#8ec07c;">                        attributeType=</span><span style="color:#b8bb26;">&quot;XML&quot;
+</span><span style="color:#8ec07c;">                        type=</span><span style="color:#b8bb26;">&quot;translate&quot;
+</span><span style="color:#8ec07c;">                        from=</span><span style="color:#b8bb26;">&quot;0&quot;
+</span><span style="color:#8ec07c;">                        to=</span><span style="color:#b8bb26;">&quot;-200&quot;
+</span><span style="color:#8ec07c;">                        dur=</span><span style="color:#b8bb26;">&quot;1s&quot;
+</span><span style="color:#8ec07c;">                        repeatCount=</span><span style="color:#b8bb26;">&quot;indefinite&quot;</span><span style="color:#83a598;">/&gt;
+</span><span>    </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">g</span><span style="color:#83a598;">&gt;
+</span><span>  </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">g</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">svg</span><span style="color:#83a598;">&gt;
+</span></code></pre>
 <p>拼接波浪的数量也不用真的去算，看见缺了的话再加一条就行了</p>
 <p>把动画放慢再展开的效果（蓝色是第一条波浪，红色第二条，可以看见波浪的拼接线）：</p>
 <p><svg width="500" height="100" xmlns="http://www.w3.org/2000/svg"
-xmlns:xlink="http://www.w3.org/1999/xlink">
+    xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <g id="wave">
 <path d="M0 0 Q 50 10, 100 0 T 200 0 V 50 H 0 V 0" />
@@ -576,12 +583,12 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
 <use x="200" y="50" xlink:href="#wave" />
 </g>
 <animateTransform attributeName="transform"
-attributeType="XML"
-type="translate"
-from="200"
-to="0"
-dur="5s"
-repeatCount="indefinite"/>
+                        attributeType="XML"
+                        type="translate"
+                        from="200"
+                        to="0"
+                        dur="5s"
+                        repeatCount="indefinite"/>
 </g>
 <circle cx="250" cy="50" r="50" stroke="white" fill="transparent" />
 </g>
@@ -590,6 +597,9 @@ repeatCount="indefinite"/>
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/waaaave/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';

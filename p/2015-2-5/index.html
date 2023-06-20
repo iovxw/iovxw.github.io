@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="吐槽">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>坑开的有点多了 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,17 +316,17 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
@@ -328,9 +342,9 @@
 <hr />
 <p>近期做过的事：</p>
 <p>先是帮<a href="https://github.com/Go-zh/go">go-zh</a>翻译了一个package（只有几行的翻译量，结果还各种不准确，几乎都是minux纠正过来的）</p>
-<p>又写了个<a href="https://github.com/Bluek404/downloader">各种意义上都弃坑了的golang下载package</a></p>
+<p>又写了个<a href="https://github.com/iovxw/downloader">各种意义上都弃坑了的golang下载package</a></p>
 <p>一旦下载超大文件就会直接挂掉，是因为线程分配的问题（直接平均分配给每个线程，所以缓冲区会爆掉），但是也懒得改了。要是有人发现了，发个issue可能会给我点动力</p>
-<p>然后又为了给coding.net的PaaS弄个<a href="https://github.com/Bluek404/coding-buildpack-dart">Dart的Buildpack</a></p>
+<p>然后又为了给coding.net的PaaS弄个<a href="https://github.com/iovxw/coding-buildpack-dart">Dart的Buildpack</a></p>
 <p>用着电信的渣出口从google code拖了1.7G的源码，编译了最新的Dart SDK</p>
 <p>又因为各种原因以及buildpack原作者的脚本有些许问题，弄了2天才下载好了完整的源码</p>
 <p>简直生不如死</p>
@@ -351,34 +365,33 @@
 <p>依赖只有一个nwjs，基本什么平台都可以用</p>
 <p>然后支持很方便的自定义控件（只要实现一个方法即可，会自动用反射来调用），以及写一个自定义控件的教程（计划中）</p>
 <p>来一段例子：</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">var w *Window
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">w = &amp;Window{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">Title:  &quot;window&quot;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">Width:  800,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">Height: 600,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">Controls: []interface{}{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">&amp;Button{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">ID:   &quot;btn0&quot;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">Text: &quot;button&quot;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">OnClick: func() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                    </span><span style="background-color:#282828;color:#fdf4c1aa;">println(GetConByID(&quot;btn0&quot;).(*Button).Text)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">},
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">},
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">&amp;Button{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">ID:   &quot;btn1&quot;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fdf4c1aa;">Text: &quot;button&quot;,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">},
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">},
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">w.Show()
-</span></pre>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>	var w *Window
+</span><span>	w = &amp;Window{
+</span><span>		Title:  &quot;window&quot;,
+</span><span>		Width:  800,
+</span><span>		Height: 600,
+</span><span>		Controls: []interface{}{
+</span><span>			&amp;Button{
+</span><span>				ID:   &quot;btn0&quot;,
+</span><span>				Text: &quot;button&quot;,
+</span><span>				OnClick: func() {
+</span><span>					println(GetConByID(&quot;btn0&quot;).(*Button).Text)
+</span><span>				},
+</span><span>			},
+</span><span>			&amp;Button{
+</span><span>				ID:   &quot;btn1&quot;,
+</span><span>				Text: &quot;button&quot;,
+</span><span>			},
+</span><span>		},
+</span><span>	}
+</span><span>	w.Show()
+</span></code></pre>
 <p>当然这个库还只是写了个框架（就是说上面说的大部分功能都还没实现(别激动别激动)）</p>
 <p>控件什么的也只写了一个按钮和一个自定义窗口边框来做演示</p>
 <p>上张图（实际运行截图）：</p>
 <p><img src="https://raw.githubusercontent.com/go-nwui/nwui/master/screenshot.png" alt="img" /></p>
 <p>然后就在这货刚写完框架之后</p>
-<p>我又开了个坑（因为<a href="https://github.com/Bluek404/Stepladder">Stepladder</a>在长链接下会有几率始终占满一个CPU线程的使用率（具体触发原因不明），然后因为是tcp所以延迟什么的还比较大）</p>
+<p>我又开了个坑（因为<a href="https://github.com/iovxw/Stepladder">Stepladder</a>在长链接下会有几率始终占满一个CPU线程的使用率（具体触发原因不明），然后因为是tcp所以延迟什么的还比较大）</p>
 <p>于是准备重写个基于udp的</p>
 <p>在github上翻了一遍发现这货<a href="https://github.com/skywind3000/kcp">https://github.com/skywind3000/kcp</a></p>
 <p>以浪费10%流量为代价换取更低的延迟？</p>
@@ -391,7 +404,7 @@
 <p>只是把编码风格转换了一下，然后ukcp本来是想封装一下的</p>
 <p>但是因为发送端的判断什么的（还要传给kcp所以识别很麻烦），就又弃坑了……</p>
 <p>（不过里面的ikcp还是可以单独拿出来用用的）</p>
-<p>当然还不能放弃，开始自己封装一个udp<a href="https://github.com/Bluek404/rudp">https://github.com/Bluek404/rudp</a></p>
+<p>当然还不能放弃，开始自己封装一个udp<a href="https://github.com/iovxw/rudp">https://github.com/iovxw/rudp</a></p>
 <p>然后嘛……现在为止还没写完</p>
 <hr />
 <p>就这么多了，坑还是慢慢填吧</p>
@@ -399,6 +412,9 @@
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/2015-2-5/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';

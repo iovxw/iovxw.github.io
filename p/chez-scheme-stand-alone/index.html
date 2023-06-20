@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="但是仍然依赖解释器">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>将 Chez Scheme 程序编译为单文件 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,17 +316,17 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
@@ -363,43 +377,40 @@ See Section&nbsp;<a href="https://iovxw.net/csug9/use.html#g13">2.8</a> for more
 and the use of <tt>make-boot-file</tt>.
 </p>
 </div>
-<!-- more -->
+<span id="continue-reading"></span>
 <hr />
 <p>例子：</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">;; lib/b.ss
-</span><span style="background-color:#282828;color:#fdf4c1aa;">(library (lib b)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(export y)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(import (rnrs))
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(define y &quot;Hello!\n&quot;))
-</span></pre><pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">;; lib/a.ss
-</span><span style="background-color:#282828;color:#fdf4c1aa;">(library (lib a)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(export x)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(import (rnrs)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">          </span><span style="background-color:#282828;color:#fdf4c1aa;">(lib b))
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">(define x y))
-</span></pre><pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">;; main.ss
-</span><span style="background-color:#282828;color:#fdf4c1aa;">(import (rnrs)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">(lib a))
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">(display x)
-</span></pre>
+<pre data-lang="scheme" style="background-color:#282828;color:#fdf4c1aa;" class="language-scheme "><code class="language-scheme" data-lang="scheme"><span>;; lib/b.ss
+</span><span>(library (lib b)
+</span><span>  (export y)
+</span><span>  (import (rnrs))
+</span><span>  (define y &quot;Hello!\n&quot;))
+</span></code></pre>
+<pre data-lang="scheme" style="background-color:#282828;color:#fdf4c1aa;" class="language-scheme "><code class="language-scheme" data-lang="scheme"><span>;; lib/a.ss
+</span><span>(library (lib a)
+</span><span>  (export x)
+</span><span>  (import (rnrs)
+</span><span>          (lib b))
+</span><span>  (define x y))
+</span></code></pre>
+<pre data-lang="scheme" style="background-color:#282828;color:#fdf4c1aa;" class="language-scheme "><code class="language-scheme" data-lang="scheme"><span>;; main.ss
+</span><span>(import (rnrs)
+</span><span>        (lib a))
+</span><span>
+</span><span>(display x)
+</span></code></pre>
 <p>编译：</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fabd2f;">echo </span><span style="background-color:#282828;color:#b8bb26;">$&#39;(make-boot-file &quot;main.boot&quot; \&#39;(&quot;scheme&quot; &quot;petite&quot;) &quot;lib/b.ss&quot; &quot;lib/a.ss&quot; &quot;main.ss&quot;)&#39; </span><span style="background-color:#282828;color:#fe8019;">| </span><span style="background-color:#282828;color:#fdf4c1;">scheme -q
-</span></pre>
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fabd2f;">echo </span><span style="color:#b8bb26;">$&#39;(make-boot-file &quot;main.boot&quot; \&#39;(&quot;scheme&quot; &quot;petite&quot;) &quot;lib/b.ss&quot; &quot;lib/a.ss&quot; &quot;main.ss&quot;)&#39; </span><span style="color:#fe8019;">| </span><span style="color:#fdf4c1;">scheme -q
+</span></code></pre>
 <p>需要注意的是，<strong>input-filename</strong> 的顺序要和 <code>import</code> 的顺序一样，不然会无法找到</p>
 <p>然后是关于 <strong>base-boot-list</strong>：</p>
 <blockquote>
 <p>In most cases, you can construct your application so it does not depend upon features of <em>Chez Scheme</em> (specifically, the compiler) by specifying only <em>&quot;petite&quot;</em> in the call to <code>make-boot-file</code>. If your application calls <code>eval</code>, however, and you wish to allow users to be able to take advantage of the faster execution speed of compiled code, then specifying both <em>&quot;scheme&quot;</em> and <em>&quot;petite&quot;</em> is appropriate.</p>
 </blockquote>
 <p>运行：</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1;">$ scheme --program main.boot
-</span><span style="background-color:#282828;color:#fdf4c1;">Hello!
-</span></pre>
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">$ scheme --program main.boot
+</span><span style="color:#fdf4c1;">Hello!
+</span></code></pre>
 <hr />
 <p>但是这样编译以后仍然依赖 <em>Chez Scheme</em>, 或者是 <em>Petite Chez Scheme</em></p>
 <p>具体依赖要看你 <strong>base-boot-list</strong> 是怎么写的了</p>
@@ -407,6 +418,9 @@ and the use of <tt>make-boot-file</tt>.
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/chez-scheme-stand-alone/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';

@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="顺便给博客添加搜索功能">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>好久没更新了啊 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,17 +316,17 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
@@ -327,25 +341,23 @@
 <p>不过貌似百度没有收录这个博客= =</p>
 <p>所以没法用什么的很正常</p>
 <p>在页面内添加</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">&lt;form id=&quot;search&quot; class=&quot;search&quot; role=&quot;search&quot;&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;input class=&quot;form-control&quot; placeholder=&quot;搜索&quot; name=&quot;q&quot; type=&quot;text&quot;&gt;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;/form&gt;
-</span></pre>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>&lt;form id=&quot;search&quot; class=&quot;search&quot; role=&quot;search&quot;&gt;
+</span><span>        &lt;input class=&quot;form-control&quot; placeholder=&quot;搜索&quot; name=&quot;q&quot; type=&quot;text&quot;&gt;
+</span><span>&lt;/form&gt;
+</span></code></pre>
 <p>然后在js里添加</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">(function(){
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">$(document).on(&#39;submit&#39;, &#39;#search.search&#39;, function(){
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">var q = $(this).find(&#39;[name=q]&#39;).val();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">if($.trim(q) !== &#39;&#39;){
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">var host = window.location.hostname;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">var url = &#39;http://www.baidu.com/s?wd=&#39; + &#39;site:&#39; + host + &quot; &quot; + $.trim(q);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">window.open(url, &quot;_blank&quot;);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">return false;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">});
-</span><span style="background-color:#282828;color:#fdf4c1aa;">})();
-</span></pre>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>(function(){
+</span><span>	$(document).on(&#39;submit&#39;, &#39;#search.search&#39;, function(){
+</span><span>		var q = $(this).find(&#39;[name=q]&#39;).val();
+</span><span>		if($.trim(q) !== &#39;&#39;){
+</span><span>			var host = window.location.hostname;
+</span><span>			var url = &#39;http://www.baidu.com/s?wd=&#39; + &#39;site:&#39; + host + &quot; &quot; + $.trim(q);
+</span><span>			window.open(url, &quot;_blank&quot;);
+</span><span>		}
+</span><span>		return false;
+</span><span>	});
+</span><span>})();
+</span></code></pre>
 <p><code>http://www.baidu.com/s?wd=</code>可以替换成任意支持site搜索的搜索引擎地址</p>
 <hr />
 <p>PS: 这是 jQuery 版本，写成原生的也不难这里就不废话了</p>
@@ -353,6 +365,9 @@
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/add-search/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';

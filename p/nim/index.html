@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="几乎没人用">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>Nim语言尝试 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,17 +316,17 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
@@ -346,72 +360,73 @@
 <p>浪费掉十几分钟后发现是编译器没有读取cfg？直接把源码扔到compiler文件夹里编译，成功。</p>
 <p>我激动的打开Aporia开始尝试语义转跳，刚按下快捷键</p>
 <p>……</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">Error: unhandled exception: 拒绝连接 [OSError]
-</span></pre>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Error: unhandled exception: 拒绝连接 [OSError]
+</span></code></pre>
 <p>窗口吡的一下就关掉了！</p>
 <p>关！掉！了！</p>
 <p>我还没有放弃，手动开启nimsuggest服务</p>
 <p>再试</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">Traceback (most recent call last)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(197)      nimsuggest
-</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(187)      handleCmdLine
-</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(149)      mainCommand
-</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(132)      serve
-</span><span style="background-color:#282828;color:#fdf4c1aa;">nimsuggest.nim(106)      action
-</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(203)         compileProject
-</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(151)         compileModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(197)          processModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(137)          processTopLevelStmt
-</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(450)             myProcess
-</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(419)             semStmtAndGenerateGenerics
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1340)       semStmt
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(893)        semExprNoType
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(2196)       semExpr
-</span><span style="background-color:#282828;color:#fdf4c1aa;">importer.nim(171)        evalImport
-</span><span style="background-color:#282828;color:#fdf4c1aa;">importer.nim(161)        myImportModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(164)         importModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(151)         compileModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(197)          processModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(137)          processTopLevelStmt
-</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(450)             myProcess
-</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(419)             semStmtAndGenerateGenerics
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1340)       semStmt
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(893)        semExprNoType
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(2196)       semExpr
-</span><span style="background-color:#282828;color:#fdf4c1aa;">importer.nim(171)        evalImport
-</span><span style="background-color:#282828;color:#fdf4c1aa;">importer.nim(161)        myImportModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(164)         importModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">modules.nim(151)         compileModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(197)          processModule
-</span><span style="background-color:#282828;color:#fdf4c1aa;">passes.nim(137)          processTopLevelStmt
-</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(450)             myProcess
-</span><span style="background-color:#282828;color:#fdf4c1aa;">sem.nim(419)             semStmtAndGenerateGenerics
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1340)       semStmt
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(893)        semExprNoType
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semexprs.nim(2189)       semExpr
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1134)       semProc
-</span><span style="background-color:#282828;color:#fdf4c1aa;">semstmts.nim(1074)       semProcAux
-</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(788)          transformBody
-</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(773)          processTransf
-</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(761)          transform
-</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(104)          transformSons
-</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(706)          transform
-</span><span style="background-color:#282828;color:#fdf4c1aa;">transf.nim(472)          transformFor
-</span><span style="background-color:#282828;color:#fdf4c1aa;">lambdalifting.nim(1022)  liftForLoop
-</span><span style="background-color:#282828;color:#fdf4c1aa;">ast.nim(941)             []
-</span><span style="background-color:#282828;color:#fdf4c1aa;">SIGSEGV: Illegal storage access. (Attempt to read from nil?)
-</span></pre><pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">*** Error in `aporia&#39;: free(): invalid pointer: 0x00007f1f16667700 ***
-</span><span style="background-color:#282828;color:#fdf4c1aa;">SIGABRT: Abnormal termination.
-</span></pre>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Traceback (most recent call last)
+</span><span>nimsuggest.nim(197)      nimsuggest
+</span><span>nimsuggest.nim(187)      handleCmdLine
+</span><span>nimsuggest.nim(149)      mainCommand
+</span><span>nimsuggest.nim(132)      serve
+</span><span>nimsuggest.nim(106)      action
+</span><span>modules.nim(203)         compileProject
+</span><span>modules.nim(151)         compileModule
+</span><span>passes.nim(197)          processModule
+</span><span>passes.nim(137)          processTopLevelStmt
+</span><span>sem.nim(450)             myProcess
+</span><span>sem.nim(419)             semStmtAndGenerateGenerics
+</span><span>semstmts.nim(1340)       semStmt
+</span><span>semexprs.nim(893)        semExprNoType
+</span><span>semexprs.nim(2196)       semExpr
+</span><span>importer.nim(171)        evalImport
+</span><span>importer.nim(161)        myImportModule
+</span><span>modules.nim(164)         importModule
+</span><span>modules.nim(151)         compileModule
+</span><span>passes.nim(197)          processModule
+</span><span>passes.nim(137)          processTopLevelStmt
+</span><span>sem.nim(450)             myProcess
+</span><span>sem.nim(419)             semStmtAndGenerateGenerics
+</span><span>semstmts.nim(1340)       semStmt
+</span><span>semexprs.nim(893)        semExprNoType
+</span><span>semexprs.nim(2196)       semExpr
+</span><span>importer.nim(171)        evalImport
+</span><span>importer.nim(161)        myImportModule
+</span><span>modules.nim(164)         importModule
+</span><span>modules.nim(151)         compileModule
+</span><span>passes.nim(197)          processModule
+</span><span>passes.nim(137)          processTopLevelStmt
+</span><span>sem.nim(450)             myProcess
+</span><span>sem.nim(419)             semStmtAndGenerateGenerics
+</span><span>semstmts.nim(1340)       semStmt
+</span><span>semexprs.nim(893)        semExprNoType
+</span><span>semexprs.nim(2189)       semExpr
+</span><span>semstmts.nim(1134)       semProc
+</span><span>semstmts.nim(1074)       semProcAux
+</span><span>transf.nim(788)          transformBody
+</span><span>transf.nim(773)          processTransf
+</span><span>transf.nim(761)          transform
+</span><span>transf.nim(104)          transformSons
+</span><span>transf.nim(706)          transform
+</span><span>transf.nim(472)          transformFor
+</span><span>lambdalifting.nim(1022)  liftForLoop
+</span><span>ast.nim(941)             []
+</span><span>SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+</span></code></pre>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>*** Error in `aporia&#39;: free(): invalid pointer: 0x00007f1f16667700 ***
+</span><span>SIGABRT: Abnormal termination.
+</span></code></pre>
 <p>我仿佛已经知道十万只草泥马在心中奔腾而过的感觉了</p>
 <p><em>可能永远也不会续的未完待续</em></p>
 
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/nim/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';

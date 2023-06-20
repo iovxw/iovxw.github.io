@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://iovxw.net">
+
+    
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
+
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    :not(pre) > code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 0.5em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
+
+      
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/programing-elixir-zh/">Elixir 入门指南中文版</a></h1>
+              <div class="info">
+                <h2>年代久远</h2>
+                <time>2015-10-09 00:00</time>
+              </div>
+              
+                <p><img src="http://elixir-lang.org/images/logo/logo.png" alt="Elixir Logo" /></p>
+<p><a href="https://www.gitbook.com/read/book/iovxw/programming-elixir">https://iovxw.gitbooks.io/programming-elixir</a></p>
+<p>把别人翻译的整理了一下</p>
+<p>Github: <a href="https://github.com/iovxw/programming-elixir">https://github.com/iovxw/programming-elixir</a></p>
+<p>英文: <a href="http://elixir-lang.org/getting-started/introduction.html">http://elixir-lang.org/getting-started/introduction.html</a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/ctr/">块密码的 CTR 计数器模式</a></h1>
+              <div class="info">
+                <h2>简单到不用讲。异或！XOR！</h2>
+                <time>2015-09-25 00:00</time>
+              </div>
+              
+              <p>块加密流加密之类的就不说了，只是单独说一下这个加密模式</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/ctr/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/new-highlight-style/">换了个代码高亮主题</a></h1>
+              <div class="info">
+                <h2>Elixir</h2>
+                <time>2015-09-21 00:00</time>
+              </div>
+              
+                <p>算是和现在用的 VIM 的配色比较接近了</p>
+<p><img src="https://img.vim-cn.com/30/8ebda049964c487db4998232540d6f18f58bf9.png" alt="VIM" /></p>
+<pre data-lang="elixir" style="background-color:#282828;color:#fdf4c1aa;" class="language-elixir "><code class="language-elixir" data-lang="elixir"><span style="color:#fa5c4b;">defrecord </span><span style="color:#8ec07c;">Person</span><span>, </span><span style="color:#fdf4c1;">first_name: </span><span style="color:#d3869b;">nil</span><span>, </span><span style="color:#fdf4c1;">last_name: </span><span style="color:#b8bb26;">&quot;Dudington&quot; </span><span style="color:#fa5c4b;">do
+</span><span>  </span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">name</span><span> record </span><span style="color:#fa5c4b;">do </span><span style="font-style:italic;color:#928374;"># huh ?
+</span><span>    </span><span style="color:#b8bb26;">&quot;#{</span><span style="color:#fdf4c1;">record.first_name</span><span>} </span><span style="color:#b8bb26;">#{</span><span style="color:#fdf4c1;">record.last_name</span><span>}</span><span style="color:#b8bb26;">&quot;
+</span><span>  </span><span style="color:#fa5c4b;">end
+</span><span style="color:#fa5c4b;">end
+</span><span>
+</span><span style="color:#fa5c4b;">defrecord </span><span style="color:#8ec07c;">User</span><span>, </span><span style="color:#fdf4c1;">name: </span><span style="color:#b8bb26;">&quot;José&quot;</span><span>, </span><span style="color:#fdf4c1;">age: </span><span style="color:#d3869b;">25
+</span><span>
+</span><span>guy </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Person</span><span>.new </span><span style="color:#fdf4c1;">first_name: </span><span style="color:#b8bb26;">&quot;Guy&quot;
+</span><span>guy.name
+</span><span>
+</span><span style="color:#fa5c4b;">defmodule </span><span style="color:#8ec07c;">ListServer </span><span style="color:#fa5c4b;">do
+</span><span>  </span><span style="font-style:italic;color:#928374;">@moduledoc &quot;&quot;&quot;
+</span><span style="font-style:italic;color:#928374;">  This module provides an easy to use ListServer, useful for keeping
+</span><span style="font-style:italic;color:#928374;">  lists of things.
+</span><span style="font-style:italic;color:#928374;">  &quot;&quot;&quot;
+</span><span>  </span><span style="color:#fa5c4b;">use </span><span style="color:#8ec07c;">GenServer</span><span>.</span><span style="color:#8ec07c;">Behaviour
+</span><span>  </span><span style="color:#fa5c4b;">alias </span><span style="color:#8ec07c;">Foo</span><span>.</span><span style="color:#8ec07c;">Bar
+</span><span>
+</span><span style="font-style:italic;color:#928374;">  ### Public API
+</span><span>  </span><span style="font-style:italic;color:#928374;">@doc &quot;&quot;&quot;
+</span><span style="font-style:italic;color:#928374;">  Starts and links a new ListServer, returning {:ok, pid}
+</span><span style="font-style:italic;color:#928374;">
+</span><span style="font-style:italic;color:#928374;">  ## Example
+</span><span style="font-style:italic;color:#928374;">
+</span><span style="font-style:italic;color:#928374;">    iex&gt; {:ok, pid} = ListServer.start_link
+</span><span style="font-style:italic;color:#928374;">
+</span><span style="font-style:italic;color:#928374;">  &quot;&quot;&quot;
+</span><span>  </span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">start_link </span><span style="color:#fa5c4b;">do
+</span><span>    </span><span style="color:#fdf4c1;">:gen_server</span><span>.start_link({</span><span style="color:#fdf4c1;">:local</span><span>, </span><span style="color:#fdf4c1;">:list</span><span>}, </span><span style="color:#fdf4c1;">__MODULE__</span><span>, [], [])
+</span><span>  </span><span style="color:#fa5c4b;">end
+</span><span>
+</span><span style="font-style:italic;color:#928374;">  ### GenServer API
+</span><span>  </span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">init</span><span>(list) </span><span style="color:#fa5c4b;">do
+</span><span>    {</span><span style="color:#fdf4c1;">:ok</span><span>, list}
+</span><span>  </span><span style="color:#fa5c4b;">end
+</span><span>
+</span><span style="font-style:italic;color:#928374;">  # Clear the list
+</span><span>  </span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">handle_cast </span><span style="color:#fdf4c1;">:clear</span><span>, list </span><span style="color:#fa5c4b;">do
+</span><span>    {</span><span style="color:#fdf4c1;">:noreply</span><span>, []}
+</span><span>  </span><span style="color:#fa5c4b;">end
+</span><span style="color:#fa5c4b;">end
+</span><span>
+</span><span>{</span><span style="color:#fdf4c1;">:ok</span><span>, pid} </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">ListServer</span><span>.start_link
+</span><span>pid </span><span style="color:#fe8019;">&lt;- </span><span>{</span><span style="color:#fdf4c1;">:foo</span><span>, </span><span style="color:#b8bb26;">&quot;bar&quot;</span><span>}
+</span><span>
+</span><span>greeter </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">fn</span><span>(x) </span><span style="color:#fe8019;">-&gt; </span><span style="color:#8ec07c;">IO</span><span>.puts </span><span style="color:#b8bb26;">&quot;hey #{</span><span style="color:#fdf4c1;">x</span><span>}</span><span style="color:#b8bb26;">&quot; </span><span style="color:#fa5c4b;">end
+</span><span>greeter.(</span><span style="color:#b8bb26;">&quot;Bob&quot;</span><span>)
+</span></code></pre>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/20150920/">被百度取消收录了？</a></h1>
+              <div class="info">
+                <h2>只是想发篇文章而已</h2>
+                <time>2015-09-20 00:00</time>
+              </div>
+              
+                <p>意料之外，情理之中</p>
+<p>就把右侧一直懒得换的百度换成了 Google</p>
+<p>夏天过去了，人却依旧懒</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/crystal-json/">Crystal 中自定义数据结构的 json 编解码</a></h1>
+              <div class="info">
+                <h2>没文档</h2>
+                <time>2015-06-18 00:00</time>
+              </div>
+              
+              <p><img src="https://t.williamgates.net/image-C4ED_55826551.jpg" alt="图" /></p>
+<p>上图为煎蛋无聊图爬虫里的comment储存结构体，在编码为json时发现需要定义几个东西，如下：</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/crystal-json/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/play-space-engineers-on-linux/">在 Linux 上玩 Space Engineers（太空工程师）</a></h1>
+              <div class="info">
+                <h2>还是靠Wine</h2>
+                <time>2015-06-16 00:00</time>
+              </div>
+              
+                <p>参见：<a href="https://appdb.winehq.org/objectManager.php?sClass=version&amp;iId=30180&amp;iTestingId=88496">https://appdb.winehq.org/objectManager.php?sClass=version&amp;iId=30180&amp;iTestingId=88496</a></p>
+<p>具体流程就是</p>
+<p>先安装最新版1.7 Wine和winetricks，步骤什么的就不用我说了，应该都会</p>
+<p>如果你直接装的64位wine，需要先设置成32位wine环境</p>
+<p><code>export WINEARCH=win32</code>（可以放在~/.bashrc或者~/.zshrc里自动设置，具体什么文件还得看你用的什么shell）</p>
+<p>然后<code>winetricks steam</code>安装Steam</p>
+<p>winetricks会把steam装在一个新的WINEPREFIX目录里</p>
+<p>为了省事，以后的配置就在这个目录里进行，所以设置一下全局的WINEPREFIX</p>
+<p><code>export WINEPREFIX=&quot;~/.local/share/wineprefixes/steam&quot;</code></p>
+<p>设置完成以后安装运行库</p>
+<p><code>winetricks vb6run dotnet40</code></p>
+<p>然后还依赖几个dll，所以从网上下载32位的<code>mscoree.dll</code>，<code>oleaut32.dll</code>和<code>x3daudio1_7.dll</code>，覆盖到</p>
+<p><code>~/.local/share/wineprefixes/steam/drive_c/windows/system32</code>目录里</p>
+<p>启动Steam，会自动更新，有机率更新失败。我是直接放在虚拟机里更新成功的</p>
+<p>在Steam设置中关闭游戏中Steam界面，不然会挂掉</p>
+<p>然后常规流程安装或者下载游戏就行</p>
+<p>运行前记得删除游戏安装目录里的<code>Content/checksum.xml</code>，不然会启动失败</p>
+<p>游戏配置在游戏里因为balabala什么的没法改，自己想办法吧</p>
+<p>附上成功截图一张：</p>
+<p><img src="https://t.williamgates.net/image-3E1C_557FFED8.jpg" alt="如果你看见这个说明图挂了，自己脑补去吧" /></p>
+<hr />
+<p>最后是个悲报……我电脑配置太渣玩起来太卡所以白折腾了</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/crystal/">在 ubuntu 上编译安装 Crystal</a></h1>
+              <div class="info">
+                <h2>水晶</h2>
+                <time>2015-06-09 00:00</time>
+              </div>
+              
+                <p>Crystal 是一个语法像 Ruby，性能堪比C的语言</p>
+<p>详细就不介绍了，直接去<a href="http://crystal-lang.org">官网</a>看吧</p>
+<h2 id="zheng-wen">正文</h2>
+<hr />
+<p>其实直接参考里面的Vagrantfile就行（Dockerfile太久没更新就无视吧）</p>
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">curl -s http://dist.crystal-lang.org/apt/setup.sh </span><span style="color:#fe8019;">| </span><span style="color:#fdf4c1;">bash
+</span><span style="color:#fdf4c1;">apt-get install -y crystal git libgmp3-dev zlib1g-dev libedit-dev libxml2-dev libssl-dev libyaml-dev libreadline-dev
+</span><span style="color:#fdf4c1;">curl -s http://crystal-lang.s3.amazonaws.com/llvm/llvm-3.5.0-1-linux-x86_64.tar.gz </span><span style="color:#fe8019;">| </span><span style="color:#fdf4c1;">tar xz -C /opt
+</span><span style="color:#fabd2f;">echo </span><span style="color:#b8bb26;">&#39;export LIBRARY_PATH=&quot;/opt/crystal/embedded/lib&quot;&#39; </span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1;"> /etc/profile.d/crystal.sh
+</span><span style="color:#fabd2f;">echo </span><span style="color:#b8bb26;">&#39;export PATH=&quot;$PATH:/opt/llvm-3.5.0-1/bin&quot;&#39; </span><span style="color:#fe8019;">&gt;&gt;</span><span style="color:#fdf4c1;"> /etc/profile.d/crystal.sh
+</span><span style="color:#fdf4c1;">git clone https://github.com/manastech/crystal.git
+</span><span style="color:#fdf4c1;">make
+</span></code></pre>
+<p>顺便照着写了个Dockerfile</p>
+<pre data-lang="Dockerfile" style="background-color:#282828;color:#fdf4c1aa;" class="language-Dockerfile "><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#fa5c4b;">FROM</span><span> ubuntu:</span><span style="color:#8ec07c;">14.04
+</span><span style="color:#fa5c4b;">RUN </span><span>apt-key adv --keyserver keys.gnupg.net --recv-keys 09617FD37CC06B54 &amp;&amp; \
+</span><span>    echo </span><span style="color:#b8bb26;">&quot;deb http://dist.crystal-lang.org/apt crystal main&quot;</span><span> &gt; /etc/apt/sources.list.d/crystal.list &amp;&amp; \
+</span><span>    apt-get update &amp;&amp; \
+</span><span>    apt-get install -y build-essential crystal curl git libgmp3-dev zlib1g-dev libedit-dev libxml2-dev libssl-dev libyaml-dev libreadline-dev &amp;&amp; \
+</span><span>    apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &amp;&amp; \
+</span><span>    curl -s http://crystal-lang.s3.amazonaws.com/llvm/llvm-3.5.0-1-linux-x86_64.tar.gz | tar xz -C /opt
+</span><span style="color:#fa5c4b;">ENV </span><span>LIBRARY_PATH=/opt/crystal/embedded/lib
+</span><span style="color:#fa5c4b;">ENV </span><span>PATH=$PATH:/opt/llvm-3.5.0-1/bin
+</span><span style="color:#fa5c4b;">RUN </span><span>git clone https://github.com/manastech/crystal.git /root/crystal
+</span><span style="color:#fa5c4b;">WORKDIR </span><span>/root/crystal
+</span></code></pre>
+<p>也可以直接<code>docker pull iovxw/crystal</code>我build好的</p>
+<p>默认只是配置好环境，进去之后make什么都随便</p>
+<hr />
+<p>顺带一提里面的轻量级线程还有channel好顺手啊，还带select</p>
+<pre data-lang="crystal" style="background-color:#282828;color:#fdf4c1aa;" class="language-crystal "><code class="language-crystal" data-lang="crystal"><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">generator</span><span>(</span><span style="color:#fdf4c1;">n : </span><span style="color:#8ec07c;">T</span><span>)
+</span><span>  channel </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Channel</span><span>(</span><span style="color:#8ec07c;">T</span><span>).</span><span style="color:#fa5c4b;">new
+</span><span>  </span><span style="color:#fa5c4b;">spawn do
+</span><span>    </span><span style="color:#fa5c4b;">loop do
+</span><span>      sleep n
+</span><span>      channel.send n
+</span><span>    </span><span style="color:#fa5c4b;">end
+</span><span>  </span><span style="color:#fa5c4b;">end
+</span><span>  channel
+</span><span style="color:#fa5c4b;">end
+</span><span>
+</span><span>ch1 </span><span style="color:#fe8019;">=</span><span> generator(</span><span style="color:#d3869b;">1</span><span>)
+</span><span>ch2 </span><span style="color:#fe8019;">=</span><span> generator(</span><span style="color:#d3869b;">1.5</span><span>)
+</span><span>ch3 </span><span style="color:#fe8019;">=</span><span> generator(</span><span style="color:#d3869b;">5</span><span>)
+</span><span>
+</span><span style="color:#fa5c4b;">loop do
+</span><span>  </span><span style="color:#fa5c4b;">case</span><span> ch </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Channel</span><span>.select(ch1, ch2, ch3)
+</span><span>  </span><span style="color:#fa5c4b;">when</span><span> ch3
+</span><span>    </span><span style="color:#fa5c4b;">break
+</span><span>  </span><span style="color:#fa5c4b;">else
+</span><span>    puts ch.receive
+</span><span>  </span><span style="color:#fa5c4b;">end
+</span><span style="color:#fa5c4b;">end
+</span></code></pre>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/golang-func-multi-return-value-to-slice/">Go语言函数多返回值转换为切片</a></h1>
+              <div class="info">
+                <h2>并没有什么用</h2>
+                <time>2015-05-30 00:00</time>
+              </div>
+              
+                <p>golang里面函数的多返回值就相当于一个展开过的切片</p>
+<p>像这个样子：</p>
+<pre data-lang="go" style="background-color:#282828;color:#fdf4c1aa;" class="language-go "><code class="language-go" data-lang="go"><span>[]</span><span style="color:#fa5c4b;">interface</span><span>{}{</span><span style="color:#fdf4c1;">返回值1</span><span>, </span><span style="color:#fdf4c1;">返回值2</span><span>}</span><span style="color:#fe8019;">...
+</span></code></pre>
+<p>于是我们把它反过来就行了</p>
+<pre data-lang="go" style="background-color:#282828;color:#fdf4c1aa;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#fa5c4b;">package </span><span style="color:#fdf4c1;">main
+</span><span>
+</span><span style="color:#fa5c4b;">import </span><span>(
+</span><span>	</span><span style="color:#b8bb26;">&quot;fmt&quot;
+</span><span>	</span><span style="color:#b8bb26;">&quot;strconv&quot;
+</span><span>)
+</span><span>
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">toSlice</span><span>(</span><span style="color:#fdf4c1;">v </span><span style="color:#fe8019;">...</span><span style="color:#fa5c4b;">interface</span><span>{}) []</span><span style="color:#fa5c4b;">interface</span><span>{} { </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">v </span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">main</span><span>() {
+</span><span>	</span><span style="color:#fdf4c1;">fmt</span><span>.</span><span style="color:#fdf4c1;">Println</span><span>(</span><span style="color:#fdf4c1;">toSlice</span><span>(</span><span style="color:#fdf4c1;">strconv</span><span>.</span><span style="color:#fdf4c1;">Atoi</span><span>(</span><span style="color:#b8bb26;">&quot;1&quot;</span><span>)))
+</span><span>}
+</span></code></pre>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/state-fo-go-may/">The State of Go</a></h1>
+              <div class="info">
+                <h2>&quot;Where we are in May 2015&quot;</h2>
+                <time>2015-05-27 00:00</time>
+              </div>
+              
+                <p>大致就是性能优化、GC优化、新增架构支持以及包可以导出给其他地方使用，还有给map加了个语法糖</p>
+<hr />
+<div id="body" class="modal fade">
+  <div class="modal-dialog" style="height: 90%;width: 90%;">
+    <div class="modal-content" style="height: 100%;">
+      <div class="modal-body" style="height: 100%;">
+        <iframe src="https://talks.golang.org/2015/state-of-go-may.slide" style="height: 100%;width: 100%;border: 1px solid #c0c0c0;">http://talks.golang.org/2015/state-of-go-may.slide</iframe>
+      </div>
+    </div>
+  </div>
+</div>
+<p><a data-toggle="modal" href="#body" class="btn btn-primary btn-large btn-block" style="float: none;">Show</a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/rust-1-0/">Rust 1.0 发布</a></h1>
+              <div class="info">
+                <h2>只是发个新闻，没别的了</h2>
+                <time>2015-05-15 00:00</time>
+              </div>
+              
+                <p>http://blog.rust-lang.org/2015/05/15/Rust-1.0.html</p>
+
+              
+            </article>
+          
+        
+        
+        <nav>
+          
+          <a href="https://iovxw.net/n/5/">PREV</a>
+          
+          
+          <a href="https://iovxw.net/n/7/">NEXT</a>
+          
+        </nav>
+        
+      
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

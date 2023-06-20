@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="一整年没更新了，写点什么吧">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://iovxw.net">
+
+    
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>Kensington Orbit 轨迹球 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
+
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    :not(pre) > code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 0.5em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>Kensington Orbit 轨迹球</h1>
+    <div class="info"><h2>一整年没更新了，写点什么吧</h2><time>2020-04-12 17:13</time></div>
+    <p><img src="https://iovxw.net/p/kensington-orbit-trackball/kensington_orbit_and_cat_feet.jpg" alt="" /></p>
+<p>最近右手手腕痛得要死</p>
+<p>因为鼠标</p>
+<p>想着不能再拖了，必须得换个输入方式</p>
+<p>就挑了一堆骨头后，入手了 Kensington Orbit with Scroll Ring</p>
+<p>这里写篇文章记录下，选择的过程，以及应该避开的坑</p>
+<span id="continue-reading"></span>
+<hr />
+<h2 id="di-yi-ge-xiang-dao-de-hong-mo-ban">第一个想到的：触摸板</h2>
+<p>没有 Mac，笔记本上的触摸板有点小，于是拿手机模拟了个触摸板用（可以用 <a href="https://kdeconnect.kde.org/">KDE Connect</a> 或 <a href="https://github.com/Unrud/remote-touchpad">remote-touchpad</a>）</p>
+<p>虽然手感不怎么样，但也没那么差</p>
+<p>用了三天</p>
+<p>就结论来说：有效果，不那么疼了</p>
+<p>但</p>
+<p>手不能一直放在上面，有时候为了及时的操作需要悬空一会</p>
+<p>不是很满意</p>
+<hr />
+<h2 id="shu-wei-ban">数位板</h2>
+<p>多年前买的 Wacom Intuos，不带触摸</p>
+<p>绝对定位模式还行，但是屏幕太大了就比较微妙</p>
+<p>相对定位的话需要经常把笔抬起来，离开感应范围，而这个范围又比较大……</p>
+<hr />
+<h2 id="xbox-shou-bing">Xbox 手柄</h2>
+<p>配置一下就能拿来模拟鼠标</p>
+<p>有好几个带图形界面的项目，但都不太能用，唯一稳定的是 <a href="https://xboxdrv.gitlab.io">xboxdrv</a></p>
+<p>下面是我的配置文件：</p>
+<pre data-lang="ini" style="background-color:#282828;color:#fdf4c1aa;" class="language-ini "><code class="language-ini" data-lang="ini"><span style="font-style:italic;color:#928374;"># Mouse Emulation
+</span><span style="font-style:italic;color:#928374;"># ===============
+</span><span style="font-style:italic;color:#928374;">#
+</span><span style="font-style:italic;color:#928374;"># This configuration file emulates a mouse.
+</span><span>
+</span><span style="color:#fa5c4b;">[xboxdrv]
+</span><span style="color:#fdf4c1;">ui-clear</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">true
+</span><span>
+</span><span style="color:#fa5c4b;">[ui-axismap]
+</span><span style="color:#fdf4c1;">x1 </span><span style="color:#fe8019;">=</span><span> rel</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_X</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1000</span><span style="color:#fe8019;">:-</span><span style="color:#d3869b;">1
+</span><span style="color:#fdf4c1;">y1 </span><span style="color:#fe8019;">=</span><span> rel</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_Y</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1000</span><span style="color:#fe8019;">:-</span><span style="color:#d3869b;">1
+</span><span>
+</span><span style="color:#fdf4c1;">y2</span><span style="color:#fe8019;">^</span><span>invert </span><span style="color:#fe8019;">=</span><span> rel</span><span style="color:#fe8019;">-</span><span>repeat</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_WHEEL</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">50
+</span><span style="color:#fdf4c1;">x2 </span><span style="color:#fe8019;">=</span><span> rel</span><span style="color:#fe8019;">-</span><span>repeat</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_HWHEEL</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">50
+</span><span>
+</span><span style="color:#fdf4c1;">lt </span><span style="color:#fe8019;">=</span><span> rel</span><span style="color:#fe8019;">-</span><span>repeat</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_WHEEL</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">20
+</span><span style="color:#fdf4c1;">rt </span><span style="color:#fe8019;">=</span><span> rel</span><span style="color:#fe8019;">-</span><span>repeat</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_WHEEL</span><span style="color:#fe8019;">:-</span><span style="color:#d3869b;">1</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">20
+</span><span>
+</span><span style="color:#fa5c4b;">[ui-buttonmap]
+</span><span style="color:#fdf4c1;">a </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">BTN_LEFT
+</span><span style="color:#fdf4c1;">b </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">BTN_RIGHT
+</span><span style="color:#fdf4c1;">x </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">BTN_MIDDLE
+</span><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_ENTER
+</span><span>
+</span><span style="color:#fdf4c1;">rb </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_PAGEDOWN
+</span><span style="color:#fdf4c1;">lb </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_PAGEUP
+</span><span>
+</span><span style="color:#fdf4c1;">tl </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_BACKSPACE
+</span><span style="color:#fdf4c1;">tr </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_SPACE
+</span><span>
+</span><span style="color:#fa5c4b;">[ui-buttonmap]
+</span><span style="color:#fdf4c1;">dl </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_LEFT
+</span><span style="color:#fdf4c1;">dr </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_RIGHT
+</span><span style="color:#fdf4c1;">du </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_UP
+</span><span style="color:#fdf4c1;">dd </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_DOWN
+</span><span>
+</span><span style="color:#fa5c4b;">[ui-buttonmap]
+</span><span style="color:#fa5c4b;">start </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_FORWARD
+</span><span style="color:#fdf4c1;">back  </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_BACK
+</span><span style="color:#fdf4c1;">guide </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_ESC
+</span><span>
+</span><span style="font-style:italic;color:#928374;"># EOF #
+</span></code></pre>
+<p>使用感想：</p>
+<p>精度不行，得非常有耐心才用得来，下一个吧</p>
+<hr />
+<h2 id="chui-zhi-shu-biao">垂直鼠标</h2>
+<p>没买</p>
+<p>原因是确实没必要，这篇文章不是《人类手臂与常见桌面材质的摩擦系数报告》</p>
+<p>可以拿橡皮泥糊到普通鼠标上体验一下，除了大范围移动不方便，还有操作鼠标的时候偶尔需要把鼠标提起来，对垂直鼠标的形状和重量要求很高</p>
+<p>也许哪天有空自己 3D 打印一个，只需要找个旧鼠标重新焊一下微动和编码器就可以了</p>
+<hr />
+<h2 id="zhi-dian-gan">指点杆</h2>
+<p>小红点分两种，十年前的型号，和……</p>
+<p>我找不到一个文明的词来形容后者</p>
+<hr />
+<h2 id="gui-ji-qiu">轨迹球</h2>
+<p>拇指球不行，因为我拇指也痛 :-(</p>
+<p>还要有滚轮，模拟滚轮是下策</p>
+<p>要左右手通用，为了负载均衡</p>
+<p>于是有了以下选择：</p>
+<hr />
+<h3 id="l-trac">L-Trac</h3>
+<p><img src="https://iovxw.net/p/kensington-orbit-trackball/redl-trac.jpg" alt="L-Trac Red" /></p>
+<p><em><strong>$149.95</strong></em></p>
+<p>有滚轮，<a href="https://youtu.be/CwDyVXZ7sg0">可动的机械轴承</a>，还能扩展按键！</p>
+<p>然而买不到（</p>
+<hr />
+<h3 id="kensington-slimbladetm">Kensington SlimBlade™</h3>
+<p><img src="https://iovxw.net/p/kensington-orbit-trackball/slimblade.jpg" alt="SlimBlade" /></p>
+<p><em><strong>$99.99</strong></em></p>
+<p>靠水平方向转球来模拟滚轮，对于这个设计评价非常两极化</p>
+<p>有评测说当滚轮用时无法避免鼠标指针乱抖，同时长距离滚动并不方便，就没买</p>
+<hr />
+<h3 id="kensington-expert-mouse-r-wireless">Kensington Expert Mouse® Wireless</h3>
+<p><img src="https://iovxw.net/p/kensington-orbit-trackball/expert.jpg" alt="Expert Mouse" /></p>
+<p><em><strong>$99.99</strong></em></p>
+<p>这个还有一个有线版本，不过差不多</p>
+<p>有 Kensington 家的滚动环设计（就是球周围那一圈，充当鼠标滚轮），很好</p>
+<p>但这个型号上的滚动环很多人不喜欢，主要是手感：</p>
+<blockquote>
+<p><img src="https://iovxw.net/p/kensington-orbit-trackball/expert_mouse_scrollwhell.jpg" alt="" /></p>
+<p>You could see it creating a complicated &quot;magnetic notched effect&quot; making the Engineer a &quot;Kensington Fellow&quot; with lots of Corporate awards. Unfortunately nobody bothered to check how it works. It sucks royally. (<a href="http://web.archive.org/web/20100620203512/http://geekhack.org/showwiki.php?title=Island:9303">Source</a>)</p>
+</blockquote>
+<p>其实原理看一下也能明白，那个长得像 Zoetrope（西洋镜？）的轮是金属做的，然后旁边有块磁铁来提供段落感</p>
+<p>可惜做的太烂，只能拆掉磁铁当无极滚轮</p>
+<hr />
+<h3 id="kensington-orbit-with-scroll-ring">Kensington Orbit with Scroll Ring</h3>
+<p><img src="https://iovxw.net/p/kensington-orbit-trackball/orbit.jpg" alt="Orbit" /></p>
+<p><em><strong>$39.99</strong></em></p>
+<p>本文的主角，也是最便宜的</p>
+<p>单独分段介绍一下：</p>
+<hr />
+<h4 id="qiu-ti">球体</h4>
+<p>上面那三个的球都是 5.5cm+，只有这个是 4cm</p>
+<p>一开始还担心精度和移动范围不行，不过到手后发现十分够用，虽然 FPS 还是玩不了的</p>
+<p>由于球体较小，可以只用食指和中指控制，完全不需要运动手腕，很棒</p>
+<p>也试了一下用三指控制，但无名指会牵扯到手腕，痛</p>
+<hr />
+<h4 id="gun-dong-huan">滚动环</h4>
+<p>买它的决定因素，Kensington 的专利</p>
+<p>体验就一个字：爽</p>
+<p>因为是光栅实现，无段落感，润滑度也可以，所以能用无名指靠惯性进行长距离滚动</p>
+<p>对于看网页懒得把手放到键盘上的时候来说是再合适不过的了</p>
+<p>缺点是做工不怎么样，快速滚动时用力角度不对会涩</p>
+<hr />
+<h4 id="pei-zhi">配置</h4>
+<p>发行版 Arch，桌面环境 Gnome 3.36.1 on Wayland</p>
+<p>因为只有两个键，设置一下同时按住两键模拟中键：</p>
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">gsettings set org.gnome.desktop.peripherals.mouse middle-click-emulation true
+</span></code></pre>
+<p>还有一个 <code>org.gnome.desktop.peripherals.trackball</code>，但看起来暂时没用</p>
+<p>启用鼠标加速度：</p>
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">gsettings set org.gnome.desktop.peripherals.mouse accel-profile adaptive
+</span></code></pre>
+<p>鼠标速度的话有图形界面设置，进控制中心直接拖到底：</p>
+<p><img src="https://iovxw.net/p/kensington-orbit-trackball/mouse-speed.png" alt="" /></p>
+<hr />
+<h4 id="wan-tuo">腕托</h4>
+<p>自带的腕托一定要装，或者用其他腕托，不然手腕悬空很难受</p>
+<hr />
+<h4 id="zhou-cheng">轴承</h4>
+<p>图懒得拍了，借用一下上面 Expert Mouse 帖子里的：</p>
+<p><img src="https://iovxw.net/p/kensington-orbit-trackball/FLA_8539.jpg" alt="" /></p>
+<p>坑里那三颗红色的球就是轴承，为直径 2mm 的红刚玉，不能转，但很耐磨</p>
+<p>可以在阿里巴巴买到</p>
+<p>也有人用氮化硅替换，虽然硬度低一点但是无润滑摩擦系数更小</p>
+<hr />
+<h4 id="ti-dai-qiu-ti">替代球体</h4>
+<p>原装球重 44g, 直径 40mm, 材料为环氧树脂, 外层亮晶晶的是聚酯颗粒</p>
+<p>虽然很顺滑但比较容易粘灰，灰在轴承边积累多了之后手感下降很快</p>
+<p>一个比较快的清理办法是把球抠出来，包张纸巾塞回去转两圈再抽出来</p>
+<p>但终归还是麻烦，于是找了一些替代球体，比如：</p>
+<hr />
+<p>乒乓球</p>
+<p><img src="https://iovxw.net/p/kensington-orbit-trackball/pingpong.jpg" alt="" /></p>
+<p>手边就有，直径一样，就塞了进去</p>
+<p>ABS 材质，表面磨砂，中空，透光，非常轻</p>
+<p>可以看出追踪用的红光让这颗球变成了一个灯泡 :-P</p>
+<p>识别效果挺好，手感超轻意外还不错，但磨砂表面滚动较困难，就打磨了一下，手感近乎完美！</p>
+<p>然而传感器识别不了了，丢帧非常多（</p>
+<p>看来不能太光滑</p>
+<p>还有一个缺点是，我家的乒乓球主要是给猫玩的</p>
+<p>所以被它发现我偷了它的球之后</p>
+<p>猫猫狂搓</p>
+<p><img src="https://iovxw.net/p/kensington-orbit-trackball/cat_with_ball.jpg" alt="" /></p>
+<hr />
+<p>吸取上面的教训，表面不能过于光滑但也不能阻碍滚动</p>
+<p>就买了一对养生绿檀木手球</p>
+<p>非常养生，甚至还能慢慢搓出包浆</p>
+<p>味道的话卖家说有香味，但我闻起来只是比较重的木头味，可能这也算香味</p>
+<p>密度和原装球差不多，重 43g，滚动起来没有问题，追踪精度也不错</p>
+<p>但因为是木头，表面有些纹路，滚动时会有点“颗粒感”，以及声音</p>
+<p><img src="https://iovxw.net/p/kensington-orbit-trackball/woodball.jpg" alt="" /></p>
+<p>顺便一提要是想让绿檀快速氧化变绿的话，可以用紫外线灯</p>
+<p>包管用，我的球照了几个小时没管，绿成了颗黑球（</p>
+<hr />
+<h4 id="geng-xin">更新：</h4>
+<p>买了两罐三和的自喷漆，闪光蓝和光油</p>
+<p>喷到乒乓球上效果如下</p>
+<p><img src="https://iovxw.net/p/kensington-orbit-trackball/super_pingpong.jpg" alt="" /></p>
+<p>色彩拍出来有点偏，我已经尽力了，实际颜色是高光周围那一圈深蓝色</p>
+<p>注意光油一定要喷，不然硬度不够手感黏糊糊的</p>
+<p>然后因为只喷了两遍，所以表面还不是特别圆滑</p>
+<p>但就这样吧，喷球体必须等一面干透才能翻过来喷另一面，光油相比闪光蓝还干的特别慢，超麻烦</p>
+<p>识别效果的话，和原装球感觉不出差异，现在就当主力球用了</p>
+<hr />
+<p>还发现一个问题，滚动环表面好像有类肤质涂层，会黏</p>
+<p>上图用纸巾擦了下就黏了不少碎屑挺难清理的</p>
+<p>有时间找点什么溶剂把它洗掉算了</p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/kensington-orbit-trackball/';
+  };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

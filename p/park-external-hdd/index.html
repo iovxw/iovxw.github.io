@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="是 HDD 需要注意的">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://iovxw.net">
+
+    
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>配置 Linux 关机时停转移动硬盘 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
+
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    :not(pre) > code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 0.5em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>配置 Linux 关机时停转移动硬盘</h1>
+    <div class="info"><h2>是 HDD 需要注意的</h2><time>2021-03-25 00:00</time></div>
+    <p>距离上篇博文又是一年，不太妙</p>
+<p>我是不是只有每年 4 月才能想起来要写点什么？</p>
+<p>嗯这次提前一个月，有进步</p>
+<p>那么正文开始</p>
+<span id="continue-reading"></span>
+<hr />
+<h2 id="qi-yin">起因</h2>
+<p>我的台式机上只有 M2</p>
+<p>这很奇怪，但作为一个体积只有 20cm * 20cm * 8cm 的 ITX 来讲，没有硬盘位就很正常了</p>
+<p>总之我的 3.5 寸仓库盘是以移动硬盘形式存在的</p>
+<p>这倒也没什么</p>
+<p>问题是为了更低的纹波，我给硬盘盒的 5V 12V 都搞的独立供电，甚至还焊了个 LC 滤波器（效果不错，内圈寻道时间显著降低）</p>
+<p>结果关机：<strong>它不停</strong></p>
+<hr />
+<h2 id="wen-ti">问题</h2>
+<p>如果是内置硬盘，或没有独立的 5V 供电——关机即断电，这个问题都不会那么容易被发现</p>
+<p>是应该反思一下自己这扭曲的需求了</p>
+<p>不过比起不停转，更大的问题是对于其他普通使用 USB 供电的移动硬盘，如果没弹出移动硬盘（像 Windows 上的“安全移除设备”），而是关机后被直接断电，那磁头的位置在哪？</p>
+<p>很幸运现代机械硬盘都是有复位装置的，断电之后磁头会被拉回去，一般不会划伤盘片</p>
+<p>但总不能依靠这个，数据无价，并且 SMART 里的 <code>Power-Off_Retract_Count</code> 会爆涨</p>
+<hr />
+<h2 id="fang-an">方案</h2>
+<p>开始以为是硬盘盒固件问题，于是寻找 ASM 1153E 的固件</p>
+<p>（比如<a href="http://web.archive.org/web/20210413021249/https://www.lulian.cn/download/48-cn.html">这里</a>）</p>
+<p>——没啥用，除了可以设置休眠时间来达到“自动关闭”</p>
+<p>且通过 <code>udisksctl power-off</code> 是能正常关闭硬盘的，排除</p>
+<p>还是乖乖找文档</p>
+<p><a href="http://www.linux-ata.org/shutdown.html#2.%20Why%20do%20I%20need%20to%20update%20shutdown(8)_%7Coutline">Serial ATA (SATA) shutdown info</a></p>
+<p>简而言之由于可能被多个设备共享，内核在关机时是不管 SCSI 设备的</p>
+<p>但 2.6.21 之后，因为 libata 使用 SCSI 作为上层驱动，就加了自动管理，可惜移动硬盘不在此列（可能因为是 <a href="https://en.wikipedia.org/wiki/SCSI_/_ATA_Translation">SAT</a>？）</p>
+<p>里面还提到 <code>/sys/class/scsi_disk/h:c:i:l/manage_start_stop</code> 这个属性</p>
+<p><a href="https://github.com/torvalds/linux/blob/v5.11/include/scsi/scsi_device.h#L186">linux/include/scsi/scsi_device.h</a></p>
+<pre data-lang="c" style="background-color:#282828;color:#fdf4c1aa;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#fa5c4b;">unsigned</span><span> manage_start_stop</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1</span><span>;	</span><span style="font-style:italic;color:#928374;">/* Let HLD (sd) manage start/stop */
+</span></code></pre>
+<p>是我们要找的了，设为 1 就会管理起停</p>
+<p>然后 <a href="https://bugzilla.kernel.org/show_bug.cgi?id=205107">https://bugzilla.kernel.org/show_bug.cgi?id=205107</a> 中提到，可以建一个 udev rule 自动化</p>
+<p><code>/etc/udev/rules.d/01-manage_start_stop.rules</code></p>
+<pre data-lang="c" style="background-color:#282828;color:#fdf4c1aa;" class="language-c "><code class="language-c" data-lang="c"><span>ACTION</span><span style="color:#fe8019;">==</span><span style="color:#b8bb26;">&quot;add|change&quot;</span><span>, DRIVERS</span><span style="color:#fe8019;">==</span><span style="color:#b8bb26;">&quot;usb-storage&quot;</span><span>, SUBSYSTEM</span><span style="color:#fe8019;">==</span><span style="color:#b8bb26;">&quot;scsi_disk&quot;</span><span>, RUN</span><span style="color:#fe8019;">+=</span><span style="color:#b8bb26;">&quot;/bin/sh -c &#39;echo 1 &gt;/sys/class/scsi_disk/%k/manage_start_stop&#39;&quot;
+</span></code></pre>
+<p>不过它不管 UAS 设备，对于支持 UAS 的硬盘盒需要加一下</p>
+<pre data-lang="c" style="background-color:#282828;color:#fdf4c1aa;" class="language-c "><code class="language-c" data-lang="c"><span>ACTION</span><span style="color:#fe8019;">==</span><span style="color:#b8bb26;">&quot;add|change&quot;</span><span>, DRIVERS</span><span style="color:#fe8019;">==</span><span style="color:#b8bb26;">&quot;usb-storage|uas&quot;</span><span>, SUBSYSTEM</span><span style="color:#fe8019;">==</span><span style="color:#b8bb26;">&quot;scsi_disk&quot;</span><span>, RUN</span><span style="color:#fe8019;">+=</span><span style="color:#b8bb26;">&quot;/bin/sh -c &#39;echo 1 &gt; /sys/class/scsi_disk/%k/manage_start_stop&#39;&quot;
+</span></code></pre>
+<hr />
+<h2 id="wan">完</h2>
+<p>顺便吐槽一下 GNOME 官方的 Removable drive menu 插件，虽然是给 removable drive 用的，却只能 unmount，要安全移除的话还得进 nautilus 点菜单</p>
+<p>TODO 里再加个插件计划吧，不知道 GNOME 40 API 又会变多少</p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/park-external-hdd/';
+  };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

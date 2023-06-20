@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://iovxw.net">
+
+    
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
+
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    :not(pre) > code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 0.5em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
+
+      
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/update-again/">再次更新模板</a></h1>
+              <div class="info">
+                <h2>还是自己写的</h2>
+                <time>2016-03-18 00:00</time>
+              </div>
+              
+                <p>这次又写了一个模板, css 加起来才 200 行<br />
+大概算是极简主义吧</p>
+<p>如果你发现顶栏的 <strong>Search</strong> 是灰色的，或者没有加粗<br />
+那么请换一个现代浏览器</p>
+<p>以及再次迁移回 <em>github page</em>, 因为发现 <em>Kloudsec</em> 提供了一个
+<a href="https://kloudsec.com/github-pages/new">免费 HTTPS CDN</a> 给 <em>github page</em><br />
+当然国内速度就不指望了</p>
+<p>顺带一提有没有发现这篇文章没有 <code>Read More...</code> ?<br />
+因为文章总共就这么长啦</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/clojure-minecraft-plugin-classpath-error/">使用 Clojure 为 Minecraft 编写 Bukkit 插件时出现 Could not locate clojure&#x2F;core__init.class or clojure&#x2F;core.clj on classpath 的解决方法</a></h1>
+              <div class="info">
+                <h2>标题太长短不了</h2>
+                <time>2016-03-11 00:00</time>
+              </div>
+              
+              <pre data-lang="java" style="background-color:#282828;color:#fdf4c1aa;" class="language-java "><code class="language-java" data-lang="java"><span style="color:#d3869b;">0</span><span style="background-color:#932b1e;color:#fdf4c1;">9</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">10</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">17</span><span> [</span><span style="color:#fdf4c1;">SEVERE</span><span>] </span><span style="color:#8ec07c;">Could</span><span> not load </span><span style="color:#b8bb26;">&#39;plugins/watershipdown-0.1.jar&#39;</span><span> in folder </span><span style="color:#b8bb26;">&#39;plugins&#39;</span><span style="color:#fe8019;">: 
+</span><span style="color:#fabd2f;">java</span><span>.</span><span style="color:#fabd2f;">lang</span><span>.</span><span style="color:#8ec07c;">ExceptionInInitializerError
+</span><span>	at </span><span style="color:#fabd2f;">clojure</span><span>.</span><span style="color:#fabd2f;">lang</span><span>.</span><span style="color:#8ec07c;">Namespace</span><span>.&lt;init&gt;(</span><span style="color:#8ec07c;">Namespace</span><span>.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">34</span><span>)
+</span><span>	at </span><span style="color:#fabd2f;">clojure</span><span>.</span><span style="color:#fabd2f;">lang</span><span>.</span><span style="color:#8ec07c;">Namespace</span><span>.</span><span style="color:#fdf4c1;">findOrCreate(</span><span style="color:#8ec07c;">Namespace</span><span style="color:#fdf4c1;">.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">176</span><span style="color:#fdf4c1;">)
+</span><span>	at </span><span style="color:#fabd2f;">clojure</span><span>.</span><span style="color:#fabd2f;">lang</span><span>.</span><span style="color:#8ec07c;">Var</span><span>.</span><span style="color:#fdf4c1;">internPrivate(</span><span style="color:#8ec07c;">Var</span><span style="color:#fdf4c1;">.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">149</span><span style="color:#fdf4c1;">)
+</span><span>	at </span><span style="color:#fabd2f;">net</span><span>.</span><span style="color:#fabd2f;">jonnay</span><span>.</span><span style="color:#fabd2f;">watershipdown</span><span>.</span><span style="color:#8ec07c;">WatershipDown</span><span>.&lt;clinit&gt;(</span><span style="color:#8ec07c;">Unknown Source</span><span>)
+</span><span>	at </span><span style="color:#fabd2f;">java</span><span>.</span><span style="color:#fabd2f;">lang</span><span>.</span><span style="color:#8ec07c;">Class</span><span>.</span><span style="color:#fdf4c1;">forName0(</span><span style="color:#8ec07c;">Native Method</span><span style="color:#fdf4c1;">)
+</span><span>	at </span><span style="color:#fabd2f;">java</span><span>.</span><span style="color:#fabd2f;">lang</span><span>.</span><span style="color:#8ec07c;">Class</span><span>.</span><span style="color:#fdf4c1;">forName(</span><span style="color:#8ec07c;">Class</span><span style="color:#fdf4c1;">.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">247</span><span style="color:#fdf4c1;">)
+</span><span>	at </span><span style="color:#fabd2f;">org</span><span>.</span><span style="color:#fabd2f;">bukkit</span><span>.</span><span style="color:#fabd2f;">plugin</span><span>.</span><span style="color:#fabd2f;">java</span><span>.</span><span style="color:#8ec07c;">JavaPluginLoader</span><span>.</span><span style="color:#fdf4c1;">loadPlugin(</span><span style="color:#8ec07c;">JavaPluginLoader</span><span style="color:#fdf4c1;">.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">131</span><span style="color:#fdf4c1;">)
+</span><span>	at </span><span style="color:#fabd2f;">org</span><span>.</span><span style="color:#fabd2f;">bukkit</span><span>.</span><span style="color:#fabd2f;">plugin</span><span>.</span><span style="color:#8ec07c;">SimplePluginManager</span><span>.</span><span style="color:#fdf4c1;">loadPlugin(</span><span style="color:#8ec07c;">SimplePluginManager</span><span style="color:#fdf4c1;">.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">285</span><span style="color:#fdf4c1;">)
+</span><span>	at </span><span style="color:#fabd2f;">org</span><span>.</span><span style="color:#fabd2f;">bukkit</span><span>.</span><span style="color:#fabd2f;">plugin</span><span>.</span><span style="color:#8ec07c;">SimplePluginManager</span><span>.</span><span style="color:#fdf4c1;">loadPlugins(</span><span style="color:#8ec07c;">SimplePluginManager</span><span style="color:#fdf4c1;">.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">200</span><span style="color:#fdf4c1;">)
+</span><span>	at </span><span style="color:#fabd2f;">org</span><span>.</span><span style="color:#fabd2f;">bukkit</span><span>.</span><span style="color:#fabd2f;">craftbukkit</span><span>.</span><span style="color:#8ec07c;">CraftServer</span><span>.</span><span style="color:#fdf4c1;">loadPlugins(</span><span style="color:#8ec07c;">CraftServer</span><span style="color:#fdf4c1;">.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">156</span><span style="color:#fdf4c1;">)
+</span><span>	at </span><span style="color:#fabd2f;">org</span><span>.</span><span style="color:#fabd2f;">bukkit</span><span>.</span><span style="color:#fabd2f;">craftbukkit</span><span>.</span><span style="color:#8ec07c;">CraftServer</span><span>.&lt;init&gt;(</span><span style="color:#8ec07c;">CraftServer</span><span>.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">132</span><span>)
+</span><span>	at </span><span style="color:#fabd2f;">net</span><span>.</span><span style="color:#fabd2f;">minecraft</span><span>.</span><span style="color:#fabd2f;">server</span><span>.</span><span style="color:#8ec07c;">ServerConfigurationManager</span><span>.&lt;init&gt;(</span><span style="color:#8ec07c;">ServerConfigurationManager</span><span>.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">52</span><span>)
+</span><span>	at </span><span style="color:#fabd2f;">net</span><span>.</span><span style="color:#fabd2f;">minecraft</span><span>.</span><span style="color:#fabd2f;">server</span><span>.</span><span style="color:#8ec07c;">MinecraftServer</span><span>.</span><span style="color:#fdf4c1;">init(</span><span style="color:#8ec07c;">MinecraftServer</span><span style="color:#fdf4c1;">.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">148</span><span style="color:#fdf4c1;">)
+</span><span>	at </span><span style="color:#fabd2f;">net</span><span>.</span><span style="color:#fabd2f;">minecraft</span><span>.</span><span style="color:#fabd2f;">server</span><span>.</span><span style="color:#8ec07c;">MinecraftServer</span><span>.</span><span style="color:#fdf4c1;">run(</span><span style="color:#8ec07c;">MinecraftServer</span><span style="color:#fdf4c1;">.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">407</span><span style="color:#fdf4c1;">)
+</span><span>	at </span><span style="color:#fabd2f;">net</span><span>.</span><span style="color:#fabd2f;">minecraft</span><span>.</span><span style="color:#fabd2f;">server</span><span>.</span><span style="color:#8ec07c;">ThreadServerApplication</span><span>.</span><span style="color:#fdf4c1;">run(</span><span style="color:#8ec07c;">SourceFile</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">465</span><span style="color:#fdf4c1;">)
+</span><span style="color:#8ec07c;">Caused</span><span> by</span><span style="color:#fe8019;">: </span><span style="color:#fabd2f;">java</span><span>.</span><span style="color:#fabd2f;">lang</span><span>.</span><span style="color:#8ec07c;">RuntimeException</span><span style="color:#fe8019;">: </span><span style="color:#fabd2f;">java</span><span>.</span><span style="color:#fabd2f;">io</span><span>.</span><span style="color:#8ec07c;">FileNotFoundException</span><span style="color:#fe8019;">: </span><span style="color:#8ec07c;">Could</span><span> not locate clojure</span><span style="color:#fe8019;">/</span><span>core__init.</span><span style="color:#fdf4c1;">class</span><span> or clojure</span><span style="color:#fe8019;">/</span><span>core.clj on classpath</span><span style="color:#fe8019;">: 
+</span><span>	at </span><span style="color:#fabd2f;">clojure</span><span>.</span><span style="color:#fabd2f;">lang</span><span>.</span><span style="color:#8ec07c;">Util</span><span>.</span><span style="color:#fdf4c1;">runtimeException(</span><span style="color:#8ec07c;">Util</span><span style="color:#fdf4c1;">.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">165</span><span style="color:#fdf4c1;">)
+</span><span>	at </span><span style="color:#fabd2f;">clojure</span><span>.</span><span style="color:#fabd2f;">lang</span><span>.</span><span style="color:#8ec07c;">RT</span><span>.&lt;clinit&gt;(</span><span style="color:#fdf4c1;">RT</span><span>.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">319</span><span>)
+</span><span>	... </span><span style="color:#d3869b;">15</span><span> more
+</span><span style="color:#8ec07c;">Caused</span><span> by</span><span style="color:#fe8019;">: </span><span style="color:#fabd2f;">java</span><span>.</span><span style="color:#fabd2f;">io</span><span>.</span><span style="color:#8ec07c;">FileNotFoundException</span><span style="color:#fe8019;">: </span><span style="color:#8ec07c;">Could</span><span> not locate clojure</span><span style="color:#fe8019;">/</span><span>core__init.</span><span style="color:#fdf4c1;">class</span><span> or clojure</span><span style="color:#fe8019;">/</span><span>core.clj on classpath</span><span style="color:#fe8019;">: 
+</span><span>	at </span><span style="color:#fabd2f;">clojure</span><span>.</span><span style="color:#fabd2f;">lang</span><span>.</span><span style="color:#8ec07c;">RT</span><span>.</span><span style="color:#fdf4c1;">load(RT.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">430</span><span style="color:#fdf4c1;">)
+</span><span>	at </span><span style="color:#fabd2f;">clojure</span><span>.</span><span style="color:#fabd2f;">lang</span><span>.</span><span style="color:#8ec07c;">RT</span><span>.</span><span style="color:#fdf4c1;">load(RT.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">398</span><span style="color:#fdf4c1;">)
+</span><span>	at </span><span style="color:#fabd2f;">clojure</span><span>.</span><span style="color:#fabd2f;">lang</span><span>.</span><span style="color:#8ec07c;">RT</span><span>.</span><span style="color:#fdf4c1;">doInit(RT.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">434</span><span style="color:#fdf4c1;">)
+</span><span>	at </span><span style="color:#fabd2f;">clojure</span><span>.</span><span style="color:#fabd2f;">lang</span><span>.</span><span style="color:#8ec07c;">RT</span><span>.&lt;clinit&gt;(</span><span style="color:#fdf4c1;">RT</span><span>.java</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">316</span><span>)
+</span><span>	... </span><span style="color:#d3869b;">15</span><span> more
+</span></code></pre>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/clojure-minecraft-plugin-classpath-error/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/make-a-jar-file-linux-executable/">Linux 下将 .jar 制作为可直接执行文件</a></h1>
+              <div class="info">
+                <h2>大概是通用的</h2>
+                <time>2016-01-26 00:00</time>
+              </div>
+              
+              <p>一般终端环境下要运行一个（有入口的） jar，需要 <code>java -jar xxxx.jar</code></p>
+<p>桌面环境则需要选择指定 java 来运行，需要设置默认。都不是很方便</p>
+<p>通常都是写一个脚本来执行 <code>java -jar</code>，但是这样就变成两个文件了，强迫症不舒服</p>
+<p>解决方法很简单，把这俩拼成一个文件就行了
+              <div class="read-more">
+                <a href="https://iovxw.net/p/make-a-jar-file-linux-executable/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/acme/">Let&#x27;s Encrypt 证书申请&#x2F;签发流程</a></h1>
+              <div class="info">
+                <h2>HTTP</h2>
+                <time>2015-12-29 00:00</time>
+              </div>
+              
+              <p>Let's Encrypt 的自动工具很方便，但也让人搞不清过程。其实就是一个 ACME (Automatic Certificate Management Environment，自动证书管理环境) 的客户端实现，相关规范可以<a href="https://github.com/ietf-wg-acme/acme">看这里</a></p>
+<p>这篇博文相当于是个笔记，只讲最简单(暴力)的验证方式，就是靠 HTTP 验证。其他还有用 DNS 和 TLS SNI 等进行验证的。</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/acme/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/new-year/">博客更新完成</a></h1>
+              <div class="info">
+                <h2>两年前的坑</h2>
+                <time>2015-12-24 00:00</time>
+              </div>
+              
+              <p>总算是把两年前的坑给填了</p>
+<p>虽然和原始设计有小小的出入（中途弄丢了源码）</p>
+<p>而且也没重写静态博客生成器</p>
+<p>但是就这样吧（摊手</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/new-year/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/functional-programming-for-the-jvm/">Clojure - Functional Programming for the JVM 中文版</a></h1>
+              <div class="info">
+                <h2>懒得翻译了</h2>
+                <time>2015-11-14 00:00</time>
+              </div>
+              
+              <p>基于原先<a href="http://xumingming.sinaapp.com/">徐明明</a>翻译的版本，替换了最新的英文版到里面</p>
+<p>一些大段的更新就干脆没翻译了，如果有愿意翻译的，就 fork <a href="https://github.com/iovxw/Clojure-Article">https://github.com/iovxw/Clojure-Article</a> 然后自己翻译吧</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/functional-programming-for-the-jvm/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/theme-color-in-chrome/">给 Chrome for Android 设置顶栏颜色以及图标</a></h1>
+              <div class="info">
+                <h2>坟</h2>
+                <time>2015-11-14 00:00</time>
+              </div>
+              
+              <blockquote>
+<p>Starting in version 39 of Chrome for Android on Lollipop, you’ll now beable to use the <code>theme-color</code> meta tag to set the toolbar color—this means no more Seattle gray toolbars! The syntax is pretty simple: add a<code>meta</code>tag to your page’s<code>&lt;head&gt;</code>with the<code>name=&quot;theme-color&quot;</code>, and set the<code>content</code>to any valid CSS color.</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/theme-color-in-chrome/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/docker-anyconnect-dtls-handshake-failed/">使用 Docker 运行 AnyConnect 时出现 DTLS handshake failed 的解决方法</a></h1>
+              <div class="info">
+                <h2>是个坑</h2>
+                <time>2015-10-22 00:00</time>
+              </div>
+              
+              <p>第一步：</p>
+<p>设置 Docker 内 AnyConnect 的端口和母机映射的端口相同</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/docker-anyconnect-dtls-handshake-failed/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/lets-encrypt-is-trusted/">Let&#x27;s Encrypt is Trusted</a></h1>
+              <div class="info">
+                <h2>终于啊终于</h2>
+                <time>2015-10-19 00:00</time>
+              </div>
+              
+              <p>We’re pleased to announce that we’ve received cross-signatures from <a href="https://identrustssl.com/">IdenTrust</a>, which means that our certificates are now trusted by all major browsers. This is a significant milestone since it means that visitors to websites using Let’s Encrypt certificates can enjoy a secure browsing experience with no special configuration required.</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/lets-encrypt-is-trusted/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/git-update-index/">Git 取消跟踪文件和重新跟踪文件</a></h1>
+              <div class="info">
+                <h2>笔记</h2>
+                <time>2015-10-11 00:00</time>
+              </div>
+              
+              <p>有时候需要让 git 忽略某个文件的更新，比如<em>配置文件</em>。配置文件里经常有各种涉及隐私的东西，一般只提交一个模板上去，如果把自己的配置提交上去了……被盗用的例子也不少了（比如<a href="http://www.devfactor.net/2014/12/30/2375-amazon-mistake/">这个</a>、<a href="http://wptavern.com/ryan-hellyers-aws-nightmare-leaked-access-keys-result-in-a-6000-bill-overnight">这个</a>和<a href="http://www.wooyun.org/bugs/wooyun-2010-061718">这个</a>）</p>
+<p>解决方法也很简单，让 git 忽略这个文件的变更就行了</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/git-update-index/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+        
+        <nav>
+          
+          <a href="https://iovxw.net/n/4/">PREV</a>
+          
+          
+          <a href="https://iovxw.net/n/6/">NEXT</a>
+          
+        </nav>
+        
+      
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

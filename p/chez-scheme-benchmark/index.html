@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="不用自己跑，省了很多事">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>Chez Scheme 性能测试 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,17 +316,17 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
@@ -346,8 +360,7 @@
 <div><h4>total-accumulated-runtime</h4><svg class="chart" width="420" height="160"><g transform="translate(0,0)"><rect width="18.347430058555627" height="19" style="fill:#00a0dc"/><text x="23.347430058555627" y="9.5" dy=".35em">chez-9.4 (94.)</text></g><g transform="translate(0,20)"><rect width="45.86857514638907" height="19" style="fill:#8d6cab"/><text x="50.86857514638907" y="9.5" dy=".35em">larceny (235.)</text></g><g transform="translate(0,40)"><rect width="146.19388418998048" height="19" style="fill:#e68523"/><text x="151.19388418998048" y="9.5" dy=".35em">petite-9.4 (749.)</text></g><g transform="translate(0,60)"><rect width="146.38906961613534" height="19" style="fill:#00aeb3"/><text x="151.38906961613534" y="9.5" dy=".35em">racket (750.)</text></g><g transform="translate(0,80)"><rect width="173.5198438516591" height="19" style="fill:#dd5143"/><text x="178.5198438516591" y="9.5" dy=".35em">petite-8.4 (889.)</text></g><g transform="translate(0,100)"><rect width="174.30058555627846" height="19" style="fill:#edb220"/><text x="179.30058555627846" y="9.5" dy=".35em">vicare (893.)</text></g><g transform="translate(0,120)"><rect width="300.0" height="19" style="fill:#dc4b89"/><text x="305.0" y="9.5" dy=".35em">ypsilon (1537.)</text></g></svg></div>
 <div><h4>times-faster-than-any-other</h4><svg class="chart" width="420" height="160"><g transform="translate(0,0)"><rect width="14.285714285714286" height="19" style="fill:#dd5143"/><text x="19.285714285714285" y="9.5" dy=".35em">petite-8.4 (2)</text></g><g transform="translate(0,20)"><rect width="21.428571428571427" height="19" style="fill:#8d6cab"/><text x="26.428571428571427" y="9.5" dy=".35em">larceny (3)</text></g><g transform="translate(0,40)"><rect width="21.428571428571427" height="19" style="fill:#00aeb3"/><text x="26.428571428571427" y="9.5" dy=".35em">racket (3)</text></g><g transform="translate(0,60)"><rect width="21.428571428571427" height="19" style="fill:#edb220"/><text x="26.428571428571427" y="9.5" dy=".35em">vicare (3)</text></g><g transform="translate(0,80)"><rect width="28.571428571428573" height="19" style="fill:#e68523"/><text x="33.57142857142857" y="9.5" dy=".35em">petite-9.4 (4)</text></g><g transform="translate(0,100)"><rect width="78.57142857142857" height="19" style="fill:#dc4b89"/><text x="83.57142857142857" y="9.5" dy=".35em">ypsilon (11)</text></g><g transform="translate(0,120)"><rect width="300.0" height="19" style="fill:#00a0dc"/><text x="305.0" y="9.5" dy=".35em">chez-9.4 (42)</text></g></svg></div>
 </div>
-<!-- more -->
-<div class="result">
+<span id="continue-reading"></span><div class="result">
 <div><h4>ack</h4><svg class="chart" width="420" height="160"><g transform="translate(0,0)"><rect width="8.819832402234637" height="19" style="fill:#00a0dc"/><text x="13.819832402234637" y="9.5" dy=".35em">chez-9.4 (1.263)</text></g><g transform="translate(0,20)"><rect width="16.222067039106143" height="19" style="fill:#8d6cab"/><text x="21.222067039106143" y="9.5" dy=".35em">larceny (2.323)</text></g><g transform="translate(0,40)"><rect width="16.298882681564244" height="19" style="fill:#edb220"/><text x="21.298882681564244" y="9.5" dy=".35em">vicare (2.334)</text></g><g transform="translate(0,60)"><rect width="21.766759776536315" height="19" style="fill:#00aeb3"/><text x="26.766759776536315" y="9.5" dy=".35em">racket (3.117)</text></g><g transform="translate(0,80)"><rect width="122.17877094972067" height="19" style="fill:#e68523"/><text x="127.17877094972067" y="9.5" dy=".35em">petite-9.4 (17.496)</text></g><g transform="translate(0,100)"><rect width="139.713687150838" height="19" style="fill:#dd5143"/><text x="144.713687150838" y="9.5" dy=".35em">petite-8.4 (20.007)</text></g><g transform="translate(0,120)"><rect width="300.0" height="19" style="fill:#dc4b89"/><text x="305.0" y="9.5" dy=".35em">ypsilon (42.96)</text></g></svg></div>
 <div><h4>array1</h4><svg class="chart" width="420" height="160"><g transform="translate(0,0)"><rect width="4.977385548814119" height="19" style="fill:#8d6cab"/><text x="9.97738554881412" y="9.5" dy=".35em">larceny (.752)</text></g><g transform="translate(0,20)"><rect width="6.082735797021511" height="19" style="fill:#00a0dc"/><text x="11.08273579702151" y="9.5" dy=".35em">chez-9.4 (.919)</text></g><g transform="translate(0,40)"><rect width="9.200220628792056" height="19" style="fill:#00aeb3"/><text x="14.200220628792056" y="9.5" dy=".35em">racket (1.39)</text></g><g transform="translate(0,60)"><rect width="43.99558742415885" height="19" style="fill:#e68523"/><text x="48.99558742415885" y="9.5" dy=".35em">petite-9.4 (6.647)</text></g><g transform="translate(0,80)"><rect width="45.27302813017098" height="19" style="fill:#dc4b89"/><text x="50.27302813017098" y="9.5" dy=".35em">ypsilon (6.84)</text></g><g transform="translate(0,100)"><rect width="46.841698841698836" height="19" style="fill:#dd5143"/><text x="51.841698841698836" y="9.5" dy=".35em">petite-8.4 (7.077)</text></g><g transform="translate(0,120)"><rect width="300.0" height="19" style="fill:#edb220"/><text x="305.0" y="9.5" dy=".35em">vicare (45.325)</text></g></svg></div>
 <div><h4>bibfreq</h4><svg class="chart" width="420" height="160"><g transform="translate(0,0)"><rect width="63.44925479063165" height="19" style="fill:#00a0dc"/><text x="68.44925479063164" y="9.5" dy=".35em">chez-9.4 (.298)</text></g><g transform="translate(0,20)"><rect width="103.05180979418026" height="19" style="fill:#e68523"/><text x="108.05180979418026" y="9.5" dy=".35em">petite-9.4 (.484)</text></g><g transform="translate(0,40)"><rect width="107.31014904187367" height="19" style="fill:#dd5143"/><text x="112.31014904187367" y="9.5" dy=".35em">petite-8.4 (.504)</text></g><g transform="translate(0,60)"><rect width="171.39815471965935" height="19" style="fill:#8d6cab"/><text x="176.39815471965935" y="9.5" dy=".35em">larceny (.805)</text></g><g transform="translate(0,80)"><rect width="202.48403122782113" height="19" style="fill:#00aeb3"/><text x="207.48403122782113" y="9.5" dy=".35em">racket (.951)</text></g><g transform="translate(0,100)"><rect width="248.47409510290984" height="19" style="fill:#dc4b89"/><text x="253.47409510290984" y="9.5" dy=".35em">ypsilon (1.167)</text></g><g transform="translate(0,120)"><rect width="300.0" height="19" style="fill:#edb220"/><text x="305.0" y="9.5" dy=".35em">vicare (1.409)</text></g></svg></div>
@@ -421,6 +434,9 @@
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/chez-scheme-benchmark/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';

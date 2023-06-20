@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="同样适用于第三方类 Pixel ROM">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
-    <title>凯华 Box 轴拆解 - iovxw</title>
+    <title>强制启用 Pixel Phone 的通话录音 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,69 +316,74 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
 
       
 <article>
-    <h1>凯华 Box 轴拆解</h1>
-    <div class="info"><h2>还可以</h2><time>2017-09-21 20:31</time></div>
-    <p>键盘的 <code>A</code> 键坏了, 可能是我在 Spacemacs 里后插入用的太多的原因, 总之决定自己换轴</p>
-<p>挑轴的时候发现卖家还卖一种叫 Box 轴的轴体, 是凯华今年一月发布, 自主研发, 主打寿命长和防水性的新系列 (这介绍真长</p>
-<p>官网上他们自己说的是挺好</p>
-<p>可是只有白(qīng)轴的图解, 其他轴则是一笔带过</p>
-<p>想着反正不包邮, 不如顺便多买点, 就在买替换用轴的同时各买了一种 Box 轴</p>
-<!-- more -->
+    <h1>强制启用 Pixel Phone 的通话录音</h1>
+    <div class="info"><h2>同样适用于第三方类 Pixel ROM</h2><time>2021-09-30 00:25</time></div>
+    <p>Pixel 自带的电话 App 是支持录音以及自动录音的</p>
+<p>但由于法律原因, 录音只在部分国家可用, 自动录音更是只有印度能用</p>
+<p>虽然中国并没有相关法律问题, 但很明显我们并不能对 Google 有这方面的期待</p>
+<p>还是得自己动手, 丰衣足食</p>
+<span id="continue-reading"></span>
 <hr />
-<p><img src="0.jpg" alt="0.jpg" /></p>
-<p>拍照水平就不要吐槽了, 下面四个是准备拿来给键盘换的 Cherry 青轴</p>
-<p>拍的时候还忘了关闪光灯, 后面的影子是猫, 在我拍完后一爪子拍走了所有 Box 轴</p>
+<h2 id="mian-root-fang-an">免 Root 方案</h2>
+<p>直接安装 <a href="https://f-droid.org/en/packages/com.github.axet.callrecorder/">https://f-droid.org/en/packages/com.github.axet.callrecorder/</a></p>
+<p><strong>优点:</strong> 不用 Root; 开源</p>
+<p><strong>缺点:</strong> App 需要常驻后台, 并且通知栏会有无法隐藏的图标, 以及一定概率下根本不能录音</p>
+<p>但毕竟都用 Pixel 了, 谁不解锁 root 呢, 所以另一种方案是:</p>
+<h2 id="xiu-gai-phone-apk">修改 Phone APK</h2>
+<p>在 XDA 上有很多魔改版的 APK, 替换掉默认的 Phone 之后在设置里就会出现录音选项, 比如<a href="https://forum.xda-developers.com/t/mod-root-enable-call-recording-on-google-phone.4278659/">这个</a></p>
+<p>但缺点同样很明显: Phone 这个 App 没得自动更新了</p>
+<p>魔改版自然是自己签名的, Google Play 不会对它进行更新, 需要自己去 XDA 重新下载, 并且很难保证作者不会弃坑, 当前版本可能就是最后一个版本</p>
+<p>好在我们还有:</p>
+<h2 id="zui-zhong-fang-an">最终方案</h2>
+<p>既然有些国家可以用录音, 那肯定哪里有个判断, 只要满足这个判断让它认为我们在对应国家就好了</p>
+<p>然后在搜索过程中, 我发现了<a href="https://forum.xda-developers.com/t/guide-enable-automatic-call-recording-in-stock-dialer-app-root-needed.4321719/">这个帖子</a> (<a href="http://web.archive.org/web/20210929170521/https://forum.xda-developers.com/t/guide-enable-automatic-call-recording-in-stock-dialer-app-root-needed.4321719/">备份</a>)</p>
+<p><img src="https://iovxw.net/p/enable-call-record-on-pixel/0.gif" alt="" /></p>
+<p>省事了, Google 直接内置了开关来控制每个特性, 只需要往数据库里插个值就可以开启了</p>
+<p>并且 <a href="https://github.com/jacopotediosi/GoogleDialerMod">@jacopotediosi 写了个 App</a>, 可以一键开关以及自动替换 <code>{starting,ending}_voice-*.wav</code> (录音提示音, 替换为静音)</p>
+<p>开启之后就可以在设置内调整录音选项了:</p>
+<p><img src="https://iovxw.net/p/enable-call-record-on-pixel/1.png" alt="" /></p>
 <hr />
-<p><img src="1.jpg" alt="1.jpg" /></p>
-<p>白轴(他们非要说这是青轴, 只是白色的而已……), 和官网上给出的结构一样 (废话</p>
-<p>是靠那根横着的弹簧, 他们叫扭簧, 来发声的(我特意侧着拍了轴芯, 可以看见后面有用于拨动扭簧的突起)</p>
-<p>不过我试了试, 这根弹簧并不只管发声, 实际上大部分段落感都来源于它, 如果把它拆掉, 或者挑开, 就基本感觉不到段落感的存在</p>
-<p>而这一部分是暴露在 &quot;Box&quot; 之外, 不知道经历了水和尘之后还能不能保持手感</p>
-<p>声音的话, 是超级大, 从感觉上来讲至少比 Cherry 青轴吵个两三倍, 而且一般的青轴, 是按下去响一声, 抬起来时声音基本没有, 这个白(qīng)轴, 抬起来和按下去的声音一样大, 按一次键能明显的听出响了两声, 要是在人多的地方用怕是会被打死</p>
-<hr />
-<p><img src="2.jpg" alt="2.jpg" /></p>
-<p>茶轴, 这个轴比较特殊</p>
-<p>和其他三个轴比, 只有它的 &quot;小绿点&quot; 不是绿的</p>
-<p>原因, 据我猜测是因为它的段落感实现不是靠和白轴一样的扭簧, 是普通的在轴芯接触部分增加突起实现的(如上图)</p>
-<p>而这个突起可能会导致轴芯或 &quot;小绿点&quot; 磨损的更快, 就换成了和轴芯一样的材质</p>
-<p>但就算这样估计茶轴也是这些轴里手感损失最快的</p>
-<p>这张照片里我把 &quot;Box&quot; 的盖掀开了</p>
-<p>能看见 &quot;小绿点&quot; 旁边有一圈凹槽, 里面填有润滑油, 大概是用于防止水进入 &quot;Box&quot; 中</p>
-<p>动片与 MX 轴不同, 变为横着的, 弯折处与触点间距离变长, 每次按键可以更小幅度的弯折动片, 增加寿命</p>
-<p>他们官网的动画展示了触发方式:</p>
-<video controls="controls" poster="http://www.kailh.com/img/video1.jpg" src="http://www.kailh.com/video/kaihua.mp4" width="100%">Your browser does not support the video tag</video>
-<hr />
-<p>说到防水, Box 轴的轴芯十字部分都被围了一圈, 这一圈是为了当按键按下时也不会有大量的水进入轴体:</p>
-<p><img src="3.jpg" alt="3.jpg" /></p>
-<p>在底部的轴柱中间有一个洞让水排出去:</p>
-<p><img src="4.jpg" alt="4.jpg" /></p>
-<p>然后黑轴和红轴都很普通, 轴芯都一样, 没啥好讲的就不单独拍了</p>
-<p>最后来个合影, 可以看出每个轴芯的差别:</p>
-<p><img src="5.jpg" alt="5.jpg" /></p>
-<hr />
-<h2 id="hou-ji">后记</h2>
-<p>就在我准备把键盘拆开换轴的时候, <code>A</code> 键又好使了……嗯……</p>
+<h2 id="qi-ta">其他</h2>
+<p>GoogleDialerMod 还列出了 Phone 的所有 flag, 所以我们还可以开关其他一些特性:</p>
+<p><img src="https://iovxw.net/p/enable-call-record-on-pixel/0.png" alt="" /></p>
+<p>其中</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>G__enable_atlas
+</span></code></pre>
+<p>可以启用 Hold for Me, 功能就是在电话人工客服排队时帮你排队并且提醒:</p>
+<p><img src="https://iovxw.net/p/enable-call-record-on-pixel/2.png" alt="" /></p>
+<p>而打开</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>G__speak_easy_enabled
+</span><span>G__enable_speakeasy_details
+</span><span>G__speak_easy_bypass_locale_check
+</span><span>G__speak_easy_enable_listen_in_button 
+</span></code></pre>
+<p>这些可以启用 Call Screen, 让 Google Assistant 替你接听电话, 当然语言支持有限, 非英语环境下没啥用</p>
+<p><img src="https://iovxw.net/p/enable-call-record-on-pixel/3.png" alt="" /></p>
+<p>但至少模型是本地的, 使用不需要联网, 真希望国内那些厂商学习一下</p>
 
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/enable-call-record-on-pixel/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';

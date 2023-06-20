@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="笔记备用">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>在 Merlin 上配置 rTorrrent 需要注意的 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,17 +316,17 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
@@ -324,7 +338,7 @@
     <p><a href="https://iovxw.net/p/ac56u.html">之前买的 RT-AC56U</a> 一直没放什么东西，空转到现在</p>
 <p>今天终于有了需求，拿它来挂 BT</p>
 <p>这篇文章作为笔记，记一下遇到的坑，以后备用</p>
-<!-- more -->
+<span id="continue-reading"></span>
 <hr />
 <h2 id="an-zhuang">安装</h2>
 <p>Merlin 支持 Entware，按照 <a href="https://github.com/RMerl/asuswrt-merlin/wiki/Entware">Wiki</a> 装好</p>
@@ -335,19 +349,17 @@
 <hr />
 <h2 id="pei-zhi">配置</h2>
 <p>我的 Entware 是装在 U盘 里的，下载文件夹设置在了移动硬盘，为了 U盘 寿命考虑，需要编辑 <em>/opt/etc/rtorrent/rtorrent.conf</em> 将 session 和 watchdir 文件夹也改在移动硬盘，这两个在安装时修改下载文件夹是不会一块跟着变的</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">session = /mnt/sdb5/download/session
-</span><span style="background-color:#282828;color:#fdf4c1aa;">schedule = watch_directory,5,5,load_start=/mnt/sdb5/download/watchdir/*.torrent
-</span></pre>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>session = /mnt/sdb5/download/session
+</span><span>schedule = watch_directory,5,5,load_start=/mnt/sdb5/download/watchdir/*.torrent
+</span></code></pre>
 <p>session 文件夹是用来放各种临时信息，比如 DHT 的节点之类</p>
 <p>watchdir 里的 torrent 文件会自动添加到新任务，当然本质是一个定时器定时检测指定路径而已</p>
 <p>修改之前记得先 <code>/opt/etc/init.d/S85rtorrent stop</code></p>
 <h3 id="duan-kou">端口</h3>
 <p>在安装完成的时候会提示开启端口，虽然不开也能运行，但是将很难找到 peer</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">iptables -I INPUT -p tcp --destination-port 51411 -j ACCEPT
-</span><span style="background-color:#282828;color:#fdf4c1aa;">iptables -I INPUT -p udp --destination-port 51412 -j ACCEPT
-</span></pre>
+<pre data-lang="shell" style="background-color:#282828;color:#fdf4c1aa;" class="language-shell "><code class="language-shell" data-lang="shell"><span>iptables -I INPUT -p tcp --destination-port 51411 -j ACCEPT
+</span><span>iptables -I INPUT -p udp --destination-port 51412 -j ACCEPT
+</span></code></pre>
 <p>51411 是 <em>port_range</em> 的默认值，这是一个端口范围，全闭区间，用于与其他 peer 的连接</p>
 <p>51412 是 <em>dht_port</em> 的默认值，字面意思</p>
 <p>为了下次启动不需要手动再开端口，在 <em>/jffs/scripts/firewall-start</em> 里加入上面两条</p>
@@ -357,20 +369,18 @@
 <p>默认 <code>dht = auto</code>，是指只有当种子的 tracker 里有设置 dht 的时候才会启用</p>
 <p>不过众所周知的原因在国内 tracker 服务器并不是那么好访问，这里直接设置为 <code>on</code> 强制启用就行</p>
 <p>DHT 在启动的时候需要先连接几个 bootstrap 节点才能初始化，配置里加入如下几行</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">schedule2 = dht_node0,30,0,dht.add_node=dht.transmissionbt.com
-</span><span style="background-color:#282828;color:#fdf4c1aa;">schedule2 = dht_node1,30,0,dht.add_node=router.bittorrent.com
-</span><span style="background-color:#282828;color:#fdf4c1aa;">schedule2 = dht_node2,30,0,dht.add_node=router.utorrent.com
-</span></pre>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>schedule2 = dht_node0,30,0,dht.add_node=dht.transmissionbt.com
+</span><span>schedule2 = dht_node1,30,0,dht.add_node=router.bittorrent.com
+</span><span>schedule2 = dht_node2,30,0,dht.add_node=router.utorrent.com
+</span></code></pre>
 <p>用 schedule 是因为需要延时一下，等待 DHT 启动完成，详见 <a href="https://github.com/rakshasa/rtorrent/issues/383">rtorrent#383</a></p>
 <h3 id="kai-ji-qi-dong">开机启动</h3>
 <p>启动的时候第一次肯定会失败，因为分区还没挂载</p>
 <p>在 <em>/jffs/scripts/post-mount</em> 里加入</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fabd2f;">[ </span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">1</span><span style="background-color:#282828;color:#b8bb26;">&quot; </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&quot;/tmp/mnt/sdb5&quot; </span><span style="background-color:#282828;color:#fabd2f;">] </span><span style="background-color:#282828;color:#fe8019;">; </span><span style="background-color:#282828;color:#fa5c4b;">then
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1;">/opt/etc/init.d/S85rtorrent start
-</span><span style="background-color:#282828;color:#fa5c4b;">fi
-</span></pre>
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fa5c4b;">if </span><span style="color:#fabd2f;">[ </span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">1</span><span style="color:#b8bb26;">&quot; </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;/tmp/mnt/sdb5&quot; </span><span style="color:#fabd2f;">] </span><span style="color:#fe8019;">; </span><span style="color:#fa5c4b;">then
+</span><span>  </span><span style="color:#fdf4c1;">/opt/etc/init.d/S85rtorrent start
+</span><span style="color:#fa5c4b;">fi
+</span></code></pre>
 <p><em>/tmp/mnt/sdb5</em> 替换为你的下载文件夹的挂载点</p>
 <p>就能在分区挂载后再次尝试启动了</p>
 <hr />
@@ -387,6 +397,9 @@
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/rtorrent-on-merin/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';

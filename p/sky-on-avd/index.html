@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="有钱还是直接买个 iPad 吧">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://iovxw.net">
+
+    
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>在 Android 模拟器上运行光遇 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
+
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    :not(pre) > code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 0.5em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>在 Android 模拟器上运行光遇</h1>
+    <div class="info"><h2>有钱还是直接买个 iPad 吧</h2><time>2021-10-04 00:16</time></div>
+    <p><img src="https://iovxw.net/p/sky-on-avd/screenshot0.png" alt="" /></p>
+<p><em>Sky: Children of The Light</em> 这游戏, 可以说是对高级用户十分不友好了</p>
+<p>在 Android 上, 它只提供 arm64-v8a 的 binary, 直接拒绝高性能的 x86 平板以及模拟器</p>
+<p>它还不允许你自己调高画质, 有一个画质上限, 由厂商根据机型来决定你最高能跑什么画质</p>
+<p>而这个机型列表还不够全, 让你只能拿着顶级的 SoC 跑着 480p 30 帧的画面, 那云都是一团一团的马赛克</p>
+<p>对于一个靠画面的步行模拟游戏来说, 这不能忍</p>
+<p>所以这两天我折腾了一下在 PC 上运行它, 争取能在客厅躺在沙发上用电视玩最高画质</p>
+<span id="continue-reading"></span>
+<hr />
+<h2 id="yun-xing-huan-jing-de-xuan-ze">运行环境的选择</h2>
+<p>光遇要求 Android 10 以上的 arm64 环境</p>
+<p>这直接劝退了一大波游戏专用 Android 模拟器, 因为他们都跑着 Android 9 甚至 Android 8</p>
+<p>甚至 Android-x86, 都还卡在 Android 8.1 上</p>
+<p>不过理论上, 只需要一个 x86_64/arm64 的 Android 10 即可, 所以如果你已经有这种环境, 可以跳过下面的安装部分了</p>
+<p>为什么 x86 可以? 感谢 Native Bridge, 在新版 Android 上我们可以无需任何配置直接在 x86 上运行 arm 的 binary</p>
+<p>这里我使用的是 Android Emulator, 配置过程如下:</p>
+<h3 id="an-zhuang-android-emulator">安装 Android Emulator</h3>
+<p>不管是直接用 Android Studio 自带的, 还是从软件源装, 总之装上它</p>
+<p>版本需要 <code>&gt; 30.0</code> 不然 arm 翻译不好使</p>
+<h3 id="chuang-jian-avd">创建 AVD</h3>
+<p>创建一个 AVD, 机器型号随便选一个带 Google Play 认证的</p>
+<p>然后注意, 镜像要选 Android 11 x86_64 Google Play 版本</p>
+<p>Android 10 我没测试过, 总之选新但又不是那么新的</p>
+<p>一定要确认 ABI 是 _64, Android Studio 里默认给你的可能是 32 位, 跑不了 arm64</p>
+<p>还有就是要 Google Play 版, 不要默认的 Google API 版</p>
+<p>Google Play 版因为认证, 会限制你修改模拟器硬件配置, 但我们可以跳过它直接修改配置文件</p>
+<p>而用 Google API 版的话, 需要手动安装 GMS 框架, 比改两行配置麻烦得多</p>
+<h3 id="xiu-gai-avd-pei-zhi">修改 AVD 配置</h3>
+<p>打开 <code>~/.android/avd/*.avd/config.ini</code>, <code>*</code> 是你 AVD 的名字</p>
+<p>确保如下几项设置</p>
+<pre data-lang="ini" style="background-color:#282828;color:#fdf4c1aa;" class="language-ini "><code class="language-ini" data-lang="ini"><span style="color:#fdf4c1;">disk</span><span style="color:#fe8019;">.</span><span>dataPartition</span><span style="color:#fe8019;">.</span><span>size </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">10G </span><span style="font-style:italic;color:#928374;"># 一般 5G 够用, 但考虑到要存多份游戏 apk, 大点较好
+</span><span style="color:#fdf4c1;">hw</span><span style="color:#fe8019;">.</span><span>gpu</span><span style="color:#fe8019;">.</span><span>enabled </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">yes
+</span><span style="color:#fdf4c1;">hw</span><span style="color:#fe8019;">.</span><span>gpu</span><span style="color:#fe8019;">.</span><span>mode </span><span style="color:#fe8019;">=</span><span> host </span><span style="font-style:italic;color:#928374;"># 使用硬件 gpu
+</span><span style="color:#fdf4c1;">hw</span><span style="color:#fe8019;">.</span><span>ramSize </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">16384 </span><span style="font-style:italic;color:#928374;"># 内存我直接上了 16G, 8G 好像也够用
+</span><span style="color:#fdf4c1;">hw</span><span style="color:#fe8019;">.</span><span>cpu</span><span style="color:#fe8019;">.</span><span>ncore </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">6 </span><span style="font-style:italic;color:#928374;"># CPU 核心数, 多给吧
+</span></code></pre>
+<h3 id="gao-qing-chu-emulator-de-wei-zhi">搞清楚 emulator 的位置</h3>
+<p>根据你的安装方式, 确定你可以从终端运行 AVD emulator, 因为后面需要手动加参数</p>
+<p>Android Studio 安装的默认位置是 <code>~/Android/Sdk/tools/emulator</code></p>
+<p>然后就可以开始下一步, 配置环境了</p>
+<hr />
+<h2 id="yun-xing-huan-jing-de-pei-zhi">运行环境的配置</h2>
+<h3 id="root">ROOT</h3>
+<p>对, 需要 Root, 最好是 Magisk, 这样就可以直接使用下面我写的 Magisk Module 了</p>
+<p>对于 AVD, 请参考 <a href="https://github.com/shakalaca/MagiskOnEmulator">https://github.com/shakalaca/MagiskOnEmulator</a></p>
+<p>这里有一个预先 patch 好的 ramdisk.img <a href="https://github.com/iovxw/BINARIES/releases/tag/ramdisk-avd30">https://github.com/iovxw/BINARIES/releases/tag/ramdisk-avd30</a></p>
+<p>对应的是 AVD x86_64 API 30 with Google Play, Magisk 23.0</p>
+<p>如果是相同版本的话可以直接拿去替换</p>
+<h3 id="qi-yong-gles-3-1">启用 GLES 3.1</h3>
+<p>如果你的显卡及驱动够新, 应该是不用这一步的</p>
+<p>但在某些情况下, 哪怕够新了模拟器也不给你 3.1, 然后运行游戏就会出现以下画面:</p>
+<p><img src="https://iovxw.net/p/sky-on-avd/game-req.jpg" alt="" /></p>
+<p>通过 <code>glxinfo | grep 'OpenGL ES'</code> 查看当前显卡及驱动的 GLES 版本:</p>
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">$ glxinfo </span><span style="color:#fe8019;">| </span><span style="color:#fdf4c1;">grep </span><span style="color:#b8bb26;">&#39;OpenGL ES&#39;
+</span></code></pre>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>OpenGL ES profile version string: OpenGL ES 3.2 Mesa 21.2.3
+</span><span>OpenGL ES profile shading language version string: OpenGL ES GLSL ES 3.20
+</span><span>OpenGL ES profile extensions:
+</span></code></pre>
+<p>我的显卡是 UHD 630, Intel 用了好几代的核心显卡, 是支持 GLES 3.2 的</p>
+<p>看一下模拟器现在的 GLES 版本:</p>
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">$ adb shell getprop ro.opengles.version
+</span></code></pre>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>196608
+</span></code></pre>
+<p>查一下文档, 版本号对应如下:</p>
+<pre data-lang="ini" style="background-color:#282828;color:#fdf4c1aa;" class="language-ini "><code class="language-ini" data-lang="ini"><span style="color:#fdf4c1;">ro</span><span style="color:#fe8019;">.</span><span>opengles</span><span style="color:#fe8019;">.</span><span>version</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">65535 </span><span style="font-style:italic;color:#928374;"># OpenGL ES 1.0
+</span><span style="color:#fdf4c1;">ro</span><span style="color:#fe8019;">.</span><span>opengles</span><span style="color:#fe8019;">.</span><span>version</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">65536 </span><span style="font-style:italic;color:#928374;"># OpenGL ES 1.1
+</span><span style="color:#fdf4c1;">ro</span><span style="color:#fe8019;">.</span><span>opengles</span><span style="color:#fe8019;">.</span><span>version</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">131072 </span><span style="font-style:italic;color:#928374;"># OpenGL ES 2.0
+</span><span style="color:#fdf4c1;">ro</span><span style="color:#fe8019;">.</span><span>opengles</span><span style="color:#fe8019;">.</span><span>version</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">196608 </span><span style="font-style:italic;color:#928374;"># OpenGL ES 3.0
+</span><span style="color:#fdf4c1;">ro</span><span style="color:#fe8019;">.</span><span>opengles</span><span style="color:#fe8019;">.</span><span>version</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">196609 </span><span style="font-style:italic;color:#928374;"># OpenGL ES 3.1
+</span><span style="color:#fdf4c1;">ro</span><span style="color:#fe8019;">.</span><span>opengles</span><span style="color:#fe8019;">.</span><span>version</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">196610 </span><span style="font-style:italic;color:#928374;"># OpenGL ES 3.2
+</span></code></pre>
+<p>现在模拟器的是 3.0 版本, 而 host 支持的是 3.2</p>
+<p>有文档说要模拟 GLES 3.0, 需要将显卡 GLES 的升级到 &gt;= 3.2</p>
+<p>但我们要模拟 3.1, 很明显至少不能通过升级 host 的 GLES 版本达成, 因为现在最新的 GLES 版本就是 3.2</p>
+<p>那就只能通过一点点魔法强行启用 3.1 了, 反正不会爆炸</p>
+<blockquote>
+<p>BTW: 如果你的 GLES 版本甚至没到 3, 而你很确定你的显卡支持它</p>
+<p>就去 Android Emulator 的 system-image 目录, 找到对应 image 的 advancedFeatures.ini</p>
+<p>确认 <code>GLESDynamicVersion = on</code> 这一项是存在的, 如果没有就加上</p>
+</blockquote>
+<blockquote>
+<p>BTW2: 如果按照上面的安装, advancedFeatures.ini 的位置是
+<code>~/Android/Sdk/system-images/android-30/google_apis_playstore/x86_64</code></p>
+</blockquote>
+<p>启用的方法很简单, 把 <code>ro.opengles.version</code> 设为 <code>196609</code> 就行了</p>
+<p>但注意必须在开机初始化阶段就设置, 不然没用</p>
+<p>这里可以写个 app 检测 (顺带一提用 CPU-Z 检测到的版本没用, 它是直接读 props 的)</p>
+<pre data-lang="java" style="background-color:#282828;color:#fdf4c1aa;" class="language-java "><code class="language-java" data-lang="java"><span style="color:#8ec07c;">ActivityManager</span><span> activityManager </span><span style="color:#fe8019;">= </span><span>(</span><span style="color:#8ec07c;">ActivityManager</span><span>) </span><span style="color:#fdf4c1;">getSystemService(</span><span style="color:#8ec07c;">Context</span><span style="color:#fdf4c1;">.ACTIVITY_SERVICE)</span><span>;
+</span><span style="color:#8ec07c;">ConfigurationInfo</span><span> configurationInfo </span><span style="color:#fe8019;">=</span><span> activityManager.</span><span style="color:#fdf4c1;">getDeviceConfigurationInfo()</span><span>;
+</span><span style="color:#8ec07c;">System</span><span>.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#8ec07c;">Double</span><span style="color:#fdf4c1;">.parseDouble(configurationInfo.getGlEsVersion()))</span><span>;
+</span></code></pre>
+<p>如果不会设置也不用担心, 后面我写了个 Magisk 模块, 直接刷上就可以了</p>
+<h3 id="qi-yong-aep">启用 AEP</h3>
+<p>光有 GLES 3.1 还不够, 你看它图里还要求 Extension Pack</p>
+<!--
+public boolean supportsOpenGLESExtensionPack() {
+    return getPackageManager().hasSystemFeature("android.hardware.opengles.aep");
+}
+-->
+<p>那我们就给它 Extension Pack, Android Extension Pack (AEP)</p>
+<p>AVD 的镜像默认是没有启用这个 feature 的, 如果你使用的镜像有, 可以跳过这步</p>
+<p>创建 <code>/vendor/etc/permissions/android.hardware.opengles.aep.xml</code></p>
+<p>内容为:</p>
+<pre data-lang="xml" style="background-color:#282828;color:#fdf4c1aa;" class="language-xml "><code class="language-xml" data-lang="xml"><span style="color:#83a598;">&lt;?</span><span style="font-weight:bold;color:#8ec07c;">xml </span><span style="color:#8ec07c;">version=</span><span style="color:#b8bb26;">&quot;1.0&quot; </span><span style="color:#8ec07c;">encoding=</span><span style="color:#b8bb26;">&quot;utf-8&quot;</span><span style="color:#83a598;">?&gt;
+</span><span style="font-style:italic;color:#928374;">&lt;!-- Copyright (C) 2014 The Android Open Source Project
+</span><span style="font-style:italic;color:#928374;">
+</span><span style="font-style:italic;color:#928374;">     Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+</span><span style="font-style:italic;color:#928374;">     you may not use this file except in compliance with the License.
+</span><span style="font-style:italic;color:#928374;">     You may obtain a copy of the License at
+</span><span style="font-style:italic;color:#928374;">
+</span><span style="font-style:italic;color:#928374;">          http://www.apache.org/licenses/LICENSE-2.0
+</span><span style="font-style:italic;color:#928374;">
+</span><span style="font-style:italic;color:#928374;">     Unless required by applicable law or agreed to in writing, software
+</span><span style="font-style:italic;color:#928374;">     distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+</span><span style="font-style:italic;color:#928374;">     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+</span><span style="font-style:italic;color:#928374;">     See the License for the specific language governing permissions and
+</span><span style="font-style:italic;color:#928374;">     limitations under the License.
+</span><span style="font-style:italic;color:#928374;">--&gt;
+</span><span>
+</span><span style="font-style:italic;color:#928374;">&lt;!-- This is the standard feature indicating that the device supports the
+</span><span style="font-style:italic;color:#928374;">     Android Extension Pack features. --&gt;
+</span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">permissions</span><span style="color:#83a598;">&gt;
+</span><span>    </span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">feature </span><span style="color:#8ec07c;">name=</span><span style="color:#b8bb26;">&quot;android.hardware.opengles.aep&quot; </span><span style="color:#83a598;">/&gt;
+</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">permissions</span><span style="color:#83a598;">&gt;
+</span></code></pre>
+<p>这一步我和上一步一起写了个 Magisk 模块完成, 参见: <a href="https://github.com/iovxw/eanble-gles3_1_and_aep/releases/latest">https://github.com/iovxw/eanble-gles3_1_and_aep/releases/latest</a></p>
+<h3 id="an-zhuang-you-xi">安装游戏</h3>
+<p>现在可以安装游戏了, 但不能直接从 Google Play 装, x86 设备会提示不兼容 (虽然确实可以运行)</p>
+<p>但毕竟条条大路, 可以从其他设备下载后提取, 或者 TapTap 国际版是可以直接安装的</p>
+<p><a href="https://www.taptap.io/app/82226">https://www.taptap.io/app/82226</a></p>
+<p>注意 TapTap 国际版屏蔽了大陆 IP</p>
+<p>然后<a href="https://www.taptap.io/app/82226">这里</a>我上传了一份目前最新版本的 apk, 不保证更新</p>
+<p>如果你想要分享, TapTap apk 的储存位置在 <code>/data/data/com.taptap.global/files/taptap/tmp</code></p>
+<p>安装到最后时可能会出错, 记得检查你的磁盘空间是否够用</p>
+<p>如果想知道具体的出错原因, 进 <code>adb shell</code> 用 <code>pm install</code> 安装 apk</p>
+<h3 id="qi-dong-you-xi">启动游戏</h3>
+<p>可能会崩, 多来几次. 确保内存什么的没满</p>
+<p>一般崩掉的原因是 main loop 过长时间无响应, 换个更强的机器可能解决问题</p>
+<p>作为参考我的机器是 Intel i7 8700 + SM961, 性能主要就是吃这俩</p>
+<p>我这 CPU 主频够用但是 SSD 看起来没手机加载快, 可能需要换个硬盘虚拟化方式</p>
+<p>不过重开个四五次大概率就可以了, 让缓存什么的准备好</p>
+<p>这时游戏里的画面等级是最低的, 全是马赛克</p>
+<p>并且最高只能点开两个闪电, 点闪电的时候可能会崩, 是正常现象, 下次启动画面就已经修改过了</p>
+<p>但这里我们不需要手动点闪电, 直接进入下一步:</p>
+<h3 id="jie-suo-hua-zhi-she-zhi">解锁画质设置</h3>
+<!--
+如前所述光遇有机型白名单, 所以要把模拟器伪装成一个高性能机器
+
+安装 [MagiskHidePropsConf](https://github.com/Magisk-Modules-Repo/MagiskHidePropsConf)
+
+重启之后 `adb shell su -c props`, Magisk 可能会弹权限请求, 记得同意
+
+然后我们会得到如下界面:
+
+```
+MagiskHide Props Config v6.1.1
+by Didgeridoohan @ XDA Developers
+
+=====================================
+ Select an option below.
+=====================================
+
+1 - Edit device fingerprint
+2 - Force BASIC key attestation
+3 - Device simulation (disabled)
+4 - Edit MagiskHide props
+5 - Add/edit custom props
+6 - Delete prop values
+7 - Script settings
+8 - Collect logs
+u - Perform module update check
+r - Reset all options/settings
+b - Reboot device
+e - Exit
+
+Some options/settings have been changed.
+Please reboot for them to take affect.
+
+See the module readme or the
+support thread @ XDA for details.
+
+Enter your desired option:
+```
+
+有两个操作要做, `1` 和 `3`
+
+先进 ***Edit device fingerprint***, 选 ``, 它会列出来一大堆品牌和机型
+
+选一个
+-->
+<p>编辑 <code>/data/data/com.tgc.sky.android/shared_prefs/com.tgc.sky.android_preferences.xml</code></p>
+<p>修改下面三项</p>
+<pre data-lang="xml" style="background-color:#282828;color:#fdf4c1aa;" class="language-xml "><code class="language-xml" data-lang="xml"><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">string </span><span style="color:#8ec07c;">name=</span><span style="color:#b8bb26;">&quot;quality_mode_preference&quot;</span><span style="color:#83a598;">&gt;</span><span>Presentation</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">string</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">string </span><span style="color:#8ec07c;">name=</span><span style="color:#b8bb26;">&quot;device_capability_gpu_rating&quot;</span><span style="color:#83a598;">&gt;</span><span>10000000</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">string</span><span style="color:#83a598;">&gt;
+</span><span style="color:#83a598;">&lt;</span><span style="font-weight:bold;color:#8ec07c;">string </span><span style="color:#8ec07c;">name=</span><span style="color:#b8bb26;">&quot;device_capability_hash_id&quot;</span><span style="color:#83a598;">&gt;</span><span>1</span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">string</span><span style="color:#83a598;">&gt;
+</span></code></pre>
+<p><code>device_capability_gpu_rating</code> 随便设置一个足够高的值, 作为参考: iPhone 11 Pro 的值是 <code>60000</code></p>
+<p>启动游戏, 现在我们是满画质了</p>
+<p><img src="https://iovxw.net/p/sky-on-avd/screenshot1.png" alt="" /></p>
+<p><img src="https://iovxw.net/p/sky-on-avd/screenshot2.png" alt="" /></p>
+<p>可以看到地面的纹理细节, 模型精细程度也还可以</p>
+<p>远处的草地仍然没加载, 云也还是马赛克, 但程度差了很多</p>
+<p>分辨率应该是原生, 帧率游戏本身上限是 120</p>
+<h3 id="jie-ru-shou-bing">接入手柄</h3>
+<p>Android Emulator 可以把 USB 设备传给 AVD, 不过我没找到图形化操作方式, 用命令的话参数如下:</p>
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="font-style:italic;color:#928374;"># 模拟器程序路径, 默认是这里
+</span><span style="color:#fdf4c1;">~/Android/Sdk/tools/emulator \
+</span><span style="color:#fdf4c1;">    </span><span style="font-style:italic;color:#928374;"># 改成你的 AVD 的名字
+</span><span>    </span><span style="color:#fdf4c1;">-avd Nexus_5X_API_30 \
+</span><span style="color:#fdf4c1;">    </span><span style="font-style:italic;color:#928374;"># 关掉快照
+</span><span>    </span><span style="color:#fdf4c1;">-no-snapstorage \
+</span><span style="color:#fdf4c1;">    </span><span style="font-style:italic;color:#928374;"># 关掉对内存的 mmap, 能显著减少游戏加载时卡死的概率, 以及省掉硬盘上的内存等大空间
+</span><span>    </span><span style="color:#fdf4c1;">-feature -QuickbootFileBacked \
+</span><span style="color:#fdf4c1;">    </span><span style="font-style:italic;color:#928374;"># 接下来的参数是传给 qemu 的
+</span><span>    </span><span style="color:#fdf4c1;">-qemu \
+</span><span style="color:#fdf4c1;">    </span><span style="font-style:italic;color:#928374;"># 添加一个 USB 2.0 控制器
+</span><span>    </span><span style="color:#fdf4c1;">-device usb-ehci,id=ehci \
+</span><span style="color:#fdf4c1;">    </span><span style="font-style:italic;color:#928374;"># 把手柄传进去
+</span><span>    </span><span style="color:#fdf4c1;">-device usb-host,bus=ehci.0,vendorid=0x045e,productid=0x028e
+</span></code></pre>
+<p>手柄的 <code>vendorid</code> <code>productid</code> 可以用 <code>lsusb</code> 查看</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Bus 001 Device 019: ID 045e:028e Microsoft Corp. Xbox360 Controller
+</span></code></pre>
+<h3 id="dai-xu">待续</h3>
+<p>对 <code>device_capability_gpu_rating</code> 的设置会在游戏重启时被重置, 所以需要每次启动前都修改配置</p>
+<p>但其实完全可以通过模拟设备型号, 来免掉这一步骤</p>
+<p>不过目前需求已经满足了, 有时间再折腾吧</p>
+<p>附: 文末彩蛋</p>
+<p><img src="https://iovxw.net/p/sky-on-avd/screenshot3.png" alt="" /></p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/sky-on-avd/';
+  };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

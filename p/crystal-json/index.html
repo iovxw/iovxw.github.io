@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="没文档">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>Crystal 中自定义数据结构的 json 编解码 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,17 +316,17 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
@@ -323,32 +337,31 @@
     <div class="info"><h2>没文档</h2><time>2015-06-18 00:00</time></div>
     <p><img src="https://t.williamgates.net/image-C4ED_55826551.jpg" alt="图" /></p>
 <p>上图为煎蛋无聊图爬虫里的comment储存结构体，在编码为json时发现需要定义几个东西，如下：</p>
-<!-- more -->
+<span id="continue-reading"></span>
 <p>对于想要编码成json的数据结构，都需要定义一个<code>to_json(io)</code></p>
 <p>然后返回编码后的String，这个方法在嵌套数据结构的时候会被自动调用</p>
 <p>需要注意的是，String必须转码，不然生成的json一团糟。用<code>to_json</code>方法就行（需要先<code>require &quot;json&quot;</code>）</p>
 <p>对于需要解码的，定义一个<code>initialize(pull: JSON::PullParser)</code></p>
 <p>同样也会被自动调用，具体写法就看上面图里的吧</p>
-<p>或者看<a href="https://github.com/Bluek404/jandan-net-spider/blob/0e2777efa6e07da9984a65ebb0a3376e63319881/src/spider/comment.cr">这里</a></p>
+<p>或者看<a href="https://github.com/iovxw/jandan-net-spider/blob/0e2777efa6e07da9984a65ebb0a3376e63319881/src/spider/comment.cr">这里</a></p>
 <hr />
 <p>新语言没文档是硬伤啊，上面这几行折腾了两小时才摸清楚，全靠看源码（还没定义转跳支持）</p>
 <p>相比go的全用反射搞定，虽然用起来复杂了点，但是自由度更高</p>
 <hr />
 <p>如果是简单的json结构，可以直接用<code>JSON.parse</code>解码</p>
 <p>但是里面的嵌套结构的类型还需要转换</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">require &quot;json&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">json = JSON.parse &quot;{\&quot;name1\&quot;:\&quot;value1\&quot;, \&quot;name2\&quot;:\&quot;value2\&quot;}&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">exit unless json.is_a?(Hash(String, JSON::Type)) # 类型断言
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">pp json.is_a?(Hash(String, JSON::Type))
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">pp json.is_a?(Hash(String, String))
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">pp json[&quot;name1&quot;].is_a?(String)
-</span></pre>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>require &quot;json&quot;
+</span><span>
+</span><span>json = JSON.parse &quot;{\&quot;name1\&quot;:\&quot;value1\&quot;, \&quot;name2\&quot;:\&quot;value2\&quot;}&quot;
+</span><span>
+</span><span>exit unless json.is_a?(Hash(String, JSON::Type)) # 类型断言
+</span><span>
+</span><span>pp json.is_a?(Hash(String, JSON::Type))
+</span><span>
+</span><span>pp json.is_a?(Hash(String, String))
+</span><span>
+</span><span>pp json[&quot;name1&quot;].is_a?(String)
+</span></code></pre>
 <blockquote>
 <p>json.is_a?(Hash(String, JSON::Type)) = true</p>
 <p>json.is_a?(Hash(String, String)) = false</p>
@@ -359,6 +372,9 @@
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/crystal-json/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';

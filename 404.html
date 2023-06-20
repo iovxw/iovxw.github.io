@@ -4,27 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw's blog">
+    <meta name="description" content="iovxw&#x27;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="canonical" href="https://iovxw.net">
-    <link href="/index.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-    <link href="/index.xml" rel="feed" type="application/rss+xml" title="iovxw" />
-    <title>404 - iovxw</title>
+
+    
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title> 404 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="/favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="/favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -32,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -111,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -134,7 +155,8 @@
     }
 
     img {
-      max-width: 100%;
+        max-width: 100%;
+        vertical-align: bottom;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -161,11 +183,11 @@
         margin: 2px 0;
     }
 
-    p, img, pre {
-        margin: 10px 0;
+    p, pre {
+        margin: 1em 0;
     }
 
-    p:last-child, img:last-child, pre:last-child {
+    article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
 
@@ -185,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -204,11 +226,10 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
-        display: inline-block;
     }
 
     pre {
@@ -216,13 +237,17 @@
         overflow-x: auto;
         display: block;
         padding: 0.5em;
-        background: #1d1f21;
     }
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
-        margin: 10px 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -238,9 +263,10 @@
     }
 
     blockquote {
-        border-left: 5px solid white;
-        padding-left: 5px;
-        margin: 10px 20px;
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -289,31 +315,36 @@
   </head>
   <body>
     <section>
-        <header>
-            <a class="title" href="/">iovxw</a>
-            <input name="search" placeholder="Search" />
-            <div class="link">
-                <a href="/p/">Archive</a>
-                <a href="/rss.xml">RSS</a>
-                <a href="/links/">Links</a>
-                <a href="/about/">About</a>
-            </div>
-        </header>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
 
-        
-            <article>
+      
+<article>
 <a href="http://wolfvh.deviantart.com/art/The-hitchhiker-s-guide-209088182">
-  <img style="width: 100%" src="/dont-panic.svg" />
+  <img style="width: 100%" src="https://iovxw.net/dont-panic.svg" />
 </a>
 </article>
 
-        
 
-        <footer>
-            <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-               Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
-            </a>
-        </footer>
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
     </section>
   </body>
 </html>
+

@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="关于我">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>关于 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,17 +316,17 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
@@ -320,18 +334,18 @@
       
 <article>
     <h1>关于</h1>
-    <div class="info"><h2>关于我</h2><time>1999-01-26 00:00</time></div>
-    <p>这是一个憋了很久还是没有写完的页面, 于是阅读以下内容可能会感觉到</p>
+    <div class="info"><h2>关于我</h2><time>1970-01-01 00:00</time></div>
+    <p>这是一个憋了很久还是没有写完的页面, 于是阅读以下内容可能会感受到</p>
 <ul>
+<li>文风多变</li>
 <li>上下文混乱</li>
 <li>时间线错乱</li>
-<li>文风多变</li>
 <li><del>多重人格</del></li>
 <li><del>乱码</del></li>
 <li>以及超多的删除线</li>
 </ul>
 <p><del>如有任何不适还请装作没事</del></p>
-<!-- more -->
+<span id="continue-reading"></span>
 <hr />
 <h3 id="guan-yu-ming-zi">关于名字</h3>
 <p>是用英文无衬线字体中大小写都左右对称的字母组成的</p>
@@ -345,38 +359,38 @@
 <p>变成了现在这幅惨不忍睹的样子</p>
 <p>不然应该是接近满的才对 <del>(改天写个脚本伪造点好了)</del></p>
 <hr />
-<h3 id="xue-guo-de-bian-cheng-yu-yan">学过的编程语言</h3>
+<h3 id="bian-cheng-yu-yan">编程语言</h3>
 <p>按时间来就是：</p>
 <p><a href="https://golang.org/"><strong>Go</strong></a> -&gt; <a href="https://www.dartlang.org/"><strong>Dart</strong></a> -&gt;
 <a href="http://nim-lang.org/"><strong>Nim</strong></a> -&gt; <a href="https://crystal-lang.org/"><strong>Crystal</strong></a> -&gt;
 <a href="http://elixir-lang.org/"><strong>Elixir</strong></a> -&gt; <a href="http://clojure.org/"><strong>Clojure</strong></a> -&gt;
 <a href="https://racket-lang.org/"><strong>Racket</strong></a> -&gt; <a href="https://github.com/cisco/ChezScheme"><strong>Scheme</strong></a> -&gt;
 <a href="https://www.rust-lang.org/"><strong>Rust</strong></a></p>
-<p>以上属于正儿八经读过文档看过教程写过项目的语言, <del>不过目前主力是 <strong>Go</strong> 和 <strong>Clojure(Script)</strong></del> 已经切换到 <strong>Rust</strong></p>
+<p><del>目前主力是 <strong>Go</strong> 和 <strong>Clojure(Script)</strong></del> 已经切换到 <strong>Rust</strong></p>
 <p><del>这得感谢 <strong>Racket</strong> 的内存占用和 <strong>Scheme</strong> 的生态环境</del></p>
-<p>基本会的大概还能算上一堆, 毕竟范式差不多的掌握起来也不难<del>, 不过最好还是别找我</del></p>
 <p><del>圆括号即正义！</del></p>
 <hr />
 <h3 id="guan-yu-zhe-ge-bo-ke">关于这个博客</h3>
 <p>托管于 <a href="https://pages.github.com/">GitHub Pages</a>,
 使用 <del><a href="https://gohugo.io/">hugo</a></del>
 <del><a href="https://github.com/cobalt-org/cobalt.rs">Cobalt</a></del>
-<a href="https://www.getgutenberg.io/">Gutenberg</a>
+<del><a href="https://www.getgutenberg.io/">Gutenberg</a></del>
+<a href="https://www.getzola.org">Zola</a>
 生成静态页面, 总共换了三四遍的模板都是自己写的, 包括现在这个
 <del>(很省流量的)</del></p>
 <p><del>因为嫌麻烦, 所以去掉了 <strong>hugo</strong> 的分类和标签功能 (反正有搜索嘛)</del></p>
 <p><del>然后翻页也砍掉了, 全部存档放一个页面就够了</del></p>
 <p><del>Cobalt 本来就没这些多余功能, 也不用砍了</del></p>
-<p>好我又换到了 Gutenberg, 重构真是愉悦</p>
+<p>好我又换到了 <del>Gutenberg</del> Zola, 重构真是愉悦</p>
 <hr />
-<h3 id="xin-yang"><del>信仰</del> 使用的编辑器</h3>
+<h3 id="xin-yang-shi-yong-de-bian-ji-qi"><del>信仰</del> 使用的编辑器</h3>
 <p>硬要说的话, 对于操作方式我是 <a href="http://www.vim.org/">vim</a> 党,
 不过现在正在使用着 <a href="https://www.gnu.org/software/emacs/">emacs</a>,
-就是在用 <a href="http://spacemacs.org/">spacemacs</a></p>
-<p>我的 spacemacs 配置文件: <a href="https://github.com/iovxw/dotfiles/tree/master/emacs">https://github.com/iovxw/dotfiles/tree/master/emacs</a></p>
+就是在用 <del><a href="http://spacemacs.org/">spacemacs</a></del> <a href="https://github.com/hlissner/doom-emacs">Doom</a></p>
+<p>我的 Doom 配置文件: <a href="https://git.io/fjwa7">https://git.io/fjwa7</a></p>
 <hr />
 <h3 id="tab-kong-ge">TAB? 空格?</h3>
-<p>俩都用, 具体用什么看语言和项目以及编码规范</p>
+<p>都用, 具体用什么看语言和项目以及编码规范</p>
 <p>总之就是该用什么用什么</p>
 <hr />
 <script src="https://gist.github.com/iovxw/2d9254c5c6123986bf2d.js"></script>
@@ -384,6 +398,9 @@
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/about/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';

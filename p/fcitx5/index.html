@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="已然开发两年半了">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://iovxw.net">
+
+    
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>我也! 用上 fcitx5 了 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
+
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    :not(pre) > code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 0.5em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>我也! 用上 fcitx5 了</h1>
+    <div class="info"><h2>已然开发两年半了</h2><time>2018-05-13 15:39</time></div>
+    <p>新 fcitx 很棒, 棒到甚至可以干掉 ibus 的服务然后直接使用 ibus 的 im module</p>
+<p>虽然目前没有配置界面也没有文档, 不过我们不需要!</p>
+<p>来上个图:</p>
+<p><img src="/p/fcitx5/0.png" alt="screenshot" /></p>
+<span id="continue-reading"></span>
+<hr />
+<p>至于安装, 其实按照 <a href="https://blog.felixc.at/2017/08/lets-try-a-new-pinyin-input-method-that-might-be-slightly-better-than-sunpinyin/">肥猫的博客里讲的</a> 来就好了</p>
+<p><del>此文完</del> 本来应该是这样</p>
+<p>然而我现在用的是 Deepin, 所以需要自己编译, 并且中途还有几个小坑</p>
+<h2 id="yuan-ma">源码</h2>
+<p>挨个 clone</p>
+<ul>
+<li><a href="https://github.com/wengxt/xcb-imdkit">xcb-imdkit</a></li>
+<li><a href="https://github.com/fcitx/fcitx5">fcitx5</a></li>
+<li><a href="https://github.com/fcitx/libime">libime</a></li>
+<li><a href="https://github.com/fcitx/fcitx5-gtk">fcitx5-gtk</a></li>
+<li><a href="https://github.com/fcitx/fcitx5-qt">fcitx5-qt</a></li>
+<li><a href="https://github.com/fcitx/fcitx5-chinese-addons">fcitx5-chinese-addons</a></li>
+</ul>
+<p>注意这也是编译的推荐顺序</p>
+<h2 id="yi-lai">依赖</h2>
+<p>按照 <code>CMakeLists.txt</code> 缺哪个装哪个, 下面是大概的列表, 不保证全, 其他 debian 系应该也没差</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>build-essential cmake extra-cmake-modules libxcb1-dev libxcb-keysyms1-dev libxcb-util0-dev libdbus-1-dev libevent-dev uuid-dev gettext libsystemd-dev libxkbfile-dev libxkbcommon-x11-dev libxcb-xkb-dev libxcb1-dev libpango1.0-dev libpangocairo-1.0-0 libenchant-dev libxcb-ewmh-dev libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-ewmh-dev wayland-protocols libboost-dev libcurl4-gnutls-dev libopencc-dev libqt5webengine5-dev libqt5webchannel5-dev qt4-qmake libqt4-dev qtbase5-dev libboost-iostreams-dev gobject-introspection libgirepository1.0-dev libgtk2.0-dev libgtk-3-dev
+</span></code></pre>
+<p>源里的 <code>libfmt3-dev</code> 不带 cmake 文件, cmake 找不到, <a href="https://github.com/fmtlib/fmt">得自己编译安装</a></p>
+<h2 id="bian-yi">编译</h2>
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">mkdir build </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fabd2f;">cd </span><span style="color:#fdf4c1;">$_ </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fdf4c1;">cmake .. </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fdf4c1;">make -j`nproc` </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fdf4c1;">sudo make install
+</span></code></pre>
+<p>编译那几个依赖 Qt5 的项目的时候可能会报错, 因为最低 Qt 版本要求是 5.7, Deepin 的是 5.6</p>
+<p>比如找不到合适的 <code>QAction</code> 构造器, 是因为 5.7 新加了默认值, 手动把默认值填上就行了</p>
+<pre data-lang="diff" style="background-color:#282828;color:#fdf4c1aa;" class="language-diff "><code class="language-diff" data-lang="diff"><span>diff --git a/qt5/widgetsaddons/fcitxqtkeysequencewidget.cpp b/qt5/widgetsaddons/fcitxqtkeysequencewidget.cpp
+</span><span>index a774282..a6d8b78 100644
+</span><span style="color:#83a598;">--- a/qt5/widgetsaddons/fcitxqtkeysequencewidget.cpp
+</span><span style="color:#83a598;">+++ b/qt5/widgetsaddons/fcitxqtkeysequencewidget.cpp
+</span><span style="color:#83a598;">@@ -143,7 +143,7 @@ </span><span style="color:#8ec07c;">void FcitxQtKeySequenceWidgetPrivate::init() {
+</span><span>     clearButton_ = new QToolButton(q);
+</span><span>     layout_-&gt;addWidget(clearButton_);
+</span><span> 
+</span><span style="color:#fa5c4b;">-    keyCodeModeAction_ = new QAction(_(&quot;Key code mode&quot;));
+</span><span style="color:#8ec07c;">+    keyCodeModeAction_ = new QAction(_(&quot;Key code mode&quot;), nullptr);
+</span><span>     keyCodeModeAction_-&gt;setCheckable(true);
+</span><span>     keyCodeModeAction_-&gt;setEnabled(isX11LikePlatform());
+</span><span>     q-&gt;setContextMenuPolicy(Qt::ActionsContextMenu);
+</span></code></pre>
+<p>还有找不到 <code>qOverload</code>, 也是自己声明个就行, 实现在:</p>
+<p><a href="https://github.com/qt/qtbase/blob/5.7/src/corelib/global/qglobal.h#L1041-L1086">https://github.com/qt/qtbase/blob/5.7/src/corelib/global/qglobal.h#L1041-L1086</a></p>
+<h2 id="pei-zhi">配置</h2>
+<p>在 <code>~/.config/fcitx5/profile</code> 写上以下内容, 如果不写靠默认配置是不会有拼音输入法可以用的</p>
+<p>配置格式在未来版本可能会变, 自己照着改改吧</p>
+<pre data-lang="ini" style="background-color:#282828;color:#fdf4c1aa;" class="language-ini "><code class="language-ini" data-lang="ini"><span style="color:#fa5c4b;">[Groups/0]
+</span><span style="font-style:italic;color:#928374;"># Group Name
+</span><span style="color:#fdf4c1;">Name</span><span style="color:#fe8019;">=</span><span>默认
+</span><span style="font-style:italic;color:#928374;"># Layout
+</span><span style="color:#fdf4c1;">Default </span><span>Layout</span><span style="color:#fe8019;">=</span><span>us
+</span><span style="font-style:italic;color:#928374;"># Default Input Method
+</span><span style="color:#fdf4c1;">DefaultIM</span><span style="color:#fe8019;">=</span><span>pinyin
+</span><span>
+</span><span style="color:#fa5c4b;">[Groups/0/Items/0]
+</span><span style="font-style:italic;color:#928374;"># Name
+</span><span style="color:#fdf4c1;">Name</span><span style="color:#fe8019;">=</span><span>keyboard</span><span style="color:#fe8019;">-</span><span>us
+</span><span style="font-style:italic;color:#928374;"># Layout
+</span><span style="color:#fdf4c1;">Layout</span><span style="color:#fe8019;">=
+</span><span>
+</span><span style="color:#fa5c4b;">[Groups/0/Items/1]
+</span><span style="font-style:italic;color:#928374;"># Name
+</span><span style="color:#fdf4c1;">Name</span><span style="color:#fe8019;">=</span><span>pinyin
+</span><span style="font-style:italic;color:#928374;"># Layout
+</span><span style="color:#fdf4c1;">Layout</span><span style="color:#fe8019;">=
+</span><span>
+</span><span style="color:#fa5c4b;">[GroupOrder]
+</span><span style="color:#d3869b;">0</span><span style="color:#fe8019;">=</span><span>默认
+</span></code></pre>
+<p>不要在 fcitx 运行时修改, 因为进程退出后会覆写所有配置文件</p>
+<h2 id="huan-jing-bian-liang">环境变量</h2>
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">GTK_IM_MODULE</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">fcitx5
+</span><span style="color:#fdf4c1;">XMODIFIERS</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">@im=fcitx
+</span><span style="color:#fdf4c1;">QT_IM_MODULE</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">fcitx5
+</span></code></pre>
+<h2 id="qi-dong">启动</h2>
+<p>终端运行 <code>fcitx5</code>, 看看有没有错误</p>
+<h2 id="zi-dong-yun-xing">自动运行</h2>
+<p>在 <code>~/.config/autostart/</code> 建个 <code>fcitx5.desktop</code>, 填上</p>
+<pre data-lang="ini" style="background-color:#282828;color:#fdf4c1aa;" class="language-ini "><code class="language-ini" data-lang="ini"><span style="color:#fa5c4b;">[Desktop Entry]
+</span><span style="color:#fdf4c1;">Name</span><span style="color:#fe8019;">=</span><span>Fcitx5
+</span><span style="color:#fdf4c1;">GenericName</span><span style="color:#fe8019;">=</span><span>Fcitx5 Input Method
+</span><span style="color:#fdf4c1;">Comment</span><span style="color:#fe8019;">=</span><span>Start Fcitx5
+</span><span style="color:#fdf4c1;">Exec</span><span style="color:#fe8019;">=</span><span>fcitx5
+</span><span style="color:#fdf4c1;">Icon</span><span style="color:#fe8019;">=</span><span>fcitx
+</span><span style="color:#fdf4c1;">Terminal</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">false
+</span><span style="color:#fdf4c1;">Type</span><span style="color:#fe8019;">=</span><span>Application
+</span><span style="color:#fdf4c1;">Categories</span><span style="color:#fe8019;">=</span><span>System;Utility;
+</span><span style="color:#fdf4c1;">StartupNotify</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">false
+</span><span style="color:#fabd2f;">X</span><span style="color:#fe8019;">-</span><span style="color:#fabd2f;">GNOME</span><span style="color:#fe8019;">-</span><span>Autostart</span><span style="color:#fe8019;">-</span><span>Phase</span><span style="color:#fe8019;">=</span><span>Applications
+</span><span style="color:#fabd2f;">X</span><span style="color:#fe8019;">-</span><span style="color:#fabd2f;">GNOME</span><span style="color:#fe8019;">-</span><span>AutoRestart</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">false
+</span><span style="color:#fabd2f;">X</span><span style="color:#fe8019;">-</span><span style="color:#fabd2f;">GNOME</span><span style="color:#fe8019;">-</span><span>Autostart</span><span style="color:#fe8019;">-</span><span>Notify</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">false
+</span><span style="color:#fabd2f;">X</span><span style="color:#fe8019;">-</span><span style="color:#fabd2f;">KDE</span><span style="color:#fe8019;">-</span><span>autostart</span><span style="color:#fe8019;">-</span><span>after</span><span style="color:#fe8019;">=</span><span>panel
+</span><span style="color:#fabd2f;">X</span><span style="color:#fe8019;">-</span><span style="color:#fabd2f;">KDE</span><span style="color:#fe8019;">-</span><span>StartupNotify</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">false
+</span><span style="color:#fabd2f;">X</span><span style="color:#fe8019;">-</span><span style="color:#fabd2f;">GNOME</span><span style="color:#fe8019;">-</span><span>Autostart</span><span style="color:#fe8019;">-</span><span>enabled</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">true
+</span></code></pre>
+<h2 id="guan-bi-yun-pin-yin">关闭云拼音</h2>
+<p>默认用的是 Google 的云拼音, 也可以切换到 Baidu 的, 但我不用</p>
+<p>关闭的快捷键是 <code>Control+Alt+Shift+C</code>, 参见 <a href="https://github.com/fcitx/fcitx5-chinese-addons/blob/b5da671c29050/modules/cloudpinyin/cloudpinyin.h#L37">这里</a></p>
+<p>也可以修改 <code>~/.config/fcitx5/conf/pinyin.conf</code></p>
+<pre data-lang="ini" style="background-color:#282828;color:#fdf4c1aa;" class="language-ini "><code class="language-ini" data-lang="ini"><span style="font-style:italic;color:#928374;"># Enable Cloud Pinyin
+</span><span style="color:#fdf4c1;">CloudPinyinEnabled</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">False
+</span></code></pre>
+<h2 id="qi-ta">其他</h2>
+<p>默认界面的配置文件在 <code>~/.config/fcitx5/conf/classicui.conf</code></p>
+<p>如果遇到多屏幕字体大小不一致的情况, 设置</p>
+<pre data-lang="ini" style="background-color:#282828;color:#fdf4c1aa;" class="language-ini "><code class="language-ini" data-lang="ini"><span style="color:#fdf4c1;">PerScreenDPI</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">False
+</span></code></pre>
+<p>因为 fcitx5 会自动计算每个屏幕的物理 DPI 大小然后进行缩放</p>
+<hr />
+<p>最后我移植了个主题, 有兴趣的话可以试试:</p>
+<p><a href="https://github.com/iovxw/fcitx5-simple-theme">https://github.com/iovxw/fcitx5-simple-theme</a></p>
+<p><img src="https://github.com/iovxw/fcitx5-simple-theme/raw/master/screenshot.png" alt="screenshot" />
+<img src="https://github.com/iovxw/fcitx5-simple-theme/raw/master/screenshot_vertical.png" alt="screenshot" /></p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/fcitx5/';
+  };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

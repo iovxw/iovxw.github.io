@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://iovxw.net">
+
+    
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
+
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    :not(pre) > code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 0.5em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
+
+      
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/wacom-speed/">Linux下Wacom数位板相对定位画笔移动速度的设置</a></h1>
+              <div class="info">
+                <h2>折腾</h2>
+                <time>2015-04-28 00:00</time>
+              </div>
+              
+                <p>新买的Wacom CTL680，因为折腾驱动还换了几遍linux内核</p>
+<p>具体驱动折腾过程就不说了，旧版内核害死人啊。</p>
+<p>好不容易弄好驱动和数位板设置成相对定位模式之后（实在不习惯绝对定位）</p>
+<p>发现<code>xsetwacom</code>貌似没有提供设置画笔移动速度的选项？</p>
+<p>又是各种查资料</p>
+<p>找到了如下设置办法：</p>
+<hr />
+<p>首先找到画笔的ID</p>
+<p><code>xsetwacom --list</code></p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Wacom Intuos P M Pen stylus             id: 17        type: STYLUS    
+</span><span>Wacom Intuos P M Pen eraser             id: 18        type: ERASER    
+</span><span>Wacom Intuos P M Pad pad                id: 19        type: PAD  
+</span></code></pre>
+<p>我这里的ID是17</p>
+<p>然后<code>xinput watch-props 17</code></p>
+<p>输出：</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Device &#39;Wacom Intuos P M Pen stylus&#39;:
+</span><span>        Device Enabled (137):        1
+</span><span>        Coordinate Transformation Matrix (139):        1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+</span><span>        Device Accel Profile (261):        0
+</span><span>        Device Accel Constant Deceleration (262):        1.000000
+</span><span>        Device Accel Adaptive Deceleration (263):        1.000000
+</span><span>        Device Accel Velocity Scaling (264):        10.000000
+</span><span>        Device Node (257):        &quot;/dev/input/event15&quot;
+</span><span>        Wacom Tablet Area (637):        0, 0, 21600, 13500
+</span><span>        Wacom Rotation (638):        0
+</span><span>        Wacom Pressurecurve (639):        0, 0, 100, 100
+</span><span>        Wacom Serial IDs (611):        803, 1, 0, 0, 0
+</span><span>        Wacom Serial ID binding (612):        0
+</span><span>        Wacom Pressure Threshold (613):        27
+</span><span>        Wacom Sample and Suppress (614):        4, 4
+</span><span>        Wacom Enable Touch (615):        0
+</span><span>        Wacom Hover Click (640):        1
+</span><span>        Wacom Enable Touch Gesture (616):        0
+</span><span>        Wacom Touch Gesture Parameters (617):        0, 0, 250
+</span><span>        Wacom Tool Type (399):        &quot;STYLUS&quot; (395)
+</span><span>        Wacom Button Actions (618):        &quot;Wacom button action 0&quot; (619), &quot;Wacom button action 1&quot; (620), &quot;Wacom button action 2&quot; (621)
+</span><span>        Wacom button action 0 (619):        1572865
+</span><span>        Wacom button action 1 (620):        1572866
+</span><span>        Wacom button action 2 (621):        1572867
+</span><span>        Device Product ID (256):        1386, 803
+</span><span>        Wacom Debug Levels (636):        0, 0
+</span><span>
+</span></code></pre>
+<p>找到我们要设置的<em>Device Accel Constant Deceleration</em>后面括号里的数字</p>
+<p><code>xinput set-prop 17 262 2.5</code></p>
+<p>就搞定啦</p>
+<p>后面的值(就是那个2.5)设置的越大笔移动速度就越慢</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/nim/">Nim语言尝试</a></h1>
+              <div class="info">
+                <h2>几乎没人用</h2>
+                <time>2015-03-05 00:00</time>
+              </div>
+              
+                <p>从solidot看到，稍微尝试了一下</p>
+<p>打开<a href="http://nim-lang.org">官网</a>后，第一感想是：</p>
+<blockquote>
+<p>诶这个代码高亮的配色不错</p>
+</blockquote>
+<p>然后看了语法什么的，觉得还算顺眼，就把首页的所有链接全部点开了</p>
+<p>第一个版本发布的日期是<code>2008-08-22</code>，比go还早一点，但是没什么人用。（果然还是得拼爹啊）</p>
+<p>教程方面，只有Tutorials栏里的两个是最新版本的，其他都是旧版</p>
+<p>语法层面还没深入研究，就不说了</p>
+<p>不过有两个比较有意思的特性，大体介绍一下</p>
+<p>首先是各种命名方法可以互相兼容</p>
+<p>就是说不管你是喜欢帕斯卡命名法还是驼峰命名法，都一样用</p>
+<p>比如标准库里的<code>system.hostOS</code>，你在使用的时候可以写成<code>system.host_os</code>或者<code>system.host_OS</code>再或者<code>system.h_Os_tOS</code>都是可以的。除了首字母以外其他地方都不区分大小写，而下划线只要不是首尾字母，其他地方也是可以随便插入的</p>
+<p>然后是foo(bar)可以写成bar.foo() (这个我还没用到，但是好像会很有用？)</p>
+<p>至于编辑器支持方面，不要去看官网FAQ里的，那里面也是好久没更新了</p>
+<p>可以直接看github上的wiki <a href="https://github.com/Araq/Nim/wiki/Editor-Support">https://github.com/Araq/Nim/wiki/Editor-Support</a></p>
+<p>最新更新的就是emacs的插件和官方的IDE <a href="https://github.com/nim-lang/Aporia">Aporia</a></p>
+<p>emacs的插件我怎么弄自动补全也没搞定，虽然有提供一个<code>ac-nim.el</code></p>
+<p>Aporia的master分支里的完全不能用！有很多严重问题。比如<a href="https://github.com/nim-lang/Aporia/issues/71">这个</a>，还有自动补全和定义转跳完全不起作用（以及里面的nimrod还没有更名为nim，虽然官方开了一个分支修改名字吧）。不知道是我配置问题还是怎么着（也根据提示设置nim路径了），开发者有一个答复是nim的idetools本身挂掉了，看了下Aporia的源码照着打了几句<code>nim idetools</code>命令也没什么输出</p>
+<p>去翻更新记录找到了<a href="https://github.com/nim-lang/nimsuggest">https://github.com/nim-lang/nimsuggest</a>这个东西，好像是0.10.3以后会用它代替idetools。于是开始折腾</p>
+<p>先是升级nim和Aporia到0.10.3开发版，然后用<code>nimble install nimsuggest</code>来安装nimsuggest。但是出现错误提示<code>~/.nimble/pkgs/compiler-0.10.3/compiler/nimfix/prettybase.nim(10, 7) Error: cannot open 'ast'</code></p>
+<p>重试几遍无果，手动编译了一下compiler，发现没问题啊</p>
+<p>浪费掉十几分钟后发现是编译器没有读取cfg？直接把源码扔到compiler文件夹里编译，成功。</p>
+<p>我激动的打开Aporia开始尝试语义转跳，刚按下快捷键</p>
+<p>……</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Error: unhandled exception: 拒绝连接 [OSError]
+</span></code></pre>
+<p>窗口吡的一下就关掉了！</p>
+<p>关！掉！了！</p>
+<p>我还没有放弃，手动开启nimsuggest服务</p>
+<p>再试</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Traceback (most recent call last)
+</span><span>nimsuggest.nim(197)      nimsuggest
+</span><span>nimsuggest.nim(187)      handleCmdLine
+</span><span>nimsuggest.nim(149)      mainCommand
+</span><span>nimsuggest.nim(132)      serve
+</span><span>nimsuggest.nim(106)      action
+</span><span>modules.nim(203)         compileProject
+</span><span>modules.nim(151)         compileModule
+</span><span>passes.nim(197)          processModule
+</span><span>passes.nim(137)          processTopLevelStmt
+</span><span>sem.nim(450)             myProcess
+</span><span>sem.nim(419)             semStmtAndGenerateGenerics
+</span><span>semstmts.nim(1340)       semStmt
+</span><span>semexprs.nim(893)        semExprNoType
+</span><span>semexprs.nim(2196)       semExpr
+</span><span>importer.nim(171)        evalImport
+</span><span>importer.nim(161)        myImportModule
+</span><span>modules.nim(164)         importModule
+</span><span>modules.nim(151)         compileModule
+</span><span>passes.nim(197)          processModule
+</span><span>passes.nim(137)          processTopLevelStmt
+</span><span>sem.nim(450)             myProcess
+</span><span>sem.nim(419)             semStmtAndGenerateGenerics
+</span><span>semstmts.nim(1340)       semStmt
+</span><span>semexprs.nim(893)        semExprNoType
+</span><span>semexprs.nim(2196)       semExpr
+</span><span>importer.nim(171)        evalImport
+</span><span>importer.nim(161)        myImportModule
+</span><span>modules.nim(164)         importModule
+</span><span>modules.nim(151)         compileModule
+</span><span>passes.nim(197)          processModule
+</span><span>passes.nim(137)          processTopLevelStmt
+</span><span>sem.nim(450)             myProcess
+</span><span>sem.nim(419)             semStmtAndGenerateGenerics
+</span><span>semstmts.nim(1340)       semStmt
+</span><span>semexprs.nim(893)        semExprNoType
+</span><span>semexprs.nim(2189)       semExpr
+</span><span>semstmts.nim(1134)       semProc
+</span><span>semstmts.nim(1074)       semProcAux
+</span><span>transf.nim(788)          transformBody
+</span><span>transf.nim(773)          processTransf
+</span><span>transf.nim(761)          transform
+</span><span>transf.nim(104)          transformSons
+</span><span>transf.nim(706)          transform
+</span><span>transf.nim(472)          transformFor
+</span><span>lambdalifting.nim(1022)  liftForLoop
+</span><span>ast.nim(941)             []
+</span><span>SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+</span></code></pre>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>*** Error in `aporia&#39;: free(): invalid pointer: 0x00007f1f16667700 ***
+</span><span>SIGABRT: Abnormal termination.
+</span></code></pre>
+<p>我仿佛已经知道十万只草泥马在心中奔腾而过的感觉了</p>
+<p><em>可能永远也不会续的未完待续</em></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/2015-2-5/">坑开的有点多了</a></h1>
+              <div class="info">
+                <h2>吐槽</h2>
+                <time>2015-02-05 00:00</time>
+              </div>
+              
+                <p>又过了很长时间没写博客了</p>
+<p>这次真不是因为懒</p>
+<p>各种忙</p>
+<p>然后还不小心开了几个大坑</p>
+<hr />
+<p>近期做过的事：</p>
+<p>先是帮<a href="https://github.com/Go-zh/go">go-zh</a>翻译了一个package（只有几行的翻译量，结果还各种不准确，几乎都是minux纠正过来的）</p>
+<p>又写了个<a href="https://github.com/iovxw/downloader">各种意义上都弃坑了的golang下载package</a></p>
+<p>一旦下载超大文件就会直接挂掉，是因为线程分配的问题（直接平均分配给每个线程，所以缓冲区会爆掉），但是也懒得改了。要是有人发现了，发个issue可能会给我点动力</p>
+<p>然后又为了给coding.net的PaaS弄个<a href="https://github.com/iovxw/coding-buildpack-dart">Dart的Buildpack</a></p>
+<p>用着电信的渣出口从google code拖了1.7G的源码，编译了最新的Dart SDK</p>
+<p>又因为各种原因以及buildpack原作者的脚本有些许问题，弄了2天才下载好了完整的源码</p>
+<p>简直生不如死</p>
+<p>关键是，最后部署的时候，才想起来dart的包管理网站 被！墙！了！</p>
+<p>于是所有的package都要预先下载好再改包管理路径然后全部提交到git</p>
+<p>又涉及到了协议什么的一大堆东西，果断还是弃坑不维护了</p>
+<p>在用go写一些小程序的时候需要用到图形界面。而go的ui库我基本都用遍了</p>
+<p>缺点大致如下（部分问题可能有解决方法，如果知道还请留言告诉我哈）：</p>
+<ul>
+<li>绘制界面时太啰嗦(go-qt5啦什么的，要一个一个创建控件，再一个一个弄框框套进去)</li>
+<li>不够灵活(<a href="https://github.com/andlabs/ui">ui</a>在绘制表格的时候是用反射获取的struct里变量的命名来做标题的，中文直接跪)</li>
+<li>还是不够灵活(go-qml的依赖对我来说太复杂，又懒得弄安装包)</li>
+<li>自定义控件麻烦(qml的话要么放在路径下，要么扔到默认文件夹里，关键是每个控件都要一个文件)</li>
+</ul>
+<p>于是！</p>
+<p>就开始写一个用<a href="https://github.com/go-nwui/nwui">node-webkit做框架的ui库</a>了</p>
+<p>用html+js做控件，然后可以自定义css，前后端通信用websocket</p>
+<p>依赖只有一个nwjs，基本什么平台都可以用</p>
+<p>然后支持很方便的自定义控件（只要实现一个方法即可，会自动用反射来调用），以及写一个自定义控件的教程（计划中）</p>
+<p>来一段例子：</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>	var w *Window
+</span><span>	w = &amp;Window{
+</span><span>		Title:  &quot;window&quot;,
+</span><span>		Width:  800,
+</span><span>		Height: 600,
+</span><span>		Controls: []interface{}{
+</span><span>			&amp;Button{
+</span><span>				ID:   &quot;btn0&quot;,
+</span><span>				Text: &quot;button&quot;,
+</span><span>				OnClick: func() {
+</span><span>					println(GetConByID(&quot;btn0&quot;).(*Button).Text)
+</span><span>				},
+</span><span>			},
+</span><span>			&amp;Button{
+</span><span>				ID:   &quot;btn1&quot;,
+</span><span>				Text: &quot;button&quot;,
+</span><span>			},
+</span><span>		},
+</span><span>	}
+</span><span>	w.Show()
+</span></code></pre>
+<p>当然这个库还只是写了个框架（就是说上面说的大部分功能都还没实现(别激动别激动)）</p>
+<p>控件什么的也只写了一个按钮和一个自定义窗口边框来做演示</p>
+<p>上张图（实际运行截图）：</p>
+<p><img src="https://raw.githubusercontent.com/go-nwui/nwui/master/screenshot.png" alt="img" /></p>
+<p>然后就在这货刚写完框架之后</p>
+<p>我又开了个坑（因为<a href="https://github.com/iovxw/Stepladder">Stepladder</a>在长链接下会有几率始终占满一个CPU线程的使用率（具体触发原因不明），然后因为是tcp所以延迟什么的还比较大）</p>
+<p>于是准备重写个基于udp的</p>
+<p>在github上翻了一遍发现这货<a href="https://github.com/skywind3000/kcp">https://github.com/skywind3000/kcp</a></p>
+<p>以浪费10%流量为代价换取更低的延迟？</p>
+<p>貌似不错</p>
+<p>还有人弄了个go版本的<a href="https://github.com/vzex/dog-tunnel">https://github.com/vzex/dog-tunnel</a></p>
+<p>就是里面的ikcp，貌似是直接用的c2go转换的，所以编码风格还是有点奇怪</p>
+<p>c版本的源码协议是GPL，但是这个是转换的所以貌似可以不用？</p>
+<p>总之拖了一份到本地，然后修改了一下编码风格</p>
+<p>这货就诞生了<a href="https://github.com/go-ukcp/ukcp">https://github.com/go-ukcp/ukcp</a>（里面的ikcp文件夹）</p>
+<p>只是把编码风格转换了一下，然后ukcp本来是想封装一下的</p>
+<p>但是因为发送端的判断什么的（还要传给kcp所以识别很麻烦），就又弃坑了……</p>
+<p>（不过里面的ikcp还是可以单独拿出来用用的）</p>
+<p>当然还不能放弃，开始自己封装一个udp<a href="https://github.com/iovxw/rudp">https://github.com/iovxw/rudp</a></p>
+<p>然后嘛……现在为止还没写完</p>
+<hr />
+<p>就这么多了，坑还是慢慢填吧</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/bye-2014/">2014浏览器A-Z</a></h1>
+              <div class="info">
+                <h2>冬天好冷啊</h2>
+                <time>2014-12-27 00:00</time>
+              </div>
+              
+                <p>好吧其实也算不上一年的</p>
+<p>因为中途从Firefox换到了Chrome（谁让Flash不支持了嘛）,然后导入的记录没有浏览次数记录</p>
+<ul>
+<li>A：admin.XXXX.net -保密</li>
+<li>B：bilibili.com -这个就不用解释了</li>
+<li>C：coding.net -国内一个代码托管平台，做的还不错</li>
+<li>D：dartlang.cc -dart的非官方中文站，学dart的时候经常打开</li>
+<li>E：extensions.gnome.org -GNOME的插件网站，折腾插件的时候用的</li>
+<li>F：fontawesome.io -写网页找图标时翻的</li>
+<li>G：github.com -最近开的坑又变多了</li>
+<li>H：html5up.net -写网页找模板用</li>
+<li>I：inbox.google.com -不用解释</li>
+<li>J：jandan.net -煎蛋偶尔看看</li>
+<li>K：kde-look.org -找kde主题</li>
+<li>L：linuxdeepin.com -作为版主还是需要经常看看的</li>
+<li>M：minecraft.net -Minecraft官网，经常改皮肤</li>
+<li>N：neovim.org -号称21世纪的vim？不过我一直没编译成功带GUI的</li>
+<li>O：origin.com -钱钱钱</li>
+<li>P：pan.baidu.com -国内传文件</li>
+<li>Q：qaq.gd -某只熊猫的博客</li>
+<li>R：没有</li>
+<li>S：solidot.org -资讯平台</li>
+<li>T：twitter.com -……</li>
+<li>U：还是没有</li>
+<li>V：v2ex.com -签到签到</li>
+<li>W：wiki.archlinux.org -arch万能的wiki</li>
+<li>X：xshellz.com -一个免费VPS，不过好久没用过了</li>
+<li>Y：youtube.com -HTML5播放器好赞</li>
+<li>Z：zybuluo.com -在线MarkDown编辑器，相当强大</li>
+</ul>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/golang-type-switch/">Golang类型switch</a></h1>
+              <div class="info">
+                <h2>语法强迫症</h2>
+                <time>2014-11-21 00:00</time>
+              </div>
+              
+                <p>在群里讨论到了这个问题</p>
+<p>然后下面这是官方给出的例子</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>var t interface{}
+</span><span>t = functionOfSomeType()
+</span><span>switch t := t.(type) {
+</span><span>default:
+</span><span>    fmt.Printf(&quot;unexpected type %T&quot;, t)       // %T prints whatever type t has
+</span><span>case bool:
+</span><span>    fmt.Printf(&quot;boolean %t\n&quot;, t)             // t has type bool
+</span><span>case int:
+</span><span>    fmt.Printf(&quot;integer %d\n&quot;, t)             // t has type int
+</span><span>case *bool:
+</span><span>    fmt.Printf(&quot;pointer to boolean %t\n&quot;, *t) // t has type *bool
+</span><span>case *int:
+</span><span>    fmt.Printf(&quot;pointer to integer %d\n&quot;, *t) // t has type *int
+</span><span>}
+</span></code></pre>
+<p>里面有几点要注意一下</p>
+<p>在<code>switch t := t.(type)</code>时</p>
+<p><code>switch</code>的其实是<code>t.(type)</code>而不是被创建的<code>t</code></p>
+<p>然后<code>t := t.(type)</code>创建的是类型为<code>t.(type)</code>，值为<code>t</code>的值的一个变量</p>
+<p>里面所使用的<code>t</code>都是<code>switch</code>里新建的那个<code>t</code></p>
+<hr />
+<p>等于下面这个例子</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>var t interface{}
+</span><span>t = functionOfSomeType()
+</span><span>switch t.(type) {
+</span><span>default:
+</span><span>    fmt.Printf(&quot;unexpected type %T&quot;, t)       // %T prints whatever type t has
+</span><span>case bool:
+</span><span>    t := t.(bool)
+</span><span>    fmt.Printf(&quot;boolean %t\n&quot;, t)             // t has type bool
+</span><span>case int:
+</span><span>    t := t.(int)
+</span><span>    fmt.Printf(&quot;integer %d\n&quot;, t)             // t has type int
+</span><span>case *bool:
+</span><span>    t := t.(*bool)
+</span><span>    fmt.Printf(&quot;pointer to boolean %t\n&quot;, *t) // t has type *bool
+</span><span>case *int:
+</span><span>    t := t.(*int)
+</span><span>    fmt.Printf(&quot;pointer to integer %d\n&quot;, *t) // t has type *int
+</span><span>}
+</span></code></pre>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/new-template/">更新了下模板</a></h1>
+              <div class="info">
+                <h2>瞬间高大上</h2>
+                <time>2014-11-07 00:00</time>
+              </div>
+              
+                <p>除了50行的custom.css和几行html修改之外全部都是直接找的模板哇咔咔</p>
+<p>虽然上上上次说要重新写一个静态博客生成工具，而且Golang的模板工具和页面模板已经写完了。但是最近又开了个坑所以就……</p>
+<p>无限延期吧……</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/leveldb/">LevelDB储存过程解析</a></h1>
+              <div class="info">
+                <h2>写的乱糟糟的</h2>
+                <time>2014-10-31 00:00</time>
+              </div>
+              
+                <p>本文是研究LevelDB结构之后为了加深印象写的，然后主要是写存储过程的细节（其实本来像画个gif来实现的，但是太麻烦了……）。细节部分都是靠各种资料总结的，然后推荐先看一下文章底部的资料，因为有些重复部分没写</p>
+<p>如有理解错误，还请指出</p>
+<hr />
+<p>首先收到一个添加key的请求，先直接写入log文件（追加写入）</p>
+<p>然后插入到内存的储存区（内存储存区内按照key的顺序排列），等到内存储存的数据达到一定大小后（1M），将内存内的数据写入level为0的sst文件内，然后删除log（这里说一下需要注意的是level0内的数据都是直接从内存写入的，所以不同sst文件的key可能会有重复，和其他level不同，其他level在合并的时候都会去掉重复key，不过level0不经过合并这个步骤（当然要是每次从内存写入的时候都更新一下也行，但是io消耗太大，不如在合并到level1的时候进行操作）。所以说level0和其他level相比，更像一个缓存数据用的）</p>
+<p>等到level0级别的sst文件达到一定数量后，挑选其中一个sst文件合并到level1（如果没有level1那么就生成level1，其他level也是这么来的。然后因为level0会有重复key（上面也说过原因），所以合并到level1的时候会先去掉和被选中的sst文件内重复的key再合并（所以可能会涉及到level0级别的多个sst文件更新））</p>
+<p>合并的时候会检查level0中的key是否和level1中的key有重合，如果有重合那就读取重合的文件和level0中被挑选的sst文件进行更新key，然后排序key之后再按照2M一个sst文件写入level1（这里就可以看出key按照顺序排列的好处了，因为挨着的key基本都在一个文件里，从level0里选择sst文件的key是挨着的，level1的也是，更新的话只需要更新1~2个文件，能减少需要读取的sst文件个数。比如level0抽取的sst文件key是<code>A1~C3</code>的，和level1里面<code>A1~C5</code>的sst刚好能重合，就只需要读取一个文件进行合并了。如果是按照插入顺序之类的乱序，可能会从N个文件里找到重复的key，合并需要读取的文件也就会更多了）</p>
+<p>等到level1的文件数据达到10M时（每个级别最大数据量为<code>10^level</code>，level1为10M，level2就是100M），就选择其中一个sst文件合并到leve2。合并方法也是找到重复的key更新，排序，然后生成sst。不过这一层的sst单个文件不再是2M，而是更大一些，每增加一层sst文件最大限制都会扩大。这样设计是为了一层满了之后不至于逐层更新。</p>
+<p>剩下的level层也是像上面那样进行更新，所以level最大的一层，数据也是最旧的</p>
+<p>删除操作和更新操作基本也都是直接插入数据，只不过删除操作插入的是删除标记，更新操作是直接重新插入一遍数据（在level合并的时候会进行处理更新）</p>
+<p>在进行读取key的时候，会先从内存查找是否有这个key，然后再到level0查找，如果还是没有就会到更高层level挨个查找，因为越高层数据越旧，没有被更新到的可能也就越大（比如一个储存在level3的key被在level2标记了删除，但是还没更新到。那么当查找这个key的时候就会优先找到在level2的删除标记（当然level3的key也会在多次合并操作之后被删除掉））</p>
+<p>本文章配合以下资料阅读更佳：</p>
+<p><a href="http://blog.nosqlfan.com/html/2882.html">http://blog.nosqlfan.com/html/2882.html</a></p>
+<p><a href="http://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html">http://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html</a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/gohtml/">Golang 模板工具</a></h1>
+              <div class="info">
+                <h2>生成器</h2>
+                <time>2014-10-27 00:00</time>
+              </div>
+              
+                <p>就是上一篇文章里说的那个，写完之后发现挺奇葩的</p>
+<p>项目地址：<a href="https://github.com/iovxw/GoHTML">https://github.com/iovxw/GoHTML</a></p>
+<p>介绍什么的直接扔README了：</p>
+<hr />
+<h1 id="gohtml">GoHTML</h1>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span> ██████╗         ██╗  ██╗████████╗███╗   ███╗██╗
+</span><span>██╔════╝  █████╗ ██║  ██║╚══██╔══╝████╗ ████║██║
+</span><span>██║  ███╗██╔══██╗███████║   ██║   ██╔████╔██║██║
+</span><span>██║   ██║██║  ██║██╔══██║   ██║   ██║╚██╔╝██║██║
+</span><span>╚██████╔╝╚█████╔╝██║  ██║   ██║   ██║ ╚═╝ ██║███████╗
+</span><span> ╚═════╝  ╚════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝╚══════╝
+</span></code></pre>
+<p>Golang HTML模板，非正式项目</p>
+<p>基本就是写着玩的</p>
+<p>可以将Golang和HTML写在一起，然后用本工具转换成Golang文件</p>
+<p>基本功能就是将<code>&lt;a&gt;</code>转换成<code>buffer.WriteString(&quot;&lt;a&gt;&quot;)</code></p>
+<h2 id="li-zi">例子</h2>
+<p><strong>转换前：</strong></p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>package tpl
+</span><span>
+</span><span>import (
+</span><span>	&quot;fmt&quot;
+</span><span>	&quot;bytes&quot;
+</span><span>)
+</span><span>
+</span><span>func Index() string {
+</span><span>	_buffer := new(bytes.Buffer)
+</span><span>
+</span><span>	&lt;a&gt;Text&lt;/a&gt;
+</span><span>
+</span><span>	for i:=0; i&lt;10; i++ {
+</span><span>		&lt;a&gt;{​{string(i)}}&lt;/a&gt;
+</span><span>	}
+</span><span>
+</span><span>	var t string = &quot;2&quot;
+</span><span>	fmt.Println(t)
+</span><span>
+</span><span>	print:=func() {
+</span><span>		&lt;a&gt;text&lt;/a&gt;
+</span><span>	}
+</span><span>	print()
+</span><span>
+</span><span>	test1(_buffer)
+</span><span>	test2(_buffer, t)
+</span><span>
+</span><span>	return _buffer.String()
+</span><span>}
+</span><span>
+</span><span>func test1(_buffer *bytes.Buffer) {
+</span><span>	&lt;a&gt;test1&lt;/a&gt;
+</span><span>}
+</span><span>
+</span><span>func test2(_buffer *bytes.Buffer, t string) {
+</span><span>	&lt;a&gt;test{​{t}}&lt;/a&gt;
+</span><span>}
+</span></code></pre>
+<p><strong>转换后：</strong></p>
+<pre data-lang="go" style="background-color:#282828;color:#fdf4c1aa;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#fa5c4b;">package </span><span style="color:#fdf4c1;">tpl
+</span><span>
+</span><span style="color:#fa5c4b;">import </span><span>(
+</span><span>	</span><span style="color:#b8bb26;">&quot;fmt&quot;
+</span><span>	</span><span style="color:#b8bb26;">&quot;bytes&quot;
+</span><span>)
+</span><span>
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">Index</span><span>() </span><span style="color:#fabd2f;">string </span><span>{
+</span><span>	</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">:= </span><span style="color:#fabd2f;">new</span><span>(</span><span style="color:#fdf4c1;">bytes</span><span>.</span><span style="color:#fa5c4b;">Buffer</span><span>)
+</span><span>
+</span><span>	</span><span style="color:#fdf4c1;">_buffer</span><span>.</span><span style="color:#fdf4c1;">WriteString</span><span>(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;Text&lt;/a&gt;&quot;</span><span>)
+</span><span>
+</span><span>	</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">i</span><span style="color:#fe8019;">:=</span><span style="color:#d3869b;">0</span><span>; </span><span style="color:#fdf4c1;">i</span><span style="color:#fe8019;">&lt;</span><span style="color:#d3869b;">10</span><span>; </span><span style="color:#fdf4c1;">i</span><span style="color:#fe8019;">++ </span><span>{
+</span><span>		</span><span style="color:#fdf4c1;">_buffer</span><span>.</span><span style="color:#fdf4c1;">WriteString</span><span>(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;&quot;</span><span>)
+</span><span>		</span><span style="color:#fdf4c1;">_buffer</span><span>.</span><span style="color:#fdf4c1;">WriteString</span><span>(</span><span style="color:#fabd2f;">string</span><span>(</span><span style="color:#fdf4c1;">i</span><span>))
+</span><span>		</span><span style="color:#fdf4c1;">_buffer</span><span>.</span><span style="color:#fdf4c1;">WriteString</span><span>(</span><span style="color:#b8bb26;">&quot;&lt;/a&gt;&quot;</span><span>)
+</span><span>	}
+</span><span>
+</span><span>	</span><span style="color:#fa5c4b;">var </span><span style="color:#fdf4c1;">t </span><span style="color:#fabd2f;">string </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;2&quot;
+</span><span>	</span><span style="color:#fdf4c1;">fmt</span><span>.</span><span style="color:#fdf4c1;">Println</span><span>(</span><span style="color:#fdf4c1;">t</span><span>)
+</span><span>
+</span><span>	</span><span style="color:#fdf4c1;">print</span><span style="color:#fe8019;">:=</span><span style="color:#fa5c4b;">func</span><span>() {
+</span><span>		</span><span style="color:#fdf4c1;">_buffer</span><span>.</span><span style="color:#fdf4c1;">WriteString</span><span>(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;text&lt;/a&gt;&quot;</span><span>)
+</span><span>	}
+</span><span>	</span><span style="color:#fabd2f;">print</span><span>()
+</span><span>
+</span><span>	</span><span style="color:#fdf4c1;">test1</span><span>(</span><span style="color:#fdf4c1;">_buffer</span><span>)
+</span><span>	</span><span style="color:#fdf4c1;">test2</span><span>(</span><span style="color:#fdf4c1;">_buffer</span><span>,</span><span style="color:#fdf4c1;">t</span><span>)
+</span><span>
+</span><span>	</span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">_buffer</span><span>.</span><span style="color:#fdf4c1;">String</span><span>()
+</span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test1</span><span>(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">bytes</span><span>.</span><span style="color:#fa5c4b;">Buffer</span><span>) {
+</span><span>	</span><span style="color:#fdf4c1;">_buffer</span><span>.</span><span style="color:#fdf4c1;">WriteString</span><span>(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;test1&lt;/a&gt;&quot;</span><span>)
+</span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test2</span><span>(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">bytes</span><span>.</span><span style="color:#fa5c4b;">Buffer</span><span>, </span><span style="color:#fdf4c1;">t </span><span style="color:#fabd2f;">string</span><span>) {
+</span><span>	</span><span style="color:#fdf4c1;">_buffer</span><span>.</span><span style="color:#fdf4c1;">WriteString</span><span>(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;test&quot;</span><span>)
+</span><span>	</span><span style="color:#fdf4c1;">_buffer</span><span>.</span><span style="color:#fdf4c1;">WriteString</span><span>(</span><span style="color:#fdf4c1;">t</span><span>)
+</span><span>	</span><span style="color:#fdf4c1;">_buffer</span><span>.</span><span style="color:#fdf4c1;">WriteString</span><span>(</span><span style="color:#b8bb26;">&quot;&lt;/a&gt;&quot;</span><span>)
+</span><span>}
+</span></code></pre>
+<p>然后就可以直接调用里面的函数作为<code>http.HandleFunc</code></p>
+<h2 id="shi-yong-bang-zhu">使用帮助</h2>
+<pre data-lang="shell" style="background-color:#282828;color:#fdf4c1aa;" class="language-shell "><code class="language-shell" data-lang="shell"><span>$ go run GoHTML.go
+</span><span>
+</span><span> ██████╗         ██╗  ██╗████████╗███╗   ███╗██╗
+</span><span>██╔════╝  █████╗ ██║  ██║╚══██╔══╝████╗ ████║██║
+</span><span>██║  ███╗██╔══██╗███████║   ██║   ██╔████╔██║██║
+</span><span>██║   ██║██║  ██║██╔══██║   ██║   ██║╚██╔╝██║██║
+</span><span>╚██████╔╝╚█████╔╝██║  ██║   ██║   ██║ ╚═╝ ██║███████╗
+</span><span> ╚═════╝  ╚════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝╚══════╝
+</span><span>=====================================================
+</span><span>GoHTML使用帮助:
+</span><span>===============
+</span><span>
+</span><span>命令结构:
+</span><span>  命令 [参数] &lt;模板文件夹路径&gt;
+</span><span>
+</span><span>参数：
+</span><span>  -dl &lt;字符串&gt;     | 默认：{{      | 左分隔符样式
+</span><span>  -dr &lt;字符串&gt;     | 默认：}}      | 右分隔符样式
+</span><span>  -suffix &lt;字符串&gt; | 默认：gohtml  | GoHTML模板文件后缀
+</span><span>  -buffer &lt;字符串&gt; | 默认：_buffer | 缓冲器变量名称
+</span><span>
+</span><span>举例：
+</span><span>  $ gohtml -dl &lt;{ -dr }&gt; -suffix temp -buffer buf /home/iovxw/gocode/web/view
+</span><span>   | 则会将
+</span><span>   | /home/iovxw/gocode/web/view
+</span><span>   | 里面所有temp为后缀的文件转换为go文件后放到同一文件夹内
+</span><span>   | 将缓冲器变量名称设为“buf”
+</span><span>   | 并设置左分隔符为“&lt;{” ，右分割符为“}&gt;”
+</span><span>
+</span><span>备注：
+</span><span>  方括号[]为选填项目，尖括号&lt;&gt;为必填项目
+</span></code></pre>
+<h2 id="yuan-ma-gui-fan">源码规范</h2>
+<p>作为<code>http.HandleFunc</code>的函数，必须返回值只有一个<code>string</code>（因为多了就不符合<code>http.HandleFunc</code>的要求了）</p>
+<p>然后里面必须创建一个类型为<code>*bytes.Buffer</code>的变量，变量名称需要和设置的一样（默认是<code>_buffer</code>）。这个缓冲器是用于存放要输出的HTML代码的</p>
+<p>然后作为<code>http.HandleFunc</code>的函数的返回值需要是<code>_buffer.String()</code>，如果你自定义了缓冲器变量名称，需要相应的改变</p>
+<p>负责处理部分html的函数，推荐写成上面例子里的样式（接收一个缓冲器变量），就像：</p>
+<pre data-lang="go" style="background-color:#282828;color:#fdf4c1aa;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test1</span><span>(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">bytes</span><span>.</span><span style="color:#fa5c4b;">Buffer</span><span>) {
+</span><span>    </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1;">test1</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;
+</span><span>}
+</span></code></pre>
+<p>因为会转换成：</p>
+<pre data-lang="go" style="background-color:#282828;color:#fdf4c1aa;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">test1</span><span>(</span><span style="color:#fdf4c1;">_buffer </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">bytes</span><span>.</span><span style="color:#fa5c4b;">Buffer</span><span>) {
+</span><span>    </span><span style="color:#fdf4c1;">_buffer</span><span>.</span><span style="color:#fdf4c1;">WriteString</span><span>(</span><span style="color:#b8bb26;">&quot;&lt;a&gt;test1&lt;/a&gt;&quot;</span><span>)
+</span><span>}
+</span></code></pre>
+<p>这个样子</p>
+<p>当然你要是写成函数里新建一个缓冲器变量然后再<code>return</code>也是没问题的</p>
+<p>不过那样就需要在使用函数的地方再加一个输出了（相当麻烦）</p>
+<p>所以就乖乖按照标准写吧</p>
+<p>然后还有一点要注意</p>
+<p>就是分隔符输出变量那里，比如<code>{​{t}}</code></p>
+<p>这里的分隔符只有在HTML中才会被转换，就像<code>&lt;a&gt;{​{t}}&lt;/a&gt;</code></p>
+<p>写在别的地方是不会转换的，比如：</p>
+<pre data-lang="go" style="background-color:#282828;color:#fdf4c1aa;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;
+</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1;">i</span><span style="color:#fe8019;">==</span><span style="color:#d3869b;">0 </span><span>{
+</span><span>    {​{</span><span style="color:#fdf4c1;">t1</span><span>}}
+</span><span>}</span><span style="color:#fa5c4b;">else</span><span>{
+</span><span>    {​{</span><span style="color:#fdf4c1;">t2</span><span>}}
+</span><span>}
+</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;
+</span></code></pre>
+<p>必须写成</p>
+<pre data-lang="go" style="background-color:#282828;color:#fdf4c1aa;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1;">i</span><span style="color:#fe8019;">==</span><span style="color:#d3869b;">0 </span><span>{
+</span><span>    </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;</span><span>{​{</span><span style="color:#fdf4c1;">t1</span><span>}}</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;
+</span><span>}</span><span style="color:#fa5c4b;">else</span><span>{
+</span><span>    </span><span style="color:#fe8019;">&lt;</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;</span><span>{​{</span><span style="color:#fdf4c1;">t2</span><span>}}</span><span style="color:#fe8019;">&lt;/</span><span style="color:#fdf4c1;">a</span><span style="color:#fe8019;">&gt;
+</span><span>}
+</span></code></pre>
+<p>这样才可以</p>
+<h2 id="zi-dong-zhuan-huan">自动转换</h2>
+<p>每次更新完模板后都要手动执行一次转换工具一定是超麻烦的</p>
+<p>所以需要自动的工具</p>
+<p>这里推荐<a href="https://github.com/Unknwon">Unknwon</a>的<a href="https://github.com/Unknwon/bra/">BRA</a>（名字好像有点奇怪？），当然其他相似功能的工具也是可以的（如果有更好的还拜托推荐一下）</p>
+<p>具体使用方法这里就不说了，自己去看吧</p>
+<h2 id="xia-zai">下载</h2>
+<p><a href="http://gobuild.io/github.com/iovxw/GoHTML"><img src="http://gobuild.io/badge/github.com/iovxw/GoHTML/downloads.svg" alt="Gobuild Download" /></a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/kengdie/">在写一个新的静态博客生成工具</a></h1>
+              <div class="info">
+                <h2>轮子、轮子、轮</h2>
+                <time>2014-10-02 00:00</time>
+              </div>
+              
+                <p>目标是“完全没有可定制性”</p>
+<p>模板已经写好了</p>
+<p>但是后端基本没写</p>
+<p>而且因为Golang本身的template包实在不好用</p>
+<p>于是准备重写一个（又是大坑）</p>
+<p>然后……</p>
+<p>估计就没有然后了……</p>
+<p><img src="https://iovxw.net/p/kengdie/0.png" alt="" /></p>
+<p><img src="https://iovxw.net/p/kengdie/1.png" alt="" /></p>
+<p><img src="https://iovxw.net/p/kengdie/2.png" alt="" /></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/new-highlight/">换了一个高亮插件</a></h1>
+              <div class="info">
+                <h2>还是因为懒……</h2>
+                <time>2014-09-03 00:00</time>
+              </div>
+              
+                <p>这个高亮脚本就叫做highlightjs</p>
+<p>因为主题比较多</p>
+<p>所以就直接换成这个了</p>
+<p>支持92种语言和49种高亮主题</p>
+<p>官网：<br />
+https://highlightjs.org</p>
+<p>主题列表&amp;预览：
+https://highlightjs.org/static/test.html</p>
+<pre data-lang="go" style="background-color:#282828;color:#fdf4c1aa;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#fa5c4b;">package </span><span style="color:#fdf4c1;">main
+</span><span>
+</span><span style="color:#fa5c4b;">import </span><span>(
+</span><span>	</span><span style="color:#b8bb26;">&quot;fmt&quot;
+</span><span>	</span><span style="color:#b8bb26;">&quot;math/rand&quot;
+</span><span>	</span><span style="color:#b8bb26;">&quot;sync/atomic&quot;
+</span><span>	</span><span style="color:#b8bb26;">&quot;time&quot;
+</span><span>)
+</span><span>
+</span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">readOp </span><span style="color:#fa5c4b;">struct </span><span>{
+</span><span>	</span><span style="color:#fdf4c1;">key  </span><span style="color:#fabd2f;">int
+</span><span>	</span><span style="color:#fdf4c1;">resp </span><span style="color:#fa5c4b;">chan </span><span style="color:#fabd2f;">int
+</span><span>}
+</span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">writeOp </span><span style="color:#fa5c4b;">struct </span><span>{
+</span><span>	</span><span style="color:#fdf4c1;">key  </span><span style="color:#fabd2f;">int
+</span><span>	</span><span style="color:#fdf4c1;">val  </span><span style="color:#fabd2f;">int
+</span><span>	</span><span style="color:#fdf4c1;">resp </span><span style="color:#fa5c4b;">chan </span><span style="color:#fabd2f;">bool
+</span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">main</span><span>() {
+</span><span>
+</span><span>	</span><span style="color:#fa5c4b;">var </span><span style="color:#fdf4c1;">ops </span><span style="color:#fabd2f;">int64
+</span><span>
+</span><span>	</span><span style="color:#fdf4c1;">reads </span><span style="color:#fe8019;">:= </span><span style="color:#fabd2f;">make</span><span>(</span><span style="color:#fa5c4b;">chan </span><span style="color:#fe8019;">*</span><span style="color:#fa5c4b;">readOp</span><span>)
+</span><span>	</span><span style="color:#fdf4c1;">writes </span><span style="color:#fe8019;">:= </span><span style="color:#fabd2f;">make</span><span>(</span><span style="color:#fa5c4b;">chan </span><span style="color:#fe8019;">*</span><span style="color:#fa5c4b;">writeOp</span><span>)
+</span><span>
+</span><span>	</span><span style="color:#fa5c4b;">go func</span><span>() {
+</span><span>		</span><span style="color:#fa5c4b;">var </span><span style="color:#fdf4c1;">state </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">make</span><span>(</span><span style="color:#fa5c4b;">map</span><span>[</span><span style="color:#fabd2f;">int</span><span>]</span><span style="color:#fabd2f;">int</span><span>)
+</span><span>		</span><span style="color:#fa5c4b;">for </span><span>{
+</span><span>			</span><span style="color:#fa5c4b;">select </span><span>{
+</span><span>			</span><span style="color:#fa5c4b;">case </span><span style="color:#fdf4c1;">read </span><span style="color:#fe8019;">:= &lt;-</span><span style="color:#fdf4c1;">reads</span><span>:
+</span><span>				</span><span style="color:#fdf4c1;">read</span><span>.</span><span style="color:#fdf4c1;">resp </span><span style="color:#fe8019;">&lt;- </span><span style="color:#fdf4c1;">state</span><span>[</span><span style="color:#fdf4c1;">read</span><span>.</span><span style="color:#fdf4c1;">key</span><span>]
+</span><span>			</span><span style="color:#fa5c4b;">case </span><span style="color:#fdf4c1;">write </span><span style="color:#fe8019;">:= &lt;-</span><span style="color:#fdf4c1;">writes</span><span>:
+</span><span>				</span><span style="color:#fdf4c1;">state</span><span>[</span><span style="color:#fdf4c1;">write</span><span>.</span><span style="color:#fdf4c1;">key</span><span>] </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">write</span><span>.</span><span style="color:#fdf4c1;">val
+</span><span>				</span><span style="color:#fdf4c1;">write</span><span>.</span><span style="color:#fdf4c1;">resp </span><span style="color:#fe8019;">&lt;- </span><span style="color:#d3869b;">true
+</span><span>			}
+</span><span>		}
+</span><span>	}()
+</span><span>
+</span><span>	</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">r </span><span style="color:#fe8019;">:= </span><span style="color:#d3869b;">0</span><span>; </span><span style="color:#fdf4c1;">r </span><span style="color:#fe8019;">&lt; </span><span style="color:#d3869b;">100</span><span>; </span><span style="color:#fdf4c1;">r</span><span style="color:#fe8019;">++ </span><span>{
+</span><span>		</span><span style="color:#fa5c4b;">go func</span><span>() {
+</span><span>			</span><span style="color:#fa5c4b;">for </span><span>{
+</span><span>				</span><span style="color:#fdf4c1;">read </span><span style="color:#fe8019;">:= &amp;</span><span style="color:#fdf4c1;">readOp</span><span>{
+</span><span>					</span><span style="color:#fdf4c1;">key</span><span>:  </span><span style="color:#fdf4c1;">rand</span><span>.</span><span style="color:#fdf4c1;">Intn</span><span>(</span><span style="color:#d3869b;">5</span><span>),
+</span><span>					</span><span style="color:#fdf4c1;">resp</span><span>: </span><span style="color:#fabd2f;">make</span><span>(</span><span style="color:#fa5c4b;">chan </span><span style="color:#fabd2f;">int</span><span>)}
+</span><span>				</span><span style="color:#fdf4c1;">reads </span><span style="color:#fe8019;">&lt;- </span><span style="color:#fdf4c1;">read
+</span><span>				</span><span style="color:#fe8019;">&lt;-</span><span style="color:#fdf4c1;">read</span><span>.</span><span style="color:#fdf4c1;">resp
+</span><span>				</span><span style="color:#fdf4c1;">atomic</span><span>.</span><span style="color:#fdf4c1;">AddInt64</span><span>(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">ops</span><span>, </span><span style="color:#d3869b;">1</span><span>)
+</span><span>			}
+</span><span>		}()
+</span><span>	}
+</span><span>
+</span><span>	</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">w </span><span style="color:#fe8019;">:= </span><span style="color:#d3869b;">0</span><span>; </span><span style="color:#fdf4c1;">w </span><span style="color:#fe8019;">&lt; </span><span style="color:#d3869b;">10</span><span>; </span><span style="color:#fdf4c1;">w</span><span style="color:#fe8019;">++ </span><span>{
+</span><span>		</span><span style="color:#fa5c4b;">go func</span><span>() {
+</span><span>			</span><span style="color:#fa5c4b;">for </span><span>{
+</span><span>				</span><span style="color:#fdf4c1;">write </span><span style="color:#fe8019;">:= &amp;</span><span style="color:#fdf4c1;">writeOp</span><span>{
+</span><span>					</span><span style="color:#fdf4c1;">key</span><span>:  </span><span style="color:#fdf4c1;">rand</span><span>.</span><span style="color:#fdf4c1;">Intn</span><span>(</span><span style="color:#d3869b;">5</span><span>),
+</span><span>					</span><span style="color:#fdf4c1;">val</span><span>:  </span><span style="color:#fdf4c1;">rand</span><span>.</span><span style="color:#fdf4c1;">Intn</span><span>(</span><span style="color:#d3869b;">100</span><span>),
+</span><span>					</span><span style="color:#fdf4c1;">resp</span><span>: </span><span style="color:#fabd2f;">make</span><span>(</span><span style="color:#fa5c4b;">chan </span><span style="color:#fabd2f;">bool</span><span>)}
+</span><span>				</span><span style="color:#fdf4c1;">writes </span><span style="color:#fe8019;">&lt;- </span><span style="color:#fdf4c1;">write
+</span><span>				</span><span style="color:#fe8019;">&lt;-</span><span style="color:#fdf4c1;">write</span><span>.</span><span style="color:#fdf4c1;">resp
+</span><span>				</span><span style="color:#fdf4c1;">atomic</span><span>.</span><span style="color:#fdf4c1;">AddInt64</span><span>(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">ops</span><span>, </span><span style="color:#d3869b;">1</span><span>)
+</span><span>			}
+</span><span>		}()
+</span><span>	}
+</span><span>
+</span><span>	</span><span style="color:#fdf4c1;">time</span><span>.</span><span style="color:#fdf4c1;">Sleep</span><span>(</span><span style="color:#fdf4c1;">time</span><span>.</span><span style="color:#fdf4c1;">Second</span><span>)
+</span><span>
+</span><span>	</span><span style="color:#fdf4c1;">opsFinal </span><span style="color:#fe8019;">:= </span><span style="color:#fdf4c1;">atomic</span><span>.</span><span style="color:#fdf4c1;">LoadInt64</span><span>(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">ops</span><span>)
+</span><span>	</span><span style="color:#fdf4c1;">fmt</span><span>.</span><span style="color:#fdf4c1;">Println</span><span>(</span><span style="color:#b8bb26;">&quot;ops:&quot;</span><span>, </span><span style="color:#fdf4c1;">opsFinal</span><span>)
+</span><span>}
+</span></code></pre>
+
+              
+            </article>
+          
+        
+        
+        <nav>
+          
+          <a href="https://iovxw.net/n/6/">PREV</a>
+          
+          
+          <a href="https://iovxw.net/n/8/">NEXT</a>
+          
+        </nav>
+        
+      
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

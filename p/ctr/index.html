@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="简单到不用讲。异或！XOR！">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>块密码的 CTR 计数器模式 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,17 +316,17 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
@@ -322,7 +336,7 @@
     <h1>块密码的 CTR 计数器模式</h1>
     <div class="info"><h2>简单到不用讲。异或！XOR！</h2><time>2015-09-25 00:00</time></div>
     <p>块加密流加密之类的就不说了，只是单独说一下这个加密模式</p>
-<!-- more -->
+<span id="continue-reading"></span>
 <hr />
 <p>加密:</p>
 <p><img src="https://img.vim-cn.com/40/11dd9afbfff13f3e30abc05e629ede5ee6f7df.svg" alt="https://img.vim-cn.com/40/11dd9afbfff13f3e30abc05e629ede5ee6f7df.svg" /></p>
@@ -338,87 +352,90 @@
 <p>又因为是用的计数器，块之前的加密没有直接联系，所以只要知道块的位置就可以直接加密解密，并行加解密也成为可能（在多处理器上优势大）</p>
 <hr />
 <p>最后附上肯定没人看的 golang 的 CTR 实现：</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;font-style:italic;color:#928374;">// Copyright 2009 The Go Authors. All rights reserved.
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">// Use of this source code is governed by a BSD-style
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">// license that can be found in the LICENSE file.
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">// Counter (CTR) mode.
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">// CTR converts a block cipher into a stream cipher by
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">// repeatedly encrypting an incrementing counter and
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">// xoring the resulting stream of data with the input.
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">// See NIST SP 800-38A, pp 13-15
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">package</span><span style="background-color:#282828;color:#fdf4c1aa;"> cipher
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">type </span><span style="background-color:#282828;color:#8ec07c;">ctr </span><span style="background-color:#282828;color:#fa5c4b;">struct </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">b</span><span style="background-color:#282828;color:#fdf4c1aa;">       Block
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">ctr     </span><span style="background-color:#282828;color:#fdf4c1aa;">[]</span><span style="background-color:#282828;color:#fa5c4b;">byte
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">out     </span><span style="background-color:#282828;color:#fdf4c1aa;">[]</span><span style="background-color:#282828;color:#fa5c4b;">byte
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">outUsed </span><span style="background-color:#282828;color:#fa5c4b;">int
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">const</span><span style="background-color:#282828;color:#fdf4c1aa;"> streamBufferSize </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#d3869b;">512
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">// NewCTR returns a Stream which encrypts/decrypts using the given Block in
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">// counter mode. The length of iv must be the same as the Block&#39;s block size.
-</span><span style="background-color:#282828;color:#fa5c4b;">func </span><span style="background-color:#282828;color:#8ec07c;">NewCTR</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">block</span><span style="background-color:#282828;color:#fdf4c1aa;"> Block, </span><span style="background-color:#282828;color:#fdf4c1;">iv </span><span style="background-color:#282828;color:#fdf4c1aa;">[]</span><span style="background-color:#282828;color:#fa5c4b;">byte</span><span style="background-color:#282828;color:#fdf4c1aa;">) Stream {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fabd2f;">len</span><span style="background-color:#282828;color:#fdf4c1;">(iv) </span><span style="background-color:#282828;color:#fe8019;">!=</span><span style="background-color:#282828;color:#fdf4c1aa;"> block</span><span style="background-color:#282828;color:#fdf4c1;">.BlockSize() </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fabd2f;">panic</span><span style="background-color:#282828;color:#fdf4c1;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;cipher.NewCTR: IV length must equal block size&quot;</span><span style="background-color:#282828;color:#fdf4c1;">)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">bufSize </span><span style="background-color:#282828;color:#fe8019;">:=</span><span style="background-color:#282828;color:#fdf4c1aa;"> streamBufferSize
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">if</span><span style="background-color:#282828;color:#fdf4c1aa;"> bufSize </span><span style="background-color:#282828;color:#fe8019;">&lt;</span><span style="background-color:#282828;color:#fdf4c1aa;"> block</span><span style="background-color:#282828;color:#fdf4c1;">.BlockSize() </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">bufSize </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> block</span><span style="background-color:#282828;color:#fdf4c1;">.BlockSize()
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">return </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fdf4c1aa;">ctr{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#8ec07c;">b</span><span style="background-color:#282828;color:#fdf4c1aa;">:       block,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#8ec07c;">ctr</span><span style="background-color:#282828;color:#fdf4c1aa;">:     </span><span style="background-color:#282828;color:#fdf4c1;">dup(iv)</span><span style="background-color:#282828;color:#fdf4c1aa;">,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#8ec07c;">out</span><span style="background-color:#282828;color:#fdf4c1aa;">:     </span><span style="background-color:#282828;color:#fabd2f;">make</span><span style="background-color:#282828;color:#fdf4c1;">([]</span><span style="background-color:#282828;color:#fa5c4b;">byte</span><span style="background-color:#282828;color:#fdf4c1;">, </span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1;">, bufSize)</span><span style="background-color:#282828;color:#fdf4c1aa;">,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#8ec07c;">outUsed</span><span style="background-color:#282828;color:#fdf4c1aa;">: </span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">,
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">func </span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">x </span><span style="background-color:#282828;color:#fe8019;">*</span><span style="background-color:#282828;color:#fdf4c1aa;">ctr) </span><span style="background-color:#282828;color:#8ec07c;">refill</span><span style="background-color:#282828;color:#fdf4c1aa;">() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">remain </span><span style="background-color:#282828;color:#fe8019;">:= </span><span style="background-color:#282828;color:#fabd2f;">len</span><span style="background-color:#282828;color:#fdf4c1;">(x.out) </span><span style="background-color:#282828;color:#fe8019;">-</span><span style="background-color:#282828;color:#fdf4c1aa;"> x.</span><span style="background-color:#282828;color:#fdf4c1;">outUsed
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">if</span><span style="background-color:#282828;color:#fdf4c1aa;"> remain </span><span style="background-color:#282828;color:#fe8019;">&gt;</span><span style="background-color:#282828;color:#fdf4c1aa;"> x.</span><span style="background-color:#282828;color:#fdf4c1;">outUsed </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">return
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fabd2f;">copy</span><span style="background-color:#282828;color:#fdf4c1;">(x.out, x.out[x.outUsed:])
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">x.</span><span style="background-color:#282828;color:#fdf4c1;">out </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> x.</span><span style="background-color:#282828;color:#fdf4c1;">out</span><span style="background-color:#282828;color:#fdf4c1aa;">[:</span><span style="background-color:#282828;color:#fabd2f;">cap</span><span style="background-color:#282828;color:#fdf4c1;">(x.out)</span><span style="background-color:#282828;color:#fdf4c1aa;">]
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">bs </span><span style="background-color:#282828;color:#fe8019;">:=</span><span style="background-color:#282828;color:#fdf4c1aa;"> x.</span><span style="background-color:#282828;color:#fdf4c1;">b.BlockSize()
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">for</span><span style="background-color:#282828;color:#fdf4c1aa;"> remain </span><span style="background-color:#282828;color:#fe8019;">&lt; </span><span style="background-color:#282828;color:#fabd2f;">len</span><span style="background-color:#282828;color:#fdf4c1;">(x.out)</span><span style="background-color:#282828;color:#fe8019;">-</span><span style="background-color:#282828;color:#fdf4c1aa;">bs {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">x.</span><span style="background-color:#282828;color:#fdf4c1;">b.Encrypt(x.out[remain:], x.ctr)
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">remain </span><span style="background-color:#282828;color:#fe8019;">+=</span><span style="background-color:#282828;color:#fdf4c1aa;"> bs
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;font-style:italic;color:#928374;">// Increment counter
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">for </span><span style="background-color:#282828;color:#fdf4c1;">i </span><span style="background-color:#282828;color:#fe8019;">:= </span><span style="background-color:#282828;color:#fabd2f;">len</span><span style="background-color:#282828;color:#fdf4c1;">(x.ctr) </span><span style="background-color:#282828;color:#fe8019;">- </span><span style="background-color:#282828;color:#d3869b;">1</span><span style="background-color:#282828;color:#fdf4c1aa;">; i </span><span style="background-color:#282828;color:#fe8019;">&gt;= </span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">; i</span><span style="background-color:#282828;color:#fe8019;">-- </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">x.</span><span style="background-color:#282828;color:#fdf4c1;">ctr</span><span style="background-color:#282828;color:#fdf4c1aa;">[i]</span><span style="background-color:#282828;color:#fe8019;">++
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fa5c4b;">if</span><span style="background-color:#282828;color:#fdf4c1aa;"> x.</span><span style="background-color:#282828;color:#fdf4c1;">ctr</span><span style="background-color:#282828;color:#fdf4c1aa;">[i] </span><span style="background-color:#282828;color:#fe8019;">!= </span><span style="background-color:#282828;color:#d3869b;">0 </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">                </span><span style="background-color:#282828;color:#fa5c4b;">break
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">x.</span><span style="background-color:#282828;color:#fdf4c1;">out </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> x.</span><span style="background-color:#282828;color:#fdf4c1;">out</span><span style="background-color:#282828;color:#fdf4c1aa;">[:remain]
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">x.</span><span style="background-color:#282828;color:#fdf4c1;">outUsed </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#d3869b;">0
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">func </span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">x </span><span style="background-color:#282828;color:#fe8019;">*</span><span style="background-color:#282828;color:#fdf4c1aa;">ctr) </span><span style="background-color:#282828;color:#8ec07c;">XORKeyStream</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fdf4c1;">dst</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">src </span><span style="background-color:#282828;color:#fdf4c1aa;">[]</span><span style="background-color:#282828;color:#fa5c4b;">byte</span><span style="background-color:#282828;color:#fdf4c1aa;">) {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">for </span><span style="background-color:#282828;color:#fabd2f;">len</span><span style="background-color:#282828;color:#fdf4c1;">(src) </span><span style="background-color:#282828;color:#fe8019;">&gt; </span><span style="background-color:#282828;color:#d3869b;">0 </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">if</span><span style="background-color:#282828;color:#fdf4c1aa;"> x.</span><span style="background-color:#282828;color:#fdf4c1;">outUsed </span><span style="background-color:#282828;color:#fe8019;">&gt;= </span><span style="background-color:#282828;color:#fabd2f;">len</span><span style="background-color:#282828;color:#fdf4c1;">(x.out)</span><span style="background-color:#282828;color:#fe8019;">-</span><span style="background-color:#282828;color:#fdf4c1aa;">x.</span><span style="background-color:#282828;color:#fdf4c1;">b.BlockSize() </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">            </span><span style="background-color:#282828;color:#fdf4c1aa;">x</span><span style="background-color:#282828;color:#fdf4c1;">.refill()
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1;">n </span><span style="background-color:#282828;color:#fe8019;">:= </span><span style="background-color:#282828;color:#fdf4c1;">xorBytes(dst, src, x.out[x.outUsed:])
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">dst </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> dst[n:]
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">src </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> src[n:]
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">x.</span><span style="background-color:#282828;color:#fdf4c1;">outUsed </span><span style="background-color:#282828;color:#fe8019;">+=</span><span style="background-color:#282828;color:#fdf4c1aa;"> n
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span></pre>
+<pre data-lang="go" style="background-color:#282828;color:#fdf4c1aa;" class="language-go "><code class="language-go" data-lang="go"><span style="font-style:italic;color:#928374;">// Copyright 2009 The Go Authors. All rights reserved.
+</span><span style="font-style:italic;color:#928374;">// Use of this source code is governed by a BSD-style
+</span><span style="font-style:italic;color:#928374;">// license that can be found in the LICENSE file.
+</span><span>
+</span><span style="font-style:italic;color:#928374;">// Counter (CTR) mode.
+</span><span>
+</span><span style="font-style:italic;color:#928374;">// CTR converts a block cipher into a stream cipher by
+</span><span style="font-style:italic;color:#928374;">// repeatedly encrypting an incrementing counter and
+</span><span style="font-style:italic;color:#928374;">// xoring the resulting stream of data with the input.
+</span><span>
+</span><span style="font-style:italic;color:#928374;">// See NIST SP 800-38A, pp 13-15
+</span><span>
+</span><span style="color:#fa5c4b;">package </span><span style="color:#fdf4c1;">cipher
+</span><span>
+</span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">ctr </span><span style="color:#fa5c4b;">struct </span><span>{
+</span><span>	</span><span style="color:#fdf4c1;">b       </span><span style="color:#fa5c4b;">Block
+</span><span>	</span><span style="color:#fdf4c1;">ctr     </span><span>[]</span><span style="color:#fabd2f;">byte
+</span><span>	</span><span style="color:#fdf4c1;">out     </span><span>[]</span><span style="color:#fabd2f;">byte
+</span><span>	</span><span style="color:#fdf4c1;">outUsed </span><span style="color:#fabd2f;">int
+</span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">const </span><span style="color:#fdf4c1;">streamBufferSize </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">512
+</span><span>
+</span><span style="font-style:italic;color:#928374;">// NewCTR returns a Stream which encrypts/decrypts using the given Block in
+</span><span style="font-style:italic;color:#928374;">// counter mode. The length of iv must be the same as the Block&#39;s block size.
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">NewCTR</span><span>(</span><span style="color:#fdf4c1;">block </span><span style="color:#fa5c4b;">Block</span><span>, </span><span style="color:#fdf4c1;">iv </span><span>[]</span><span style="color:#fabd2f;">byte</span><span>) </span><span style="color:#fa5c4b;">Stream </span><span>{
+</span><span>	</span><span style="color:#fa5c4b;">if </span><span style="color:#fabd2f;">len</span><span>(</span><span style="color:#fdf4c1;">iv</span><span>) </span><span style="color:#fe8019;">!= </span><span style="color:#fdf4c1;">block</span><span>.</span><span style="color:#fdf4c1;">BlockSize</span><span>() {
+</span><span>		</span><span style="color:#fabd2f;">panic</span><span>(</span><span style="color:#b8bb26;">&quot;cipher.NewCTR: IV length must equal block size&quot;</span><span>)
+</span><span>	}
+</span><span>	</span><span style="color:#fdf4c1;">bufSize </span><span style="color:#fe8019;">:= </span><span style="color:#fdf4c1;">streamBufferSize
+</span><span>	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1;">bufSize </span><span style="color:#fe8019;">&lt; </span><span style="color:#fdf4c1;">block</span><span>.</span><span style="color:#fdf4c1;">BlockSize</span><span>() {
+</span><span>		</span><span style="color:#fdf4c1;">bufSize </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">block</span><span>.</span><span style="color:#fdf4c1;">BlockSize</span><span>()
+</span><span>	}
+</span><span>	</span><span style="color:#fa5c4b;">return </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">ctr</span><span>{
+</span><span>		</span><span style="color:#fdf4c1;">b</span><span>:       </span><span style="color:#fdf4c1;">block</span><span>,
+</span><span>		</span><span style="color:#fdf4c1;">ctr</span><span>:     </span><span style="color:#fdf4c1;">dup</span><span>(</span><span style="color:#fdf4c1;">iv</span><span>),
+</span><span>		</span><span style="color:#fdf4c1;">out</span><span>:     </span><span style="color:#fabd2f;">make</span><span>([]</span><span style="color:#fabd2f;">byte</span><span>, </span><span style="color:#d3869b;">0</span><span>, </span><span style="color:#fdf4c1;">bufSize</span><span>),
+</span><span>		</span><span style="color:#fdf4c1;">outUsed</span><span>: </span><span style="color:#d3869b;">0</span><span>,
+</span><span>	}
+</span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">func </span><span>(</span><span style="color:#fdf4c1;">x </span><span style="color:#fe8019;">*</span><span style="color:#fa5c4b;">ctr</span><span>) </span><span style="color:#8ec07c;">refill</span><span>() {
+</span><span>	</span><span style="color:#fdf4c1;">remain </span><span style="color:#fe8019;">:= </span><span style="color:#fabd2f;">len</span><span>(</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">out</span><span>) </span><span style="color:#fe8019;">- </span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">outUsed
+</span><span>	</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1;">remain </span><span style="color:#fe8019;">&gt; </span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">outUsed </span><span>{
+</span><span>		</span><span style="color:#fa5c4b;">return
+</span><span>	}
+</span><span>	</span><span style="color:#fabd2f;">copy</span><span>(</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">out</span><span>, </span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">out</span><span>[</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">outUsed</span><span>:])
+</span><span>	</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">out </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">out</span><span>[:</span><span style="color:#fabd2f;">cap</span><span>(</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">out</span><span>)]
+</span><span>	</span><span style="color:#fdf4c1;">bs </span><span style="color:#fe8019;">:= </span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">b</span><span>.</span><span style="color:#fdf4c1;">BlockSize</span><span>()
+</span><span>	</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">remain </span><span style="color:#fe8019;">&lt; </span><span style="color:#fabd2f;">len</span><span>(</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">out</span><span>)</span><span style="color:#fe8019;">-</span><span style="color:#fdf4c1;">bs </span><span>{
+</span><span>		</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">b</span><span>.</span><span style="color:#fdf4c1;">Encrypt</span><span>(</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">out</span><span>[</span><span style="color:#fdf4c1;">remain</span><span>:], </span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">ctr</span><span>)
+</span><span>		</span><span style="color:#fdf4c1;">remain </span><span style="color:#fe8019;">+= </span><span style="color:#fdf4c1;">bs
+</span><span>
+</span><span>		</span><span style="font-style:italic;color:#928374;">// Increment counter
+</span><span>		</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">i </span><span style="color:#fe8019;">:= </span><span style="color:#fabd2f;">len</span><span>(</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">ctr</span><span>) </span><span style="color:#fe8019;">- </span><span style="color:#d3869b;">1</span><span>; </span><span style="color:#fdf4c1;">i </span><span style="color:#fe8019;">&gt;= </span><span style="color:#d3869b;">0</span><span>; </span><span style="color:#fdf4c1;">i</span><span style="color:#fe8019;">-- </span><span>{
+</span><span>			</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">ctr</span><span>[</span><span style="color:#fdf4c1;">i</span><span>]</span><span style="color:#fe8019;">++
+</span><span>			</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">ctr</span><span>[</span><span style="color:#fdf4c1;">i</span><span>] </span><span style="color:#fe8019;">!= </span><span style="color:#d3869b;">0 </span><span>{
+</span><span>				</span><span style="color:#fa5c4b;">break
+</span><span>			}
+</span><span>		}
+</span><span>	}
+</span><span>	</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">out </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">out</span><span>[:</span><span style="color:#fdf4c1;">remain</span><span>]
+</span><span>	</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">outUsed </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">0
+</span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">func </span><span>(</span><span style="color:#fdf4c1;">x </span><span style="color:#fe8019;">*</span><span style="color:#fa5c4b;">ctr</span><span>) </span><span style="color:#8ec07c;">XORKeyStream</span><span>(</span><span style="color:#fdf4c1;">dst</span><span>, </span><span style="color:#fdf4c1;">src </span><span>[]</span><span style="color:#fabd2f;">byte</span><span>) {
+</span><span>	</span><span style="color:#fa5c4b;">for </span><span style="color:#fabd2f;">len</span><span>(</span><span style="color:#fdf4c1;">src</span><span>) </span><span style="color:#fe8019;">&gt; </span><span style="color:#d3869b;">0 </span><span>{
+</span><span>		</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">outUsed </span><span style="color:#fe8019;">&gt;= </span><span style="color:#fabd2f;">len</span><span>(</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">out</span><span>)</span><span style="color:#fe8019;">-</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">b</span><span>.</span><span style="color:#fdf4c1;">BlockSize</span><span>() {
+</span><span>			</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">refill</span><span>()
+</span><span>		}
+</span><span>		</span><span style="color:#fdf4c1;">n </span><span style="color:#fe8019;">:= </span><span style="color:#fdf4c1;">xorBytes</span><span>(</span><span style="color:#fdf4c1;">dst</span><span>, </span><span style="color:#fdf4c1;">src</span><span>, </span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">out</span><span>[</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">outUsed</span><span>:])
+</span><span>		</span><span style="color:#fdf4c1;">dst </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">dst</span><span>[</span><span style="color:#fdf4c1;">n</span><span>:]
+</span><span>		</span><span style="color:#fdf4c1;">src </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">src</span><span>[</span><span style="color:#fdf4c1;">n</span><span>:]
+</span><span>		</span><span style="color:#fdf4c1;">x</span><span>.</span><span style="color:#fdf4c1;">outUsed </span><span style="color:#fe8019;">+= </span><span style="color:#fdf4c1;">n
+</span><span>	}
+</span><span>}
+</span></code></pre>
+
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/ctr/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';

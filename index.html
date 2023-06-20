@@ -7,27 +7,27 @@
     <meta name="description" content="iovxw&#x27;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,27 +316,199 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
 
       
         
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/msm8916/">在 2023 年为骁龙 410 随身 WiFi 移植 postmarkerOS</a></h1>
+              <div class="info">
+                <h2>一些资料更新</h2>
+                <time>2023-02-22 00:00</time>
+              </div>
+              
+              <p><img src="https://iovxw.net/p/msm8916/0.webp" alt="" /></p>
+<p>在所有开发板价格疯涨, 树莓派价格翻了 4 倍成为理财产品的 2021 年, 这个只卖 10 块钱上下,
+凑几个优惠券甚至能 3 块钱包邮的 &quot;电子垃圾&quot; 成为了不少人的替代选择</p>
+<p>而今天, 到了 2023 年开发板价格仍然没有一丁点下降的今天,
+它也被迫成了正在为第三台 3D 打印机寻找上位机的我的选择(sad</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/msm8916/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
         
           
             <article>
-              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ugly-rust&#x2F;">Rust 100 黑</a></h1>
+              <h1><a class="title" href="https://iovxw.net/p/sky-on-avd/">在 Android 模拟器上运行光遇</a></h1>
+              <div class="info">
+                <h2>有钱还是直接买个 iPad 吧</h2>
+                <time>2021-10-04 00:16</time>
+              </div>
+              
+              <p><img src="https://iovxw.net/p/sky-on-avd/screenshot0.png" alt="" /></p>
+<p><em>Sky: Children of The Light</em> 这游戏, 可以说是对高级用户十分不友好了</p>
+<p>在 Android 上, 它只提供 arm64-v8a 的 binary, 直接拒绝高性能的 x86 平板以及模拟器</p>
+<p>它还不允许你自己调高画质, 有一个画质上限, 由厂商根据机型来决定你最高能跑什么画质</p>
+<p>而这个机型列表还不够全, 让你只能拿着顶级的 SoC 跑着 480p 30 帧的画面, 那云都是一团一团的马赛克</p>
+<p>对于一个靠画面的步行模拟游戏来说, 这不能忍</p>
+<p>所以这两天我折腾了一下在 PC 上运行它, 争取能在客厅躺在沙发上用电视玩最高画质</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/sky-on-avd/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/enable-call-record-on-pixel/">强制启用 Pixel Phone 的通话录音</a></h1>
+              <div class="info">
+                <h2>同样适用于第三方类 Pixel ROM</h2>
+                <time>2021-09-30 00:25</time>
+              </div>
+              
+              <p>Pixel 自带的电话 App 是支持录音以及自动录音的</p>
+<p>但由于法律原因, 录音只在部分国家可用, 自动录音更是只有印度能用</p>
+<p>虽然中国并没有相关法律问题, 但很明显我们并不能对 Google 有这方面的期待</p>
+<p>还是得自己动手, 丰衣足食</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/enable-call-record-on-pixel/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/park-external-hdd/">配置 Linux 关机时停转移动硬盘</a></h1>
+              <div class="info">
+                <h2>是 HDD 需要注意的</h2>
+                <time>2021-03-25 00:00</time>
+              </div>
+              
+              <p>距离上篇博文又是一年，不太妙</p>
+<p>我是不是只有每年 4 月才能想起来要写点什么？</p>
+<p>嗯这次提前一个月，有进步</p>
+<p>那么正文开始</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/park-external-hdd/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/kensington-orbit-trackball/">Kensington Orbit 轨迹球</a></h1>
+              <div class="info">
+                <h2>一整年没更新了，写点什么吧</h2>
+                <time>2020-04-12 17:13</time>
+              </div>
+              
+              <p><img src="https://iovxw.net/p/kensington-orbit-trackball/kensington_orbit_and_cat_feet.jpg" alt="" /></p>
+<p>最近右手手腕痛得要死</p>
+<p>因为鼠标</p>
+<p>想着不能再拖了，必须得换个输入方式</p>
+<p>就挑了一堆骨头后，入手了 Kensington Orbit with Scroll Ring</p>
+<p>这里写篇文章记录下，选择的过程，以及应该避开的坑</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/kensington-orbit-trackball/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/rust-closure-and-copy/">Rust 闭包环境捕获行为与 Copy trait</a></h1>
+              <div class="info">
+                <h2>历史遗留问题</h2>
+                <time>2019-04-28 23:01</time>
+              </div>
+              
+              <p>今天 Rust 群里有人遇到了反直觉的关于闭包的引用错误, 在群友合力排除各种干扰找到原因之后</p>
+<p>我们就又有了一个可以塞到 <a href="https://iovxw.net/p/ugly-rust/">100 黑</a> 里的坑 (悲)</p>
+<p>不过因为篇幅太长 (太罗嗦), 这里独立拆分出一篇文章讲解</p>
+<hr />
+<p>闭包在捕获环境时, 如不显式添加 <code>move</code> 关键字, 捕获的方法是由编译器推导的</p>
+<p>规则为: 如果捕获的变量在闭包内被引用, 或者可变引用, 那么就捕获到引用或可变引用</p>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let</span><span> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span>::new();
+</span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span>|| v.</span><span style="color:#fabd2f;">len</span><span>(); </span><span style="font-style:italic;color:#928374;">// v: &amp;String
+</span></code></pre>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/rust-closure-and-copy/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/intel-5ghz-ap/">Linux 下 Intel® 网卡开启 5Ghz AP</a></h1>
+              <div class="info">
+                <h2>最好还是换网卡</h2>
+                <time>2019-01-05 21:20</time>
+              </div>
+              
+              <p>Intel 家的网卡都禁止使用 5Ghz 开 AP, 只能开 2.4 的</p>
+<p>比如我的 9560, 可以说是旗舰网卡, 能跑 1.7Gbps, 强得一匹</p>
+<p>但却连个 5Ghz AP 都开不了</p>
+<p>周边 2.4Ghz 信道都满了，要它何用啊</p>
+<p>幸</p>
+<p>今日得一魔法, 可破此局</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/intel-5ghz-ap/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/fcitx5/">我也! 用上 fcitx5 了</a></h1>
+              <div class="info">
+                <h2>已然开发两年半了</h2>
+                <time>2018-05-13 15:39</time>
+              </div>
+              
+              <p>新 fcitx 很棒, 棒到甚至可以干掉 ibus 的服务然后直接使用 ibus 的 im module</p>
+<p>虽然目前没有配置界面也没有文档, 不过我们不需要!</p>
+<p>来上个图:</p>
+<p><img src="/p/fcitx5/0.png" alt="screenshot" /></p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/fcitx5/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/ugly-rust/">Rust 100 黑</a></h1>
               <div class="info">
                 <h2>不定期更新</h2>
                 <time>2018-03-28 23:30</time>
@@ -340,16 +526,14 @@
 <li>
 <p><strong>尾递归优化并不总是生效</strong></p>
 <p>当进行尾递归调用的作用域内有 <code>Drop</code> 变量存在时</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">recur</span><span style="background-color:#282828;color:#fdf4c1aa;">() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> x </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">vec!</span><span style="background-color:#282828;color:#fdf4c1aa;">[</span><span style="background-color:#282828;color:#d3869b;">false</span><span style="background-color:#282828;color:#fdf4c1aa;">];
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fabd2f;">recur</span><span style="background-color:#282828;color:#fdf4c1aa;">()
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span></pre></li>
-</ol>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">recur</span><span>() {
+</span><span>    </span><span style="color:#fa5c4b;">let</span><span> x </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">vec!</span><span>[</span><span style="color:#d3869b;">false</span><span>];
+</span><span>    </span><span style="color:#fabd2f;">recur</span><span>()
+</span><span>}
+</span></code></pre>
 
               <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ugly-rust&#x2F;">Read More…</a>
+                <a href="https://iovxw.net/p/ugly-rust/#continue-reading">Read More…</a>
               </div>
               
             </article>
@@ -357,7 +541,7 @@
         
           
             <article>
-              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coerce-unsized&#x2F;">Rust 隐式转换之 CoerceUnsized</a></h1>
+              <h1><a class="title" href="https://iovxw.net/p/rust-coerce-unsized/">Rust 隐式转换之 CoerceUnsized</a></h1>
               <div class="info">
                 <h2>标题看起来像一个系列, 然而并不一定有后续</h2>
                 <time>2018-03-23 17:53</time>
@@ -366,348 +550,24 @@
               <p>Rust 中有四种隐式类型转换 (别和我提回字怎么写), 其中三种都是为了简化代码, 就算没有隐式, 也可以显式地用其他方法写出来</p>
 <p>唯有 <a href="https://doc.rust-lang.org/core/ops/trait.CoerceUnsized.html"><code>CoerceUnsized</code></a> 比较特殊, 提供了一种抽象, 没有它就无法写出包含 DST(Dynamically-sized Type) 的智能指针</p>
 <p>像这样:</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> x: [</span><span style="background-color:#282828;color:#fa5c4b;">u8</span><span style="background-color:#282828;color:#fdf4c1aa;">; </span><span style="background-color:#282828;color:#d3869b;">3</span><span style="background-color:#282828;color:#fdf4c1aa;">] </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fdf4c1aa;">[</span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#d3869b;">0</span><span style="background-color:#282828;color:#fdf4c1aa;">];
-</span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> y: Box&lt;[</span><span style="background-color:#282828;color:#fa5c4b;">u8</span><span style="background-color:#282828;color:#fdf4c1aa;">]&gt; </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">Box</span><span style="background-color:#282828;color:#fdf4c1aa;">::new(x);
-</span></pre>
-              <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coerce-unsized&#x2F;">Read More…</a>
-              </div>
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;phantomdata-magic&#x2F;">PhantomData 黑魔法</a></h1>
-              <div class="info">
-                <h2>&amp;&#x27;a mut &amp;&#x27;a ()</h2>
-                <time>2018-03-14 00:17</time>
-              </div>
-              
-              <pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">use </span><span style="background-color:#282828;color:#fdf4c1aa;">std::marker::PhantomData;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">pub struct </span><span style="background-color:#282828;color:#8ec07c;">Magic</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a</span><span style="background-color:#282828;color:#fdf4c1aa;">&gt;(PhantomData&lt;</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a mut </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a </span><span style="background-color:#282828;color:#fdf4c1aa;">()</span><span style="background-color:#282828;color:#fe8019;">&gt;</span><span style="background-color:#282828;color:#fdf4c1aa;">);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">impl</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a</span><span style="background-color:#282828;color:#fdf4c1aa;">&gt; </span><span style="background-color:#282828;color:#8ec07c;">Magic</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a</span><span style="background-color:#282828;color:#fdf4c1aa;">&gt; {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">pub fn </span><span style="background-color:#282828;color:#8ec07c;">as_ref</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a </span><span style="background-color:#282828;color:#fdf4c1;">self</span><span style="background-color:#282828;color:#fdf4c1aa;">) -&gt; </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a Self </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fdf4c1;">self
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">main</span><span style="background-color:#282828;color:#fdf4c1aa;">() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> pin </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> Magic(PhantomData);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">pin.</span><span style="background-color:#282828;color:#fabd2f;">as_ref</span><span style="background-color:#282828;color:#fdf4c1aa;">();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">pin;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span></pre>
-              <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;phantomdata-magic&#x2F;">Read More…</a>
-              </div>
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;the-new-tokio&#x2F;">新 tokio 中的变动</a></h1>
-              <div class="info">
-                <h2>架构更新</h2>
-                <time>2018-02-08 12:03</time>
-              </div>
-              
-              <p>几个小时前, <a href="https://crates.io/crates/tokio/0.1.0"><em>tokio</em> 0.1.0</a> 正式发布了</p>
-<p>如果没有一直关注, 肯定是一脸茫然
-<img width="64em" src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='384' fill='white' display='block'%3E%3Cpath d='M219.7 12.7c-8.2 5.2-9.4 28-2 38.2 1 1 2.5 4 3.3 6 .8 2 2.7 5 4 7 1.6 2 3.2 5 3.5 7 .4 1 1 2 1.5 2 .7 0 4 5 8.6 13 .7 1 2.6 3 4.3 5 2 2 4 6 2 6l-25-4c-3-2-40-2-45 0l-11 2c-3 0-6 1-7 2s-3 2-6 2-7 2-10 3c-6 3-9 2-9-2l-2-4c-4-9-6-13-7-14-3-4-4-5-5-7s-4-6-7-10-5.8-7-5.8-8-1-2-2-3-2-2-2-3-.3-1.6-1-1.6-4-2.6-8-6c-9.4-8.7-14-12-17-13-1-.6-3-1.6-4-2.4-4.6-4-16-2-21 4-5.5 7-1 31 8.6 47 2.3 4 5 9 6 10.5.4 2 2 4 3.3 5 3 2 11 10 11 12 0 1 2 4 4.3 6 3 3 5 5 5 6l6 5.6c8 6.5 8 6-2 17-5 5-10 11-12 14-1 3-4 6-5 7-3 2.8-9 14-10 18.8 0 2.3-1 5-2 6s-1 4-2 7c0 3-1 7.5-2 9.4-1 2-1 5.6-1 7.5 0 2-.7 5-1 6.4-2 4-3 28.8-2 38.4 3 17.5 4 27 6 33.4 3.7 9.4 9 21.3 11 22 1 .3 1.7 1 1.7 1.7 0 1 1.6 3 3 5l8.5 10c3 3.6 7 7.2 10 9 3.5 1.5 5 3 5 4.4 0 3 1.3 4 5 5 1.3 1 4.2 2 6.4 4s5.5 4 7 5c3 2 3 4.5 2 12.6l-1.7 10-1 5.7h5c5.7 0 5 1 7-15.5 1.4-14.3-.4-18.5-10-24-8.6-4.5-37-32.4-37-36 0-1-.5-2-1-3-1 0-7-13-7-14s-1-3-2-5-2-6-2-8c0-2.7-1-8.6-2-13.6-3-13.3-2.7-29.2 1.3-52 2.8-15.6 7-28 9-28 .6 0 .8-1 0-2.6-1-3.5 5.7-13.7 13.8-22.4l5-7c1.8-2.3 6-7 9-10 10-8.6 9.8-9.4-6-22.3-2.3-2.5-5-5-5.5-6s-4-5-7.5-9c-3.4-4-7-8.5-8-10-.6-1.5-2.3-4-4-6-5.3-7-14-22.7-14-26 0-1-.4-4-1-6-4-10.7 1-22 7-17 .5.2 1.4.4 2 0 1-1 8 3 12 7 12 12.5 24.6 26 25.6 30 0 1 1 2 2 3s1.5 2 1.5 2.5.3 1 1.3 2 2 3 3 4l3 5c1 2 2 4 2 6s2 5 3 7 3 5 3 6c2 7.5 8 11 12 6 1-1.4 3-3 5-3.4 2 0 4-1 6-2 1-1 4-2 7-2.3 2 0 7-1 9-2 10-3 38-4 54-2 11.5 1 26 4.2 29 6 2 1 4 2 5 2s3 1 5 2c5 3 7.2-3.8 3-9l-3-4c0-1-1.4-2-3-3l-4.5-5-6-9-6-9-4-5c-1.4-1-2.6-3.4-2.6-5 0-1-1-3.4-1.7-5-11-19-15-35-10-41 2.6-3 13 5 17 12.7 1 1 3 5 5 7.3l5 7 4 6.7c1.3 2 3.3 5 4.3 6 2 2.5 13 22 19 33 2.6 5 7 17 10.5 28 1 3 8 13 9 13l5 3.5s5 3.4 5.7 3.4c1.5 0 17.6 16 17.6 17 0 2 3 7.6 4 7.6 3.8 0 15 23 19.8 38 3.6 12 5 40 2 47l-2 8.3c-1 6.6-8.2 25.6-10.5 27-.5.7-1.7 3-3 5.6s-2.4 5-3 5c-.5 0-2.4 2.2-4.3 5-4 6-18.3 20-22.5 22l-3.6 2c-1 2-9 7-24 14-4 2-9 3.5-16 4.2-10 1-10.6 2-12 30v11h11l1-12.3c2-20 1-18 5-18 5-.6 11-2 13-4 1-1 3-2 5-2s5-1 6-2c2-1.5 8-5 13-8 5.6-3.5 13-9 18-14 5-4.7 9-8 9-8 .7 0 1-1 1-2 1-1 2-2.6 4-3.7 1.7-1 4-4 5-6.2s3-5.2 4-6c2-1.6 5-8 9-17 1-1.7 2-6 3-9.6 4-17 5-19.8 6-21 2.5-5 .2-37-3-44.7l-2.5-8c-3-11-5.7-17.6-10.7-25-3-4.5-5-8.4-5-9 0-1.4-15.5-19-21-23.4l-9-8c-2-2-4.7-3.4-6-3.4-5.8 0-9-6-14.4-27.3-.7-2-2-6-3-8-8.6-16-12-23-13-24.2-1-.8-2-2.6-2.8-4-2-3.8-3.7-6.6-5-8.5-1.7-2-3-5-5-9-2-3-7.7-12-9.5-14-.4-1-3-4-5-7-10-12-21-17.6-28.2-13m85 174c-2.6 3-2.6 4-.3 6 3.6 3 6 1.5 6-4 0-4-3-5-6-2m-149 3c-3.4 1.6.6 9 4.5 8 3-.3 5-5 4-7 0-2-5-2.5-8-1m74 36c-21.2 1-24 1-24 3.5 0 4 4.4 5 18.4 3.8 7-.7 17-1 21.2-1 9 0 12-1.8 10-5-1-2-1.6-2-25-1' fill-rule='evenodd'/%3E%3C/svg%3E"></p>
-<p><em>tokio-core</em> 呢? <code>reactor::Core</code> 又跑哪去了??</p>
-<p>其实这是计划了差不多半年的一个变动</p>
-<p>因为之前的 <em>futures</em> 和 <em>tokio</em> 都只是 &quot;能用&quot; 的程度, 在被大量使用后暴露出了很多设计上的问题, 并且还有不少要放弃向后兼容才能修复</p>
-<p>所以这次就攒到一起重新设计顺便分了个新的 crate</p>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let</span><span> x: [</span><span style="color:#fa5c4b;">u8</span><span>; </span><span style="color:#d3869b;">3</span><span>] </span><span style="color:#fe8019;">= </span><span>[</span><span style="color:#d3869b;">0</span><span>, </span><span style="color:#d3869b;">0</span><span>, </span><span style="color:#d3869b;">0</span><span>];
+</span><span style="color:#fa5c4b;">let</span><span> y: </span><span style="color:#fabd2f;">Box</span><span>&lt;[</span><span style="color:#fa5c4b;">u8</span><span>]&gt; </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">Box</span><span>::new(x);
+</span></code></pre>
 
               <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;the-new-tokio&#x2F;">Read More…</a>
+                <a href="https://iovxw.net/p/rust-coerce-unsized/#continue-reading">Read More…</a>
               </div>
               
             </article>
           
         
-          
-            <article>
-              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;curve-interpolation&#x2F;">统计图的曲线插值</a></h1>
-              <div class="info">
-                <h2>不会数学还想写图形界面?</h2>
-                <time>2017-11-13 20:58</time>
-              </div>
-              
-              <p>很多程序, 比如各种监视器, 需要实时绘制统计图来将数据直观的展示给用户</p>
-<p>而这个实时, 却又不是那么的 &quot;实时&quot;, 一般表示一秒左右</p>
-<p>不然一个监视器吃的资源比被监视程序还多, 就十分微妙了</p>
-<p>通常为了偷懒, 直接画几条线把型值点连起来, 做成折线图, 然后一秒一秒的刷新就可以</p>
-<p>但人是要有追求的! 我们要平滑! 要曲线!</p>
-<p>所以便有了本文, 记录追求上帝所有物的流水帐</p>
-
-              <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;curve-interpolation&#x2F;">Read More…</a>
-              </div>
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;kailh-box&#x2F;">凯华 Box 轴拆解</a></h1>
-              <div class="info">
-                <h2>还可以</h2>
-                <time>2017-09-21 20:31</time>
-              </div>
-              
-              <p>键盘的 <code>A</code> 键坏了, 可能是我在 Spacemacs 里后插入用的太多的原因, 总之决定自己换轴</p>
-<p>挑轴的时候发现卖家还卖一种叫 Box 轴的轴体, 是凯华今年一月发布, 自主研发, 主打寿命长和防水性的新系列 (这介绍真长</p>
-<p>官网上他们自己说的是挺好</p>
-<p>可是只有白(qīng)轴的图解, 其他轴则是一笔带过</p>
-<p>想着反正不包邮, 不如顺便多买点, 就在买替换用轴的同时各买了一种 Box 轴</p>
-
-              <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;kailh-box&#x2F;">Read More…</a>
-              </div>
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-higher-rank-lifetime-bounds&#x2F;">Rust 中的高阶生命期约束</a></h1>
-              <div class="info">
-                <h2>Ruskell</h2>
-                <time>2017-09-13 22:29</time>
-              </div>
-              
-              <p>这篇文章并不在讲什么是生命期, 请先确保有正确的生命期概念</p>
-<p>虽然标题是说高阶生命期约束, 不过 RFC 本身是叫高阶 Trait 约束 (Higher Ranked Trait Bounds), 但由于他们目前只实现了生命期的部分, 所以……</p>
-<p>言归正传, 在 <a href="https://crates.io/crates/serde"><em>serde</em></a> 里, 会发现 <a href="https://docs.serde.rs/serde/de/trait.DeserializeOwned.html"><code>DeserializeOwned</code></a> 的定义是这样的</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">pub trait </span><span style="background-color:#282828;color:#8ec07c;">DeserializeOwned</span><span style="background-color:#282828;color:#fdf4c1aa;">: for&lt;&#39;de&gt; Deserialize&lt;&#39;de&gt; { }
-</span></pre>
-              <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-higher-rank-lifetime-bounds&#x2F;">Read More…</a>
-              </div>
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coroutine&#x2F;">Rust 的 async&#x2F;await</a></h1>
-              <div class="info">
-                <h2>仍需努力</h2>
-                <time>2017-08-29 00:00</time>
-              </div>
-              
-              <p>今天, Rust 的 Generator 支持<a href="https://github.com/rust-lang/rust/pull/43076#issuecomment-325453224">终于被合并了</a>!</p>
-<p>这代表那拖了很久又很久的 Coroutine 也终于可以在 Nightly(2017-08-29) 里使用了</p>
-<p>可喜可贺, 可喜可贺</p>
-<p>那以后就可以愉快的在 Rust 里写异步代码啦?</p>
-<p>想得美</p>
-<p>坑在哪里我下面慢慢说</p>
-
-              <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rust-coroutine&#x2F;">Read More…</a>
-              </div>
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rtorrent-on-merin&#x2F;">在 Merlin 上配置 rTorrrent 需要注意的</a></h1>
-              <div class="info">
-                <h2>笔记备用</h2>
-                <time>2017-07-09 00:26</time>
-              </div>
-              
-              <p><a href="https://iovxw.net/p/ac56u.html">之前买的 RT-AC56U</a> 一直没放什么东西，空转到现在</p>
-<p>今天终于有了需求，拿它来挂 BT</p>
-<p>这篇文章作为笔记，记一下遇到的坑，以后备用</p>
-
-              <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;rtorrent-on-merin&#x2F;">Read More…</a>
-              </div>
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;soul-knight&#x2F;">Soul Knight Android 免 root 存档修改</a></h1>
-              <div class="info">
-                <h2>勿滥用</h2>
-                <time>2017-06-29 00:00</time>
-              </div>
-              
-              <p>挺好玩的 Roguelike 游戏（最近还加了联机模式，然而联机起来各种崩，戒指怕是有生之年了）</p>
-<p>可惜没有云存档，在经历了某次事件后，我的存档和我说了再见</p>
-<p>重新打？我没那毅力。不过既然是本地的，改起来也容易</p>
-<p>流程如下：</p>
-
-              <div class="read-more">
-                <a href="https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;soul-knight&#x2F;">Read More…</a>
-              </div>
-              
-            </article>
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
         
+        <nav>
           
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
           
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
+          <a href="https://iovxw.net/n/2/">NEXT</a>
           
+        </nav>
         
       
 

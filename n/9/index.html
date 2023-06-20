@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://iovxw.net">
+
+    
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
+
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    :not(pre) > code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 0.5em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
+
+      
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/ubuntu-install-budgie-desktop/">Ubuntu 安装 Budgie Desktop</a></h1>
+              <div class="info">
+                <h2>类似ChromeOS的桌面环境</h2>
+                <time>2014-07-09 00:00</time>
+              </div>
+              
+                <p>介绍什么的就懒得重复了</p>
+<p>自己百度吧</p>
+<p>直接扔命令</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>        sudo add-apt-repository ppa:sukso96100/budgie-desktop
+</span><span>        sudo apt-get update
+</span><span>        sudo apt-get install budgie-desktop
+</span></code></pre>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/golang-in-atom/">Atom配置Golang开发环境</a></h1>
+              <div class="info">
+                <h2>没有自动补全硬伤</h2>
+                <time>2014-06-26 00:00</time>
+              </div>
+              
+                <p><img src="http://img3.picbed.org/uploads/2014/06/DeepinScreenshot20140626190918.png" alt="" /></p>
+<p>先扔一个效果图</p>
+<p>Atom我就不介绍了，自己去看WIKI吧</p>
+<p>ubuntu快速安装：</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>sudo add-apt-repository ppa:webupd8team/atom
+</span><span>sudo apt-get update &amp;&amp; sudo apt-get install atom
+</span></code></pre>
+<p>MAC可以直接从<a href="https://atom.io">官网</a>下载</p>
+<p>其他系统就自己编译吧</p>
+<p>因为和Github结合的很好，然后速度较快，比较适合项目的小修改&amp;提交，和不喜欢大型IDE的人</p>
+<p>未配置的界面很像<code>Sublime Text</code>，上图是我修改主题和配色后的</p>
+<p>言归正传。Atom自带Golang插件，但是调试和格式化没有（自动补全就别想了）</p>
+<p>然后我在官方Packages里找到了Go的插件，叫做<code>Go Plus</code></p>
+<p>Github地址：<a href="https://github.com/joefitzgerald/go-plus">https://github.com/joefitzgerald/go-plus</a></p>
+<p>作者的演示：</p>
+<p><img src="https://camo.githubusercontent.com/dfd447388f9d6506dcdd19e6c5c431bf4211e673/687474703a2f2f636c2e6c792f696d6167652f3339327a324c3066304534312f676f2d706c75732d6578616d706c652e676966" alt="https://camo.githubusercontent.com/dfd447388f9d6506dcdd19e6c5c431bf4211e673/687474703a2f2f636c2e6c792f696d6167652f3339327a324c3066304534312f676f2d706c75732d6578616d706c652e676966" /></p>
+<p>安装的方法也很简单，<code>File -&gt; Preferences... -&gt; Packages</code></p>
+<p>然后在搜索框内输入<code>go plus</code>回车等一会就会出现了</p>
+<p>点击<code>Install</code>安装</p>
+<p>有可能会出错，重试一遍就行了</p>
+<p><img src="http://img4.picbed.org/uploads/2014/06/DeepinScreenshot20140626192051.png" alt="" /></p>
+<p>然后点击<code>Settings</code>进行设置</p>
+<p><img src="http://img4.tuchuang.org/uploads/2014/06/DeepinScreenshot20140626192214.png" alt="" /></p>
+<p>勾选自己需要的功能</p>
+<p>然后填入Go的安装目录和工作目录就行了</p>
+<p>如果要使用<code>Lint</code>和<code>Vet</code>的话</p>
+<p>还需要</p>
+<p><code>go get github.com/golang/lint/golint</code></p>
+<p><code>go get code.google.com/p/go.tools/cmd/vet</code></p>
+<p>主题和配色也都可以在<code>Preferences</code>里更换&amp;下载</p>
+<p>开始玩吧！</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/add-search/">好久没更新了啊</a></h1>
+              <div class="info">
+                <h2>顺便给博客添加搜索功能</h2>
+                <time>2014-06-20 00:00</time>
+              </div>
+              
+                <p>谁说静态博客就不能用搜索的？</p>
+<p>好吧其实就是用了下搜索引擎的site搜索功能</p>
+<p>可以看见右边测栏里已经多出来了一个搜索框</p>
+<p>不过貌似百度没有收录这个博客= =</p>
+<p>所以没法用什么的很正常</p>
+<p>在页面内添加</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>&lt;form id=&quot;search&quot; class=&quot;search&quot; role=&quot;search&quot;&gt;
+</span><span>        &lt;input class=&quot;form-control&quot; placeholder=&quot;搜索&quot; name=&quot;q&quot; type=&quot;text&quot;&gt;
+</span><span>&lt;/form&gt;
+</span></code></pre>
+<p>然后在js里添加</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>(function(){
+</span><span>	$(document).on(&#39;submit&#39;, &#39;#search.search&#39;, function(){
+</span><span>		var q = $(this).find(&#39;[name=q]&#39;).val();
+</span><span>		if($.trim(q) !== &#39;&#39;){
+</span><span>			var host = window.location.hostname;
+</span><span>			var url = &#39;http://www.baidu.com/s?wd=&#39; + &#39;site:&#39; + host + &quot; &quot; + $.trim(q);
+</span><span>			window.open(url, &quot;_blank&quot;);
+</span><span>		}
+</span><span>		return false;
+</span><span>	});
+</span><span>})();
+</span></code></pre>
+<p><code>http://www.baidu.com/s?wd=</code>可以替换成任意支持site搜索的搜索引擎地址</p>
+<hr />
+<p>PS: 这是 jQuery 版本，写成原生的也不难这里就不废话了</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/go-intellij-idea/">Golang IntelliJ IDEA</a></h1>
+              <div class="info">
+                <h2>换了个IDE玩</h2>
+                <time>2014-06-06 00:00</time>
+              </div>
+              
+                <p>LiteIDE用了好久，觉得有些地方不是很符合要求</p>
+<p>于是又去试了几个Golang的编辑器</p>
+<p>发现<code>IntelliJ IDEA</code>还挺顺手的</p>
+<p>各种IDE该有的功能都有了（这不废话么）</p>
+<p>配合Golang的插件我认为应该是最好用的Go IDE了</p>
+<p>当然缺点就是CPU占用略高</p>
+<p>1.1Ghz的渣本有点发热</p>
+<p><img src="http://s30.postimg.org/5ugx7gjen/Deepin_Screenshot20140606142553.png" alt="" /></p>
+<p><img src="http://s30.postimg.org/4e5epbghr/Deepin_Screenshot20140606143239.png" alt="" /><br />
+CPU已经撑不住了</p>
+<p><img src="http://s30.postimg.org/s3uue0ev3/Deepin_Screenshot20140606143544.png" alt="" /><br />
+鼠标放到右侧滚轮条可以预览相应的代码</p>
+<p><img src="http://s30.postimg.org/b220bwzzz/Deepin_Screenshot20140606143612.png" alt="" /><br />
+提示功能</p>
+<p><img src="http://s30.postimg.org/m0d9u3olb/Deepin_Screenshot20140606143636.png" alt="" /><br />
+自动补全</p>
+<p>不知道什么时候能有个中文语言包呢</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/go-opengl/">开始折腾OpenGL</a></h1>
+              <div class="info">
+                <h2>生命在于折腾啊。生命不息，折腾不止。</h2>
+                <time>2014-06-05 00:00</time>
+              </div>
+              
+                <p>嗯，准备写一个类似Mineccraft的游戏</p>
+<p>基本设定已经弄好了</p>
+<p>不过目测是个大坑</p>
+<p>希望到时候别弃坑吧</p>
+<p>求有经验的人帮忙啊……</p>
+<p>下面是<code>go-gl</code>的example源码</p>
+<p>顺便测试一下代码高亮</p>
+<link id="prettify-style" href="https://www.zybuluo.com/static/editor/libs/google-code-prettify/prettify-cmd.css" type="text/css" rel="stylesheet">
+<pre style="" class="prettyprint linenums prettyprinted"><ol class="linenums"><li class="L0"><code><span class="kwd">package</span><span class="pln"> main</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="kwd">import</span><span class="pln"> </span><span class="pun">(</span></code></li><li class="L3"><code><span class="pln">    </span><span class="str">"errors"</span></code></li><li class="L4"><code><span class="pln">    </span><span class="str">"fmt"</span></code></li><li class="L5"><code><span class="pln">    </span><span class="str">"github.com/go-gl/gl"</span></code></li><li class="L6"><code><span class="pln">    glfw </span><span class="str">"github.com/go-gl/glfw3"</span></code></li><li class="L7"><code><span class="pln">    </span><span class="str">"image"</span></code></li><li class="L8"><code><span class="pln">    </span><span class="str">"image/png"</span></code></li><li class="L9"><code><span class="pln">    </span><span class="str">"io"</span></code></li><li class="L0"><code><span class="pln">    </span><span class="str">"os"</span></code></li><li class="L1"><code><span class="pun">)</span></code></li><li class="L2"><code></code></li><li class="L3"><code><span class="kwd">const</span><span class="pln"> </span><span class="pun">(</span></code></li><li class="L4"><code><span class="pln">    </span><span class="typ">Title</span><span class="pln">  </span><span class="pun">=</span><span class="pln"> </span><span class="str">"Spinning Gopher"</span></code></li><li class="L5"><code><span class="pln">    </span><span class="typ">Width</span><span class="pln">  </span><span class="pun">=</span><span class="pln"> </span><span class="lit">640</span></code></li><li class="L6"><code><span class="pln">    </span><span class="typ">Height</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">480</span></code></li><li class="L7"><code><span class="pun">)</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="kwd">var</span><span class="pln"> </span><span class="pun">(</span></code></li><li class="L0"><code><span class="pln">    texture    gl</span><span class="pun">.</span><span class="typ">Texture</span></code></li><li class="L1"><code><span class="pln">    rotx</span><span class="pun">,</span><span class="pln"> roty float32</span></code></li><li class="L2"><code><span class="pln">    ambient    </span><span class="pun">[]</span><span class="pln">float32 </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[]</span><span class="pln">float32</span><span class="pun">{</span><span class="lit">0.5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0.5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0.5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">}</span></code></li><li class="L3"><code><span class="pln">    diffuse    </span><span class="pun">[]</span><span class="pln">float32 </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[]</span><span class="pln">float32</span><span class="pun">{</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">}</span></code></li><li class="L4"><code><span class="pln">    lightpos   </span><span class="pun">[]</span><span class="pln">float32 </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[]</span><span class="pln">float32</span><span class="pun">{-</span><span class="lit">5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">10</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">}</span></code></li><li class="L5"><code><span class="pun">)</span></code></li><li class="L6"><code></code></li><li class="L7"><code><span class="pln">func errorCallback</span><span class="pun">(</span><span class="pln">err glfw</span><span class="pun">.</span><span class="typ">ErrorCode</span><span class="pun">,</span><span class="pln"> desc </span><span class="kwd">string</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L8"><code><span class="pln">    fmt</span><span class="pun">.</span><span class="typ">Printf</span><span class="pun">(</span><span class="str">"%v: %v\n"</span><span class="pun">,</span><span class="pln"> err</span><span class="pun">,</span><span class="pln"> desc</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pun">}</span></code></li><li class="L0"><code></code></li><li class="L1"><code><span class="pln">func main</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L2"><code><span class="pln">    glfw</span><span class="pun">.</span><span class="typ">SetErrorCallback</span><span class="pun">(</span><span class="pln">errorCallback</span><span class="pun">)</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">!</span><span class="pln">glfw</span><span class="pun">.</span><span class="typ">Init</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L5"><code><span class="pln">        panic</span><span class="pun">(</span><span class="str">"Can't init glfw!"</span><span class="pun">)</span></code></li><li class="L6"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L7"><code><span class="pln">    defer glfw</span><span class="pun">.</span><span class="typ">Terminate</span><span class="pun">()</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="pln">    window</span><span class="pun">,</span><span class="pln"> err </span><span class="pun">:=</span><span class="pln"> glfw</span><span class="pun">.</span><span class="typ">CreateWindow</span><span class="pun">(</span><span class="typ">Width</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Height</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Title</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">nil</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">nil</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    </span><span class="kwd">if</span><span class="pln"> err </span><span class="pun">!=</span><span class="pln"> </span><span class="kwd">nil</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L1"><code><span class="pln">        panic</span><span class="pun">(</span><span class="pln">err</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">    window</span><span class="pun">.</span><span class="typ">MakeContextCurrent</span><span class="pun">()</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    glfw</span><span class="pun">.</span><span class="typ">SwapInterval</span><span class="pun">(</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L7"><code></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Init</span><span class="pun">()</span></code></li><li class="L9"><code></code></li><li class="L0"><code><span class="pln">    </span><span class="kwd">if</span><span class="pln"> err </span><span class="pun">:=</span><span class="pln"> initScene</span><span class="pun">();</span><span class="pln"> err </span><span class="pun">!=</span><span class="pln"> </span><span class="kwd">nil</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L1"><code><span class="pln">        fmt</span><span class="pun">.</span><span class="typ">Fprintf</span><span class="pun">(</span><span class="pln">os</span><span class="pun">.</span><span class="typ">Stderr</span><span class="pun">,</span><span class="pln"> </span><span class="str">"init: %s\n"</span><span class="pun">,</span><span class="pln"> err</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">        </span><span class="kwd">return</span></code></li><li class="L3"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L4"><code><span class="pln">    defer destroyScene</span><span class="pun">()</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">!</span><span class="pln">window</span><span class="pun">.</span><span class="typ">ShouldClose</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L7"><code><span class="pln">        drawScene</span><span class="pun">()</span></code></li><li class="L8"><code><span class="pln">        window</span><span class="pun">.</span><span class="typ">SwapBuffers</span><span class="pun">()</span></code></li><li class="L9"><code><span class="pln">        glfw</span><span class="pun">.</span><span class="typ">PollEvents</span><span class="pun">()</span></code></li><li class="L0"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L1"><code><span class="pun">}</span></code></li><li class="L2"><code></code></li><li class="L3"><code><span class="pln">func createTexture</span><span class="pun">(</span><span class="pln">r io</span><span class="pun">.</span><span class="typ">Reader</span><span class="pun">)</span><span class="pln"> </span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="typ">Texture</span><span class="pun">,</span><span class="pln"> error</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    img</span><span class="pun">,</span><span class="pln"> err </span><span class="pun">:=</span><span class="pln"> png</span><span class="pun">.</span><span class="typ">Decode</span><span class="pun">(</span><span class="pln">r</span><span class="pun">)</span></code></li><li class="L5"><code><span class="pln">    </span><span class="kwd">if</span><span class="pln"> err </span><span class="pun">!=</span><span class="pln"> </span><span class="kwd">nil</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L6"><code><span class="pln">        </span><span class="kwd">return</span><span class="pln"> gl</span><span class="pun">.</span><span class="typ">Texture</span><span class="pun">(</span><span class="lit">0</span><span class="pun">),</span><span class="pln"> err</span></code></li><li class="L7"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="pln">    rgbaImg</span><span class="pun">,</span><span class="pln"> ok </span><span class="pun">:=</span><span class="pln"> img</span><span class="pun">.(*</span><span class="pln">image</span><span class="pun">.</span><span class="pln">NRGBA</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">!</span><span class="pln">ok </span><span class="pun">{</span></code></li><li class="L1"><code><span class="pln">        </span><span class="kwd">return</span><span class="pln"> gl</span><span class="pun">.</span><span class="typ">Texture</span><span class="pun">(</span><span class="lit">0</span><span class="pun">),</span><span class="pln"> errors</span><span class="pun">.</span><span class="typ">New</span><span class="pun">(</span><span class="str">"texture must be an NRGBA image"</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">    textureId </span><span class="pun">:=</span><span class="pln"> gl</span><span class="pun">.</span><span class="typ">GenTexture</span><span class="pun">()</span></code></li><li class="L5"><code><span class="pln">    textureId</span><span class="pun">.</span><span class="typ">Bind</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">TEXTURE_2D</span><span class="pun">)</span></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexParameterf</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">TEXTURE_2D</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">TEXTURE_MAG_FILTER</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">LINEAR</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexParameterf</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">TEXTURE_2D</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">TEXTURE_MIN_FILTER</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">LINEAR</span><span class="pun">)</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="pln">    </span><span class="com">// flip image: first pixel is lower left corner</span></code></li><li class="L0"><code><span class="pln">    imgWidth</span><span class="pun">,</span><span class="pln"> imgHeight </span><span class="pun">:=</span><span class="pln"> img</span><span class="pun">.</span><span class="typ">Bounds</span><span class="pun">().</span><span class="typ">Dx</span><span class="pun">(),</span><span class="pln"> img</span><span class="pun">.</span><span class="typ">Bounds</span><span class="pun">().</span><span class="typ">Dy</span><span class="pun">()</span></code></li><li class="L1"><code><span class="pln">    data </span><span class="pun">:=</span><span class="pln"> make</span><span class="pun">([]</span><span class="kwd">byte</span><span class="pun">,</span><span class="pln"> imgWidth</span><span class="pun">*</span><span class="pln">imgHeight</span><span class="pun">*</span><span class="lit">4</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    lineLen </span><span class="pun">:=</span><span class="pln"> imgWidth </span><span class="pun">*</span><span class="pln"> </span><span class="lit">4</span></code></li><li class="L3"><code><span class="pln">    dest </span><span class="pun">:=</span><span class="pln"> len</span><span class="pun">(</span><span class="pln">data</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> lineLen</span></code></li><li class="L4"><code><span class="pln">    </span><span class="kwd">for</span><span class="pln"> src </span><span class="pun">:=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> src </span><span class="pun">&lt;</span><span class="pln"> len</span><span class="pun">(</span><span class="pln">rgbaImg</span><span class="pun">.</span><span class="typ">Pix</span><span class="pun">);</span><span class="pln"> src </span><span class="pun">+=</span><span class="pln"> rgbaImg</span><span class="pun">.</span><span class="typ">Stride</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L5"><code><span class="pln">        copy</span><span class="pun">(</span><span class="pln">data</span><span class="pun">[</span><span class="pln">dest</span><span class="pun">:</span><span class="pln">dest</span><span class="pun">+</span><span class="pln">lineLen</span><span class="pun">],</span><span class="pln"> rgbaImg</span><span class="pun">.</span><span class="typ">Pix</span><span class="pun">[</span><span class="pln">src</span><span class="pun">:</span><span class="pln">src</span><span class="pun">+</span><span class="pln">rgbaImg</span><span class="pun">.</span><span class="typ">Stride</span><span class="pun">])</span></code></li><li class="L6"><code><span class="pln">        dest </span><span class="pun">-=</span><span class="pln"> lineLen</span></code></li><li class="L7"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexImage2D</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">TEXTURE_2D</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> imgWidth</span><span class="pun">,</span><span class="pln"> imgHeight</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">RGBA</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">UNSIGNED_BYTE</span><span class="pun">,</span><span class="pln"> data</span><span class="pun">)</span></code></li><li class="L9"><code></code></li><li class="L0"><code><span class="pln">    </span><span class="kwd">return</span><span class="pln"> textureId</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">nil</span></code></li><li class="L1"><code><span class="pun">}</span></code></li><li class="L2"><code></code></li><li class="L3"><code><span class="pln">func initScene</span><span class="pun">()</span><span class="pln"> </span><span class="pun">(</span><span class="pln">err error</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Enable</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">TEXTURE_2D</span><span class="pun">)</span></code></li><li class="L5"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Enable</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">DEPTH_TEST</span><span class="pun">)</span></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Enable</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">LIGHTING</span><span class="pun">)</span></code></li><li class="L7"><code></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">ClearColor</span><span class="pun">(</span><span class="lit">0.5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0.5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0.5</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0.0</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">ClearDepth</span><span class="pun">(</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">DepthFunc</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">LEQUAL</span><span class="pun">)</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Lightfv</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">LIGHT0</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">AMBIENT</span><span class="pun">,</span><span class="pln"> ambient</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Lightfv</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">LIGHT0</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">DIFFUSE</span><span class="pun">,</span><span class="pln"> diffuse</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Lightfv</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">LIGHT0</span><span class="pun">,</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">POSITION</span><span class="pun">,</span><span class="pln"> lightpos</span><span class="pun">)</span></code></li><li class="L5"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Enable</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">LIGHT0</span><span class="pun">)</span></code></li><li class="L6"><code></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Viewport</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Width</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Height</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">MatrixMode</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">PROJECTION</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">LoadIdentity</span><span class="pun">()</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Frustum</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1.0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">10.0</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">MatrixMode</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">MODELVIEW</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">LoadIdentity</span><span class="pun">()</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">    goph</span><span class="pun">,</span><span class="pln"> err </span><span class="pun">:=</span><span class="pln"> os</span><span class="pun">.</span><span class="typ">Open</span><span class="pun">(</span><span class="str">"gopher.png"</span><span class="pun">)</span></code></li><li class="L5"><code><span class="pln">    </span><span class="kwd">if</span><span class="pln"> err </span><span class="pun">!=</span><span class="pln"> </span><span class="kwd">nil</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L6"><code><span class="pln">        panic</span><span class="pun">(</span><span class="pln">err</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L8"><code><span class="pln">    defer goph</span><span class="pun">.</span><span class="typ">Close</span><span class="pun">()</span></code></li><li class="L9"><code></code></li><li class="L0"><code><span class="pln">    texture</span><span class="pun">,</span><span class="pln"> err </span><span class="pun">=</span><span class="pln"> createTexture</span><span class="pun">(</span><span class="pln">goph</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    </span><span class="kwd">return</span></code></li><li class="L2"><code><span class="pun">}</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">func destroyScene</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L5"><code><span class="pln">    texture</span><span class="pun">.</span><span class="typ">Delete</span><span class="pun">()</span></code></li><li class="L6"><code><span class="pun">}</span></code></li><li class="L7"><code></code></li><li class="L8"><code><span class="pln">func drawScene</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Clear</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">COLOR_BUFFER_BIT </span><span class="pun">|</span><span class="pln"> gl</span><span class="pun">.</span><span class="pln">DEPTH_BUFFER_BIT</span><span class="pun">)</span></code></li><li class="L0"><code></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">MatrixMode</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">MODELVIEW</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">LoadIdentity</span><span class="pun">()</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Translatef</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">3.0</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Rotatef</span><span class="pun">(</span><span class="pln">rotx</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L5"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Rotatef</span><span class="pun">(</span><span class="pln">roty</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L6"><code></code></li><li class="L7"><code><span class="pln">    rotx </span><span class="pun">+=</span><span class="pln"> </span><span class="lit">0.5</span></code></li><li class="L8"><code><span class="pln">    roty </span><span class="pun">+=</span><span class="pln"> </span><span class="lit">0.1</span></code></li><li class="L9"><code></code></li><li class="L0"><code><span class="pln">    texture</span><span class="pun">.</span><span class="typ">Bind</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">TEXTURE_2D</span><span class="pun">)</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Color4f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Begin</span><span class="pun">(</span><span class="pln">gl</span><span class="pun">.</span><span class="pln">QUADS</span><span class="pun">)</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Normal3f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Normal3f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Normal3f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Normal3f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Normal3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Normal3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L2"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">TexCoord2f</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">Vertex3f</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    gl</span><span class="pun">.</span><span class="typ">End</span><span class="pun">()</span></code></li><li class="L7"><code><span class="pun">}</span></code></li></ol></pre>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/fuck-you-gwf/">博客优化完成</a></h1>
+              <div class="info">
+                <h2>因为某些原因，优化博客访问速度</h2>
+                <time>2014-06-02 00:00</time>
+              </div>
+              
+                <p>因为某些众所周知的原因，谷歌访问不稳定，而这个博客本身的字体是用的谷歌的API，所以打开死慢= =</p>
+<p>于是刚刚把整个css和字体都下载到了本地，访问速度应该会提升</p>
+<p>希望Github别不稳定啊……不然就真挂了</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/go-get-glfw3/">Go语言GLFW3库的安装</a></h1>
+              <div class="info">
+                <h2>编译&amp;&amp;安装GLFW3</h2>
+                <time>2014-05-30 00:00</time>
+              </div>
+              
+                <p>因为想要写一个小游戏玩玩，然后需要安装GLFW3</p>
+<p>于是写了这么一个教程备用</p>
+<p>首先，安装需要的lib库</p>
+<p><code>sudo apt-get install libxrandr-dev libxi-dev</code></p>
+<p>当然已经安装过的就不用了，不过反正也不会重复安装，忘记的话就运行一遍试试吧</p>
+<p>下载GLFW源码</p>
+<p><a href="http://www.glfw.org">http://www.glfw.org</a></p>
+<p>编译</p>
+<p><code>cmake -DBUILD_SHARED_LIBS=ON</code></p>
+<p><img src="http://s29.postimg.org/4w8ttvzt1/Deepin_Screenshot20140601153904.png" alt="cmake_install.cmake" /></p>
+<p>打开<code>cmake_install.cmake</code>，修改<code>SET(CMAKE_INSTALL_PREFIX &quot;/usr/local&quot;)</code>为<code>SET(CMAKE_INSTALL_PREFIX &quot;/usr&quot;)</code></p>
+<p>然后<code>make</code>+<code>sudo make install</code></p>
+<p><code>go get -u github.com/go-gl/glfw3</code></p>
+<p>======END======</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/modify-xp-registry/">让XP继续接受更新</a></h1>
+              <div class="info">
+                <h2>通过修改注册表来让XP继续接受更新</h2>
+                <time>2014-05-27 00:00</time>
+              </div>
+              
+                <p>在<a href="http://www.zdnet.com/registry-hack-enables-continued-updates-for-windows-xp-7000029851/">Betanews</a>看到了让XP继续更新的方法</p>
+<p>大体过程如下：</p>
+<p>1.新建一个文件扩展名为<code>.reg</code>的文件（例如<code>updates.reg</code>）</p>
+<p>2.用文本编辑器打开</p>
+<p>3.修改内容为</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Windows Registry Editor Version 5.00
+</span><span>[HKEY_LOCAL_MACHINE\SYSTEM\WPA\PosReady]
+</span><span>&quot;Installed&quot;=dword:00000001
+</span></code></pre>
+<p>4.保存，然后双击它</p>
+<p>现在打开更新管理器就会发现有新的更新可用了</p>
+<p>这个的原理是欺骗Windows Update，让它把你的电脑识别为<a href="http://Windows%20Embedded%20POSReady%202009">Windows Embedded POSReady 2009</a></p>
+<p>而Windows Embedded POSReady 2009的支持日期一直到2019年4月9日</p>
+<p>当然这不是最好的解决办法，要想一直有免费升级的话，还是去用Linux吧</p>
+<p>最起码你不用再担心系统是不是安全了</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/github-page-404/">Github Page自定义404页面</a></h1>
+              <div class="info">
+                <h2>404呦</h2>
+                <time>2014-05-26 00:00</time>
+              </div>
+              
+                <p>想给博客自定义一个404页面，毕竟老用Github默认的也不太好</p>
+<p>于是乎上网翻了一下，发现貌似没中文介绍</p>
+<p>然后在Github Page官方帮助找到了</p>
+<p>很简单</p>
+<p>只需要在根目录新建一个<code>404.html</code>即可</p>
+<p>当然有个前提，就是你必须要先绑定独立域名，不然会出错的</p>
+<p>至于怎么绑定……还是百度吧，也很简单……</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/mobile-version/">手机版搞定！</a></h1>
+              <div class="info">
+                <h2>弄好了博客的手机版</h2>
+                <time>2014-05-25 00:00</time>
+              </div>
+              
+                <p><img src="http://s30.postimg.org/p6hzxfzpr/Deepin_Screenshot20140526142158.png" alt="我是图" /></p>
+<p>如图，把浏览器缩放到手机大小就可以预览了</p>
+
+              
+            </article>
+          
+        
+        
+        <nav>
+          
+          <a href="https://iovxw.net/n/8/">PREV</a>
+          
+          
+          <a href="https://iovxw.net/n/10/">NEXT</a>
+          
+        </nav>
+        
+      
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

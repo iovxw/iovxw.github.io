@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="&amp;&#x27;a mut &amp;&#x27;a ()">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>PhantomData 黑魔法 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,17 +316,17 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
@@ -321,63 +335,61 @@
 <article>
     <h1>PhantomData 黑魔法</h1>
     <div class="info"><h2>&amp;&#x27;a mut &amp;&#x27;a ()</h2><time>2018-03-14 00:17</time></div>
-    <pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">use </span><span style="background-color:#282828;color:#fdf4c1aa;">std::marker::PhantomData;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">pub struct </span><span style="background-color:#282828;color:#8ec07c;">Magic</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a</span><span style="background-color:#282828;color:#fdf4c1aa;">&gt;(PhantomData&lt;</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a mut </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a </span><span style="background-color:#282828;color:#fdf4c1aa;">()</span><span style="background-color:#282828;color:#fe8019;">&gt;</span><span style="background-color:#282828;color:#fdf4c1aa;">);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">impl</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a</span><span style="background-color:#282828;color:#fdf4c1aa;">&gt; </span><span style="background-color:#282828;color:#8ec07c;">Magic</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a</span><span style="background-color:#282828;color:#fdf4c1aa;">&gt; {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">pub fn </span><span style="background-color:#282828;color:#8ec07c;">as_ref</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a </span><span style="background-color:#282828;color:#fdf4c1;">self</span><span style="background-color:#282828;color:#fdf4c1aa;">) -&gt; </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a Self </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fdf4c1;">self
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">main</span><span style="background-color:#282828;color:#fdf4c1aa;">() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> pin </span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#fdf4c1aa;"> Magic(PhantomData);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fdf4c1aa;">pin.</span><span style="background-color:#282828;color:#fabd2f;">as_ref</span><span style="background-color:#282828;color:#fdf4c1aa;">();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">pin;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span></pre><!-- more -->
+    <pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">use </span><span>std::marker::PhantomData;
+</span><span>
+</span><span style="color:#fa5c4b;">pub struct </span><span style="color:#8ec07c;">Magic</span><span>&lt;</span><span style="color:#fa5c4b;">&#39;a</span><span>&gt;(PhantomData&lt;</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a mut </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a </span><span>()</span><span style="color:#fe8019;">&gt;</span><span>);
+</span><span>
+</span><span style="color:#fa5c4b;">impl</span><span>&lt;</span><span style="color:#fa5c4b;">&#39;a</span><span>&gt; </span><span style="color:#8ec07c;">Magic</span><span>&lt;</span><span style="color:#fa5c4b;">&#39;a</span><span>&gt; {
+</span><span>    </span><span style="color:#fa5c4b;">pub fn </span><span style="color:#8ec07c;">as_ref</span><span>(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a </span><span style="color:#fdf4c1;">self</span><span>) -&gt; </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a Self </span><span>{
+</span><span>        </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">self
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">main</span><span>() {
+</span><span>    </span><span style="color:#fa5c4b;">let</span><span> pin </span><span style="color:#fe8019;">=</span><span> Magic(PhantomData);
+</span><span>    {
+</span><span>        pin.</span><span style="color:#fabd2f;">as_ref</span><span>();
+</span><span>    }
+</span><span>    pin;
+</span><span>}
+</span></code></pre>
+<span id="continue-reading"></span>
 <hr />
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fdf4c1aa;">error[E0505]: cannot move out of `pin` because it is borrowed
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fdf4c1aa;">--&gt; src/main.rs:16:5
-</span><span style="background-color:#282828;color:#fdf4c1aa;">   </span><span style="background-color:#282828;color:#fdf4c1aa;">|
-</span><span style="background-color:#282828;color:#fdf4c1aa;">14 |         pin.as_ref();
-</span><span style="background-color:#282828;color:#fdf4c1aa;">   </span><span style="background-color:#282828;color:#fdf4c1aa;">|         --- borrow of `pin` occurs here
-</span><span style="background-color:#282828;color:#fdf4c1aa;">15 |     }
-</span><span style="background-color:#282828;color:#fdf4c1aa;">16 |     pin;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">   </span><span style="background-color:#282828;color:#fdf4c1aa;">|     ^^^ move out of `pin` occurs here
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">error: aborting due to previous error
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">error: Could not compile `playground`.
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">To learn more, run the command again with --verbose.
-</span></pre>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>error[E0505]: cannot move out of `pin` because it is borrowed
+</span><span>  --&gt; src/main.rs:16:5
+</span><span>   |
+</span><span>14 |         pin.as_ref();
+</span><span>   |         --- borrow of `pin` occurs here
+</span><span>15 |     }
+</span><span>16 |     pin;
+</span><span>   |     ^^^ move out of `pin` occurs here
+</span><span>
+</span><span>error: aborting due to previous error
+</span><span>
+</span><span>error: Could not compile `playground`.
+</span><span>
+</span><span>To learn more, run the command again with --verbose.
+</span></code></pre>
 <p><a href="https://play.rust-lang.org/?gist=e16426ed7dc4dbfc0665bdb39b2876fe">https://play.rust-lang.org/?gist=e16426ed7dc4dbfc0665bdb39b2876fe</a></p>
 <hr />
 <p>此处 <code>as_ref()</code> 之后, 就算出了作用域, 引用也没被释放, 原因就是 <code>'a</code> 被强行绑定为与 pin 的生命期一样了</p>
 <p>一般情况下, Rust 允许一个长的生命期被 variant 为一个短的</p>
 <p>但是引入可变性的一些情况下例外, <code>&amp;mut T</code> 的 <code>T</code> 就是一个</p>
 <p>看下面的例子</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">overwrite</span><span style="background-color:#282828;color:#fdf4c1aa;">&lt;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a</span><span style="background-color:#282828;color:#fdf4c1aa;">&gt;(</span><span style="background-color:#282828;color:#fdf4c1;">input</span><span style="background-color:#282828;color:#fdf4c1aa;">: </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">mut </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a str</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">new</span><span style="background-color:#282828;color:#fdf4c1aa;">: </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">mut </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;a str</span><span style="background-color:#282828;color:#fdf4c1aa;">) {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fe8019;">*</span><span style="background-color:#282828;color:#fdf4c1aa;">input </span><span style="background-color:#282828;color:#fe8019;">= *</span><span style="background-color:#282828;color:#fdf4c1aa;">new;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">fn </span><span style="background-color:#282828;color:#8ec07c;">main</span><span style="background-color:#282828;color:#fdf4c1aa;">() {
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fa5c4b;">let mut</span><span style="background-color:#282828;color:#fdf4c1aa;"> forever_str: </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">&#39;static str </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#b8bb26;">&quot;hello&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">{
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fa5c4b;">let</span><span style="background-color:#282828;color:#fdf4c1aa;"> string </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fabd2f;">String</span><span style="background-color:#282828;color:#fdf4c1aa;">::from(</span><span style="background-color:#282828;color:#b8bb26;">&quot;world&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">        </span><span style="background-color:#282828;color:#fabd2f;">overwrite</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">mut</span><span style="background-color:#282828;color:#fdf4c1aa;"> forever_str, </span><span style="background-color:#282828;color:#fe8019;">&amp;</span><span style="background-color:#282828;color:#fa5c4b;">mut </span><span style="background-color:#282828;color:#fe8019;">&amp;*</span><span style="background-color:#282828;color:#fdf4c1aa;">string);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;">// Oops, printing free&#39;d memory
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fabd2f;">println!</span><span style="background-color:#282828;color:#fdf4c1aa;">(</span><span style="background-color:#282828;color:#b8bb26;">&quot;</span><span style="background-color:#282828;color:#fdf4c1;">{}</span><span style="background-color:#282828;color:#b8bb26;">&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">, forever_str);
-</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span></pre>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">overwrite</span><span>&lt;</span><span style="color:#fa5c4b;">&#39;a</span><span>&gt;(</span><span style="color:#fdf4c1;">input</span><span>: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a str</span><span>, </span><span style="color:#fdf4c1;">new</span><span>: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;a str</span><span>) {
+</span><span>    </span><span style="color:#fe8019;">*</span><span>input </span><span style="color:#fe8019;">= *</span><span>new;
+</span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">main</span><span>() {
+</span><span>    </span><span style="color:#fa5c4b;">let mut</span><span> forever_str: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;static str </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;hello&quot;</span><span>;
+</span><span>    {
+</span><span>        </span><span style="color:#fa5c4b;">let</span><span> string </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span>::from(</span><span style="color:#b8bb26;">&quot;world&quot;</span><span>);
+</span><span>        </span><span style="color:#fabd2f;">overwrite</span><span>(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut</span><span> forever_str, </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut </span><span style="color:#fe8019;">&amp;*</span><span>string);
+</span><span>    }
+</span><span>    </span><span style="font-style:italic;color:#928374;">// Oops, printing free&#39;d memory
+</span><span>    </span><span style="color:#fabd2f;">println!</span><span>(</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fdf4c1;">{}</span><span style="color:#b8bb26;">&quot;</span><span>, forever_str);
+</span><span>}
+</span></code></pre>
 <p><a href="https://play.rust-lang.org/?gist=49c82fc84a3091cb1853462b221239f7">https://play.rust-lang.org/?gist=49c82fc84a3091cb1853462b221239f7</a></p>
 <p>如果允许 <code>&amp;mut</code> 后的类型 variant, 上面的 <code>'static</code> 会被降为 <code>'a</code>, 就 use after free 了</p>
 <p>所以所有提供可变性的, 比如 <code>&amp;mut T</code>, <code>Cell&lt;T&gt;</code>, <code>RefCell&lt;T&gt;</code> 的 <code>T</code> 的生命期都是 invariant 的</p>
@@ -386,6 +398,9 @@
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/phantomdata-magic/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';

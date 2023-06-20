@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://iovxw.net">
+
+    
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
+
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    :not(pre) > code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 0.5em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
+
+      
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/google-code-prettify/">给博客添加了代码高亮</a></h1>
+              <div class="info">
+                <h2>Google Code Prettify</h2>
+                <time>2014-09-01 00:00</time>
+              </div>
+              
+                <p>使用的是Google Code Prettify</p>
+<p>因为这个js是google code用的，所以各种语言支持比较全面（当然主要是因为Golang才用的）</p>
+<p>直接用的默认css</p>
+<p>所以和博客主题不是很搭</p>
+<p>准备有时间自己修改一下（目测这几个月内是不行了）</p>
+<p>来一段测试一下：</p>
+<pre data-lang="go" style="background-color:#282828;color:#fdf4c1aa;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#fa5c4b;">package </span><span style="color:#fdf4c1;">main
+</span><span>
+</span><span style="color:#fa5c4b;">import </span><span>(
+</span><span>	</span><span style="color:#b8bb26;">&quot;fmt&quot;
+</span><span>	</span><span style="color:#b8bb26;">&quot;math/rand&quot;
+</span><span>	</span><span style="color:#b8bb26;">&quot;sync/atomic&quot;
+</span><span>	</span><span style="color:#b8bb26;">&quot;time&quot;
+</span><span>)
+</span><span>
+</span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">readOp </span><span style="color:#fa5c4b;">struct </span><span>{
+</span><span>	</span><span style="color:#fdf4c1;">key  </span><span style="color:#fabd2f;">int
+</span><span>	</span><span style="color:#fdf4c1;">resp </span><span style="color:#fa5c4b;">chan </span><span style="color:#fabd2f;">int
+</span><span>}
+</span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">writeOp </span><span style="color:#fa5c4b;">struct </span><span>{
+</span><span>	</span><span style="color:#fdf4c1;">key  </span><span style="color:#fabd2f;">int
+</span><span>	</span><span style="color:#fdf4c1;">val  </span><span style="color:#fabd2f;">int
+</span><span>	</span><span style="color:#fdf4c1;">resp </span><span style="color:#fa5c4b;">chan </span><span style="color:#fabd2f;">bool
+</span><span>}
+</span><span>
+</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">main</span><span>() {
+</span><span>
+</span><span>	</span><span style="color:#fa5c4b;">var </span><span style="color:#fdf4c1;">ops </span><span style="color:#fabd2f;">int64
+</span><span>
+</span><span>	</span><span style="color:#fdf4c1;">reads </span><span style="color:#fe8019;">:= </span><span style="color:#fabd2f;">make</span><span>(</span><span style="color:#fa5c4b;">chan </span><span style="color:#fe8019;">*</span><span style="color:#fa5c4b;">readOp</span><span>)
+</span><span>	</span><span style="color:#fdf4c1;">writes </span><span style="color:#fe8019;">:= </span><span style="color:#fabd2f;">make</span><span>(</span><span style="color:#fa5c4b;">chan </span><span style="color:#fe8019;">*</span><span style="color:#fa5c4b;">writeOp</span><span>)
+</span><span>
+</span><span>	</span><span style="color:#fa5c4b;">go func</span><span>() {
+</span><span>		</span><span style="color:#fa5c4b;">var </span><span style="color:#fdf4c1;">state </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">make</span><span>(</span><span style="color:#fa5c4b;">map</span><span>[</span><span style="color:#fabd2f;">int</span><span>]</span><span style="color:#fabd2f;">int</span><span>)
+</span><span>		</span><span style="color:#fa5c4b;">for </span><span>{
+</span><span>			</span><span style="color:#fa5c4b;">select </span><span>{
+</span><span>			</span><span style="color:#fa5c4b;">case </span><span style="color:#fdf4c1;">read </span><span style="color:#fe8019;">:= &lt;-</span><span style="color:#fdf4c1;">reads</span><span>:
+</span><span>				</span><span style="color:#fdf4c1;">read</span><span>.</span><span style="color:#fdf4c1;">resp </span><span style="color:#fe8019;">&lt;- </span><span style="color:#fdf4c1;">state</span><span>[</span><span style="color:#fdf4c1;">read</span><span>.</span><span style="color:#fdf4c1;">key</span><span>]
+</span><span>			</span><span style="color:#fa5c4b;">case </span><span style="color:#fdf4c1;">write </span><span style="color:#fe8019;">:= &lt;-</span><span style="color:#fdf4c1;">writes</span><span>:
+</span><span>				</span><span style="color:#fdf4c1;">state</span><span>[</span><span style="color:#fdf4c1;">write</span><span>.</span><span style="color:#fdf4c1;">key</span><span>] </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">write</span><span>.</span><span style="color:#fdf4c1;">val
+</span><span>				</span><span style="color:#fdf4c1;">write</span><span>.</span><span style="color:#fdf4c1;">resp </span><span style="color:#fe8019;">&lt;- </span><span style="color:#d3869b;">true
+</span><span>			}
+</span><span>		}
+</span><span>	}()
+</span><span>
+</span><span>	</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">r </span><span style="color:#fe8019;">:= </span><span style="color:#d3869b;">0</span><span>; </span><span style="color:#fdf4c1;">r </span><span style="color:#fe8019;">&lt; </span><span style="color:#d3869b;">100</span><span>; </span><span style="color:#fdf4c1;">r</span><span style="color:#fe8019;">++ </span><span>{
+</span><span>		</span><span style="color:#fa5c4b;">go func</span><span>() {
+</span><span>			</span><span style="color:#fa5c4b;">for </span><span>{
+</span><span>				</span><span style="color:#fdf4c1;">read </span><span style="color:#fe8019;">:= &amp;</span><span style="color:#fdf4c1;">readOp</span><span>{
+</span><span>					</span><span style="color:#fdf4c1;">key</span><span>:  </span><span style="color:#fdf4c1;">rand</span><span>.</span><span style="color:#fdf4c1;">Intn</span><span>(</span><span style="color:#d3869b;">5</span><span>),
+</span><span>					</span><span style="color:#fdf4c1;">resp</span><span>: </span><span style="color:#fabd2f;">make</span><span>(</span><span style="color:#fa5c4b;">chan </span><span style="color:#fabd2f;">int</span><span>)}
+</span><span>				</span><span style="color:#fdf4c1;">reads </span><span style="color:#fe8019;">&lt;- </span><span style="color:#fdf4c1;">read
+</span><span>				</span><span style="color:#fe8019;">&lt;-</span><span style="color:#fdf4c1;">read</span><span>.</span><span style="color:#fdf4c1;">resp
+</span><span>				</span><span style="color:#fdf4c1;">atomic</span><span>.</span><span style="color:#fdf4c1;">AddInt64</span><span>(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">ops</span><span>, </span><span style="color:#d3869b;">1</span><span>)
+</span><span>			}
+</span><span>		}()
+</span><span>	}
+</span><span>
+</span><span>	</span><span style="color:#fa5c4b;">for </span><span style="color:#fdf4c1;">w </span><span style="color:#fe8019;">:= </span><span style="color:#d3869b;">0</span><span>; </span><span style="color:#fdf4c1;">w </span><span style="color:#fe8019;">&lt; </span><span style="color:#d3869b;">10</span><span>; </span><span style="color:#fdf4c1;">w</span><span style="color:#fe8019;">++ </span><span>{
+</span><span>		</span><span style="color:#fa5c4b;">go func</span><span>() {
+</span><span>			</span><span style="color:#fa5c4b;">for </span><span>{
+</span><span>				</span><span style="color:#fdf4c1;">write </span><span style="color:#fe8019;">:= &amp;</span><span style="color:#fdf4c1;">writeOp</span><span>{
+</span><span>					</span><span style="color:#fdf4c1;">key</span><span>:  </span><span style="color:#fdf4c1;">rand</span><span>.</span><span style="color:#fdf4c1;">Intn</span><span>(</span><span style="color:#d3869b;">5</span><span>),
+</span><span>					</span><span style="color:#fdf4c1;">val</span><span>:  </span><span style="color:#fdf4c1;">rand</span><span>.</span><span style="color:#fdf4c1;">Intn</span><span>(</span><span style="color:#d3869b;">100</span><span>),
+</span><span>					</span><span style="color:#fdf4c1;">resp</span><span>: </span><span style="color:#fabd2f;">make</span><span>(</span><span style="color:#fa5c4b;">chan </span><span style="color:#fabd2f;">bool</span><span>)}
+</span><span>				</span><span style="color:#fdf4c1;">writes </span><span style="color:#fe8019;">&lt;- </span><span style="color:#fdf4c1;">write
+</span><span>				</span><span style="color:#fe8019;">&lt;-</span><span style="color:#fdf4c1;">write</span><span>.</span><span style="color:#fdf4c1;">resp
+</span><span>				</span><span style="color:#fdf4c1;">atomic</span><span>.</span><span style="color:#fdf4c1;">AddInt64</span><span>(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">ops</span><span>, </span><span style="color:#d3869b;">1</span><span>)
+</span><span>			}
+</span><span>		}()
+</span><span>	}
+</span><span>
+</span><span>	</span><span style="color:#fdf4c1;">time</span><span>.</span><span style="color:#fdf4c1;">Sleep</span><span>(</span><span style="color:#fdf4c1;">time</span><span>.</span><span style="color:#fdf4c1;">Second</span><span>)
+</span><span>
+</span><span>	</span><span style="color:#fdf4c1;">opsFinal </span><span style="color:#fe8019;">:= </span><span style="color:#fdf4c1;">atomic</span><span>.</span><span style="color:#fdf4c1;">LoadInt64</span><span>(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">ops</span><span>)
+</span><span>	</span><span style="color:#fdf4c1;">fmt</span><span>.</span><span style="color:#fdf4c1;">Println</span><span>(</span><span style="color:#b8bb26;">&quot;ops:&quot;</span><span>, </span><span style="color:#fdf4c1;">opsFinal</span><span>)
+</span><span>}
+</span></code></pre>
+<p>上面这段源码来自于：</p>
+<p><a href="http://everyx.github.io/gobyexample/stateful-goroutines/">Go by Example 中文：Go 状态协程</a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/coding-moon-cake/">Coding活动送的月饼收到</a></h1>
+              <div class="info">
+                <h2>下午茶的东西全了</h2>
+                <time>2014-08-31 00:00</time>
+              </div>
+              
+                <p>上面还附带一个开箱工具</p>
+<p>外加一包铁观音</p>
+<p><img src="https://iovxw.net/p/coding-moon-cake/0.jpg" alt="" /></p>
+<p><img src="https://iovxw.net/p/coding-moon-cake/1.jpg" alt="" /></p>
+<p><img src="https://iovxw.net/p/coding-moon-cake/2.jpg" alt="" /></p>
+<p><img src="https://iovxw.net/p/coding-moon-cake/3.jpg" alt="" /></p>
+<p><img src="https://iovxw.net/p/coding-moon-cake/4.jpg" alt="" /></p>
+<p>顺便在博客css里面加上了一段</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>.container img {
+</span><span>	max-width: 100%;
+</span><span>}
+</span></code></pre>
+<p>这样图片就自动缩放了</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/hello-twister/">Twister 去中心化的 Twitter</a></h1>
+              <div class="info">
+                <h2>FREEDOM！！</h2>
+                <time>2014-08-26 00:00</time>
+              </div>
+              
+                <p>在36氪看见的文章</p>
+<p><a href="http://www.36kr.com/p/214845.html">http://www.36kr.com/p/214845.html</a></p>
+<p>于是就下载使用了一下</p>
+<p>发现Arch的aur源里已经可以安装了</p>
+<p><code>yaourt -S twister-core-git twister-html-git</code></p>
+<p>然后配置一下</p>
+<p><code>~/.twister/twister.conf</code></p>
+<p>里面填入</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>rpcuser=user
+</span><span>rpcpassword=pwd
+</span><span>rpcallowip=127.0.0.1
+</span></code></pre>
+<p>上面的用户名和密码改成你自定义的就行了</p>
+<p>这个用户名和密码只不过是用来识别本地管理员身份的，不是twister帐号</p>
+<p>然后移动twister-html到~/.twister/html（twister-html的位置我忘了，搜索下吧）</p>
+<p>su切换到root运行<code>systemctl start twister</code>开启服务</p>
+<p>切换到普通用户运行<code>twisterd</code>开启主程序</p>
+<p>打开网页<a href="http://127.0.0.1:28332/index.html">http://127.0.0.1:28332/index.html</a>输入你上面的用户名密码然后等待区块同步完成修改个人信息即可</p>
+<p>官网：<a href="http://twister.net.co">http://twister.net.co</a></p>
+<p>参考信息：<a href="http://wiki.twister.net.co/w/using:howto:compiling_twister_on_ubuntu_12.04">http://wiki.twister.net.co/w/using:howto:compiling_twister_on_ubuntu_12.04</a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/chedan/">近期的计划</a></h1>
+              <div class="info">
+                <h2>懒啊………</h2>
+                <time>2014-08-21 00:00</time>
+              </div>
+              
+                <p>又好久没写博客了</p>
+<p>这次不是因为太忙</p>
+<p>纯粹是懒</p>
+<p>果然天一热就什么也不想干啊……</p>
+<p>因为懒，所以也就有了一大堆代办事项</p>
+<p>现在列出来备忘一下</p>
+<ol>
+<li>学好js和css，然后修改一下博客的图片显示缩放等等</li>
+<li>把上次写的那个梯子的坑填完，做一个网页管理系统和代理服务器群组的自动配置</li>
+<li>填好2个Minecraft服务器的坑</li>
+<li>攒钱租服务器</li>
+<li>修改一下这个博客的生成器<code>hugo</code>，加强一下markdown解析什么的</li>
+<li>攒钱给域名续费&amp;&amp;攒钱买游戏</li>
+</ol>
+<p>一直想wine星际2，结果就是不成功，一直卡在检查更新中</p>
+<p>看了一下应该是wine网络问题，如果始终不行的话还是去Steam买《Planetary Annihilation》吧，不过49刀太贵了（不知有没有土豪愿意送我 :D）</p>
+<p>估计得慢慢等打折，上次打折后仅需5刀结果错过了，悲伤啊悲伤</p>
+<p>感觉好懒……</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/arch-start/">[备用]Arch安装后的配置</a></h1>
+              <div class="info">
+                <h2>个人备用笔记</h2>
+                <time>2014-07-31 00:00</time>
+              </div>
+              
+                <p>个人备用笔记，以防下次玩脱了结果忘了怎么配置</p>
+<p>当然要先安装图形界面了，这里我使用的是KDE</p>
+<p><code>pacman -S xorg kde</code></p>
+<p>设置KDM自动启动</p>
+<p><code>systemctl enable kdm</code></p>
+<p>开启KDM</p>
+<p><code>systemctl start kdm</code></p>
+<p>安装KDE中文语言包</p>
+<p><code>pacman -S kde-l10n-zh_cn</code></p>
+<p>安装<strong>文泉驿微米黑</strong>中文字体</p>
+<p><code>pacman -S wqy-microhei wqy-microhei-lite</code></p>
+<p>安装Yaourt</p>
+<p>在<code>/etc/pacman.conf</code>里添加</p>
+<blockquote>
+<p>[archlinuxcn]<br />
+#The Chinese Arch Linux communities packages.<br />
+SigLevel = Optional TrustAll<br />
+Server   = http://repo.archlinuxcn.org/$arch</p>
+</blockquote>
+<p>然后<code>pacman -Syu yaourt</code></p>
+<p>安装字体渲染工具</p>
+<p><code>yaourt -S freetype2-infinality lib32-freetype2-infinality fontconfig-infinality</code></p>
+<p>设置字体渲染</p>
+<p><code>infctl setstyle</code>选择linux</p>
+<p>安装网络管理器</p>
+<p><code>yaourt -S networkmanager kdeplasma-applets-networkmanagement</code></p>
+<p>安装KDE的GTK主题管理工具</p>
+<p><code>yaourt -S kde-gtk-config</code></p>
+<p>安装fcitx和中州韵输入法</p>
+<p><code>yaourt -S fcitx fcitx-qt4 fcitx-rime</code></p>
+<p>使fcitx成为默认输入法</p>
+<p><code>nano ~/.xprofile</code></p>
+<p>添加</p>
+<blockquote>
+<p>export LANG=zh_CN.UTF8<br />
+export XMODIFIERS=@im=fcitx<br />
+export GTK_IM_MODULE=fcitx<br />
+export QT_IM_MODULE=fcitx</p>
+</blockquote>
+<p>安装Java JDK</p>
+<p><code>yaourt -S jdk</code></p>
+<p>安装WineQQ</p>
+<p><code>yaourt -S wineqq</code></p>
+<p>还有一大堆解码器和压缩格式支持就懒得写了</p>
+<p>去翻Arch Wiki把</p>
+<p>扔一张配置好的图，左边那个时钟的栏是可以自动隐藏的面板</p>
+<p><img src="https://iovxw.net/p/arch-start/0.png" alt="图片" /></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/use-arch/">装上了Arch</a></h1>
+              <div class="info">
+                <h2>生命不息，折腾不止</h2>
+                <time>2014-07-30 00:00</time>
+              </div>
+              
+                <p>安装的原因是前几天捣鼓KDE5，虽然安装成功了</p>
+<p>结果系统却是32位的，强迫症各种伤不起</p>
+<p>于是乎还是果断重装了</p>
+<p>ubuntu每日构建版下载2遍MD5依旧不正确，发现是迅雷离线下载的问题</p>
+<p>于是用百度离线重下了</p>
+<p>U盘刻录成功</p>
+<p>结果安装程序缺失部件</p>
+<p>验证了好几遍然后确定是ISO本身问题</p>
+<p>然后已经到了夜里2点</p>
+<p>遂不折腾了</p>
+<p>早上起床想到可以试一下Arch，于是下载刻盘安装</p>
+<p>安装基本顺利</p>
+<p>除了刚开始忘了分EFI分区导致只能用BIOS启动</p>
+<p>还有手滑习惯性的把<code>/dev/sdb1</code>输入成了<code>/dev/sda1</code>导致1T的数据盘被格以外</p>
+<p>其他基本没啥问题（感谢我那良好的备份习惯啊……）</p>
+<p>还有发现<em>中州韵输入法</em>和<em>Smartgithg</em>挺不错的</p>
+<p><a href="http://img1.tuchuang.org/uploads/2014/07/download_id_8308_mode_view.png"><img src="http://img1.tuchuang.org/thumbs/2014/07/download_id_8308_mode_view.png" alt="图片" /></a>
+<a href="http://img5.tuchuang.org/uploads/2014/07/download_id_8309_mode_view.png"><img src="http://img5.tuchuang.org/thumbs/2014/07/download_id_8309_mode_view.png" alt="图片" /></a>
+<a href="http://img3.tuchuang.org/uploads/2014/07/download_id_8310_mode_view.png"><img src="http://img3.tuchuang.org/thumbs/2014/07/download_id_8310_mode_view.png" alt="图片" /></a>
+<a href="http://img2.picbed.org/uploads/2014/07/download_id_8311_mode_view.png"><img src="http://img2.picbed.org/thumbs/2014/07/download_id_8311_mode_view.png" alt="图片" /></a>
+<a href="http://img2.picbed.org/uploads/2014/07/download_id_8312_mode_view.png"><img src="http://img2.picbed.org/thumbs/2014/07/download_id_8312_mode_view.png" alt="图片" /></a>
+<a href="http://img1.picbed.org/uploads/2014/07/awdssrr34ssd.png"><img src="http://img1.picbed.org/thumbs/2014/07/awdssrr34ssd.png" alt="图片" /></a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/stepladder/">用Golang写了一个梯子</a></h1>
+              <div class="info">
+                <h2>梯子，当然是用来翻墙的</h2>
+                <time>2014-07-26 00:00</time>
+              </div>
+              
+                <p>无聊的作品</p>
+<p>其实就是一个通过tls的socks5代理</p>
+<p>然后中间传输用了点Golang的gob而已</p>
+<p>没啥好介绍的</p>
+<p>直接扔github地址：<a href="https://github.com/iovxw/Stepladder">https://github.com/iovxw/Stepladder</a></p>
+<p>在README里有详细使用教程</p>
+<p>话说发现一个新东西：<a href="https://coding.net">Coding</a></p>
+<p>看起来不错</p>
+<p>于是也上传了一份</p>
+<p><a href="https://coding.net/u/iovxw/p/Stepladder/git">https://coding.net/u/iovxw/p/Stepladder/git</a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/golang-neovim/">Neovim的Golang开发环境配置</a></h1>
+              <div class="info">
+                <h2>强迫症强迫症强迫症强迫……</h2>
+                <time>2014-07-14 00:00</time>
+              </div>
+              
+                <pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>&quot;No warp───┐
+</span><span>set nowrap&quot;│
+</span><span>&quot;──────────┘
+</span><span>&quot;Line number─┐
+</span><span>set number  &quot;│
+</span><span>&quot;────────────┘
+</span><span>&quot;Plugin Manager────────────────────┐
+</span><span>set rtp+=~/.nvim/bundle/Vundle.vim&quot;│
+</span><span>&quot;──────────────────────────────────┘
+</span><span>&quot;Plugin load begin───────────────────┐
+</span><span>set nocompatible                    &quot;│
+</span><span>filetype off                        &quot;│
+</span><span>call vundle#begin()                 &quot;│
+</span><span>                                    &quot;│
+</span><span>&quot;Airline───────────────────┐         │
+</span><span>Plugin &#39;bling/vim-airline&#39;&quot;│         │
+</span><span>set laststatus=2          &quot;│         │
+</span><span>&quot;──────────────────────────┘         │
+</span><span>&quot;TagBar─────────────────────────────┐│
+</span><span>Plugin &#39;majutsushi/tagbar&#39;         &quot;││
+</span><span>nmap &lt;F8&gt; :TagbarToggle&lt;CR&gt;        &quot;││
+</span><span>let g:tagbar_type_go = {
+</span><span>    \ &#39;ctagstype&#39; : &#39;go&#39;,
+</span><span>    \ &#39;kinds&#39;     : [
+</span><span>        \ &#39;p:package&#39;,             
+</span><span>        \ &#39;i:imports:1&#39;,           
+</span><span>        \ &#39;c:constants&#39;,           
+</span><span>        \ &#39;v:variables&#39;,           
+</span><span>        \ &#39;t:types&#39;,               
+</span><span>        \ &#39;n:interfaces&#39;,         
+</span><span>        \ &#39;w:fields&#39;,             
+</span><span>        \ &#39;e:embedded&#39;,           
+</span><span>        \ &#39;m:methods&#39;,             
+</span><span>        \ &#39;r:constructor&#39;,         
+</span><span>        \ &#39;f:functions&#39;           
+</span><span>    \ ],
+</span><span>    \ &#39;sro&#39; : &#39;.&#39;,
+</span><span>    \ &#39;kind2scope&#39; : {
+</span><span>        \ &#39;t&#39; : &#39;ctype&#39;,           
+</span><span>        \ &#39;n&#39; : &#39;ntype&#39;           
+</span><span>    \ },
+</span><span>    \ &#39;scope2kind&#39; : {
+</span><span>        \ &#39;ctype&#39; : &#39;t&#39;,           
+</span><span>        \ &#39;ntype&#39; : &#39;n&#39;           
+</span><span>    \ },
+</span><span>    \ &#39;ctagsbin&#39;  : &#39;gotags&#39;,
+</span><span>    \ &#39;ctagsargs&#39; : &#39;-sort -silent&#39;
+</span><span>\ }                                &quot;││
+</span><span>&quot;───────────────────────────────────┘│
+</span><span>&quot;NerdTree────────────────────┐       │
+</span><span>Plugin &#39;scrooloose/nerdtree&#39;&quot;│       │
+</span><span>map &lt;C-n&gt; :NERDTree&lt;CR&gt;     &quot;│       │
+</span><span>&quot;────────────────────────────┘       │
+</span><span>&quot;Golang Plugin────────────────┐      │
+</span><span>Plugin &#39;dgryski/vim-godef&#39;   &quot;│      │
+</span><span>Plugin &#39;cespare/vim-golang&#39;  &quot;│      │
+</span><span>Plugin &#39;Blackrush/vim-gocode&#39;&quot;│      │
+</span><span>&quot;─────────────────────────────┘      │
+</span><span>&quot;Autocompletion─────────────────┐    │
+</span><span>Plugin &#39;Valloric/YouCompleteMe&#39;&quot;│    │
+</span><span>&quot;───────────────────────────────┘    │
+</span><span>&quot;Plugin load end──────────┐          │
+</span><span>call vundle#end()        &quot;│          │
+</span><span>filetype plugin indent on&quot;│          │
+</span><span>&quot;─────────────────────────┘          │
+</span><span>&quot;────────────────────────────────────┘
+</span><span>&quot;Highlight─┐
+</span><span>syntax on &quot;│
+</span><span>&quot;──────────┘
+</span><span>&quot;Golang compiler plugin─────────┐
+</span><span>autocmd FileType go compiler go&quot;│
+</span><span>&quot;───────────────────────────────┘
+</span><span>&quot;Automatic format────────────────────────────────────┐
+</span><span>autocmd FileType go autocmd BufWritePre &lt;buffer&gt; Fmt&quot;│
+</span><span>&quot;────────────────────────────────────────────────────┘
+</span></code></pre>
+<p>好吧其实原版VIM也通用</p>
+<p>只是需要把上面的<code>.nvim</code>文件夹改成<code>.vim</code>就行</p>
+<p>这里面需要用到Golang的官方插件，把go源码里的<code>misc/vim</code>全部扔到相应的文件夹即可（或者做个链接）</p>
+<p>别问我为什么写成这样……我有强迫症</p>
+<p>不过因为<code>\</code>接上一行的问题，所以有些地方没法注释（逼死强迫症啊）</p>
+<p>然后这个是适用于初学者的，因为我才开始用vim不到一周。有什么问题欢迎指出哈</p>
+<p><img src="https://iovxw.net/p/golang-neovim/0.png" alt="" /></p>
+<p>使用方法：</p>
+<ol>
+<li>
+<p>有一个Neovim（原版vim请自行把<code>.nvim</code>脑补成<code>.vim</code>，Neovim编译安装可以看&lt;@/p/neovim.md&gt;）</p>
+</li>
+<li>
+<p>安装Vundle插件管理器
+<code>git clone https://github.com/gmarik/Vundle.vim.git ~/.nvim/bundle/Vundle.vim</code>
+然后打开<code>~/.nvim/bundle/Vundle.vim/autoload/vundle.vim</code>，把里面的文件夹路径.vim替换成.nvim（原版vim无需此步骤，这是让插件管理器安装插件到Neovim的文件夹）</p>
+</li>
+<li>
+<p>把上面的配置文件保存到用户目录的<code>.nvimrc</code>文件</p>
+</li>
+<li>
+<p>终端输入<code>nvim</code>然后输入<code>:BundleInstall</code>安装插件</p>
+</li>
+<li>
+<p>完成～</p>
+</li>
+</ol>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/neovim/">ubuntu编译安装Neovim</a></h1>
+              <div class="info">
+                <h2>21世纪的VIM？</h2>
+                <time>2014-07-12 00:00</time>
+              </div>
+              
+                <p>介绍：</p>
+<blockquote>
+<p><img src="http://neovim.org/images/logo@2x.png" alt="" /></p>
+</blockquote>
+<blockquote>
+<p>巴西程序员Thiago de Arruda Padilha（aka tarruda）向Vim开源编辑器项目递交了两大补丁，对Vim的架构进行了大幅调整，结果遭到了Vim作者Bram Moolenaar的拒绝，因为对于Vim这样一个成熟的项目进行如此大的改变风险太高。于是tarruda发起了Vim fork项目Neovim，集资1万美元打造出21世纪的编辑器，提供更好的脚本、插件支持，整合现代的图形界面。</p>
+</blockquote>
+<blockquote>
+<p>该项目超额完成集资，已筹集到3.25万美元。Moolenaar本人对该项目持有异议，认为需要大量工作，会引入新的bug，而终端用户获益不多。</p>
+</blockquote>
+<p>主页：<a href="http://neovim.org">http://neovim.org</a></p>
+<p>官方wiki里的安装方法：<a href="https://github.com/neovim/neovim/wiki/Installing">https://github.com/neovim/neovim/wiki/Installing</a></p>
+<p>我用brew安装竟然提示需要pkgutil，我用的是ubuntu哪来的pkgutil？</p>
+<p>于是乎还是果断手动编译安装了</p>
+<p>先安装所需要的工具：<code>sudo apt-get install libtool autoconf automake cmake libncurses5-dev g++ pkg-config</code></p>
+<p>clone到本地<code>git clone https://github.com/neovim/neovim.git</code>然后<code>cd neovim</code>+<code>make</code>就编译完成了</p>
+<p>这里主要是说一下编译过程中出现的error解决方法</p>
+<p><code>libtoolize: not found</code>：<code>sudo apt-get install libtool</code></p>
+<p><code>aclocal: not found</code>：<code>sudo apt-get install autoconf</code></p>
+<p>安装过程中会下载几个包，网站都是国外的，所以比较慢，而且没有进度显示。耐心等待就行（如果相关网站被墙请手动设置代理）</p>
+<p>安装：</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/
+</span><span>make install
+</span></code></pre>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/gnome/">再次换回GNOME</a></h1>
+              <div class="info">
+                <h2>换啊换，换啊换</h2>
+                <time>2014-07-10 00:00</time>
+              </div>
+              
+                <p>桌面环境又换到了GNOME</p>
+<p>发行版也顺便换了好几遍</p>
+<p>当然最后的结果还是GNOME+Deepin</p>
+<p>中间还顺便尝试了仿Chrome OS的<code>Budgie Desktop</code>和仿Windows的<code>Zorn OS</code></p>
+<p>发现貌似没什么特点</p>
+<p>这次的GNOME的配置是：</p>
+<p>GTK主题：<code>Zukitwo Dark Shell</code><br />
+shell主题：<code>Moskva</code><br />
+开启的扩展：<br />
+<code>Alternatetab</code><br />
+<code>Applications menu</code><br />
+<code>User themes</code><br />
+使用：<code>GNOME Next PPA</code></p>
+<p>扔图：</p>
+<p><img src="https://iovxw.net/p/gnome/0.png" alt="" />
+<img src="https://iovxw.net/p/gnome/1.png" alt="" />
+<img src="https://iovxw.net/p/gnome/2.png" alt="" />
+<img src="https://iovxw.net/p/gnome/3.png" alt="" />
+<img src="https://iovxw.net/p/gnome/4.png" alt="" />
+<img src="https://iovxw.net/p/gnome/5.png" alt="" />
+<img src="https://iovxw.net/p/gnome/6.png" alt="" />
+<img src="https://iovxw.net/p/gnome/7.png" alt="" /></p>
+
+              
+            </article>
+          
+        
+        
+        <nav>
+          
+          <a href="https://iovxw.net/n/7/">PREV</a>
+          
+          
+          <a href="https://iovxw.net/n/9/">NEXT</a>
+          
+        </nav>
+        
+      
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

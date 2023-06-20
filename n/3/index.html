@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://iovxw.net">
+
+    
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
+
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    :not(pre) > code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 0.5em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
+
+      
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/waaaave/">多种方式实现波浪动画</a></h1>
+              <div class="info">
+                <h2>基础动画实现</h2>
+                <time>2017-02-12 08:00</time>
+              </div>
+              
+              <p>当我知道有些动画效果是纯靠图片拼起来的时候我是绝望的，虽然的确很省计算资源，但是你们让高分屏往哪哭？</p>
+<p>大部分动画效果，直接用相应图形库自带的函数就能解决</p>
+<p>有些稍微麻烦一点的，就得手写了（当然还是不推荐，毕竟人家的函数一般都带各种加速）</p>
+<p>这时候就体现出了一个 客户端/网页端 的前端稍微懂点数学是多么的重要</p>
+<p>不过太高级的数学我也不会，只能讲点简单的，就是实现一个波浪动画</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/waaaave/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/srp/">别在服务端储存用户密码了，来用 SRP 吧</a></h1>
+              <div class="info">
+                <h2>只是介绍</h2>
+                <time>2017-01-03 00:00</time>
+              </div>
+              
+              <p>新年第一篇文章就是从去年的草稿箱里发出来的，感觉真不怎么新……</p>
+<p>当然这个协议也不新了，是 2000 年出的 RFC</p>
+<p>不过现在都 2017 年了，还是有一大堆网站在用什么 md5 加盐（不，就算你用 SHA2XX 也不行），甚至连 bcrypt 和 Argon2 是啥都不知道，感觉真是悲伤（</p>
+<p>所以，来看看 SRP 是个啥（如果你真的不知道 Argon2，还是先去看它吧）：</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/srp/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/rust/">学完了 Rust</a></h1>
+              <div class="info">
+                <h2>算入门</h2>
+                <time>2016-10-15 00:00</time>
+              </div>
+              
+              <p>实在受够了 <em>Clojure</em> 的内存占用, <em>Go</em> 又太丑, 决定该再找个语言用了</p>
+<p>在用了一圈小众语言之后, 又被残酷的现实打击了, 没社区就得什么都自己来</p>
+<p>自己造语言这个想法也很快放弃了, 至少现在还不行</p>
+<p>而折中方案, 就是 <em>Rust</em></p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/rust/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/bismuth/">bismuth —— 几何壁纸生成器</a></h1>
+              <div class="info">
+                <h2>填坑好累</h2>
+                <time>2016-10-07 00:00</time>
+              </div>
+              
+              <p><img src="https://raw.githubusercontent.com/iovxw/bismuth/1a7b7e4587b549ee489168bb3c264faabfb89499/screenshot0.png" alt="screenshot" /></p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/bismuth/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/swetter-brainfuck/">含糖型 Brainfuck 解释器</a></h1>
+              <div class="info">
+                <h2>断句有问题</h2>
+                <time>2016-08-24 00:00</time>
+              </div>
+              
+              <p>其实标题应该是 《含糖型 Brainfuck | 的解释器》</p>
+<p>不过因为不单单是个解释器还是个可视化和单步执行工具以及一个语法糖的实现</p>
+<p>所以，嗯……标题就这样吧</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/swetter-brainfuck/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/linux-fix-cursor-theme/">修复 Linux GNOME 环境下非 GTK 窗口鼠标指针主题不统一问题</a></h1>
+              <div class="info">
+                <h2>以后重装系统得清配置文件</h2>
+                <time>2016-08-01 00:00</time>
+              </div>
+              
+                <p>把 <code>~/.icons/default/index.theme</code> 中的 <em>Inherits</em> 改过来就行了</p>
+<p>如果没有就改 <code>/usr/share/icons/default/index.theme</code>，不过就是全局的了</p>
+<p><em><strong>本文完</strong></em></p>
+<p>原因估计是 GNOME 自带的鼠标主题设置没改这个文件，而非 GTK 程序都是靠这个读取鼠标主题的</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/git-commit-date/">自定义 Git commit 时间</a></h1>
+              <div class="info">
+                <h2>拿来刷小绿点</h2>
+                <time>2016-07-30 00:00</time>
+              </div>
+              
+              <p>在需要给 <em>commit</em> 指定时间的时候，可以用 <code>--date</code> 参数</p>
+<p>支持的日期格式可以看：</p>
+<p><a href="http://stackoverflow.com/questions/19742345/what-is-the-format-for-date-parameter-of-git-commit">http://stackoverflow.com/questions/19742345/what-is-the-format-for-date-parameter-of-git-commit</a></p>
+<p>使用 <code>'x days ago'</code> 可以很方便的补上之前的小绿点（🙈这功能其实就是拿来干这种事的）</p>
+<script>
+if (window.location.pathname == "/") {
+    document.write("<p>然后这篇文章到这就结束了，剩下是给连今天是几号都懒得看的人的</p>")
+}
+</script>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/git-commit-date/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/shields-io/">Shields.io —— 制作各种状态图标</a></h1>
+              <div class="info">
+                <h2>嘛这篇文章其实是凑数的</h2>
+                <time>2016-07-27 00:00</time>
+              </div>
+              
+              <p>在 github 上看见很多项目都有 <img src="https://img.shields.io/wercker/ci/wercker/docs.svg?maxAge=2592000" alt="IMG" /> 这样的图标对不对？</p>
+<p>嗯，这就是今天我在好不容易重新开始的 github 连击要断了于是急中生智水的这一篇博客中要介绍的东西：</p>
+<p><a href="http://shields.io">http://shields.io</a></p>
+<p>打开页面就能发现，各种例子相当全面，完全不用我介绍</p>
+<p>于是这篇文章就结束了</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/shields-io/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/minecraft-ingameinfo/">一份 Minecraft InGameInfo Mod 配置文件</a></h1>
+              <div class="info">
+                <h2>没错，这段时间我都在玩游戏</h2>
+                <time>2016-07-12 00:00</time>
+              </div>
+              
+              <p>效果图:</p>
+<p><img src="https://img.vim-cn.com/f6/80f3ababde436eacbeaf0616cb42dc34f5fc2a.png" alt="https://img.vim-cn.com/f6/80f3ababde436eacbeaf0616cb42dc34f5fc2a.png" /></p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/minecraft-ingameinfo/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/ark-lang/">Ark —— Go 和 Rust 的结合体</a></h1>
+              <div class="info">
+                <h2>只是没人用</h2>
+                <time>2016-06-14 00:00</time>
+              </div>
+              
+                <p>编译器是用go和Rust写的，github在这里：<a href="https://github.com/ark-lang/ark">https://github.com/ark-lang/ark</a></p>
+<p>官网：<a href="http://ark-lang.org/">http://ark-lang.org/</a></p>
+<p>说是系统级编程语言，可以和C无缝交互</p>
+<p>至于为什么说是go和rust的结合体</p>
+<p>看下面的例子就知道了（<a href="https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md">https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md</a>）</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>struct Bar {
+</span><span>    name: str;
+</span><span>}
+</span><span>
+</span><span>struct Baz {
+</span><span>    name: str;
+</span><span>}
+</span><span>
+</span><span>trait Foo {
+</span><span>    func fooBar();
+</span><span>}
+</span><span>
+</span><span>impl Foo for Bar {
+</span><span>    func fooBar() {
+</span><span>        println(&quot;foobar method in foo for bar %s!&quot;, name);
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span>impl Foo for Baz {
+</span><span>    func fooBar() {
+</span><span>        println(&quot;foobar method in foo for baz %s!&quot;, name);
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span>
+</span><span>// attributes look cool
+</span><span>// basically generics, we need to use
+</span><span>// them in this case instead of saying `value: Foo` as
+</span><span>// a param, because a trait does not have a constant
+</span><span>// size that is known at compile time, so the generic
+</span><span>// will basically compile down to [in this case] two
+</span><span>// functions one for Bar, and one for Baz, then it
+</span><span>// will know the size of the given value.
+</span><span>// this might be weird to understand but its 1am and im
+</span><span>// ill and tired. jah bless xx
+</span><span>func [T: Foo] callFooBar(value: T) {
+</span><span>
+</span><span>}
+</span><span>
+</span><span>func main() {
+</span><span>    // monomorphisation????
+</span><span>    baz: Baz = {
+</span><span>        name: &quot;baz&quot;,
+</span><span>    };
+</span><span>
+</span><span>    bar: Bar = {
+</span><span>        name: &quot;bar&quot;,
+</span><span>    }
+</span><span>
+</span><span>    callFooBar(baz);
+</span><span>    callFooBar(bar);
+</span><span>}
+</span></code></pre>
+
+              
+            </article>
+          
+        
+        
+        <nav>
+          
+          <a href="https://iovxw.net/n/2/">PREV</a>
+          
+          
+          <a href="https://iovxw.net/n/4/">NEXT</a>
+          
+        </nav>
+        
+      
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="大概是通用的">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>Linux 下将 .jar 制作为可直接执行文件 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,17 +316,17 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
@@ -324,31 +338,29 @@
     <p>一般终端环境下要运行一个（有入口的） jar，需要 <code>java -jar xxxx.jar</code></p>
 <p>桌面环境则需要选择指定 java 来运行，需要设置默认。都不是很方便</p>
 <p>通常都是写一个脚本来执行 <code>java -jar</code>，但是这样就变成两个文件了，强迫症不舒服</p>
-<p>解决方法很简单，把这俩拼成一个文件就行了<!-- more -->：</p>
+<p>解决方法很简单，把这俩拼成一个文件就行了<span id="continue-reading"></span>：</p>
 <p>先写一个启动脚本存为 <em>stub.sh</em> （名字可以随便，只要后面别弄错就行）（<a href="https://coderwall.com/p/ssuaxa/how-to-make-a-jar-file-linux-executable">来源</a>）</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;font-style:italic;color:#928374;">#!/usr/bin/env bash
-</span><span style="background-color:#282828;color:#fdf4c1;">MYSELF</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#b8bb26;">`</span><span style="background-color:#282828;color:#fdf4c1;">which </span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">&quot; </span><span style="background-color:#282828;color:#d3869b;">2</span><span style="background-color:#282828;color:#fe8019;">&gt;</span><span style="background-color:#282828;color:#fdf4c1;">/dev/null</span><span style="background-color:#282828;color:#b8bb26;">`
-</span><span style="background-color:#282828;color:#fabd2f;">[ </span><span style="background-color:#282828;color:#fdf4c1;">$? -gt 0 -a -f </span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">&quot; </span><span style="background-color:#282828;color:#fabd2f;">] </span><span style="background-color:#282828;color:#fe8019;">&amp;&amp; </span><span style="background-color:#282828;color:#fdf4c1;">MYSELF</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#b8bb26;">&quot;./$</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">&quot;
-</span><span style="background-color:#282828;color:#fdf4c1;">java</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#b8bb26;">java
-</span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fdf4c1;">test -n </span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">JAVA_HOME</span><span style="background-color:#282828;color:#b8bb26;">&quot;</span><span style="background-color:#282828;color:#fe8019;">; </span><span style="background-color:#282828;color:#fa5c4b;">then
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">java</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">JAVA_HOME</span><span style="background-color:#282828;color:#b8bb26;">/bin/java&quot;
-</span><span style="background-color:#282828;color:#fa5c4b;">fi
-</span><span style="background-color:#282828;color:#fabd2f;">exec </span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">java</span><span style="background-color:#282828;color:#b8bb26;">&quot; </span><span style="background-color:#282828;color:#fdf4c1;">$java_args -jar </span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">MYSELF</span><span style="background-color:#282828;color:#b8bb26;">&quot; &quot;$</span><span style="background-color:#282828;color:#fdf4c1;">@</span><span style="background-color:#282828;color:#b8bb26;">&quot;
-</span><span style="background-color:#282828;color:#fabd2f;">exit</span><span style="background-color:#282828;color:#fdf4c1;"> 1 
-</span></pre>
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="font-style:italic;color:#928374;">#!/usr/bin/env bash
+</span><span style="color:#fdf4c1;">MYSELF</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1;">`which </span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">0</span><span style="color:#b8bb26;">&quot; </span><span style="color:#d3869b;">2</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1;">/dev/null`
+</span><span style="color:#fabd2f;">[ </span><span style="color:#fdf4c1;">$? -gt 0 -a -f </span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">0</span><span style="color:#b8bb26;">&quot; </span><span style="color:#fabd2f;">] </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fdf4c1;">MYSELF</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">&quot;./$</span><span style="color:#fdf4c1;">0</span><span style="color:#b8bb26;">&quot;
+</span><span style="color:#fdf4c1;">java</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">java
+</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1;">test -n </span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">JAVA_HOME</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fe8019;">; </span><span style="color:#fa5c4b;">then
+</span><span>    </span><span style="color:#fdf4c1;">java</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">JAVA_HOME</span><span style="color:#b8bb26;">/bin/java&quot;
+</span><span style="color:#fa5c4b;">fi
+</span><span style="color:#fabd2f;">exec </span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">java</span><span style="color:#b8bb26;">&quot; </span><span style="color:#fdf4c1;">$java_args -jar </span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">MYSELF</span><span style="color:#b8bb26;">&quot; &quot;$</span><span style="color:#fdf4c1;">@</span><span style="color:#b8bb26;">&quot;
+</span><span style="color:#fabd2f;">exit</span><span style="color:#fdf4c1;"> 1 
+</span></code></pre>
 <p>逐行讲解一下这个脚本写了啥</p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;font-style:italic;color:#928374;">#!/usr/bin/env bash # shebang，用于启动解释器，我改成了使用 env 来运行 bash，更靠谱
-</span><span style="background-color:#282828;color:#fdf4c1;">MYSELF</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#b8bb26;">`</span><span style="background-color:#282828;color:#fdf4c1;">which </span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">&quot; </span><span style="background-color:#282828;color:#d3869b;">2</span><span style="background-color:#282828;color:#fe8019;">&gt;</span><span style="background-color:#282828;color:#fdf4c1;">/dev/null</span><span style="background-color:#282828;color:#b8bb26;">` </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 找到这个脚本所在的绝对路径（如果是在 $PATH 里）
-</span><span style="background-color:#282828;color:#fabd2f;">[ </span><span style="background-color:#282828;color:#fdf4c1;">$? -gt 0 -a -f </span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">&quot; </span><span style="background-color:#282828;color:#fabd2f;">] </span><span style="background-color:#282828;color:#fe8019;">&amp;&amp; </span><span style="background-color:#282828;color:#fdf4c1;">MYSELF</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#b8bb26;">&quot;./$</span><span style="background-color:#282828;color:#fdf4c1;">0</span><span style="background-color:#282828;color:#b8bb26;">&quot; </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 上一步失败的话，使用相对路径
-</span><span style="background-color:#282828;color:#fdf4c1;">java</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#b8bb26;">java </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 指定 java 命令
-</span><span style="background-color:#282828;color:#fa5c4b;">if </span><span style="background-color:#282828;color:#fdf4c1;">test -n </span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">JAVA_HOME</span><span style="background-color:#282828;color:#b8bb26;">&quot;</span><span style="background-color:#282828;color:#fe8019;">; </span><span style="background-color:#282828;color:#fa5c4b;">then </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 如果用户设置了 $JAVA_HOME 的话
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">java</span><span style="background-color:#282828;color:#fe8019;">=</span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">JAVA_HOME</span><span style="background-color:#282828;color:#b8bb26;">/bin/java&quot; </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 那就用用户设置的 $JAVA_HOME 里的 java
-</span><span style="background-color:#282828;color:#fa5c4b;">fi
-</span><span style="background-color:#282828;color:#fabd2f;">exec </span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">java</span><span style="background-color:#282828;color:#b8bb26;">&quot; </span><span style="background-color:#282828;color:#fdf4c1;">$java_args -jar </span><span style="background-color:#282828;color:#b8bb26;">&quot;$</span><span style="background-color:#282828;color:#fdf4c1;">MYSELF</span><span style="background-color:#282828;color:#b8bb26;">&quot; &quot;$</span><span style="background-color:#282828;color:#fdf4c1;">@</span><span style="background-color:#282828;color:#b8bb26;">&quot; </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 运行 java -jar，同时传递参数。
-</span><span style="background-color:#282828;color:#fabd2f;">exit</span><span style="background-color:#282828;color:#fdf4c1;"> 1 </span><span style="background-color:#282828;font-style:italic;color:#928374;"># 如果上面调用 exec 失败，则会返回退出码 1
-</span></pre>
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="font-style:italic;color:#928374;">#!/usr/bin/env bash # shebang，用于启动解释器，我改成了使用 env 来运行 bash，更靠谱
+</span><span style="color:#fdf4c1;">MYSELF</span><span style="color:#fe8019;">=</span><span style="color:#fdf4c1;">`which </span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">0</span><span style="color:#b8bb26;">&quot; </span><span style="color:#d3869b;">2</span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1;">/dev/null` </span><span style="font-style:italic;color:#928374;"># 找到这个脚本所在的绝对路径（如果是在 $PATH 里）
+</span><span style="color:#fabd2f;">[ </span><span style="color:#fdf4c1;">$? -gt 0 -a -f </span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">0</span><span style="color:#b8bb26;">&quot; </span><span style="color:#fabd2f;">] </span><span style="color:#fe8019;">&amp;&amp; </span><span style="color:#fdf4c1;">MYSELF</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">&quot;./$</span><span style="color:#fdf4c1;">0</span><span style="color:#b8bb26;">&quot; </span><span style="font-style:italic;color:#928374;"># 上一步失败的话，使用相对路径
+</span><span style="color:#fdf4c1;">java</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">java </span><span style="font-style:italic;color:#928374;"># 指定 java 命令
+</span><span style="color:#fa5c4b;">if </span><span style="color:#fdf4c1;">test -n </span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">JAVA_HOME</span><span style="color:#b8bb26;">&quot;</span><span style="color:#fe8019;">; </span><span style="color:#fa5c4b;">then </span><span style="font-style:italic;color:#928374;"># 如果用户设置了 $JAVA_HOME 的话
+</span><span>    </span><span style="color:#fdf4c1;">java</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">JAVA_HOME</span><span style="color:#b8bb26;">/bin/java&quot; </span><span style="font-style:italic;color:#928374;"># 那就用用户设置的 $JAVA_HOME 里的 java
+</span><span style="color:#fa5c4b;">fi
+</span><span style="color:#fabd2f;">exec </span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">java</span><span style="color:#b8bb26;">&quot; </span><span style="color:#fdf4c1;">$java_args -jar </span><span style="color:#b8bb26;">&quot;$</span><span style="color:#fdf4c1;">MYSELF</span><span style="color:#b8bb26;">&quot; &quot;$</span><span style="color:#fdf4c1;">@</span><span style="color:#b8bb26;">&quot; </span><span style="font-style:italic;color:#928374;"># 运行 java -jar，同时传递参数。
+</span><span style="color:#fabd2f;">exit</span><span style="color:#fdf4c1;"> 1 </span><span style="font-style:italic;color:#928374;"># 如果上面调用 exec 失败，则会返回退出码 1
+</span></code></pre>
 <p>然后就是拼接起来:</p>
 <p><code>cat stub.sh hello.jar &gt; hello &amp;&amp; chmod +x hello</code></p>
 <p>上面命令的意思是，将 <em>stub.sh</em> 和 <em>hello.jar</em> 拼接到一起，存为 <em>hello</em>，然后给 <em>hello</em> 添加执行权限</p>
@@ -373,6 +385,9 @@
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/make-a-jar-file-linux-executable/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';

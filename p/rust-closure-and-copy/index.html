@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="历史遗留问题">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://iovxw.net">
+
+    
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>Rust 闭包环境捕获行为与 Copy trait - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
+
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    :not(pre) > code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 0.5em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>Rust 闭包环境捕获行为与 Copy trait</h1>
+    <div class="info"><h2>历史遗留问题</h2><time>2019-04-28 23:01</time></div>
+    <p>今天 Rust 群里有人遇到了反直觉的关于闭包的引用错误, 在群友合力排除各种干扰找到原因之后</p>
+<p>我们就又有了一个可以塞到 <a href="https://iovxw.net/p/ugly-rust/">100 黑</a> 里的坑 (悲)</p>
+<p>不过因为篇幅太长 (太罗嗦), 这里独立拆分出一篇文章讲解</p>
+<hr />
+<p>闭包在捕获环境时, 如不显式添加 <code>move</code> 关键字, 捕获的方法是由编译器推导的</p>
+<p>规则为: 如果捕获的变量在闭包内被引用, 或者可变引用, 那么就捕获到引用或可变引用</p>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let</span><span> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span>::new();
+</span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span>|| v.</span><span style="color:#fabd2f;">len</span><span>(); </span><span style="font-style:italic;color:#928374;">// v: &amp;String
+</span></code></pre>
+<span id="continue-reading"></span><pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let</span><span> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span>::new();
+</span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span>|| v.</span><span style="color:#fabd2f;">clear</span><span>(); </span><span style="font-style:italic;color:#928374;">// v: &amp;mut String
+</span></code></pre>
+<p>可以在 MIR 里查看闭包捕获的类型, 这里我就直接在注释里写出来了</p>
+<p>然后如果捕获的变量在闭包内被消耗, move 走的话, 就捕获所有权</p>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let</span><span> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span>::new();
+</span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span>|| std::mem::drop(v); </span><span style="font-style:italic;color:#928374;">// v: String
+</span></code></pre>
+<p>到这还是非常符合直觉的 —— 除非你捕获的变量实现了 <code>Copy</code></p>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let</span><span> v </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">false</span><span>;
+</span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span>|| std::mem::drop(v); </span><span style="font-style:italic;color:#928374;">// v: &amp;bool
+</span></code></pre>
+<p>按理来说, 上面这个闭包的行为应该和给闭包加 <code>move</code> 一样, 因为我们把 <code>v</code> 消耗掉了</p>
+<p>然而并不, <code>c</code> 捕获到的 <code>v</code> 的类型是 <code>&amp;bool</code>, 是个引用</p>
+<p>那 <code>std::mem::drop</code> 接受的参数也是 <code>&amp;bool</code> 吗?</p>
+<p>也不是, 仍然是 <code>bool</code>, 因为编译器把上面的例子展开后差不多是这样的</p>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let</span><span> v </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">false</span><span>;
+</span><span style="color:#fa5c4b;">let</span><span> ref_v </span><span style="color:#fe8019;">= &amp;</span><span>v;
+</span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span>|| std::mem::drop(</span><span style="color:#fe8019;">*</span><span>ref_v);
+</span></code></pre>
+<p>闭包只捕获了 <code>v</code> 的引用, 然后在使用时 <code>*</code> 解引用, 又因为 <code>v</code> 是 <code>Copy</code>, 相当于无事发生</p>
+<p>换句话说如果 Rust 的闭包在捕获环境时没有手动指定 <code>move</code>, 那么编译器会尝试惰性的 <code>Copy</code></p>
+<p>如果不了解这个行为, 会让你撞上奇怪的 &quot;短命&quot; 还有引用问题, 并且编译器不会提示加 <code>move</code> 续命, 比如 <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=a4cebe3ca7669755d34de340f14305fc">这样</a>
+和 <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=eddfdbcdfeed71b1311df6115f7484a5">这样</a></p>
+<p>总之非常反直觉</p>
+<hr />
+<p>更新:</p>
+<p>相关 issues: <a href="https://github.com/rust-lang/rust/issues/54060">#54060</a></p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/rust-closure-and-copy/';
+  };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

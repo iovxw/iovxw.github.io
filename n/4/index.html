@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://iovxw.net">
+
+    
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
+
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    :not(pre) > code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 0.5em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
+
+      
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/chez-scheme-machine-type/">Chez Scheme 中的 machine-type</a></h1>
+              <div class="info">
+                <h2>魔法的缩写</h2>
+                <time>2016-05-13 00:00</time>
+              </div>
+              
+              <p>在 <em>Chez Scheme</em> 中可以用 <code>(machine-type)</code> 获取当前的运行环境</p>
+<p>比如 64 位 Linux 获取到的是 <strong>a6le</strong>, 而如果启用了线程则是 <strong>ta6le</strong></p>
+<p>第一次看完全是一头雾水, 这到底是什么玩意?</p>
+<p>其实只要注意看一下 <em><strong>Makefile</strong></em>, 就能明白了</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/chez-scheme-machine-type/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/chez-scheme-benchmark/">Chez Scheme 性能测试</a></h1>
+              <div class="info">
+                <h2>不用自己跑，省了很多事</h2>
+                <time>2016-05-03 00:00</time>
+              </div>
+              
+              <p>在 <a href="http://webchat.freenode.net?channels=%23chez">#chez</a> 频道里, <strong>@ecraven</strong> 使用 <em>Chez Scheme</em> 跑了下
+<a href="http://www.larcenists.org/benchmarksGenuineR6Linux.html">Larceny 项目的 R6RS Scheme 基准测试</a> (感谢 ecraven)</p>
+<p>测试环境是 <code>Intel i7-4770 @ 3.4GHz</code>, 结果如下:</p>
+<p><a href="http://www.nexoid.at/tmp/scheme-benchmark.html">http://www.nexoid.at/tmp/scheme-benchmark.html</a></p>
+<p>为了省事在这里也放一份, 不过不保证更新, 最新结果请去上面的链接查看</p>
+<style>
+.result {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.result div {
+  float: left;
+}
+
+.chart text {
+  fill: white;
+  font-size: 10px;
+}
+</style>
+<div class="result">
+<div><h4>total-accumulated-runtime</h4><svg class="chart" width="420" height="160"><g transform="translate(0,0)"><rect width="18.347430058555627" height="19" style="fill:#00a0dc"/><text x="23.347430058555627" y="9.5" dy=".35em">chez-9.4 (94.)</text></g><g transform="translate(0,20)"><rect width="45.86857514638907" height="19" style="fill:#8d6cab"/><text x="50.86857514638907" y="9.5" dy=".35em">larceny (235.)</text></g><g transform="translate(0,40)"><rect width="146.19388418998048" height="19" style="fill:#e68523"/><text x="151.19388418998048" y="9.5" dy=".35em">petite-9.4 (749.)</text></g><g transform="translate(0,60)"><rect width="146.38906961613534" height="19" style="fill:#00aeb3"/><text x="151.38906961613534" y="9.5" dy=".35em">racket (750.)</text></g><g transform="translate(0,80)"><rect width="173.5198438516591" height="19" style="fill:#dd5143"/><text x="178.5198438516591" y="9.5" dy=".35em">petite-8.4 (889.)</text></g><g transform="translate(0,100)"><rect width="174.30058555627846" height="19" style="fill:#edb220"/><text x="179.30058555627846" y="9.5" dy=".35em">vicare (893.)</text></g><g transform="translate(0,120)"><rect width="300.0" height="19" style="fill:#dc4b89"/><text x="305.0" y="9.5" dy=".35em">ypsilon (1537.)</text></g></svg></div>
+<div><h4>times-faster-than-any-other</h4><svg class="chart" width="420" height="160"><g transform="translate(0,0)"><rect width="14.285714285714286" height="19" style="fill:#dd5143"/><text x="19.285714285714285" y="9.5" dy=".35em">petite-8.4 (2)</text></g><g transform="translate(0,20)"><rect width="21.428571428571427" height="19" style="fill:#8d6cab"/><text x="26.428571428571427" y="9.5" dy=".35em">larceny (3)</text></g><g transform="translate(0,40)"><rect width="21.428571428571427" height="19" style="fill:#00aeb3"/><text x="26.428571428571427" y="9.5" dy=".35em">racket (3)</text></g><g transform="translate(0,60)"><rect width="21.428571428571427" height="19" style="fill:#edb220"/><text x="26.428571428571427" y="9.5" dy=".35em">vicare (3)</text></g><g transform="translate(0,80)"><rect width="28.571428571428573" height="19" style="fill:#e68523"/><text x="33.57142857142857" y="9.5" dy=".35em">petite-9.4 (4)</text></g><g transform="translate(0,100)"><rect width="78.57142857142857" height="19" style="fill:#dc4b89"/><text x="83.57142857142857" y="9.5" dy=".35em">ypsilon (11)</text></g><g transform="translate(0,120)"><rect width="300.0" height="19" style="fill:#00a0dc"/><text x="305.0" y="9.5" dy=".35em">chez-9.4 (42)</text></g></svg></div>
+</div>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/chez-scheme-benchmark/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/release-chez-scheme/">打包发布 Chez Scheme 程序</a></h1>
+              <div class="info">
+                <h2>简单暴力</h2>
+                <time>2016-05-01 00:00</time>
+              </div>
+              
+              <p>在 <a href="/p/chez-scheme-stand-alone.html">上一篇文章</a> 里说过如何将 <em>Chez Scheme</em> 程序编译为单文件,
+不过仍然需要 <em>Chez Scheme</em> 或者是 <em>Petite Chez Scheme</em> 才能运行</p>
+<p>但是总不能要求用户都安装 <em>Chez Scheme</em>, 因为这货在各大发行版官方仓库里都没有 (AUR 不是官方仓库), 只能自己编译, 更别说 Windows 了
+(好好好, 我知道 Windows 10 发布了一个很重要的特性, 但那现在还是预览版)</p>
+<p>解决方法很简单也很暴力, 发布的时候把 <em>Chez Scheme</em> 打包进去</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/release-chez-scheme/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/chez-scheme-stand-alone/">将 Chez Scheme 程序编译为单文件</a></h1>
+              <div class="info">
+                <h2>但是仍然依赖解释器</h2>
+                <time>2016-04-30 00:00</time>
+              </div>
+              
+              <p>通过使用 <code>make-boot-file</code> 可以将 Chez Scheme 程序编译为单文件</p>
+<p>文档如下：</p>
+<style>
+    .doc {
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 5px;
+        background: rgba(255,255,255,.05);
+    }
+</style>
+<div class="doc">
+<span><b>procedure</b>: <tt>(make-boot-file&nbsp;<i>output-filename</i>&nbsp;<i>base-boot-list</i>&nbsp;<i>input-filename</i>&nbsp;...)</tt></span>
+<br>
+<b>returns: </b>unspecified
+<br>
+<b>libraries: </b><tt>(chezscheme)</tt>
+<p><tt><i>output-filename</i></tt>, <tt><i>input-filename</i></tt>, and the elements of
+<tt><i>base-boot-list</i></tt> must be strings.
+</p>
+<p>
+<tt>make-boot-file</tt> writes a boot header to the file named by
+<tt><i>output-filename</i></tt>, followed by the object code for each
+<tt><i>input-filename</i></tt> in turn.
+If an input file is not already compiled, <tt>make-boot-file</tt> compiles
+the file as it proceeds.
+</p>
+<p>
+The boot header identifies the elements of <tt><i>base-boot-list</i></tt> as
+alternative boot files upon which the new boot file depends.
+If the list of strings naming base boot files is empty, the first named
+input file should be a base boot file, i.e., petite.boot or some boot file
+derived from petite.boot.
+</p>
+<p>
+Boot files are loaded explicitly via the <tt>--boot</tt> or <tt>-b</tt>
+command-line options or implicitly based on the name of the executable
+(Section&nbsp;<a href="https://iovxw.net/csug9/use.html#g14">2.9</a>).
+</p>
+<p>
+See Section&nbsp;<a href="https://iovxw.net/csug9/use.html#g13">2.8</a> for more information on boot files
+and the use of <tt>make-boot-file</tt>.
+</p>
+</div>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/chez-scheme-stand-alone/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/chez-scheme-users-guide/">Chez Scheme Version 9 User’s Guide</a></h1>
+              <div class="info">
+                <h2>LaTeX 依赖好麻烦</h2>
+                <time>2016-04-29 00:00</time>
+              </div>
+              
+              <p>闲得没事自己编译了下，有一块竟然还要手动写日期，一堆依赖真是麻烦</p>
+<p>Github: <a href="https://github.com/iovxw/csug9">https://github.com/iovxw/csug9</a></p>
+<p>PDF: <a href="https://iovxw.net/csug9/csug.pdf">https://iovxw.net/csug9/csug.pdf</a></p>
+<p>HTML: <a href="https://iovxw.net/csug9/csug.html">https://iovxw.net/csug9/csug.html</a></p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/chez-scheme-users-guide/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/clojure-thread-sleep/">Clojure Thread&#x2F;sleep 在 core.async 里的坑</a></h1>
+              <div class="info">
+                <h2>文档为何没标注</h2>
+                <time>2016-04-21 00:00</time>
+              </div>
+              
+              <p>给 Telegram 写的一个 RSS Bot 总是随机出现大量重复推送更新的 BUG，还以为是数据库或者 RSS 对比的问题，然而逻辑上根本没问题</p>
+<p>百思不得其解</p>
+<p>直到发现了自己在 loop 用的是 <code>Thread/sleep</code> 来进行定时的，它是 <code>Thread</code> 啊！</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/clojure-thread-sleep/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/chez-scheme/">「速报」世界上最好的 Scheme 编译器开源了</a></h1>
+              <div class="info">
+                <h2>还没试</h2>
+                <time>2016-04-15 00:00</time>
+              </div>
+              
+              <p>当然最好的不是我说的，是<a href="http://www.yinwang.org/blog-cn/2013/03/28/chez-scheme">王垠</a>说的 <del>（冤有头债有主，别打我）</del></p>
+<p>十二天前，Cisco 的 github 上新建了一个 <a href="https://github.com/cisco/ChezScheme">repo</a>，就是大名鼎鼎的 <del>(被王垠吹上天的)</del>
+<a href="http://www.scheme.com/">ChezScheme</a></p>
+<p>不过只有一个 README 和 LICENSE</p>
+<p>而就在十分钟之前，终于推了源码上去了</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/chez-scheme/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/web-appcache/">HTML5 离线缓存两个需要注意的地方</a></h1>
+              <div class="info">
+                <h2>笔记</h2>
+                <time>2016-04-10 00:00</time>
+              </div>
+              
+              <p>这两天用 ClojureScript 弄了个 <a href="https://github.com/iovxw/text-todo-list">Todo List</a></p>
+<p>在线版本: <a href="https://iovxw.net/text-todo-list/">https://iovxw.net/text-todo-list/</a></p>
+<p>为了能离线使用, 试着用了下 HTML5 加的 Application Cache, 效果当然是不错的</p>
+<p>不过中间看文档不仔细导致白折腾了半天</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/web-appcache/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/the-war/">不要去评价一门你没真正用过的编程语言</a></h1>
+              <div class="info">
+                <h2>人类是无法互相理解的</h2>
+                <time>2016-03-31 00:00</time>
+              </div>
+              
+              <p>只要是个程序员，肯定就陷入过这个话题中</p>
+<blockquote>
+<p>究竟哪个语言更好？</p>
+</blockquote>
+<p>一般这种话题开始后，只有三种结果</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/the-war/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
+              <h1><a class="title" href="https://iovxw.net/p/about-lisp/">关于 Lisp</a></h1>
+              <div class="info">
+                <h2>一些废话</h2>
+                <time>2016-03-29 00:00</time>
+              </div>
+              
+              <p>有人奇怪我为啥会喜欢这么一个没人用的语言</p>
+<p>还有人认为这是为了装逼（对于这种人，真想打一顿）</p>
+<p>本来是想回答：</p>
+<blockquote>
+<p>反正我喜欢用，又没安利给你，你管得着吗</p>
+</blockquote>
+<p>不过还是谈一下 Lisp 这个 <del>充满圆括号的</del> 语言吧</p>
+
+              <div class="read-more">
+                <a href="https://iovxw.net/p/about-lisp/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+        
+        <nav>
+          
+          <a href="https://iovxw.net/n/3/">PREV</a>
+          
+          
+          <a href="https://iovxw.net/n/5/">NEXT</a>
+          
+        </nav>
+        
+      
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

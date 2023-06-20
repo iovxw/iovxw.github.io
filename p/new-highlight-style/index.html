@@ -4,30 +4,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
+    <meta name="description" content="Elixir">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https:&#x2F;&#x2F;iovxw.net">
+    <link rel="canonical" href="https://iovxw.net">
 
     
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https:&#x2F;&#x2F;iovxw.net&#x2F;rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
     
     <title>换了个代码高亮主题 - iovxw</title>
 
     <meta name="theme-color" content="#212121">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
 
-    <meta name="msapplication-TileImage" content="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
     <meta name="msapplication-TileColor" content="#3F51B5">
 
-    <link rel="shortcut icon" href="https:&#x2F;&#x2F;iovxw.net&#x2F;favicon.png">
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
 
     <style>
     body {
@@ -35,6 +35,7 @@
         background: #151515;
         color: white;
         font-size: 16px;
+        font-family: sans-serif;
     }
 
     header a {
@@ -114,12 +115,29 @@
         margin-right: 6px;
     }
 
-    header, article, footer {
+    header, article, nav, footer {
         padding: 10px;
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
     }
 
     section {
@@ -169,10 +187,6 @@
         margin: 1em 0;
     }
 
-    p, li {
-        line-height: 1.5em;
-    }
-
     article > p:last-child, article > pre:last-child {
         margin-bottom: 0;
     }
@@ -193,7 +207,7 @@
     article .info {
         display: flex;
         align-items: baseline;
-        border-bottom: 1px dashed white;
+        border-bottom: 1px solid white;
         margin-bottom: 7px;
     }
 
@@ -212,7 +226,7 @@
         margin-bottom: 4px;
     }
 
-    code {
+    :not(pre) > code {
         background: rgba(255,255,255,.1);
         border: 1px solid rgba(255,255,255,.1);
         padding: 0 0.3em;
@@ -227,13 +241,13 @@
 
     hr {
         border: 0;
-        border-top: 1px dashed #ccc;
+        border-top: 1px solid #ccc;
         margin: 1em 0;
     }
 
     ol, ul {
         padding: 0;
-        margin: 1em 2em;
+        margin: 1em 0 1em 2em;
     }
 
     .read-more {
@@ -252,7 +266,7 @@
         border: solid white;
         border-width: 0 3px;
         padding: 0 0.5em;
-        margin: 1em 1em;
+        margin: 1em 0.5em;
     }
 
     ul.archive {
@@ -302,17 +316,17 @@
   <body>
     <section>
       <header>
-        <a class="title" href="https:&#x2F;&#x2F;iovxw.net">iovxw</a>
+        <a class="title" href="https://iovxw.net">iovxw</a>
           <input name="search" placeholder="Search" />
           <div class="link">
             
-              <a href="https://iovxw.net&#x2F;p&#x2F;">Archive</a>
+              <a href="https://iovxw.net/p/">Archive</a>
             
-              <a href="https://iovxw.net&#x2F;rss.xml">RSS</a>
+              <a href="https://iovxw.net/rss.xml">RSS</a>
             
-              <a href="https://iovxw.net&#x2F;links&#x2F;">Links</a>
+              <a href="https://iovxw.net/links/">Links</a>
             
-              <a href="https://iovxw.net&#x2F;about&#x2F;">About</a>
+              <a href="https://iovxw.net/about/">About</a>
             
           </div>
       </header>
@@ -323,59 +337,62 @@
     <div class="info"><h2>Elixir</h2><time>2015-09-21 00:00</time></div>
     <p>算是和现在用的 VIM 的配色比较接近了</p>
 <p><img src="https://img.vim-cn.com/30/8ebda049964c487db4998232540d6f18f58bf9.png" alt="VIM" /></p>
-<pre style="background-color:#282828">
-<span style="background-color:#282828;color:#fa5c4b;">defrecord </span><span style="background-color:#282828;color:#8ec07c;">Person</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">first_name: </span><span style="background-color:#282828;color:#d3869b;">nil</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">last_name: </span><span style="background-color:#282828;color:#b8bb26;">&quot;Dudington&quot; </span><span style="background-color:#282828;color:#fa5c4b;">do
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fa5c4b;">def </span><span style="background-color:#282828;color:#8ec07c;">name</span><span style="background-color:#282828;color:#fdf4c1aa;"> record </span><span style="background-color:#282828;color:#fa5c4b;">do </span><span style="background-color:#282828;font-style:italic;color:#928374;"># huh ?
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#b8bb26;">&quot;#{record.first_name} #{record.last_name}&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fa5c4b;">end
-</span><span style="background-color:#282828;color:#fa5c4b;">end
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">defrecord </span><span style="background-color:#282828;color:#8ec07c;">User</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">name: </span><span style="background-color:#282828;color:#b8bb26;">&quot;José&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">age: </span><span style="background-color:#282828;color:#d3869b;">25
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">guy </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#8ec07c;">Person</span><span style="background-color:#282828;color:#fdf4c1aa;">.new </span><span style="background-color:#282828;color:#fdf4c1;">first_name: </span><span style="background-color:#282828;color:#b8bb26;">&quot;Guy&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">guy.name
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fa5c4b;">defmodule </span><span style="background-color:#282828;color:#8ec07c;">ListServer </span><span style="background-color:#282828;color:#fa5c4b;">do
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;font-style:italic;color:#928374;">@moduledoc &quot;&quot;&quot;
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">  </span><span style="background-color:#282828;font-style:italic;color:#928374;">This module provides an easy to use ListServer, useful for keeping
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">  </span><span style="background-color:#282828;font-style:italic;color:#928374;">lists of things.
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">  </span><span style="background-color:#282828;font-style:italic;color:#928374;">&quot;&quot;&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fa5c4b;">use </span><span style="background-color:#282828;color:#8ec07c;">GenServer</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">Behaviour
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fa5c4b;">alias </span><span style="background-color:#282828;color:#8ec07c;">Foo</span><span style="background-color:#282828;color:#fdf4c1aa;">.</span><span style="background-color:#282828;color:#8ec07c;">Bar
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;font-style:italic;color:#928374;">### Public API
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;font-style:italic;color:#928374;">@doc &quot;&quot;&quot;
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">  </span><span style="background-color:#282828;font-style:italic;color:#928374;">Starts and links a new ListServer, returning {:ok, pid}
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">  </span><span style="background-color:#282828;font-style:italic;color:#928374;">## Example
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">    </span><span style="background-color:#282828;font-style:italic;color:#928374;">iex&gt; {:ok, pid} = ListServer.start_link
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">
-</span><span style="background-color:#282828;font-style:italic;color:#928374;">  </span><span style="background-color:#282828;font-style:italic;color:#928374;">&quot;&quot;&quot;
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fa5c4b;">def </span><span style="background-color:#282828;color:#8ec07c;">start_link </span><span style="background-color:#282828;color:#fa5c4b;">do
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1;">:gen_server</span><span style="background-color:#282828;color:#fdf4c1aa;">.start_link({</span><span style="background-color:#282828;color:#fdf4c1;">:local</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#fdf4c1;">:list</span><span style="background-color:#282828;color:#fdf4c1aa;">}, </span><span style="background-color:#282828;color:#fdf4c1;">__MODULE__</span><span style="background-color:#282828;color:#fdf4c1aa;">, [], [])
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fa5c4b;">end
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;font-style:italic;color:#928374;">### GenServer API
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fa5c4b;">def </span><span style="background-color:#282828;color:#8ec07c;">init</span><span style="background-color:#282828;color:#fdf4c1aa;">(list) </span><span style="background-color:#282828;color:#fa5c4b;">do
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">{</span><span style="background-color:#282828;color:#fdf4c1;">:ok</span><span style="background-color:#282828;color:#fdf4c1aa;">, list}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fa5c4b;">end
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;font-style:italic;color:#928374;"># Clear the list
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fa5c4b;">def </span><span style="background-color:#282828;color:#8ec07c;">handle_cast </span><span style="background-color:#282828;color:#fdf4c1;">:clear</span><span style="background-color:#282828;color:#fdf4c1aa;">, list </span><span style="background-color:#282828;color:#fa5c4b;">do
-</span><span style="background-color:#282828;color:#fdf4c1aa;">    </span><span style="background-color:#282828;color:#fdf4c1aa;">{</span><span style="background-color:#282828;color:#fdf4c1;">:noreply</span><span style="background-color:#282828;color:#fdf4c1aa;">, []}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">  </span><span style="background-color:#282828;color:#fa5c4b;">end
-</span><span style="background-color:#282828;color:#fa5c4b;">end
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">{</span><span style="background-color:#282828;color:#fdf4c1;">:ok</span><span style="background-color:#282828;color:#fdf4c1aa;">, pid} </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#8ec07c;">ListServer</span><span style="background-color:#282828;color:#fdf4c1aa;">.start_link
-</span><span style="background-color:#282828;color:#fdf4c1aa;">pid </span><span style="background-color:#282828;color:#fe8019;">&lt;- </span><span style="background-color:#282828;color:#fdf4c1aa;">{</span><span style="background-color:#282828;color:#fdf4c1;">:foo</span><span style="background-color:#282828;color:#fdf4c1aa;">, </span><span style="background-color:#282828;color:#b8bb26;">&quot;bar&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">}
-</span><span style="background-color:#282828;color:#fdf4c1aa;">
-</span><span style="background-color:#282828;color:#fdf4c1aa;">greeter </span><span style="background-color:#282828;color:#fe8019;">= </span><span style="background-color:#282828;color:#fa5c4b;">fn</span><span style="background-color:#282828;color:#fdf4c1aa;">(x) </span><span style="background-color:#282828;color:#fe8019;">-&gt; </span><span style="background-color:#282828;color:#8ec07c;">IO</span><span style="background-color:#282828;color:#fdf4c1aa;">.puts </span><span style="background-color:#282828;color:#b8bb26;">&quot;hey #{x}&quot; </span><span style="background-color:#282828;color:#fa5c4b;">end
-</span><span style="background-color:#282828;color:#fdf4c1aa;">greeter.(</span><span style="background-color:#282828;color:#b8bb26;">&quot;Bob&quot;</span><span style="background-color:#282828;color:#fdf4c1aa;">)
-</span></pre>
+<pre data-lang="elixir" style="background-color:#282828;color:#fdf4c1aa;" class="language-elixir "><code class="language-elixir" data-lang="elixir"><span style="color:#fa5c4b;">defrecord </span><span style="color:#8ec07c;">Person</span><span>, </span><span style="color:#fdf4c1;">first_name: </span><span style="color:#d3869b;">nil</span><span>, </span><span style="color:#fdf4c1;">last_name: </span><span style="color:#b8bb26;">&quot;Dudington&quot; </span><span style="color:#fa5c4b;">do
+</span><span>  </span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">name</span><span> record </span><span style="color:#fa5c4b;">do </span><span style="font-style:italic;color:#928374;"># huh ?
+</span><span>    </span><span style="color:#b8bb26;">&quot;#{</span><span style="color:#fdf4c1;">record.first_name</span><span>} </span><span style="color:#b8bb26;">#{</span><span style="color:#fdf4c1;">record.last_name</span><span>}</span><span style="color:#b8bb26;">&quot;
+</span><span>  </span><span style="color:#fa5c4b;">end
+</span><span style="color:#fa5c4b;">end
+</span><span>
+</span><span style="color:#fa5c4b;">defrecord </span><span style="color:#8ec07c;">User</span><span>, </span><span style="color:#fdf4c1;">name: </span><span style="color:#b8bb26;">&quot;José&quot;</span><span>, </span><span style="color:#fdf4c1;">age: </span><span style="color:#d3869b;">25
+</span><span>
+</span><span>guy </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Person</span><span>.new </span><span style="color:#fdf4c1;">first_name: </span><span style="color:#b8bb26;">&quot;Guy&quot;
+</span><span>guy.name
+</span><span>
+</span><span style="color:#fa5c4b;">defmodule </span><span style="color:#8ec07c;">ListServer </span><span style="color:#fa5c4b;">do
+</span><span>  </span><span style="font-style:italic;color:#928374;">@moduledoc &quot;&quot;&quot;
+</span><span style="font-style:italic;color:#928374;">  This module provides an easy to use ListServer, useful for keeping
+</span><span style="font-style:italic;color:#928374;">  lists of things.
+</span><span style="font-style:italic;color:#928374;">  &quot;&quot;&quot;
+</span><span>  </span><span style="color:#fa5c4b;">use </span><span style="color:#8ec07c;">GenServer</span><span>.</span><span style="color:#8ec07c;">Behaviour
+</span><span>  </span><span style="color:#fa5c4b;">alias </span><span style="color:#8ec07c;">Foo</span><span>.</span><span style="color:#8ec07c;">Bar
+</span><span>
+</span><span style="font-style:italic;color:#928374;">  ### Public API
+</span><span>  </span><span style="font-style:italic;color:#928374;">@doc &quot;&quot;&quot;
+</span><span style="font-style:italic;color:#928374;">  Starts and links a new ListServer, returning {:ok, pid}
+</span><span style="font-style:italic;color:#928374;">
+</span><span style="font-style:italic;color:#928374;">  ## Example
+</span><span style="font-style:italic;color:#928374;">
+</span><span style="font-style:italic;color:#928374;">    iex&gt; {:ok, pid} = ListServer.start_link
+</span><span style="font-style:italic;color:#928374;">
+</span><span style="font-style:italic;color:#928374;">  &quot;&quot;&quot;
+</span><span>  </span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">start_link </span><span style="color:#fa5c4b;">do
+</span><span>    </span><span style="color:#fdf4c1;">:gen_server</span><span>.start_link({</span><span style="color:#fdf4c1;">:local</span><span>, </span><span style="color:#fdf4c1;">:list</span><span>}, </span><span style="color:#fdf4c1;">__MODULE__</span><span>, [], [])
+</span><span>  </span><span style="color:#fa5c4b;">end
+</span><span>
+</span><span style="font-style:italic;color:#928374;">  ### GenServer API
+</span><span>  </span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">init</span><span>(list) </span><span style="color:#fa5c4b;">do
+</span><span>    {</span><span style="color:#fdf4c1;">:ok</span><span>, list}
+</span><span>  </span><span style="color:#fa5c4b;">end
+</span><span>
+</span><span style="font-style:italic;color:#928374;">  # Clear the list
+</span><span>  </span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">handle_cast </span><span style="color:#fdf4c1;">:clear</span><span>, list </span><span style="color:#fa5c4b;">do
+</span><span>    {</span><span style="color:#fdf4c1;">:noreply</span><span>, []}
+</span><span>  </span><span style="color:#fa5c4b;">end
+</span><span style="color:#fa5c4b;">end
+</span><span>
+</span><span>{</span><span style="color:#fdf4c1;">:ok</span><span>, pid} </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">ListServer</span><span>.start_link
+</span><span>pid </span><span style="color:#fe8019;">&lt;- </span><span>{</span><span style="color:#fdf4c1;">:foo</span><span>, </span><span style="color:#b8bb26;">&quot;bar&quot;</span><span>}
+</span><span>
+</span><span>greeter </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">fn</span><span>(x) </span><span style="color:#fe8019;">-&gt; </span><span style="color:#8ec07c;">IO</span><span>.puts </span><span style="color:#b8bb26;">&quot;hey #{</span><span style="color:#fdf4c1;">x</span><span>}</span><span style="color:#b8bb26;">&quot; </span><span style="color:#fa5c4b;">end
+</span><span>greeter.(</span><span style="color:#b8bb26;">&quot;Bob&quot;</span><span>)
+</span></code></pre>
+
 </article>
 <div id="disqus_thread"></div>
 <script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/new-highlight-style/';
+  };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://iovxw.disqus.com/embed.js';
