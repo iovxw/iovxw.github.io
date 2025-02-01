@@ -354,7 +354,7 @@
 <p>(肯定有人要问了, 那干嘛其他语言不都用 Stackless 的呢? 傻孩子, 那是因为人家可以在任意嵌套调用中暂停, 你见过 Go 需要 await 吗? (当然这肯定不系统级 (笑)) 以及某些有 call/cc 的语言根本不在乎这点开销)</p>
 <hr />
 <p>Coroutine/Generator 在 Rust 中写起来像 Closure, 但不接受任何参数</p>
-<p>内部提供 <code>yield</code> 语句, 它可以 &quot;暂停&quot; 当前 Generator, 并允许之后继续执行</p>
+<p>内部提供 <code>yield</code> 语句, 它可以 "暂停" 当前 Generator, 并允许之后继续执行</p>
 <pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#fdf4c1;">feature</span><span>(generators, generator_trait)]
 </span><span>
 </span><span style="color:#fa5c4b;">use </span><span>std::ops::{Generator, GeneratorState};
@@ -442,7 +442,7 @@
 <p>这个值可能因为网络, 或其他什么原因 Block 住了, 现在无法得到</p>
 <p>用户可以用它提供的各种 Combinator 写完后续的逻辑, 当值可用的时候会自动调用 (像不像回调?)</p>
 <p>但也只比回调好了一点点而已, 逻辑一旦出现分支, 痛不欲生 (想知道有多痛, <a href="https://github.com/iovxw/rssbot/blob/855afacdb20dd4193afd3e480ad2dfa53d330fb9/src/cmdhandels.rs">请看这里</a>)</p>
-<p>而我们现在有了 Generator, 终于可以 &quot;近乎&quot; 完美的解决它了</p>
+<p>而我们现在有了 Generator, 终于可以 "近乎" 完美的解决它了</p>
 <p>每个 <code>Future</code> 都有一个 <a href="https://docs.rs/futures/0.1.15/futures/future/trait.Future.html#tymethod.poll"><code>.poll</code></a> 方法 (实现 <code>Future</code> 时唯一需要手动实现的方法)</p>
 <p>调度器 (比如 <a href="https://tokio.rs/"><em>tokio</em></a> 提供的) 会在收到关联事件时调用它</p>
 <p>它返回处理好的值或者 <code>NotReady</code> 表示值还未准备好 (此时调度器会在下一次事件后重试)</p>

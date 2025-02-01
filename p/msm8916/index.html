@@ -337,7 +337,7 @@
     <div class="info"><h2>一些资料更新</h2><time>2023-02-22 00:00</time></div>
     <p><img src="https://iovxw.net/p/msm8916/0.webp" alt="" /></p>
 <p>在所有开发板价格疯涨, 树莓派价格翻了 4 倍成为理财产品的 2021 年, 这个只卖 10 块钱上下,
-凑几个优惠券甚至能 3 块钱包邮的 &quot;电子垃圾&quot; 成为了不少人的替代选择</p>
+凑几个优惠券甚至能 3 块钱包邮的 "电子垃圾" 成为了不少人的替代选择</p>
 <p>而今天, 到了 2023 年开发板价格仍然没有一丁点下降的今天,
 它也被迫成了正在为第三台 3D 打印机寻找上位机的我的选择(sad</p>
 <span id="continue-reading"></span>
@@ -353,7 +353,7 @@
 可以在编译时指定设备树, 不用再手动硬编码了</li>
 <li>并且 <a href="https://github.com/msm8916-mainline/lk2nd/commit/143d3bca8347ca4309112cce9cfb6b9fd08d77f4">UFI 系列</a>以及
 <a href="https://github.com/msm8916-mainline/lk2nd/commit/3a5f65b667b3475d7eb1d72fad3ea20163248670">UF896 的设备树</a>已经被 lk2nd 合并,
-也不再需要使用 fork 的了 </li>
+也不再需要使用 fork 的了</li>
 </ul>
 </li>
 <li>OpenStick 同样 <a href="https://github.com/OpenStick/linux">fork</a> 了 5.15 的 <a href="https://github.com/msm8916-mainline/linux">msm8916-mainline/linux</a>,
@@ -368,7 +368,7 @@
 </li>
 </ul>
 </li>
-<li>由于随身 WiFi 自带的 TrustZone 固件不支持 64 位内核, 现有的方案都需要让用户先刷入一个 &quot;底包&quot;
+<li>由于随身 WiFi 自带的 TrustZone 固件不支持 64 位内核, 现有的方案都需要让用户先刷入一个 "底包"
 <ul>
 <li>这个底包其实是同样使用骁龙 410 SoC 的开发板 <a href="https://www.96boards.org/product/dragonboard410c/">DragonBoard 410c</a>
 的分区表以及固件, 可以从<a href="http://releases.linaro.org/96boards/dragonboard410c/linaro/rescue/latest">这里</a>下载</li>
@@ -378,7 +378,7 @@
 <li><code>fsg</code> 是 EFS (Encrypted File System, 即 <code>modemst1</code> <code>modemst2</code> 分区) 的 Golden Copy
 (高通的一种私有格式, 要拿到相关工具可能得先签保密协议了), 如果这两个分区为空就会从 <code>fsg</code> 中恢复</li>
 <li><code>fsc</code> 储存 EFS 的 cookie</li>
-<li><code>modemst1</code> <code>modemst2</code> 是基带相关的加密分区, 从公开的资料能查到 QCN 和运营商的 MBN 大概都存在这里面 </li>
+<li><code>modemst1</code> <code>modemst2</code> 是基带相关的加密分区, 从公开的资料能查到 QCN 和运营商的 MBN 大概都存在这里面</li>
 </ul>
 </li>
 <li><code>hyp</code> 分区存着高通的 hypervisor 固件, 但可以用开源的 <a href="https://github.com/msm8916-mainline/qhypstub">qhypstub</a> 替代</li>

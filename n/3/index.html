@@ -335,6 +335,31 @@
         
           
             <article>
+              <h1><a class="title" href="https://iovxw.net/p/rust-sanitizers/">Rust 使用 Sanitizers 进行运行时安全检查</a></h1>
+              <div class="info">
+                <h2>还是实验性功能</h2>
+                <time>2017-02-15 00:00</time>
+              </div>
+              
+              <p>6 天前, Rust 引入了由 LLVM 提供的实验性的 <a href="https://github.com/rust-lang/rust/pull/38699">Sanitizer 支持</a> (仅限 <code>x86_64-unknown-linux-gnu</code> 平台)</p>
+<p>而今天 Rust Nightly 默认启用了 Sanitizer, 就是说所有用 Nightly 的小伙伴都可以直接更新体验 Sanitizer 啦 (废话</p>
+<p>目前有如下几个 Sanitizer：</p>
+<ul>
+<li><em>LeakSanitizer</em> 内存泄漏检查 (例如 <code>Rc</code> 环和 <code>std::mem::forget</code>)</li>
+<li><em>ThreadSanitizer</em> 数据竟态检查 (就是 go 的那个 <code>-race</code> 命令)</li>
+<li><em>AddressSanitizer</em> 内存寻址检查 (比如数组访问越界)</li>
+<li><em>MemorySanitizer</em> 未初始化内存的使用检查</li>
+</ul>
+<p>当然这主要还是为 <code>unsafe</code> 准备的，毕竟其他大部分情况都能在编译时检测出来</p>
+              <div class="read-more">
+                <a href="https://iovxw.net/p/rust-sanitizers/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
               <h1><a class="title" href="https://iovxw.net/p/waaaave/">多种方式实现波浪动画</a></h1>
               <div class="info">
                 <h2>基础动画实现</h2>
@@ -346,7 +371,6 @@
 <p>有些稍微麻烦一点的，就得手写了（当然还是不推荐，毕竟人家的函数一般都带各种加速）</p>
 <p>这时候就体现出了一个 客户端/网页端 的前端稍微懂点数学是多么的重要</p>
 <p>不过太高级的数学我也不会，只能讲点简单的，就是实现一个波浪动画</p>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/waaaave/#continue-reading">Read More…</a>
               </div>
@@ -366,7 +390,6 @@
 <p>当然这个协议也不新了，是 2000 年出的 RFC</p>
 <p>不过现在都 2017 年了，还是有一大堆网站在用什么 md5 加盐（不，就算你用 SHA2XX 也不行），甚至连 bcrypt 和 Argon2 是啥都不知道，感觉真是悲伤（</p>
 <p>所以，来看看 SRP 是个啥（如果你真的不知道 Argon2，还是先去看它吧）：</p>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/srp/#continue-reading">Read More…</a>
               </div>
@@ -386,7 +409,6 @@
 <p>在用了一圈小众语言之后, 又被残酷的现实打击了, 没社区就得什么都自己来</p>
 <p>自己造语言这个想法也很快放弃了, 至少现在还不行</p>
 <p>而折中方案, 就是 <em>Rust</em></p>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/rust/#continue-reading">Read More…</a>
               </div>
@@ -403,7 +425,6 @@
               </div>
               
               <p><img src="https://raw.githubusercontent.com/iovxw/bismuth/1a7b7e4587b549ee489168bb3c264faabfb89499/screenshot0.png" alt="screenshot" /></p>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/bismuth/#continue-reading">Read More…</a>
               </div>
@@ -422,7 +443,6 @@
               <p>其实标题应该是 《含糖型 Brainfuck | 的解释器》</p>
 <p>不过因为不单单是个解释器还是个可视化和单步执行工具以及一个语法糖的实现</p>
 <p>所以，嗯……标题就这样吧</p>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/swetter-brainfuck/#continue-reading">Read More…</a>
               </div>
@@ -464,7 +484,6 @@ if (window.location.pathname == "/") {
     document.write("<p>然后这篇文章到这就结束了，剩下是给连今天是几号都懒得看的人的</p>")
 }
 </script>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/git-commit-date/#continue-reading">Read More…</a>
               </div>
@@ -485,7 +504,6 @@ if (window.location.pathname == "/") {
 <p><a href="http://shields.io">http://shields.io</a></p>
 <p>打开页面就能发现，各种例子相当全面，完全不用我介绍</p>
 <p>于是这篇文章就结束了</p>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/shields-io/#continue-reading">Read More…</a>
               </div>
@@ -503,81 +521,9 @@ if (window.location.pathname == "/") {
               
               <p>效果图:</p>
 <p><img src="https://img.vim-cn.com/f6/80f3ababde436eacbeaf0616cb42dc34f5fc2a.png" alt="https://img.vim-cn.com/f6/80f3ababde436eacbeaf0616cb42dc34f5fc2a.png" /></p>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/minecraft-ingameinfo/#continue-reading">Read More…</a>
               </div>
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https://iovxw.net/p/ark-lang/">Ark —— Go 和 Rust 的结合体</a></h1>
-              <div class="info">
-                <h2>只是没人用</h2>
-                <time>2016-06-14 00:00</time>
-              </div>
-              
-                <p>编译器是用go和Rust写的，github在这里：<a href="https://github.com/ark-lang/ark">https://github.com/ark-lang/ark</a></p>
-<p>官网：<a href="http://ark-lang.org/">http://ark-lang.org/</a></p>
-<p>说是系统级编程语言，可以和C无缝交互</p>
-<p>至于为什么说是go和rust的结合体</p>
-<p>看下面的例子就知道了（<a href="https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md">https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md</a>）</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>struct Bar {
-</span><span>    name: str;
-</span><span>}
-</span><span>
-</span><span>struct Baz {
-</span><span>    name: str;
-</span><span>}
-</span><span>
-</span><span>trait Foo {
-</span><span>    func fooBar();
-</span><span>}
-</span><span>
-</span><span>impl Foo for Bar {
-</span><span>    func fooBar() {
-</span><span>        println(&quot;foobar method in foo for bar %s!&quot;, name);
-</span><span>    }
-</span><span>}
-</span><span>
-</span><span>impl Foo for Baz {
-</span><span>    func fooBar() {
-</span><span>        println(&quot;foobar method in foo for baz %s!&quot;, name);
-</span><span>    }
-</span><span>}
-</span><span>
-</span><span>
-</span><span>// attributes look cool
-</span><span>// basically generics, we need to use
-</span><span>// them in this case instead of saying `value: Foo` as
-</span><span>// a param, because a trait does not have a constant
-</span><span>// size that is known at compile time, so the generic
-</span><span>// will basically compile down to [in this case] two
-</span><span>// functions one for Bar, and one for Baz, then it
-</span><span>// will know the size of the given value.
-</span><span>// this might be weird to understand but its 1am and im
-</span><span>// ill and tired. jah bless xx
-</span><span>func [T: Foo] callFooBar(value: T) {
-</span><span>
-</span><span>}
-</span><span>
-</span><span>func main() {
-</span><span>    // monomorphisation????
-</span><span>    baz: Baz = {
-</span><span>        name: &quot;baz&quot;,
-</span><span>    };
-</span><span>
-</span><span>    bar: Bar = {
-</span><span>        name: &quot;bar&quot;,
-</span><span>    }
-</span><span>
-</span><span>    callFooBar(baz);
-</span><span>    callFooBar(bar);
-</span><span>}
-</span></code></pre>
-
               
             </article>
           

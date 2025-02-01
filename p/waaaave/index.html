@@ -392,7 +392,7 @@
     main();
 })();
 </script>
-<p>基本步骤是，先在中间画一条三次贝塞尔曲线，再画三条线把下面包起来填充做成 &quot;水&quot;</p>
+<p>基本步骤是，先在中间画一条三次贝塞尔曲线，再画三条线把下面包起来填充做成 "水"</p>
 <p>最后找规律写个控制算法控制曲线的两个控制点循环就行</p>
 <p>不过控制算法写的不好，导致看起来并不是很舒服，也不想继续优化了，所以这个版本弃坑</p>
 <hr />
@@ -470,7 +470,7 @@
 <p>把里面的 magic 换成三角函数，比如正弦函数（sin），你就可以画出来这样的曲线：</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Sin.svg/800px-Sin.svg.png" alt="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Sin.svg/800px-Sin.svg.png" /></p>
 <p>（图片来自维基百科，公有领域）</p>
-<p>但这还不够，我们需要让这条曲线看起来更 &quot;柔和&quot; 一些，所以让我们把 <code>x</code> 变小一点，比如：</p>
+<p>但这还不够，我们需要让这条曲线看起来更 "柔和" 一些，所以让我们把 <code>x</code> 变小一点，比如：</p>
 <pre data-lang="js" style="background-color:#282828;color:#fdf4c1aa;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">sin</span><span>(</span><span style="color:#d3869b;">0.3 </span><span style="color:#fe8019;">* </span><span style="color:#fdf4c1;">x</span><span>)
 </span></code></pre>
 <p><img src="https://img.vim-cn.com/f6/8fa1280ff1f6eac4e46afacb57945f4c8afb02.svg" alt="https://img.vim-cn.com/f6/8fa1280ff1f6eac4e46afacb57945f4c8afb02.svg" /></p>

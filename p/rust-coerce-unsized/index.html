@@ -344,7 +344,7 @@
 <span id="continue-reading"></span>
 <hr />
 <p>在讲 <a href="https://doc.rust-lang.org/core/ops/trait.CoerceUnsized.html"><code>CoerceUnsized</code></a> 之前, 必须要说 <a href="https://doc.rust-lang.org/core/marker/trait.Unsize.html"><code>Unsize</code></a></p>
-<p><code>Unsize</code> 是一个标记 trait, 表示一个类型可以被 &quot;unsized&quot; 到一个 DST, 像 <code>[u8; 3]</code> 可以 &quot;unsized&quot; 为 <code>[u8]</code> (<code>[u8; 3]</code> 实现了 <code>Unsize&lt;[u8]&gt;</code>), 以及 <code>T: Trait</code> 的 <code>T</code> 可以作为 <code>dyn Trait</code> (<code>T: Trait</code> 实现了 <code>Unsize&lt;dyn Trait&gt;</code>)</p>
+<p><code>Unsize</code> 是一个标记 trait, 表示一个类型可以被 "unsized" 到一个 DST, 像 <code>[u8; 3]</code> 可以 "unsized" 为 <code>[u8]</code> (<code>[u8; 3]</code> 实现了 <code>Unsize&lt;[u8]&gt;</code>), 以及 <code>T: Trait</code> 的 <code>T</code> 可以作为 <code>dyn Trait</code> (<code>T: Trait</code> 实现了 <code>Unsize&lt;dyn Trait&gt;</code>)</p>
 <p>然而光有 <code>Unsize</code> 并没有什么用, 因为 Rust 不允许在栈上创建 DST</p>
 <p>所以需要智能指针, 在堆上创建 DST, 并且自动转换为动态分发, 上面提到的 <code>Box&lt;[u8]&gt;</code> 就是很好的例子 (不过 <code>slice</code> 和 <code>str</code> 是 primitive type, 不需要动态分发)</p>
 <h1 id="dai-xu-sheng-xia-lan-de-xie-liao">待续！剩下懒得写了</h1>

@@ -335,6 +335,27 @@
         
           
             <article>
+              <h1><a class="title" href="https://iovxw.net/p/rust-coerce-unsized/">Rust 隐式转换之 CoerceUnsized</a></h1>
+              <div class="info">
+                <h2>标题看起来像一个系列, 然而并不一定有后续</h2>
+                <time>2018-03-23 17:53</time>
+              </div>
+              
+              <p>Rust 中有四种隐式类型转换 (别和我提回字怎么写), 其中三种都是为了简化代码, 就算没有隐式, 也可以显式地用其他方法写出来</p>
+<p>唯有 <a href="https://doc.rust-lang.org/core/ops/trait.CoerceUnsized.html"><code>CoerceUnsized</code></a> 比较特殊, 提供了一种抽象, 没有它就无法写出包含 DST(Dynamically-sized Type) 的智能指针</p>
+<p>像这样:</p>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let</span><span> x: [</span><span style="color:#fa5c4b;">u8</span><span>; </span><span style="color:#d3869b;">3</span><span>] </span><span style="color:#fe8019;">= </span><span>[</span><span style="color:#d3869b;">0</span><span>, </span><span style="color:#d3869b;">0</span><span>, </span><span style="color:#d3869b;">0</span><span>];
+</span><span style="color:#fa5c4b;">let</span><span> y: </span><span style="color:#fabd2f;">Box</span><span>&lt;[</span><span style="color:#fa5c4b;">u8</span><span>]&gt; </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">Box</span><span>::new(x);
+</span></code></pre>
+              <div class="read-more">
+                <a href="https://iovxw.net/p/rust-coerce-unsized/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
               <h1><a class="title" href="https://iovxw.net/p/phantomdata-magic/">PhantomData 黑魔法</a></h1>
               <div class="info">
                 <h2>&amp;&#x27;a mut &amp;&#x27;a ()</h2>
@@ -359,7 +380,6 @@
 </span><span>    pin;
 </span><span>}
 </span></code></pre>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/phantomdata-magic/#continue-reading">Read More…</a>
               </div>
@@ -380,9 +400,8 @@
 <img width="64em" src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='384' fill='white' display='block'%3E%3Cpath d='M219.7 12.7c-8.2 5.2-9.4 28-2 38.2 1 1 2.5 4 3.3 6 .8 2 2.7 5 4 7 1.6 2 3.2 5 3.5 7 .4 1 1 2 1.5 2 .7 0 4 5 8.6 13 .7 1 2.6 3 4.3 5 2 2 4 6 2 6l-25-4c-3-2-40-2-45 0l-11 2c-3 0-6 1-7 2s-3 2-6 2-7 2-10 3c-6 3-9 2-9-2l-2-4c-4-9-6-13-7-14-3-4-4-5-5-7s-4-6-7-10-5.8-7-5.8-8-1-2-2-3-2-2-2-3-.3-1.6-1-1.6-4-2.6-8-6c-9.4-8.7-14-12-17-13-1-.6-3-1.6-4-2.4-4.6-4-16-2-21 4-5.5 7-1 31 8.6 47 2.3 4 5 9 6 10.5.4 2 2 4 3.3 5 3 2 11 10 11 12 0 1 2 4 4.3 6 3 3 5 5 5 6l6 5.6c8 6.5 8 6-2 17-5 5-10 11-12 14-1 3-4 6-5 7-3 2.8-9 14-10 18.8 0 2.3-1 5-2 6s-1 4-2 7c0 3-1 7.5-2 9.4-1 2-1 5.6-1 7.5 0 2-.7 5-1 6.4-2 4-3 28.8-2 38.4 3 17.5 4 27 6 33.4 3.7 9.4 9 21.3 11 22 1 .3 1.7 1 1.7 1.7 0 1 1.6 3 3 5l8.5 10c3 3.6 7 7.2 10 9 3.5 1.5 5 3 5 4.4 0 3 1.3 4 5 5 1.3 1 4.2 2 6.4 4s5.5 4 7 5c3 2 3 4.5 2 12.6l-1.7 10-1 5.7h5c5.7 0 5 1 7-15.5 1.4-14.3-.4-18.5-10-24-8.6-4.5-37-32.4-37-36 0-1-.5-2-1-3-1 0-7-13-7-14s-1-3-2-5-2-6-2-8c0-2.7-1-8.6-2-13.6-3-13.3-2.7-29.2 1.3-52 2.8-15.6 7-28 9-28 .6 0 .8-1 0-2.6-1-3.5 5.7-13.7 13.8-22.4l5-7c1.8-2.3 6-7 9-10 10-8.6 9.8-9.4-6-22.3-2.3-2.5-5-5-5.5-6s-4-5-7.5-9c-3.4-4-7-8.5-8-10-.6-1.5-2.3-4-4-6-5.3-7-14-22.7-14-26 0-1-.4-4-1-6-4-10.7 1-22 7-17 .5.2 1.4.4 2 0 1-1 8 3 12 7 12 12.5 24.6 26 25.6 30 0 1 1 2 2 3s1.5 2 1.5 2.5.3 1 1.3 2 2 3 3 4l3 5c1 2 2 4 2 6s2 5 3 7 3 5 3 6c2 7.5 8 11 12 6 1-1.4 3-3 5-3.4 2 0 4-1 6-2 1-1 4-2 7-2.3 2 0 7-1 9-2 10-3 38-4 54-2 11.5 1 26 4.2 29 6 2 1 4 2 5 2s3 1 5 2c5 3 7.2-3.8 3-9l-3-4c0-1-1.4-2-3-3l-4.5-5-6-9-6-9-4-5c-1.4-1-2.6-3.4-2.6-5 0-1-1-3.4-1.7-5-11-19-15-35-10-41 2.6-3 13 5 17 12.7 1 1 3 5 5 7.3l5 7 4 6.7c1.3 2 3.3 5 4.3 6 2 2.5 13 22 19 33 2.6 5 7 17 10.5 28 1 3 8 13 9 13l5 3.5s5 3.4 5.7 3.4c1.5 0 17.6 16 17.6 17 0 2 3 7.6 4 7.6 3.8 0 15 23 19.8 38 3.6 12 5 40 2 47l-2 8.3c-1 6.6-8.2 25.6-10.5 27-.5.7-1.7 3-3 5.6s-2.4 5-3 5c-.5 0-2.4 2.2-4.3 5-4 6-18.3 20-22.5 22l-3.6 2c-1 2-9 7-24 14-4 2-9 3.5-16 4.2-10 1-10.6 2-12 30v11h11l1-12.3c2-20 1-18 5-18 5-.6 11-2 13-4 1-1 3-2 5-2s5-1 6-2c2-1.5 8-5 13-8 5.6-3.5 13-9 18-14 5-4.7 9-8 9-8 .7 0 1-1 1-2 1-1 2-2.6 4-3.7 1.7-1 4-4 5-6.2s3-5.2 4-6c2-1.6 5-8 9-17 1-1.7 2-6 3-9.6 4-17 5-19.8 6-21 2.5-5 .2-37-3-44.7l-2.5-8c-3-11-5.7-17.6-10.7-25-3-4.5-5-8.4-5-9 0-1.4-15.5-19-21-23.4l-9-8c-2-2-4.7-3.4-6-3.4-5.8 0-9-6-14.4-27.3-.7-2-2-6-3-8-8.6-16-12-23-13-24.2-1-.8-2-2.6-2.8-4-2-3.8-3.7-6.6-5-8.5-1.7-2-3-5-5-9-2-3-7.7-12-9.5-14-.4-1-3-4-5-7-10-12-21-17.6-28.2-13m85 174c-2.6 3-2.6 4-.3 6 3.6 3 6 1.5 6-4 0-4-3-5-6-2m-149 3c-3.4 1.6.6 9 4.5 8 3-.3 5-5 4-7 0-2-5-2.5-8-1m74 36c-21.2 1-24 1-24 3.5 0 4 4.4 5 18.4 3.8 7-.7 17-1 21.2-1 9 0 12-1.8 10-5-1-2-1.6-2-25-1' fill-rule='evenodd'/%3E%3C/svg%3E"></p>
 <p><em>tokio-core</em> 呢? <code>reactor::Core</code> 又跑哪去了??</p>
 <p>其实这是计划了差不多半年的一个变动</p>
-<p>因为之前的 <em>futures</em> 和 <em>tokio</em> 都只是 &quot;能用&quot; 的程度, 在被大量使用后暴露出了很多设计上的问题, 并且还有不少要放弃向后兼容才能修复</p>
+<p>因为之前的 <em>futures</em> 和 <em>tokio</em> 都只是 "能用" 的程度, 在被大量使用后暴露出了很多设计上的问题, 并且还有不少要放弃向后兼容才能修复</p>
 <p>所以这次就攒到一起重新设计顺便分了个新的 crate</p>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/the-new-tokio/#continue-reading">Read More…</a>
               </div>
@@ -399,12 +418,11 @@
               </div>
               
               <p>很多程序, 比如各种监视器, 需要实时绘制统计图来将数据直观的展示给用户</p>
-<p>而这个实时, 却又不是那么的 &quot;实时&quot;, 一般表示一秒左右</p>
+<p>而这个实时, 却又不是那么的 "实时", 一般表示一秒左右</p>
 <p>不然一个监视器吃的资源比被监视程序还多, 就十分微妙了</p>
 <p>通常为了偷懒, 直接画几条线把型值点连起来, 做成折线图, 然后一秒一秒的刷新就可以</p>
 <p>但人是要有追求的! 我们要平滑! 要曲线!</p>
 <p>所以便有了本文, 记录追求上帝所有物的流水帐</p>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/curve-interpolation/#continue-reading">Read More…</a>
               </div>
@@ -425,7 +443,6 @@
 <p>言归正传, 在 <a href="https://crates.io/crates/serde"><em>serde</em></a> 里, 会发现 <a href="https://docs.serde.rs/serde/de/trait.DeserializeOwned.html"><code>DeserializeOwned</code></a> 的定义是这样的</p>
 <pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">pub trait </span><span style="color:#8ec07c;">DeserializeOwned</span><span>: for&lt;&#39;de&gt; Deserialize&lt;&#39;de&gt; { }
 </span></code></pre>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/rust-higher-rank-lifetime-bounds/#continue-reading">Read More…</a>
               </div>
@@ -447,7 +464,6 @@
 <p>那以后就可以愉快的在 Rust 里写异步代码啦?</p>
 <p>想得美</p>
 <p>坑在哪里我下面慢慢说</p>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/rust-coroutine/#continue-reading">Read More…</a>
               </div>
@@ -466,7 +482,6 @@
               <p><a href="https://iovxw.net/p/ac56u.html">之前买的 RT-AC56U</a> 一直没放什么东西，空转到现在</p>
 <p>今天终于有了需求，拿它来挂 BT</p>
 <p>这篇文章作为笔记，记一下遇到的坑，以后备用</p>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/rtorrent-on-merin/#continue-reading">Read More…</a>
               </div>
@@ -486,7 +501,6 @@
 <p>可惜没有云存档，在经历了某次事件后，我的存档和我说了再见</p>
 <p>重新打？我没那毅力。不过既然是本地的，改起来也容易</p>
 <p>流程如下：</p>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/soul-knight/#continue-reading">Read More…</a>
               </div>
@@ -511,7 +525,6 @@
 <p>然后因为我在用 Linux ，顺便跑了一遍 test</p>
 <p>结果发现原来的 test 本身就是错的，所以直接把正确结果拿出来覆盖上去 pass 了</p>
 <p>嗯……有些时候问题真是简单呢</p>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/cobalt/#continue-reading">Read More…</a>
               </div>
@@ -537,35 +550,8 @@
     };
 </script>
 <p>上边这是华硕官网的介绍图，本以为他们还搞了个 3D 什么的，结果就是一堆图拼起来的，所以这里干脆用滑块代替了</p>
-
               <div class="read-more">
                 <a href="https://iovxw.net/p/ac56u/#continue-reading">Read More…</a>
-              </div>
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https://iovxw.net/p/rust-sanitizers/">Rust 使用 Sanitizers 进行运行时安全检查</a></h1>
-              <div class="info">
-                <h2>还是实验性功能</h2>
-                <time>2017-02-15 00:00</time>
-              </div>
-              
-              <p>6 天前, Rust 引入了由 LLVM 提供的实验性的 <a href="https://github.com/rust-lang/rust/pull/38699">Sanitizer 支持</a> (仅限 <code>x86_64-unknown-linux-gnu</code> 平台)</p>
-<p>而今天 Rust Nightly 默认启用了 Sanitizer, 就是说所有用 Nightly 的小伙伴都可以直接更新体验 Sanitizer 啦 (废话</p>
-<p>目前有如下几个 Sanitizer：</p>
-<ul>
-<li><em>LeakSanitizer</em> 内存泄漏检查 (例如 <code>Rc</code> 环和 <code>std::mem::forget</code>)</li>
-<li><em>ThreadSanitizer</em> 数据竟态检查 (就是 go 的那个 <code>-race</code> 命令)</li>
-<li><em>AddressSanitizer</em> 内存寻址检查 (比如数组访问越界)</li>
-<li><em>MemorySanitizer</em> 未初始化内存的使用检查</li>
-</ul>
-<p>当然这主要还是为 <code>unsafe</code> 准备的，毕竟其他大部分情况都能在编译时检测出来</p>
-
-              <div class="read-more">
-                <a href="https://iovxw.net/p/rust-sanitizers/#continue-reading">Read More…</a>
               </div>
               
             </article>

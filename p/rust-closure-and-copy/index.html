@@ -366,7 +366,7 @@
 </span></code></pre>
 <p>闭包只捕获了 <code>v</code> 的引用, 然后在使用时 <code>*</code> 解引用, 又因为 <code>v</code> 是 <code>Copy</code>, 相当于无事发生</p>
 <p>换句话说如果 Rust 的闭包在捕获环境时没有手动指定 <code>move</code>, 那么编译器会尝试惰性的 <code>Copy</code></p>
-<p>如果不了解这个行为, 会让你撞上奇怪的 &quot;短命&quot; 还有引用问题, 并且编译器不会提示加 <code>move</code> 续命, 比如 <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=a4cebe3ca7669755d34de340f14305fc">这样</a>
+<p>如果不了解这个行为, 会让你撞上奇怪的 "短命" 还有引用问题, 并且编译器不会提示加 <code>move</code> 续命, 比如 <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=a4cebe3ca7669755d34de340f14305fc">这样</a>
 和 <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=eddfdbcdfeed71b1311df6115f7484a5">这样</a></p>
 <p>总之非常反直觉</p>
 <hr />

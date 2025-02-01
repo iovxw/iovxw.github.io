@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="图都是从聊天记录里扒的, 面向群友 debug">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://iovxw.net">
+
+    
+      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
+      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+    
+    <title>解决 Frigate 周期性硬盘无用写入问题 - iovxw</title>
+
+    <meta name="theme-color" content="#212121">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iovxw">
+    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
+
+    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
+    <meta name="msapplication-TileColor" content="#3F51B5">
+
+    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
+
+    <style>
+    body {
+        margin: 8px;
+        background: #151515;
+        color: white;
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        min-width: 64px;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+
+    header input:placeholder-shown {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input::-moz-placeholder {
+        opacity: 1;
+        font-weight: bold;
+    }
+
+    header input:-ms-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:focus {
+        border: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    header .link, footer .license {
+        margin-right: -10px;
+        padding-right: 10px;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 26px;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    header, article, nav, footer {
+        padding: 10px;
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        margin: -10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    article > p:last-child, article > pre:last-child {
+        margin-bottom: 0;
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid white;
+        margin-bottom: 7px;
+    }
+
+    article .info h2 {
+        font-size: 18px;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    :not(pre) > code {
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.1);
+        padding: 0 0.3em;
+    }
+
+    pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        border: solid white;
+        border-width: 0 3px;
+        padding: 0 0.5em;
+        margin: 1em 0.5em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+
+    #disqus_thread {
+        padding: 10px;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>解决 Frigate 周期性硬盘无用写入问题</h1>
+    <div class="info"><h2>图都是从聊天记录里扒的, 面向群友 debug</h2><time>2025-02-01 00:00</time></div>
+    <p>之前需要个门铃摄像头</p>
+<p>但现有方案要么需要上云, 要么就得装全家桶</p>
+<p>都不干净, 还不如自己做</p>
+<p>于是就搓出来了个:</p>
+<p><img src="https://iovxw.net/p/frigate/0.webp" alt="ipc55ae" /></p>
+<style>img[alt="ipc55ae"]{ max-height:700px }</style>
+<p>TL-IPC55AE 加 3D 打印外壳, 顺便解决了原装摄像头底座过于方便拆的问题</p>
+<p>录像和监控报警用的是 <a href="https://frigate.video/">Frigate</a></p>
+<p>它的物体识别准确率还可以, 并且支持的硬件多, 开启硬件加速后总体功耗非常低, 省电</p>
+<p>最关键是可以仅在检测到运动时录像, 不像 <a href="https://scrypted.app/">scrypted</a> 必须 7x24 小时的</p>
+<p>对硬盘十分友好, 1T 可以存三年</p>
+<span id="continue-reading"></span>
+<hr />
+<h2 id="wen-ti">问题</h2>
+<p>然后就遇到了标题说的问题:</p>
+<p>硬盘它每隔几秒, 就响一下</p>
+<p>周期非常稳定, 声音一听就是在写入</p>
+<p><img src="https://iovxw.net/p/frigate/1.webp" alt="monitor" /></p>
+<p>一看果然有个 700k 的写入</p>
+<p>把 Frigate 停掉就没有了</p>
+<p>但 Frigate 说自己啥都没检测到, 并没有在录像</p>
+<p>然后 iotop 能看见 <code>Total DISK WRITE</code> 一直为 0 但是有 <code>Actual DISK WRITE</code></p>
+<p>这个行为就比较怪了, 可能是文件系统在写 metadata</p>
+<p>可我开着 relatime 能有什么更新这么频繁?</p>
+<p>还是上 strace</p>
+<p><img src="https://iovxw.net/p/frigate/2.webp" alt="" /></p>
+<p>怎么有个 chown? ctime 变了那肯定有写入了</p>
+<p>bcachefs 的 <code>lazytime</code> 看起来还不工作, 找源头修吧</p>
+<p>简单 rg 了一下 frigate 里没有, 那再去 sqlite 里找找</p>
+<p>就找到了这段:</p>
+<pre data-lang="c" style="background-color:#282828;color:#fdf4c1aa;" class="language-c "><code class="language-c" data-lang="c"><span>    </span><span style="font-style:italic;color:#928374;">/* The owner of the rollback journal or WAL file should always be the
+</span><span style="font-style:italic;color:#928374;">    ** same as the owner of the database file.  Try to ensure that this is
+</span><span style="font-style:italic;color:#928374;">    ** the case.  The chown() system call will be a no-op if the current
+</span><span style="font-style:italic;color:#928374;">    ** process lacks root privileges, be we should at least try.  Without
+</span><span style="font-style:italic;color:#928374;">    ** this step, if a root process opens a database file, it can leave
+</span><span style="font-style:italic;color:#928374;">    ** behinds a journal/WAL that is owned by root and hence make the
+</span><span style="font-style:italic;color:#928374;">    ** database inaccessible to unprivileged processes.
+</span><span style="font-style:italic;color:#928374;">    **
+</span><span style="font-style:italic;color:#928374;">    ** If openMode==0, then that means uid and gid are not set correctly
+</span><span style="font-style:italic;color:#928374;">    ** (probably because SQLite is configured to use 8+3 filename mode) and
+</span><span style="font-style:italic;color:#928374;">    ** in that case we do not want to attempt the chown().
+</span><span style="font-style:italic;color:#928374;">    */
+</span><span>    </span><span style="color:#fa5c4b;">if</span><span>( openMode </span><span style="color:#fe8019;">&amp;&amp; </span><span>(flags </span><span style="color:#fe8019;">&amp; </span><span>(SQLITE_OPEN_WAL</span><span style="color:#fe8019;">|</span><span>SQLITE_OPEN_MAIN_JOURNAL))</span><span style="color:#fe8019;">!=</span><span style="color:#d3869b;">0 </span><span>){
+</span><span>      </span><span style="color:#fdf4c1;">robustFchown(fd, uid, gid)</span><span>;
+</span><span>    }
+</span></code></pre>
+<p>sqlite 在以 root 身份打开 wal 的时候会同步 wal 与 db 的权限/所有者</p>
+<p>这本应只在创建文件的时候进行, 但它设计上又没有区分打开还是创建, 只设置了个 <code>O_CREAT</code></p>
+<p>chown 就只能每次都运行了</p>
+<p>修起来很容易, 但 sqlite 不接受直接的代码贡献, 那就有时间再说吧</p>
+<hr />
+<h2 id="frigate">Frigate</h2>
+<p>更大的问题在 frigate 这边, 它竟然拿 root 跑服务!</p>
+<p>frigate 官方提供了好几种部署方式, 但里面其实都是 docker, 并且不是常规的一个服务一个容器</p>
+<p>而是把所有服务全塞到一起, 然后用 s6 来管理</p>
+<p>这就让权限管理非常头大, 再加上调用 GPU 所需的权限, 事情就更复杂了</p>
+<p>一个晚上解决不了, 还是先用个简单方案, 让它先跑着再说</p>
+<hr />
+<h2 id="sqlite">SQLite</h2>
+<p>众所周知</p>
+<p>SQLite 的跨平台做得非常好, 你甚至可以给它写一个 pastbin 后端</p>
+<p>原因是它有一个 VFS 层, 对所有底层接口做了抽象</p>
+<p>然后这个 VFS 呢，还支持 override 它内部使用的 system call, 方便 debug</p>
+<p>我们就可以拿它暴力删除 chown (或者不那么暴力, 只过滤掉 wal 的 chown)</p>
+<p>首先找到库的位置:</p>
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">docker exec frigate bash -c </span><span style="color:#b8bb26;">&#39;lsof -p $(pgrep python) | grep sqlite&#39;
+</span></code></pre>
+<pre data-lang="csv" style="background-color:#282828;color:#fdf4c1aa;" class="language-csv "><code class="language-csv" data-lang="csv"><span style="color:#fa5c4b;">python3 </span><span style="color:#d3869b;">107 </span><span style="color:#fa5c4b;">root  mem       REG               </span><span style="color:#d3869b;">0</span><span style="color:#fe8019;">,</span><span style="color:#d3869b;">66  1318776  119654 </span><span style="color:#fa5c4b;">/usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6
+</span><span style="color:#fa5c4b;">python3 </span><span style="color:#d3869b;">107 </span><span style="color:#fa5c4b;">root  mem       REG               </span><span style="color:#d3869b;">0</span><span style="color:#fe8019;">,</span><span style="color:#d3869b;">66    99840  118646 </span><span style="color:#fa5c4b;">/usr/lib/python3.9/lib-dynload/_sqlite3.cpython-39-x86_64-linux-gnu.so
+</span><span style="color:#fa5c4b;">python3 </span><span style="color:#d3869b;">107 </span><span style="color:#fa5c4b;">root  mem       REG               </span><span style="color:#d3869b;">0</span><span style="color:#fe8019;">,</span><span style="color:#d3869b;">66  9347208  143171 </span><span style="color:#fa5c4b;">/usr/local/lib/python3.9/dist-packages/pysqlite3/_sqlite3.cpython-39-x86_64-linux-gnu.so
+</span></code></pre>
+<p>从 frigate 的 dockerfile 里看它是自己打包的 sqilte, 所以不是第一个</p>
+<p>然后 lib-dynload 里是 python ffi 的东西, 没有我们需要的符号, 也排除</p>
+<p>再从 sqlite 复制一下 vfs object 的定义, 塞给 cffi</p>
+<pre data-lang="python" style="background-color:#282828;color:#fdf4c1aa;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#fa5c4b;">from </span><span>cffi </span><span style="color:#fa5c4b;">import </span><span style="color:#fdf4c1;">FFI
+</span><span>
+</span><span>ffi </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">FFI()
+</span><span>lib </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">ffi.dlopen(</span><span style="color:#b8bb26;">&quot;/usr/local/lib/python3.9/dist-packages/pysqlite3/_sqlite3.cpython-39-x86_64-linux-gnu.so&quot;</span><span style="color:#fdf4c1;">)
+</span><span>
+</span><span style="color:#fdf4c1;">ffi.cdef(</span><span style="color:#b8bb26;">&quot;&quot;&quot;
+</span><span style="color:#b8bb26;">typedef const char *sqlite3_filename;
+</span><span style="color:#b8bb26;">typedef struct sqlite3_file sqlite3_file;
+</span><span style="color:#b8bb26;">typedef struct sqlite3_int64 sqlite3_int64;
+</span><span style="color:#b8bb26;">typedef struct sqlite3_vfs sqlite3_vfs;
+</span><span style="color:#b8bb26;">typedef void (*sqlite3_syscall_ptr)(void);
+</span><span style="color:#b8bb26;">typedef int (*fchown_ptr)(int, int, int);
+</span><span style="color:#b8bb26;">typedef struct sqlite3_vfs {
+</span><span style="color:#b8bb26;">  int iVersion;            /* Structure version number (currently 3) */
+</span><span style="color:#b8bb26;">  int szOsFile;            /* Size of subclassed sqlite3_file */
+</span><span style="color:#b8bb26;">  int mxPathname;          /* Maximum file pathname length */
+</span><span style="color:#b8bb26;">  sqlite3_vfs *pNext;      /* Next registered VFS */
+</span><span style="color:#b8bb26;">  const char *zName;       /* Name of this virtual file system */
+</span><span style="color:#b8bb26;">  void *pAppData;          /* Pointer to application-specific data */
+</span><span style="color:#b8bb26;">  int (*xOpen)(sqlite3_vfs*, sqlite3_filename zName, sqlite3_file*,
+</span><span style="color:#b8bb26;">               int flags, int *pOutFlags);
+</span><span style="color:#b8bb26;">  int (*xDelete)(sqlite3_vfs*, const char *zName, int syncDir);
+</span><span style="color:#b8bb26;">  int (*xAccess)(sqlite3_vfs*, const char *zName, int flags, int *pResOut);
+</span><span style="color:#b8bb26;">  int (*xFullPathname)(sqlite3_vfs*, const char *zName, int nOut, char *zOut);
+</span><span style="color:#b8bb26;">  void *(*xDlOpen)(sqlite3_vfs*, const char *zFilename);
+</span><span style="color:#b8bb26;">  void (*xDlError)(sqlite3_vfs*, int nByte, char *zErrMsg);
+</span><span style="color:#b8bb26;">  void (*(*xDlSym)(sqlite3_vfs*,void*, const char *zSymbol))(void);
+</span><span style="color:#b8bb26;">  void (*xDlClose)(sqlite3_vfs*, void*);
+</span><span style="color:#b8bb26;">  int (*xRandomness)(sqlite3_vfs*, int nByte, char *zOut);
+</span><span style="color:#b8bb26;">  int (*xSleep)(sqlite3_vfs*, int microseconds);
+</span><span style="color:#b8bb26;">  int (*xCurrentTime)(sqlite3_vfs*, double*);
+</span><span style="color:#b8bb26;">  int (*xGetLastError)(sqlite3_vfs*, int, char *);
+</span><span style="color:#b8bb26;">  /*
+</span><span style="color:#b8bb26;">  ** The methods above are in version 1 of the sqlite_vfs object
+</span><span style="color:#b8bb26;">  ** definition.  Those that follow are added in version 2 or later
+</span><span style="color:#b8bb26;">  */
+</span><span style="color:#b8bb26;">  int (*xCurrentTimeInt64)(sqlite3_vfs*, sqlite3_int64*);
+</span><span style="color:#b8bb26;">  /*
+</span><span style="color:#b8bb26;">  ** The methods above are in versions 1 and 2 of the sqlite_vfs object.
+</span><span style="color:#b8bb26;">  ** Those below are for version 3 and greater.
+</span><span style="color:#b8bb26;">  */
+</span><span style="color:#b8bb26;">  int (*xSetSystemCall)(sqlite3_vfs*, const char *zName, fchown_ptr);
+</span><span style="color:#b8bb26;">  sqlite3_syscall_ptr (*xGetSystemCall)(sqlite3_vfs*, const char *zName);
+</span><span style="color:#b8bb26;">  const char *(*xNextSystemCall)(sqlite3_vfs*, const char *zName);
+</span><span style="color:#b8bb26;">  /*
+</span><span style="color:#b8bb26;">  ** The methods above are in versions 1 through 3 of the sqlite_vfs object.
+</span><span style="color:#b8bb26;">  ** New fields may be appended in future versions.  The iVersion
+</span><span style="color:#b8bb26;">  ** value will increment whenever this happens.
+</span><span style="color:#b8bb26;">  */
+</span><span style="color:#b8bb26;">} sqlite3_vfs;
+</span><span style="color:#b8bb26;">sqlite3_vfs* sqlite3_vfs_find( const char* name );
+</span><span style="color:#b8bb26;">&quot;&quot;&quot;</span><span style="color:#fdf4c1;">)
+</span><span>
+</span><span>@ffi.</span><span style="color:#fdf4c1;">callback</span><span>(</span><span style="color:#b8bb26;">&quot;int(int, int, int)&quot;</span><span>)
+</span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">mychown</span><span>(</span><span style="color:#fdf4c1;">fd</span><span>, </span><span style="color:#fdf4c1;">pid</span><span>, </span><span style="color:#fdf4c1;">gid</span><span>):
+</span><span>    </span><span style="color:#fa5c4b;">return </span><span style="color:#d3869b;">0
+</span><span>
+</span><span>vfs </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">lib.sqlite3_vfs_find(</span><span style="color:#fa5c4b;">b</span><span style="color:#b8bb26;">&quot;unix&quot;</span><span style="color:#fdf4c1;">)
+</span><span style="color:#fdf4c1;">vfs.xSetSystemCall(vfs, </span><span style="color:#fa5c4b;">b</span><span style="color:#b8bb26;">&quot;fchown&quot;</span><span style="color:#fdf4c1;">, mychown)
+</span></code></pre>
+<p>最后要让它在 <code>import sqlite3</code> 之前被执行, 所以写个 volumes 映射让 docker 把它放到随便一个 <code>__init__.py</code> 里</p>
+<pre data-lang="yml" style="background-color:#282828;color:#fdf4c1aa;" class="language-yml "><code class="language-yml" data-lang="yml"><span>    </span><span style="font-weight:bold;color:#8ec07c;">volumes</span><span>:
+</span><span>      - </span><span style="color:#b8bb26;">./block_fchown.py:/opt/frigate/frigate/__init__.py
+</span></code></pre>
+<p>就搞定啦</p>
+<blockquote>
+<p>BTW: <code>xSetSystemCall</code> 不能简单传个 null 过去, 是重置</p>
+</blockquote>
+<hr />
+<h2 id="qi-ta">其他</h2>
+<p>等有时间还是看看怎么精细控制权限, 不然所有人就都知道我拿 root 跑着个 frigate 了, 而 docker 又那么容易逃逸</p>
+<p>危</p>
+<p>顺便还发现 TP-LINK 没有使用标准的 ONVIF Profile T 做双向语音, 而是自己做了个 RTSP MULTITRANS 扩展, 里面跑的东西其实和 tapo 的私有协议差不多, 只是把外层从 HTTP 换成了 RTSP, 基于 go2rtc 现有的 tapo 实现改一个出来应该不难, 也放进 TODO 里好了</p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/frigate/';
+  };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+

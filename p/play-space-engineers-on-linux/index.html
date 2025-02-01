@@ -343,7 +343,7 @@
 <p>然后<code>winetricks steam</code>安装Steam</p>
 <p>winetricks会把steam装在一个新的WINEPREFIX目录里</p>
 <p>为了省事，以后的配置就在这个目录里进行，所以设置一下全局的WINEPREFIX</p>
-<p><code>export WINEPREFIX=&quot;~/.local/share/wineprefixes/steam&quot;</code></p>
+<p><code>export WINEPREFIX="~/.local/share/wineprefixes/steam"</code></p>
 <p>设置完成以后安装运行库</p>
 <p><code>winetricks vb6run dotnet40</code></p>
 <p>然后还依赖几个dll，所以从网上下载32位的<code>mscoree.dll</code>，<code>oleaut32.dll</code>和<code>x3daudio1_7.dll</code>，覆盖到</p>

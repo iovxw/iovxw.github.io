@@ -518,7 +518,7 @@ lein repl # starts up the interactive REPL
   <td>注释</td>
   <td><code>; <em>text</em></code>&nbsp;
 <p><em>单行注释</em></td></p>
-<td><code>宏(comment <em>text</em>)可以用来写多行注释</code></td>
+  <td><code>宏(comment <em>text</em>)可以用来写多行注释</code></td>
 </tr>
 <tr>
   <td>字符 (Java <code>char</code> 类型)</td>
@@ -2976,16 +2976,16 @@ do
   CP=$CP:$file
 done
 </pre></code>
-<p>下面是他一个简单的 Compojure web应用：</p>
+   <p>下面是他一个简单的 Compojure web应用：</p>
 <img src="http://java.ociweb.com/mark/clojure/images/Compojure1.png" alt="Compojure input page" /> <img src="http://java.ociweb.com/mark/clojure/images/Compojure2.png" alt="Compojure output page" />
 <pre><code class="clojure hljs">(ns com.ociweb.hello
   (:use compojure))
-<p>(def host &quot;localhost&quot;)
+<p>(def host "localhost")
 (def port 8080)
-(def in-path &quot;/hello&quot;)
-(def out-path &quot;/hello-out&quot;)</p>
+(def in-path "/hello")
+(def out-path "/hello-out")</p>
 <p>(defn html-doc
-&quot;generates well-formed HTML for a given title and body content&quot;
+"generates well-formed HTML for a given title and body content"
 [title &amp; body]
 (html
 (doctype :html4)
@@ -2994,26 +2994,26 @@ done
 [:body body]]))</p>
 <p>; Creates HTML for input form.
 (def hello-in
-(html-doc &quot;Hello In&quot;
+(html-doc "Hello In"
 (form-to [:post out-path]
-&quot;Name: &quot;
-(text-field {:size 10} :name &quot;World&quot;)
+"Name: "
+(text-field {:size 10} :name "World")
 [:br]
-(reset-button &quot;Reset&quot;)
-(submit-button &quot;Greet&quot;))))</p>
+(reset-button "Reset")
+(submit-button "Greet"))))</p>
 <p>; Creates HTML for result message.
 (defn hello-out [name]
-(html-doc &quot;Hello Out&quot;
-[:h1 &quot;Hello, &quot; name &quot;!&quot;]))</p>
+(html-doc "Hello Out"
+[:h1 "Hello, " name "!"]))</p>
 <p>(defroutes hello-service
 ; The following three lines map HTTP methods
 ; and URL patterns to response HTML.
 (GET in-path hello-in)
 (POST out-path (hello-out (params :name)))
-(ANY &quot;*&quot; (page-not-found))) ; displays ./public/404.html by default</p>
-<p>(println (str &quot;browse http://&quot; host &quot;:&quot; port in-path))
+(ANY "*" (page-not-found))) ; displays ./public/404.html by default</p>
+<p>(println (str "browse http://" host ":" port in-path))
 ; -&gt; browse http://localhost:8080/hello
-(run-server {:port port} &quot;/*&quot; (servl
+(run-server {:port port} "/*" (servl
 </pre></code>
 <em><a href="#contents">回到上面</a></em></p>
 <h2><a name="databases">数据库</a></h2>

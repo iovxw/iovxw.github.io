@@ -372,7 +372,7 @@
 </li>
 <li>
 <p><strong><code>'static</code> 并不 <code>static</code></strong></p>
-<p><code>'static</code> 甚至不是一个生命期参数 (它是一个特殊的 &quot;字面量&quot;, 并作为一个关键字实现)，在很多情况下它只被用来表示变量不受某个生命期约束</p>
+<p><code>'static</code> 甚至不是一个生命期参数 (它是一个特殊的 "字面量", 并作为一个关键字实现)，在很多情况下它只被用来表示变量不受某个生命期约束</p>
 <p>很多人认为所有 <code>'static</code> 的变量会永远留在内存中，这是不正确的，一个 owned 类型也是 <code>'static</code> 的</p>
 <pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">assert_static</span><span>&lt;T: </span><span style="color:#fa5c4b;">&#39;static</span><span>&gt;(</span><span style="color:#fe8019;">_</span><span>: T) {}
 </span><span style="color:#fabd2f;">assert_static</span><span>(</span><span style="color:#fabd2f;">String</span><span>::new());

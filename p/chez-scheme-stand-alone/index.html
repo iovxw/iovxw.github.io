@@ -405,7 +405,7 @@ and the use of <tt>make-boot-file</tt>.
 <p>需要注意的是，<strong>input-filename</strong> 的顺序要和 <code>import</code> 的顺序一样，不然会无法找到</p>
 <p>然后是关于 <strong>base-boot-list</strong>：</p>
 <blockquote>
-<p>In most cases, you can construct your application so it does not depend upon features of <em>Chez Scheme</em> (specifically, the compiler) by specifying only <em>&quot;petite&quot;</em> in the call to <code>make-boot-file</code>. If your application calls <code>eval</code>, however, and you wish to allow users to be able to take advantage of the faster execution speed of compiled code, then specifying both <em>&quot;scheme&quot;</em> and <em>&quot;petite&quot;</em> is appropriate.</p>
+<p>In most cases, you can construct your application so it does not depend upon features of <em>Chez Scheme</em> (specifically, the compiler) by specifying only <em>"petite"</em> in the call to <code>make-boot-file</code>. If your application calls <code>eval</code>, however, and you wish to allow users to be able to take advantage of the faster execution speed of compiled code, then specifying both <em>"scheme"</em> and <em>"petite"</em> is appropriate.</p>
 </blockquote>
 <p>运行：</p>
 <pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">$ scheme --program main.boot
