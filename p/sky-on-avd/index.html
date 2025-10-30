@@ -1,41 +1,40 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-Hans">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="有钱还是直接买个 iPad 吧">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="canonical" href="https://iovxw.net">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="description" content="有钱还是直接买个 iPad 吧" />
+    <meta name="author" content="iovxw" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#212121" />
+    <link rel="canonical" href="https://iovxw.net/p/sky-on-avd/" />
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png" />
+    <link rel="icon" sizes="any" href="https://iovxw.net/favicon.svg" />
     
-      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link rel="alternate" href="https://iovxw.net/rss.xml" type="application/rss+xml" title="iovxw" />
     
     <title>在 Android 模拟器上运行光遇 - iovxw</title>
 
-    <meta name="theme-color" content="#212121">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
-
-    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
-    <meta name="msapplication-TileColor" content="#3F51B5">
-
-    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
-
     <style>
+    :root {
+        --border-spacing: 10px;
+        color-scheme: dark;
+        text-spacing-trim: trim-start;
+    }
+
     body {
-        margin: 8px;
+        margin: 8px 0;
         background: #151515;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
         font-family: sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        body {
+            margin: 0;
+        }
     }
 
     header a {
@@ -47,51 +46,31 @@
 
     header input {
         width: 100%;
-        min-width: 64px;
+        field-sizing: content; /* waiting firefox */
+        min-width: 6ch;
         text-align: right;
         background: 0;
         border: none;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
     }
 
-    header input:placeholder-shown {
+    header input::placeholder {
         color: white;
         font-weight: bold;
     }
 
-    header input:-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input::-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input:-ms-input-placeholder {
-        color: white;
-        font-weight: bold;
-    }
-
-    header input::-webkit-input-placeholder {
-        color: white;
-        font-weight: bold;
+    header input:not(:placeholder-shown) {
+        min-width: 10ch; /* TODO: field-sizing */
     }
 
     header input:focus {
-        border: none;
+        outline: none;
     }
 
     header .link {
         display: flex;
         text-align: right;
-    }
-
-    header .link, footer .license {
-        margin-right: -10px;
-        padding-right: 10px;
     }
 
     footer .license {
@@ -110,13 +89,13 @@
     }
 
     header .title {
-        font-size: 26px;
+        font-size: 1.625em;
         margin: 0;
-        margin-right: 6px;
+        margin-right: 1ch;
     }
 
     header, article, nav, footer {
-        padding: 10px;
+        padding: var(--border-spacing);
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
@@ -124,6 +103,7 @@
     }
 
     nav {
+        padding: 0;
         display: flex;
     }
 
@@ -133,8 +113,7 @@
 
     nav a {
         flex: 1 1 0;
-        margin: -10px 0;
-        padding: 10px 0;
+        padding: var(--border-spacing) 0;
         text-align: center;
         font-weight: bold;
         color: white;
@@ -162,24 +141,44 @@
     h1, h2, h3, h4, h5, h6 {
         font-weight: bold;
     }
+    
+    article :is(h2, h3, h4, h5, h6) a:visited {
+        color: white;
+    }
+
+    h2::before {
+        content: "# ";
+    }
+    h3::before {
+        content: "## ";
+    }
+    h4::before {
+        content: "### ";
+    }
+    h5::before {
+        content: "#### ";
+    }
+    h6::before {
+        content: "##### ";
+    }
 
     h1 {
-        font-size: 22px;
+        font-size: 1.375em;
         margin: 10px 0;
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 1.25em;
         margin: 5px 0;
     }
 
     h3 {
-        font-size: 18px;
+        font-size: 1.125em;
         margin: 2px 0;
     }
 
     h4, h5, h6 {
-        font-size: 16px;
+        font-size: 1em;
         margin: 2px 0;
     }
 
@@ -187,8 +186,25 @@
         margin: 1em 0;
     }
 
-    article > p:last-child, article > pre:last-child {
+    article > p:last-child {
+        margin-bottom: calc(1em - 10px);
+    }
+
+    article > pre:last-child:has(code), article > p:last-child:has(img),
+    article pre:has(code):has(+ hr), article p:has(img):has(+ hr) {
         margin-bottom: 0;
+    }
+
+    article pre:has(code) + hr, article p:has(img) + hr {
+        margin-top: var(--border-spacing);
+    }
+
+    article :is(.info, hr) + :is(p:has(img), pre:has(code)) {
+        margin-top: 0;
+    }
+    
+    hr:has(+ pre code, + p img) {
+        margin-bottom: var(--border-spacing);
     }
 
     article {
@@ -208,11 +224,11 @@
         display: flex;
         align-items: baseline;
         border-bottom: 1px solid white;
-        margin-bottom: 7px;
+        margin-bottom: var(--border-spacing);
     }
 
-    article .info h2 {
-        font-size: 18px;
+    article .info p {
+        font-size: 1.125em;
         font-weight: normal;
         color: #9E9E9E;
         margin-top: 2px;
@@ -220,7 +236,7 @@
     }
 
     article .info time {
-        font-size: 12px;
+        font-size: 0.75em;
         flex-grow: 1;
         text-align: right;
         margin-bottom: 4px;
@@ -228,21 +244,23 @@
 
     :not(pre) > code {
         background: rgba(255,255,255,.1);
-        border: 1px solid rgba(255,255,255,.1);
+        outline: 1px solid rgba(255,255,255,.1);
+        outline-offset: -1px;
         padding: 0 0.3em;
     }
 
-    pre {
-        font-size: 14px;
+    pre:has(code) {
+        font-size: 0.875em;
         overflow-x: auto;
         display: block;
         padding: 0.5em;
+        border: 1px solid white;
     }
 
     hr {
         border: 0;
-        border-top: 1px solid #ccc;
-        margin: 1em 0;
+        border-top: 5px solid white;
+        margin: 1em calc(var(--border-spacing) * -1);
     }
 
     ol, ul {
@@ -263,10 +281,20 @@
     }
 
     blockquote {
-        border: solid white;
-        border-width: 0 3px;
-        padding: 0 0.5em;
-        margin: 1em 0.5em;
+        padding: 0.5em 2em;
+        margin: 1em calc(var(--border-spacing) * -1);
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+    
+    blockquote::before {
+        font-family: Arial;
+        content: "\201C";
+        color: rgba(255, 255, 255, 0.1);
+        font-size: 5em;
+        position: absolute;
+        top: 0;
+        left: 0.15em;
     }
 
     ul.archive {
@@ -282,11 +310,11 @@
 
     .archive li time {
         white-space: nowrap;
-        margin-right: 10px;
+        margin-right: 1ch;
     }
 
     #disqus_thread {
-        padding: 10px;
+        padding: var(--border-spacing);
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
@@ -334,7 +362,7 @@
       
 <article>
     <h1>在 Android 模拟器上运行光遇</h1>
-    <div class="info"><h2>有钱还是直接买个 iPad 吧</h2><time>2021-10-04 00:16</time></div>
+    <div class="info"><p>有钱还是直接买个 iPad 吧</p><time>2021-10-04 00:16</time></div>
     <p><img src="https://iovxw.net/p/sky-on-avd/screenshot0.png" alt="" /></p>
 <p><em>Sky: Children of The Light</em> 这游戏, 可以说是对高级用户十分不友好了</p>
 <p>在 Android 上, 它只提供 arm64-v8a 的 binary, 直接拒绝高性能的 x86 平板以及模拟器</p>
@@ -344,17 +372,17 @@
 <p>所以这两天我折腾了一下在 PC 上运行它, 争取能在客厅躺在沙发上用电视玩最高画质</p>
 <span id="continue-reading"></span>
 <hr />
-<h2 id="yun-xing-huan-jing-de-xuan-ze">运行环境的选择</h2>
+<h2 id="yun-xing-huan-jing-de-xuan-ze"><a class="zola-anchor" href="#yun-xing-huan-jing-de-xuan-ze" aria-label="Anchor link for: yun-xing-huan-jing-de-xuan-ze">运行环境的选择</a></h2>
 <p>光遇要求 Android 10 以上的 arm64 环境</p>
 <p>这直接劝退了一大波游戏专用 Android 模拟器, 因为他们都跑着 Android 9 甚至 Android 8</p>
 <p>甚至 Android-x86, 都还卡在 Android 8.1 上</p>
 <p>不过理论上, 只需要一个 x86_64/arm64 的 Android 10 即可, 所以如果你已经有这种环境, 可以跳过下面的安装部分了</p>
 <p>为什么 x86 可以? 感谢 Native Bridge, 在新版 Android 上我们可以无需任何配置直接在 x86 上运行 arm 的 binary</p>
 <p>这里我使用的是 Android Emulator, 配置过程如下:</p>
-<h3 id="an-zhuang-android-emulator">安装 Android Emulator</h3>
+<h3 id="an-zhuang-android-emulator"><a class="zola-anchor" href="#an-zhuang-android-emulator" aria-label="Anchor link for: an-zhuang-android-emulator">安装 Android Emulator</a></h3>
 <p>不管是直接用 Android Studio 自带的, 还是从软件源装, 总之装上它</p>
 <p>版本需要 <code>&gt; 30.0</code> 不然 arm 翻译不好使</p>
-<h3 id="chuang-jian-avd">创建 AVD</h3>
+<h3 id="chuang-jian-avd"><a class="zola-anchor" href="#chuang-jian-avd" aria-label="Anchor link for: chuang-jian-avd">创建 AVD</a></h3>
 <p>创建一个 AVD, 机器型号随便选一个带 Google Play 认证的</p>
 <p>然后注意, 镜像要选 Android 11 x86_64 Google Play 版本</p>
 <p>Android 10 我没测试过, 总之选新但又不是那么新的</p>
@@ -362,7 +390,7 @@
 <p>还有就是要 Google Play 版, 不要默认的 Google API 版</p>
 <p>Google Play 版因为认证, 会限制你修改模拟器硬件配置, 但我们可以跳过它直接修改配置文件</p>
 <p>而用 Google API 版的话, 需要手动安装 GMS 框架, 比改两行配置麻烦得多</p>
-<h3 id="xiu-gai-avd-pei-zhi">修改 AVD 配置</h3>
+<h3 id="xiu-gai-avd-pei-zhi"><a class="zola-anchor" href="#xiu-gai-avd-pei-zhi" aria-label="Anchor link for: xiu-gai-avd-pei-zhi">修改 AVD 配置</a></h3>
 <p>打开 <code>~/.android/avd/*.avd/config.ini</code>, <code>*</code> 是你 AVD 的名字</p>
 <p>确保如下几项设置</p>
 <pre data-lang="ini" style="background-color:#282828;color:#fdf4c1aa;" class="language-ini "><code class="language-ini" data-lang="ini"><span style="color:#fdf4c1;">disk</span><span style="color:#fe8019;">.</span><span>dataPartition</span><span style="color:#fe8019;">.</span><span>size </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">10G </span><span style="font-style:italic;color:#928374;"># 一般 5G 够用, 但考虑到要存多份游戏 apk, 大点较好
@@ -371,19 +399,19 @@
 </span><span style="color:#fdf4c1;">hw</span><span style="color:#fe8019;">.</span><span>ramSize </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">16384 </span><span style="font-style:italic;color:#928374;"># 内存我直接上了 16G, 8G 好像也够用
 </span><span style="color:#fdf4c1;">hw</span><span style="color:#fe8019;">.</span><span>cpu</span><span style="color:#fe8019;">.</span><span>ncore </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">6 </span><span style="font-style:italic;color:#928374;"># CPU 核心数, 多给吧
 </span></code></pre>
-<h3 id="gao-qing-chu-emulator-de-wei-zhi">搞清楚 emulator 的位置</h3>
+<h3 id="gao-qing-chu-emulator-de-wei-zhi"><a class="zola-anchor" href="#gao-qing-chu-emulator-de-wei-zhi" aria-label="Anchor link for: gao-qing-chu-emulator-de-wei-zhi">搞清楚 emulator 的位置</a></h3>
 <p>根据你的安装方式, 确定你可以从终端运行 AVD emulator, 因为后面需要手动加参数</p>
 <p>Android Studio 安装的默认位置是 <code>~/Android/Sdk/tools/emulator</code></p>
 <p>然后就可以开始下一步, 配置环境了</p>
 <hr />
-<h2 id="yun-xing-huan-jing-de-pei-zhi">运行环境的配置</h2>
-<h3 id="root">ROOT</h3>
+<h2 id="yun-xing-huan-jing-de-pei-zhi"><a class="zola-anchor" href="#yun-xing-huan-jing-de-pei-zhi" aria-label="Anchor link for: yun-xing-huan-jing-de-pei-zhi">运行环境的配置</a></h2>
+<h3 id="root"><a class="zola-anchor" href="#root" aria-label="Anchor link for: root">ROOT</a></h3>
 <p>对, 需要 Root, 最好是 Magisk, 这样就可以直接使用下面我写的 Magisk Module 了</p>
 <p>对于 AVD, 请参考 <a href="https://github.com/shakalaca/MagiskOnEmulator">https://github.com/shakalaca/MagiskOnEmulator</a></p>
 <p>这里有一个预先 patch 好的 ramdisk.img <a href="https://github.com/iovxw/BINARIES/releases/tag/ramdisk-avd30">https://github.com/iovxw/BINARIES/releases/tag/ramdisk-avd30</a></p>
 <p>对应的是 AVD x86_64 API 30 with Google Play, Magisk 23.0</p>
 <p>如果是相同版本的话可以直接拿去替换</p>
-<h3 id="qi-yong-gles-3-1">启用 GLES 3.1</h3>
+<h3 id="qi-yong-gles-3-1"><a class="zola-anchor" href="#qi-yong-gles-3-1" aria-label="Anchor link for: qi-yong-gles-3-1">启用 GLES 3.1</a></h3>
 <p>如果你的显卡及驱动够新, 应该是不用这一步的</p>
 <p>但在某些情况下, 哪怕够新了模拟器也不给你 3.1, 然后运行游戏就会出现以下画面:</p>
 <p><img src="https://iovxw.net/p/sky-on-avd/game-req.jpg" alt="" /></p>
@@ -429,7 +457,7 @@
 </span><span style="color:#8ec07c;">System</span><span>.out.</span><span style="color:#fdf4c1;">println(</span><span style="color:#8ec07c;">Double</span><span style="color:#fdf4c1;">.parseDouble(configurationInfo.getGlEsVersion()))</span><span>;
 </span></code></pre>
 <p>如果不会设置也不用担心, 后面我写了个 Magisk 模块, 直接刷上就可以了</p>
-<h3 id="qi-yong-aep">启用 AEP</h3>
+<h3 id="qi-yong-aep"><a class="zola-anchor" href="#qi-yong-aep" aria-label="Anchor link for: qi-yong-aep">启用 AEP</a></h3>
 <p>光有 GLES 3.1 还不够, 你看它图里还要求 Extension Pack</p>
 <!--
 public boolean supportsOpenGLESExtensionPack() {
@@ -463,7 +491,7 @@ public boolean supportsOpenGLESExtensionPack() {
 </span><span style="color:#83a598;">&lt;/</span><span style="font-weight:bold;color:#8ec07c;">permissions</span><span style="color:#83a598;">&gt;
 </span></code></pre>
 <p>这一步我和上一步一起写了个 Magisk 模块完成, 参见: <a href="https://github.com/iovxw/eanble-gles3_1_and_aep/releases/latest">https://github.com/iovxw/eanble-gles3_1_and_aep/releases/latest</a></p>
-<h3 id="an-zhuang-you-xi">安装游戏</h3>
+<h3 id="an-zhuang-you-xi"><a class="zola-anchor" href="#an-zhuang-you-xi" aria-label="Anchor link for: an-zhuang-you-xi">安装游戏</a></h3>
 <p>现在可以安装游戏了, 但不能直接从 Google Play 装, x86 设备会提示不兼容 (虽然确实可以运行)</p>
 <p>但毕竟条条大路, 可以从其他设备下载后提取, 或者 TapTap 国际版是可以直接安装的</p>
 <p><a href="https://www.taptap.io/app/82226">https://www.taptap.io/app/82226</a></p>
@@ -472,7 +500,7 @@ public boolean supportsOpenGLESExtensionPack() {
 <p>如果你想要分享, TapTap apk 的储存位置在 <code>/data/data/com.taptap.global/files/taptap/tmp</code></p>
 <p>安装到最后时可能会出错, 记得检查你的磁盘空间是否够用</p>
 <p>如果想知道具体的出错原因, 进 <code>adb shell</code> 用 <code>pm install</code> 安装 apk</p>
-<h3 id="qi-dong-you-xi">启动游戏</h3>
+<h3 id="qi-dong-you-xi"><a class="zola-anchor" href="#qi-dong-you-xi" aria-label="Anchor link for: qi-dong-you-xi">启动游戏</a></h3>
 <p>可能会崩, 多来几次. 确保内存什么的没满</p>
 <p>一般崩掉的原因是 main loop 过长时间无响应, 换个更强的机器可能解决问题</p>
 <p>作为参考我的机器是 Intel i7 8700 + SM961, 性能主要就是吃这俩</p>
@@ -481,7 +509,7 @@ public boolean supportsOpenGLESExtensionPack() {
 <p>这时游戏里的画面等级是最低的, 全是马赛克</p>
 <p>并且最高只能点开两个闪电, 点闪电的时候可能会崩, 是正常现象, 下次启动画面就已经修改过了</p>
 <p>但这里我们不需要手动点闪电, 直接进入下一步:</p>
-<h3 id="jie-suo-hua-zhi-she-zhi">解锁画质设置</h3>
+<h3 id="jie-suo-hua-zhi-she-zhi"><a class="zola-anchor" href="#jie-suo-hua-zhi-she-zhi" aria-label="Anchor link for: jie-suo-hua-zhi-she-zhi">解锁画质设置</a></h3>
 <!--
 如前所述光遇有机型白名单, 所以要把模拟器伪装成一个高性能机器
 
@@ -540,7 +568,7 @@ Enter your desired option:
 <p>可以看到地面的纹理细节, 模型精细程度也还可以</p>
 <p>远处的草地仍然没加载, 云也还是马赛克, 但程度差了很多</p>
 <p>分辨率应该是原生, 帧率游戏本身上限是 120</p>
-<h3 id="jie-ru-shou-bing">接入手柄</h3>
+<h3 id="jie-ru-shou-bing"><a class="zola-anchor" href="#jie-ru-shou-bing" aria-label="Anchor link for: jie-ru-shou-bing">接入手柄</a></h3>
 <p>Android Emulator 可以把 USB 设备传给 AVD, 不过我没找到图形化操作方式, 用命令的话参数如下:</p>
 <pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="font-style:italic;color:#928374;"># 模拟器程序路径, 默认是这里
 </span><span style="color:#fdf4c1;">~/Android/Sdk/tools/emulator \
@@ -560,7 +588,7 @@ Enter your desired option:
 <p>手柄的 <code>vendorid</code> <code>productid</code> 可以用 <code>lsusb</code> 查看</p>
 <pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Bus 001 Device 019: ID 045e:028e Microsoft Corp. Xbox360 Controller
 </span></code></pre>
-<h3 id="dai-xu">待续</h3>
+<h3 id="dai-xu"><a class="zola-anchor" href="#dai-xu" aria-label="Anchor link for: dai-xu">待续</a></h3>
 <p>对 <code>device_capability_gpu_rating</code> 的设置会在游戏重启时被重置, 所以需要每次启动前都修改配置</p>
 <p>但其实完全可以通过模拟设备型号, 来免掉这一步骤</p>
 <p>不过目前需求已经满足了, 有时间再折腾吧</p>

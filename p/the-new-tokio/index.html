@@ -1,41 +1,40 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-Hans">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="架构更新">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="canonical" href="https://iovxw.net">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="description" content="架构更新" />
+    <meta name="author" content="iovxw" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#212121" />
+    <link rel="canonical" href="https://iovxw.net/p/the-new-tokio/" />
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png" />
+    <link rel="icon" sizes="any" href="https://iovxw.net/favicon.svg" />
     
-      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link rel="alternate" href="https://iovxw.net/rss.xml" type="application/rss+xml" title="iovxw" />
     
     <title>新 tokio 中的变动 - iovxw</title>
 
-    <meta name="theme-color" content="#212121">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
-
-    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
-    <meta name="msapplication-TileColor" content="#3F51B5">
-
-    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
-
     <style>
+    :root {
+        --border-spacing: 10px;
+        color-scheme: dark;
+        text-spacing-trim: trim-start;
+    }
+
     body {
-        margin: 8px;
+        margin: 8px 0;
         background: #151515;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
         font-family: sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        body {
+            margin: 0;
+        }
     }
 
     header a {
@@ -47,51 +46,31 @@
 
     header input {
         width: 100%;
-        min-width: 64px;
+        field-sizing: content; /* waiting firefox */
+        min-width: 6ch;
         text-align: right;
         background: 0;
         border: none;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
     }
 
-    header input:placeholder-shown {
+    header input::placeholder {
         color: white;
         font-weight: bold;
     }
 
-    header input:-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input::-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input:-ms-input-placeholder {
-        color: white;
-        font-weight: bold;
-    }
-
-    header input::-webkit-input-placeholder {
-        color: white;
-        font-weight: bold;
+    header input:not(:placeholder-shown) {
+        min-width: 10ch; /* TODO: field-sizing */
     }
 
     header input:focus {
-        border: none;
+        outline: none;
     }
 
     header .link {
         display: flex;
         text-align: right;
-    }
-
-    header .link, footer .license {
-        margin-right: -10px;
-        padding-right: 10px;
     }
 
     footer .license {
@@ -110,13 +89,13 @@
     }
 
     header .title {
-        font-size: 26px;
+        font-size: 1.625em;
         margin: 0;
-        margin-right: 6px;
+        margin-right: 1ch;
     }
 
     header, article, nav, footer {
-        padding: 10px;
+        padding: var(--border-spacing);
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
@@ -124,6 +103,7 @@
     }
 
     nav {
+        padding: 0;
         display: flex;
     }
 
@@ -133,8 +113,7 @@
 
     nav a {
         flex: 1 1 0;
-        margin: -10px 0;
-        padding: 10px 0;
+        padding: var(--border-spacing) 0;
         text-align: center;
         font-weight: bold;
         color: white;
@@ -162,24 +141,44 @@
     h1, h2, h3, h4, h5, h6 {
         font-weight: bold;
     }
+    
+    article :is(h2, h3, h4, h5, h6) a:visited {
+        color: white;
+    }
+
+    h2::before {
+        content: "# ";
+    }
+    h3::before {
+        content: "## ";
+    }
+    h4::before {
+        content: "### ";
+    }
+    h5::before {
+        content: "#### ";
+    }
+    h6::before {
+        content: "##### ";
+    }
 
     h1 {
-        font-size: 22px;
+        font-size: 1.375em;
         margin: 10px 0;
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 1.25em;
         margin: 5px 0;
     }
 
     h3 {
-        font-size: 18px;
+        font-size: 1.125em;
         margin: 2px 0;
     }
 
     h4, h5, h6 {
-        font-size: 16px;
+        font-size: 1em;
         margin: 2px 0;
     }
 
@@ -187,8 +186,25 @@
         margin: 1em 0;
     }
 
-    article > p:last-child, article > pre:last-child {
+    article > p:last-child {
+        margin-bottom: calc(1em - 10px);
+    }
+
+    article > pre:last-child:has(code), article > p:last-child:has(img),
+    article pre:has(code):has(+ hr), article p:has(img):has(+ hr) {
         margin-bottom: 0;
+    }
+
+    article pre:has(code) + hr, article p:has(img) + hr {
+        margin-top: var(--border-spacing);
+    }
+
+    article :is(.info, hr) + :is(p:has(img), pre:has(code)) {
+        margin-top: 0;
+    }
+    
+    hr:has(+ pre code, + p img) {
+        margin-bottom: var(--border-spacing);
     }
 
     article {
@@ -208,11 +224,11 @@
         display: flex;
         align-items: baseline;
         border-bottom: 1px solid white;
-        margin-bottom: 7px;
+        margin-bottom: var(--border-spacing);
     }
 
-    article .info h2 {
-        font-size: 18px;
+    article .info p {
+        font-size: 1.125em;
         font-weight: normal;
         color: #9E9E9E;
         margin-top: 2px;
@@ -220,7 +236,7 @@
     }
 
     article .info time {
-        font-size: 12px;
+        font-size: 0.75em;
         flex-grow: 1;
         text-align: right;
         margin-bottom: 4px;
@@ -228,21 +244,23 @@
 
     :not(pre) > code {
         background: rgba(255,255,255,.1);
-        border: 1px solid rgba(255,255,255,.1);
+        outline: 1px solid rgba(255,255,255,.1);
+        outline-offset: -1px;
         padding: 0 0.3em;
     }
 
-    pre {
-        font-size: 14px;
+    pre:has(code) {
+        font-size: 0.875em;
         overflow-x: auto;
         display: block;
         padding: 0.5em;
+        border: 1px solid white;
     }
 
     hr {
         border: 0;
-        border-top: 1px solid #ccc;
-        margin: 1em 0;
+        border-top: 5px solid white;
+        margin: 1em calc(var(--border-spacing) * -1);
     }
 
     ol, ul {
@@ -263,10 +281,20 @@
     }
 
     blockquote {
-        border: solid white;
-        border-width: 0 3px;
-        padding: 0 0.5em;
-        margin: 1em 0.5em;
+        padding: 0.5em 2em;
+        margin: 1em calc(var(--border-spacing) * -1);
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+    
+    blockquote::before {
+        font-family: Arial;
+        content: "\201C";
+        color: rgba(255, 255, 255, 0.1);
+        font-size: 5em;
+        position: absolute;
+        top: 0;
+        left: 0.15em;
     }
 
     ul.archive {
@@ -282,11 +310,11 @@
 
     .archive li time {
         white-space: nowrap;
-        margin-right: 10px;
+        margin-right: 1ch;
     }
 
     #disqus_thread {
-        padding: 10px;
+        padding: var(--border-spacing);
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
@@ -334,7 +362,7 @@
       
 <article>
     <h1>新 tokio 中的变动</h1>
-    <div class="info"><h2>架构更新</h2><time>2018-02-08 12:03</time></div>
+    <div class="info"><p>架构更新</p><time>2018-02-08 12:03</time></div>
     <p>几个小时前, <a href="https://crates.io/crates/tokio/0.1.0"><em>tokio</em> 0.1.0</a> 正式发布了</p>
 <p>如果没有一直关注, 肯定是一脸茫然
 <img width="64em" src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='384' fill='white' display='block'%3E%3Cpath d='M219.7 12.7c-8.2 5.2-9.4 28-2 38.2 1 1 2.5 4 3.3 6 .8 2 2.7 5 4 7 1.6 2 3.2 5 3.5 7 .4 1 1 2 1.5 2 .7 0 4 5 8.6 13 .7 1 2.6 3 4.3 5 2 2 4 6 2 6l-25-4c-3-2-40-2-45 0l-11 2c-3 0-6 1-7 2s-3 2-6 2-7 2-10 3c-6 3-9 2-9-2l-2-4c-4-9-6-13-7-14-3-4-4-5-5-7s-4-6-7-10-5.8-7-5.8-8-1-2-2-3-2-2-2-3-.3-1.6-1-1.6-4-2.6-8-6c-9.4-8.7-14-12-17-13-1-.6-3-1.6-4-2.4-4.6-4-16-2-21 4-5.5 7-1 31 8.6 47 2.3 4 5 9 6 10.5.4 2 2 4 3.3 5 3 2 11 10 11 12 0 1 2 4 4.3 6 3 3 5 5 5 6l6 5.6c8 6.5 8 6-2 17-5 5-10 11-12 14-1 3-4 6-5 7-3 2.8-9 14-10 18.8 0 2.3-1 5-2 6s-1 4-2 7c0 3-1 7.5-2 9.4-1 2-1 5.6-1 7.5 0 2-.7 5-1 6.4-2 4-3 28.8-2 38.4 3 17.5 4 27 6 33.4 3.7 9.4 9 21.3 11 22 1 .3 1.7 1 1.7 1.7 0 1 1.6 3 3 5l8.5 10c3 3.6 7 7.2 10 9 3.5 1.5 5 3 5 4.4 0 3 1.3 4 5 5 1.3 1 4.2 2 6.4 4s5.5 4 7 5c3 2 3 4.5 2 12.6l-1.7 10-1 5.7h5c5.7 0 5 1 7-15.5 1.4-14.3-.4-18.5-10-24-8.6-4.5-37-32.4-37-36 0-1-.5-2-1-3-1 0-7-13-7-14s-1-3-2-5-2-6-2-8c0-2.7-1-8.6-2-13.6-3-13.3-2.7-29.2 1.3-52 2.8-15.6 7-28 9-28 .6 0 .8-1 0-2.6-1-3.5 5.7-13.7 13.8-22.4l5-7c1.8-2.3 6-7 9-10 10-8.6 9.8-9.4-6-22.3-2.3-2.5-5-5-5.5-6s-4-5-7.5-9c-3.4-4-7-8.5-8-10-.6-1.5-2.3-4-4-6-5.3-7-14-22.7-14-26 0-1-.4-4-1-6-4-10.7 1-22 7-17 .5.2 1.4.4 2 0 1-1 8 3 12 7 12 12.5 24.6 26 25.6 30 0 1 1 2 2 3s1.5 2 1.5 2.5.3 1 1.3 2 2 3 3 4l3 5c1 2 2 4 2 6s2 5 3 7 3 5 3 6c2 7.5 8 11 12 6 1-1.4 3-3 5-3.4 2 0 4-1 6-2 1-1 4-2 7-2.3 2 0 7-1 9-2 10-3 38-4 54-2 11.5 1 26 4.2 29 6 2 1 4 2 5 2s3 1 5 2c5 3 7.2-3.8 3-9l-3-4c0-1-1.4-2-3-3l-4.5-5-6-9-6-9-4-5c-1.4-1-2.6-3.4-2.6-5 0-1-1-3.4-1.7-5-11-19-15-35-10-41 2.6-3 13 5 17 12.7 1 1 3 5 5 7.3l5 7 4 6.7c1.3 2 3.3 5 4.3 6 2 2.5 13 22 19 33 2.6 5 7 17 10.5 28 1 3 8 13 9 13l5 3.5s5 3.4 5.7 3.4c1.5 0 17.6 16 17.6 17 0 2 3 7.6 4 7.6 3.8 0 15 23 19.8 38 3.6 12 5 40 2 47l-2 8.3c-1 6.6-8.2 25.6-10.5 27-.5.7-1.7 3-3 5.6s-2.4 5-3 5c-.5 0-2.4 2.2-4.3 5-4 6-18.3 20-22.5 22l-3.6 2c-1 2-9 7-24 14-4 2-9 3.5-16 4.2-10 1-10.6 2-12 30v11h11l1-12.3c2-20 1-18 5-18 5-.6 11-2 13-4 1-1 3-2 5-2s5-1 6-2c2-1.5 8-5 13-8 5.6-3.5 13-9 18-14 5-4.7 9-8 9-8 .7 0 1-1 1-2 1-1 2-2.6 4-3.7 1.7-1 4-4 5-6.2s3-5.2 4-6c2-1.6 5-8 9-17 1-1.7 2-6 3-9.6 4-17 5-19.8 6-21 2.5-5 .2-37-3-44.7l-2.5-8c-3-11-5.7-17.6-10.7-25-3-4.5-5-8.4-5-9 0-1.4-15.5-19-21-23.4l-9-8c-2-2-4.7-3.4-6-3.4-5.8 0-9-6-14.4-27.3-.7-2-2-6-3-8-8.6-16-12-23-13-24.2-1-.8-2-2.6-2.8-4-2-3.8-3.7-6.6-5-8.5-1.7-2-3-5-5-9-2-3-7.7-12-9.5-14-.4-1-3-4-5-7-10-12-21-17.6-28.2-13m85 174c-2.6 3-2.6 4-.3 6 3.6 3 6 1.5 6-4 0-4-3-5-6-2m-149 3c-3.4 1.6.6 9 4.5 8 3-.3 5-5 4-7 0-2-5-2.5-8-1m74 36c-21.2 1-24 1-24 3.5 0 4 4.4 5 18.4 3.8 7-.7 17-1 21.2-1 9 0 12-1.8 10-5-1-2-1.6-2-25-1' fill-rule='evenodd'/%3E%3C/svg%3E"></p>

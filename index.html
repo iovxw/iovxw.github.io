@@ -1,41 +1,40 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-Hans">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="canonical" href="https://iovxw.net">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="description" content="iovxw&#x27;s blog" />
+    <meta name="author" content="iovxw" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#212121" />
+    <link rel="canonical" href="https://iovxw.net/" />
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png" />
+    <link rel="icon" sizes="any" href="https://iovxw.net/favicon.svg" />
     
-      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link rel="alternate" href="https://iovxw.net/rss.xml" type="application/rss+xml" title="iovxw" />
     
     <title>iovxw</title>
 
-    <meta name="theme-color" content="#212121">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
-
-    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
-    <meta name="msapplication-TileColor" content="#3F51B5">
-
-    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
-
     <style>
+    :root {
+        --border-spacing: 10px;
+        color-scheme: dark;
+        text-spacing-trim: trim-start;
+    }
+
     body {
-        margin: 8px;
+        margin: 8px 0;
         background: #151515;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
         font-family: sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        body {
+            margin: 0;
+        }
     }
 
     header a {
@@ -47,51 +46,31 @@
 
     header input {
         width: 100%;
-        min-width: 64px;
+        field-sizing: content; /* waiting firefox */
+        min-width: 6ch;
         text-align: right;
         background: 0;
         border: none;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
     }
 
-    header input:placeholder-shown {
+    header input::placeholder {
         color: white;
         font-weight: bold;
     }
 
-    header input:-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input::-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input:-ms-input-placeholder {
-        color: white;
-        font-weight: bold;
-    }
-
-    header input::-webkit-input-placeholder {
-        color: white;
-        font-weight: bold;
+    header input:not(:placeholder-shown) {
+        min-width: 10ch; /* TODO: field-sizing */
     }
 
     header input:focus {
-        border: none;
+        outline: none;
     }
 
     header .link {
         display: flex;
         text-align: right;
-    }
-
-    header .link, footer .license {
-        margin-right: -10px;
-        padding-right: 10px;
     }
 
     footer .license {
@@ -110,13 +89,13 @@
     }
 
     header .title {
-        font-size: 26px;
+        font-size: 1.625em;
         margin: 0;
-        margin-right: 6px;
+        margin-right: 1ch;
     }
 
     header, article, nav, footer {
-        padding: 10px;
+        padding: var(--border-spacing);
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
@@ -124,6 +103,7 @@
     }
 
     nav {
+        padding: 0;
         display: flex;
     }
 
@@ -133,8 +113,7 @@
 
     nav a {
         flex: 1 1 0;
-        margin: -10px 0;
-        padding: 10px 0;
+        padding: var(--border-spacing) 0;
         text-align: center;
         font-weight: bold;
         color: white;
@@ -162,24 +141,44 @@
     h1, h2, h3, h4, h5, h6 {
         font-weight: bold;
     }
+    
+    article :is(h2, h3, h4, h5, h6) a:visited {
+        color: white;
+    }
+
+    h2::before {
+        content: "# ";
+    }
+    h3::before {
+        content: "## ";
+    }
+    h4::before {
+        content: "### ";
+    }
+    h5::before {
+        content: "#### ";
+    }
+    h6::before {
+        content: "##### ";
+    }
 
     h1 {
-        font-size: 22px;
+        font-size: 1.375em;
         margin: 10px 0;
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 1.25em;
         margin: 5px 0;
     }
 
     h3 {
-        font-size: 18px;
+        font-size: 1.125em;
         margin: 2px 0;
     }
 
     h4, h5, h6 {
-        font-size: 16px;
+        font-size: 1em;
         margin: 2px 0;
     }
 
@@ -187,8 +186,25 @@
         margin: 1em 0;
     }
 
-    article > p:last-child, article > pre:last-child {
+    article > p:last-child {
+        margin-bottom: calc(1em - 10px);
+    }
+
+    article > pre:last-child:has(code), article > p:last-child:has(img),
+    article pre:has(code):has(+ hr), article p:has(img):has(+ hr) {
         margin-bottom: 0;
+    }
+
+    article pre:has(code) + hr, article p:has(img) + hr {
+        margin-top: var(--border-spacing);
+    }
+
+    article :is(.info, hr) + :is(p:has(img), pre:has(code)) {
+        margin-top: 0;
+    }
+    
+    hr:has(+ pre code, + p img) {
+        margin-bottom: var(--border-spacing);
     }
 
     article {
@@ -208,11 +224,11 @@
         display: flex;
         align-items: baseline;
         border-bottom: 1px solid white;
-        margin-bottom: 7px;
+        margin-bottom: var(--border-spacing);
     }
 
-    article .info h2 {
-        font-size: 18px;
+    article .info p {
+        font-size: 1.125em;
         font-weight: normal;
         color: #9E9E9E;
         margin-top: 2px;
@@ -220,7 +236,7 @@
     }
 
     article .info time {
-        font-size: 12px;
+        font-size: 0.75em;
         flex-grow: 1;
         text-align: right;
         margin-bottom: 4px;
@@ -228,21 +244,23 @@
 
     :not(pre) > code {
         background: rgba(255,255,255,.1);
-        border: 1px solid rgba(255,255,255,.1);
+        outline: 1px solid rgba(255,255,255,.1);
+        outline-offset: -1px;
         padding: 0 0.3em;
     }
 
-    pre {
-        font-size: 14px;
+    pre:has(code) {
+        font-size: 0.875em;
         overflow-x: auto;
         display: block;
         padding: 0.5em;
+        border: 1px solid white;
     }
 
     hr {
         border: 0;
-        border-top: 1px solid #ccc;
-        margin: 1em 0;
+        border-top: 5px solid white;
+        margin: 1em calc(var(--border-spacing) * -1);
     }
 
     ol, ul {
@@ -263,10 +281,20 @@
     }
 
     blockquote {
-        border: solid white;
-        border-width: 0 3px;
-        padding: 0 0.5em;
-        margin: 1em 0.5em;
+        padding: 0.5em 2em;
+        margin: 1em calc(var(--border-spacing) * -1);
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+    
+    blockquote::before {
+        font-family: Arial;
+        content: "\201C";
+        color: rgba(255, 255, 255, 0.1);
+        font-size: 5em;
+        position: absolute;
+        top: 0;
+        left: 0.15em;
     }
 
     ul.archive {
@@ -282,11 +310,11 @@
 
     .archive li time {
         white-space: nowrap;
-        margin-right: 10px;
+        margin-right: 1ch;
     }
 
     #disqus_thread {
-        padding: 10px;
+        padding: var(--border-spacing);
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
@@ -335,9 +363,28 @@
         
           
             <article>
+              <h1><a class="title" href="https://iovxw.net/p/dyson-battery/">给戴森 V8 更换 18V 工具电池</a></h1>
+              <div class="info">
+                <p>也有厂家叫 20V 21V 电池，但其实都一样</p>
+                <time>2025-10-24 00:00</time>
+              </div>
+              
+              <p><img src="https://iovxw.net/p/dyson-battery/0.webp" alt="0D930L" /></p>
+<p>戴森 V8</p>
+<p>由于生命期长，从 2016 年至今仍在生产销售，市场存量相当之大</p>
+<p>单主机二手价格普遍一百块左右，再加一百甚至能收个全配件大全套</p>
+              <div class="read-more">
+                <a href="https://iovxw.net/p/dyson-battery/#continue-reading">Read More…</a>
+              </div>
+              
+            </article>
+          
+        
+          
+            <article>
               <h1><a class="title" href="https://iovxw.net/p/frigate/">解决 Frigate 周期性硬盘无用写入问题</a></h1>
               <div class="info">
-                <h2>图都是从聊天记录里扒的, 面向群友 debug</h2>
+                <p>图都是从聊天记录里扒的, 面向群友 debug</p>
                 <time>2025-02-01 00:00</time>
               </div>
               
@@ -363,7 +410,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/msm8916/">在 2023 年为骁龙 410 随身 WiFi 移植 postmarkerOS</a></h1>
               <div class="info">
-                <h2>一些资料更新</h2>
+                <p>一些资料更新</p>
                 <time>2023-02-22 00:00</time>
               </div>
               
@@ -383,7 +430,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/sky-on-avd/">在 Android 模拟器上运行光遇</a></h1>
               <div class="info">
-                <h2>有钱还是直接买个 iPad 吧</h2>
+                <p>有钱还是直接买个 iPad 吧</p>
                 <time>2021-10-04 00:16</time>
               </div>
               
@@ -405,7 +452,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/enable-call-record-on-pixel/">强制启用 Pixel Phone 的通话录音</a></h1>
               <div class="info">
-                <h2>同样适用于第三方类 Pixel ROM</h2>
+                <p>同样适用于第三方类 Pixel ROM</p>
                 <time>2021-09-30 00:25</time>
               </div>
               
@@ -424,7 +471,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/park-external-hdd/">配置 Linux 关机时停转移动硬盘</a></h1>
               <div class="info">
-                <h2>是 HDD 需要注意的</h2>
+                <p>是 HDD 需要注意的</p>
                 <time>2021-03-25 00:00</time>
               </div>
               
@@ -443,7 +490,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/kensington-orbit-trackball/">Kensington Orbit 轨迹球</a></h1>
               <div class="info">
-                <h2>一整年没更新了，写点什么吧</h2>
+                <p>一整年没更新了，写点什么吧</p>
                 <time>2020-04-12 17:13</time>
               </div>
               
@@ -464,7 +511,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/rust-closure-and-copy/">Rust 闭包环境捕获行为与 Copy trait</a></h1>
               <div class="info">
-                <h2>历史遗留问题</h2>
+                <p>历史遗留问题</p>
                 <time>2019-04-28 23:01</time>
               </div>
               
@@ -488,7 +535,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/intel-5ghz-ap/">Linux 下 Intel® 网卡开启 5Ghz AP</a></h1>
               <div class="info">
-                <h2>最好还是换网卡</h2>
+                <p>最好还是换网卡</p>
                 <time>2019-01-05 21:20</time>
               </div>
               
@@ -509,51 +556,17 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/fcitx5/">我也! 用上 fcitx5 了</a></h1>
               <div class="info">
-                <h2>已然开发两年半了</h2>
+                <p>已然开发两年半了</p>
                 <time>2018-05-13 15:39</time>
               </div>
               
               <p>新 fcitx 很棒, 棒到甚至可以干掉 ibus 的服务然后直接使用 ibus 的 im module</p>
 <p>虽然目前没有配置界面也没有文档, 不过我们不需要!</p>
 <p>来上个图:</p>
-<p><img src="/p/fcitx5/0.png" alt="screenshot" /></p>
+<p>
+    <img src="/p/fcitx5/0.png" alt="screenshot">
               <div class="read-more">
                 <a href="https://iovxw.net/p/fcitx5/#continue-reading">Read More…</a>
-              </div>
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https://iovxw.net/p/ugly-rust/">Rust 100 黑</a></h1>
-              <div class="info">
-                <h2>不定期更新</h2>
-                <time>2018-03-28 23:30</time>
-              </div>
-              
-              <p>所谓爱到深处自然黑, 本文将会收集 Rust 的黑点, 并附上简单的解释和状态跟踪</p>
-<p>至于能不能真的收集到 100 个, 希望不能吧</p>
-<p>友情链接: <a href="https://3442853561.gitbooks.io/wtfrust/content/">https://3442853561.gitbooks.io/wtfrust/content/</a></p>
-<hr />
-<ol>
-<li>
-<p><strong><code>enum</code> 的内存占用</strong></p>
-<p>尽管某些特殊类型会优化, 但大部分需要额外保存 tag, 而这个 tag 是 1byte, 极端情况下是个灾难</p>
-</li>
-<li>
-<p><strong>尾递归优化并不总是生效</strong></p>
-<p>当进行尾递归调用的作用域内有 <code>Drop</code> 变量存在时</p>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">recur</span><span>() {
-</span><span>    </span><span style="color:#fa5c4b;">let</span><span> x </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">vec!</span><span>[</span><span style="color:#d3869b;">false</span><span>];
-</span><span>    </span><span style="color:#fabd2f;">recur</span><span>()
-</span><span>}
-</span></code></pre>&hellip;
-</li>
-</ol>
-
-              <div class="read-more">
-                <a href="https://iovxw.net/p/ugly-rust/#continue-reading">Read More…</a>
               </div>
               
             </article>

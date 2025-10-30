@@ -5,13 +5,24 @@
       <link>https://iovxw.net</link>
       <description>iovxw&#x27;s blog</description>
       <generator>Zola</generator>
-      <language>en</language>
+      <language>zh-Hans</language>
       <atom:link href="https://iovxw.net/rss.xml" rel="self" type="application/rss+xml"/>
-      <lastBuildDate>Sat, 01 Feb 2025 00:00:00 +0000</lastBuildDate>
+      <lastBuildDate>Fri, 24 Oct 2025 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>给戴森 V8 更换 18V 工具电池</title>
+          <pubDate>Fri, 24 Oct 2025 00:00:00 +0000</pubDate>
+          <author>iovxw</author>
+          <link>https://iovxw.net/p/dyson-battery/</link>
+          <guid>https://iovxw.net/p/dyson-battery/</guid>
+          <description xml:base="https://iovxw.net/p/dyson-battery/">&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;dyson-battery&#x2F;0.webp&quot; alt=&quot;0D930L&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;戴森 V8&lt;&#x2F;p&gt;
+&lt;p&gt;由于生命期长，从 2016 年至今仍在生产销售，市场存量相当之大&lt;&#x2F;p&gt;
+&lt;p&gt;单主机二手价格普遍一百块左右，再加一百甚至能收个全配件大全套&lt;&#x2F;p&gt;</description>
+      </item>
       <item>
           <title>解决 Frigate 周期性硬盘无用写入问题</title>
           <pubDate>Sat, 01 Feb 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/frigate/</link>
           <guid>https://iovxw.net/p/frigate/</guid>
           <description xml:base="https://iovxw.net/p/frigate/">&lt;p&gt;之前需要个门铃摄像头&lt;&#x2F;p&gt;
@@ -29,7 +40,7 @@
       <item>
           <title>在 2023 年为骁龙 410 随身 WiFi 移植 postmarkerOS</title>
           <pubDate>Wed, 22 Feb 2023 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/msm8916/</link>
           <guid>https://iovxw.net/p/msm8916/</guid>
           <description xml:base="https://iovxw.net/p/msm8916/">&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;msm8916&#x2F;0.webp&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
@@ -41,7 +52,7 @@
       <item>
           <title>在 Android 模拟器上运行光遇</title>
           <pubDate>Mon, 04 Oct 2021 00:16:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/sky-on-avd/</link>
           <guid>https://iovxw.net/p/sky-on-avd/</guid>
           <description xml:base="https://iovxw.net/p/sky-on-avd/">&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;sky-on-avd&#x2F;screenshot0.png&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
@@ -55,7 +66,7 @@
       <item>
           <title>强制启用 Pixel Phone 的通话录音</title>
           <pubDate>Thu, 30 Sep 2021 00:25:57 +0800</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/enable-call-record-on-pixel/</link>
           <guid>https://iovxw.net/p/enable-call-record-on-pixel/</guid>
           <description xml:base="https://iovxw.net/p/enable-call-record-on-pixel/">&lt;p&gt;Pixel 自带的电话 App 是支持录音以及自动录音的&lt;&#x2F;p&gt;
@@ -66,7 +77,7 @@
       <item>
           <title>配置 Linux 关机时停转移动硬盘</title>
           <pubDate>Thu, 25 Mar 2021 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/park-external-hdd/</link>
           <guid>https://iovxw.net/p/park-external-hdd/</guid>
           <description xml:base="https://iovxw.net/p/park-external-hdd/">&lt;p&gt;距离上篇博文又是一年，不太妙&lt;&#x2F;p&gt;
@@ -77,7 +88,7 @@
       <item>
           <title>Kensington Orbit 轨迹球</title>
           <pubDate>Sun, 12 Apr 2020 17:13:32 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/kensington-orbit-trackball/</link>
           <guid>https://iovxw.net/p/kensington-orbit-trackball/</guid>
           <description xml:base="https://iovxw.net/p/kensington-orbit-trackball/">&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;kensington-orbit-trackball&#x2F;kensington_orbit_and_cat_feet.jpg&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
@@ -90,7 +101,7 @@
       <item>
           <title>Rust 闭包环境捕获行为与 Copy trait</title>
           <pubDate>Sun, 28 Apr 2019 23:01:07 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/rust-closure-and-copy/</link>
           <guid>https://iovxw.net/p/rust-closure-and-copy/</guid>
           <description xml:base="https://iovxw.net/p/rust-closure-and-copy/">&lt;p&gt;今天 Rust 群里有人遇到了反直觉的关于闭包的引用错误, 在群友合力排除各种干扰找到原因之后&lt;&#x2F;p&gt;
@@ -106,7 +117,7 @@
       <item>
           <title>Linux 下 Intel® 网卡开启 5Ghz AP</title>
           <pubDate>Sat, 05 Jan 2019 21:20:59 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/intel-5ghz-ap/</link>
           <guid>https://iovxw.net/p/intel-5ghz-ap/</guid>
           <description xml:base="https://iovxw.net/p/intel-5ghz-ap/">&lt;p&gt;Intel 家的网卡都禁止使用 5Ghz 开 AP, 只能开 2.4 的&lt;&#x2F;p&gt;
@@ -119,18 +130,19 @@
       <item>
           <title>我也! 用上 fcitx5 了</title>
           <pubDate>Sun, 13 May 2018 15:39:08 +0800</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/fcitx5/</link>
           <guid>https://iovxw.net/p/fcitx5/</guid>
           <description xml:base="https://iovxw.net/p/fcitx5/">&lt;p&gt;新 fcitx 很棒, 棒到甚至可以干掉 ibus 的服务然后直接使用 ibus 的 im module&lt;&#x2F;p&gt;
 &lt;p&gt;虽然目前没有配置界面也没有文档, 不过我们不需要!&lt;&#x2F;p&gt;
 &lt;p&gt;来上个图:&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;&#x2F;p&#x2F;fcitx5&#x2F;0.png&quot; alt=&quot;screenshot&quot; &#x2F;&gt;&lt;&#x2F;p&gt;</description>
+&lt;p&gt;
+    &lt;img src=&quot;&#x2F;p&#x2F;fcitx5&#x2F;0.png&quot; alt=&quot;screenshot&quot;&gt;</description>
       </item>
       <item>
           <title>Rust 100 黑</title>
           <pubDate>Wed, 28 Mar 2018 23:30:57 +0800</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/ugly-rust/</link>
           <guid>https://iovxw.net/p/ugly-rust/</guid>
           <description xml:base="https://iovxw.net/p/ugly-rust/">&lt;p&gt;所谓爱到深处自然黑, 本文将会收集 Rust 的黑点, 并附上简单的解释和状态跟踪&lt;&#x2F;p&gt;
@@ -157,7 +169,7 @@
       <item>
           <title>Rust 隐式转换之 CoerceUnsized</title>
           <pubDate>Fri, 23 Mar 2018 17:53:27 +0800</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/rust-coerce-unsized/</link>
           <guid>https://iovxw.net/p/rust-coerce-unsized/</guid>
           <description xml:base="https://iovxw.net/p/rust-coerce-unsized/">&lt;p&gt;Rust 中有四种隐式类型转换 (别和我提回字怎么写), 其中三种都是为了简化代码, 就算没有隐式, 也可以显式地用其他方法写出来&lt;&#x2F;p&gt;
@@ -170,7 +182,7 @@
       <item>
           <title>PhantomData 黑魔法</title>
           <pubDate>Wed, 14 Mar 2018 00:17:21 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/phantomdata-magic/</link>
           <guid>https://iovxw.net/p/phantomdata-magic/</guid>
           <description xml:base="https://iovxw.net/p/phantomdata-magic/">&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;std::marker::PhantomData;
@@ -195,7 +207,7 @@
       <item>
           <title>新 tokio 中的变动</title>
           <pubDate>Thu, 08 Feb 2018 12:03:15 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/the-new-tokio/</link>
           <guid>https://iovxw.net/p/the-new-tokio/</guid>
           <description xml:base="https://iovxw.net/p/the-new-tokio/">&lt;p&gt;几个小时前, &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;tokio&#x2F;0.1.0&quot;&gt;&lt;em&gt;tokio&lt;&#x2F;em&gt; 0.1.0&lt;&#x2F;a&gt; 正式发布了&lt;&#x2F;p&gt;
@@ -209,7 +221,7 @@
       <item>
           <title>统计图的曲线插值</title>
           <pubDate>Mon, 13 Nov 2017 20:58:39 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/curve-interpolation/</link>
           <guid>https://iovxw.net/p/curve-interpolation/</guid>
           <description xml:base="https://iovxw.net/p/curve-interpolation/">&lt;p&gt;很多程序, 比如各种监视器, 需要实时绘制统计图来将数据直观的展示给用户&lt;&#x2F;p&gt;
@@ -222,7 +234,7 @@
       <item>
           <title>Rust 中的高阶生命期约束</title>
           <pubDate>Wed, 13 Sep 2017 22:29:59 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/rust-higher-rank-lifetime-bounds/</link>
           <guid>https://iovxw.net/p/rust-higher-rank-lifetime-bounds/</guid>
           <description xml:base="https://iovxw.net/p/rust-higher-rank-lifetime-bounds/">&lt;p&gt;这篇文章并不在讲什么是生命期, 请先确保有正确的生命期概念&lt;&#x2F;p&gt;
@@ -234,7 +246,7 @@
       <item>
           <title>Rust 的 async&#x2F;await</title>
           <pubDate>Tue, 29 Aug 2017 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/rust-coroutine/</link>
           <guid>https://iovxw.net/p/rust-coroutine/</guid>
           <description xml:base="https://iovxw.net/p/rust-coroutine/">&lt;p&gt;今天, Rust 的 Generator 支持&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;rust-lang&#x2F;rust&#x2F;pull&#x2F;43076#issuecomment-325453224&quot;&gt;终于被合并了&lt;&#x2F;a&gt;!&lt;&#x2F;p&gt;
@@ -247,7 +259,7 @@
       <item>
           <title>在 Merlin 上配置 rTorrrent 需要注意的</title>
           <pubDate>Sun, 09 Jul 2017 00:26:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/rtorrent-on-merin/</link>
           <guid>https://iovxw.net/p/rtorrent-on-merin/</guid>
           <description xml:base="https://iovxw.net/p/rtorrent-on-merin/">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;iovxw.net&#x2F;p&#x2F;ac56u.html&quot;&gt;之前买的 RT-AC56U&lt;&#x2F;a&gt; 一直没放什么东西，空转到现在&lt;&#x2F;p&gt;
@@ -257,7 +269,7 @@
       <item>
           <title>Soul Knight Android 免 root 存档修改</title>
           <pubDate>Thu, 29 Jun 2017 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/soul-knight/</link>
           <guid>https://iovxw.net/p/soul-knight/</guid>
           <description xml:base="https://iovxw.net/p/soul-knight/">&lt;p&gt;挺好玩的 Roguelike 游戏（最近还加了联机模式，然而联机起来各种崩，戒指怕是有生之年了）&lt;&#x2F;p&gt;
@@ -268,7 +280,7 @@
       <item>
           <title>博客静态生成器切换到 Cobalt</title>
           <pubDate>Thu, 20 Apr 2017 22:15:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>iovxw</author>
           <link>https://iovxw.net/p/cobalt/</link>
           <guid>https://iovxw.net/p/cobalt/</guid>
           <description xml:base="https://iovxw.net/p/cobalt/">&lt;p&gt;抽空把博客生成器换到了 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;cobalt-org&#x2F;cobalt.rs&quot;&gt;Cobalt&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
@@ -280,23 +292,6 @@
 &lt;p&gt;然后因为我在用 Linux ，顺便跑了一遍 test&lt;&#x2F;p&gt;
 &lt;p&gt;结果发现原来的 test 本身就是错的，所以直接把正确结果拿出来覆盖上去 pass 了&lt;&#x2F;p&gt;
 &lt;p&gt;嗯……有些时候问题真是简单呢&lt;&#x2F;p&gt;</description>
-      </item>
-      <item>
-          <title>RT-AC56U</title>
-          <pubDate>Mon, 17 Apr 2017 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
-          <link>https://iovxw.net/p/ac56u/</link>
-          <guid>https://iovxw.net/p/ac56u/</guid>
-          <description xml:base="https://iovxw.net/p/ac56u/">&lt;img id=&quot;demo&quot; src=&quot;https:&#x2F;&#x2F;www.asus.com&#x2F;websites&#x2F;global&#x2F;products&#x2F;ejvcVtFQNPxjVH5w&#x2F;3D&#x2F;0_32_2.jpg&quot;&gt;
-&lt;input id=&quot;slide&quot; type=&quot;range&quot; min=&quot;16&quot; max=&quot;64&quot; value=&quot;32&quot;&gt;&lt;&#x2F;input&gt;
-&lt;script&gt;
-    let demo = document.querySelector(&quot;#demo&quot;);
-    let slide = document.querySelector(&quot;#slide&quot;);
-    slide.oninput = ()=&gt; {
-        demo.src = &quot;https:&#x2F;&#x2F;www.asus.com&#x2F;websites&#x2F;global&#x2F;products&#x2F;ejvcVtFQNPxjVH5w&#x2F;3D&#x2F;0_&quot; + slide.value + &quot;.jpg&quot;
-    };
-&lt;&#x2F;script&gt;
-&lt;p&gt;上边这是华硕官网的介绍图，本以为他们还搞了个 3D 什么的，结果就是一堆图拼起来的，所以这里干脆用滑块代替了&lt;&#x2F;p&gt;</description>
       </item>
     </channel>
 </rss>

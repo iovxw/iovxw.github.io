@@ -1,41 +1,40 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-Hans">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="图都是从聊天记录里扒的, 面向群友 debug">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="canonical" href="https://iovxw.net">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="description" content="图都是从聊天记录里扒的, 面向群友 debug" />
+    <meta name="author" content="iovxw" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#212121" />
+    <link rel="canonical" href="https://iovxw.net/p/frigate/" />
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png" />
+    <link rel="icon" sizes="any" href="https://iovxw.net/favicon.svg" />
     
-      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link rel="alternate" href="https://iovxw.net/rss.xml" type="application/rss+xml" title="iovxw" />
     
     <title>解决 Frigate 周期性硬盘无用写入问题 - iovxw</title>
 
-    <meta name="theme-color" content="#212121">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
-
-    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
-    <meta name="msapplication-TileColor" content="#3F51B5">
-
-    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
-
     <style>
+    :root {
+        --border-spacing: 10px;
+        color-scheme: dark;
+        text-spacing-trim: trim-start;
+    }
+
     body {
-        margin: 8px;
+        margin: 8px 0;
         background: #151515;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
         font-family: sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        body {
+            margin: 0;
+        }
     }
 
     header a {
@@ -47,51 +46,31 @@
 
     header input {
         width: 100%;
-        min-width: 64px;
+        field-sizing: content; /* waiting firefox */
+        min-width: 6ch;
         text-align: right;
         background: 0;
         border: none;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
     }
 
-    header input:placeholder-shown {
+    header input::placeholder {
         color: white;
         font-weight: bold;
     }
 
-    header input:-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input::-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input:-ms-input-placeholder {
-        color: white;
-        font-weight: bold;
-    }
-
-    header input::-webkit-input-placeholder {
-        color: white;
-        font-weight: bold;
+    header input:not(:placeholder-shown) {
+        min-width: 10ch; /* TODO: field-sizing */
     }
 
     header input:focus {
-        border: none;
+        outline: none;
     }
 
     header .link {
         display: flex;
         text-align: right;
-    }
-
-    header .link, footer .license {
-        margin-right: -10px;
-        padding-right: 10px;
     }
 
     footer .license {
@@ -110,13 +89,13 @@
     }
 
     header .title {
-        font-size: 26px;
+        font-size: 1.625em;
         margin: 0;
-        margin-right: 6px;
+        margin-right: 1ch;
     }
 
     header, article, nav, footer {
-        padding: 10px;
+        padding: var(--border-spacing);
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
@@ -124,6 +103,7 @@
     }
 
     nav {
+        padding: 0;
         display: flex;
     }
 
@@ -133,8 +113,7 @@
 
     nav a {
         flex: 1 1 0;
-        margin: -10px 0;
-        padding: 10px 0;
+        padding: var(--border-spacing) 0;
         text-align: center;
         font-weight: bold;
         color: white;
@@ -162,24 +141,44 @@
     h1, h2, h3, h4, h5, h6 {
         font-weight: bold;
     }
+    
+    article :is(h2, h3, h4, h5, h6) a:visited {
+        color: white;
+    }
+
+    h2::before {
+        content: "# ";
+    }
+    h3::before {
+        content: "## ";
+    }
+    h4::before {
+        content: "### ";
+    }
+    h5::before {
+        content: "#### ";
+    }
+    h6::before {
+        content: "##### ";
+    }
 
     h1 {
-        font-size: 22px;
+        font-size: 1.375em;
         margin: 10px 0;
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 1.25em;
         margin: 5px 0;
     }
 
     h3 {
-        font-size: 18px;
+        font-size: 1.125em;
         margin: 2px 0;
     }
 
     h4, h5, h6 {
-        font-size: 16px;
+        font-size: 1em;
         margin: 2px 0;
     }
 
@@ -187,8 +186,25 @@
         margin: 1em 0;
     }
 
-    article > p:last-child, article > pre:last-child {
+    article > p:last-child {
+        margin-bottom: calc(1em - 10px);
+    }
+
+    article > pre:last-child:has(code), article > p:last-child:has(img),
+    article pre:has(code):has(+ hr), article p:has(img):has(+ hr) {
         margin-bottom: 0;
+    }
+
+    article pre:has(code) + hr, article p:has(img) + hr {
+        margin-top: var(--border-spacing);
+    }
+
+    article :is(.info, hr) + :is(p:has(img), pre:has(code)) {
+        margin-top: 0;
+    }
+    
+    hr:has(+ pre code, + p img) {
+        margin-bottom: var(--border-spacing);
     }
 
     article {
@@ -208,11 +224,11 @@
         display: flex;
         align-items: baseline;
         border-bottom: 1px solid white;
-        margin-bottom: 7px;
+        margin-bottom: var(--border-spacing);
     }
 
-    article .info h2 {
-        font-size: 18px;
+    article .info p {
+        font-size: 1.125em;
         font-weight: normal;
         color: #9E9E9E;
         margin-top: 2px;
@@ -220,7 +236,7 @@
     }
 
     article .info time {
-        font-size: 12px;
+        font-size: 0.75em;
         flex-grow: 1;
         text-align: right;
         margin-bottom: 4px;
@@ -228,21 +244,23 @@
 
     :not(pre) > code {
         background: rgba(255,255,255,.1);
-        border: 1px solid rgba(255,255,255,.1);
+        outline: 1px solid rgba(255,255,255,.1);
+        outline-offset: -1px;
         padding: 0 0.3em;
     }
 
-    pre {
-        font-size: 14px;
+    pre:has(code) {
+        font-size: 0.875em;
         overflow-x: auto;
         display: block;
         padding: 0.5em;
+        border: 1px solid white;
     }
 
     hr {
         border: 0;
-        border-top: 1px solid #ccc;
-        margin: 1em 0;
+        border-top: 5px solid white;
+        margin: 1em calc(var(--border-spacing) * -1);
     }
 
     ol, ul {
@@ -263,10 +281,20 @@
     }
 
     blockquote {
-        border: solid white;
-        border-width: 0 3px;
-        padding: 0 0.5em;
-        margin: 1em 0.5em;
+        padding: 0.5em 2em;
+        margin: 1em calc(var(--border-spacing) * -1);
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+    
+    blockquote::before {
+        font-family: Arial;
+        content: "\201C";
+        color: rgba(255, 255, 255, 0.1);
+        font-size: 5em;
+        position: absolute;
+        top: 0;
+        left: 0.15em;
     }
 
     ul.archive {
@@ -282,11 +310,11 @@
 
     .archive li time {
         white-space: nowrap;
-        margin-right: 10px;
+        margin-right: 1ch;
     }
 
     #disqus_thread {
-        padding: 10px;
+        padding: var(--border-spacing);
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
@@ -334,7 +362,7 @@
       
 <article>
     <h1>解决 Frigate 周期性硬盘无用写入问题</h1>
-    <div class="info"><h2>图都是从聊天记录里扒的, 面向群友 debug</h2><time>2025-02-01 00:00</time></div>
+    <div class="info"><p>图都是从聊天记录里扒的, 面向群友 debug</p><time>2025-02-01 00:00</time></div>
     <p>之前需要个门铃摄像头</p>
 <p>但现有方案要么需要上云, 要么就得装全家桶</p>
 <p>都不干净, 还不如自己做</p>
@@ -348,7 +376,7 @@
 <p>对硬盘十分友好, 1T 可以存三年</p>
 <span id="continue-reading"></span>
 <hr />
-<h2 id="wen-ti">问题</h2>
+<h2 id="wen-ti"><a class="zola-anchor" href="#wen-ti" aria-label="Anchor link for: wen-ti">问题</a></h2>
 <p>然后就遇到了标题说的问题:</p>
 <p>硬盘它每隔几秒, 就响一下</p>
 <p>周期非常稳定, 声音一听就是在写入</p>
@@ -386,18 +414,18 @@
 <p>chown 就只能每次都运行了</p>
 <p>修起来很容易, 但 sqlite 不接受直接的代码贡献, 那就有时间再说吧</p>
 <hr />
-<h2 id="frigate">Frigate</h2>
+<h2 id="frigate"><a class="zola-anchor" href="#frigate" aria-label="Anchor link for: frigate">Frigate</a></h2>
 <p>更大的问题在 frigate 这边, 它竟然拿 root 跑服务!</p>
 <p>frigate 官方提供了好几种部署方式, 但里面其实都是 docker, 并且不是常规的一个服务一个容器</p>
 <p>而是把所有服务全塞到一起, 然后用 s6 来管理</p>
 <p>这就让权限管理非常头大, 再加上调用 GPU 所需的权限, 事情就更复杂了</p>
 <p>一个晚上解决不了, 还是先用个简单方案, 让它先跑着再说</p>
 <hr />
-<h2 id="sqlite">SQLite</h2>
+<h2 id="sqlite"><a class="zola-anchor" href="#sqlite" aria-label="Anchor link for: sqlite">SQLite</a></h2>
 <p>众所周知</p>
 <p>SQLite 的跨平台做得非常好, 你甚至可以给它写一个 pastbin 后端</p>
 <p>原因是它有一个 VFS 层, 对所有底层接口做了抽象</p>
-<p>然后这个 VFS 呢，还支持 override 它内部使用的 system call, 方便 debug</p>
+<p>然后这个 VFS 呢, 还支持 override 它内部使用的 system call, 方便 debug</p>
 <p>我们就可以拿它暴力删除 chown (或者不那么暴力, 只过滤掉 wal 的 chown)</p>
 <p>首先找到库的位置:</p>
 <pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">docker exec frigate bash -c </span><span style="color:#b8bb26;">&#39;lsof -p $(pgrep python) | grep sqlite&#39;
@@ -478,7 +506,7 @@
 <p>BTW: <code>xSetSystemCall</code> 不能简单传个 null 过去, 是重置</p>
 </blockquote>
 <hr />
-<h2 id="qi-ta">其他</h2>
+<h2 id="qi-ta"><a class="zola-anchor" href="#qi-ta" aria-label="Anchor link for: qi-ta">其他</a></h2>
 <p>等有时间还是看看怎么精细控制权限, 不然所有人就都知道我拿 root 跑着个 frigate 了, 而 docker 又那么容易逃逸</p>
 <p>危</p>
 <p>顺便还发现 TP-LINK 没有使用标准的 ONVIF Profile T 做双向语音, 而是自己做了个 RTSP MULTITRANS 扩展, 里面跑的东西其实和 tapo 的私有协议差不多, 只是把外层从 HTTP 换成了 RTSP, 基于 go2rtc 现有的 tapo 实现改一个出来应该不难, 也放进 TODO 里好了</p>

@@ -1,41 +1,40 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-Hans">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="同样适用于第三方类 Pixel ROM">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="canonical" href="https://iovxw.net">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="description" content="同样适用于第三方类 Pixel ROM" />
+    <meta name="author" content="iovxw" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#212121" />
+    <link rel="canonical" href="https://iovxw.net/p/enable-call-record-on-pixel/" />
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png" />
+    <link rel="icon" sizes="any" href="https://iovxw.net/favicon.svg" />
     
-      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link rel="alternate" href="https://iovxw.net/rss.xml" type="application/rss+xml" title="iovxw" />
     
     <title>强制启用 Pixel Phone 的通话录音 - iovxw</title>
 
-    <meta name="theme-color" content="#212121">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
-
-    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
-    <meta name="msapplication-TileColor" content="#3F51B5">
-
-    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
-
     <style>
+    :root {
+        --border-spacing: 10px;
+        color-scheme: dark;
+        text-spacing-trim: trim-start;
+    }
+
     body {
-        margin: 8px;
+        margin: 8px 0;
         background: #151515;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
         font-family: sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        body {
+            margin: 0;
+        }
     }
 
     header a {
@@ -47,51 +46,31 @@
 
     header input {
         width: 100%;
-        min-width: 64px;
+        field-sizing: content; /* waiting firefox */
+        min-width: 6ch;
         text-align: right;
         background: 0;
         border: none;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
     }
 
-    header input:placeholder-shown {
+    header input::placeholder {
         color: white;
         font-weight: bold;
     }
 
-    header input:-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input::-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input:-ms-input-placeholder {
-        color: white;
-        font-weight: bold;
-    }
-
-    header input::-webkit-input-placeholder {
-        color: white;
-        font-weight: bold;
+    header input:not(:placeholder-shown) {
+        min-width: 10ch; /* TODO: field-sizing */
     }
 
     header input:focus {
-        border: none;
+        outline: none;
     }
 
     header .link {
         display: flex;
         text-align: right;
-    }
-
-    header .link, footer .license {
-        margin-right: -10px;
-        padding-right: 10px;
     }
 
     footer .license {
@@ -110,13 +89,13 @@
     }
 
     header .title {
-        font-size: 26px;
+        font-size: 1.625em;
         margin: 0;
-        margin-right: 6px;
+        margin-right: 1ch;
     }
 
     header, article, nav, footer {
-        padding: 10px;
+        padding: var(--border-spacing);
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
@@ -124,6 +103,7 @@
     }
 
     nav {
+        padding: 0;
         display: flex;
     }
 
@@ -133,8 +113,7 @@
 
     nav a {
         flex: 1 1 0;
-        margin: -10px 0;
-        padding: 10px 0;
+        padding: var(--border-spacing) 0;
         text-align: center;
         font-weight: bold;
         color: white;
@@ -162,24 +141,44 @@
     h1, h2, h3, h4, h5, h6 {
         font-weight: bold;
     }
+    
+    article :is(h2, h3, h4, h5, h6) a:visited {
+        color: white;
+    }
+
+    h2::before {
+        content: "# ";
+    }
+    h3::before {
+        content: "## ";
+    }
+    h4::before {
+        content: "### ";
+    }
+    h5::before {
+        content: "#### ";
+    }
+    h6::before {
+        content: "##### ";
+    }
 
     h1 {
-        font-size: 22px;
+        font-size: 1.375em;
         margin: 10px 0;
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 1.25em;
         margin: 5px 0;
     }
 
     h3 {
-        font-size: 18px;
+        font-size: 1.125em;
         margin: 2px 0;
     }
 
     h4, h5, h6 {
-        font-size: 16px;
+        font-size: 1em;
         margin: 2px 0;
     }
 
@@ -187,8 +186,25 @@
         margin: 1em 0;
     }
 
-    article > p:last-child, article > pre:last-child {
+    article > p:last-child {
+        margin-bottom: calc(1em - 10px);
+    }
+
+    article > pre:last-child:has(code), article > p:last-child:has(img),
+    article pre:has(code):has(+ hr), article p:has(img):has(+ hr) {
         margin-bottom: 0;
+    }
+
+    article pre:has(code) + hr, article p:has(img) + hr {
+        margin-top: var(--border-spacing);
+    }
+
+    article :is(.info, hr) + :is(p:has(img), pre:has(code)) {
+        margin-top: 0;
+    }
+    
+    hr:has(+ pre code, + p img) {
+        margin-bottom: var(--border-spacing);
     }
 
     article {
@@ -208,11 +224,11 @@
         display: flex;
         align-items: baseline;
         border-bottom: 1px solid white;
-        margin-bottom: 7px;
+        margin-bottom: var(--border-spacing);
     }
 
-    article .info h2 {
-        font-size: 18px;
+    article .info p {
+        font-size: 1.125em;
         font-weight: normal;
         color: #9E9E9E;
         margin-top: 2px;
@@ -220,7 +236,7 @@
     }
 
     article .info time {
-        font-size: 12px;
+        font-size: 0.75em;
         flex-grow: 1;
         text-align: right;
         margin-bottom: 4px;
@@ -228,21 +244,23 @@
 
     :not(pre) > code {
         background: rgba(255,255,255,.1);
-        border: 1px solid rgba(255,255,255,.1);
+        outline: 1px solid rgba(255,255,255,.1);
+        outline-offset: -1px;
         padding: 0 0.3em;
     }
 
-    pre {
-        font-size: 14px;
+    pre:has(code) {
+        font-size: 0.875em;
         overflow-x: auto;
         display: block;
         padding: 0.5em;
+        border: 1px solid white;
     }
 
     hr {
         border: 0;
-        border-top: 1px solid #ccc;
-        margin: 1em 0;
+        border-top: 5px solid white;
+        margin: 1em calc(var(--border-spacing) * -1);
     }
 
     ol, ul {
@@ -263,10 +281,20 @@
     }
 
     blockquote {
-        border: solid white;
-        border-width: 0 3px;
-        padding: 0 0.5em;
-        margin: 1em 0.5em;
+        padding: 0.5em 2em;
+        margin: 1em calc(var(--border-spacing) * -1);
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+    
+    blockquote::before {
+        font-family: Arial;
+        content: "\201C";
+        color: rgba(255, 255, 255, 0.1);
+        font-size: 5em;
+        position: absolute;
+        top: 0;
+        left: 0.15em;
     }
 
     ul.archive {
@@ -282,11 +310,11 @@
 
     .archive li time {
         white-space: nowrap;
-        margin-right: 10px;
+        margin-right: 1ch;
     }
 
     #disqus_thread {
-        padding: 10px;
+        padding: var(--border-spacing);
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
@@ -334,24 +362,24 @@
       
 <article>
     <h1>强制启用 Pixel Phone 的通话录音</h1>
-    <div class="info"><h2>同样适用于第三方类 Pixel ROM</h2><time>2021-09-30 00:25</time></div>
+    <div class="info"><p>同样适用于第三方类 Pixel ROM</p><time>2021-09-30 00:25</time></div>
     <p>Pixel 自带的电话 App 是支持录音以及自动录音的</p>
 <p>但由于法律原因, 录音只在部分国家可用, 自动录音更是只有印度能用</p>
 <p>虽然中国并没有相关法律问题, 但很明显我们并不能对 Google 有这方面的期待</p>
 <p>还是得自己动手, 丰衣足食</p>
 <span id="continue-reading"></span>
 <hr />
-<h2 id="mian-root-fang-an">免 Root 方案</h2>
+<h2 id="mian-root-fang-an"><a class="zola-anchor" href="#mian-root-fang-an" aria-label="Anchor link for: mian-root-fang-an">免 Root 方案</a></h2>
 <p>直接安装 <a href="https://f-droid.org/en/packages/com.github.axet.callrecorder/">https://f-droid.org/en/packages/com.github.axet.callrecorder/</a></p>
 <p><strong>优点:</strong> 不用 Root; 开源</p>
 <p><strong>缺点:</strong> App 需要常驻后台, 并且通知栏会有无法隐藏的图标, 以及一定概率下根本不能录音</p>
 <p>但毕竟都用 Pixel 了, 谁不解锁 root 呢, 所以另一种方案是:</p>
-<h2 id="xiu-gai-phone-apk">修改 Phone APK</h2>
+<h2 id="xiu-gai-phone-apk"><a class="zola-anchor" href="#xiu-gai-phone-apk" aria-label="Anchor link for: xiu-gai-phone-apk">修改 Phone APK</a></h2>
 <p>在 XDA 上有很多魔改版的 APK, 替换掉默认的 Phone 之后在设置里就会出现录音选项, 比如<a href="https://forum.xda-developers.com/t/mod-root-enable-call-recording-on-google-phone.4278659/">这个</a></p>
 <p>但缺点同样很明显: Phone 这个 App 没得自动更新了</p>
 <p>魔改版自然是自己签名的, Google Play 不会对它进行更新, 需要自己去 XDA 重新下载, 并且很难保证作者不会弃坑, 当前版本可能就是最后一个版本</p>
 <p>好在我们还有:</p>
-<h2 id="zui-zhong-fang-an">最终方案</h2>
+<h2 id="zui-zhong-fang-an"><a class="zola-anchor" href="#zui-zhong-fang-an" aria-label="Anchor link for: zui-zhong-fang-an">最终方案</a></h2>
 <p>既然有些国家可以用录音, 那肯定哪里有个判断, 只要满足这个判断让它认为我们在对应国家就好了</p>
 <p>然后在搜索过程中, 我发现了<a href="https://forum.xda-developers.com/t/guide-enable-automatic-call-recording-in-stock-dialer-app-root-needed.4321719/">这个帖子</a> (<a href="http://web.archive.org/web/20210929170521/https://forum.xda-developers.com/t/guide-enable-automatic-call-recording-in-stock-dialer-app-root-needed.4321719/">备份</a>)</p>
 <p><img src="https://iovxw.net/p/enable-call-record-on-pixel/0.gif" alt="" /></p>
@@ -360,7 +388,7 @@
 <p>开启之后就可以在设置内调整录音选项了:</p>
 <p><img src="https://iovxw.net/p/enable-call-record-on-pixel/1.png" alt="" /></p>
 <hr />
-<h2 id="qi-ta">其他</h2>
+<h2 id="qi-ta"><a class="zola-anchor" href="#qi-ta" aria-label="Anchor link for: qi-ta">其他</a></h2>
 <p>GoogleDialerMod 还列出了 Phone 的所有 flag, 所以我们还可以开关其他一些特性:</p>
 <p><img src="https://iovxw.net/p/enable-call-record-on-pixel/0.png" alt="" /></p>
 <p>其中</p>

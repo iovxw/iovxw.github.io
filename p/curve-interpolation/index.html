@@ -1,41 +1,40 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-Hans">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="不会数学还想写图形界面?">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="canonical" href="https://iovxw.net">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="description" content="不会数学还想写图形界面?" />
+    <meta name="author" content="iovxw" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#212121" />
+    <link rel="canonical" href="https://iovxw.net/p/curve-interpolation/" />
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png" />
+    <link rel="icon" sizes="any" href="https://iovxw.net/favicon.svg" />
     
-      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link rel="alternate" href="https://iovxw.net/rss.xml" type="application/rss+xml" title="iovxw" />
     
     <title>统计图的曲线插值 - iovxw</title>
 
-    <meta name="theme-color" content="#212121">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
-
-    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
-    <meta name="msapplication-TileColor" content="#3F51B5">
-
-    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
-
     <style>
+    :root {
+        --border-spacing: 10px;
+        color-scheme: dark;
+        text-spacing-trim: trim-start;
+    }
+
     body {
-        margin: 8px;
+        margin: 8px 0;
         background: #151515;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
         font-family: sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        body {
+            margin: 0;
+        }
     }
 
     header a {
@@ -47,51 +46,31 @@
 
     header input {
         width: 100%;
-        min-width: 64px;
+        field-sizing: content; /* waiting firefox */
+        min-width: 6ch;
         text-align: right;
         background: 0;
         border: none;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
     }
 
-    header input:placeholder-shown {
+    header input::placeholder {
         color: white;
         font-weight: bold;
     }
 
-    header input:-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input::-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input:-ms-input-placeholder {
-        color: white;
-        font-weight: bold;
-    }
-
-    header input::-webkit-input-placeholder {
-        color: white;
-        font-weight: bold;
+    header input:not(:placeholder-shown) {
+        min-width: 10ch; /* TODO: field-sizing */
     }
 
     header input:focus {
-        border: none;
+        outline: none;
     }
 
     header .link {
         display: flex;
         text-align: right;
-    }
-
-    header .link, footer .license {
-        margin-right: -10px;
-        padding-right: 10px;
     }
 
     footer .license {
@@ -110,13 +89,13 @@
     }
 
     header .title {
-        font-size: 26px;
+        font-size: 1.625em;
         margin: 0;
-        margin-right: 6px;
+        margin-right: 1ch;
     }
 
     header, article, nav, footer {
-        padding: 10px;
+        padding: var(--border-spacing);
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
@@ -124,6 +103,7 @@
     }
 
     nav {
+        padding: 0;
         display: flex;
     }
 
@@ -133,8 +113,7 @@
 
     nav a {
         flex: 1 1 0;
-        margin: -10px 0;
-        padding: 10px 0;
+        padding: var(--border-spacing) 0;
         text-align: center;
         font-weight: bold;
         color: white;
@@ -162,24 +141,44 @@
     h1, h2, h3, h4, h5, h6 {
         font-weight: bold;
     }
+    
+    article :is(h2, h3, h4, h5, h6) a:visited {
+        color: white;
+    }
+
+    h2::before {
+        content: "# ";
+    }
+    h3::before {
+        content: "## ";
+    }
+    h4::before {
+        content: "### ";
+    }
+    h5::before {
+        content: "#### ";
+    }
+    h6::before {
+        content: "##### ";
+    }
 
     h1 {
-        font-size: 22px;
+        font-size: 1.375em;
         margin: 10px 0;
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 1.25em;
         margin: 5px 0;
     }
 
     h3 {
-        font-size: 18px;
+        font-size: 1.125em;
         margin: 2px 0;
     }
 
     h4, h5, h6 {
-        font-size: 16px;
+        font-size: 1em;
         margin: 2px 0;
     }
 
@@ -187,8 +186,25 @@
         margin: 1em 0;
     }
 
-    article > p:last-child, article > pre:last-child {
+    article > p:last-child {
+        margin-bottom: calc(1em - 10px);
+    }
+
+    article > pre:last-child:has(code), article > p:last-child:has(img),
+    article pre:has(code):has(+ hr), article p:has(img):has(+ hr) {
         margin-bottom: 0;
+    }
+
+    article pre:has(code) + hr, article p:has(img) + hr {
+        margin-top: var(--border-spacing);
+    }
+
+    article :is(.info, hr) + :is(p:has(img), pre:has(code)) {
+        margin-top: 0;
+    }
+    
+    hr:has(+ pre code, + p img) {
+        margin-bottom: var(--border-spacing);
     }
 
     article {
@@ -208,11 +224,11 @@
         display: flex;
         align-items: baseline;
         border-bottom: 1px solid white;
-        margin-bottom: 7px;
+        margin-bottom: var(--border-spacing);
     }
 
-    article .info h2 {
-        font-size: 18px;
+    article .info p {
+        font-size: 1.125em;
         font-weight: normal;
         color: #9E9E9E;
         margin-top: 2px;
@@ -220,7 +236,7 @@
     }
 
     article .info time {
-        font-size: 12px;
+        font-size: 0.75em;
         flex-grow: 1;
         text-align: right;
         margin-bottom: 4px;
@@ -228,21 +244,23 @@
 
     :not(pre) > code {
         background: rgba(255,255,255,.1);
-        border: 1px solid rgba(255,255,255,.1);
+        outline: 1px solid rgba(255,255,255,.1);
+        outline-offset: -1px;
         padding: 0 0.3em;
     }
 
-    pre {
-        font-size: 14px;
+    pre:has(code) {
+        font-size: 0.875em;
         overflow-x: auto;
         display: block;
         padding: 0.5em;
+        border: 1px solid white;
     }
 
     hr {
         border: 0;
-        border-top: 1px solid #ccc;
-        margin: 1em 0;
+        border-top: 5px solid white;
+        margin: 1em calc(var(--border-spacing) * -1);
     }
 
     ol, ul {
@@ -263,10 +281,20 @@
     }
 
     blockquote {
-        border: solid white;
-        border-width: 0 3px;
-        padding: 0 0.5em;
-        margin: 1em 0.5em;
+        padding: 0.5em 2em;
+        margin: 1em calc(var(--border-spacing) * -1);
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+    
+    blockquote::before {
+        font-family: Arial;
+        content: "\201C";
+        color: rgba(255, 255, 255, 0.1);
+        font-size: 5em;
+        position: absolute;
+        top: 0;
+        left: 0.15em;
     }
 
     ul.archive {
@@ -282,11 +310,11 @@
 
     .archive li time {
         white-space: nowrap;
-        margin-right: 10px;
+        margin-right: 1ch;
     }
 
     #disqus_thread {
-        padding: 10px;
+        padding: var(--border-spacing);
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
@@ -334,7 +362,7 @@
       
 <article>
     <h1>统计图的曲线插值</h1>
-    <div class="info"><h2>不会数学还想写图形界面?</h2><time>2017-11-13 20:58</time></div>
+    <div class="info"><p>不会数学还想写图形界面?</p><time>2017-11-13 20:58</time></div>
     <p>很多程序, 比如各种监视器, 需要实时绘制统计图来将数据直观的展示给用户</p>
 <p>而这个实时, 却又不是那么的 "实时", 一般表示一秒左右</p>
 <p>不然一个监视器吃的资源比被监视程序还多, 就十分微妙了</p>
@@ -347,13 +375,13 @@
 <p>而求出这些数据的过程, 叫做插值 (或者内插, 反正知道有这么个词就行了)</p>
 <p>然后如果你知道拟合, 那要明确一下, 插值不是拟合, 与拟合相比插值必须经过所有型值点</p>
 <hr />
-<h2 id="xian-xing-cha-zhi">线性插值</h2>
+<h2 id="xian-xing-cha-zhi"><a class="zola-anchor" href="#xian-xing-cha-zhi" aria-label="Anchor link for: xian-xing-cha-zhi">线性插值</a></h2>
 <p>最简单的插值, 效果就是折线图:</p>
 <img src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='150' width='600'%3E%3Cg transform='translate(2,2)'%3E%3Cpath d='M50,100L150,60L250,120L350,20L450,140L550,110' stroke='rgb(31,119,180)' stroke-width='2'%3E%3C/path%3E%3C/g%3E%3Cg transform='translate(2,2)'%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='50' cy='100' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='150' cy='60' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='250' cy='120' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='350' cy='20' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='450' cy='140' r='3'%3E%3C/circle%3E%3Ccircle cursor='move' fill='rgb(31,119,180)' stroke='rgb(31,119,180)' cx='550' cy='110' r='3'%3E%3C/circle%3E%3C/g%3E%3C/svg%3E">
 <p>实现也很简单 <code>line to</code> 一下就行</p>
-<h2 id="duo-xiang-shi-cha-zhi">多项式插值</h2>
+<h2 id="duo-xiang-shi-cha-zhi"><a class="zola-anchor" href="#duo-xiang-shi-cha-zhi" aria-label="Anchor link for: duo-xiang-shi-cha-zhi">多项式插值</a></h2>
 <p>是一个类型的统称, 算法有很多, 但因为复杂度还有<a href="https://zh.wikipedia.org/wiki/%E9%BE%99%E6%A0%BC%E7%8E%B0%E8%B1%A1">龙格现象</a>导致的等距点插值时的过大误差, 这里肯定是不能用的了, 所以就此略过</p>
-<h2 id="yang-tiao-cha-zhi">样条插值</h2>
+<h2 id="yang-tiao-cha-zhi"><a class="zola-anchor" href="#yang-tiao-cha-zhi" aria-label="Anchor link for: yang-tiao-cha-zhi">样条插值</a></h2>
 <p>要避免龙格现象, 最通用的方法是使用样条插值, 同样也有很多算法 (还有专门为字体适配的, 各种杂七杂八的算法, 不过这里就画个统计图也用不到)</p>
 <p>样条插值的特点是根据分段计算, 计算时只关注相邻的几个型值点, 不需要整条曲线, 自然也就不会因为阶数太高受到龙格现象影响</p>
 <p>这里选用 Cardinal Splines, tension 为 0.7:</p>

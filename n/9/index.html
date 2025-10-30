@@ -1,41 +1,40 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-Hans">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="canonical" href="https://iovxw.net">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="description" content="iovxw&#x27;s blog" />
+    <meta name="author" content="iovxw" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#212121" />
+    <link rel="canonical" href="https://iovxw.net/n/9/" />
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png" />
+    <link rel="icon" sizes="any" href="https://iovxw.net/favicon.svg" />
     
-      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link rel="alternate" href="https://iovxw.net/rss.xml" type="application/rss+xml" title="iovxw" />
     
     <title>iovxw</title>
 
-    <meta name="theme-color" content="#212121">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
-
-    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
-    <meta name="msapplication-TileColor" content="#3F51B5">
-
-    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
-
     <style>
+    :root {
+        --border-spacing: 10px;
+        color-scheme: dark;
+        text-spacing-trim: trim-start;
+    }
+
     body {
-        margin: 8px;
+        margin: 8px 0;
         background: #151515;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
         font-family: sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        body {
+            margin: 0;
+        }
     }
 
     header a {
@@ -47,51 +46,31 @@
 
     header input {
         width: 100%;
-        min-width: 64px;
+        field-sizing: content; /* waiting firefox */
+        min-width: 6ch;
         text-align: right;
         background: 0;
         border: none;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
     }
 
-    header input:placeholder-shown {
+    header input::placeholder {
         color: white;
         font-weight: bold;
     }
 
-    header input:-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input::-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input:-ms-input-placeholder {
-        color: white;
-        font-weight: bold;
-    }
-
-    header input::-webkit-input-placeholder {
-        color: white;
-        font-weight: bold;
+    header input:not(:placeholder-shown) {
+        min-width: 10ch; /* TODO: field-sizing */
     }
 
     header input:focus {
-        border: none;
+        outline: none;
     }
 
     header .link {
         display: flex;
         text-align: right;
-    }
-
-    header .link, footer .license {
-        margin-right: -10px;
-        padding-right: 10px;
     }
 
     footer .license {
@@ -110,13 +89,13 @@
     }
 
     header .title {
-        font-size: 26px;
+        font-size: 1.625em;
         margin: 0;
-        margin-right: 6px;
+        margin-right: 1ch;
     }
 
     header, article, nav, footer {
-        padding: 10px;
+        padding: var(--border-spacing);
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
@@ -124,6 +103,7 @@
     }
 
     nav {
+        padding: 0;
         display: flex;
     }
 
@@ -133,8 +113,7 @@
 
     nav a {
         flex: 1 1 0;
-        margin: -10px 0;
-        padding: 10px 0;
+        padding: var(--border-spacing) 0;
         text-align: center;
         font-weight: bold;
         color: white;
@@ -162,24 +141,44 @@
     h1, h2, h3, h4, h5, h6 {
         font-weight: bold;
     }
+    
+    article :is(h2, h3, h4, h5, h6) a:visited {
+        color: white;
+    }
+
+    h2::before {
+        content: "# ";
+    }
+    h3::before {
+        content: "## ";
+    }
+    h4::before {
+        content: "### ";
+    }
+    h5::before {
+        content: "#### ";
+    }
+    h6::before {
+        content: "##### ";
+    }
 
     h1 {
-        font-size: 22px;
+        font-size: 1.375em;
         margin: 10px 0;
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 1.25em;
         margin: 5px 0;
     }
 
     h3 {
-        font-size: 18px;
+        font-size: 1.125em;
         margin: 2px 0;
     }
 
     h4, h5, h6 {
-        font-size: 16px;
+        font-size: 1em;
         margin: 2px 0;
     }
 
@@ -187,8 +186,25 @@
         margin: 1em 0;
     }
 
-    article > p:last-child, article > pre:last-child {
+    article > p:last-child {
+        margin-bottom: calc(1em - 10px);
+    }
+
+    article > pre:last-child:has(code), article > p:last-child:has(img),
+    article pre:has(code):has(+ hr), article p:has(img):has(+ hr) {
         margin-bottom: 0;
+    }
+
+    article pre:has(code) + hr, article p:has(img) + hr {
+        margin-top: var(--border-spacing);
+    }
+
+    article :is(.info, hr) + :is(p:has(img), pre:has(code)) {
+        margin-top: 0;
+    }
+    
+    hr:has(+ pre code, + p img) {
+        margin-bottom: var(--border-spacing);
     }
 
     article {
@@ -208,11 +224,11 @@
         display: flex;
         align-items: baseline;
         border-bottom: 1px solid white;
-        margin-bottom: 7px;
+        margin-bottom: var(--border-spacing);
     }
 
-    article .info h2 {
-        font-size: 18px;
+    article .info p {
+        font-size: 1.125em;
         font-weight: normal;
         color: #9E9E9E;
         margin-top: 2px;
@@ -220,7 +236,7 @@
     }
 
     article .info time {
-        font-size: 12px;
+        font-size: 0.75em;
         flex-grow: 1;
         text-align: right;
         margin-bottom: 4px;
@@ -228,21 +244,23 @@
 
     :not(pre) > code {
         background: rgba(255,255,255,.1);
-        border: 1px solid rgba(255,255,255,.1);
+        outline: 1px solid rgba(255,255,255,.1);
+        outline-offset: -1px;
         padding: 0 0.3em;
     }
 
-    pre {
-        font-size: 14px;
+    pre:has(code) {
+        font-size: 0.875em;
         overflow-x: auto;
         display: block;
         padding: 0.5em;
+        border: 1px solid white;
     }
 
     hr {
         border: 0;
-        border-top: 1px solid #ccc;
-        margin: 1em 0;
+        border-top: 5px solid white;
+        margin: 1em calc(var(--border-spacing) * -1);
     }
 
     ol, ul {
@@ -263,10 +281,20 @@
     }
 
     blockquote {
-        border: solid white;
-        border-width: 0 3px;
-        padding: 0 0.5em;
-        margin: 1em 0.5em;
+        padding: 0.5em 2em;
+        margin: 1em calc(var(--border-spacing) * -1);
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+    
+    blockquote::before {
+        font-family: Arial;
+        content: "\201C";
+        color: rgba(255, 255, 255, 0.1);
+        font-size: 5em;
+        position: absolute;
+        top: 0;
+        left: 0.15em;
     }
 
     ul.archive {
@@ -282,11 +310,11 @@
 
     .archive li time {
         white-space: nowrap;
-        margin-right: 10px;
+        margin-right: 1ch;
     }
 
     #disqus_thread {
-        padding: 10px;
+        padding: var(--border-spacing);
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
@@ -335,9 +363,46 @@
         
           
             <article>
+              <h1><a class="title" href="https://iovxw.net/p/neovim/">ubuntu编译安装Neovim</a></h1>
+              <div class="info">
+                <p>21世纪的VIM？</p>
+                <time>2014-07-12 00:00</time>
+              </div>
+              
+                <p>介绍：</p>
+<blockquote>
+<p><img src="http://neovim.org/images/logo@2x.png" alt="" /></p>
+</blockquote>
+<blockquote>
+<p>巴西程序员Thiago de Arruda Padilha（aka tarruda）向Vim开源编辑器项目递交了两大补丁，对Vim的架构进行了大幅调整，结果遭到了Vim作者Bram Moolenaar的拒绝，因为对于Vim这样一个成熟的项目进行如此大的改变风险太高。于是tarruda发起了Vim fork项目Neovim，集资1万美元打造出21世纪的编辑器，提供更好的脚本、插件支持，整合现代的图形界面。</p>
+</blockquote>
+<blockquote>
+<p>该项目超额完成集资，已筹集到3.25万美元。Moolenaar本人对该项目持有异议，认为需要大量工作，会引入新的bug，而终端用户获益不多。</p>
+</blockquote>
+<p>主页：<a href="http://neovim.org">http://neovim.org</a></p>
+<p>官方wiki里的安装方法：<a href="https://github.com/neovim/neovim/wiki/Installing">https://github.com/neovim/neovim/wiki/Installing</a></p>
+<p>我用brew安装竟然提示需要pkgutil，我用的是ubuntu哪来的pkgutil？</p>
+<p>于是乎还是果断手动编译安装了</p>
+<p>先安装所需要的工具：<code>sudo apt-get install libtool autoconf automake cmake libncurses5-dev g++ pkg-config</code></p>
+<p>clone到本地<code>git clone https://github.com/neovim/neovim.git</code>然后<code>cd neovim</code>+<code>make</code>就编译完成了</p>
+<p>这里主要是说一下编译过程中出现的error解决方法</p>
+<p><code>libtoolize: not found</code>：<code>sudo apt-get install libtool</code></p>
+<p><code>aclocal: not found</code>：<code>sudo apt-get install autoconf</code></p>
+<p>安装过程中会下载几个包，网站都是国外的，所以比较慢，而且没有进度显示。耐心等待就行（如果相关网站被墙请手动设置代理）</p>
+<p>安装：</p>
+<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/
+</span><span>make install
+</span></code></pre>
+
+              
+            </article>
+          
+        
+          
+            <article>
               <h1><a class="title" href="https://iovxw.net/p/gnome/">再次换回GNOME</a></h1>
               <div class="info">
-                <h2>换啊换，换啊换</h2>
+                <p>换啊换，换啊换</p>
                 <time>2014-07-10 00:00</time>
               </div>
               
@@ -372,7 +437,7 @@ shell主题：<code>Moskva</code><br />
             <article>
               <h1><a class="title" href="https://iovxw.net/p/ubuntu-install-budgie-desktop/">Ubuntu 安装 Budgie Desktop</a></h1>
               <div class="info">
-                <h2>类似ChromeOS的桌面环境</h2>
+                <p>类似ChromeOS的桌面环境</p>
                 <time>2014-07-09 00:00</time>
               </div>
               
@@ -392,7 +457,7 @@ shell主题：<code>Moskva</code><br />
             <article>
               <h1><a class="title" href="https://iovxw.net/p/golang-in-atom/">Atom配置Golang开发环境</a></h1>
               <div class="info">
-                <h2>没有自动补全硬伤</h2>
+                <p>没有自动补全硬伤</p>
                 <time>2014-06-26 00:00</time>
               </div>
               
@@ -436,7 +501,7 @@ shell主题：<code>Moskva</code><br />
             <article>
               <h1><a class="title" href="https://iovxw.net/p/add-search/">好久没更新了啊</a></h1>
               <div class="info">
-                <h2>顺便给博客添加搜索功能</h2>
+                <p>顺便给博客添加搜索功能</p>
                 <time>2014-06-20 00:00</time>
               </div>
               
@@ -475,7 +540,7 @@ shell主题：<code>Moskva</code><br />
             <article>
               <h1><a class="title" href="https://iovxw.net/p/go-intellij-idea/">Golang IntelliJ IDEA</a></h1>
               <div class="info">
-                <h2>换了个IDE玩</h2>
+                <p>换了个IDE玩</p>
                 <time>2014-06-06 00:00</time>
               </div>
               
@@ -505,7 +570,7 @@ CPU已经撑不住了</p>
             <article>
               <h1><a class="title" href="https://iovxw.net/p/go-opengl/">开始折腾OpenGL</a></h1>
               <div class="info">
-                <h2>生命在于折腾啊。生命不息，折腾不止。</h2>
+                <p>生命在于折腾啊。生命不息，折腾不止。</p>
                 <time>2014-06-05 00:00</time>
               </div>
               
@@ -527,7 +592,7 @@ CPU已经撑不住了</p>
             <article>
               <h1><a class="title" href="https://iovxw.net/p/fuck-you-gwf/">博客优化完成</a></h1>
               <div class="info">
-                <h2>因为某些原因，优化博客访问速度</h2>
+                <p>因为某些原因，优化博客访问速度</p>
                 <time>2014-06-02 00:00</time>
               </div>
               
@@ -543,7 +608,7 @@ CPU已经撑不住了</p>
             <article>
               <h1><a class="title" href="https://iovxw.net/p/go-get-glfw3/">Go语言GLFW3库的安装</a></h1>
               <div class="info">
-                <h2>编译&amp;&amp;安装GLFW3</h2>
+                <p>编译&amp;&amp;安装GLFW3</p>
                 <time>2014-05-30 00:00</time>
               </div>
               
@@ -570,7 +635,7 @@ CPU已经撑不住了</p>
             <article>
               <h1><a class="title" href="https://iovxw.net/p/modify-xp-registry/">让XP继续接受更新</a></h1>
               <div class="info">
-                <h2>通过修改注册表来让XP继续接受更新</h2>
+                <p>通过修改注册表来让XP继续接受更新</p>
                 <time>2014-05-27 00:00</time>
               </div>
               
@@ -589,26 +654,6 @@ CPU已经撑不住了</p>
 <p>而Windows Embedded POSReady 2009的支持日期一直到2019年4月9日</p>
 <p>当然这不是最好的解决办法，要想一直有免费升级的话，还是去用Linux吧</p>
 <p>最起码你不用再担心系统是不是安全了</p>
-
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https://iovxw.net/p/github-page-404/">Github Page自定义404页面</a></h1>
-              <div class="info">
-                <h2>404呦</h2>
-                <time>2014-05-26 00:00</time>
-              </div>
-              
-                <p>想给博客自定义一个404页面，毕竟老用Github默认的也不太好</p>
-<p>于是乎上网翻了一下，发现貌似没中文介绍</p>
-<p>然后在Github Page官方帮助找到了</p>
-<p>很简单</p>
-<p>只需要在根目录新建一个<code>404.html</code>即可</p>
-<p>当然有个前提，就是你必须要先绑定独立域名，不然会出错的</p>
-<p>至于怎么绑定……还是百度吧，也很简单……</p>
 
               
             </article>

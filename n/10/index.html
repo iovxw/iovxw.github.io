@@ -1,41 +1,40 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-Hans">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="canonical" href="https://iovxw.net">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="description" content="iovxw&#x27;s blog" />
+    <meta name="author" content="iovxw" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#212121" />
+    <link rel="canonical" href="https://iovxw.net/n/10/" />
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png" />
+    <link rel="icon" sizes="any" href="https://iovxw.net/favicon.svg" />
     
-      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link rel="alternate" href="https://iovxw.net/rss.xml" type="application/rss+xml" title="iovxw" />
     
     <title>iovxw</title>
 
-    <meta name="theme-color" content="#212121">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
-
-    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
-    <meta name="msapplication-TileColor" content="#3F51B5">
-
-    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
-
     <style>
+    :root {
+        --border-spacing: 10px;
+        color-scheme: dark;
+        text-spacing-trim: trim-start;
+    }
+
     body {
-        margin: 8px;
+        margin: 8px 0;
         background: #151515;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
         font-family: sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        body {
+            margin: 0;
+        }
     }
 
     header a {
@@ -47,51 +46,31 @@
 
     header input {
         width: 100%;
-        min-width: 64px;
+        field-sizing: content; /* waiting firefox */
+        min-width: 6ch;
         text-align: right;
         background: 0;
         border: none;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
     }
 
-    header input:placeholder-shown {
+    header input::placeholder {
         color: white;
         font-weight: bold;
     }
 
-    header input:-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input::-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input:-ms-input-placeholder {
-        color: white;
-        font-weight: bold;
-    }
-
-    header input::-webkit-input-placeholder {
-        color: white;
-        font-weight: bold;
+    header input:not(:placeholder-shown) {
+        min-width: 10ch; /* TODO: field-sizing */
     }
 
     header input:focus {
-        border: none;
+        outline: none;
     }
 
     header .link {
         display: flex;
         text-align: right;
-    }
-
-    header .link, footer .license {
-        margin-right: -10px;
-        padding-right: 10px;
     }
 
     footer .license {
@@ -110,13 +89,13 @@
     }
 
     header .title {
-        font-size: 26px;
+        font-size: 1.625em;
         margin: 0;
-        margin-right: 6px;
+        margin-right: 1ch;
     }
 
     header, article, nav, footer {
-        padding: 10px;
+        padding: var(--border-spacing);
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
@@ -124,6 +103,7 @@
     }
 
     nav {
+        padding: 0;
         display: flex;
     }
 
@@ -133,8 +113,7 @@
 
     nav a {
         flex: 1 1 0;
-        margin: -10px 0;
-        padding: 10px 0;
+        padding: var(--border-spacing) 0;
         text-align: center;
         font-weight: bold;
         color: white;
@@ -162,24 +141,44 @@
     h1, h2, h3, h4, h5, h6 {
         font-weight: bold;
     }
+    
+    article :is(h2, h3, h4, h5, h6) a:visited {
+        color: white;
+    }
+
+    h2::before {
+        content: "# ";
+    }
+    h3::before {
+        content: "## ";
+    }
+    h4::before {
+        content: "### ";
+    }
+    h5::before {
+        content: "#### ";
+    }
+    h6::before {
+        content: "##### ";
+    }
 
     h1 {
-        font-size: 22px;
+        font-size: 1.375em;
         margin: 10px 0;
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 1.25em;
         margin: 5px 0;
     }
 
     h3 {
-        font-size: 18px;
+        font-size: 1.125em;
         margin: 2px 0;
     }
 
     h4, h5, h6 {
-        font-size: 16px;
+        font-size: 1em;
         margin: 2px 0;
     }
 
@@ -187,8 +186,25 @@
         margin: 1em 0;
     }
 
-    article > p:last-child, article > pre:last-child {
+    article > p:last-child {
+        margin-bottom: calc(1em - 10px);
+    }
+
+    article > pre:last-child:has(code), article > p:last-child:has(img),
+    article pre:has(code):has(+ hr), article p:has(img):has(+ hr) {
         margin-bottom: 0;
+    }
+
+    article pre:has(code) + hr, article p:has(img) + hr {
+        margin-top: var(--border-spacing);
+    }
+
+    article :is(.info, hr) + :is(p:has(img), pre:has(code)) {
+        margin-top: 0;
+    }
+    
+    hr:has(+ pre code, + p img) {
+        margin-bottom: var(--border-spacing);
     }
 
     article {
@@ -208,11 +224,11 @@
         display: flex;
         align-items: baseline;
         border-bottom: 1px solid white;
-        margin-bottom: 7px;
+        margin-bottom: var(--border-spacing);
     }
 
-    article .info h2 {
-        font-size: 18px;
+    article .info p {
+        font-size: 1.125em;
         font-weight: normal;
         color: #9E9E9E;
         margin-top: 2px;
@@ -220,7 +236,7 @@
     }
 
     article .info time {
-        font-size: 12px;
+        font-size: 0.75em;
         flex-grow: 1;
         text-align: right;
         margin-bottom: 4px;
@@ -228,21 +244,23 @@
 
     :not(pre) > code {
         background: rgba(255,255,255,.1);
-        border: 1px solid rgba(255,255,255,.1);
+        outline: 1px solid rgba(255,255,255,.1);
+        outline-offset: -1px;
         padding: 0 0.3em;
     }
 
-    pre {
-        font-size: 14px;
+    pre:has(code) {
+        font-size: 0.875em;
         overflow-x: auto;
         display: block;
         padding: 0.5em;
+        border: 1px solid white;
     }
 
     hr {
         border: 0;
-        border-top: 1px solid #ccc;
-        margin: 1em 0;
+        border-top: 5px solid white;
+        margin: 1em calc(var(--border-spacing) * -1);
     }
 
     ol, ul {
@@ -263,10 +281,20 @@
     }
 
     blockquote {
-        border: solid white;
-        border-width: 0 3px;
-        padding: 0 0.5em;
-        margin: 1em 0.5em;
+        padding: 0.5em 2em;
+        margin: 1em calc(var(--border-spacing) * -1);
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+    
+    blockquote::before {
+        font-family: Arial;
+        content: "\201C";
+        color: rgba(255, 255, 255, 0.1);
+        font-size: 5em;
+        position: absolute;
+        top: 0;
+        left: 0.15em;
     }
 
     ul.archive {
@@ -282,11 +310,11 @@
 
     .archive li time {
         white-space: nowrap;
-        margin-right: 10px;
+        margin-right: 1ch;
     }
 
     #disqus_thread {
-        padding: 10px;
+        padding: var(--border-spacing);
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
@@ -335,9 +363,29 @@
         
           
             <article>
+              <h1><a class="title" href="https://iovxw.net/p/github-page-404/">Github Page自定义404页面</a></h1>
+              <div class="info">
+                <p>404呦</p>
+                <time>2014-05-26 00:00</time>
+              </div>
+              
+                <p>想给博客自定义一个404页面，毕竟老用Github默认的也不太好</p>
+<p>于是乎上网翻了一下，发现貌似没中文介绍</p>
+<p>然后在Github Page官方帮助找到了</p>
+<p>很简单</p>
+<p>只需要在根目录新建一个<code>404.html</code>即可</p>
+<p>当然有个前提，就是你必须要先绑定独立域名，不然会出错的</p>
+<p>至于怎么绑定……还是百度吧，也很简单……</p>
+
+              
+            </article>
+          
+        
+          
+            <article>
               <h1><a class="title" href="https://iovxw.net/p/mobile-version/">手机版搞定！</a></h1>
               <div class="info">
-                <h2>弄好了博客的手机版</h2>
+                <p>弄好了博客的手机版</p>
                 <time>2014-05-25 00:00</time>
               </div>
               
@@ -352,7 +400,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/test/">测试TEST</a></h1>
               <div class="info">
-                <h2>用来测试主题控件</h2>
+                <p>用来测试主题控件</p>
                 <time>2014-05-25 00:00</time>
               </div>
               
@@ -1437,16 +1485,16 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/hello-world/">Hello World!</a></h1>
               <div class="info">
-                <h2>嗯，国际惯例。</h2>
+                <p>嗯，国际惯例。</p>
                 <time>2014-04-08 00:00</time>
               </div>
               
                 <p>第一篇帖子，庆祝在Github Page上搭建成功！使用了Go语言写的<code>Hugo</code>作为静态页面生成工具。有时间写个前端什么的，不然直接写MarkDown太痛苦了</p>
 <p>下面是Hugo自带的文章示例</p>
-<h2 id="a-section">A Section</h2>
+<h2 id="a-section"><a class="zola-anchor" href="#a-section" aria-label="Anchor link for: a-section">A Section</a></h2>
 <p>Here's a simple titled section where you can place whatever information you want.</p>
 <p>You can use inline HTML if you want, but really there's not much that markdown can't do.</p>
-<h2 id="showing-off-with-markdown">Showing Off With Markdown</h2>
+<h2 id="showing-off-with-markdown"><a class="zola-anchor" href="#showing-off-with-markdown" aria-label="Anchor link for: showing-off-with-markdown">Showing Off With Markdown</a></h2>
 <p>A full cheat sheet can be found <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">here</a>
 or through <a href="https://google.com/">google</a>.</p>
 <p>There are some <em>easy</em> examples for styling, though. I can't <strong>emphasize</strong> that enough.
@@ -1454,7 +1502,7 @@ Creating <a href="https://google.com/">links</a> or <code>inline code</code> blo
 <pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>There are some *easy* examples for styling, though. I can&#39;t **emphasize** that enough.
 </span><span>Creating [links](https://google.com/) or `inline code` blocks are very straightforward.
 </span></code></pre>
-<h2 id="front-matter-for-fun">Front Matter For Fun</h2>
+<h2 id="front-matter-for-fun"><a class="zola-anchor" href="#front-matter-for-fun" aria-label="Anchor link for: front-matter-for-fun">Front Matter For Fun</a></h2>
 <p>This is the meta data for this post. It is located at the top of the <code>content/post/hello-hugo.md</code> markdown file.</p>
 <pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>---
 </span><span>title: &quot;Hello Hugo!&quot;
@@ -1482,7 +1530,7 @@ examining the code in this example and through reading the Hugo <a href="http://
             <article>
               <h1><a class="title" href="https://iovxw.net/about/">关于</a></h1>
               <div class="info">
-                <h2>关于我</h2>
+                <p>关于我</p>
                 <time>1970-01-01 00:00</time>
               </div>
               
@@ -1507,7 +1555,7 @@ examining the code in this example and through reading the Hugo <a href="http://
             <article>
               <h1><a class="title" href="https://iovxw.net/links/">友情链接</a></h1>
               <div class="info">
-                <h2>排序是随机的</h2>
+                <p>排序是随机的</p>
                 <time>0000-01-01 00:05</time>
               </div>
               

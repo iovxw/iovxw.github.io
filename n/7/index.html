@@ -1,41 +1,40 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-Hans">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="canonical" href="https://iovxw.net">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="description" content="iovxw&#x27;s blog" />
+    <meta name="author" content="iovxw" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#212121" />
+    <link rel="canonical" href="https://iovxw.net/n/7/" />
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png" />
+    <link rel="icon" sizes="any" href="https://iovxw.net/favicon.svg" />
     
-      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link rel="alternate" href="https://iovxw.net/rss.xml" type="application/rss+xml" title="iovxw" />
     
     <title>iovxw</title>
 
-    <meta name="theme-color" content="#212121">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
-
-    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
-    <meta name="msapplication-TileColor" content="#3F51B5">
-
-    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
-
     <style>
+    :root {
+        --border-spacing: 10px;
+        color-scheme: dark;
+        text-spacing-trim: trim-start;
+    }
+
     body {
-        margin: 8px;
+        margin: 8px 0;
         background: #151515;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
         font-family: sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        body {
+            margin: 0;
+        }
     }
 
     header a {
@@ -47,51 +46,31 @@
 
     header input {
         width: 100%;
-        min-width: 64px;
+        field-sizing: content; /* waiting firefox */
+        min-width: 6ch;
         text-align: right;
         background: 0;
         border: none;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
     }
 
-    header input:placeholder-shown {
+    header input::placeholder {
         color: white;
         font-weight: bold;
     }
 
-    header input:-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input::-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input:-ms-input-placeholder {
-        color: white;
-        font-weight: bold;
-    }
-
-    header input::-webkit-input-placeholder {
-        color: white;
-        font-weight: bold;
+    header input:not(:placeholder-shown) {
+        min-width: 10ch; /* TODO: field-sizing */
     }
 
     header input:focus {
-        border: none;
+        outline: none;
     }
 
     header .link {
         display: flex;
         text-align: right;
-    }
-
-    header .link, footer .license {
-        margin-right: -10px;
-        padding-right: 10px;
     }
 
     footer .license {
@@ -110,13 +89,13 @@
     }
 
     header .title {
-        font-size: 26px;
+        font-size: 1.625em;
         margin: 0;
-        margin-right: 6px;
+        margin-right: 1ch;
     }
 
     header, article, nav, footer {
-        padding: 10px;
+        padding: var(--border-spacing);
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
@@ -124,6 +103,7 @@
     }
 
     nav {
+        padding: 0;
         display: flex;
     }
 
@@ -133,8 +113,7 @@
 
     nav a {
         flex: 1 1 0;
-        margin: -10px 0;
-        padding: 10px 0;
+        padding: var(--border-spacing) 0;
         text-align: center;
         font-weight: bold;
         color: white;
@@ -162,24 +141,44 @@
     h1, h2, h3, h4, h5, h6 {
         font-weight: bold;
     }
+    
+    article :is(h2, h3, h4, h5, h6) a:visited {
+        color: white;
+    }
+
+    h2::before {
+        content: "# ";
+    }
+    h3::before {
+        content: "## ";
+    }
+    h4::before {
+        content: "### ";
+    }
+    h5::before {
+        content: "#### ";
+    }
+    h6::before {
+        content: "##### ";
+    }
 
     h1 {
-        font-size: 22px;
+        font-size: 1.375em;
         margin: 10px 0;
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 1.25em;
         margin: 5px 0;
     }
 
     h3 {
-        font-size: 18px;
+        font-size: 1.125em;
         margin: 2px 0;
     }
 
     h4, h5, h6 {
-        font-size: 16px;
+        font-size: 1em;
         margin: 2px 0;
     }
 
@@ -187,8 +186,25 @@
         margin: 1em 0;
     }
 
-    article > p:last-child, article > pre:last-child {
+    article > p:last-child {
+        margin-bottom: calc(1em - 10px);
+    }
+
+    article > pre:last-child:has(code), article > p:last-child:has(img),
+    article pre:has(code):has(+ hr), article p:has(img):has(+ hr) {
         margin-bottom: 0;
+    }
+
+    article pre:has(code) + hr, article p:has(img) + hr {
+        margin-top: var(--border-spacing);
+    }
+
+    article :is(.info, hr) + :is(p:has(img), pre:has(code)) {
+        margin-top: 0;
+    }
+    
+    hr:has(+ pre code, + p img) {
+        margin-bottom: var(--border-spacing);
     }
 
     article {
@@ -208,11 +224,11 @@
         display: flex;
         align-items: baseline;
         border-bottom: 1px solid white;
-        margin-bottom: 7px;
+        margin-bottom: var(--border-spacing);
     }
 
-    article .info h2 {
-        font-size: 18px;
+    article .info p {
+        font-size: 1.125em;
         font-weight: normal;
         color: #9E9E9E;
         margin-top: 2px;
@@ -220,7 +236,7 @@
     }
 
     article .info time {
-        font-size: 12px;
+        font-size: 0.75em;
         flex-grow: 1;
         text-align: right;
         margin-bottom: 4px;
@@ -228,21 +244,23 @@
 
     :not(pre) > code {
         background: rgba(255,255,255,.1);
-        border: 1px solid rgba(255,255,255,.1);
+        outline: 1px solid rgba(255,255,255,.1);
+        outline-offset: -1px;
         padding: 0 0.3em;
     }
 
-    pre {
-        font-size: 14px;
+    pre:has(code) {
+        font-size: 0.875em;
         overflow-x: auto;
         display: block;
         padding: 0.5em;
+        border: 1px solid white;
     }
 
     hr {
         border: 0;
-        border-top: 1px solid #ccc;
-        margin: 1em 0;
+        border-top: 5px solid white;
+        margin: 1em calc(var(--border-spacing) * -1);
     }
 
     ol, ul {
@@ -263,10 +281,20 @@
     }
 
     blockquote {
-        border: solid white;
-        border-width: 0 3px;
-        padding: 0 0.5em;
-        margin: 1em 0.5em;
+        padding: 0.5em 2em;
+        margin: 1em calc(var(--border-spacing) * -1);
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+    
+    blockquote::before {
+        font-family: Arial;
+        content: "\201C";
+        color: rgba(255, 255, 255, 0.1);
+        font-size: 5em;
+        position: absolute;
+        top: 0;
+        left: 0.15em;
     }
 
     ul.archive {
@@ -282,11 +310,11 @@
 
     .archive li time {
         white-space: nowrap;
-        margin-right: 10px;
+        margin-right: 1ch;
     }
 
     #disqus_thread {
-        padding: 10px;
+        padding: var(--border-spacing);
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
@@ -335,9 +363,34 @@
         
           
             <article>
+              <h1><a class="title" href="https://iovxw.net/p/state-fo-go-may/">The State of Go</a></h1>
+              <div class="info">
+                <p>&quot;Where we are in May 2015&quot;</p>
+                <time>2015-05-27 00:00</time>
+              </div>
+              
+                <p>大致就是性能优化、GC优化、新增架构支持以及包可以导出给其他地方使用，还有给map加了个语法糖</p>
+<hr />
+<div id="body" class="modal fade">
+  <div class="modal-dialog" style="height: 90%;width: 90%;">
+    <div class="modal-content" style="height: 100%;">
+      <div class="modal-body" style="height: 100%;">
+        <iframe src="https://talks.golang.org/2015/state-of-go-may.slide" style="height: 100%;width: 100%;border: 1px solid #c0c0c0;">http://talks.golang.org/2015/state-of-go-may.slide</iframe>
+      </div>
+    </div>
+  </div>
+</div>
+<p><a data-toggle="modal" href="#body" class="btn btn-primary btn-large btn-block" style="float: none;">Show</a></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
               <h1><a class="title" href="https://iovxw.net/p/rust-1-0/">Rust 1.0 发布</a></h1>
               <div class="info">
-                <h2>只是发个新闻，没别的了</h2>
+                <p>只是发个新闻，没别的了</p>
                 <time>2015-05-15 00:00</time>
               </div>
               
@@ -351,7 +404,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/wacom-speed/">Linux下Wacom数位板相对定位画笔移动速度的设置</a></h1>
               <div class="info">
-                <h2>折腾</h2>
+                <p>折腾</p>
                 <time>2015-04-28 00:00</time>
               </div>
               
@@ -412,7 +465,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/nim/">Nim语言尝试</a></h1>
               <div class="info">
-                <h2>几乎没人用</h2>
+                <p>几乎没人用</p>
                 <time>2015-03-05 00:00</time>
               </div>
               
@@ -510,7 +563,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/2015-2-5/">坑开的有点多了</a></h1>
               <div class="info">
-                <h2>吐槽</h2>
+                <p>吐槽</p>
                 <time>2015-02-05 00:00</time>
               </div>
               
@@ -596,7 +649,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/bye-2014/">2014浏览器A-Z</a></h1>
               <div class="info">
-                <h2>冬天好冷啊</h2>
+                <p>冬天好冷啊</p>
                 <time>2014-12-27 00:00</time>
               </div>
               
@@ -639,7 +692,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/golang-type-switch/">Golang类型switch</a></h1>
               <div class="info">
-                <h2>语法强迫症</h2>
+                <p>语法强迫症</p>
                 <time>2014-11-21 00:00</time>
               </div>
               
@@ -695,7 +748,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/new-template/">更新了下模板</a></h1>
               <div class="info">
-                <h2>瞬间高大上</h2>
+                <p>瞬间高大上</p>
                 <time>2014-11-07 00:00</time>
               </div>
               
@@ -711,7 +764,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/leveldb/">LevelDB储存过程解析</a></h1>
               <div class="info">
-                <h2>写的乱糟糟的</h2>
+                <p>写的乱糟糟的</p>
                 <time>2014-10-31 00:00</time>
               </div>
               
@@ -738,7 +791,7 @@
             <article>
               <h1><a class="title" href="https://iovxw.net/p/gohtml/">Golang 模板工具</a></h1>
               <div class="info">
-                <h2>生成器</h2>
+                <p>生成器</p>
                 <time>2014-10-27 00:00</time>
               </div>
               
@@ -746,7 +799,7 @@
 <p>项目地址：<a href="https://github.com/iovxw/GoHTML">https://github.com/iovxw/GoHTML</a></p>
 <p>介绍什么的直接扔README了：</p>
 <hr />
-<h1 id="gohtml">GoHTML</h1>
+<h1 id="gohtml"><a class="zola-anchor" href="#gohtml" aria-label="Anchor link for: gohtml">GoHTML</a></h1>
 <pre style="background-color:#282828;color:#fdf4c1aa;"><code><span> ██████╗         ██╗  ██╗████████╗███╗   ███╗██╗
 </span><span>██╔════╝  █████╗ ██║  ██║╚══██╔══╝████╗ ████║██║
 </span><span>██║  ███╗██╔══██╗███████║   ██║   ██╔████╔██║██║
@@ -758,7 +811,7 @@
 <p>基本就是写着玩的</p>
 <p>可以将Golang和HTML写在一起，然后用本工具转换成Golang文件</p>
 <p>基本功能就是将<code>&lt;a&gt;</code>转换成<code>buffer.WriteString("&lt;a&gt;")</code></p>
-<h2 id="li-zi">例子</h2>
+<h2 id="li-zi"><a class="zola-anchor" href="#li-zi" aria-label="Anchor link for: li-zi">例子</a></h2>
 <p><strong>转换前：</strong></p>
 <pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>package tpl
 </span><span>
@@ -842,7 +895,7 @@
 </span><span>}
 </span></code></pre>
 <p>然后就可以直接调用里面的函数作为<code>http.HandleFunc</code></p>
-<h2 id="shi-yong-bang-zhu">使用帮助</h2>
+<h2 id="shi-yong-bang-zhu"><a class="zola-anchor" href="#shi-yong-bang-zhu" aria-label="Anchor link for: shi-yong-bang-zhu">使用帮助</a></h2>
 <pre data-lang="shell" style="background-color:#282828;color:#fdf4c1aa;" class="language-shell "><code class="language-shell" data-lang="shell"><span>$ go run GoHTML.go
 </span><span>
 </span><span> ██████╗         ██╗  ██╗████████╗███╗   ███╗██╗
@@ -875,7 +928,7 @@
 </span><span>备注：
 </span><span>  方括号[]为选填项目，尖括号&lt;&gt;为必填项目
 </span></code></pre>
-<h2 id="yuan-ma-gui-fan">源码规范</h2>
+<h2 id="yuan-ma-gui-fan"><a class="zola-anchor" href="#yuan-ma-gui-fan" aria-label="Anchor link for: yuan-ma-gui-fan">源码规范</a></h2>
 <p>作为<code>http.HandleFunc</code>的函数，必须返回值只有一个<code>string</code>（因为多了就不符合<code>http.HandleFunc</code>的要求了）</p>
 <p>然后里面必须创建一个类型为<code>*bytes.Buffer</code>的变量，变量名称需要和设置的一样（默认是<code>_buffer</code>）。这个缓冲器是用于存放要输出的HTML代码的</p>
 <p>然后作为<code>http.HandleFunc</code>的函数的返回值需要是<code>_buffer.String()</code>，如果你自定义了缓冲器变量名称，需要相应的改变</p>
@@ -913,36 +966,13 @@
 </span><span>}
 </span></code></pre>
 <p>这样才可以</p>
-<h2 id="zi-dong-zhuan-huan">自动转换</h2>
+<h2 id="zi-dong-zhuan-huan"><a class="zola-anchor" href="#zi-dong-zhuan-huan" aria-label="Anchor link for: zi-dong-zhuan-huan">自动转换</a></h2>
 <p>每次更新完模板后都要手动执行一次转换工具一定是超麻烦的</p>
 <p>所以需要自动的工具</p>
 <p>这里推荐<a href="https://github.com/Unknwon">Unknwon</a>的<a href="https://github.com/Unknwon/bra/">BRA</a>（名字好像有点奇怪？），当然其他相似功能的工具也是可以的（如果有更好的还拜托推荐一下）</p>
 <p>具体使用方法这里就不说了，自己去看吧</p>
-<h2 id="xia-zai">下载</h2>
+<h2 id="xia-zai"><a class="zola-anchor" href="#xia-zai" aria-label="Anchor link for: xia-zai">下载</a></h2>
 <p><a href="http://gobuild.io/github.com/iovxw/GoHTML"><img src="http://gobuild.io/badge/github.com/iovxw/GoHTML/downloads.svg" alt="Gobuild Download" /></a></p>
-
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https://iovxw.net/p/kengdie/">在写一个新的静态博客生成工具</a></h1>
-              <div class="info">
-                <h2>轮子、轮子、轮</h2>
-                <time>2014-10-02 00:00</time>
-              </div>
-              
-                <p>目标是“完全没有可定制性”</p>
-<p>模板已经写好了</p>
-<p>但是后端基本没写</p>
-<p>而且因为Golang本身的template包实在不好用</p>
-<p>于是准备重写一个（又是大坑）</p>
-<p>然后……</p>
-<p>估计就没有然后了……</p>
-<p><img src="https://iovxw.net/p/kengdie/0.png" alt="" /></p>
-<p><img src="https://iovxw.net/p/kengdie/1.png" alt="" /></p>
-<p><img src="https://iovxw.net/p/kengdie/2.png" alt="" /></p>
 
               
             </article>

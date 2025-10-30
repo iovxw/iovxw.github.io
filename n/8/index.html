@@ -1,41 +1,40 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-Hans">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="iovxw&#x27;s blog">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="canonical" href="https://iovxw.net">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="description" content="iovxw&#x27;s blog" />
+    <meta name="author" content="iovxw" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#212121" />
+    <link rel="canonical" href="https://iovxw.net/n/8/" />
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png" />
+    <link rel="icon" sizes="any" href="https://iovxw.net/favicon.svg" />
     
-      <link href="https://iovxw.net/rss.xml" rel="alternate" type="application/rss+xml" title="iovxw" />
-      <link href="https://iovxw.net/rss.xml" rel="feed" type="application/rss+xml" title="iovxw" />
+      <link rel="alternate" href="https://iovxw.net/rss.xml" type="application/rss+xml" title="iovxw" />
     
     <title>iovxw</title>
 
-    <meta name="theme-color" content="#212121">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="iovxw">
-    <link rel="apple-touch-icon-precomposed" href="https://iovxw.net/favicon.png">
-
-    <meta name="msapplication-TileImage" content="https://iovxw.net/favicon.png">
-    <meta name="msapplication-TileColor" content="#3F51B5">
-
-    <link rel="shortcut icon" href="https://iovxw.net/favicon.png">
-
     <style>
+    :root {
+        --border-spacing: 10px;
+        color-scheme: dark;
+        text-spacing-trim: trim-start;
+    }
+
     body {
-        margin: 8px;
+        margin: 8px 0;
         background: #151515;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
         font-family: sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        body {
+            margin: 0;
+        }
     }
 
     header a {
@@ -47,51 +46,31 @@
 
     header input {
         width: 100%;
-        min-width: 64px;
+        field-sizing: content; /* waiting firefox */
+        min-width: 6ch;
         text-align: right;
         background: 0;
         border: none;
         color: white;
-        font-size: 16px;
+        font-size: 1em;
     }
 
-    header input:placeholder-shown {
+    header input::placeholder {
         color: white;
         font-weight: bold;
     }
 
-    header input:-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input::-moz-placeholder {
-        opacity: 1;
-        font-weight: bold;
-    }
-
-    header input:-ms-input-placeholder {
-        color: white;
-        font-weight: bold;
-    }
-
-    header input::-webkit-input-placeholder {
-        color: white;
-        font-weight: bold;
+    header input:not(:placeholder-shown) {
+        min-width: 10ch; /* TODO: field-sizing */
     }
 
     header input:focus {
-        border: none;
+        outline: none;
     }
 
     header .link {
         display: flex;
         text-align: right;
-    }
-
-    header .link, footer .license {
-        margin-right: -10px;
-        padding-right: 10px;
     }
 
     footer .license {
@@ -110,13 +89,13 @@
     }
 
     header .title {
-        font-size: 26px;
+        font-size: 1.625em;
         margin: 0;
-        margin-right: 6px;
+        margin-right: 1ch;
     }
 
     header, article, nav, footer {
-        padding: 10px;
+        padding: var(--border-spacing);
         overflow-x: auto;
         border-left: 5px solid white;
         border-right: 5px solid white;
@@ -124,6 +103,7 @@
     }
 
     nav {
+        padding: 0;
         display: flex;
     }
 
@@ -133,8 +113,7 @@
 
     nav a {
         flex: 1 1 0;
-        margin: -10px 0;
-        padding: 10px 0;
+        padding: var(--border-spacing) 0;
         text-align: center;
         font-weight: bold;
         color: white;
@@ -162,24 +141,44 @@
     h1, h2, h3, h4, h5, h6 {
         font-weight: bold;
     }
+    
+    article :is(h2, h3, h4, h5, h6) a:visited {
+        color: white;
+    }
+
+    h2::before {
+        content: "# ";
+    }
+    h3::before {
+        content: "## ";
+    }
+    h4::before {
+        content: "### ";
+    }
+    h5::before {
+        content: "#### ";
+    }
+    h6::before {
+        content: "##### ";
+    }
 
     h1 {
-        font-size: 22px;
+        font-size: 1.375em;
         margin: 10px 0;
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 1.25em;
         margin: 5px 0;
     }
 
     h3 {
-        font-size: 18px;
+        font-size: 1.125em;
         margin: 2px 0;
     }
 
     h4, h5, h6 {
-        font-size: 16px;
+        font-size: 1em;
         margin: 2px 0;
     }
 
@@ -187,8 +186,25 @@
         margin: 1em 0;
     }
 
-    article > p:last-child, article > pre:last-child {
+    article > p:last-child {
+        margin-bottom: calc(1em - 10px);
+    }
+
+    article > pre:last-child:has(code), article > p:last-child:has(img),
+    article pre:has(code):has(+ hr), article p:has(img):has(+ hr) {
         margin-bottom: 0;
+    }
+
+    article pre:has(code) + hr, article p:has(img) + hr {
+        margin-top: var(--border-spacing);
+    }
+
+    article :is(.info, hr) + :is(p:has(img), pre:has(code)) {
+        margin-top: 0;
+    }
+    
+    hr:has(+ pre code, + p img) {
+        margin-bottom: var(--border-spacing);
     }
 
     article {
@@ -208,11 +224,11 @@
         display: flex;
         align-items: baseline;
         border-bottom: 1px solid white;
-        margin-bottom: 7px;
+        margin-bottom: var(--border-spacing);
     }
 
-    article .info h2 {
-        font-size: 18px;
+    article .info p {
+        font-size: 1.125em;
         font-weight: normal;
         color: #9E9E9E;
         margin-top: 2px;
@@ -220,7 +236,7 @@
     }
 
     article .info time {
-        font-size: 12px;
+        font-size: 0.75em;
         flex-grow: 1;
         text-align: right;
         margin-bottom: 4px;
@@ -228,21 +244,23 @@
 
     :not(pre) > code {
         background: rgba(255,255,255,.1);
-        border: 1px solid rgba(255,255,255,.1);
+        outline: 1px solid rgba(255,255,255,.1);
+        outline-offset: -1px;
         padding: 0 0.3em;
     }
 
-    pre {
-        font-size: 14px;
+    pre:has(code) {
+        font-size: 0.875em;
         overflow-x: auto;
         display: block;
         padding: 0.5em;
+        border: 1px solid white;
     }
 
     hr {
         border: 0;
-        border-top: 1px solid #ccc;
-        margin: 1em 0;
+        border-top: 5px solid white;
+        margin: 1em calc(var(--border-spacing) * -1);
     }
 
     ol, ul {
@@ -263,10 +281,20 @@
     }
 
     blockquote {
-        border: solid white;
-        border-width: 0 3px;
-        padding: 0 0.5em;
-        margin: 1em 0.5em;
+        padding: 0.5em 2em;
+        margin: 1em calc(var(--border-spacing) * -1);
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+    
+    blockquote::before {
+        font-family: Arial;
+        content: "\201C";
+        color: rgba(255, 255, 255, 0.1);
+        font-size: 5em;
+        position: absolute;
+        top: 0;
+        left: 0.15em;
     }
 
     ul.archive {
@@ -282,11 +310,11 @@
 
     .archive li time {
         white-space: nowrap;
-        margin-right: 10px;
+        margin-right: 1ch;
     }
 
     #disqus_thread {
-        padding: 10px;
+        padding: var(--border-spacing);
         border-left: 5px solid white;
         border-right: 5px solid white;
         border-bottom: 5px solid white;
@@ -335,9 +363,32 @@
         
           
             <article>
+              <h1><a class="title" href="https://iovxw.net/p/kengdie/">在写一个新的静态博客生成工具</a></h1>
+              <div class="info">
+                <p>轮子、轮子、轮</p>
+                <time>2014-10-02 00:00</time>
+              </div>
+              
+                <p>目标是“完全没有可定制性”</p>
+<p>模板已经写好了</p>
+<p>但是后端基本没写</p>
+<p>而且因为Golang本身的template包实在不好用</p>
+<p>于是准备重写一个（又是大坑）</p>
+<p>然后……</p>
+<p>估计就没有然后了……</p>
+<p><img src="https://iovxw.net/p/kengdie/0.png" alt="" /></p>
+<p><img src="https://iovxw.net/p/kengdie/1.png" alt="" /></p>
+<p><img src="https://iovxw.net/p/kengdie/2.png" alt="" /></p>
+
+              
+            </article>
+          
+        
+          
+            <article>
               <h1><a class="title" href="https://iovxw.net/p/new-highlight/">换了一个高亮插件</a></h1>
               <div class="info">
-                <h2>还是因为懒……</h2>
+                <p>还是因为懒……</p>
                 <time>2014-09-03 00:00</time>
               </div>
               
@@ -430,7 +481,7 @@ https://highlightjs.org/static/test.html</p>
             <article>
               <h1><a class="title" href="https://iovxw.net/p/google-code-prettify/">给博客添加了代码高亮</a></h1>
               <div class="info">
-                <h2>Google Code Prettify</h2>
+                <p>Google Code Prettify</p>
                 <time>2014-09-01 00:00</time>
               </div>
               
@@ -523,7 +574,7 @@ https://highlightjs.org/static/test.html</p>
             <article>
               <h1><a class="title" href="https://iovxw.net/p/coding-moon-cake/">Coding活动送的月饼收到</a></h1>
               <div class="info">
-                <h2>下午茶的东西全了</h2>
+                <p>下午茶的东西全了</p>
                 <time>2014-08-31 00:00</time>
               </div>
               
@@ -549,7 +600,7 @@ https://highlightjs.org/static/test.html</p>
             <article>
               <h1><a class="title" href="https://iovxw.net/p/hello-twister/">Twister 去中心化的 Twitter</a></h1>
               <div class="info">
-                <h2>FREEDOM！！</h2>
+                <p>FREEDOM！！</p>
                 <time>2014-08-26 00:00</time>
               </div>
               
@@ -582,7 +633,7 @@ https://highlightjs.org/static/test.html</p>
             <article>
               <h1><a class="title" href="https://iovxw.net/p/chedan/">近期的计划</a></h1>
               <div class="info">
-                <h2>懒啊………</h2>
+                <p>懒啊………</p>
                 <time>2014-08-21 00:00</time>
               </div>
               
@@ -613,7 +664,7 @@ https://highlightjs.org/static/test.html</p>
             <article>
               <h1><a class="title" href="https://iovxw.net/p/arch-start/">[备用]Arch安装后的配置</a></h1>
               <div class="info">
-                <h2>个人备用笔记</h2>
+                <p>个人备用笔记</p>
                 <time>2014-07-31 00:00</time>
               </div>
               
@@ -673,7 +724,7 @@ export QT_IM_MODULE=fcitx</p>
             <article>
               <h1><a class="title" href="https://iovxw.net/p/use-arch/">装上了Arch</a></h1>
               <div class="info">
-                <h2>生命不息，折腾不止</h2>
+                <p>生命不息，折腾不止</p>
                 <time>2014-07-30 00:00</time>
               </div>
               
@@ -708,7 +759,7 @@ export QT_IM_MODULE=fcitx</p>
             <article>
               <h1><a class="title" href="https://iovxw.net/p/stepladder/">用Golang写了一个梯子</a></h1>
               <div class="info">
-                <h2>梯子，当然是用来翻墙的</h2>
+                <p>梯子，当然是用来翻墙的</p>
                 <time>2014-07-26 00:00</time>
               </div>
               
@@ -731,7 +782,7 @@ export QT_IM_MODULE=fcitx</p>
             <article>
               <h1><a class="title" href="https://iovxw.net/p/golang-neovim/">Neovim的Golang开发环境配置</a></h1>
               <div class="info">
-                <h2>强迫症强迫症强迫症强迫……</h2>
+                <p>强迫症强迫症强迫症强迫……</p>
                 <time>2014-07-14 00:00</time>
               </div>
               
@@ -838,43 +889,6 @@ export QT_IM_MODULE=fcitx</p>
 <p>完成～</p>
 </li>
 </ol>
-
-              
-            </article>
-          
-        
-          
-            <article>
-              <h1><a class="title" href="https://iovxw.net/p/neovim/">ubuntu编译安装Neovim</a></h1>
-              <div class="info">
-                <h2>21世纪的VIM？</h2>
-                <time>2014-07-12 00:00</time>
-              </div>
-              
-                <p>介绍：</p>
-<blockquote>
-<p><img src="http://neovim.org/images/logo@2x.png" alt="" /></p>
-</blockquote>
-<blockquote>
-<p>巴西程序员Thiago de Arruda Padilha（aka tarruda）向Vim开源编辑器项目递交了两大补丁，对Vim的架构进行了大幅调整，结果遭到了Vim作者Bram Moolenaar的拒绝，因为对于Vim这样一个成熟的项目进行如此大的改变风险太高。于是tarruda发起了Vim fork项目Neovim，集资1万美元打造出21世纪的编辑器，提供更好的脚本、插件支持，整合现代的图形界面。</p>
-</blockquote>
-<blockquote>
-<p>该项目超额完成集资，已筹集到3.25万美元。Moolenaar本人对该项目持有异议，认为需要大量工作，会引入新的bug，而终端用户获益不多。</p>
-</blockquote>
-<p>主页：<a href="http://neovim.org">http://neovim.org</a></p>
-<p>官方wiki里的安装方法：<a href="https://github.com/neovim/neovim/wiki/Installing">https://github.com/neovim/neovim/wiki/Installing</a></p>
-<p>我用brew安装竟然提示需要pkgutil，我用的是ubuntu哪来的pkgutil？</p>
-<p>于是乎还是果断手动编译安装了</p>
-<p>先安装所需要的工具：<code>sudo apt-get install libtool autoconf automake cmake libncurses5-dev g++ pkg-config</code></p>
-<p>clone到本地<code>git clone https://github.com/neovim/neovim.git</code>然后<code>cd neovim</code>+<code>make</code>就编译完成了</p>
-<p>这里主要是说一下编译过程中出现的error解决方法</p>
-<p><code>libtoolize: not found</code>：<code>sudo apt-get install libtool</code></p>
-<p><code>aclocal: not found</code>：<code>sudo apt-get install autoconf</code></p>
-<p>安装过程中会下载几个包，网站都是国外的，所以比较慢，而且没有进度显示。耐心等待就行（如果相关网站被墙请手动设置代理）</p>
-<p>安装：</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/
-</span><span>make install
-</span></code></pre>
 
               
             </article>

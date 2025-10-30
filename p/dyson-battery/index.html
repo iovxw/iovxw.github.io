@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="description" content="也有厂家叫 20V 21V 电池，但其实都一样" />
+    <meta name="author" content="iovxw" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#212121" />
+    <link rel="canonical" href="https://iovxw.net/p/dyson-battery/" />
+    <link rel="icon" sizes="192x192" href="https://iovxw.net/favicon.png" />
+    <link rel="icon" sizes="any" href="https://iovxw.net/favicon.svg" />
+    
+      <link rel="alternate" href="https://iovxw.net/rss.xml" type="application/rss+xml" title="iovxw" />
+    
+    <title>给戴森 V8 更换 18V 工具电池 - iovxw</title>
+
+    <style>
+    :root {
+        --border-spacing: 10px;
+        color-scheme: dark;
+        text-spacing-trim: trim-start;
+    }
+
+    body {
+        margin: 8px 0;
+        background: #151515;
+        color: white;
+        font-size: 1em;
+        font-family: sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        body {
+            margin: 0;
+        }
+    }
+
+    header a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 6px;
+    }
+
+    header input {
+        width: 100%;
+        field-sizing: content; /* waiting firefox */
+        min-width: 6ch;
+        text-align: right;
+        background: 0;
+        border: none;
+        color: white;
+        font-size: 1em;
+    }
+
+    header input::placeholder {
+        color: white;
+        font-weight: bold;
+    }
+
+    header input:not(:placeholder-shown) {
+        min-width: 10ch; /* TODO: field-sizing */
+    }
+
+    header input:focus {
+        outline: none;
+    }
+
+    header .link {
+        display: flex;
+        text-align: right;
+    }
+
+    footer .license {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    header {
+        border-top: 5px solid white;
+    }
+
+    header, footer {
+        display: flex;
+        align-items: baseline;
+    }
+
+    header .title {
+        font-size: 1.625em;
+        margin: 0;
+        margin-right: 1ch;
+    }
+
+    header, article, nav, footer {
+        padding: var(--border-spacing);
+        overflow-x: auto;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    nav {
+        padding: 0;
+        display: flex;
+    }
+
+    nav a + a {
+        border-left: 5px solid white;
+    }
+
+    nav a {
+        flex: 1 1 0;
+        padding: var(--border-spacing) 0;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    section {
+        width: 50%;
+        min-width: 512px;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+        section {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: bottom;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+    
+    article :is(h2, h3, h4, h5, h6) a:visited {
+        color: white;
+    }
+
+    h2::before {
+        content: "# ";
+    }
+    h3::before {
+        content: "## ";
+    }
+    h4::before {
+        content: "### ";
+    }
+    h5::before {
+        content: "#### ";
+    }
+    h6::before {
+        content: "##### ";
+    }
+
+    h1 {
+        font-size: 1.375em;
+        margin: 10px 0;
+    }
+
+    h2 {
+        font-size: 1.25em;
+        margin: 5px 0;
+    }
+
+    h3 {
+        font-size: 1.125em;
+        margin: 2px 0;
+    }
+
+    h4, h5, h6 {
+        font-size: 1em;
+        margin: 2px 0;
+    }
+
+    p, pre {
+        margin: 1em 0;
+    }
+
+    article > p:last-child {
+        margin-bottom: calc(1em - 10px);
+    }
+
+    article > pre:last-child:has(code), article > p:last-child:has(img),
+    article pre:has(code):has(+ hr), article p:has(img):has(+ hr) {
+        margin-bottom: 0;
+    }
+
+    article pre:has(code) + hr, article p:has(img) + hr {
+        margin-top: var(--border-spacing);
+    }
+
+    article :is(.info, hr) + :is(p:has(img), pre:has(code)) {
+        margin-top: 0;
+    }
+    
+    hr:has(+ pre code, + p img) {
+        margin-bottom: var(--border-spacing);
+    }
+
+    article {
+        word-break: break-word;
+    }
+
+    article a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    article a:visited {
+        color: #E0E0E0;
+    }
+
+    article .info {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid white;
+        margin-bottom: var(--border-spacing);
+    }
+
+    article .info p {
+        font-size: 1.125em;
+        font-weight: normal;
+        color: #9E9E9E;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    article .info time {
+        font-size: 0.75em;
+        flex-grow: 1;
+        text-align: right;
+        margin-bottom: 4px;
+    }
+
+    :not(pre) > code {
+        background: rgba(255,255,255,.1);
+        outline: 1px solid rgba(255,255,255,.1);
+        outline-offset: -1px;
+        padding: 0 0.3em;
+    }
+
+    pre:has(code) {
+        font-size: 0.875em;
+        overflow-x: auto;
+        display: block;
+        padding: 0.5em;
+        border: 1px solid white;
+    }
+
+    hr {
+        border: 0;
+        border-top: 5px solid white;
+        margin: 1em calc(var(--border-spacing) * -1);
+    }
+
+    ol, ul {
+        padding: 0;
+        margin: 1em 0 1em 2em;
+    }
+
+    .read-more {
+        text-align: right;
+    }
+
+    article a:link.title {
+        text-decoration: none;
+    }
+
+    article a:visited.title {
+        color: white;
+    }
+
+    blockquote {
+        padding: 0.5em 2em;
+        margin: 1em calc(var(--border-spacing) * -1);
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+    
+    blockquote::before {
+        font-family: Arial;
+        content: "\201C";
+        color: rgba(255, 255, 255, 0.1);
+        font-size: 5em;
+        position: absolute;
+        top: 0;
+        left: 0.15em;
+    }
+
+    ul.archive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .archive li {
+        display: flex;
+        align-items: baseline;
+        margin: 5px 0;
+    }
+
+    .archive li time {
+        white-space: nowrap;
+        margin-right: 1ch;
+    }
+
+    #disqus_thread {
+        padding: var(--border-spacing);
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        border-bottom: 5px solid white;
+    }
+
+    #disqus_thread a:link {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      var search = document.getElementsByName("search")[0]
+      search.onkeydown = function(event) {
+        if (event.keyCode == 13) {
+          var q = search.value;
+          if (q != '') {
+            var host = window.location.hostname;
+            var url = 'https://www.google.com/search?q=' + 'site:' + host + " " + q;
+            window.open(url, "_blank");
+          }
+          return false;
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a class="title" href="https://iovxw.net">iovxw</a>
+          <input name="search" placeholder="Search" />
+          <div class="link">
+            
+              <a href="https://iovxw.net/p/">Archive</a>
+            
+              <a href="https://iovxw.net/rss.xml">RSS</a>
+            
+              <a href="https://iovxw.net/links/">Links</a>
+            
+              <a href="https://iovxw.net/about/">About</a>
+            
+          </div>
+      </header>
+
+      
+<article>
+    <h1>给戴森 V8 更换 18V 工具电池</h1>
+    <div class="info"><p>也有厂家叫 20V 21V 电池，但其实都一样</p><time>2025-10-24 00:00</time></div>
+    <p><img src="https://iovxw.net/p/dyson-battery/0.webp" alt="0D930L" /></p>
+<p>戴森 V8</p>
+<p>由于生命期长，从 2016 年至今仍在生产销售，市场存量相当之大</p>
+<p>单主机二手价格普遍一百块左右，再加一百甚至能收个全配件大全套</p>
+<span id="continue-reading"></span>
+<p>拿来做全屋清洁的话是肯定比不上现在的产品的，但只用来吸一下扫地机器人够不到的各种犄角旮旯，还有做木工时飞到奇怪地方的木屑是十分够用了</p>
+<p>但这个价格电池肯定是不用想了，要么只能用一分钟，要么干脆不能用⸺只闪四下红灯，说明放置时间太长，电池均衡炸了，保护板锁定了</p>
+<p>不过只要不是红灯长亮（那说明电机故障了，千万别买），就还能用</p>
+<p>当然买个新电池是不可能的，就算只买第三方的、容量勉强达标的，一个 100 块钱的吸尘器要换块 300 块钱的电池，开玩笑呢</p>
+<p>好在戴森 V8 作为一个十年前的老型号，还不像现在的吸尘器这样使劲加电压，只使用了 6 串高压锂电池供电，最低电压 18V</p>
+<p>我们可以牺牲一点利用率，用常见的 5 串工具电池代替它</p>
+<p>所以只需要弄个转接⸺</p>
+<p>就可以给它装上我价值七百块的正版牧田 18V 6.0 Ah 工具锂电池啦哈哈哈</p>
+<hr />
+<h2 id="mai"><a class="zola-anchor" href="#mai" aria-label="Anchor link for: mai">买？</a></h2>
+<p>网上有卖现成的电池转换器，我找到了三种型号，但都有同一个问题⸺比原装电池厚，会挡住集尘桶的拆卸开关，要清洗集尘桶的话就只能先卸掉电池座</p>
+<blockquote>
+<p>淘宝用户 <strong>梦里梦见梦眯眯</strong> 的商品评价配图：</p>
+<p><img src="https://iovxw.net/p/dyson-battery/c0.webp" alt="c0" /></p>
+</blockquote>
+<style>img[alt="c0"]{ max-height:700px }</style>
+<p>评论区甚至有人专门开了个洞解决这个问题</p>
+<blockquote>
+<p>淘宝用户 <strong>地对空飛彈</strong> 的商品评价配图：</p>
+<p><img src="https://iovxw.net/p/dyson-battery/c1.webp" alt="c1" /></p>
+</blockquote>
+<p>就这还卖 50？还是自己动手吧</p>
+<hr />
+<h2 id="doityourself"><a class="zola-anchor" href="#doityourself" aria-label="Anchor link for: doityourself">DoItYourself</a></h2>
+<p>戴森的设计师很有个性</p>
+<p>他们设计的电池上面有个按钮</p>
+<p>这个按钮隐藏在手柄内部，正常情况是看不见的</p>
+<p>它不是什么 debug 按钮</p>
+<p>它是个开关，总开关</p>
+<p>按下它电池才会供电</p>
+<p>吸尘器本体上是没有开关的</p>
+<p>手柄上那个按钮是个纯机械传动结构（并且非常容易坏），用来触发电池上这个按钮的</p>
+<p>如果直接接电吸尘器会一直开机</p>
+<p>所以是真的很有个性</p>
+<p>往电机主板上多加个 mos 很难吗，那上面还有风冷散热诶</p>
+<p>甚至搞个普通的机械开关这手柄的空间也完全塞得下啊</p>
+<p><img src="https://iovxw.net/p/dyson-battery/sweat.gif" alt="" /></p>
+<p>总之得益于此，要做一个戴森电池转接器不是只接个线就行的⸺还得加个开关⸺一个能跑 24A 电流的开关</p>
+<p>也是因为这多出来的一点小麻烦，才有了这篇文章</p>
+<p>又因为是当作教程来写的，会尽量啰嗦点</p>
+<p>但又又因为拖更过久，有些本来应该写上的点忘掉了</p>
+<p>我想起来会补上，但可能就有点破碎了</p>
+<p>将就看吧</p>
+<hr />
+<h2 id="chai"><a class="zola-anchor" href="#chai" aria-label="Anchor link for: chai">拆</a></h2>
+<p>本着最小化工作量的原则，我们先拆开看看有啥可以复用的⸺</p>
+<p><img src="https://iovxw.net/p/dyson-battery/2.webp" alt="" /></p>
+<p>外壳挺有韧性的，用个圆润一点的撬棒找准卡扣位置很轻松就能无损撬开</p>
+<p>要小心有注塑纹的地方，主要是那些颜色很深的熔接纹，会容易裂</p>
+<p>戴森这工艺水平真是一言难尽，他们还把这当作正版特征🤣</p>
+<p>可以看见按钮在一侧外壳上，下面用弹簧压着一个反过来的常闭的微动，所以还是常开的逻辑</p>
+<p>PCB 最左侧是一个干簧管，与微动串联，用来检测电池是否已安装到主机上</p>
+<p>测试电路的时候记得在它上面放个磁铁</p>
+<p>整个板子上糊满了密封胶，抠掉之后还有一层三防漆，不是很绝缘但是真的很妨碍看丝印</p>
+<p><img src="https://iovxw.net/p/dyson-battery/1.webp" alt="" /></p>
+<p>上面有颗大 MOS（就正中偏下那颗黑乎乎，R19正上方），原本就是用它来当那个开关的</p>
+<p>勉强看出来上面写着 <code>0D930L</code>（见题图）是 <code>PSMN0R9-30YLD</code></p>
+<p>电池管理是 <code>ISL94208</code>（这个芯片是支持均衡的，但是戴森偏不用😑），MCU 是 <code>PIC16F1847</code></p>
+<p>微动后面串了俩电阻（R53 R10）共 140kΩ 接到了 <code>WKUP</code> 引脚上</p>
+<p>MOS 的栅极并了个 1MΩ 电阻（R23），接 <code>DFET</code></p>
+<p>所以基本流程是：</p>
+<p>微动被松开 → <code>WKUP</code> 收到信号 → 固件判断一堆前置条件 → MOS 栅极充电 → 电池开始供电</p>
+<p>但是因为电池不均衡，固件熔断了，这堆东西都没法直接用</p>
+<p>可以找开源的固件刷进去复活，但还得整个编程器</p>
+<p>而现在我们要外接电池不需要管理，这堆芯片放着也耗电，不如改改电路</p>
+<hr />
+<h2 id="zen-me-gai"><a class="zola-anchor" href="#zen-me-gai" aria-label="Anchor link for: zen-me-gai">怎么改？</a></h2>
+<p>看一眼 MOS 需要多大电压：</p>
+<p><img src="https://iovxw.net/p/dyson-battery/6.webp" alt="" />
+<img src="https://iovxw.net/p/dyson-battery/5.webp" alt="" /></p>
+<p>VGS 最低 3V 最高 20V</p>
+<p>5 串锂电池满电是 21V，所以不能直接接上去</p>
+<p>但它这原本电路刚好可以改成个电阻分压电路来用</p>
+<p><img src="https://iovxw.net/p/dyson-battery/1.webp" alt="" /></p>
+<p>前面说过微动上串了 140kΩ，那只需要再找一个合适的电阻⸺比如 R14 是 220kΩ 就很合适，可以把电压降到 11-12.8V（不用担心栅极充电速度，1ms 够了，戴森的电机有缓启动）</p>
+<p>把它换到 R23 的位置上去</p>
+<p>再在图里标记的红线处飞条线，把微动和栅极接起来</p>
+<p>电路部分就算是完成了，芯片（U1 U2）有热风枪的话可以吹下来，没有用刀割一圈也一样</p>
+<p>充电口的线也可以直接剪掉</p>
+<p>当然上面这些动手之前得先把电芯拆下来</p>
+<p>镍片用钳子夹住末端撕，小心别把正极那头的电池外皮弄破了，容易短路</p>
+<p><img src="https://iovxw.net/p/dyson-battery/3.webp" alt="" /></p>
+<p>用的还不是常见的 21700，是 20700 的高压电芯，满电是 4.35V</p>
+<p>顺便 PCB 背面，这很广东：</p>
+<p><img src="https://iovxw.net/p/dyson-battery/4.webp" alt="back" /></p>
+<style>img[alt="back"]{ max-height: 80vh }</style>
+<p>圆头那一端粗的镍片是总正极，方头那边是总负极</p>
+<p>找两根能跑 24A 的线焊上，再绕到背面</p>
+<p>这里我用的是各两根两平的线，注意电流平衡线长别差得太大</p>
+<p>焊这种粗线的时候，如果两秒锡没化，就不用继续费劲了，换个大功率烙铁吧</p>
+<p>背面为了方便走线用台锯开了个槽</p>
+<p>不开也可以，不装电芯保持架的盖然后从侧面硬绕就行</p>
+<p><img src="https://iovxw.net/p/dyson-battery/7.webp" alt="" /></p>
+<p>塞壳里，找个电池座焊上，拧好螺丝</p>
+<p>把外壳合起来的时候要注意一下微动和充电口的线，很容易卡到微动</p>
+<p>位置尽量靠后些，保持重心</p>
+<p><img src="https://iovxw.net/p/dyson-battery/8.webp" alt="done" /></p>
+<style>img[alt="done"]{ max-height: 80vh }</style>
+<p>完成</p>
+<p><img src="https://iovxw.net/p/dyson-battery/9.webp" alt="" /></p>
+<hr />
+<h2 id="guan-yu-di-zuo"><a class="zola-anchor" href="#guan-yu-di-zuo" aria-label="Anchor link for: guan-yu-di-zuo">关于底座</a></h2>
+<p>牧田的电池座不要买三脚的</p>
+<p>因为电池上的那个短脚里面其实是两个触点，官方的三脚电池底座插入时会短接一下它俩，然后就会启动一个被动模式</p>
+<p>这个模式下的电池保护是交给用电工具控制的，如果只是用傻瓜式的电池座而没有相关控制电路，电池是能被过放电的</p>
+<style>img[alt="10"], img[alt="11"] { max-width: 50% }</style>
+<p><img src="https://iovxw.net/p/dyson-battery/11.webp" alt="11" /><img src="https://iovxw.net/p/dyson-battery/10.webp" alt="10" /></p>
+<p>如图，官方的三脚插座那个短脚是特殊形状的，上面还带个 <em>★</em> 表示有保护电路</p>
+<p>而官方的两脚款都是不带 <em>★</em> 的</p>
+<hr />
+<h2 id="ti-wai-hua"><a class="zola-anchor" href="#ti-wai-hua" aria-label="Anchor link for: ti-wai-hua">题外话</a></h2>
+<p>虽然本博客的文字风格一直很自由</p>
+<p>基本不用句号</p>
+<p>还一段一段大喘气</p>
+<p>并没有遵守过什么规范</p>
+<p>但本文这次还是对标点符号做出了一些改进⸺彻底换成全角符号了</p>
+<p>以前是因为标点挤压没有实现，都是半角符号并手动插入空格</p>
+<blockquote>
+<p><img src="https://www.thetype.com/wp-content/uploads/2018/02/Mode-Explaination.png" alt="" />
+图片来自 <a href="https://www.thetype.com/2018/02/14211/">Reic Q.LIU，《全角半角碎碎念》</a></p>
+</blockquote>
+<p>而 Chrome <a href="https://developer.chrome.com/blog/css-i18n-features">自 123 起默认开启 <code>text-spacing-trim</code></a> 已经一年半了，Firefox 也终于是<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1951795">在做了</a></p>
+<p>按我这一年一篇的更新频率，下一篇文章发布前应该就能普及了</p>
+<p>可喜可贺</p>
+<p>还有一个 <code>text-autospace</code></p>
+<p>这个 Firefox 下个正式版就会支持，以后写中英文就不用手动插入空格了</p>
+
+</article>
+<div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    this.page.url = 'https://iovxw.net/p/dyson-battery/';
+  };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://iovxw.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+      <footer>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International license.
+        </a>
+      </footer>
+    </section>
+  </body>
+</html>
+
