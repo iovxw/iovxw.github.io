@@ -21,14 +21,13 @@
         --border-spacing: 10px;
         color-scheme: dark;
         text-spacing-trim: trim-start;
+        font-family: sans-serif;
     }
 
     body {
         margin: 8px 0;
         background: #151515;
         color: white;
-        font-size: 1em;
-        font-family: sans-serif;
     }
 
     @media (max-width: 640px) {
@@ -377,16 +376,16 @@
 <hr />
 <h2 id="pei-zhi"><a class="zola-anchor" href="#pei-zhi" aria-label="Anchor link for: pei-zhi">配置</a></h2>
 <p>我的 Entware 是装在 U盘 里的，下载文件夹设置在了移动硬盘，为了 U盘 寿命考虑，需要编辑 <em>/opt/etc/rtorrent/rtorrent.conf</em> 将 session 和 watchdir 文件夹也改在移动硬盘，这两个在安装时修改下载文件夹是不会一块跟着变的</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>session = /mnt/sdb5/download/session
-</span><span>schedule = watch_directory,5,5,load_start=/mnt/sdb5/download/watchdir/*.torrent
+<pre data-lang="ini" style="background-color:#282828;color:#fdf4c1aa;" class="language-ini "><code class="language-ini" data-lang="ini"><span style="color:#fdf4c1;">session </span><span style="color:#fe8019;">= /</span><span>mnt</span><span style="color:#fe8019;">/</span><span>sdb5</span><span style="color:#fe8019;">/</span><span>download</span><span style="color:#fe8019;">/</span><span>session
+</span><span style="color:#fdf4c1;">schedule </span><span style="color:#fe8019;">=</span><span> watch_directory</span><span style="color:#fe8019;">,</span><span style="color:#d3869b;">5</span><span style="color:#fe8019;">,</span><span style="color:#d3869b;">5</span><span style="color:#fe8019;">,</span><span>load_start</span><span style="color:#fe8019;">=/</span><span>mnt</span><span style="color:#fe8019;">/</span><span>sdb5</span><span style="color:#fe8019;">/</span><span>download</span><span style="color:#fe8019;">/</span><span>watchdir</span><span style="color:#fe8019;">/*.</span><span>torrent
 </span></code></pre>
 <p>session 文件夹是用来放各种临时信息，比如 DHT 的节点之类</p>
 <p>watchdir 里的 torrent 文件会自动添加到新任务，当然本质是一个定时器定时检测指定路径而已</p>
 <p>修改之前记得先 <code>/opt/etc/init.d/S85rtorrent stop</code></p>
 <h3 id="duan-kou"><a class="zola-anchor" href="#duan-kou" aria-label="Anchor link for: duan-kou">端口</a></h3>
 <p>在安装完成的时候会提示开启端口，虽然不开也能运行，但是将很难找到 peer</p>
-<pre data-lang="shell" style="background-color:#282828;color:#fdf4c1aa;" class="language-shell "><code class="language-shell" data-lang="shell"><span>iptables -I INPUT -p tcp --destination-port 51411 -j ACCEPT
-</span><span>iptables -I INPUT -p udp --destination-port 51412 -j ACCEPT
+<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">iptables -I INPUT -p tcp --destination-port 51411 -j ACCEPT
+</span><span style="color:#fdf4c1;">iptables -I INPUT -p udp --destination-port 51412 -j ACCEPT
 </span></code></pre>
 <p>51411 是 <em>port_range</em> 的默认值，这是一个端口范围，全闭区间，用于与其他 peer 的连接</p>
 <p>51412 是 <em>dht_port</em> 的默认值，字面意思</p>
@@ -397,9 +396,9 @@
 <p>默认 <code>dht = auto</code>，是指只有当种子的 tracker 里有设置 dht 的时候才会启用</p>
 <p>不过众所周知的原因在国内 tracker 服务器并不是那么好访问，这里直接设置为 <code>on</code> 强制启用就行</p>
 <p>DHT 在启动的时候需要先连接几个 bootstrap 节点才能初始化，配置里加入如下几行</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>schedule2 = dht_node0,30,0,dht.add_node=dht.transmissionbt.com
-</span><span>schedule2 = dht_node1,30,0,dht.add_node=router.bittorrent.com
-</span><span>schedule2 = dht_node2,30,0,dht.add_node=router.utorrent.com
+<pre data-lang="ini" style="background-color:#282828;color:#fdf4c1aa;" class="language-ini "><code class="language-ini" data-lang="ini"><span style="color:#fdf4c1;">schedule2 </span><span style="color:#fe8019;">=</span><span> dht_node0</span><span style="color:#fe8019;">,</span><span style="color:#d3869b;">30</span><span style="color:#fe8019;">,</span><span style="color:#d3869b;">0</span><span style="color:#fe8019;">,</span><span>dht</span><span style="color:#fe8019;">.</span><span>add_node</span><span style="color:#fe8019;">=</span><span>dht</span><span style="color:#fe8019;">.</span><span>transmissionbt</span><span style="color:#fe8019;">.</span><span>com
+</span><span style="color:#fdf4c1;">schedule2 </span><span style="color:#fe8019;">=</span><span> dht_node1</span><span style="color:#fe8019;">,</span><span style="color:#d3869b;">30</span><span style="color:#fe8019;">,</span><span style="color:#d3869b;">0</span><span style="color:#fe8019;">,</span><span>dht</span><span style="color:#fe8019;">.</span><span>add_node</span><span style="color:#fe8019;">=</span><span>router</span><span style="color:#fe8019;">.</span><span>bittorrent</span><span style="color:#fe8019;">.</span><span>com
+</span><span style="color:#fdf4c1;">schedule2 </span><span style="color:#fe8019;">=</span><span> dht_node2</span><span style="color:#fe8019;">,</span><span style="color:#d3869b;">30</span><span style="color:#fe8019;">,</span><span style="color:#d3869b;">0</span><span style="color:#fe8019;">,</span><span>dht</span><span style="color:#fe8019;">.</span><span>add_node</span><span style="color:#fe8019;">=</span><span>router</span><span style="color:#fe8019;">.</span><span>utorrent</span><span style="color:#fe8019;">.</span><span>com
 </span></code></pre>
 <p>用 schedule 是因为需要延时一下，等待 DHT 启动完成，详见 <a href="https://github.com/rakshasa/rtorrent/issues/383">rtorrent#383</a></p>
 <h3 id="kai-ji-qi-dong"><a class="zola-anchor" href="#kai-ji-qi-dong" aria-label="Anchor link for: kai-ji-qi-dong">开机启动</a></h3>

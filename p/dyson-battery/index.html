@@ -21,14 +21,13 @@
         --border-spacing: 10px;
         color-scheme: dark;
         text-spacing-trim: trim-start;
+        font-family: sans-serif;
     }
 
     body {
         margin: 8px 0;
         background: #151515;
         color: white;
-        font-size: 1em;
-        font-family: sans-serif;
     }
 
     @media (max-width: 640px) {
@@ -436,18 +435,34 @@
 <hr />
 <h2 id="zen-me-gai"><a class="zola-anchor" href="#zen-me-gai" aria-label="Anchor link for: zen-me-gai">怎么改？</a></h2>
 <p>看一眼 MOS 需要多大电压：</p>
-<p><img src="https://iovxw.net/p/dyson-battery/6.webp" alt="" />
-<img src="https://iovxw.net/p/dyson-battery/5.webp" alt="" /></p>
-<p>VGS 最低 3V 最高 20V</p>
+<p><img src="https://iovxw.net/p/dyson-battery/limiting_values.svg" alt="limiting_values" /></p>
+<p><img src="https://iovxw.net/p/dyson-battery/fig_7_8.svg" alt="fig_7_8" /></p>
+<style>img[alt="limiting_values"],img[alt="fig_7_8"]{ width: 100% }</style>
+<p>V<sub>ɢs</sub> 最低 3V 最高 20V</p>
 <p>5 串锂电池满电是 21V，所以不能直接接上去</p>
 <p>但它这原本电路刚好可以改成个电阻分压电路来用</p>
+<p>前面说过微动上串了 140kΩ，那只需要再找一个合适的电阻⸺比如 R14 是 220kΩ</p>
+<p>就可以把电压降到 11-12.8V 了</p>
+<p>但是这样 MOS 的驱动电流只有 128.6μA，有点小啊</p>
+<p>再看一眼手册：</p>
+<p><img src="https://iovxw.net/p/dyson-battery/qg.svg" alt="qg" /></p>
+<style>img[alt="qg"]{ width: 30em }</style>
+<p>Q<sub>ɢ</sub> 按 140nC 算，完全开启 MOS 需要 1ms 左右</p>
+<p>戴森的电机有缓启动，够用了</p>
 <p><img src="https://iovxw.net/p/dyson-battery/1.webp" alt="" /></p>
-<p>前面说过微动上串了 140kΩ，那只需要再找一个合适的电阻⸺比如 R14 是 220kΩ 就很合适，可以把电压降到 11-12.8V（不用担心栅极充电速度，1ms 够了，戴森的电机有缓启动）</p>
-<p>把它换到 R23 的位置上去</p>
+<p>所以改动很简单</p>
+<ol>
+<li>
+<p>把 R14 换到 R23 的位置上去</p>
+</li>
+<li>
 <p>再在图里标记的红线处飞条线，把微动和栅极接起来</p>
-<p>电路部分就算是完成了，芯片（U1 U2）有热风枪的话可以吹下来，没有用刀割一圈也一样</p>
+</li>
+</ol>
+<p>电路部分就算是完成了</p>
+<p>芯片（U1 U2）有热风枪的话可以吹下来，没有用刀割一圈也一样</p>
 <p>充电口的线也可以直接剪掉</p>
-<p>当然上面这些动手之前得先把电芯拆下来</p>
+<p>当然动手之前得先把电芯拆下来</p>
 <p>镍片用钳子夹住末端撕，小心别把正极那头的电池外皮弄破了，容易短路</p>
 <p><img src="https://iovxw.net/p/dyson-battery/3.webp" alt="" /></p>
 <p>用的还不是常见的 21700，是 20700 的高压电芯，满电是 4.35V</p>

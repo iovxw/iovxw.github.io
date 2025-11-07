@@ -21,14 +21,13 @@
         --border-spacing: 10px;
         color-scheme: dark;
         text-spacing-trim: trim-start;
+        font-family: sans-serif;
     }
 
     body {
         margin: 8px 0;
         background: #151515;
         color: white;
-        font-size: 1em;
-        font-family: sans-serif;
     }
 
     @media (max-width: 640px) {
@@ -408,21 +407,21 @@ and the use of <tt>make-boot-file</tt>.
 <span id="continue-reading"></span>
 <hr />
 <p>例子：</p>
-<pre data-lang="scheme" style="background-color:#282828;color:#fdf4c1aa;" class="language-scheme "><code class="language-scheme" data-lang="scheme"><span>;; lib/b.ss
+<pre data-lang="lisp" style="background-color:#282828;color:#fdf4c1aa;" class="language-lisp "><code class="language-lisp" data-lang="lisp"><span style="font-style:italic;color:#928374;">;; lib/b.ss
 </span><span>(library (lib b)
-</span><span>  (export y)
-</span><span>  (import (rnrs))
-</span><span>  (define y &quot;Hello!\n&quot;))
+</span><span>  (</span><span style="color:#fabd2f;">export</span><span> y)
+</span><span>  (</span><span style="color:#fabd2f;">import </span><span>(rnrs))
+</span><span>  (define y </span><span style="color:#b8bb26;">&quot;Hello!\n&quot;</span><span>))
 </span></code></pre>
-<pre data-lang="scheme" style="background-color:#282828;color:#fdf4c1aa;" class="language-scheme "><code class="language-scheme" data-lang="scheme"><span>;; lib/a.ss
+<pre data-lang="lisp" style="background-color:#282828;color:#fdf4c1aa;" class="language-lisp "><code class="language-lisp" data-lang="lisp"><span style="font-style:italic;color:#928374;">;; lib/a.ss
 </span><span>(library (lib a)
-</span><span>  (export x)
-</span><span>  (import (rnrs)
+</span><span>  (</span><span style="color:#fabd2f;">export</span><span> x)
+</span><span>  (</span><span style="color:#fabd2f;">import </span><span>(rnrs)
 </span><span>          (lib b))
 </span><span>  (define x y))
 </span></code></pre>
-<pre data-lang="scheme" style="background-color:#282828;color:#fdf4c1aa;" class="language-scheme "><code class="language-scheme" data-lang="scheme"><span>;; main.ss
-</span><span>(import (rnrs)
+<pre data-lang="lisp" style="background-color:#282828;color:#fdf4c1aa;" class="language-lisp "><code class="language-lisp" data-lang="lisp"><span style="font-style:italic;color:#928374;">;; main.ss
+</span><span>(</span><span style="color:#fabd2f;">import </span><span>(rnrs)
 </span><span>        (lib a))
 </span><span>
 </span><span>(display x)
