@@ -371,41 +371,39 @@
 <hr />
 <p>首先找到画笔的ID</p>
 <p><code>xsetwacom --list</code></p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Wacom Intuos P M Pen stylus             id: 17        type: STYLUS    
-</span><span>Wacom Intuos P M Pen eraser             id: 18        type: ERASER    
-</span><span>Wacom Intuos P M Pad pad                id: 19        type: PAD  
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>Wacom Intuos P M Pen stylus             id: 17        type: STYLUS    </span></span>
+<span class="giallo-l"><span>Wacom Intuos P M Pen eraser             id: 18        type: ERASER    </span></span>
+<span class="giallo-l"><span>Wacom Intuos P M Pad pad                id: 19        type: PAD  </span></span></code></pre>
 <p>我这里的ID是17</p>
 <p>然后<code>xinput watch-props 17</code></p>
 <p>输出：</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Device &#39;Wacom Intuos P M Pen stylus&#39;:
-</span><span>        Device Enabled (137):        1
-</span><span>        Coordinate Transformation Matrix (139):        1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
-</span><span>        Device Accel Profile (261):        0
-</span><span>        Device Accel Constant Deceleration (262):        1.000000
-</span><span>        Device Accel Adaptive Deceleration (263):        1.000000
-</span><span>        Device Accel Velocity Scaling (264):        10.000000
-</span><span>        Device Node (257):        &quot;/dev/input/event15&quot;
-</span><span>        Wacom Tablet Area (637):        0, 0, 21600, 13500
-</span><span>        Wacom Rotation (638):        0
-</span><span>        Wacom Pressurecurve (639):        0, 0, 100, 100
-</span><span>        Wacom Serial IDs (611):        803, 1, 0, 0, 0
-</span><span>        Wacom Serial ID binding (612):        0
-</span><span>        Wacom Pressure Threshold (613):        27
-</span><span>        Wacom Sample and Suppress (614):        4, 4
-</span><span>        Wacom Enable Touch (615):        0
-</span><span>        Wacom Hover Click (640):        1
-</span><span>        Wacom Enable Touch Gesture (616):        0
-</span><span>        Wacom Touch Gesture Parameters (617):        0, 0, 250
-</span><span>        Wacom Tool Type (399):        &quot;STYLUS&quot; (395)
-</span><span>        Wacom Button Actions (618):        &quot;Wacom button action 0&quot; (619), &quot;Wacom button action 1&quot; (620), &quot;Wacom button action 2&quot; (621)
-</span><span>        Wacom button action 0 (619):        1572865
-</span><span>        Wacom button action 1 (620):        1572866
-</span><span>        Wacom button action 2 (621):        1572867
-</span><span>        Device Product ID (256):        1386, 803
-</span><span>        Wacom Debug Levels (636):        0, 0
-</span><span>
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>Device &#39;Wacom Intuos P M Pen stylus&#39;:</span></span>
+<span class="giallo-l"><span>        Device Enabled (137):        1</span></span>
+<span class="giallo-l"><span>        Coordinate Transformation Matrix (139):        1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000</span></span>
+<span class="giallo-l"><span>        Device Accel Profile (261):        0</span></span>
+<span class="giallo-l"><span>        Device Accel Constant Deceleration (262):        1.000000</span></span>
+<span class="giallo-l"><span>        Device Accel Adaptive Deceleration (263):        1.000000</span></span>
+<span class="giallo-l"><span>        Device Accel Velocity Scaling (264):        10.000000</span></span>
+<span class="giallo-l"><span>        Device Node (257):        &quot;/dev/input/event15&quot;</span></span>
+<span class="giallo-l"><span>        Wacom Tablet Area (637):        0, 0, 21600, 13500</span></span>
+<span class="giallo-l"><span>        Wacom Rotation (638):        0</span></span>
+<span class="giallo-l"><span>        Wacom Pressurecurve (639):        0, 0, 100, 100</span></span>
+<span class="giallo-l"><span>        Wacom Serial IDs (611):        803, 1, 0, 0, 0</span></span>
+<span class="giallo-l"><span>        Wacom Serial ID binding (612):        0</span></span>
+<span class="giallo-l"><span>        Wacom Pressure Threshold (613):        27</span></span>
+<span class="giallo-l"><span>        Wacom Sample and Suppress (614):        4, 4</span></span>
+<span class="giallo-l"><span>        Wacom Enable Touch (615):        0</span></span>
+<span class="giallo-l"><span>        Wacom Hover Click (640):        1</span></span>
+<span class="giallo-l"><span>        Wacom Enable Touch Gesture (616):        0</span></span>
+<span class="giallo-l"><span>        Wacom Touch Gesture Parameters (617):        0, 0, 250</span></span>
+<span class="giallo-l"><span>        Wacom Tool Type (399):        &quot;STYLUS&quot; (395)</span></span>
+<span class="giallo-l"><span>        Wacom Button Actions (618):        &quot;Wacom button action 0&quot; (619), &quot;Wacom button action 1&quot; (620), &quot;Wacom button action 2&quot; (621)</span></span>
+<span class="giallo-l"><span>        Wacom button action 0 (619):        1572865</span></span>
+<span class="giallo-l"><span>        Wacom button action 1 (620):        1572866</span></span>
+<span class="giallo-l"><span>        Wacom button action 2 (621):        1572867</span></span>
+<span class="giallo-l"><span>        Device Product ID (256):        1386, 803</span></span>
+<span class="giallo-l"><span>        Wacom Debug Levels (636):        0, 0</span></span>
+<span class="giallo-l"></span></code></pre>
 <p>找到我们要设置的<em>Device Accel Constant Deceleration</em>后面括号里的数字</p>
 <p><code>xinput set-prop 17 262 2.5</code></p>
 <p>就搞定啦</p>

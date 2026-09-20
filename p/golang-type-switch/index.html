@@ -364,21 +364,20 @@
     <div class="info"><p>语法强迫症</p><time>2014-11-21 00:00</time></div>
     <p>在群里讨论到了这个问题</p>
 <p>然后下面这是官方给出的例子</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>var t interface{}
-</span><span>t = functionOfSomeType()
-</span><span>switch t := t.(type) {
-</span><span>default:
-</span><span>    fmt.Printf(&quot;unexpected type %T&quot;, t)       // %T prints whatever type t has
-</span><span>case bool:
-</span><span>    fmt.Printf(&quot;boolean %t\n&quot;, t)             // t has type bool
-</span><span>case int:
-</span><span>    fmt.Printf(&quot;integer %d\n&quot;, t)             // t has type int
-</span><span>case *bool:
-</span><span>    fmt.Printf(&quot;pointer to boolean %t\n&quot;, *t) // t has type *bool
-</span><span>case *int:
-</span><span>    fmt.Printf(&quot;pointer to integer %d\n&quot;, *t) // t has type *int
-</span><span>}
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>var t interface{}</span></span>
+<span class="giallo-l"><span>t = functionOfSomeType()</span></span>
+<span class="giallo-l"><span>switch t := t.(type) {</span></span>
+<span class="giallo-l"><span>default:</span></span>
+<span class="giallo-l"><span>    fmt.Printf(&quot;unexpected type %T&quot;, t)       // %T prints whatever type t has</span></span>
+<span class="giallo-l"><span>case bool:</span></span>
+<span class="giallo-l"><span>    fmt.Printf(&quot;boolean %t\n&quot;, t)             // t has type bool</span></span>
+<span class="giallo-l"><span>case int:</span></span>
+<span class="giallo-l"><span>    fmt.Printf(&quot;integer %d\n&quot;, t)             // t has type int</span></span>
+<span class="giallo-l"><span>case *bool:</span></span>
+<span class="giallo-l"><span>    fmt.Printf(&quot;pointer to boolean %t\n&quot;, *t) // t has type *bool</span></span>
+<span class="giallo-l"><span>case *int:</span></span>
+<span class="giallo-l"><span>    fmt.Printf(&quot;pointer to integer %d\n&quot;, *t) // t has type *int</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre>
 <p>里面有几点要注意一下</p>
 <p>在<code>switch t := t.(type)</code>时</p>
 <p><code>switch</code>的其实是<code>t.(type)</code>而不是被创建的<code>t</code></p>
@@ -386,26 +385,24 @@
 <p>里面所使用的<code>t</code>都是<code>switch</code>里新建的那个<code>t</code></p>
 <hr />
 <p>等于下面这个例子</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>var t interface{}
-</span><span>t = functionOfSomeType()
-</span><span>switch t.(type) {
-</span><span>default:
-</span><span>    fmt.Printf(&quot;unexpected type %T&quot;, t)       // %T prints whatever type t has
-</span><span>case bool:
-</span><span>    t := t.(bool)
-</span><span>    fmt.Printf(&quot;boolean %t\n&quot;, t)             // t has type bool
-</span><span>case int:
-</span><span>    t := t.(int)
-</span><span>    fmt.Printf(&quot;integer %d\n&quot;, t)             // t has type int
-</span><span>case *bool:
-</span><span>    t := t.(*bool)
-</span><span>    fmt.Printf(&quot;pointer to boolean %t\n&quot;, *t) // t has type *bool
-</span><span>case *int:
-</span><span>    t := t.(*int)
-</span><span>    fmt.Printf(&quot;pointer to integer %d\n&quot;, *t) // t has type *int
-</span><span>}
-</span></code></pre>
-
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>var t interface{}</span></span>
+<span class="giallo-l"><span>t = functionOfSomeType()</span></span>
+<span class="giallo-l"><span>switch t.(type) {</span></span>
+<span class="giallo-l"><span>default:</span></span>
+<span class="giallo-l"><span>    fmt.Printf(&quot;unexpected type %T&quot;, t)       // %T prints whatever type t has</span></span>
+<span class="giallo-l"><span>case bool:</span></span>
+<span class="giallo-l"><span>    t := t.(bool)</span></span>
+<span class="giallo-l"><span>    fmt.Printf(&quot;boolean %t\n&quot;, t)             // t has type bool</span></span>
+<span class="giallo-l"><span>case int:</span></span>
+<span class="giallo-l"><span>    t := t.(int)</span></span>
+<span class="giallo-l"><span>    fmt.Printf(&quot;integer %d\n&quot;, t)             // t has type int</span></span>
+<span class="giallo-l"><span>case *bool:</span></span>
+<span class="giallo-l"><span>    t := t.(*bool)</span></span>
+<span class="giallo-l"><span>    fmt.Printf(&quot;pointer to boolean %t\n&quot;, *t) // t has type *bool</span></span>
+<span class="giallo-l"><span>case *int:</span></span>
+<span class="giallo-l"><span>    t := t.(*int)</span></span>
+<span class="giallo-l"><span>    fmt.Printf(&quot;pointer to integer %d\n&quot;, *t) // t has type *int</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre>
 </article>
 <div id="disqus_thread"></div>
 <script>

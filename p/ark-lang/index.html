@@ -362,65 +362,63 @@
 <article>
     <h1>Ark —— Go 和 Rust 的结合体</h1>
     <div class="info"><p>只是没人用</p><time>2016-06-14 00:00</time></div>
-    <p>编译器是用go和Rust写的，github在这里：<a href="https://github.com/ark-lang/ark">https://github.com/ark-lang/ark</a></p>
-<p>官网：<a href="http://ark-lang.org/">http://ark-lang.org/</a></p>
+    <p>编译器是用go和Rust写的，github在这里：<a rel="external" href="https://github.com/ark-lang/ark">https://github.com/ark-lang/ark</a></p>
+<p>官网：<a rel="external" href="http://ark-lang.org/">http://ark-lang.org/</a></p>
 <p>说是系统级编程语言，可以和C无缝交互</p>
 <p>至于为什么说是go和rust的结合体</p>
-<p>看下面的例子就知道了（<a href="https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md">https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md</a>）</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>struct Bar {
-</span><span>    name: str;
-</span><span>}
-</span><span>
-</span><span>struct Baz {
-</span><span>    name: str;
-</span><span>}
-</span><span>
-</span><span>trait Foo {
-</span><span>    func fooBar();
-</span><span>}
-</span><span>
-</span><span>impl Foo for Bar {
-</span><span>    func fooBar() {
-</span><span>        println(&quot;foobar method in foo for bar %s!&quot;, name);
-</span><span>    }
-</span><span>}
-</span><span>
-</span><span>impl Foo for Baz {
-</span><span>    func fooBar() {
-</span><span>        println(&quot;foobar method in foo for baz %s!&quot;, name);
-</span><span>    }
-</span><span>}
-</span><span>
-</span><span>
-</span><span>// attributes look cool
-</span><span>// basically generics, we need to use
-</span><span>// them in this case instead of saying `value: Foo` as
-</span><span>// a param, because a trait does not have a constant
-</span><span>// size that is known at compile time, so the generic
-</span><span>// will basically compile down to [in this case] two
-</span><span>// functions one for Bar, and one for Baz, then it
-</span><span>// will know the size of the given value.
-</span><span>// this might be weird to understand but its 1am and im
-</span><span>// ill and tired. jah bless xx
-</span><span>func [T: Foo] callFooBar(value: T) {
-</span><span>
-</span><span>}
-</span><span>
-</span><span>func main() {
-</span><span>    // monomorphisation????
-</span><span>    baz: Baz = {
-</span><span>        name: &quot;baz&quot;,
-</span><span>    };
-</span><span>
-</span><span>    bar: Bar = {
-</span><span>        name: &quot;bar&quot;,
-</span><span>    }
-</span><span>
-</span><span>    callFooBar(baz);
-</span><span>    callFooBar(bar);
-</span><span>}
-</span></code></pre>
-
+<p>看下面的例子就知道了（<a rel="external" href="https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md">https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md</a>）</p>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>struct Bar {</span></span>
+<span class="giallo-l"><span>    name: str;</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>struct Baz {</span></span>
+<span class="giallo-l"><span>    name: str;</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>trait Foo {</span></span>
+<span class="giallo-l"><span>    func fooBar();</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>impl Foo for Bar {</span></span>
+<span class="giallo-l"><span>    func fooBar() {</span></span>
+<span class="giallo-l"><span>        println(&quot;foobar method in foo for bar %s!&quot;, name);</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>impl Foo for Baz {</span></span>
+<span class="giallo-l"><span>    func fooBar() {</span></span>
+<span class="giallo-l"><span>        println(&quot;foobar method in foo for baz %s!&quot;, name);</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>// attributes look cool</span></span>
+<span class="giallo-l"><span>// basically generics, we need to use</span></span>
+<span class="giallo-l"><span>// them in this case instead of saying `value: Foo` as</span></span>
+<span class="giallo-l"><span>// a param, because a trait does not have a constant</span></span>
+<span class="giallo-l"><span>// size that is known at compile time, so the generic</span></span>
+<span class="giallo-l"><span>// will basically compile down to [in this case] two</span></span>
+<span class="giallo-l"><span>// functions one for Bar, and one for Baz, then it</span></span>
+<span class="giallo-l"><span>// will know the size of the given value.</span></span>
+<span class="giallo-l"><span>// this might be weird to understand but its 1am and im</span></span>
+<span class="giallo-l"><span>// ill and tired. jah bless xx</span></span>
+<span class="giallo-l"><span>func [T: Foo] callFooBar(value: T) {</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>func main() {</span></span>
+<span class="giallo-l"><span>    // monomorphisation????</span></span>
+<span class="giallo-l"><span>    baz: Baz = {</span></span>
+<span class="giallo-l"><span>        name: &quot;baz&quot;,</span></span>
+<span class="giallo-l"><span>    };</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    bar: Bar = {</span></span>
+<span class="giallo-l"><span>        name: &quot;bar&quot;,</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    callFooBar(baz);</span></span>
+<span class="giallo-l"><span>    callFooBar(bar);</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre>
 </article>
 <div id="disqus_thread"></div>
 <script>

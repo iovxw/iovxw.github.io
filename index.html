@@ -394,9 +394,9 @@
 <p><img src="https://iovxw.net/p/frigate/0.webp" alt="ipc55ae" /></p>
 <style>img[alt="ipc55ae"]{ max-height:700px }</style>
 <p>TL-IPC55AE 加 3D 打印外壳, 顺便解决了原装摄像头底座过于方便拆的问题</p>
-<p>录像和监控报警用的是 <a href="https://frigate.video/">Frigate</a></p>
+<p>录像和监控报警用的是 <a rel="external" href="https://frigate.video/">Frigate</a></p>
 <p>它的物体识别准确率还可以, 并且支持的硬件多, 开启硬件加速后总体功耗非常低, 省电</p>
-<p>最关键是可以仅在检测到运动时录像, 不像 <a href="https://scrypted.app/">scrypted</a> 必须 7x24 小时的</p>
+<p>最关键是可以仅在检测到运动时录像, 不像 <a rel="external" href="https://scrypted.app/">scrypted</a> 必须 7x24 小时的</p>
 <p>对硬盘十分友好, 1T 可以存三年</p>
               <div class="read-more">
                 <a href="https://iovxw.net/p/frigate/#continue-reading">Read More…</a>
@@ -520,9 +520,8 @@
 <hr />
 <p>闭包在捕获环境时, 如不显式添加 <code>move</code> 关键字, 捕获的方法是由编译器推导的</p>
 <p>规则为: 如果捕获的变量在闭包内被引用, 或者可变引用, 那么就捕获到引用或可变引用</p>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let</span><span> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span>::new();
-</span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span>|| v.</span><span style="color:#fabd2f;">len</span><span>(); </span><span style="font-style:italic;color:#928374;">// v: &amp;String
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #FE8019;">let</span><span style="color: #83A598;"> v</span><span style="color: #8EC07C;"> =</span><span style="color: #FABD2F;"> String</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">new</span><span style="color: #A89984;">();</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">let</span><span style="color: #83A598;"> c</span><span style="color: #8EC07C;"> =</span><span style="color: #FB4934;"> ||</span><span style="color: #83A598;"> v</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">len</span><span style="color: #A89984;">();</span><span style="color: #928374;font-style: italic;"> // v: &amp;String</span></span></code></pre>
               <div class="read-more">
                 <a href="https://iovxw.net/p/rust-closure-and-copy/#continue-reading">Read More…</a>
               </div>

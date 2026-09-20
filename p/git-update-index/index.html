@@ -362,13 +362,11 @@
 <article>
     <h1>Git 取消跟踪文件和重新跟踪文件</h1>
     <div class="info"><p>笔记</p><time>2015-10-11 00:00</time></div>
-    <p>有时候需要让 git 忽略某个文件的更新，比如<em>配置文件</em>。配置文件里经常有各种涉及隐私的东西，一般只提交一个模板上去，如果把自己的配置提交上去了……被盗用的例子也不少了（比如<a href="http://www.devfactor.net/2014/12/30/2375-amazon-mistake/">这个</a>、<a href="http://wptavern.com/ryan-hellyers-aws-nightmare-leaked-access-keys-result-in-a-6000-bill-overnight">这个</a>和<a href="http://www.wooyun.org/bugs/wooyun-2010-061718">这个</a>）</p>
+    <p>有时候需要让 git 忽略某个文件的更新，比如<em>配置文件</em>。配置文件里经常有各种涉及隐私的东西，一般只提交一个模板上去，如果把自己的配置提交上去了……被盗用的例子也不少了（比如<a rel="external" href="http://www.devfactor.net/2014/12/30/2375-amazon-mistake/">这个</a>、<a rel="external" href="http://wptavern.com/ryan-hellyers-aws-nightmare-leaked-access-keys-result-in-a-6000-bill-overnight">这个</a>和<a rel="external" href="http://www.wooyun.org/bugs/wooyun-2010-061718">这个</a>）</p>
 <p>解决方法也很简单，让 git 忽略这个文件的变更就行了</p>
-<span id="continue-reading"></span><pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">git update-index --assume-unchanged your_file_path
-</span></code></pre>
+<span id="continue-reading"></span><pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FABD2F;">git</span><span style="color: #B8BB26;"> update-index</span><span style="color: #D3869B;"> --assume-unchanged</span><span style="color: #B8BB26;"> your_file_path</span></span></code></pre>
 <p>重新跟踪:</p>
-<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">git update-index --no-assume-unchanged your_file_path
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FABD2F;">git</span><span style="color: #B8BB26;"> update-index</span><span style="color: #D3869B;"> --no-assume-unchanged</span><span style="color: #B8BB26;"> your_file_path</span></span></code></pre>
 <blockquote>
 <p><strong>--[no-]assume-unchanged</strong>
 When this flag is specified, the object names recorded for the paths are not updated. Instead, this option sets/unsets the "assume unchanged" bit for the paths. When the "assume unchanged" bit is on, the user promises not to change the file and allows Git to assume that the working tree file matches what is recorded in the index. If you want to change the working tree file, you need to unset the bit to tell Git. This is sometimes helpful when working with a big project on a filesystem that has very slow lstat(2) system call (e.g. cifs).</p>
@@ -376,7 +374,7 @@ When this flag is specified, the object names recorded for the paths are not upd
 <blockquote>
 <p>Git will fail (gracefully) in case it needs to modify this file in the index e.g. when merging in a commit; thus, in case the assumed-untracked file is changed upstream, you will need to handle the situation manually.</p>
 </blockquote>
-<p><a href="https://git-scm.com/docs/git-update-index">https://git-scm.com/docs/git-update-index</a></p>
+<p><a rel="external" href="https://git-scm.com/docs/git-update-index">https://git-scm.com/docs/git-update-index</a></p>
 
 </article>
 <div id="disqus_thread"></div>

@@ -362,7 +362,7 @@
 <article>
     <h1>Rust 的 async&#x2F;await</h1>
     <div class="info"><p>仍需努力</p><time>2017-08-29 00:00</time></div>
-    <p>今天, Rust 的 Generator 支持<a href="https://github.com/rust-lang/rust/pull/43076#issuecomment-325453224">终于被合并了</a>!</p>
+    <p>今天, Rust 的 Generator 支持<a rel="external" href="https://github.com/rust-lang/rust/pull/43076#issuecomment-325453224">终于被合并了</a>!</p>
 <p>这代表那拖了很久又很久的 Coroutine 也终于可以在 Nightly(2017-08-29) 里使用了</p>
 <p>可喜可贺, 可喜可贺</p>
 <p>那以后就可以愉快的在 Rust 里写异步代码啦?</p>
@@ -370,7 +370,7 @@
 <p>坑在哪里我下面慢慢说</p>
 <span id="continue-reading"></span>
 <hr />
-<p>Rust 有一个库叫 <a href="https://crates.io/crates/futures"><em>futures</em></a> 用来写异步程序, 这个库实现了 Future/Promise 模型里的各种组合子(其实就是把回调换个写法)</p>
+<p>Rust 有一个库叫 <a rel="external" href="https://crates.io/crates/futures"><em>futures</em></a> 用来写异步程序, 这个库实现了 Future/Promise 模型里的各种组合子(其实就是把回调换个写法)</p>
 <p>但是它写起来很别扭, 需要一大串 <code>.and_then</code> 之类的, 并且导致流程控制变得很复杂</p>
 <p>所以人们迫切的需要一个更加同步的方式来写异步代码</p>
 <p>在人类目前科技水平下, 这个方式叫 Coroutine</p>
@@ -382,212 +382,202 @@
 <hr />
 <p>Coroutine/Generator 在 Rust 中写起来像 Closure, 但不接受任何参数</p>
 <p>内部提供 <code>yield</code> 语句, 它可以 "暂停" 当前 Generator, 并允许之后继续执行</p>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#fdf4c1;">feature</span><span>(generators, generator_trait)]
-</span><span>
-</span><span style="color:#fa5c4b;">use </span><span>std::ops::{Generator, GeneratorState};
-</span><span>
-</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">main</span><span>() {
-</span><span>    </span><span style="color:#fa5c4b;">let mut </span><span style="color:#8ec07c;">generator </span><span style="color:#fe8019;">= </span><span>|| {
-</span><span>        </span><span style="background-color:#932b1e;color:#fdf4c1;">yield</span><span> </span><span style="color:#d3869b;">1</span><span>;
-</span><span>        </span><span style="color:#fa5c4b;">return </span><span style="color:#b8bb26;">&quot;foo&quot;
-</span><span>    };
-</span><span>
-</span><span>    </span><span style="color:#fa5c4b;">match</span><span> generator.</span><span style="color:#fabd2f;">resume</span><span>() {
-</span><span>        GeneratorState::Yielded(</span><span style="color:#d3869b;">1</span><span>) </span><span style="color:#fe8019;">=&gt; </span><span>{}
-</span><span>        </span><span style="color:#fe8019;">_ =&gt; </span><span style="color:#fabd2f;">panic!</span><span>(</span><span style="color:#b8bb26;">&quot;unexpected value from resume&quot;</span><span>),
-</span><span>    }
-</span><span>    </span><span style="color:#fa5c4b;">match</span><span> generator.</span><span style="color:#fabd2f;">resume</span><span>() {
-</span><span>        GeneratorState::Complete(</span><span style="color:#b8bb26;">&quot;foo&quot;</span><span>) </span><span style="color:#fe8019;">=&gt; </span><span>{}
-</span><span>        </span><span style="color:#fe8019;">_ =&gt; </span><span style="color:#fabd2f;">panic!</span><span>(</span><span style="color:#b8bb26;">&quot;unexpected value from resume&quot;</span><span>),
-</span><span>    }
-</span><span>}
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #A89984;">#</span><span>!</span><span style="color: #A89984;">[</span><span>feature</span><span style="color: #A89984;">(</span><span>generators</span><span style="color: #A89984;">,</span><span> generator_trait</span><span style="color: #A89984;">)]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">use</span><span style="color: #FABD2F;"> std</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">ops</span><span style="color: #8EC07C;">::</span><span style="color: #A89984;">{</span><span style="color: #FABD2F;">Generator</span><span style="color: #A89984;">,</span><span style="color: #FABD2F;"> GeneratorState</span><span style="color: #A89984;">};</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">fn</span><span style="color: #FABD2F;"> main</span><span style="color: #A89984;">() {</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">    let mut</span><span style="color: #83A598;"> generator</span><span style="color: #8EC07C;"> =</span><span style="color: #FB4934;"> ||</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">        yield</span><span style="color: #D3869B;"> 1</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">        return</span><span style="color: #A89984;"> &quot;</span><span style="color: #B8BB26;">foo</span><span style="color: #A89984;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    };</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">    match</span><span style="color: #83A598;"> generator</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">resume</span><span style="color: #A89984;">() {</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">        GeneratorState</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Yielded</span><span style="color: #A89984;">(</span><span style="color: #D3869B;">1</span><span style="color: #A89984;">)</span><span style="color: #8EC07C;"> =&gt;</span><span style="color: #A89984;"> {}</span></span>
+<span class="giallo-l"><span style="color: #83A598;">        _</span><span style="color: #8EC07C;"> =&gt;</span><span style="color: #FABD2F;"> panic!</span><span style="color: #A89984;">(&quot;</span><span style="color: #B8BB26;">unexpected value from resume</span><span style="color: #A89984;">&quot;),</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    }</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">    match</span><span style="color: #83A598;"> generator</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">resume</span><span style="color: #A89984;">() {</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">        GeneratorState</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Complete</span><span style="color: #A89984;">(&quot;</span><span style="color: #B8BB26;">foo</span><span style="color: #A89984;">&quot;)</span><span style="color: #8EC07C;"> =&gt;</span><span style="color: #A89984;"> {}</span></span>
+<span class="giallo-l"><span style="color: #83A598;">        _</span><span style="color: #8EC07C;"> =&gt;</span><span style="color: #FABD2F;"> panic!</span><span style="color: #A89984;">(&quot;</span><span style="color: #B8BB26;">unexpected value from resume</span><span style="color: #A89984;">&quot;),</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    }</span></span>
+<span class="giallo-l"><span style="color: #A89984;">}</span></span></code></pre>
 <p>Rust 中所有的 Generator 都会被翻译为状态机来达到 Zero-cost Abstraction</p>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#fdf4c1;">feature</span><span>(generators, generator_trait)]
-</span><span>
-</span><span style="color:#fa5c4b;">use </span><span>std::ops::Generator;
-</span><span>
-</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">main</span><span>() {
-</span><span>    </span><span style="color:#fa5c4b;">let</span><span> ret </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;foo&quot;</span><span>;
-</span><span>    </span><span style="color:#fa5c4b;">let mut</span><span> generator </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">move </span><span style="color:#fe8019;">|| </span><span>{
-</span><span>        </span><span style="background-color:#932b1e;color:#fdf4c1;">yield</span><span> </span><span style="color:#d3869b;">1</span><span>;
-</span><span>        </span><span style="color:#fa5c4b;">return</span><span> ret
-</span><span>    };
-</span><span>
-</span><span>    generator.</span><span style="color:#fabd2f;">resume</span><span>();
-</span><span>    generator.</span><span style="color:#fabd2f;">resume</span><span>();
-</span><span>}
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #A89984;">#</span><span>!</span><span style="color: #A89984;">[</span><span>feature</span><span style="color: #A89984;">(</span><span>generators</span><span style="color: #A89984;">,</span><span> generator_trait</span><span style="color: #A89984;">)]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">use</span><span style="color: #FABD2F;"> std</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">ops</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Generator</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">fn</span><span style="color: #FABD2F;"> main</span><span style="color: #A89984;">() {</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">    let</span><span style="color: #83A598;"> ret</span><span style="color: #8EC07C;"> =</span><span style="color: #A89984;"> &quot;</span><span style="color: #B8BB26;">foo</span><span style="color: #A89984;">&quot;;</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">    let mut</span><span style="color: #83A598;"> generator</span><span style="color: #8EC07C;"> =</span><span style="color: #FB4934;"> move ||</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">        yield</span><span style="color: #D3869B;"> 1</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">        return</span><span style="color: #83A598;"> ret</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    };</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #83A598;">    generator</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">resume</span><span style="color: #A89984;">();</span></span>
+<span class="giallo-l"><span style="color: #83A598;">    generator</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">resume</span><span style="color: #A89984;">();</span></span>
+<span class="giallo-l"><span style="color: #A89984;">}</span></span></code></pre>
 <p>会被翻译成类似下面这样:</p>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#fdf4c1;">feature</span><span>(generators, generator_trait)]
-</span><span>
-</span><span style="color:#fa5c4b;">use </span><span>std::ops::{Generator, GeneratorState};
-</span><span>
-</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">main</span><span>() {
-</span><span>    </span><span style="color:#fa5c4b;">let</span><span> ret </span><span style="color:#fe8019;">= </span><span style="color:#b8bb26;">&quot;foo&quot;</span><span>;
-</span><span>    </span><span style="color:#fa5c4b;">let mut</span><span> generator </span><span style="color:#fe8019;">= </span><span>{
-</span><span>        </span><span style="color:#fa5c4b;">enum </span><span style="color:#8ec07c;">__Generator </span><span>{
-</span><span>            Start(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;static str</span><span>),
-</span><span>            Yield1(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;static str</span><span>),
-</span><span>            Done,
-</span><span>        }
-</span><span>
-</span><span>        </span><span style="color:#fa5c4b;">impl </span><span>Generator </span><span style="color:#fa5c4b;">for </span><span style="color:#8ec07c;">__Generator </span><span>{
-</span><span>            </span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">Yield </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">i32</span><span>;
-</span><span>            </span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">Return </span><span style="color:#fe8019;">= &amp;</span><span style="color:#fa5c4b;">&#39;static str</span><span>;
-</span><span>
-</span><span>            </span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">resume</span><span>(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut </span><span style="color:#fdf4c1;">self</span><span>) -&gt; GeneratorState&lt;</span><span style="color:#fa5c4b;">i32</span><span>, </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">&#39;static str</span><span>&gt; {
-</span><span>                </span><span style="color:#fa5c4b;">use </span><span>std::mem;
-</span><span>                </span><span style="color:#fa5c4b;">match </span><span>mem::replace(</span><span style="color:#fdf4c1;">self</span><span>, __Generator::Done) {
-</span><span>                    __Generator::Start(s) </span><span style="color:#fe8019;">=&gt; </span><span>{
-</span><span>                        </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">self </span><span style="color:#fe8019;">= </span><span>__Generator::Yield1(s);
-</span><span>                        GeneratorState::Yielded(</span><span style="color:#d3869b;">1</span><span>)
-</span><span>                    }
-</span><span>
-</span><span>                    __Generator::Yield1(s) </span><span style="color:#fe8019;">=&gt; </span><span>{
-</span><span>                        </span><span style="color:#fe8019;">*</span><span style="color:#fdf4c1;">self </span><span style="color:#fe8019;">= </span><span>__Generator::Done;
-</span><span>                        GeneratorState::Complete(s)
-</span><span>                    }
-</span><span>
-</span><span>                    __Generator::Done </span><span style="color:#fe8019;">=&gt; </span><span>{
-</span><span>                        </span><span style="color:#fabd2f;">panic!</span><span>(</span><span style="color:#b8bb26;">&quot;generator resumed after completion&quot;</span><span>)
-</span><span>                    }
-</span><span>                }
-</span><span>            }
-</span><span>        }
-</span><span>
-</span><span>        __Generator::Start(ret)
-</span><span>    };
-</span><span>
-</span><span>    generator.</span><span style="color:#fabd2f;">resume</span><span>();
-</span><span>    generator.</span><span style="color:#fabd2f;">resume</span><span>();
-</span><span>}
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #A89984;">#</span><span>!</span><span style="color: #A89984;">[</span><span>feature</span><span style="color: #A89984;">(</span><span>generators</span><span style="color: #A89984;">,</span><span> generator_trait</span><span style="color: #A89984;">)]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">use</span><span style="color: #FABD2F;"> std</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">ops</span><span style="color: #8EC07C;">::</span><span style="color: #A89984;">{</span><span style="color: #FABD2F;">Generator</span><span style="color: #A89984;">,</span><span style="color: #FABD2F;"> GeneratorState</span><span style="color: #A89984;">};</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">fn</span><span style="color: #FABD2F;"> main</span><span style="color: #A89984;">() {</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">    let</span><span style="color: #83A598;"> ret</span><span style="color: #8EC07C;"> =</span><span style="color: #A89984;"> &quot;</span><span style="color: #B8BB26;">foo</span><span style="color: #A89984;">&quot;;</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">    let mut</span><span style="color: #83A598;"> generator</span><span style="color: #8EC07C;"> =</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">        enum</span><span> __Generator </span><span style="color: #A89984;">{</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">            Start</span><span style="color: #A89984;">(</span><span style="color: #8EC07C;">&amp;</span><span style="color: #A89984;">&#39;</span><span style="color: #FABD2F;">static str</span><span style="color: #A89984;">),</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">            Yield1</span><span style="color: #A89984;">(</span><span style="color: #8EC07C;">&amp;</span><span style="color: #A89984;">&#39;</span><span style="color: #FABD2F;">static str</span><span style="color: #A89984;">),</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">            Done</span><span style="color: #A89984;">,</span></span>
+<span class="giallo-l"><span style="color: #A89984;">        }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">        impl</span><span style="color: #FABD2F;"> Generator</span><span style="color: #FB4934;"> for</span><span> __Generator </span><span style="color: #A89984;">{</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">            type</span><span style="color: #FABD2F;"> Yield</span><span style="color: #8EC07C;"> =</span><span style="color: #FABD2F;"> i32</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">            type</span><span style="color: #FABD2F;"> Return</span><span style="color: #8EC07C;"> = &amp;</span><span style="color: #A89984;">&#39;</span><span style="color: #FABD2F;">static str</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">            fn</span><span style="color: #FABD2F;"> resume</span><span style="color: #A89984;">(</span><span style="color: #8EC07C;">&amp;</span><span style="color: #FE8019;">mut</span><span style="color: #83A598;"> self</span><span style="color: #A89984;">)</span><span style="color: #8EC07C;"> -&gt;</span><span style="color: #FABD2F;"> GeneratorState</span><span style="color: #A89984;">&lt;</span><span style="color: #FABD2F;">i32</span><span style="color: #A89984;">,</span><span style="color: #8EC07C;"> &amp;</span><span style="color: #A89984;">&#39;</span><span style="color: #FABD2F;">static str</span><span style="color: #A89984;">&gt; {</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">                use</span><span style="color: #FABD2F;"> std</span><span style="color: #8EC07C;">::</span><span>mem</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">                match</span><span style="color: #FABD2F;"> mem</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">replace</span><span style="color: #A89984;">(</span><span style="color: #83A598;">self</span><span style="color: #A89984;">,</span><span style="color: #FABD2F;"> __Generator</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Done</span><span style="color: #A89984;">) {</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">                    __Generator</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Start</span><span style="color: #A89984;">(</span><span style="color: #83A598;">s</span><span style="color: #A89984;">)</span><span style="color: #8EC07C;"> =&gt;</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #8EC07C;">                        *</span><span style="color: #83A598;">self</span><span style="color: #8EC07C;"> =</span><span style="color: #FABD2F;"> __Generator</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Yield1</span><span style="color: #A89984;">(</span><span style="color: #83A598;">s</span><span style="color: #A89984;">);</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">                        GeneratorState</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Yielded</span><span style="color: #A89984;">(</span><span style="color: #D3869B;">1</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #A89984;">                    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FABD2F;">                    __Generator</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Yield1</span><span style="color: #A89984;">(</span><span style="color: #83A598;">s</span><span style="color: #A89984;">)</span><span style="color: #8EC07C;"> =&gt;</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #8EC07C;">                        *</span><span style="color: #83A598;">self</span><span style="color: #8EC07C;"> =</span><span style="color: #FABD2F;"> __Generator</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Done</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">                        GeneratorState</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Complete</span><span style="color: #A89984;">(</span><span style="color: #83A598;">s</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #A89984;">                    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FABD2F;">                    __Generator</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Done</span><span style="color: #8EC07C;"> =&gt;</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">                        panic!</span><span style="color: #A89984;">(&quot;</span><span style="color: #B8BB26;">generator resumed after completion</span><span style="color: #A89984;">&quot;)</span></span>
+<span class="giallo-l"><span style="color: #A89984;">                    }</span></span>
+<span class="giallo-l"><span style="color: #A89984;">                }</span></span>
+<span class="giallo-l"><span style="color: #A89984;">            }</span></span>
+<span class="giallo-l"><span style="color: #A89984;">        }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FABD2F;">        __Generator</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Start</span><span style="color: #A89984;">(</span><span style="color: #83A598;">ret</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    };</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #83A598;">    generator</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">resume</span><span style="color: #A89984;">();</span></span>
+<span class="giallo-l"><span style="color: #83A598;">    generator</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">resume</span><span style="color: #A89984;">();</span></span>
+<span class="giallo-l"><span style="color: #A89984;">}</span></span></code></pre>
 <p>总之就是一个很好用的特性, 而且还没任何额外开销, 不过只是这样用处并不大</p>
 <hr />
-<p><em>futures</em> 提供的 <a href="https://docs.rs/futures/0.1.15/futures/future/trait.Future.html"><code>Future</code></a> 代表一个将会在未来某个时间可用的值</p>
+<p><em>futures</em> 提供的 <a rel="external" href="https://docs.rs/futures/0.1.15/futures/future/trait.Future.html"><code>Future</code></a> 代表一个将会在未来某个时间可用的值</p>
 <p>这个值可能因为网络, 或其他什么原因 Block 住了, 现在无法得到</p>
 <p>用户可以用它提供的各种 Combinator 写完后续的逻辑, 当值可用的时候会自动调用 (像不像回调?)</p>
-<p>但也只比回调好了一点点而已, 逻辑一旦出现分支, 痛不欲生 (想知道有多痛, <a href="https://github.com/iovxw/rssbot/blob/855afacdb20dd4193afd3e480ad2dfa53d330fb9/src/cmdhandels.rs">请看这里</a>)</p>
+<p>但也只比回调好了一点点而已, 逻辑一旦出现分支, 痛不欲生 (想知道有多痛, <a rel="external" href="https://github.com/iovxw/rssbot/blob/855afacdb20dd4193afd3e480ad2dfa53d330fb9/src/cmdhandels.rs">请看这里</a>)</p>
 <p>而我们现在有了 Generator, 终于可以 "近乎" 完美的解决它了</p>
-<p>每个 <code>Future</code> 都有一个 <a href="https://docs.rs/futures/0.1.15/futures/future/trait.Future.html#tymethod.poll"><code>.poll</code></a> 方法 (实现 <code>Future</code> 时唯一需要手动实现的方法)</p>
-<p>调度器 (比如 <a href="https://tokio.rs/"><em>tokio</em></a> 提供的) 会在收到关联事件时调用它</p>
+<p>每个 <code>Future</code> 都有一个 <a rel="external" href="https://docs.rs/futures/0.1.15/futures/future/trait.Future.html#tymethod.poll"><code>.poll</code></a> 方法 (实现 <code>Future</code> 时唯一需要手动实现的方法)</p>
+<p>调度器 (比如 <a rel="external" href="https://tokio.rs/"><em>tokio</em></a> 提供的) 会在收到关联事件时调用它</p>
 <p>它返回处理好的值或者 <code>NotReady</code> 表示值还未准备好 (此时调度器会在下一次事件后重试)</p>
 <p>一个 <code>Future</code> 的 <code>.poll</code> 大概长这样:</p>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">poll</span><span>(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut </span><span style="color:#fdf4c1;">self</span><span>) -&gt; Poll&lt;</span><span style="color:#fa5c4b;">Self::</span><span>Item, </span><span style="color:#fa5c4b;">Self::</span><span>Error&gt; {
-</span><span>    </span><span style="color:#fa5c4b;">if </span><span style="color:#fe8019;">!</span><span style="color:#fdf4c1;">self</span><span>.step1_done {
-</span><span>        </span><span style="color:#fdf4c1;">self</span><span>.</span><span style="color:#fabd2f;">do_step1</span><span>();
-</span><span>        </span><span style="color:#fa5c4b;">if </span><span style="color:#fe8019;">!</span><span style="color:#fdf4c1;">self</span><span>.</span><span style="color:#fabd2f;">step2_ready</span><span>() {
-</span><span>            </span><span style="color:#fa5c4b;">return </span><span style="color:#fabd2f;">Ok</span><span>(Async::NotReady)
-</span><span>        }
-</span><span>    }
-</span><span>    </span><span style="color:#fa5c4b;">if </span><span style="color:#fe8019;">!</span><span style="color:#fdf4c1;">self</span><span>.step2_done {
-</span><span>        </span><span style="color:#fdf4c1;">self</span><span>.</span><span style="color:#fabd2f;">do_step2</span><span>();
-</span><span>        </span><span style="color:#fa5c4b;">if </span><span style="color:#fe8019;">!</span><span style="color:#fdf4c1;">self</span><span>.</span><span style="color:#fabd2f;">step3_ready</span><span>() {
-</span><span>            </span><span style="color:#fa5c4b;">return </span><span style="color:#fabd2f;">Ok</span><span>(Async::NotReady)
-</span><span>        }
-</span><span>    }
-</span><span>    </span><span style="color:#fa5c4b;">if </span><span style="color:#fe8019;">!</span><span style="color:#fdf4c1;">self</span><span>.step3_done {
-</span><span>        </span><span style="color:#fa5c4b;">let</span><span> result </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">self</span><span>.</span><span style="color:#fabd2f;">do_step3</span><span>();
-</span><span>        </span><span style="color:#fabd2f;">Ok</span><span>(Async::Ready(result))
-</span><span>    } </span><span style="color:#fa5c4b;">else </span><span>{
-</span><span>        </span><span style="color:#fabd2f;">panic!</span><span>(</span><span style="color:#b8bb26;">&quot;future already completed&quot;</span><span>);
-</span><span>    }
-</span><span>}
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #FB4934;">fn</span><span style="color: #FABD2F;"> poll</span><span style="color: #A89984;">(</span><span style="color: #8EC07C;">&amp;</span><span style="color: #FE8019;">mut</span><span style="color: #83A598;"> self</span><span style="color: #A89984;">)</span><span style="color: #8EC07C;"> -&gt;</span><span style="color: #FABD2F;"> Poll</span><span style="color: #A89984;">&lt;</span><span style="color: #83A598;">Self</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Item</span><span style="color: #A89984;">,</span><span style="color: #83A598;"> Self</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Error</span><span style="color: #A89984;">&gt; {</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">    if !</span><span style="color: #83A598;">self</span><span style="color: #8EC07C;">.</span><span>step1_done </span><span style="color: #A89984;">{</span></span>
+<span class="giallo-l"><span style="color: #83A598;">        self</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">do_step1</span><span style="color: #A89984;">();</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">        if !</span><span style="color: #83A598;">self</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">step2_ready</span><span style="color: #A89984;">() {</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">            return</span><span style="color: #FABD2F;"> Ok</span><span style="color: #A89984;">(</span><span style="color: #FABD2F;">Async</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">NotReady</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #A89984;">        }</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    }</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">    if !</span><span style="color: #83A598;">self</span><span style="color: #8EC07C;">.</span><span>step2_done </span><span style="color: #A89984;">{</span></span>
+<span class="giallo-l"><span style="color: #83A598;">        self</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">do_step2</span><span style="color: #A89984;">();</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">        if !</span><span style="color: #83A598;">self</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">step3_ready</span><span style="color: #A89984;">() {</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">            return</span><span style="color: #FABD2F;"> Ok</span><span style="color: #A89984;">(</span><span style="color: #FABD2F;">Async</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">NotReady</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #A89984;">        }</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    }</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">    if !</span><span style="color: #83A598;">self</span><span style="color: #8EC07C;">.</span><span>step3_done </span><span style="color: #A89984;">{</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">        let</span><span style="color: #83A598;"> result</span><span style="color: #8EC07C;"> =</span><span style="color: #83A598;"> self</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">do_step3</span><span style="color: #A89984;">();</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">        Ok</span><span style="color: #A89984;">(</span><span style="color: #FABD2F;">Async</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Ready</span><span style="color: #A89984;">(</span><span style="color: #83A598;">result</span><span style="color: #A89984;">))</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    }</span><span style="color: #FB4934;"> else</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">        panic!</span><span style="color: #A89984;">(&quot;</span><span style="color: #B8BB26;">future already completed</span><span style="color: #A89984;">&quot;);</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    }</span></span>
+<span class="giallo-l"><span style="color: #A89984;">}</span></span></code></pre>
 <p>充满了状态判断, 还容易不小心写错</p>
 <p>有了 Generator 之后是这样的:</p>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">generator </span><span style="color:#fe8019;">= </span><span>|| {
-</span><span>    </span><span style="color:#fdf4c1;">self</span><span>.</span><span style="color:#fabd2f;">do_step1</span><span>();
-</span><span>    </span><span style="color:#fa5c4b;">if </span><span style="color:#fe8019;">!</span><span style="color:#fdf4c1;">self</span><span>.</span><span style="color:#fabd2f;">step2_ready</span><span>() {
-</span><span>        </span><span style="background-color:#932b1e;color:#fdf4c1;">yield</span><span>;
-</span><span>    }
-</span><span>    </span><span style="color:#fdf4c1;">self</span><span>.</span><span style="color:#fabd2f;">do_step2</span><span>();
-</span><span>    </span><span style="color:#fa5c4b;">if </span><span style="color:#fe8019;">!</span><span style="color:#fdf4c1;">self</span><span>.</span><span style="color:#fabd2f;">step3_ready</span><span>() {
-</span><span>        </span><span style="background-color:#932b1e;color:#fdf4c1;">yield</span><span>;
-</span><span>    }
-</span><span>    </span><span style="color:#fa5c4b;">let</span><span> result </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">self</span><span>.</span><span style="color:#fabd2f;">do_step3</span><span>();
-</span><span>    </span><span style="color:#fabd2f;">Ok</span><span>(result)
-</span><span>};
-</span><span>GenFuture(generator)
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #FE8019;">let</span><span style="color: #83A598;"> generator</span><span style="color: #8EC07C;"> =</span><span style="color: #FB4934;"> ||</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #83A598;">    self</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">do_step1</span><span style="color: #A89984;">();</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">    if !</span><span style="color: #83A598;">self</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">step2_ready</span><span style="color: #A89984;">() {</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">        yield</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    }</span></span>
+<span class="giallo-l"><span style="color: #83A598;">    self</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">do_step2</span><span style="color: #A89984;">();</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">    if !</span><span style="color: #83A598;">self</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">step3_ready</span><span style="color: #A89984;">() {</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">        yield</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    }</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">    let</span><span style="color: #83A598;"> result</span><span style="color: #8EC07C;"> =</span><span style="color: #83A598;"> self</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">do_step3</span><span style="color: #A89984;">();</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">    Ok</span><span style="color: #A89984;">(</span><span style="color: #83A598;">result</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #A89984;">};</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">GenFuture</span><span style="color: #A89984;">(</span><span style="color: #83A598;">generator</span><span style="color: #A89984;">)</span></span></code></pre>
 <p><code>yield</code> 用于返回 <code>NotReady</code> (见下面), 免去了维护状态</p>
 <p><code>GenFuture</code> 用于将 Generator 转换为 <code>Future</code>, 实现非常简单:</p>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">struct </span><span style="color:#8ec07c;">GenFuture</span><span>&lt;T&gt;(T);
-</span><span>
-</span><span style="color:#fa5c4b;">impl</span><span>&lt;T&gt; Future </span><span style="color:#fa5c4b;">for </span><span style="color:#8ec07c;">GenFuture</span><span>&lt;T&gt;
-</span><span>    </span><span style="color:#fa5c4b;">where</span><span> T: Generator&lt;Yield = ()&gt;,
-</span><span>          </span><span style="color:#fa5c4b;">T::</span><span>Return: Try,
-</span><span>{
-</span><span>    </span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">Item </span><span style="color:#fe8019;">= </span><span>&lt;</span><span style="color:#fa5c4b;">T::</span><span>Return </span><span style="color:#fe8019;">as</span><span> Try&gt;::Ok;
-</span><span>    </span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">Error </span><span style="color:#fe8019;">= </span><span>&lt;</span><span style="color:#fa5c4b;">T::</span><span>Return </span><span style="color:#fe8019;">as</span><span> Try&gt;::Error;
-</span><span>
-</span><span>    </span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">poll</span><span>(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut </span><span style="color:#fdf4c1;">self</span><span>) -&gt; Poll&lt;</span><span style="color:#fa5c4b;">Self::</span><span>Item, </span><span style="color:#fa5c4b;">Self::</span><span>Error&gt; {
-</span><span>        </span><span style="color:#fa5c4b;">match </span><span style="color:#fdf4c1;">self</span><span>.</span><span style="color:#d3869b;">0.</span><span style="color:#fabd2f;">resume</span><span>() {
-</span><span>            GeneratorState::Yielded(()) </span><span style="color:#fe8019;">=&gt; </span><span style="color:#fabd2f;">Ok</span><span>(Async::NotReady),
-</span><span>            GeneratorState::Complete(e) </span><span style="color:#fe8019;">=&gt;</span><span> e.</span><span style="color:#fabd2f;">into_result</span><span>().</span><span style="color:#fabd2f;">map</span><span>(Async::Ready),
-</span><span>        }
-</span><span>    }
-</span><span>}
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #FE8019;">struct</span><span style="color: #FABD2F;"> GenFuture</span><span style="color: #A89984;">&lt;</span><span style="color: #FABD2F;">T</span><span style="color: #A89984;">&gt;(</span><span style="color: #FABD2F;">T</span><span style="color: #A89984;">);</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">impl</span><span style="color: #A89984;">&lt;</span><span style="color: #FABD2F;">T</span><span style="color: #A89984;">&gt;</span><span style="color: #FABD2F;"> Future</span><span style="color: #FB4934;"> for</span><span style="color: #FABD2F;"> GenFuture</span><span style="color: #A89984;">&lt;</span><span style="color: #FABD2F;">T</span><span style="color: #A89984;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">    where</span><span style="color: #FABD2F;"> T</span><span style="color: #8EC07C;">:</span><span style="color: #FABD2F;"> Generator</span><span style="color: #A89984;">&lt;</span><span style="color: #FABD2F;">Yield</span><span style="color: #8EC07C;"> =</span><span style="color: #A89984;"> ()&gt;,</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">          T</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Return</span><span style="color: #8EC07C;">:</span><span style="color: #FABD2F;"> Try</span><span style="color: #A89984;">,</span></span>
+<span class="giallo-l"><span style="color: #A89984;">{</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">    type</span><span style="color: #FABD2F;"> Item</span><span style="color: #8EC07C;"> =</span><span style="color: #A89984;"> &lt;</span><span style="color: #FABD2F;">T</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Return</span><span style="color: #FB4934;"> as</span><span style="color: #FABD2F;"> Try</span><span style="color: #A89984;">&gt;</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Ok</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">    type</span><span style="color: #FABD2F;"> Error</span><span style="color: #8EC07C;"> =</span><span style="color: #A89984;"> &lt;</span><span style="color: #FABD2F;">T</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Return</span><span style="color: #FB4934;"> as</span><span style="color: #FABD2F;"> Try</span><span style="color: #A89984;">&gt;</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Error</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">    fn</span><span style="color: #FABD2F;"> poll</span><span style="color: #A89984;">(</span><span style="color: #8EC07C;">&amp;</span><span style="color: #FE8019;">mut</span><span style="color: #83A598;"> self</span><span style="color: #A89984;">)</span><span style="color: #8EC07C;"> -&gt;</span><span style="color: #FABD2F;"> Poll</span><span style="color: #A89984;">&lt;</span><span style="color: #83A598;">Self</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Item</span><span style="color: #A89984;">,</span><span style="color: #83A598;"> Self</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Error</span><span style="color: #A89984;">&gt; {</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">        match</span><span style="color: #83A598;"> self</span><span style="color: #8EC07C;">.</span><span style="color: #D3869B;">0</span><span style="color: #A89984;">.</span><span style="color: #FABD2F;">resume</span><span style="color: #A89984;">() {</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">            GeneratorState</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Yielded</span><span style="color: #A89984;">(())</span><span style="color: #8EC07C;"> =&gt;</span><span style="color: #FABD2F;"> Ok</span><span style="color: #A89984;">(</span><span style="color: #FABD2F;">Async</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">NotReady</span><span style="color: #A89984;">),</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">            GeneratorState</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Complete</span><span style="color: #A89984;">(</span><span style="color: #83A598;">e</span><span style="color: #A89984;">)</span><span style="color: #8EC07C;"> =&gt;</span><span style="color: #83A598;"> e</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">into_result</span><span style="color: #A89984;">()</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">map</span><span style="color: #A89984;">(</span><span style="color: #FABD2F;">Async</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Ready</span><span style="color: #A89984;">),</span></span>
+<span class="giallo-l"><span style="color: #A89984;">        }</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    }</span></span>
+<span class="giallo-l"><span style="color: #A89984;">}</span></span></code></pre>
 <p>同理, 在 <code>Future</code> 中使用 <code>Future</code> 也可以这么干</p>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">work</span><span>() -&gt; impl Future&lt;Item = (), Error = Error&gt; {
-</span><span>    </span><span style="color:#fabd2f;">get</span><span>(</span><span style="color:#b8bb26;">&quot;http://exampl.com&quot;</span><span>)
-</span><span>        .</span><span style="color:#fabd2f;">and_then</span><span>(|</span><span style="color:#fdf4c1;">response</span><span>| {
-</span><span>            </span><span style="color:#fabd2f;">do_something</span><span>(response)
-</span><span>        })
-</span><span>        .</span><span style="color:#fabd2f;">and_then</span><span>(|</span><span style="color:#fdf4c1;">result</span><span>| {
-</span><span>            </span><span style="color:#fa5c4b;">if</span><span> result </span><span style="color:#fe8019;">&gt; </span><span style="color:#d3869b;">7 </span><span>{
-</span><span>                Either::A(</span><span style="color:#fabd2f;">Ok</span><span>(</span><span style="color:#fdf4c1;">DEFAULT_VALUE</span><span>))
-</span><span>            } </span><span style="color:#fa5c4b;">else </span><span>{
-</span><span>                Either::B(</span><span style="color:#fabd2f;">blahblah</span><span>())
-</span><span>            }
-</span><span>        })
-</span><span>        .</span><span style="color:#fabd2f;">and_then</span><span>(|</span><span style="color:#fdf4c1;">result</span><span>| {
-</span><span>            </span><span style="color:#fabd2f;">post</span><span>(result)
-</span><span>        })
-</span><span>}
-</span></code></pre>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">work</span><span>() -&gt; impl Future&lt;Item = (), Error = Error&gt; {
-</span><span>    </span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">generator </span><span style="color:#fe8019;">= </span><span>|| {
-</span><span>        </span><span style="color:#fa5c4b;">let</span><span> response </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">await!</span><span>(</span><span style="color:#fabd2f;">get</span><span>(</span><span style="color:#b8bb26;">&quot;http://example.com&quot;</span><span>))</span><span style="color:#fe8019;">?</span><span>;
-</span><span>        </span><span style="color:#fa5c4b;">let</span><span> result </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">if </span><span style="color:#fabd2f;">await!</span><span>(</span><span style="color:#fabd2f;">do_something</span><span>(response))</span><span style="color:#fe8019;">? &gt; </span><span style="color:#d3869b;">7 </span><span>{
-</span><span>            </span><span style="color:#fdf4c1;">DEFAULT_VALUE
-</span><span>        } </span><span style="color:#fa5c4b;">else </span><span>{
-</span><span>            </span><span style="color:#fabd2f;">await!</span><span>(</span><span style="color:#fabd2f;">blahblah</span><span>())</span><span style="color:#fe8019;">?
-</span><span>        };
-</span><span>        </span><span style="color:#fabd2f;">await!</span><span>(</span><span style="color:#fabd2f;">post</span><span>(result))
-</span><span>    };
-</span><span>    GenFuture(generator)
-</span><span>}
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #FB4934;">fn</span><span style="color: #FABD2F;"> work</span><span style="color: #A89984;">()</span><span style="color: #8EC07C;"> -&gt;</span><span style="color: #FB4934;"> impl</span><span style="color: #FABD2F;"> Future</span><span style="color: #A89984;">&lt;</span><span style="color: #FABD2F;">Item</span><span style="color: #8EC07C;"> =</span><span style="color: #A89984;"> (),</span><span style="color: #FABD2F;"> Error</span><span style="color: #8EC07C;"> =</span><span style="color: #FABD2F;"> Error</span><span style="color: #A89984;">&gt; {</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">    get</span><span style="color: #A89984;">(&quot;</span><span style="color: #B8BB26;">http://exampl.com</span><span style="color: #A89984;">&quot;)</span></span>
+<span class="giallo-l"><span style="color: #8EC07C;">        .</span><span style="color: #FABD2F;">and_then</span><span style="color: #A89984;">(</span><span style="color: #FB4934;">|</span><span style="color: #83A598;">response</span><span style="color: #FB4934;">|</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">            do_something</span><span style="color: #A89984;">(</span><span style="color: #83A598;">response</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #A89984;">        })</span></span>
+<span class="giallo-l"><span style="color: #8EC07C;">        .</span><span style="color: #FABD2F;">and_then</span><span style="color: #A89984;">(</span><span style="color: #FB4934;">|</span><span style="color: #83A598;">result</span><span style="color: #FB4934;">|</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">            if</span><span style="color: #83A598;"> result</span><span style="color: #8EC07C;"> &gt;</span><span style="color: #D3869B;"> 7</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">                Either</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">A</span><span style="color: #A89984;">(</span><span style="color: #FABD2F;">Ok</span><span style="color: #A89984;">(</span><span style="color: #D3869B;font-weight: bold;">DEFAULT_VALUE</span><span style="color: #A89984;">))</span></span>
+<span class="giallo-l"><span style="color: #A89984;">            }</span><span style="color: #FB4934;"> else</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">                Either</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">B</span><span style="color: #A89984;">(</span><span style="color: #FABD2F;">blahblah</span><span style="color: #A89984;">())</span></span>
+<span class="giallo-l"><span style="color: #A89984;">            }</span></span>
+<span class="giallo-l"><span style="color: #A89984;">        })</span></span>
+<span class="giallo-l"><span style="color: #8EC07C;">        .</span><span style="color: #FABD2F;">and_then</span><span style="color: #A89984;">(</span><span style="color: #FB4934;">|</span><span style="color: #83A598;">result</span><span style="color: #FB4934;">|</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">            post</span><span style="color: #A89984;">(</span><span style="color: #83A598;">result</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #A89984;">        })</span></span>
+<span class="giallo-l"><span style="color: #A89984;">}</span></span></code></pre><pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #FB4934;">fn</span><span style="color: #FABD2F;"> work</span><span style="color: #A89984;">()</span><span style="color: #8EC07C;"> -&gt;</span><span style="color: #FB4934;"> impl</span><span style="color: #FABD2F;"> Future</span><span style="color: #A89984;">&lt;</span><span style="color: #FABD2F;">Item</span><span style="color: #8EC07C;"> =</span><span style="color: #A89984;"> (),</span><span style="color: #FABD2F;"> Error</span><span style="color: #8EC07C;"> =</span><span style="color: #FABD2F;"> Error</span><span style="color: #A89984;">&gt; {</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">    let</span><span style="color: #83A598;"> generator</span><span style="color: #8EC07C;"> =</span><span style="color: #FB4934;"> ||</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">        let</span><span style="color: #83A598;"> response</span><span style="color: #8EC07C;"> =</span><span style="color: #FB4934;"> await!</span><span style="color: #A89984;">(</span><span style="color: #FABD2F;">get</span><span style="color: #A89984;">(&quot;</span><span style="color: #B8BB26;">http://example.com</span><span style="color: #A89984;">&quot;))</span><span style="color: #8EC07C;">?</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">        let</span><span style="color: #83A598;"> result</span><span style="color: #8EC07C;"> =</span><span style="color: #FB4934;"> if await!</span><span style="color: #A89984;">(</span><span style="color: #FABD2F;">do_something</span><span style="color: #A89984;">(</span><span style="color: #83A598;">response</span><span style="color: #A89984;">))</span><span style="color: #8EC07C;">?</span><span style="color: #A89984;"> &gt;</span><span style="color: #D3869B;"> 7</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #D3869B;font-weight: bold;">            DEFAULT_VALUE</span></span>
+<span class="giallo-l"><span style="color: #A89984;">        }</span><span style="color: #FB4934;"> else</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">            await!</span><span style="color: #A89984;">(</span><span style="color: #FABD2F;">blahblah</span><span style="color: #A89984;">())</span><span style="color: #8EC07C;">?</span></span>
+<span class="giallo-l"><span style="color: #A89984;">        };</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">        await!</span><span style="color: #A89984;">(</span><span style="color: #FABD2F;">post</span><span style="color: #A89984;">(</span><span style="color: #83A598;">result</span><span style="color: #A89984;">))</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    };</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">    GenFuture</span><span style="color: #A89984;">(</span><span style="color: #83A598;">generator</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #A89984;">}</span></span></code></pre>
 <p><code>await</code> 的实现更加简单, 只需要一个宏</p>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fabd2f;">macro_rules! </span><span style="color:#8ec07c;">await </span><span>{
-</span><span>    (</span><span style="color:#fdf4c1;">$e</span><span>:</span><span style="color:#fa5c4b;">expr</span><span>) </span><span style="color:#fe8019;">=&gt; </span><span>({
-</span><span>        </span><span style="color:#fa5c4b;">let mut</span><span> future </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">$e</span><span>;
-</span><span>        </span><span style="color:#fa5c4b;">loop </span><span>{
-</span><span>            </span><span style="color:#fa5c4b;">match </span><span>::futures::Future::poll(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut</span><span> future) {
-</span><span>                ::futures::__rt::Ok(::futures::Async::Ready(e)) </span><span style="color:#fe8019;">=&gt; </span><span>{
-</span><span>                    </span><span style="color:#fa5c4b;">break </span><span>::futures::__rt::Ok(e)
-</span><span>                }
-</span><span>                ::futures::__rt::Ok(::futures::Async::NotReady) </span><span style="color:#fe8019;">=&gt; </span><span>{}
-</span><span>                ::futures::__rt::Err(e) </span><span style="color:#fe8019;">=&gt; </span><span>{
-</span><span>                    </span><span style="color:#fa5c4b;">break </span><span>::futures::__rt::Err(e)
-</span><span>                }
-</span><span>            }
-</span><span>            </span><span style="background-color:#932b1e;color:#fdf4c1;">yield</span><span>
-</span><span>        }
-</span><span>    })
-</span><span>}
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #FABD2F;">macro_rules! await</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    (</span><span style="color: #8EC07C;">$</span><span style="color: #83A598;">e</span><span style="color: #8EC07C;">:</span><span style="color: #83A598;">expr</span><span style="color: #A89984;">)</span><span style="color: #8EC07C;"> =&gt;</span><span style="color: #A89984;"> ({</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">        let mut</span><span style="color: #83A598;"> future</span><span style="color: #8EC07C;"> = $</span><span style="color: #83A598;">e</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">        loop</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">            match</span><span style="color: #8EC07C;"> ::</span><span style="color: #FABD2F;">futures</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Future</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">poll</span><span style="color: #A89984;">(</span><span style="color: #8EC07C;">&amp;</span><span style="color: #FE8019;">mut</span><span style="color: #83A598;"> future</span><span style="color: #A89984;">) {</span></span>
+<span class="giallo-l"><span style="color: #8EC07C;">                ::</span><span style="color: #FABD2F;">futures</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">__rt</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Ok</span><span style="color: #A89984;">(</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">futures</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Async</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Ready</span><span style="color: #A89984;">(</span><span style="color: #83A598;">e</span><span style="color: #A89984;">))</span><span style="color: #8EC07C;"> =&gt;</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">                    break</span><span style="color: #8EC07C;"> ::</span><span style="color: #FABD2F;">futures</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">__rt</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Ok</span><span style="color: #A89984;">(</span><span style="color: #83A598;">e</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #A89984;">                }</span></span>
+<span class="giallo-l"><span style="color: #8EC07C;">                ::</span><span style="color: #FABD2F;">futures</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">__rt</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Ok</span><span style="color: #A89984;">(</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">futures</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Async</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">NotReady</span><span style="color: #A89984;">)</span><span style="color: #8EC07C;"> =&gt;</span><span style="color: #A89984;"> {}</span></span>
+<span class="giallo-l"><span style="color: #8EC07C;">                ::</span><span style="color: #FABD2F;">futures</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">__rt</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Err</span><span style="color: #A89984;">(</span><span style="color: #83A598;">e</span><span style="color: #A89984;">)</span><span style="color: #8EC07C;"> =&gt;</span><span style="color: #A89984;"> {</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">                    break</span><span style="color: #8EC07C;"> ::</span><span style="color: #FABD2F;">futures</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">__rt</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">Err</span><span style="color: #A89984;">(</span><span style="color: #83A598;">e</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #A89984;">                }</span></span>
+<span class="giallo-l"><span style="color: #A89984;">            }</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">            yield</span></span>
+<span class="giallo-l"><span style="color: #A89984;">        }</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    })</span></span>
+<span class="giallo-l"><span style="color: #A89984;">}</span></span></code></pre>
 <p>神奇不神奇? Rust 里就这么有了 <code>await</code></p>
-<p>而这个 RFC 的提出者 <a href="https://github.com/alexcrichton"><strong>Alex Crichton</strong></a> 还专门写了一个库 <a href="https://github.com/alexcrichton/futures-await">futures-await</a>, 除了 <code>await</code> 还用 Procedural macro 实现了 <code>async</code> 自动修改函数签名以及异步的 Stream 迭代</p>
+<p>而这个 RFC 的提出者 <a rel="external" href="https://github.com/alexcrichton"><strong>Alex Crichton</strong></a> 还专门写了一个库 <a rel="external" href="https://github.com/alexcrichton/futures-await">futures-await</a>, 除了 <code>await</code> 还用 Procedural macro 实现了 <code>async</code> 自动修改函数签名以及异步的 Stream 迭代</p>
 <p>感觉好像没什么毛病, 甚至相当完美</p>
 <hr />
 <p>然而</p>
 <p>事情并没有那么美好</p>
-<p>目前这个 Coroutine/Generator 只是一个 <a href="https://github.com/rust-lang/rfcs/pull/2033">eRFC(experimental RFC) 的实现</a>, 永远不会 stabilize, 也就进不了 Rust stable, 除非有新的 RFC 完善它</p>
-<p>然后 <em>futures-await</em> 现在的支持其实非常有限, 最简单的例子, <code>#[async]</code> 的函数并不能有借用的参数 (包括 <code>self</code>), 因为所有 lifetime 默认是 <code>'static</code> 的, <a href="https://github.com/alexcrichton/futures-await/issues/11">当然他们已经在解决了</a></p>
+<p>目前这个 Coroutine/Generator 只是一个 <a rel="external" href="https://github.com/rust-lang/rfcs/pull/2033">eRFC(experimental RFC) 的实现</a>, 永远不会 stabilize, 也就进不了 Rust stable, 除非有新的 RFC 完善它</p>
+<p>然后 <em>futures-await</em> 现在的支持其实非常有限, 最简单的例子, <code>#[async]</code> 的函数并不能有借用的参数 (包括 <code>self</code>), 因为所有 lifetime 默认是 <code>'static</code> 的, <a rel="external" href="https://github.com/alexcrichton/futures-await/issues/11">当然他们已经在解决了</a></p>
 <p>同样由于上面的原因, trait 里用 <code>async</code> 并不靠谱</p>
 <p>首先是 <code>impl Trait</code> 当前不支持 trait 里使用(需要等他们搞定高阶类型的实现, 猴年马月吧……), 但这个可以用 <code>#[async(boxed)]</code> 把返回值放 <code>Box</code> 里解决, 虽然进行了不必要的堆分配</p>
 <p>然后就是 <code>self</code>, 借用肯定是不行了, 直接用总可以吧?</p>

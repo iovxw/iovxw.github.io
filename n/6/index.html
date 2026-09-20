@@ -384,7 +384,7 @@
                 <time>2015-10-11 00:00</time>
               </div>
               
-              <p>有时候需要让 git 忽略某个文件的更新，比如<em>配置文件</em>。配置文件里经常有各种涉及隐私的东西，一般只提交一个模板上去，如果把自己的配置提交上去了……被盗用的例子也不少了（比如<a href="http://www.devfactor.net/2014/12/30/2375-amazon-mistake/">这个</a>、<a href="http://wptavern.com/ryan-hellyers-aws-nightmare-leaked-access-keys-result-in-a-6000-bill-overnight">这个</a>和<a href="http://www.wooyun.org/bugs/wooyun-2010-061718">这个</a>）</p>
+              <p>有时候需要让 git 忽略某个文件的更新，比如<em>配置文件</em>。配置文件里经常有各种涉及隐私的东西，一般只提交一个模板上去，如果把自己的配置提交上去了……被盗用的例子也不少了（比如<a rel="external" href="http://www.devfactor.net/2014/12/30/2375-amazon-mistake/">这个</a>、<a rel="external" href="http://wptavern.com/ryan-hellyers-aws-nightmare-leaked-access-keys-result-in-a-6000-bill-overnight">这个</a>和<a rel="external" href="http://www.wooyun.org/bugs/wooyun-2010-061718">这个</a>）</p>
 <p>解决方法也很简单，让 git 忽略这个文件的变更就行了</p>
               <div class="read-more">
                 <a href="https://iovxw.net/p/git-update-index/#continue-reading">Read More…</a>
@@ -402,10 +402,10 @@
               </div>
               
                 <p><img src="http://elixir-lang.org/images/logo/logo.png" alt="Elixir Logo" /></p>
-<p><a href="https://www.gitbook.com/read/book/iovxw/programming-elixir">https://iovxw.gitbooks.io/programming-elixir</a></p>
+<p><a rel="external" href="https://www.gitbook.com/read/book/iovxw/programming-elixir">https://iovxw.gitbooks.io/programming-elixir</a></p>
 <p>把别人翻译的整理了一下</p>
-<p>Github: <a href="https://github.com/iovxw/programming-elixir">https://github.com/iovxw/programming-elixir</a></p>
-<p>英文: <a href="http://elixir-lang.org/getting-started/introduction.html">http://elixir-lang.org/getting-started/introduction.html</a></p>
+<p>Github: <a rel="external" href="https://github.com/iovxw/programming-elixir">https://github.com/iovxw/programming-elixir</a></p>
+<p>英文: <a rel="external" href="http://elixir-lang.org/getting-started/introduction.html">http://elixir-lang.org/getting-started/introduction.html</a></p>
 
               
             </article>
@@ -437,56 +437,54 @@
               
                 <p>算是和现在用的 VIM 的配色比较接近了</p>
 <p><img src="https://img.vim-cn.com/30/8ebda049964c487db4998232540d6f18f58bf9.png" alt="VIM" /></p>
-<pre data-lang="elixir" style="background-color:#282828;color:#fdf4c1aa;" class="language-elixir "><code class="language-elixir" data-lang="elixir"><span style="color:#fa5c4b;">defrecord </span><span style="color:#8ec07c;">Person</span><span>, </span><span style="color:#fdf4c1;">first_name: </span><span style="color:#d3869b;">nil</span><span>, </span><span style="color:#fdf4c1;">last_name: </span><span style="color:#b8bb26;">&quot;Dudington&quot; </span><span style="color:#fa5c4b;">do
-</span><span>  </span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">name</span><span> record </span><span style="color:#fa5c4b;">do </span><span style="font-style:italic;color:#928374;"># huh ?
-</span><span>    </span><span style="color:#b8bb26;">&quot;#{</span><span style="color:#fdf4c1;">record.first_name</span><span>} </span><span style="color:#b8bb26;">#{</span><span style="color:#fdf4c1;">record.last_name</span><span>}</span><span style="color:#b8bb26;">&quot;
-</span><span>  </span><span style="color:#fa5c4b;">end
-</span><span style="color:#fa5c4b;">end
-</span><span>
-</span><span style="color:#fa5c4b;">defrecord </span><span style="color:#8ec07c;">User</span><span>, </span><span style="color:#fdf4c1;">name: </span><span style="color:#b8bb26;">&quot;José&quot;</span><span>, </span><span style="color:#fdf4c1;">age: </span><span style="color:#d3869b;">25
-</span><span>
-</span><span>guy </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Person</span><span>.new </span><span style="color:#fdf4c1;">first_name: </span><span style="color:#b8bb26;">&quot;Guy&quot;
-</span><span>guy.name
-</span><span>
-</span><span style="color:#fa5c4b;">defmodule </span><span style="color:#8ec07c;">ListServer </span><span style="color:#fa5c4b;">do
-</span><span>  </span><span style="font-style:italic;color:#928374;">@moduledoc &quot;&quot;&quot;
-</span><span style="font-style:italic;color:#928374;">  This module provides an easy to use ListServer, useful for keeping
-</span><span style="font-style:italic;color:#928374;">  lists of things.
-</span><span style="font-style:italic;color:#928374;">  &quot;&quot;&quot;
-</span><span>  </span><span style="color:#fa5c4b;">use </span><span style="color:#8ec07c;">GenServer</span><span>.</span><span style="color:#8ec07c;">Behaviour
-</span><span>  </span><span style="color:#fa5c4b;">alias </span><span style="color:#8ec07c;">Foo</span><span>.</span><span style="color:#8ec07c;">Bar
-</span><span>
-</span><span style="font-style:italic;color:#928374;">  ### Public API
-</span><span>  </span><span style="font-style:italic;color:#928374;">@doc &quot;&quot;&quot;
-</span><span style="font-style:italic;color:#928374;">  Starts and links a new ListServer, returning {:ok, pid}
-</span><span style="font-style:italic;color:#928374;">
-</span><span style="font-style:italic;color:#928374;">  ## Example
-</span><span style="font-style:italic;color:#928374;">
-</span><span style="font-style:italic;color:#928374;">    iex&gt; {:ok, pid} = ListServer.start_link
-</span><span style="font-style:italic;color:#928374;">
-</span><span style="font-style:italic;color:#928374;">  &quot;&quot;&quot;
-</span><span>  </span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">start_link </span><span style="color:#fa5c4b;">do
-</span><span>    </span><span style="color:#fdf4c1;">:gen_server</span><span>.start_link({</span><span style="color:#fdf4c1;">:local</span><span>, </span><span style="color:#fdf4c1;">:list</span><span>}, </span><span style="color:#fdf4c1;">__MODULE__</span><span>, [], [])
-</span><span>  </span><span style="color:#fa5c4b;">end
-</span><span>
-</span><span style="font-style:italic;color:#928374;">  ### GenServer API
-</span><span>  </span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">init</span><span>(list) </span><span style="color:#fa5c4b;">do
-</span><span>    {</span><span style="color:#fdf4c1;">:ok</span><span>, list}
-</span><span>  </span><span style="color:#fa5c4b;">end
-</span><span>
-</span><span style="font-style:italic;color:#928374;">  # Clear the list
-</span><span>  </span><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">handle_cast </span><span style="color:#fdf4c1;">:clear</span><span>, list </span><span style="color:#fa5c4b;">do
-</span><span>    {</span><span style="color:#fdf4c1;">:noreply</span><span>, []}
-</span><span>  </span><span style="color:#fa5c4b;">end
-</span><span style="color:#fa5c4b;">end
-</span><span>
-</span><span>{</span><span style="color:#fdf4c1;">:ok</span><span>, pid} </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">ListServer</span><span>.start_link
-</span><span>pid </span><span style="color:#fe8019;">&lt;- </span><span>{</span><span style="color:#fdf4c1;">:foo</span><span>, </span><span style="color:#b8bb26;">&quot;bar&quot;</span><span>}
-</span><span>
-</span><span>greeter </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">fn</span><span>(x) </span><span style="color:#fe8019;">-&gt; </span><span style="color:#8ec07c;">IO</span><span>.puts </span><span style="color:#b8bb26;">&quot;hey #{</span><span style="color:#fdf4c1;">x</span><span>}</span><span style="color:#b8bb26;">&quot; </span><span style="color:#fa5c4b;">end
-</span><span>greeter.(</span><span style="color:#b8bb26;">&quot;Bob&quot;</span><span>)
-</span></code></pre>
-
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="elixir"><span class="giallo-l"><span style="color: #FB4934;">defrecord</span><span style="color: #FABD2F;"> Person</span><span style="color: #A89984;">,</span><span style="color: #D3869B;"> first_name</span><span style="color: #A89984;">:</span><span style="color: #D3869B;"> nil</span><span style="color: #A89984;">,</span><span style="color: #D3869B;"> last_name</span><span style="color: #A89984;">: &quot;</span><span style="color: #B8BB26;">Dudington</span><span style="color: #A89984;">&quot;</span><span style="color: #FB4934;"> do</span></span>
+<span class="giallo-l"><span style="color: #8EC07C;">  def</span><span style="color: #FABD2F;"> name</span><span> record </span><span style="color: #8EC07C;">do</span><span style="color: #928374;font-style: italic;"> # huh ?</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    &quot;#{</span><span style="color: #B8BB26;">record</span><span style="color: #A89984;">.</span><span style="color: #B8BB26;">first_name</span><span style="color: #A89984;">} #{</span><span style="color: #B8BB26;">record</span><span style="color: #A89984;">.</span><span style="color: #B8BB26;">last_name</span><span style="color: #A89984;">}&quot;</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">  end</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">end</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">defrecord</span><span style="color: #FABD2F;"> User</span><span style="color: #A89984;">,</span><span style="color: #D3869B;"> name</span><span style="color: #A89984;">: &quot;</span><span style="color: #B8BB26;">José</span><span style="color: #A89984;">&quot;,</span><span style="color: #D3869B;"> age</span><span style="color: #A89984;">:</span><span style="color: #D3869B;"> 25</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>guy </span><span style="color: #8EC07C;">=</span><span style="color: #FABD2F;"> Person</span><span style="color: #A89984;">.</span><span style="color: #FABD2F;">new</span><span style="color: #D3869B;"> first_name</span><span style="color: #A89984;">: &quot;</span><span style="color: #B8BB26;">Guy</span><span style="color: #A89984;">&quot;</span></span>
+<span class="giallo-l"><span>guy</span><span style="color: #A89984;">.</span><span>name</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #8EC07C;">defmodule</span><span style="color: #FABD2F;"> ListServer</span><span style="color: #8EC07C;"> do</span></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;">  @moduledoc &quot;&quot;&quot;</span></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;">  This module provides an easy to use ListServer, useful for keeping</span></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;">  lists of things.</span></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;">  &quot;&quot;&quot;</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">  use</span><span style="color: #FABD2F;"> GenServer</span><span style="color: #A89984;">.</span><span style="color: #FABD2F;">Behaviour</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">  alias</span><span style="color: #FABD2F;"> Foo</span><span style="color: #A89984;">.</span><span style="color: #FABD2F;">Bar</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;">  ### Public API</span></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;">  @doc &quot;&quot;&quot;</span></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;">  Starts and links a new ListServer, returning {:ok, pid}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;">  ## Example</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;">    iex&gt; {:ok, pid} = ListServer.start_link</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;">  &quot;&quot;&quot;</span></span>
+<span class="giallo-l"><span style="color: #8EC07C;">  def</span><span style="color: #FABD2F;"> start_link</span><span style="color: #8EC07C;"> do</span></span>
+<span class="giallo-l"><span style="color: #D3869B;">    :gen_server</span><span style="color: #A89984;">.</span><span style="color: #FABD2F;">start_link</span><span style="color: #A89984;">({:</span><span style="color: #D3869B;">local</span><span style="color: #A89984;">, :</span><span style="color: #D3869B;">list</span><span style="color: #A89984;">},</span><span style="color: #83A598;"> __MODULE__</span><span style="color: #A89984;">, [], [])</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">  end</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;">  ### GenServer API</span></span>
+<span class="giallo-l"><span style="color: #8EC07C;">  def</span><span style="color: #FABD2F;"> init</span><span style="color: #A89984;">(</span><span>list</span><span style="color: #A89984;">)</span><span style="color: #8EC07C;"> do</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    {:</span><span style="color: #D3869B;">ok</span><span style="color: #A89984;">,</span><span> list</span><span style="color: #A89984;">}</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">  end</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;">  # Clear the list</span></span>
+<span class="giallo-l"><span style="color: #8EC07C;">  def</span><span style="color: #FABD2F;"> handle_cast</span><span style="color: #A89984;"> :</span><span style="color: #D3869B;">clear</span><span style="color: #A89984;">,</span><span> list </span><span style="color: #8EC07C;">do</span></span>
+<span class="giallo-l"><span style="color: #A89984;">    {:</span><span style="color: #D3869B;">noreply</span><span style="color: #A89984;">, []}</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">  end</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">end</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A89984;">{:</span><span style="color: #D3869B;">ok</span><span style="color: #A89984;">,</span><span> pid</span><span style="color: #A89984;">}</span><span style="color: #8EC07C;"> =</span><span style="color: #FABD2F;"> ListServer</span><span style="color: #A89984;">.</span><span style="color: #FABD2F;">start_link</span></span>
+<span class="giallo-l"><span>pid </span><span style="color: #8EC07C;">&lt;-</span><span style="color: #A89984;"> {:</span><span style="color: #D3869B;">foo</span><span style="color: #A89984;">, &quot;</span><span style="color: #B8BB26;">bar</span><span style="color: #A89984;">&quot;}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>greeter </span><span style="color: #8EC07C;">=</span><span style="color: #FABD2F;"> fn</span><span style="color: #A89984;">(</span><span>x</span><span style="color: #A89984;">)</span><span style="color: #8EC07C;"> -&gt;</span><span style="color: #FABD2F;"> IO</span><span style="color: #A89984;">.</span><span style="color: #FABD2F;">puts</span><span style="color: #A89984;"> &quot;</span><span style="color: #B8BB26;">hey </span><span style="color: #A89984;">#{</span><span style="color: #B8BB26;">x</span><span style="color: #A89984;">}&quot;</span><span style="color: #FB4934;"> end</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">greeter</span><span style="color: #A89984;">.(&quot;</span><span style="color: #B8BB26;">Bob</span><span style="color: #A89984;">&quot;)</span></span></code></pre>
               
             </article>
           
@@ -532,7 +530,7 @@
                 <time>2015-06-16 00:00</time>
               </div>
               
-                <p>参见：<a href="https://appdb.winehq.org/objectManager.php?sClass=version&amp;iId=30180&amp;iTestingId=88496">https://appdb.winehq.org/objectManager.php?sClass=version&amp;iId=30180&amp;iTestingId=88496</a></p>
+                <p>参见：<a rel="external" href="https://appdb.winehq.org/objectManager.php?sClass=version&amp;iId=30180&amp;iTestingId=88496">https://appdb.winehq.org/objectManager.php?sClass=version&amp;iId=30180&amp;iTestingId=88496</a></p>
 <p>具体流程就是</p>
 <p>先安装最新版1.7 Wine和winetricks，步骤什么的就不用我说了，应该都会</p>
 <p>如果你直接装的64位wine，需要先设置成32位wine环境</p>
@@ -568,60 +566,56 @@
               </div>
               
                 <p>Crystal 是一个语法像 Ruby，性能堪比C的语言</p>
-<p>详细就不介绍了，直接去<a href="http://crystal-lang.org">官网</a>看吧</p>
+<p>详细就不介绍了，直接去<a rel="external" href="http://crystal-lang.org">官网</a>看吧</p>
 <h2 id="zheng-wen"><a class="zola-anchor" href="#zheng-wen" aria-label="Anchor link for: zheng-wen">正文</a></h2>
 <hr />
 <p>其实直接参考里面的Vagrantfile就行（Dockerfile太久没更新就无视吧）</p>
-<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">curl -s http://dist.crystal-lang.org/apt/setup.sh </span><span style="color:#fe8019;">| </span><span style="color:#fdf4c1;">bash
-</span><span style="color:#fdf4c1;">apt-get install -y crystal git libgmp3-dev zlib1g-dev libedit-dev libxml2-dev libssl-dev libyaml-dev libreadline-dev
-</span><span style="color:#fdf4c1;">curl -s http://crystal-lang.s3.amazonaws.com/llvm/llvm-3.5.0-1-linux-x86_64.tar.gz </span><span style="color:#fe8019;">| </span><span style="color:#fdf4c1;">tar xz -C /opt
-</span><span style="color:#fabd2f;">echo </span><span style="color:#b8bb26;">&#39;export LIBRARY_PATH=&quot;/opt/crystal/embedded/lib&quot;&#39; </span><span style="color:#fe8019;">&gt;</span><span style="color:#fdf4c1;"> /etc/profile.d/crystal.sh
-</span><span style="color:#fabd2f;">echo </span><span style="color:#b8bb26;">&#39;export PATH=&quot;$PATH:/opt/llvm-3.5.0-1/bin&quot;&#39; </span><span style="color:#fe8019;">&gt;&gt;</span><span style="color:#fdf4c1;"> /etc/profile.d/crystal.sh
-</span><span style="color:#fdf4c1;">git clone https://github.com/manastech/crystal.git
-</span><span style="color:#fdf4c1;">make
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FABD2F;">curl</span><span style="color: #D3869B;"> -s</span><span style="color: #B8BB26;"> http://dist.crystal-lang.org/apt/setup.sh</span><span style="color: #8EC07C;"> |</span><span style="color: #FABD2F;"> bash</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">apt-get</span><span style="color: #B8BB26;"> install</span><span style="color: #D3869B;"> -y</span><span style="color: #B8BB26;"> crystal git libgmp3-dev zlib1g-dev libedit-dev libxml2-dev libssl-dev libyaml-dev libreadline-dev</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">curl</span><span style="color: #D3869B;"> -s</span><span style="color: #B8BB26;"> http://crystal-lang.s3.amazonaws.com/llvm/llvm-3.5.0-1-linux-x86_64.tar.gz</span><span style="color: #8EC07C;"> |</span><span style="color: #FABD2F;"> tar</span><span style="color: #B8BB26;"> xz</span><span style="color: #D3869B;"> -C</span><span style="color: #B8BB26;"> /opt</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">echo</span><span style="color: #A89984;"> &#39;</span><span style="color: #B8BB26;">export LIBRARY_PATH=&quot;/opt/crystal/embedded/lib&quot;</span><span style="color: #A89984;">&#39;</span><span style="color: #8EC07C;"> &gt;</span><span style="color: #B8BB26;"> /etc/profile.d/crystal.sh</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">echo</span><span style="color: #A89984;"> &#39;</span><span style="color: #B8BB26;">export PATH=&quot;$PATH:/opt/llvm-3.5.0-1/bin&quot;</span><span style="color: #A89984;">&#39;</span><span style="color: #8EC07C;"> &gt;&gt;</span><span style="color: #B8BB26;"> /etc/profile.d/crystal.sh</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">git</span><span style="color: #B8BB26;"> clone https://github.com/manastech/crystal.git</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">make</span></span></code></pre>
 <p>顺便照着写了个Dockerfile</p>
-<pre data-lang="Dockerfile" style="background-color:#282828;color:#fdf4c1aa;" class="language-Dockerfile "><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#fa5c4b;">FROM</span><span> ubuntu:</span><span style="color:#8ec07c;">14.04
-</span><span style="color:#fa5c4b;">RUN </span><span>apt-key adv --keyserver keys.gnupg.net --recv-keys 09617FD37CC06B54 &amp;&amp; \
-</span><span>    echo </span><span style="color:#b8bb26;">&quot;deb http://dist.crystal-lang.org/apt crystal main&quot;</span><span> &gt; /etc/apt/sources.list.d/crystal.list &amp;&amp; \
-</span><span>    apt-get update &amp;&amp; \
-</span><span>    apt-get install -y build-essential crystal curl git libgmp3-dev zlib1g-dev libedit-dev libxml2-dev libssl-dev libyaml-dev libreadline-dev &amp;&amp; \
-</span><span>    apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &amp;&amp; \
-</span><span>    curl -s http://crystal-lang.s3.amazonaws.com/llvm/llvm-3.5.0-1-linux-x86_64.tar.gz | tar xz -C /opt
-</span><span style="color:#fa5c4b;">ENV </span><span>LIBRARY_PATH=/opt/crystal/embedded/lib
-</span><span style="color:#fa5c4b;">ENV </span><span>PATH=$PATH:/opt/llvm-3.5.0-1/bin
-</span><span style="color:#fa5c4b;">RUN </span><span>git clone https://github.com/manastech/crystal.git /root/crystal
-</span><span style="color:#fa5c4b;">WORKDIR </span><span>/root/crystal
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="docker"><span class="giallo-l"><span style="color: #FB4934;">FROM</span><span> ubuntu:14.04</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">RUN</span><span> apt-key adv --keyserver keys.gnupg.net --recv-keys 09617FD37CC06B54 &amp;&amp; \</span></span>
+<span class="giallo-l"><span>    echo </span><span style="color: #B8BB26;">&quot;deb http://dist.crystal-lang.org/apt crystal main&quot;</span><span> &gt; /etc/apt/sources.list.d/crystal.list &amp;&amp; \</span></span>
+<span class="giallo-l"><span>    apt-get update &amp;&amp; \</span></span>
+<span class="giallo-l"><span>    apt-get install -y build-essential crystal curl git libgmp3-dev zlib1g-dev libedit-dev libxml2-dev libssl-dev libyaml-dev libreadline-dev &amp;&amp; \</span></span>
+<span class="giallo-l"><span>    apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &amp;&amp; \</span></span>
+<span class="giallo-l"><span>    curl -s http://crystal-lang.s3.amazonaws.com/llvm/llvm-3.5.0-1-linux-x86_64.tar.gz | tar xz -C /opt</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">ENV</span><span> LIBRARY_PATH=/opt/crystal/embedded/lib</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">ENV</span><span> PATH=$PATH:/opt/llvm-3.5.0-1/bin</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">RUN</span><span> git clone https://github.com/manastech/crystal.git /root/crystal</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">WORKDIR</span><span> /root/crystal</span></span></code></pre>
 <p>也可以直接<code>docker pull iovxw/crystal</code>我build好的</p>
 <p>默认只是配置好环境，进去之后make什么都随便</p>
 <hr />
 <p>顺带一提里面的轻量级线程还有channel好顺手啊，还带select</p>
-<pre data-lang="crystal" style="background-color:#282828;color:#fdf4c1aa;" class="language-crystal "><code class="language-crystal" data-lang="crystal"><span style="color:#fa5c4b;">def </span><span style="color:#8ec07c;">generator</span><span>(</span><span style="color:#fdf4c1;">n : </span><span style="color:#8ec07c;">T</span><span>)
-</span><span>  channel </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Channel</span><span>(</span><span style="color:#8ec07c;">T</span><span>).</span><span style="color:#fa5c4b;">new
-</span><span>  </span><span style="color:#fa5c4b;">spawn do
-</span><span>    </span><span style="color:#fa5c4b;">loop do
-</span><span>      sleep n
-</span><span>      channel.send n
-</span><span>    </span><span style="color:#fa5c4b;">end
-</span><span>  </span><span style="color:#fa5c4b;">end
-</span><span>  channel
-</span><span style="color:#fa5c4b;">end
-</span><span>
-</span><span>ch1 </span><span style="color:#fe8019;">=</span><span> generator(</span><span style="color:#d3869b;">1</span><span>)
-</span><span>ch2 </span><span style="color:#fe8019;">=</span><span> generator(</span><span style="color:#d3869b;">1.5</span><span>)
-</span><span>ch3 </span><span style="color:#fe8019;">=</span><span> generator(</span><span style="color:#d3869b;">5</span><span>)
-</span><span>
-</span><span style="color:#fa5c4b;">loop do
-</span><span>  </span><span style="color:#fa5c4b;">case</span><span> ch </span><span style="color:#fe8019;">= </span><span style="color:#8ec07c;">Channel</span><span>.select(ch1, ch2, ch3)
-</span><span>  </span><span style="color:#fa5c4b;">when</span><span> ch3
-</span><span>    </span><span style="color:#fa5c4b;">break
-</span><span>  </span><span style="color:#fa5c4b;">else
-</span><span>    puts ch.receive
-</span><span>  </span><span style="color:#fa5c4b;">end
-</span><span style="color:#fa5c4b;">end
-</span></code></pre>
-
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="crystal"><span class="giallo-l"><span style="color: #FB4934;">def</span><span style="color: #FABD2F;"> generator</span><span style="color: #A89984;">(</span><span style="color: #83A598;">n</span><span style="color: #A89984;"> :</span><span> T</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #83A598;">  channel</span><span style="color: #8EC07C;"> =</span><span> Channel</span><span style="color: #A89984;">(</span><span>T</span><span style="color: #A89984;">).</span><span>new</span></span>
+<span class="giallo-l"><span>  spawn</span><span style="color: #FB4934;"> do</span></span>
+<span class="giallo-l"><span>    loop</span><span style="color: #FB4934;"> do</span></span>
+<span class="giallo-l"><span>      sleep n</span></span>
+<span class="giallo-l"><span style="color: #83A598;">      channel</span><span style="color: #A89984;">.</span><span>send n</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">    end</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">  end</span></span>
+<span class="giallo-l"><span>  channel</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">end</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #83A598;">ch1</span><span style="color: #8EC07C;"> =</span><span style="color: #FABD2F;"> generator</span><span style="color: #A89984;">(</span><span style="color: #D3869B;">1</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #83A598;">ch2</span><span style="color: #8EC07C;"> =</span><span style="color: #FABD2F;"> generator</span><span style="color: #A89984;">(</span><span style="color: #D3869B;">1.5</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #83A598;">ch3</span><span style="color: #8EC07C;"> =</span><span style="color: #FABD2F;"> generator</span><span style="color: #A89984;">(</span><span style="color: #D3869B;">5</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>loop</span><span style="color: #FB4934;"> do</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">  case</span><span style="color: #83A598;"> ch</span><span style="color: #8EC07C;"> =</span><span> Channel</span><span style="color: #A89984;">.</span><span style="color: #FABD2F;">select</span><span style="color: #A89984;">(</span><span style="color: #83A598;">ch1</span><span style="color: #A89984;">,</span><span style="color: #83A598;"> ch2</span><span style="color: #A89984;">,</span><span style="color: #83A598;"> ch3</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">  when</span><span> ch3</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">    break</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">  else</span></span>
+<span class="giallo-l"><span>    puts</span><span style="color: #83A598;"> ch</span><span style="color: #A89984;">.</span><span>receive</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">  end</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">end</span></span></code></pre>
               
             </article>
           
@@ -636,23 +630,20 @@
               
                 <p>golang里面函数的多返回值就相当于一个展开过的切片</p>
 <p>像这个样子：</p>
-<pre data-lang="go" style="background-color:#282828;color:#fdf4c1aa;" class="language-go "><code class="language-go" data-lang="go"><span>[]</span><span style="color:#fa5c4b;">interface</span><span>{}{</span><span style="color:#fdf4c1;">返回值1</span><span>, </span><span style="color:#fdf4c1;">返回值2</span><span>}</span><span style="color:#fe8019;">...
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="go"><span class="giallo-l"><span style="color: #A89984;">[]</span><span style="color: #83A598;">interface</span><span style="color: #A89984;">{}{</span><span style="color: #83A598;">返回值1</span><span style="color: #A89984;">,</span><span style="color: #83A598;"> 返回值2</span><span style="color: #A89984;">}</span><span style="color: #8EC07C;">...</span></span></code></pre>
 <p>于是我们把它反过来就行了</p>
-<pre data-lang="go" style="background-color:#282828;color:#fdf4c1aa;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#fa5c4b;">package </span><span style="color:#fdf4c1;">main
-</span><span>
-</span><span style="color:#fa5c4b;">import </span><span>(
-</span><span>	</span><span style="color:#b8bb26;">&quot;fmt&quot;
-</span><span>	</span><span style="color:#b8bb26;">&quot;strconv&quot;
-</span><span>)
-</span><span>
-</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">toSlice</span><span>(</span><span style="color:#fdf4c1;">v </span><span style="color:#fe8019;">...</span><span style="color:#fa5c4b;">interface</span><span>{}) []</span><span style="color:#fa5c4b;">interface</span><span>{} { </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">v </span><span>}
-</span><span>
-</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">main</span><span>() {
-</span><span>	</span><span style="color:#fdf4c1;">fmt</span><span>.</span><span style="color:#fdf4c1;">Println</span><span>(</span><span style="color:#fdf4c1;">toSlice</span><span>(</span><span style="color:#fdf4c1;">strconv</span><span>.</span><span style="color:#fdf4c1;">Atoi</span><span>(</span><span style="color:#b8bb26;">&quot;1&quot;</span><span>)))
-</span><span>}
-</span></code></pre>
-
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="go"><span class="giallo-l"><span style="color: #8EC07C;">package</span><span> main</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">import</span><span style="color: #A89984;"> (</span></span>
+<span class="giallo-l"><span style="color: #A89984;">	&quot;</span><span style="color: #B8BB26;">fmt</span><span style="color: #A89984;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #A89984;">	&quot;</span><span style="color: #B8BB26;">strconv</span><span style="color: #A89984;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">func</span><span style="color: #D3869B;"> toSlice</span><span style="color: #A89984;">(</span><span style="color: #83A598;">v</span><span style="color: #8EC07C;"> ...</span><span style="color: #83A598;">interface</span><span style="color: #A89984;">{}) []</span><span style="color: #83A598;">interface</span><span style="color: #A89984;">{} {</span><span style="color: #FB4934;"> return</span><span style="color: #83A598;"> v</span><span style="color: #A89984;"> }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">func</span><span style="color: #D3869B;"> main</span><span style="color: #A89984;">() {</span></span>
+<span class="giallo-l"><span style="color: #83A598;">	fmt</span><span style="color: #A89984;">.</span><span style="color: #D3869B;">Println</span><span style="color: #A89984;">(</span><span style="color: #D3869B;">toSlice</span><span style="color: #A89984;">(</span><span style="color: #83A598;">strconv</span><span style="color: #A89984;">.</span><span style="color: #D3869B;">Atoi</span><span style="color: #A89984;">(&quot;</span><span style="color: #B8BB26;">1</span><span style="color: #A89984;">&quot;)))</span></span>
+<span class="giallo-l"><span style="color: #A89984;">}</span></span></code></pre>
               
             </article>
           

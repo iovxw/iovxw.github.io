@@ -371,7 +371,7 @@
 <span id="continue-reading"></span>
 <hr />
 <h2 id="di-yi-ge-xiang-dao-de-hong-mo-ban"><a class="zola-anchor" href="#di-yi-ge-xiang-dao-de-hong-mo-ban" aria-label="Anchor link for: di-yi-ge-xiang-dao-de-hong-mo-ban">第一个想到的：触摸板</a></h2>
-<p>没有 Mac，笔记本上的触摸板有点小，于是拿手机模拟了个触摸板用（可以用 <a href="https://kdeconnect.kde.org/">KDE Connect</a> 或 <a href="https://github.com/Unrud/remote-touchpad">remote-touchpad</a>）</p>
+<p>没有 Mac，笔记本上的触摸板有点小，于是拿手机模拟了个触摸板用（可以用 <a rel="external" href="https://kdeconnect.kde.org/">KDE Connect</a> 或 <a rel="external" href="https://github.com/Unrud/remote-touchpad">remote-touchpad</a>）</p>
 <p>虽然手感不怎么样，但也没那么差</p>
 <p>用了三天</p>
 <p>就结论来说：有效果，不那么疼了</p>
@@ -386,51 +386,50 @@
 <hr />
 <h2 id="xbox-shou-bing"><a class="zola-anchor" href="#xbox-shou-bing" aria-label="Anchor link for: xbox-shou-bing">Xbox 手柄</a></h2>
 <p>配置一下就能拿来模拟鼠标</p>
-<p>有好几个带图形界面的项目，但都不太能用，唯一稳定的是 <a href="https://xboxdrv.gitlab.io">xboxdrv</a></p>
+<p>有好几个带图形界面的项目，但都不太能用，唯一稳定的是 <a rel="external" href="https://xboxdrv.gitlab.io">xboxdrv</a></p>
 <p>下面是我的配置文件：</p>
-<pre data-lang="ini" style="background-color:#282828;color:#fdf4c1aa;" class="language-ini "><code class="language-ini" data-lang="ini"><span style="font-style:italic;color:#928374;"># Mouse Emulation
-</span><span style="font-style:italic;color:#928374;"># ===============
-</span><span style="font-style:italic;color:#928374;">#
-</span><span style="font-style:italic;color:#928374;"># This configuration file emulates a mouse.
-</span><span>
-</span><span style="color:#fa5c4b;">[xboxdrv]
-</span><span style="color:#fdf4c1;">ui-clear</span><span style="color:#fe8019;">=</span><span style="color:#d3869b;">true
-</span><span>
-</span><span style="color:#fa5c4b;">[ui-axismap]
-</span><span style="color:#fdf4c1;">x1 </span><span style="color:#fe8019;">=</span><span> rel</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_X</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1000</span><span style="color:#fe8019;">:-</span><span style="color:#d3869b;">1
-</span><span style="color:#fdf4c1;">y1 </span><span style="color:#fe8019;">=</span><span> rel</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_Y</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1000</span><span style="color:#fe8019;">:-</span><span style="color:#d3869b;">1
-</span><span>
-</span><span style="color:#fdf4c1;">y2</span><span style="color:#fe8019;">^</span><span>invert </span><span style="color:#fe8019;">=</span><span> rel</span><span style="color:#fe8019;">-</span><span>repeat</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_WHEEL</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">50
-</span><span style="color:#fdf4c1;">x2 </span><span style="color:#fe8019;">=</span><span> rel</span><span style="color:#fe8019;">-</span><span>repeat</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_HWHEEL</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">50
-</span><span>
-</span><span style="color:#fdf4c1;">lt </span><span style="color:#fe8019;">=</span><span> rel</span><span style="color:#fe8019;">-</span><span>repeat</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_WHEEL</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">20
-</span><span style="color:#fdf4c1;">rt </span><span style="color:#fe8019;">=</span><span> rel</span><span style="color:#fe8019;">-</span><span>repeat</span><span style="color:#fe8019;">:</span><span style="color:#fabd2f;">REL_WHEEL</span><span style="color:#fe8019;">:-</span><span style="color:#d3869b;">1</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">20
-</span><span>
-</span><span style="color:#fa5c4b;">[ui-buttonmap]
-</span><span style="color:#fdf4c1;">a </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">BTN_LEFT
-</span><span style="color:#fdf4c1;">b </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">BTN_RIGHT
-</span><span style="color:#fdf4c1;">x </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">BTN_MIDDLE
-</span><span style="color:#fdf4c1;">y </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_ENTER
-</span><span>
-</span><span style="color:#fdf4c1;">rb </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_PAGEDOWN
-</span><span style="color:#fdf4c1;">lb </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_PAGEUP
-</span><span>
-</span><span style="color:#fdf4c1;">tl </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_BACKSPACE
-</span><span style="color:#fdf4c1;">tr </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_SPACE
-</span><span>
-</span><span style="color:#fa5c4b;">[ui-buttonmap]
-</span><span style="color:#fdf4c1;">dl </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_LEFT
-</span><span style="color:#fdf4c1;">dr </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_RIGHT
-</span><span style="color:#fdf4c1;">du </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_UP
-</span><span style="color:#fdf4c1;">dd </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_DOWN
-</span><span>
-</span><span style="color:#fa5c4b;">[ui-buttonmap]
-</span><span style="color:#fa5c4b;">start </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_FORWARD
-</span><span style="color:#fdf4c1;">back  </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_BACK
-</span><span style="color:#fdf4c1;">guide </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">KEY_ESC
-</span><span>
-</span><span style="font-style:italic;color:#928374;"># EOF #
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="ini"><span class="giallo-l"><span style="color: #928374;font-style: italic;"># Mouse Emulation</span></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;"># ===============</span></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;">#</span></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;"># This configuration file emulates a mouse.</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A89984;">[</span><span style="color: #FABD2F;">xboxdrv</span><span style="color: #A89984;">]</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">ui-clear</span><span style="color: #A89984;">=</span><span>true</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A89984;">[</span><span style="color: #FABD2F;">ui-axismap</span><span style="color: #A89984;">]</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">x1</span><span style="color: #A89984;"> =</span><span> rel:REL_X:1000:-1</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">y1</span><span style="color: #A89984;"> =</span><span> rel:REL_Y:1000:-1</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>y2^</span><span style="color: #FB4934;">invert</span><span style="color: #A89984;"> =</span><span> rel-repeat:REL_WHEEL:1:50</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">x2</span><span style="color: #A89984;"> =</span><span> rel-repeat:REL_HWHEEL:1:50</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">lt</span><span style="color: #A89984;"> =</span><span> rel-repeat:REL_WHEEL:1:20</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">rt</span><span style="color: #A89984;"> =</span><span> rel-repeat:REL_WHEEL:-1:20</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A89984;">[</span><span style="color: #FABD2F;">ui-buttonmap</span><span style="color: #A89984;">]</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">a</span><span style="color: #A89984;"> =</span><span> BTN_LEFT</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">b</span><span style="color: #A89984;"> =</span><span> BTN_RIGHT</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">x</span><span style="color: #A89984;"> =</span><span> BTN_MIDDLE</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">y</span><span style="color: #A89984;"> =</span><span> KEY_ENTER</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">rb</span><span style="color: #A89984;"> =</span><span> KEY_PAGEDOWN</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">lb</span><span style="color: #A89984;"> =</span><span> KEY_PAGEUP</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">tl</span><span style="color: #A89984;"> =</span><span> KEY_BACKSPACE</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">tr</span><span style="color: #A89984;"> =</span><span> KEY_SPACE</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A89984;">[</span><span style="color: #FABD2F;">ui-buttonmap</span><span style="color: #A89984;">]</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">dl</span><span style="color: #A89984;"> =</span><span> KEY_LEFT</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">dr</span><span style="color: #A89984;"> =</span><span> KEY_RIGHT</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">du</span><span style="color: #A89984;"> =</span><span> KEY_UP</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">dd</span><span style="color: #A89984;"> =</span><span> KEY_DOWN</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A89984;">[</span><span style="color: #FABD2F;">ui-buttonmap</span><span style="color: #A89984;">]</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">start</span><span style="color: #A89984;"> =</span><span> KEY_FORWARD</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">back</span><span style="color: #A89984;">  =</span><span> KEY_BACK</span></span>
+<span class="giallo-l"><span style="color: #FB4934;">guide</span><span style="color: #A89984;"> =</span><span> KEY_ESC</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;"># EOF #</span></span></code></pre>
 <p>使用感想：</p>
 <p>精度不行，得非常有耐心才用得来，下一个吧</p>
 <hr />
@@ -453,7 +452,7 @@
 <h3 id="l-trac"><a class="zola-anchor" href="#l-trac" aria-label="Anchor link for: l-trac">L-Trac</a></h3>
 <p><img src="https://iovxw.net/p/kensington-orbit-trackball/redl-trac.jpg" alt="L-Trac Red" /></p>
 <p><em><strong>$149.95</strong></em></p>
-<p>有滚轮，<a href="https://youtu.be/CwDyVXZ7sg0">可动的机械轴承</a>，还能扩展按键！</p>
+<p>有滚轮，<a rel="external" href="https://youtu.be/CwDyVXZ7sg0">可动的机械轴承</a>，还能扩展按键！</p>
 <p>然而买不到（</p>
 <hr />
 <h3 id="kensington-slimbladetm"><a class="zola-anchor" href="#kensington-slimbladetm" aria-label="Anchor link for: kensington-slimbladetm">Kensington SlimBlade™</a></h3>
@@ -470,7 +469,7 @@
 <p>但这个型号上的滚动环很多人不喜欢，主要是手感：</p>
 <blockquote>
 <p><img src="https://iovxw.net/p/kensington-orbit-trackball/expert_mouse_scrollwhell.jpg" alt="" /></p>
-<p>You could see it creating a complicated "magnetic notched effect" making the Engineer a "Kensington Fellow" with lots of Corporate awards. Unfortunately nobody bothered to check how it works. It sucks royally. (<a href="http://web.archive.org/web/20100620203512/http://geekhack.org/showwiki.php?title=Island:9303">Source</a>)</p>
+<p>You could see it creating a complicated "magnetic notched effect" making the Engineer a "Kensington Fellow" with lots of Corporate awards. Unfortunately nobody bothered to check how it works. It sucks royally. (<a rel="external" href="http://web.archive.org/web/20100620203512/http://geekhack.org/showwiki.php?title=Island:9303">Source</a>)</p>
 </blockquote>
 <p>其实原理看一下也能明白，那个长得像 Zoetrope（西洋镜？）的轮是金属做的，然后旁边有块磁铁来提供段落感</p>
 <p>可惜做的太烂，只能拆掉磁铁当无极滚轮</p>
@@ -497,12 +496,10 @@
 <h4 id="pei-zhi"><a class="zola-anchor" href="#pei-zhi" aria-label="Anchor link for: pei-zhi">配置</a></h4>
 <p>发行版 Arch，桌面环境 Gnome 3.36.1 on Wayland</p>
 <p>因为只有两个键，设置一下同时按住两键模拟中键：</p>
-<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">gsettings set org.gnome.desktop.peripherals.mouse middle-click-emulation true
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FABD2F;">gsettings</span><span style="color: #B8BB26;"> set org.gnome.desktop.peripherals.mouse middle-click-emulation</span><span style="color: #D3869B;"> true</span></span></code></pre>
 <p>还有一个 <code>org.gnome.desktop.peripherals.trackball</code>，但看起来暂时没用</p>
 <p>启用鼠标加速度：</p>
-<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">gsettings set org.gnome.desktop.peripherals.mouse accel-profile adaptive
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FABD2F;">gsettings</span><span style="color: #B8BB26;"> set org.gnome.desktop.peripherals.mouse accel-profile adaptive</span></span></code></pre>
 <p>鼠标速度的话有图形界面设置，进控制中心直接拖到底：</p>
 <p><img src="https://iovxw.net/p/kensington-orbit-trackball/mouse-speed.png" alt="" /></p>
 <hr />

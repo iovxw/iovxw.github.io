@@ -385,25 +385,22 @@
 <hr />
 <h2 id="fang-an"><a class="zola-anchor" href="#fang-an" aria-label="Anchor link for: fang-an">方案</a></h2>
 <p>开始以为是硬盘盒固件问题，于是寻找 ASM 1153E 的固件</p>
-<p>（比如<a href="http://web.archive.org/web/20210413021249/https://www.lulian.cn/download/48-cn.html">这里</a>）</p>
+<p>（比如<a rel="external" href="http://web.archive.org/web/20210413021249/https://www.lulian.cn/download/48-cn.html">这里</a>）</p>
 <p>——没啥用，除了可以设置休眠时间来达到“自动关闭”</p>
 <p>且通过 <code>udisksctl power-off</code> 是能正常关闭硬盘的，排除</p>
 <p>还是乖乖找文档</p>
-<p><a href="http://www.linux-ata.org/shutdown.html#2.%20Why%20do%20I%20need%20to%20update%20shutdown(8)_%7Coutline">Serial ATA (SATA) shutdown info</a></p>
+<p><a rel="external" href="http://www.linux-ata.org/shutdown.html#2.%20Why%20do%20I%20need%20to%20update%20shutdown(8)_%7Coutline">Serial ATA (SATA) shutdown info</a></p>
 <p>简而言之由于可能被多个设备共享，内核在关机时是不管 SCSI 设备的</p>
-<p>但 2.6.21 之后，因为 libata 使用 SCSI 作为上层驱动，就加了自动管理，可惜移动硬盘不在此列（可能因为是 <a href="https://en.wikipedia.org/wiki/SCSI_/_ATA_Translation">SAT</a>？）</p>
+<p>但 2.6.21 之后，因为 libata 使用 SCSI 作为上层驱动，就加了自动管理，可惜移动硬盘不在此列（可能因为是 <a rel="external" href="https://en.wikipedia.org/wiki/SCSI_/_ATA_Translation">SAT</a>？）</p>
 <p>里面还提到 <code>/sys/class/scsi_disk/h:c:i:l/manage_start_stop</code> 这个属性</p>
-<p><a href="https://github.com/torvalds/linux/blob/v5.11/include/scsi/scsi_device.h#L186">linux/include/scsi/scsi_device.h</a></p>
-<pre data-lang="c" style="background-color:#282828;color:#fdf4c1aa;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#fa5c4b;">unsigned</span><span> manage_start_stop</span><span style="color:#fe8019;">:</span><span style="color:#d3869b;">1</span><span>;	</span><span style="font-style:italic;color:#928374;">/* Let HLD (sd) manage start/stop */
-</span></code></pre>
+<p><a rel="external" href="https://github.com/torvalds/linux/blob/v5.11/include/scsi/scsi_device.h#L186">linux/include/scsi/scsi_device.h</a></p>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="c"><span class="giallo-l"><span style="color: #FE8019;">unsigned</span><span> manage_start_stop:</span><span style="color: #D3869B;">1</span><span style="color: #A89984;">;</span><span style="color: #928374;font-style: italic;">	/* Let HLD (sd) manage start/stop */</span></span></code></pre>
 <p>是我们要找的了，设为 1 就会管理起停</p>
-<p>然后 <a href="https://bugzilla.kernel.org/show_bug.cgi?id=205107">https://bugzilla.kernel.org/show_bug.cgi?id=205107</a> 中提到，可以建一个 udev rule 自动化</p>
+<p>然后 <a rel="external" href="https://bugzilla.kernel.org/show_bug.cgi?id=205107">https://bugzilla.kernel.org/show_bug.cgi?id=205107</a> 中提到，可以建一个 udev rule 自动化</p>
 <p><code>/etc/udev/rules.d/01-manage_start_stop.rules</code></p>
-<pre data-lang="c" style="background-color:#282828;color:#fdf4c1aa;" class="language-c "><code class="language-c" data-lang="c"><span>ACTION</span><span style="color:#fe8019;">==</span><span style="color:#b8bb26;">&quot;add|change&quot;</span><span>, DRIVERS</span><span style="color:#fe8019;">==</span><span style="color:#b8bb26;">&quot;usb-storage&quot;</span><span>, SUBSYSTEM</span><span style="color:#fe8019;">==</span><span style="color:#b8bb26;">&quot;scsi_disk&quot;</span><span>, RUN</span><span style="color:#fe8019;">+=</span><span style="color:#b8bb26;">&quot;/bin/sh -c &#39;echo 1 &gt;/sys/class/scsi_disk/%k/manage_start_stop&#39;&quot;
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="c"><span class="giallo-l"><span>ACTION</span><span style="color: #8EC07C;">==</span><span style="color: #A89984;">&quot;</span><span style="color: #B8BB26;">add|change</span><span style="color: #A89984;">&quot;,</span><span> DRIVERS</span><span style="color: #8EC07C;">==</span><span style="color: #A89984;">&quot;</span><span style="color: #B8BB26;">usb-storage</span><span style="color: #A89984;">&quot;,</span><span> SUBSYSTEM</span><span style="color: #8EC07C;">==</span><span style="color: #A89984;">&quot;</span><span style="color: #B8BB26;">scsi_disk</span><span style="color: #A89984;">&quot;,</span><span> RUN</span><span style="color: #8EC07C;">+=</span><span style="color: #A89984;">&quot;</span><span style="color: #B8BB26;">/bin/sh -c &#39;echo 1 &gt;/sys/class/scsi_disk/</span><span style="color: #CC241D;">%</span><span style="color: #B8BB26;">k/manage_start_stop&#39;</span><span style="color: #A89984;">&quot;</span></span></code></pre>
 <p>不过它不管 UAS 设备，对于支持 UAS 的硬盘盒需要加一下</p>
-<pre data-lang="c" style="background-color:#282828;color:#fdf4c1aa;" class="language-c "><code class="language-c" data-lang="c"><span>ACTION</span><span style="color:#fe8019;">==</span><span style="color:#b8bb26;">&quot;add|change&quot;</span><span>, DRIVERS</span><span style="color:#fe8019;">==</span><span style="color:#b8bb26;">&quot;usb-storage|uas&quot;</span><span>, SUBSYSTEM</span><span style="color:#fe8019;">==</span><span style="color:#b8bb26;">&quot;scsi_disk&quot;</span><span>, RUN</span><span style="color:#fe8019;">+=</span><span style="color:#b8bb26;">&quot;/bin/sh -c &#39;echo 1 &gt; /sys/class/scsi_disk/%k/manage_start_stop&#39;&quot;
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="c"><span class="giallo-l"><span>ACTION</span><span style="color: #8EC07C;">==</span><span style="color: #A89984;">&quot;</span><span style="color: #B8BB26;">add|change</span><span style="color: #A89984;">&quot;,</span><span> DRIVERS</span><span style="color: #8EC07C;">==</span><span style="color: #A89984;">&quot;</span><span style="color: #B8BB26;">usb-storage|uas</span><span style="color: #A89984;">&quot;,</span><span> SUBSYSTEM</span><span style="color: #8EC07C;">==</span><span style="color: #A89984;">&quot;</span><span style="color: #B8BB26;">scsi_disk</span><span style="color: #A89984;">&quot;,</span><span> RUN</span><span style="color: #8EC07C;">+=</span><span style="color: #A89984;">&quot;</span><span style="color: #B8BB26;">/bin/sh -c &#39;echo 1 &gt; /sys/class/scsi_disk/</span><span style="color: #CC241D;">%</span><span style="color: #B8BB26;">k/manage_start_stop&#39;</span><span style="color: #A89984;">&quot;</span></span></code></pre>
 <hr />
 <h2 id="wan"><a class="zola-anchor" href="#wan" aria-label="Anchor link for: wan">完</a></h2>
 <p>顺便吐槽一下 GNOME 官方的 Removable drive menu 插件，虽然是给 removable drive 用的，却只能 unmount，要安全移除的话还得进 nautilus 点菜单</p>

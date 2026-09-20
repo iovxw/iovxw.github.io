@@ -362,18 +362,17 @@
 <article>
     <h1>让XP继续接受更新</h1>
     <div class="info"><p>通过修改注册表来让XP继续接受更新</p><time>2014-05-27 00:00</time></div>
-    <p>在<a href="http://www.zdnet.com/registry-hack-enables-continued-updates-for-windows-xp-7000029851/">Betanews</a>看到了让XP继续更新的方法</p>
+    <p>在<a rel="external" href="http://www.zdnet.com/registry-hack-enables-continued-updates-for-windows-xp-7000029851/">Betanews</a>看到了让XP继续更新的方法</p>
 <p>大体过程如下：</p>
 <p>1.新建一个文件扩展名为<code>.reg</code>的文件（例如<code>updates.reg</code>）</p>
 <p>2.用文本编辑器打开</p>
 <p>3.修改内容为</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Windows Registry Editor Version 5.00
-</span><span>[HKEY_LOCAL_MACHINE\SYSTEM\WPA\PosReady]
-</span><span>&quot;Installed&quot;=dword:00000001
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>Windows Registry Editor Version 5.00</span></span>
+<span class="giallo-l"><span>[HKEY_LOCAL_MACHINE\SYSTEM\WPA\PosReady]</span></span>
+<span class="giallo-l"><span>&quot;Installed&quot;=dword:00000001</span></span></code></pre>
 <p>4.保存，然后双击它</p>
 <p>现在打开更新管理器就会发现有新的更新可用了</p>
-<p>这个的原理是欺骗Windows Update，让它把你的电脑识别为<a href="http://Windows%20Embedded%20POSReady%202009">Windows Embedded POSReady 2009</a></p>
+<p>这个的原理是欺骗Windows Update，让它把你的电脑识别为<a rel="external" href="http://Windows%20Embedded%20POSReady%202009">Windows Embedded POSReady 2009</a></p>
 <p>而Windows Embedded POSReady 2009的支持日期一直到2019年4月9日</p>
 <p>当然这不是最好的解决办法，要想一直有免费升级的话，还是去用Linux吧</p>
 <p>最起码你不用再担心系统是不是安全了</p>

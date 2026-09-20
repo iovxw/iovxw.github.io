@@ -385,65 +385,63 @@
                 <time>2016-06-14 00:00</time>
               </div>
               
-                <p>编译器是用go和Rust写的，github在这里：<a href="https://github.com/ark-lang/ark">https://github.com/ark-lang/ark</a></p>
-<p>官网：<a href="http://ark-lang.org/">http://ark-lang.org/</a></p>
+                <p>编译器是用go和Rust写的，github在这里：<a rel="external" href="https://github.com/ark-lang/ark">https://github.com/ark-lang/ark</a></p>
+<p>官网：<a rel="external" href="http://ark-lang.org/">http://ark-lang.org/</a></p>
 <p>说是系统级编程语言，可以和C无缝交互</p>
 <p>至于为什么说是go和rust的结合体</p>
-<p>看下面的例子就知道了（<a href="https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md">https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md</a>）</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>struct Bar {
-</span><span>    name: str;
-</span><span>}
-</span><span>
-</span><span>struct Baz {
-</span><span>    name: str;
-</span><span>}
-</span><span>
-</span><span>trait Foo {
-</span><span>    func fooBar();
-</span><span>}
-</span><span>
-</span><span>impl Foo for Bar {
-</span><span>    func fooBar() {
-</span><span>        println(&quot;foobar method in foo for bar %s!&quot;, name);
-</span><span>    }
-</span><span>}
-</span><span>
-</span><span>impl Foo for Baz {
-</span><span>    func fooBar() {
-</span><span>        println(&quot;foobar method in foo for baz %s!&quot;, name);
-</span><span>    }
-</span><span>}
-</span><span>
-</span><span>
-</span><span>// attributes look cool
-</span><span>// basically generics, we need to use
-</span><span>// them in this case instead of saying `value: Foo` as
-</span><span>// a param, because a trait does not have a constant
-</span><span>// size that is known at compile time, so the generic
-</span><span>// will basically compile down to [in this case] two
-</span><span>// functions one for Bar, and one for Baz, then it
-</span><span>// will know the size of the given value.
-</span><span>// this might be weird to understand but its 1am and im
-</span><span>// ill and tired. jah bless xx
-</span><span>func [T: Foo] callFooBar(value: T) {
-</span><span>
-</span><span>}
-</span><span>
-</span><span>func main() {
-</span><span>    // monomorphisation????
-</span><span>    baz: Baz = {
-</span><span>        name: &quot;baz&quot;,
-</span><span>    };
-</span><span>
-</span><span>    bar: Bar = {
-</span><span>        name: &quot;bar&quot;,
-</span><span>    }
-</span><span>
-</span><span>    callFooBar(baz);
-</span><span>    callFooBar(bar);
-</span><span>}
-</span></code></pre>
-
+<p>看下面的例子就知道了（<a rel="external" href="https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md">https://github.com/ark-lang/ark-docs/blob/master/IDEAS.md</a>）</p>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>struct Bar {</span></span>
+<span class="giallo-l"><span>    name: str;</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>struct Baz {</span></span>
+<span class="giallo-l"><span>    name: str;</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>trait Foo {</span></span>
+<span class="giallo-l"><span>    func fooBar();</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>impl Foo for Bar {</span></span>
+<span class="giallo-l"><span>    func fooBar() {</span></span>
+<span class="giallo-l"><span>        println(&quot;foobar method in foo for bar %s!&quot;, name);</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>impl Foo for Baz {</span></span>
+<span class="giallo-l"><span>    func fooBar() {</span></span>
+<span class="giallo-l"><span>        println(&quot;foobar method in foo for baz %s!&quot;, name);</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>// attributes look cool</span></span>
+<span class="giallo-l"><span>// basically generics, we need to use</span></span>
+<span class="giallo-l"><span>// them in this case instead of saying `value: Foo` as</span></span>
+<span class="giallo-l"><span>// a param, because a trait does not have a constant</span></span>
+<span class="giallo-l"><span>// size that is known at compile time, so the generic</span></span>
+<span class="giallo-l"><span>// will basically compile down to [in this case] two</span></span>
+<span class="giallo-l"><span>// functions one for Bar, and one for Baz, then it</span></span>
+<span class="giallo-l"><span>// will know the size of the given value.</span></span>
+<span class="giallo-l"><span>// this might be weird to understand but its 1am and im</span></span>
+<span class="giallo-l"><span>// ill and tired. jah bless xx</span></span>
+<span class="giallo-l"><span>func [T: Foo] callFooBar(value: T) {</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>func main() {</span></span>
+<span class="giallo-l"><span>    // monomorphisation????</span></span>
+<span class="giallo-l"><span>    baz: Baz = {</span></span>
+<span class="giallo-l"><span>        name: &quot;baz&quot;,</span></span>
+<span class="giallo-l"><span>    };</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    bar: Bar = {</span></span>
+<span class="giallo-l"><span>        name: &quot;bar&quot;,</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    callFooBar(baz);</span></span>
+<span class="giallo-l"><span>    callFooBar(bar);</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre>
               
             </article>
           
@@ -475,10 +473,10 @@
                 <time>2016-05-03 00:00</time>
               </div>
               
-              <p>在 <a href="http://webchat.freenode.net?channels=%23chez">#chez</a> 频道里, <strong>@ecraven</strong> 使用 <em>Chez Scheme</em> 跑了下
-<a href="http://www.larcenists.org/benchmarksGenuineR6Linux.html">Larceny 项目的 R6RS Scheme 基准测试</a> (感谢 ecraven)</p>
+              <p>在 <a rel="external" href="http://webchat.freenode.net?channels=%23chez">#chez</a> 频道里, <strong>@ecraven</strong> 使用 <em>Chez Scheme</em> 跑了下
+<a rel="external" href="http://www.larcenists.org/benchmarksGenuineR6Linux.html">Larceny 项目的 R6RS Scheme 基准测试</a> (感谢 ecraven)</p>
 <p>测试环境是 <code>Intel i7-4770 @ 3.4GHz</code>, 结果如下:</p>
-<p><a href="http://www.nexoid.at/tmp/scheme-benchmark.html">http://www.nexoid.at/tmp/scheme-benchmark.html</a></p>
+<p><a rel="external" href="http://www.nexoid.at/tmp/scheme-benchmark.html">http://www.nexoid.at/tmp/scheme-benchmark.html</a></p>
 <p>为了省事在这里也放一份, 不过不保证更新, 最新结果请去上面的链接查看</p>
 <style>
 .result {
@@ -593,9 +591,9 @@ and the use of <tt>make-boot-file</tt>.
               </div>
               
               <p>闲得没事自己编译了下，有一块竟然还要手动写日期，一堆依赖真是麻烦</p>
-<p>Github: <a href="https://github.com/iovxw/csug9">https://github.com/iovxw/csug9</a></p>
-<p>PDF: <a href="https://iovxw.net/csug9/csug.pdf">https://iovxw.net/csug9/csug.pdf</a></p>
-<p>HTML: <a href="https://iovxw.net/csug9/csug.html">https://iovxw.net/csug9/csug.html</a></p>
+<p>Github: <a rel="external" href="https://github.com/iovxw/csug9">https://github.com/iovxw/csug9</a></p>
+<p>PDF: <a rel="external" href="https://iovxw.net/csug9/csug.pdf">https://iovxw.net/csug9/csug.pdf</a></p>
+<p>HTML: <a rel="external" href="https://iovxw.net/csug9/csug.html">https://iovxw.net/csug9/csug.html</a></p>
               <div class="read-more">
                 <a href="https://iovxw.net/p/chez-scheme-users-guide/#continue-reading">Read More…</a>
               </div>
@@ -629,9 +627,9 @@ and the use of <tt>make-boot-file</tt>.
                 <time>2016-04-15 00:00</time>
               </div>
               
-              <p>当然最好的不是我说的，是<a href="http://www.yinwang.org/blog-cn/2013/03/28/chez-scheme">王垠</a>说的 <del>（冤有头债有主，别打我）</del></p>
-<p>十二天前，Cisco 的 github 上新建了一个 <a href="https://github.com/cisco/ChezScheme">repo</a>，就是大名鼎鼎的 <del>(被王垠吹上天的)</del>
-<a href="http://www.scheme.com/">ChezScheme</a></p>
+              <p>当然最好的不是我说的，是<a rel="external" href="http://www.yinwang.org/blog-cn/2013/03/28/chez-scheme">王垠</a>说的 <del>（冤有头债有主，别打我）</del></p>
+<p>十二天前，Cisco 的 github 上新建了一个 <a rel="external" href="https://github.com/cisco/ChezScheme">repo</a>，就是大名鼎鼎的 <del>(被王垠吹上天的)</del>
+<a rel="external" href="http://www.scheme.com/">ChezScheme</a></p>
 <p>不过只有一个 README 和 LICENSE</p>
 <p>而就在十分钟之前，终于推了源码上去了</p>
               <div class="read-more">
@@ -649,8 +647,8 @@ and the use of <tt>make-boot-file</tt>.
                 <time>2016-04-10 00:00</time>
               </div>
               
-              <p>这两天用 ClojureScript 弄了个 <a href="https://github.com/iovxw/text-todo-list">Todo List</a></p>
-<p>在线版本: <a href="https://iovxw.net/text-todo-list/">https://iovxw.net/text-todo-list/</a></p>
+              <p>这两天用 ClojureScript 弄了个 <a rel="external" href="https://github.com/iovxw/text-todo-list">Todo List</a></p>
+<p>在线版本: <a rel="external" href="https://iovxw.net/text-todo-list/">https://iovxw.net/text-todo-list/</a></p>
 <p>为了能离线使用, 试着用了下 HTML5 加的 Application Cache, 效果当然是不错的</p>
 <p>不过中间看文档不仔细导致白折腾了半天</p>
               <div class="read-more">

@@ -378,8 +378,8 @@
 <blockquote>
 <p>该项目超额完成集资，已筹集到3.25万美元。Moolenaar本人对该项目持有异议，认为需要大量工作，会引入新的bug，而终端用户获益不多。</p>
 </blockquote>
-<p>主页：<a href="http://neovim.org">http://neovim.org</a></p>
-<p>官方wiki里的安装方法：<a href="https://github.com/neovim/neovim/wiki/Installing">https://github.com/neovim/neovim/wiki/Installing</a></p>
+<p>主页：<a rel="external" href="http://neovim.org">http://neovim.org</a></p>
+<p>官方wiki里的安装方法：<a rel="external" href="https://github.com/neovim/neovim/wiki/Installing">https://github.com/neovim/neovim/wiki/Installing</a></p>
 <p>我用brew安装竟然提示需要pkgutil，我用的是ubuntu哪来的pkgutil？</p>
 <p>于是乎还是果断手动编译安装了</p>
 <p>先安装所需要的工具：<code>sudo apt-get install libtool autoconf automake cmake libncurses5-dev g++ pkg-config</code></p>
@@ -389,10 +389,8 @@
 <p><code>aclocal: not found</code>：<code>sudo apt-get install autoconf</code></p>
 <p>安装过程中会下载几个包，网站都是国外的，所以比较慢，而且没有进度显示。耐心等待就行（如果相关网站被墙请手动设置代理）</p>
 <p>安装：</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/
-</span><span>make install
-</span></code></pre>
-
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/</span></span>
+<span class="giallo-l"><span>make install</span></span></code></pre>
               
             </article>
           
@@ -443,11 +441,9 @@ shell主题：<code>Moskva</code><br />
                 <p>介绍什么的就懒得重复了</p>
 <p>自己百度吧</p>
 <p>直接扔命令</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>        sudo add-apt-repository ppa:sukso96100/budgie-desktop
-</span><span>        sudo apt-get update
-</span><span>        sudo apt-get install budgie-desktop
-</span></code></pre>
-
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>        sudo add-apt-repository ppa:sukso96100/budgie-desktop</span></span>
+<span class="giallo-l"><span>        sudo apt-get update</span></span>
+<span class="giallo-l"><span>        sudo apt-get install budgie-desktop</span></span></code></pre>
               
             </article>
           
@@ -464,16 +460,15 @@ shell主题：<code>Moskva</code><br />
 <p>先扔一个效果图</p>
 <p>Atom我就不介绍了，自己去看WIKI吧</p>
 <p>ubuntu快速安装：</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>sudo add-apt-repository ppa:webupd8team/atom
-</span><span>sudo apt-get update &amp;&amp; sudo apt-get install atom
-</span></code></pre>
-<p>MAC可以直接从<a href="https://atom.io">官网</a>下载</p>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>sudo add-apt-repository ppa:webupd8team/atom</span></span>
+<span class="giallo-l"><span>sudo apt-get update &amp;&amp; sudo apt-get install atom</span></span></code></pre>
+<p>MAC可以直接从<a rel="external" href="https://atom.io">官网</a>下载</p>
 <p>其他系统就自己编译吧</p>
 <p>因为和Github结合的很好，然后速度较快，比较适合项目的小修改&amp;提交，和不喜欢大型IDE的人</p>
 <p>未配置的界面很像<code>Sublime Text</code>，上图是我修改主题和配色后的</p>
 <p>言归正传。Atom自带Golang插件，但是调试和格式化没有（自动补全就别想了）</p>
 <p>然后我在官方Packages里找到了Go的插件，叫做<code>Go Plus</code></p>
-<p>Github地址：<a href="https://github.com/joefitzgerald/go-plus">https://github.com/joefitzgerald/go-plus</a></p>
+<p>Github地址：<a rel="external" href="https://github.com/joefitzgerald/go-plus">https://github.com/joefitzgerald/go-plus</a></p>
 <p>作者的演示：</p>
 <p><img src="https://camo.githubusercontent.com/dfd447388f9d6506dcdd19e6c5c431bf4211e673/687474703a2f2f636c2e6c792f696d6167652f3339327a324c3066304534312f676f2d706c75732d6578616d706c652e676966" alt="https://camo.githubusercontent.com/dfd447388f9d6506dcdd19e6c5c431bf4211e673/687474703a2f2f636c2e6c792f696d6167652f3339327a324c3066304534312f676f2d706c75732d6578616d706c652e676966" /></p>
 <p>安装的方法也很简单，<code>File -&gt; Preferences... -&gt; Packages</code></p>
@@ -510,23 +505,21 @@ shell主题：<code>Moskva</code><br />
 <p>不过貌似百度没有收录这个博客= =</p>
 <p>所以没法用什么的很正常</p>
 <p>在页面内添加</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>&lt;form id=&quot;search&quot; class=&quot;search&quot; role=&quot;search&quot;&gt;
-</span><span>        &lt;input class=&quot;form-control&quot; placeholder=&quot;搜索&quot; name=&quot;q&quot; type=&quot;text&quot;&gt;
-</span><span>&lt;/form&gt;
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>&lt;form id=&quot;search&quot; class=&quot;search&quot; role=&quot;search&quot;&gt;</span></span>
+<span class="giallo-l"><span>        &lt;input class=&quot;form-control&quot; placeholder=&quot;搜索&quot; name=&quot;q&quot; type=&quot;text&quot;&gt;</span></span>
+<span class="giallo-l"><span>&lt;/form&gt;</span></span></code></pre>
 <p>然后在js里添加</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>(function(){
-</span><span>	$(document).on(&#39;submit&#39;, &#39;#search.search&#39;, function(){
-</span><span>		var q = $(this).find(&#39;[name=q]&#39;).val();
-</span><span>		if($.trim(q) !== &#39;&#39;){
-</span><span>			var host = window.location.hostname;
-</span><span>			var url = &#39;http://www.baidu.com/s?wd=&#39; + &#39;site:&#39; + host + &quot; &quot; + $.trim(q);
-</span><span>			window.open(url, &quot;_blank&quot;);
-</span><span>		}
-</span><span>		return false;
-</span><span>	});
-</span><span>})();
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>(function(){</span></span>
+<span class="giallo-l"><span>	$(document).on(&#39;submit&#39;, &#39;#search.search&#39;, function(){</span></span>
+<span class="giallo-l"><span>		var q = $(this).find(&#39;[name=q]&#39;).val();</span></span>
+<span class="giallo-l"><span>		if($.trim(q) !== &#39;&#39;){</span></span>
+<span class="giallo-l"><span>			var host = window.location.hostname;</span></span>
+<span class="giallo-l"><span>			var url = &#39;http://www.baidu.com/s?wd=&#39; + &#39;site:&#39; + host + &quot; &quot; + $.trim(q);</span></span>
+<span class="giallo-l"><span>			window.open(url, &quot;_blank&quot;);</span></span>
+<span class="giallo-l"><span>		}</span></span>
+<span class="giallo-l"><span>		return false;</span></span>
+<span class="giallo-l"><span>	});</span></span>
+<span class="giallo-l"><span>})();</span></span></code></pre>
 <p><code>http://www.baidu.com/s?wd=</code>可以替换成任意支持site搜索的搜索引擎地址</p>
 <hr />
 <p>PS: 这是 jQuery 版本，写成原生的也不难这里就不废话了</p>
@@ -617,7 +610,7 @@ CPU已经撑不住了</p>
 <p><code>sudo apt-get install libxrandr-dev libxi-dev</code></p>
 <p>当然已经安装过的就不用了，不过反正也不会重复安装，忘记的话就运行一遍试试吧</p>
 <p>下载GLFW源码</p>
-<p><a href="http://www.glfw.org">http://www.glfw.org</a></p>
+<p><a rel="external" href="http://www.glfw.org">http://www.glfw.org</a></p>
 <p>编译</p>
 <p><code>cmake -DBUILD_SHARED_LIBS=ON</code></p>
 <p><img src="http://s29.postimg.org/4w8ttvzt1/Deepin_Screenshot20140601153904.png" alt="cmake_install.cmake" /></p>
@@ -638,18 +631,17 @@ CPU已经撑不住了</p>
                 <time>2014-05-27 00:00</time>
               </div>
               
-                <p>在<a href="http://www.zdnet.com/registry-hack-enables-continued-updates-for-windows-xp-7000029851/">Betanews</a>看到了让XP继续更新的方法</p>
+                <p>在<a rel="external" href="http://www.zdnet.com/registry-hack-enables-continued-updates-for-windows-xp-7000029851/">Betanews</a>看到了让XP继续更新的方法</p>
 <p>大体过程如下：</p>
 <p>1.新建一个文件扩展名为<code>.reg</code>的文件（例如<code>updates.reg</code>）</p>
 <p>2.用文本编辑器打开</p>
 <p>3.修改内容为</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Windows Registry Editor Version 5.00
-</span><span>[HKEY_LOCAL_MACHINE\SYSTEM\WPA\PosReady]
-</span><span>&quot;Installed&quot;=dword:00000001
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>Windows Registry Editor Version 5.00</span></span>
+<span class="giallo-l"><span>[HKEY_LOCAL_MACHINE\SYSTEM\WPA\PosReady]</span></span>
+<span class="giallo-l"><span>&quot;Installed&quot;=dword:00000001</span></span></code></pre>
 <p>4.保存，然后双击它</p>
 <p>现在打开更新管理器就会发现有新的更新可用了</p>
-<p>这个的原理是欺骗Windows Update，让它把你的电脑识别为<a href="http://Windows%20Embedded%20POSReady%202009">Windows Embedded POSReady 2009</a></p>
+<p>这个的原理是欺骗Windows Update，让它把你的电脑识别为<a rel="external" href="http://Windows%20Embedded%20POSReady%202009">Windows Embedded POSReady 2009</a></p>
 <p>而Windows Embedded POSReady 2009的支持日期一直到2019年4月9日</p>
 <p>当然这不是最好的解决办法，要想一直有免费升级的话，还是去用Linux吧</p>
 <p>最起码你不用再担心系统是不是安全了</p>

@@ -363,25 +363,24 @@
     <h1>Twister 去中心化的 Twitter</h1>
     <div class="info"><p>FREEDOM！！</p><time>2014-08-26 00:00</time></div>
     <p>在36氪看见的文章</p>
-<p><a href="http://www.36kr.com/p/214845.html">http://www.36kr.com/p/214845.html</a></p>
+<p><a rel="external" href="http://www.36kr.com/p/214845.html">http://www.36kr.com/p/214845.html</a></p>
 <p>于是就下载使用了一下</p>
 <p>发现Arch的aur源里已经可以安装了</p>
 <p><code>yaourt -S twister-core-git twister-html-git</code></p>
 <p>然后配置一下</p>
 <p><code>~/.twister/twister.conf</code></p>
 <p>里面填入</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>rpcuser=user
-</span><span>rpcpassword=pwd
-</span><span>rpcallowip=127.0.0.1
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>rpcuser=user</span></span>
+<span class="giallo-l"><span>rpcpassword=pwd</span></span>
+<span class="giallo-l"><span>rpcallowip=127.0.0.1</span></span></code></pre>
 <p>上面的用户名和密码改成你自定义的就行了</p>
 <p>这个用户名和密码只不过是用来识别本地管理员身份的，不是twister帐号</p>
 <p>然后移动twister-html到~/.twister/html（twister-html的位置我忘了，搜索下吧）</p>
 <p>su切换到root运行<code>systemctl start twister</code>开启服务</p>
 <p>切换到普通用户运行<code>twisterd</code>开启主程序</p>
-<p>打开网页<a href="http://127.0.0.1:28332/index.html">http://127.0.0.1:28332/index.html</a>输入你上面的用户名密码然后等待区块同步完成修改个人信息即可</p>
-<p>官网：<a href="http://twister.net.co">http://twister.net.co</a></p>
-<p>参考信息：<a href="http://wiki.twister.net.co/w/using:howto:compiling_twister_on_ubuntu_12.04">http://wiki.twister.net.co/w/using:howto:compiling_twister_on_ubuntu_12.04</a></p>
+<p>打开网页<a rel="external" href="http://127.0.0.1:28332/index.html">http://127.0.0.1:28332/index.html</a>输入你上面的用户名密码然后等待区块同步完成修改个人信息即可</p>
+<p>官网：<a rel="external" href="http://twister.net.co">http://twister.net.co</a></p>
+<p>参考信息：<a rel="external" href="http://wiki.twister.net.co/w/using:howto:compiling_twister_on_ubuntu_12.04">http://wiki.twister.net.co/w/using:howto:compiling_twister_on_ubuntu_12.04</a></p>
 
 </article>
 <div id="disqus_thread"></div>

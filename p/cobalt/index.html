@@ -362,26 +362,26 @@
 <article>
     <h1>博客静态生成器切换到 Cobalt</h1>
     <div class="info"><p>外观没变</p><time>2017-04-20 22:15</time></div>
-    <p>抽空把博客生成器换到了 <a href="https://github.com/cobalt-org/cobalt.rs">Cobalt</a></p>
-<p>纯 Rust 编写，还支持用 <a href="https://github.com/trishume/syntect/">syntect</a> 对代码块高亮（虽然仅限 Linux 平台）</p>
-<p>之前用 <a href="https://gohugo.io/">hugo</a> 的时候说要修改啊贡献啊什么的结果也没做</p>
-<p>这次一上来就发了个 <a href="https://github.com/cobalt-org/cobalt.rs/pull/212">PR</a> 把 <a href="https://github.com/google/pulldown-cmark">pulldown</a> 升级了还修了下 test</p>
+    <p>抽空把博客生成器换到了 <a rel="external" href="https://github.com/cobalt-org/cobalt.rs">Cobalt</a></p>
+<p>纯 Rust 编写，还支持用 <a rel="external" href="https://github.com/trishume/syntect/">syntect</a> 对代码块高亮（虽然仅限 Linux 平台）</p>
+<p>之前用 <a rel="external" href="https://gohugo.io/">hugo</a> 的时候说要修改啊贡献啊什么的结果也没做</p>
+<p>这次一上来就发了个 <a rel="external" href="https://github.com/cobalt-org/cobalt.rs/pull/212">PR</a> 把 <a rel="external" href="https://github.com/google/pulldown-cmark">pulldown</a> 升级了还修了下 test</p>
 <p>旧的 pulldown 各种毛病，<code>&lt;script&gt;</code> 标签之内都不能有空行，否则就解析成 Markdown</p>
-<p>维护者曾经<a href="https://github.com/cobalt-org/cobalt.rs/pull/204">尝试升级</a>不过高亮测试失败了，而他用 Windows 无法测试高亮，就卡在旧版本了</p>
+<p>维护者曾经<a rel="external" href="https://github.com/cobalt-org/cobalt.rs/pull/204">尝试升级</a>不过高亮测试失败了，而他用 Windows 无法测试高亮，就卡在旧版本了</p>
 <p>然后因为我在用 Linux ，顺便跑了一遍 test</p>
 <p>结果发现原来的 test 本身就是错的，所以直接把正确结果拿出来覆盖上去 pass 了</p>
 <p>嗯……有些时候问题真是简单呢</p>
 <span id="continue-reading"></span>
 <hr />
-<p>模板格式是 <a href="https://shopify.github.io/liquid/">liquid</a>，和 Go 的相差不大，挺好改</p>
+<p>模板格式是 <a rel="external" href="https://shopify.github.io/liquid/">liquid</a>，和 Go 的相差不大，挺好改</p>
 <p>移动文章费了点功夫，因为时间格式必须是 <code>%dd %Mon %YYYY %HH:%MM:%SS %zzzz</code> 才行</p>
-<p>当然显示出来是没差的，毕竟 liquid 自带 <a href="https://shopify.github.io/liquid/filters/date/"><code>date</code></a> filter</p>
-<p>中间还发现 <a href="https://github.com/cobalt-org/liquid-rust">liquid-rust</a> 的 filter 没有例外，统一用 <code>| xxx</code> 的格式</p>
-<p>比如 <a href="https://shopify.github.io/liquid/filters/first/"><code>first</code></a> filter 就不能 <code>array.first</code> 而要 <code>array | first</code></p>
+<p>当然显示出来是没差的，毕竟 liquid 自带 <a rel="external" href="https://shopify.github.io/liquid/filters/date/"><code>date</code></a> filter</p>
+<p>中间还发现 <a rel="external" href="https://github.com/cobalt-org/liquid-rust">liquid-rust</a> 的 filter 没有例外，统一用 <code>| xxx</code> 的格式</p>
+<p>比如 <a rel="external" href="https://shopify.github.io/liquid/filters/first/"><code>first</code></a> filter 就不能 <code>array.first</code> 而要 <code>array | first</code></p>
 <p>感觉挺好</p>
 <hr />
 <p>说起来 hugo 的 <code>html</code> filter 在最新 dev 版 go <code>html/template</code> 包里被做为 predefined escaper 不能用了</p>
-<p><a href="https://github.com/golang/go/issues/19952">https://github.com/golang/go/issues/19952</a></p>
+<p><a rel="external" href="https://github.com/golang/go/issues/19952">https://github.com/golang/go/issues/19952</a></p>
 <p>真不知道他们要怎么修</p>
 
 </article>

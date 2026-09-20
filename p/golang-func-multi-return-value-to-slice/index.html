@@ -364,23 +364,20 @@
     <div class="info"><p>并没有什么用</p><time>2015-05-30 00:00</time></div>
     <p>golang里面函数的多返回值就相当于一个展开过的切片</p>
 <p>像这个样子：</p>
-<pre data-lang="go" style="background-color:#282828;color:#fdf4c1aa;" class="language-go "><code class="language-go" data-lang="go"><span>[]</span><span style="color:#fa5c4b;">interface</span><span>{}{</span><span style="color:#fdf4c1;">返回值1</span><span>, </span><span style="color:#fdf4c1;">返回值2</span><span>}</span><span style="color:#fe8019;">...
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="go"><span class="giallo-l"><span style="color: #A89984;">[]</span><span style="color: #83A598;">interface</span><span style="color: #A89984;">{}{</span><span style="color: #83A598;">返回值1</span><span style="color: #A89984;">,</span><span style="color: #83A598;"> 返回值2</span><span style="color: #A89984;">}</span><span style="color: #8EC07C;">...</span></span></code></pre>
 <p>于是我们把它反过来就行了</p>
-<pre data-lang="go" style="background-color:#282828;color:#fdf4c1aa;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#fa5c4b;">package </span><span style="color:#fdf4c1;">main
-</span><span>
-</span><span style="color:#fa5c4b;">import </span><span>(
-</span><span>	</span><span style="color:#b8bb26;">&quot;fmt&quot;
-</span><span>	</span><span style="color:#b8bb26;">&quot;strconv&quot;
-</span><span>)
-</span><span>
-</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">toSlice</span><span>(</span><span style="color:#fdf4c1;">v </span><span style="color:#fe8019;">...</span><span style="color:#fa5c4b;">interface</span><span>{}) []</span><span style="color:#fa5c4b;">interface</span><span>{} { </span><span style="color:#fa5c4b;">return </span><span style="color:#fdf4c1;">v </span><span>}
-</span><span>
-</span><span style="color:#fa5c4b;">func </span><span style="color:#8ec07c;">main</span><span>() {
-</span><span>	</span><span style="color:#fdf4c1;">fmt</span><span>.</span><span style="color:#fdf4c1;">Println</span><span>(</span><span style="color:#fdf4c1;">toSlice</span><span>(</span><span style="color:#fdf4c1;">strconv</span><span>.</span><span style="color:#fdf4c1;">Atoi</span><span>(</span><span style="color:#b8bb26;">&quot;1&quot;</span><span>)))
-</span><span>}
-</span></code></pre>
-
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="go"><span class="giallo-l"><span style="color: #8EC07C;">package</span><span> main</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">import</span><span style="color: #A89984;"> (</span></span>
+<span class="giallo-l"><span style="color: #A89984;">	&quot;</span><span style="color: #B8BB26;">fmt</span><span style="color: #A89984;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #A89984;">	&quot;</span><span style="color: #B8BB26;">strconv</span><span style="color: #A89984;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">func</span><span style="color: #D3869B;"> toSlice</span><span style="color: #A89984;">(</span><span style="color: #83A598;">v</span><span style="color: #8EC07C;"> ...</span><span style="color: #83A598;">interface</span><span style="color: #A89984;">{}) []</span><span style="color: #83A598;">interface</span><span style="color: #A89984;">{} {</span><span style="color: #FB4934;"> return</span><span style="color: #83A598;"> v</span><span style="color: #A89984;"> }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #FB4934;">func</span><span style="color: #D3869B;"> main</span><span style="color: #A89984;">() {</span></span>
+<span class="giallo-l"><span style="color: #83A598;">	fmt</span><span style="color: #A89984;">.</span><span style="color: #D3869B;">Println</span><span style="color: #A89984;">(</span><span style="color: #D3869B;">toSlice</span><span style="color: #A89984;">(</span><span style="color: #83A598;">strconv</span><span style="color: #A89984;">.</span><span style="color: #D3869B;">Atoi</span><span style="color: #A89984;">(&quot;</span><span style="color: #B8BB26;">1</span><span style="color: #A89984;">&quot;)))</span></span>
+<span class="giallo-l"><span style="color: #A89984;">}</span></span></code></pre>
 </article>
 <div id="disqus_thread"></div>
 <script>

@@ -362,82 +362,81 @@
 <article>
     <h1>Neovim的Golang开发环境配置</h1>
     <div class="info"><p>强迫症强迫症强迫症强迫……</p><time>2014-07-14 00:00</time></div>
-    <pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>&quot;No warp───┐
-</span><span>set nowrap&quot;│
-</span><span>&quot;──────────┘
-</span><span>&quot;Line number─┐
-</span><span>set number  &quot;│
-</span><span>&quot;────────────┘
-</span><span>&quot;Plugin Manager────────────────────┐
-</span><span>set rtp+=~/.nvim/bundle/Vundle.vim&quot;│
-</span><span>&quot;──────────────────────────────────┘
-</span><span>&quot;Plugin load begin───────────────────┐
-</span><span>set nocompatible                    &quot;│
-</span><span>filetype off                        &quot;│
-</span><span>call vundle#begin()                 &quot;│
-</span><span>                                    &quot;│
-</span><span>&quot;Airline───────────────────┐         │
-</span><span>Plugin &#39;bling/vim-airline&#39;&quot;│         │
-</span><span>set laststatus=2          &quot;│         │
-</span><span>&quot;──────────────────────────┘         │
-</span><span>&quot;TagBar─────────────────────────────┐│
-</span><span>Plugin &#39;majutsushi/tagbar&#39;         &quot;││
-</span><span>nmap &lt;F8&gt; :TagbarToggle&lt;CR&gt;        &quot;││
-</span><span>let g:tagbar_type_go = {
-</span><span>    \ &#39;ctagstype&#39; : &#39;go&#39;,
-</span><span>    \ &#39;kinds&#39;     : [
-</span><span>        \ &#39;p:package&#39;,             
-</span><span>        \ &#39;i:imports:1&#39;,           
-</span><span>        \ &#39;c:constants&#39;,           
-</span><span>        \ &#39;v:variables&#39;,           
-</span><span>        \ &#39;t:types&#39;,               
-</span><span>        \ &#39;n:interfaces&#39;,         
-</span><span>        \ &#39;w:fields&#39;,             
-</span><span>        \ &#39;e:embedded&#39;,           
-</span><span>        \ &#39;m:methods&#39;,             
-</span><span>        \ &#39;r:constructor&#39;,         
-</span><span>        \ &#39;f:functions&#39;           
-</span><span>    \ ],
-</span><span>    \ &#39;sro&#39; : &#39;.&#39;,
-</span><span>    \ &#39;kind2scope&#39; : {
-</span><span>        \ &#39;t&#39; : &#39;ctype&#39;,           
-</span><span>        \ &#39;n&#39; : &#39;ntype&#39;           
-</span><span>    \ },
-</span><span>    \ &#39;scope2kind&#39; : {
-</span><span>        \ &#39;ctype&#39; : &#39;t&#39;,           
-</span><span>        \ &#39;ntype&#39; : &#39;n&#39;           
-</span><span>    \ },
-</span><span>    \ &#39;ctagsbin&#39;  : &#39;gotags&#39;,
-</span><span>    \ &#39;ctagsargs&#39; : &#39;-sort -silent&#39;
-</span><span>\ }                                &quot;││
-</span><span>&quot;───────────────────────────────────┘│
-</span><span>&quot;NerdTree────────────────────┐       │
-</span><span>Plugin &#39;scrooloose/nerdtree&#39;&quot;│       │
-</span><span>map &lt;C-n&gt; :NERDTree&lt;CR&gt;     &quot;│       │
-</span><span>&quot;────────────────────────────┘       │
-</span><span>&quot;Golang Plugin────────────────┐      │
-</span><span>Plugin &#39;dgryski/vim-godef&#39;   &quot;│      │
-</span><span>Plugin &#39;cespare/vim-golang&#39;  &quot;│      │
-</span><span>Plugin &#39;Blackrush/vim-gocode&#39;&quot;│      │
-</span><span>&quot;─────────────────────────────┘      │
-</span><span>&quot;Autocompletion─────────────────┐    │
-</span><span>Plugin &#39;Valloric/YouCompleteMe&#39;&quot;│    │
-</span><span>&quot;───────────────────────────────┘    │
-</span><span>&quot;Plugin load end──────────┐          │
-</span><span>call vundle#end()        &quot;│          │
-</span><span>filetype plugin indent on&quot;│          │
-</span><span>&quot;─────────────────────────┘          │
-</span><span>&quot;────────────────────────────────────┘
-</span><span>&quot;Highlight─┐
-</span><span>syntax on &quot;│
-</span><span>&quot;──────────┘
-</span><span>&quot;Golang compiler plugin─────────┐
-</span><span>autocmd FileType go compiler go&quot;│
-</span><span>&quot;───────────────────────────────┘
-</span><span>&quot;Automatic format────────────────────────────────────┐
-</span><span>autocmd FileType go autocmd BufWritePre &lt;buffer&gt; Fmt&quot;│
-</span><span>&quot;────────────────────────────────────────────────────┘
-</span></code></pre>
+    <pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>&quot;No warp───┐</span></span>
+<span class="giallo-l"><span>set nowrap&quot;│</span></span>
+<span class="giallo-l"><span>&quot;──────────┘</span></span>
+<span class="giallo-l"><span>&quot;Line number─┐</span></span>
+<span class="giallo-l"><span>set number  &quot;│</span></span>
+<span class="giallo-l"><span>&quot;────────────┘</span></span>
+<span class="giallo-l"><span>&quot;Plugin Manager────────────────────┐</span></span>
+<span class="giallo-l"><span>set rtp+=~/.nvim/bundle/Vundle.vim&quot;│</span></span>
+<span class="giallo-l"><span>&quot;──────────────────────────────────┘</span></span>
+<span class="giallo-l"><span>&quot;Plugin load begin───────────────────┐</span></span>
+<span class="giallo-l"><span>set nocompatible                    &quot;│</span></span>
+<span class="giallo-l"><span>filetype off                        &quot;│</span></span>
+<span class="giallo-l"><span>call vundle#begin()                 &quot;│</span></span>
+<span class="giallo-l"><span>                                    &quot;│</span></span>
+<span class="giallo-l"><span>&quot;Airline───────────────────┐         │</span></span>
+<span class="giallo-l"><span>Plugin &#39;bling/vim-airline&#39;&quot;│         │</span></span>
+<span class="giallo-l"><span>set laststatus=2          &quot;│         │</span></span>
+<span class="giallo-l"><span>&quot;──────────────────────────┘         │</span></span>
+<span class="giallo-l"><span>&quot;TagBar─────────────────────────────┐│</span></span>
+<span class="giallo-l"><span>Plugin &#39;majutsushi/tagbar&#39;         &quot;││</span></span>
+<span class="giallo-l"><span>nmap &lt;F8&gt; :TagbarToggle&lt;CR&gt;        &quot;││</span></span>
+<span class="giallo-l"><span>let g:tagbar_type_go = {</span></span>
+<span class="giallo-l"><span>    \ &#39;ctagstype&#39; : &#39;go&#39;,</span></span>
+<span class="giallo-l"><span>    \ &#39;kinds&#39;     : [</span></span>
+<span class="giallo-l"><span>        \ &#39;p:package&#39;,             </span></span>
+<span class="giallo-l"><span>        \ &#39;i:imports:1&#39;,           </span></span>
+<span class="giallo-l"><span>        \ &#39;c:constants&#39;,           </span></span>
+<span class="giallo-l"><span>        \ &#39;v:variables&#39;,           </span></span>
+<span class="giallo-l"><span>        \ &#39;t:types&#39;,               </span></span>
+<span class="giallo-l"><span>        \ &#39;n:interfaces&#39;,         </span></span>
+<span class="giallo-l"><span>        \ &#39;w:fields&#39;,             </span></span>
+<span class="giallo-l"><span>        \ &#39;e:embedded&#39;,           </span></span>
+<span class="giallo-l"><span>        \ &#39;m:methods&#39;,             </span></span>
+<span class="giallo-l"><span>        \ &#39;r:constructor&#39;,         </span></span>
+<span class="giallo-l"><span>        \ &#39;f:functions&#39;           </span></span>
+<span class="giallo-l"><span>    \ ],</span></span>
+<span class="giallo-l"><span>    \ &#39;sro&#39; : &#39;.&#39;,</span></span>
+<span class="giallo-l"><span>    \ &#39;kind2scope&#39; : {</span></span>
+<span class="giallo-l"><span>        \ &#39;t&#39; : &#39;ctype&#39;,           </span></span>
+<span class="giallo-l"><span>        \ &#39;n&#39; : &#39;ntype&#39;           </span></span>
+<span class="giallo-l"><span>    \ },</span></span>
+<span class="giallo-l"><span>    \ &#39;scope2kind&#39; : {</span></span>
+<span class="giallo-l"><span>        \ &#39;ctype&#39; : &#39;t&#39;,           </span></span>
+<span class="giallo-l"><span>        \ &#39;ntype&#39; : &#39;n&#39;           </span></span>
+<span class="giallo-l"><span>    \ },</span></span>
+<span class="giallo-l"><span>    \ &#39;ctagsbin&#39;  : &#39;gotags&#39;,</span></span>
+<span class="giallo-l"><span>    \ &#39;ctagsargs&#39; : &#39;-sort -silent&#39;</span></span>
+<span class="giallo-l"><span>\ }                                &quot;││</span></span>
+<span class="giallo-l"><span>&quot;───────────────────────────────────┘│</span></span>
+<span class="giallo-l"><span>&quot;NerdTree────────────────────┐       │</span></span>
+<span class="giallo-l"><span>Plugin &#39;scrooloose/nerdtree&#39;&quot;│       │</span></span>
+<span class="giallo-l"><span>map &lt;C-n&gt; :NERDTree&lt;CR&gt;     &quot;│       │</span></span>
+<span class="giallo-l"><span>&quot;────────────────────────────┘       │</span></span>
+<span class="giallo-l"><span>&quot;Golang Plugin────────────────┐      │</span></span>
+<span class="giallo-l"><span>Plugin &#39;dgryski/vim-godef&#39;   &quot;│      │</span></span>
+<span class="giallo-l"><span>Plugin &#39;cespare/vim-golang&#39;  &quot;│      │</span></span>
+<span class="giallo-l"><span>Plugin &#39;Blackrush/vim-gocode&#39;&quot;│      │</span></span>
+<span class="giallo-l"><span>&quot;─────────────────────────────┘      │</span></span>
+<span class="giallo-l"><span>&quot;Autocompletion─────────────────┐    │</span></span>
+<span class="giallo-l"><span>Plugin &#39;Valloric/YouCompleteMe&#39;&quot;│    │</span></span>
+<span class="giallo-l"><span>&quot;───────────────────────────────┘    │</span></span>
+<span class="giallo-l"><span>&quot;Plugin load end──────────┐          │</span></span>
+<span class="giallo-l"><span>call vundle#end()        &quot;│          │</span></span>
+<span class="giallo-l"><span>filetype plugin indent on&quot;│          │</span></span>
+<span class="giallo-l"><span>&quot;─────────────────────────┘          │</span></span>
+<span class="giallo-l"><span>&quot;────────────────────────────────────┘</span></span>
+<span class="giallo-l"><span>&quot;Highlight─┐</span></span>
+<span class="giallo-l"><span>syntax on &quot;│</span></span>
+<span class="giallo-l"><span>&quot;──────────┘</span></span>
+<span class="giallo-l"><span>&quot;Golang compiler plugin─────────┐</span></span>
+<span class="giallo-l"><span>autocmd FileType go compiler go&quot;│</span></span>
+<span class="giallo-l"><span>&quot;───────────────────────────────┘</span></span>
+<span class="giallo-l"><span>&quot;Automatic format────────────────────────────────────┐</span></span>
+<span class="giallo-l"><span>autocmd FileType go autocmd BufWritePre &lt;buffer&gt; Fmt&quot;│</span></span>
+<span class="giallo-l"><span>&quot;────────────────────────────────────────────────────┘</span></span></code></pre>
 <p>好吧其实原版VIM也通用</p>
 <p>只是需要把上面的<code>.nvim</code>文件夹改成<code>.vim</code>就行</p>
 <p>这里面需要用到Golang的官方插件，把go源码里的<code>misc/vim</code>全部扔到相应的文件夹即可（或者做个链接）</p>

@@ -368,10 +368,10 @@
 <p>然后还不小心开了几个大坑</p>
 <hr />
 <p>近期做过的事：</p>
-<p>先是帮<a href="https://github.com/Go-zh/go">go-zh</a>翻译了一个package（只有几行的翻译量，结果还各种不准确，几乎都是minux纠正过来的）</p>
-<p>又写了个<a href="https://github.com/iovxw/downloader">各种意义上都弃坑了的golang下载package</a></p>
+<p>先是帮<a rel="external" href="https://github.com/Go-zh/go">go-zh</a>翻译了一个package（只有几行的翻译量，结果还各种不准确，几乎都是minux纠正过来的）</p>
+<p>又写了个<a rel="external" href="https://github.com/iovxw/downloader">各种意义上都弃坑了的golang下载package</a></p>
 <p>一旦下载超大文件就会直接挂掉，是因为线程分配的问题（直接平均分配给每个线程，所以缓冲区会爆掉），但是也懒得改了。要是有人发现了，发个issue可能会给我点动力</p>
-<p>然后又为了给coding.net的PaaS弄个<a href="https://github.com/iovxw/coding-buildpack-dart">Dart的Buildpack</a></p>
+<p>然后又为了给coding.net的PaaS弄个<a rel="external" href="https://github.com/iovxw/coding-buildpack-dart">Dart的Buildpack</a></p>
 <p>用着电信的渣出口从google code拖了1.7G的源码，编译了最新的Dart SDK</p>
 <p>又因为各种原因以及buildpack原作者的脚本有些许问题，弄了2天才下载好了完整的源码</p>
 <p>简直生不如死</p>
@@ -382,56 +382,55 @@
 <p>缺点大致如下（部分问题可能有解决方法，如果知道还请留言告诉我哈）：</p>
 <ul>
 <li>绘制界面时太啰嗦(go-qt5啦什么的，要一个一个创建控件，再一个一个弄框框套进去)</li>
-<li>不够灵活(<a href="https://github.com/andlabs/ui">ui</a>在绘制表格的时候是用反射获取的struct里变量的命名来做标题的，中文直接跪)</li>
+<li>不够灵活(<a rel="external" href="https://github.com/andlabs/ui">ui</a>在绘制表格的时候是用反射获取的struct里变量的命名来做标题的，中文直接跪)</li>
 <li>还是不够灵活(go-qml的依赖对我来说太复杂，又懒得弄安装包)</li>
 <li>自定义控件麻烦(qml的话要么放在路径下，要么扔到默认文件夹里，关键是每个控件都要一个文件)</li>
 </ul>
 <p>于是！</p>
-<p>就开始写一个用<a href="https://github.com/go-nwui/nwui">node-webkit做框架的ui库</a>了</p>
+<p>就开始写一个用<a rel="external" href="https://github.com/go-nwui/nwui">node-webkit做框架的ui库</a>了</p>
 <p>用html+js做控件，然后可以自定义css，前后端通信用websocket</p>
 <p>依赖只有一个nwjs，基本什么平台都可以用</p>
 <p>然后支持很方便的自定义控件（只要实现一个方法即可，会自动用反射来调用），以及写一个自定义控件的教程（计划中）</p>
 <p>来一段例子：</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>	var w *Window
-</span><span>	w = &amp;Window{
-</span><span>		Title:  &quot;window&quot;,
-</span><span>		Width:  800,
-</span><span>		Height: 600,
-</span><span>		Controls: []interface{}{
-</span><span>			&amp;Button{
-</span><span>				ID:   &quot;btn0&quot;,
-</span><span>				Text: &quot;button&quot;,
-</span><span>				OnClick: func() {
-</span><span>					println(GetConByID(&quot;btn0&quot;).(*Button).Text)
-</span><span>				},
-</span><span>			},
-</span><span>			&amp;Button{
-</span><span>				ID:   &quot;btn1&quot;,
-</span><span>				Text: &quot;button&quot;,
-</span><span>			},
-</span><span>		},
-</span><span>	}
-</span><span>	w.Show()
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>	var w *Window</span></span>
+<span class="giallo-l"><span>	w = &amp;Window{</span></span>
+<span class="giallo-l"><span>		Title:  &quot;window&quot;,</span></span>
+<span class="giallo-l"><span>		Width:  800,</span></span>
+<span class="giallo-l"><span>		Height: 600,</span></span>
+<span class="giallo-l"><span>		Controls: []interface{}{</span></span>
+<span class="giallo-l"><span>			&amp;Button{</span></span>
+<span class="giallo-l"><span>				ID:   &quot;btn0&quot;,</span></span>
+<span class="giallo-l"><span>				Text: &quot;button&quot;,</span></span>
+<span class="giallo-l"><span>				OnClick: func() {</span></span>
+<span class="giallo-l"><span>					println(GetConByID(&quot;btn0&quot;).(*Button).Text)</span></span>
+<span class="giallo-l"><span>				},</span></span>
+<span class="giallo-l"><span>			},</span></span>
+<span class="giallo-l"><span>			&amp;Button{</span></span>
+<span class="giallo-l"><span>				ID:   &quot;btn1&quot;,</span></span>
+<span class="giallo-l"><span>				Text: &quot;button&quot;,</span></span>
+<span class="giallo-l"><span>			},</span></span>
+<span class="giallo-l"><span>		},</span></span>
+<span class="giallo-l"><span>	}</span></span>
+<span class="giallo-l"><span>	w.Show()</span></span></code></pre>
 <p>当然这个库还只是写了个框架（就是说上面说的大部分功能都还没实现(别激动别激动)）</p>
 <p>控件什么的也只写了一个按钮和一个自定义窗口边框来做演示</p>
 <p>上张图（实际运行截图）：</p>
 <p><img src="https://raw.githubusercontent.com/go-nwui/nwui/master/screenshot.png" alt="img" /></p>
 <p>然后就在这货刚写完框架之后</p>
-<p>我又开了个坑（因为<a href="https://github.com/iovxw/Stepladder">Stepladder</a>在长链接下会有几率始终占满一个CPU线程的使用率（具体触发原因不明），然后因为是tcp所以延迟什么的还比较大）</p>
+<p>我又开了个坑（因为<a rel="external" href="https://github.com/iovxw/Stepladder">Stepladder</a>在长链接下会有几率始终占满一个CPU线程的使用率（具体触发原因不明），然后因为是tcp所以延迟什么的还比较大）</p>
 <p>于是准备重写个基于udp的</p>
-<p>在github上翻了一遍发现这货<a href="https://github.com/skywind3000/kcp">https://github.com/skywind3000/kcp</a></p>
+<p>在github上翻了一遍发现这货<a rel="external" href="https://github.com/skywind3000/kcp">https://github.com/skywind3000/kcp</a></p>
 <p>以浪费10%流量为代价换取更低的延迟？</p>
 <p>貌似不错</p>
-<p>还有人弄了个go版本的<a href="https://github.com/vzex/dog-tunnel">https://github.com/vzex/dog-tunnel</a></p>
+<p>还有人弄了个go版本的<a rel="external" href="https://github.com/vzex/dog-tunnel">https://github.com/vzex/dog-tunnel</a></p>
 <p>就是里面的ikcp，貌似是直接用的c2go转换的，所以编码风格还是有点奇怪</p>
 <p>c版本的源码协议是GPL，但是这个是转换的所以貌似可以不用？</p>
 <p>总之拖了一份到本地，然后修改了一下编码风格</p>
-<p>这货就诞生了<a href="https://github.com/go-ukcp/ukcp">https://github.com/go-ukcp/ukcp</a>（里面的ikcp文件夹）</p>
+<p>这货就诞生了<a rel="external" href="https://github.com/go-ukcp/ukcp">https://github.com/go-ukcp/ukcp</a>（里面的ikcp文件夹）</p>
 <p>只是把编码风格转换了一下，然后ukcp本来是想封装一下的</p>
 <p>但是因为发送端的判断什么的（还要传给kcp所以识别很麻烦），就又弃坑了……</p>
 <p>（不过里面的ikcp还是可以单独拿出来用用的）</p>
-<p>当然还不能放弃，开始自己封装一个udp<a href="https://github.com/iovxw/rudp">https://github.com/iovxw/rudp</a></p>
+<p>当然还不能放弃，开始自己封装一个udp<a rel="external" href="https://github.com/iovxw/rudp">https://github.com/iovxw/rudp</a></p>
 <p>然后嘛……现在为止还没写完</p>
 <hr />
 <p>就这么多了，坑还是慢慢填吧</p>

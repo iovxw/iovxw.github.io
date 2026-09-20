@@ -374,8 +374,8 @@
 <p>删除操作和更新操作基本也都是直接插入数据，只不过删除操作插入的是删除标记，更新操作是直接重新插入一遍数据（在level合并的时候会进行处理更新）</p>
 <p>在进行读取key的时候，会先从内存查找是否有这个key，然后再到level0查找，如果还是没有就会到更高层level挨个查找，因为越高层数据越旧，没有被更新到的可能也就越大（比如一个储存在level3的key被在level2标记了删除，但是还没更新到。那么当查找这个key的时候就会优先找到在level2的删除标记（当然level3的key也会在多次合并操作之后被删除掉））</p>
 <p>本文章配合以下资料阅读更佳：</p>
-<p><a href="http://blog.nosqlfan.com/html/2882.html">http://blog.nosqlfan.com/html/2882.html</a></p>
-<p><a href="http://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html">http://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html</a></p>
+<p><a rel="external" href="http://blog.nosqlfan.com/html/2882.html">http://blog.nosqlfan.com/html/2882.html</a></p>
+<p><a rel="external" href="http://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html">http://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html</a></p>
 
 </article>
 <div id="disqus_thread"></div>

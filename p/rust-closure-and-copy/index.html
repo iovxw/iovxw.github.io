@@ -368,37 +368,31 @@
 <hr />
 <p>闭包在捕获环境时, 如不显式添加 <code>move</code> 关键字, 捕获的方法是由编译器推导的</p>
 <p>规则为: 如果捕获的变量在闭包内被引用, 或者可变引用, 那么就捕获到引用或可变引用</p>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let</span><span> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span>::new();
-</span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span>|| v.</span><span style="color:#fabd2f;">len</span><span>(); </span><span style="font-style:italic;color:#928374;">// v: &amp;String
-</span></code></pre>
-<span id="continue-reading"></span><pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let</span><span> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span>::new();
-</span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span>|| v.</span><span style="color:#fabd2f;">clear</span><span>(); </span><span style="font-style:italic;color:#928374;">// v: &amp;mut String
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #FE8019;">let</span><span style="color: #83A598;"> v</span><span style="color: #8EC07C;"> =</span><span style="color: #FABD2F;"> String</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">new</span><span style="color: #A89984;">();</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">let</span><span style="color: #83A598;"> c</span><span style="color: #8EC07C;"> =</span><span style="color: #FB4934;"> ||</span><span style="color: #83A598;"> v</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">len</span><span style="color: #A89984;">();</span><span style="color: #928374;font-style: italic;"> // v: &amp;String</span></span></code></pre><span id="continue-reading"></span><pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #FE8019;">let</span><span style="color: #83A598;"> v</span><span style="color: #8EC07C;"> =</span><span style="color: #FABD2F;"> String</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">new</span><span style="color: #A89984;">();</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">let</span><span style="color: #83A598;"> c</span><span style="color: #8EC07C;"> =</span><span style="color: #FB4934;"> ||</span><span style="color: #83A598;"> v</span><span style="color: #8EC07C;">.</span><span style="color: #FABD2F;">clear</span><span style="color: #A89984;">();</span><span style="color: #928374;font-style: italic;"> // v: &amp;mut String</span></span></code></pre>
 <p>可以在 MIR 里查看闭包捕获的类型, 这里我就直接在注释里写出来了</p>
 <p>然后如果捕获的变量在闭包内被消耗, move 走的话, 就捕获所有权</p>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let</span><span> v </span><span style="color:#fe8019;">= </span><span style="color:#fabd2f;">String</span><span>::new();
-</span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span>|| std::mem::drop(v); </span><span style="font-style:italic;color:#928374;">// v: String
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #FE8019;">let</span><span style="color: #83A598;"> v</span><span style="color: #8EC07C;"> =</span><span style="color: #FABD2F;"> String</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">new</span><span style="color: #A89984;">();</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">let</span><span style="color: #83A598;"> c</span><span style="color: #8EC07C;"> =</span><span style="color: #FB4934;"> ||</span><span style="color: #FABD2F;"> std</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">mem</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">drop</span><span style="color: #A89984;">(</span><span style="color: #83A598;">v</span><span style="color: #A89984;">);</span><span style="color: #928374;font-style: italic;"> // v: String</span></span></code></pre>
 <p>到这还是非常符合直觉的 —— 除非你捕获的变量实现了 <code>Copy</code></p>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let</span><span> v </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">false</span><span>;
-</span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span>|| std::mem::drop(v); </span><span style="font-style:italic;color:#928374;">// v: &amp;bool
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #FE8019;">let</span><span style="color: #83A598;"> v</span><span style="color: #8EC07C;"> =</span><span style="color: #D3869B;"> false</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">let</span><span style="color: #83A598;"> c</span><span style="color: #8EC07C;"> =</span><span style="color: #FB4934;"> ||</span><span style="color: #FABD2F;"> std</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">mem</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">drop</span><span style="color: #A89984;">(</span><span style="color: #83A598;">v</span><span style="color: #A89984;">);</span><span style="color: #928374;font-style: italic;"> // v: &amp;bool</span></span></code></pre>
 <p>按理来说, 上面这个闭包的行为应该和给闭包加 <code>move</code> 一样, 因为我们把 <code>v</code> 消耗掉了</p>
 <p>然而并不, <code>c</code> 捕获到的 <code>v</code> 的类型是 <code>&amp;bool</code>, 是个引用</p>
 <p>那 <code>std::mem::drop</code> 接受的参数也是 <code>&amp;bool</code> 吗?</p>
 <p>也不是, 仍然是 <code>bool</code>, 因为编译器把上面的例子展开后差不多是这样的</p>
-<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">let</span><span> v </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">false</span><span>;
-</span><span style="color:#fa5c4b;">let</span><span> ref_v </span><span style="color:#fe8019;">= &amp;</span><span>v;
-</span><span style="color:#fa5c4b;">let </span><span style="color:#8ec07c;">c </span><span style="color:#fe8019;">= </span><span>|| std::mem::drop(</span><span style="color:#fe8019;">*</span><span>ref_v);
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="rust"><span class="giallo-l"><span style="color: #FE8019;">let</span><span style="color: #83A598;"> v</span><span style="color: #8EC07C;"> =</span><span style="color: #D3869B;"> false</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">let</span><span style="color: #83A598;"> ref_v</span><span style="color: #8EC07C;"> = &amp;</span><span style="color: #83A598;">v</span><span style="color: #A89984;">;</span></span>
+<span class="giallo-l"><span style="color: #FE8019;">let</span><span style="color: #83A598;"> c</span><span style="color: #8EC07C;"> =</span><span style="color: #FB4934;"> ||</span><span style="color: #FABD2F;"> std</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">mem</span><span style="color: #8EC07C;">::</span><span style="color: #FABD2F;">drop</span><span style="color: #A89984;">(</span><span style="color: #8EC07C;">*</span><span style="color: #83A598;">ref_v</span><span style="color: #A89984;">);</span></span></code></pre>
 <p>闭包只捕获了 <code>v</code> 的引用, 然后在使用时 <code>*</code> 解引用, 又因为 <code>v</code> 是 <code>Copy</code>, 相当于无事发生</p>
 <p>换句话说如果 Rust 的闭包在捕获环境时没有手动指定 <code>move</code>, 那么编译器会尝试惰性的 <code>Copy</code></p>
-<p>如果不了解这个行为, 会让你撞上奇怪的 "短命" 还有引用问题, 并且编译器不会提示加 <code>move</code> 续命, 比如 <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=a4cebe3ca7669755d34de340f14305fc">这样</a>
-和 <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=eddfdbcdfeed71b1311df6115f7484a5">这样</a></p>
+<p>如果不了解这个行为, 会让你撞上奇怪的 "短命" 还有引用问题, 并且编译器不会提示加 <code>move</code> 续命, 比如 <a rel="external" href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=a4cebe3ca7669755d34de340f14305fc">这样</a>
+和 <a rel="external" href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=eddfdbcdfeed71b1311df6115f7484a5">这样</a></p>
 <p>总之非常反直觉</p>
 <hr />
 <p>更新:</p>
-<p>相关 issues: <a href="https://github.com/rust-lang/rust/issues/54060">#54060</a></p>
+<p>相关 issues: <a rel="external" href="https://github.com/rust-lang/rust/issues/54060">#54060</a></p>
 
 </article>
 <div id="disqus_thread"></div>

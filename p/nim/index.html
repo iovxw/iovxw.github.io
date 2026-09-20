@@ -363,7 +363,7 @@
     <h1>Nim语言尝试</h1>
     <div class="info"><p>几乎没人用</p><time>2015-03-05 00:00</time></div>
     <p>从solidot看到，稍微尝试了一下</p>
-<p>打开<a href="http://nim-lang.org">官网</a>后，第一感想是：</p>
+<p>打开<a rel="external" href="http://nim-lang.org">官网</a>后，第一感想是：</p>
 <blockquote>
 <p>诶这个代码高亮的配色不错</p>
 </blockquote>
@@ -377,74 +377,70 @@
 <p>比如标准库里的<code>system.hostOS</code>，你在使用的时候可以写成<code>system.host_os</code>或者<code>system.host_OS</code>再或者<code>system.h_Os_tOS</code>都是可以的。除了首字母以外其他地方都不区分大小写，而下划线只要不是首尾字母，其他地方也是可以随便插入的</p>
 <p>然后是foo(bar)可以写成bar.foo() (这个我还没用到，但是好像会很有用？)</p>
 <p>至于编辑器支持方面，不要去看官网FAQ里的，那里面也是好久没更新了</p>
-<p>可以直接看github上的wiki <a href="https://github.com/Araq/Nim/wiki/Editor-Support">https://github.com/Araq/Nim/wiki/Editor-Support</a></p>
-<p>最新更新的就是emacs的插件和官方的IDE <a href="https://github.com/nim-lang/Aporia">Aporia</a></p>
+<p>可以直接看github上的wiki <a rel="external" href="https://github.com/Araq/Nim/wiki/Editor-Support">https://github.com/Araq/Nim/wiki/Editor-Support</a></p>
+<p>最新更新的就是emacs的插件和官方的IDE <a rel="external" href="https://github.com/nim-lang/Aporia">Aporia</a></p>
 <p>emacs的插件我怎么弄自动补全也没搞定，虽然有提供一个<code>ac-nim.el</code></p>
-<p>Aporia的master分支里的完全不能用！有很多严重问题。比如<a href="https://github.com/nim-lang/Aporia/issues/71">这个</a>，还有自动补全和定义转跳完全不起作用（以及里面的nimrod还没有更名为nim，虽然官方开了一个分支修改名字吧）。不知道是我配置问题还是怎么着（也根据提示设置nim路径了），开发者有一个答复是nim的idetools本身挂掉了，看了下Aporia的源码照着打了几句<code>nim idetools</code>命令也没什么输出</p>
-<p>去翻更新记录找到了<a href="https://github.com/nim-lang/nimsuggest">https://github.com/nim-lang/nimsuggest</a>这个东西，好像是0.10.3以后会用它代替idetools。于是开始折腾</p>
+<p>Aporia的master分支里的完全不能用！有很多严重问题。比如<a rel="external" href="https://github.com/nim-lang/Aporia/issues/71">这个</a>，还有自动补全和定义转跳完全不起作用（以及里面的nimrod还没有更名为nim，虽然官方开了一个分支修改名字吧）。不知道是我配置问题还是怎么着（也根据提示设置nim路径了），开发者有一个答复是nim的idetools本身挂掉了，看了下Aporia的源码照着打了几句<code>nim idetools</code>命令也没什么输出</p>
+<p>去翻更新记录找到了<a rel="external" href="https://github.com/nim-lang/nimsuggest">https://github.com/nim-lang/nimsuggest</a>这个东西，好像是0.10.3以后会用它代替idetools。于是开始折腾</p>
 <p>先是升级nim和Aporia到0.10.3开发版，然后用<code>nimble install nimsuggest</code>来安装nimsuggest。但是出现错误提示<code>~/.nimble/pkgs/compiler-0.10.3/compiler/nimfix/prettybase.nim(10, 7) Error: cannot open 'ast'</code></p>
 <p>重试几遍无果，手动编译了一下compiler，发现没问题啊</p>
 <p>浪费掉十几分钟后发现是编译器没有读取cfg？直接把源码扔到compiler文件夹里编译，成功。</p>
 <p>我激动的打开Aporia开始尝试语义转跳，刚按下快捷键</p>
 <p>……</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Error: unhandled exception: 拒绝连接 [OSError]
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>Error: unhandled exception: 拒绝连接 [OSError]</span></span></code></pre>
 <p>窗口吡的一下就关掉了！</p>
 <p>关！掉！了！</p>
 <p>我还没有放弃，手动开启nimsuggest服务</p>
 <p>再试</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>Traceback (most recent call last)
-</span><span>nimsuggest.nim(197)      nimsuggest
-</span><span>nimsuggest.nim(187)      handleCmdLine
-</span><span>nimsuggest.nim(149)      mainCommand
-</span><span>nimsuggest.nim(132)      serve
-</span><span>nimsuggest.nim(106)      action
-</span><span>modules.nim(203)         compileProject
-</span><span>modules.nim(151)         compileModule
-</span><span>passes.nim(197)          processModule
-</span><span>passes.nim(137)          processTopLevelStmt
-</span><span>sem.nim(450)             myProcess
-</span><span>sem.nim(419)             semStmtAndGenerateGenerics
-</span><span>semstmts.nim(1340)       semStmt
-</span><span>semexprs.nim(893)        semExprNoType
-</span><span>semexprs.nim(2196)       semExpr
-</span><span>importer.nim(171)        evalImport
-</span><span>importer.nim(161)        myImportModule
-</span><span>modules.nim(164)         importModule
-</span><span>modules.nim(151)         compileModule
-</span><span>passes.nim(197)          processModule
-</span><span>passes.nim(137)          processTopLevelStmt
-</span><span>sem.nim(450)             myProcess
-</span><span>sem.nim(419)             semStmtAndGenerateGenerics
-</span><span>semstmts.nim(1340)       semStmt
-</span><span>semexprs.nim(893)        semExprNoType
-</span><span>semexprs.nim(2196)       semExpr
-</span><span>importer.nim(171)        evalImport
-</span><span>importer.nim(161)        myImportModule
-</span><span>modules.nim(164)         importModule
-</span><span>modules.nim(151)         compileModule
-</span><span>passes.nim(197)          processModule
-</span><span>passes.nim(137)          processTopLevelStmt
-</span><span>sem.nim(450)             myProcess
-</span><span>sem.nim(419)             semStmtAndGenerateGenerics
-</span><span>semstmts.nim(1340)       semStmt
-</span><span>semexprs.nim(893)        semExprNoType
-</span><span>semexprs.nim(2189)       semExpr
-</span><span>semstmts.nim(1134)       semProc
-</span><span>semstmts.nim(1074)       semProcAux
-</span><span>transf.nim(788)          transformBody
-</span><span>transf.nim(773)          processTransf
-</span><span>transf.nim(761)          transform
-</span><span>transf.nim(104)          transformSons
-</span><span>transf.nim(706)          transform
-</span><span>transf.nim(472)          transformFor
-</span><span>lambdalifting.nim(1022)  liftForLoop
-</span><span>ast.nim(941)             []
-</span><span>SIGSEGV: Illegal storage access. (Attempt to read from nil?)
-</span></code></pre>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>*** Error in `aporia&#39;: free(): invalid pointer: 0x00007f1f16667700 ***
-</span><span>SIGABRT: Abnormal termination.
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>Traceback (most recent call last)</span></span>
+<span class="giallo-l"><span>nimsuggest.nim(197)      nimsuggest</span></span>
+<span class="giallo-l"><span>nimsuggest.nim(187)      handleCmdLine</span></span>
+<span class="giallo-l"><span>nimsuggest.nim(149)      mainCommand</span></span>
+<span class="giallo-l"><span>nimsuggest.nim(132)      serve</span></span>
+<span class="giallo-l"><span>nimsuggest.nim(106)      action</span></span>
+<span class="giallo-l"><span>modules.nim(203)         compileProject</span></span>
+<span class="giallo-l"><span>modules.nim(151)         compileModule</span></span>
+<span class="giallo-l"><span>passes.nim(197)          processModule</span></span>
+<span class="giallo-l"><span>passes.nim(137)          processTopLevelStmt</span></span>
+<span class="giallo-l"><span>sem.nim(450)             myProcess</span></span>
+<span class="giallo-l"><span>sem.nim(419)             semStmtAndGenerateGenerics</span></span>
+<span class="giallo-l"><span>semstmts.nim(1340)       semStmt</span></span>
+<span class="giallo-l"><span>semexprs.nim(893)        semExprNoType</span></span>
+<span class="giallo-l"><span>semexprs.nim(2196)       semExpr</span></span>
+<span class="giallo-l"><span>importer.nim(171)        evalImport</span></span>
+<span class="giallo-l"><span>importer.nim(161)        myImportModule</span></span>
+<span class="giallo-l"><span>modules.nim(164)         importModule</span></span>
+<span class="giallo-l"><span>modules.nim(151)         compileModule</span></span>
+<span class="giallo-l"><span>passes.nim(197)          processModule</span></span>
+<span class="giallo-l"><span>passes.nim(137)          processTopLevelStmt</span></span>
+<span class="giallo-l"><span>sem.nim(450)             myProcess</span></span>
+<span class="giallo-l"><span>sem.nim(419)             semStmtAndGenerateGenerics</span></span>
+<span class="giallo-l"><span>semstmts.nim(1340)       semStmt</span></span>
+<span class="giallo-l"><span>semexprs.nim(893)        semExprNoType</span></span>
+<span class="giallo-l"><span>semexprs.nim(2196)       semExpr</span></span>
+<span class="giallo-l"><span>importer.nim(171)        evalImport</span></span>
+<span class="giallo-l"><span>importer.nim(161)        myImportModule</span></span>
+<span class="giallo-l"><span>modules.nim(164)         importModule</span></span>
+<span class="giallo-l"><span>modules.nim(151)         compileModule</span></span>
+<span class="giallo-l"><span>passes.nim(197)          processModule</span></span>
+<span class="giallo-l"><span>passes.nim(137)          processTopLevelStmt</span></span>
+<span class="giallo-l"><span>sem.nim(450)             myProcess</span></span>
+<span class="giallo-l"><span>sem.nim(419)             semStmtAndGenerateGenerics</span></span>
+<span class="giallo-l"><span>semstmts.nim(1340)       semStmt</span></span>
+<span class="giallo-l"><span>semexprs.nim(893)        semExprNoType</span></span>
+<span class="giallo-l"><span>semexprs.nim(2189)       semExpr</span></span>
+<span class="giallo-l"><span>semstmts.nim(1134)       semProc</span></span>
+<span class="giallo-l"><span>semstmts.nim(1074)       semProcAux</span></span>
+<span class="giallo-l"><span>transf.nim(788)          transformBody</span></span>
+<span class="giallo-l"><span>transf.nim(773)          processTransf</span></span>
+<span class="giallo-l"><span>transf.nim(761)          transform</span></span>
+<span class="giallo-l"><span>transf.nim(104)          transformSons</span></span>
+<span class="giallo-l"><span>transf.nim(706)          transform</span></span>
+<span class="giallo-l"><span>transf.nim(472)          transformFor</span></span>
+<span class="giallo-l"><span>lambdalifting.nim(1022)  liftForLoop</span></span>
+<span class="giallo-l"><span>ast.nim(941)             []</span></span>
+<span class="giallo-l"><span>SIGSEGV: Illegal storage access. (Attempt to read from nil?)</span></span></code></pre><pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>*** Error in `aporia&#39;: free(): invalid pointer: 0x00007f1f16667700 ***</span></span>
+<span class="giallo-l"><span>SIGABRT: Abnormal termination.</span></span></code></pre>
 <p>我仿佛已经知道十万只草泥马在心中奔腾而过的感觉了</p>
 <p><em>可能永远也不会续的未完待续</em></p>
 

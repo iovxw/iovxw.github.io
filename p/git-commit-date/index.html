@@ -364,7 +364,7 @@
     <div class="info"><p>拿来刷小绿点</p><time>2016-07-30 00:00</time></div>
     <p>在需要给 <em>commit</em> 指定时间的时候，可以用 <code>--date</code> 参数</p>
 <p>支持的日期格式可以看：</p>
-<p><a href="http://stackoverflow.com/questions/19742345/what-is-the-format-for-date-parameter-of-git-commit">http://stackoverflow.com/questions/19742345/what-is-the-format-for-date-parameter-of-git-commit</a></p>
+<p><a rel="external" href="http://stackoverflow.com/questions/19742345/what-is-the-format-for-date-parameter-of-git-commit">http://stackoverflow.com/questions/19742345/what-is-the-format-for-date-parameter-of-git-commit</a></p>
 <p>使用 <code>'x days ago'</code> 可以很方便的补上之前的小绿点（🙈这功能其实就是拿来干这种事的）</p>
 <script>
 if (window.location.pathname == "/") {
@@ -375,19 +375,16 @@ if (window.location.pathname == "/") {
 <hr />
 <p>不过这种相对时间格式并不支持未来时间，除非你愿意看看今天是几号（我就是这么懒）</p>
 <p>解决方式就是，用 <code>date</code> 命令：</p>
-<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">git commit --date</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">&quot;`</span><span style="color:#fdf4c1;">LANG</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">C </span><span style="color:#fdf4c1;">date --d</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">&#39;next day&#39;`&quot;
-</span></code></pre>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FABD2F;">git</span><span style="color: #B8BB26;"> commit</span><span style="color: #D3869B;"> --date=</span><span style="color: #A89984;">&quot;`</span><span style="color: #83A598;">LANG</span><span style="color: #8EC07C;">=</span><span style="color: #B8BB26;">C</span><span style="color: #FABD2F;"> date</span><span style="color: #D3869B;"> --d=</span><span style="color: #A89984;">&#39;</span><span style="color: #B8BB26;">next day</span><span style="color: #A89984;">&#39;`&quot;</span></span></code></pre>
 <p><code>LANG=C</code> 是为了输出英文日期格式。让 <em>git</em> 直接识别本地时间格式的方法也有，但是这个最简单暴力</p>
 <p><code>--d='next day'</code> 就是字面意思，也可以用 <code>--d='-1 days ago'</code> 之类的</p>
 <p>嗯……不过好像更长了……</p>
 <hr />
 <p><em>2016-07-31 更新：</em></p>
 <p>上面的方法只能更改 git 本身的操作时间，并不能更改第三方的，比如 gpg 签名的时间</p>
-<p>一个简单暴力的方法就是用 <a href="https://github.com/wolfcw/libfaketime">libfaketime</a></p>
+<p>一个简单暴力的方法就是用 <a rel="external" href="https://github.com/wolfcw/libfaketime">libfaketime</a></p>
 <p>但是注意不要直接用 ubuntu 源里的 <code>faketime</code> 运行 git，会 <strong>Segmentation fault</strong> 的</p>
-<pre data-lang="bash" style="background-color:#282828;color:#fdf4c1aa;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#fdf4c1;">LD_PRELOAD</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">/usr/local/lib/faketime/libfaketime.so.1 </span><span style="color:#fdf4c1;">FAKETIME</span><span style="color:#fe8019;">=</span><span style="color:#b8bb26;">&quot;+1d&quot; </span><span style="color:#fdf4c1;">git ...
-</span></code></pre>
-
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #83A598;">LD_PRELOAD</span><span style="color: #8EC07C;">=</span><span style="color: #B8BB26;">/usr/local/lib/faketime/libfaketime.so.1</span><span style="color: #83A598;"> FAKETIME</span><span style="color: #8EC07C;">=</span><span style="color: #A89984;">&quot;</span><span style="color: #B8BB26;">+1d</span><span style="color: #A89984;">&quot;</span><span style="color: #FABD2F;"> git</span><span style="color: #B8BB26;"> ...</span></span></code></pre>
 </article>
 <div id="disqus_thread"></div>
 <script>

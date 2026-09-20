@@ -372,8 +372,8 @@
 <blockquote>
 <p>该项目超额完成集资，已筹集到3.25万美元。Moolenaar本人对该项目持有异议，认为需要大量工作，会引入新的bug，而终端用户获益不多。</p>
 </blockquote>
-<p>主页：<a href="http://neovim.org">http://neovim.org</a></p>
-<p>官方wiki里的安装方法：<a href="https://github.com/neovim/neovim/wiki/Installing">https://github.com/neovim/neovim/wiki/Installing</a></p>
+<p>主页：<a rel="external" href="http://neovim.org">http://neovim.org</a></p>
+<p>官方wiki里的安装方法：<a rel="external" href="https://github.com/neovim/neovim/wiki/Installing">https://github.com/neovim/neovim/wiki/Installing</a></p>
 <p>我用brew安装竟然提示需要pkgutil，我用的是ubuntu哪来的pkgutil？</p>
 <p>于是乎还是果断手动编译安装了</p>
 <p>先安装所需要的工具：<code>sudo apt-get install libtool autoconf automake cmake libncurses5-dev g++ pkg-config</code></p>
@@ -383,10 +383,8 @@
 <p><code>aclocal: not found</code>：<code>sudo apt-get install autoconf</code></p>
 <p>安装过程中会下载几个包，网站都是国外的，所以比较慢，而且没有进度显示。耐心等待就行（如果相关网站被墙请手动设置代理）</p>
 <p>安装：</p>
-<pre style="background-color:#282828;color:#fdf4c1aa;"><code><span>cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/
-</span><span>make install
-</span></code></pre>
-
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"><span>cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/</span></span>
+<span class="giallo-l"><span>make install</span></span></code></pre>
 </article>
 <div id="disqus_thread"></div>
 <script>
